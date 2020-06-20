@@ -14,7 +14,7 @@ public class TwowayTrade extends Trade {
      * @param status whether the trade is unconfirmed, confirmed or completed
      * @param duration whether the trade is temporary or permanent
      */
-    public TwowayTrade(ClientUser trader1, ClientUser trader2, ClientUser item1, ClientUser item2, String status, String duration){
+    public TwowayTrade(ClientUser trader1, ClientUser trader2, Item item1, Item item2, String status, String duration){
         super(status, duration);
         this.trader1 = trader1;
         this.trader2 = trader2;

@@ -13,7 +13,7 @@ public class OnewayTrade extends Trade {
      * @param status whether the trade is unconfirmed, confirmed or completed
      * @param duration whether the trade is temporary or permanent
      */
-    public OnewayTrade(ClientUser lender, ClientUser borrower, ClientUser item, String status, String duration){
+    public OnewayTrade(ClientUser lender, ClientUser borrower, Item item, String status, String duration){
         super(status, duration);
         this.lender = lender;
         this.borrower = borrower;
