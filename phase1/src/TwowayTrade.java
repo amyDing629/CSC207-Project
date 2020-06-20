@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 public class TwowayTrade extends Trade {
-    private final Trader trader1;
-    private final Trader trader2;
+    private final ClientUser trader1;
+    private final ClientUser trader2;
     private final Item item1to2;
     private final Item item2to1;
 
@@ -14,7 +14,7 @@ public class TwowayTrade extends Trade {
      * @param status whether the trade is unconfirmed, confirmed or completed
      * @param duration whether the trade is temporary or permanent
      */
-    public TwowayTrade(Trader trader1, Trader trader2, Item item1, Item item2, String status, String duration){
+    public TwowayTrade(ClientUser trader1, ClientUser trader2, ClientUser item1, ClientUser item2, String status, String duration){
         super(status, duration);
         this.trader1 = trader1;
         this.trader2 = trader2;
@@ -27,8 +27,8 @@ public class TwowayTrade extends Trade {
      * getter for two traders of the trade
      * @return the two traders
      */
-    public ArrayList<Trader> getTraders() {
-        ArrayList<Trader> list = new ArrayList<Trader>();
+    public ArrayList<ClientUser> getTraders() {
+        ArrayList<ClientUser> list = new ArrayList<ClientUser>();
         list.add(trader1);
         list.add(trader2);
         return list;

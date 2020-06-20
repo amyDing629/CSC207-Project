@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 
 public class OnewayTrade extends Trade {
-    private final Trader lender;
-    private final Trader borrower;
+    private final ClientUser lender;
+    private final ClientUser borrower;
     private final Item item;
 
     /**
@@ -13,7 +13,7 @@ public class OnewayTrade extends Trade {
      * @param status whether the trade is unconfirmed, confirmed or completed
      * @param duration whether the trade is temporary or permanent
      */
-    public OnewayTrade(Trader lender, Trader borrower, Item item, String status, String duration){
+    public OnewayTrade(ClientUser lender, ClientUser borrower, ClientUser item, String status, String duration){
         super(status, duration);
         this.lender = lender;
         this.borrower = borrower;
@@ -25,7 +25,7 @@ public class OnewayTrade extends Trade {
      * getter for lender of the trade
      * @return lender
      */
-    public Trader getLender() {
+    public ClientUser getLender() {
         return lender;
     }
 
@@ -33,7 +33,7 @@ public class OnewayTrade extends Trade {
      * getter for borrow of the trade
      * @return borrower
      */
-    public Trader getBorrower() {
+    public ClientUser getBorrower() {
         return borrower;
     }
 
