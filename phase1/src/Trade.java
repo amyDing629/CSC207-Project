@@ -8,7 +8,7 @@ public abstract class Trade {
     private int id;
     private Meeting secondMeeting;
     private final String duration;
-    private ArrayList<Message> messageList;
+    private ArrayList<String> messageList;
 
     /**
      * Constructor
@@ -18,7 +18,7 @@ public abstract class Trade {
     public Trade(String status, String duration){
         this.status = status;
         this.duration = duration;
-        messageList = new ArrayList<Message>();
+        messageList = new ArrayList<String>();
         numOfTrade++;
         id = numOfTrade;
     }
@@ -88,7 +88,7 @@ public abstract class Trade {
     public void changeMeeting(){
     }
 
-    public ArrayList<Message> getMessageList(){
+    public ArrayList<String> getMessageList(){
         return messageList;
     }
 
