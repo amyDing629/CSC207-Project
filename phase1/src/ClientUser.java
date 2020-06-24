@@ -57,6 +57,7 @@ public class ClientUser extends User {
     public boolean getIsFrozen(){
         return isFrozen;
     }
+    public void setIsFrozen(boolean a){isFrozen = a;}
 
     public List<String> getWishLend() {
         return wishLend;

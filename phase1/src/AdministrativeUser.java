@@ -10,7 +10,6 @@ public class AdministrativeUser extends User {
         super(username, password, id);
     }
 
-
     @Override
     public String getPassword() {
         return password;
@@ -45,5 +44,20 @@ public class AdministrativeUser extends User {
     public void changeUsername(String username) {
         this.username=username;
     }
+
+    public void freeze(ClientUser a){a.setIsFrozen(false);}
+
+    public void unfreeze(ClientUser a){a.setIsFrozen(true);}
+
+    public AdministrativeUser addNewUser(String username, String password, int id){
+        AdministrativeUser a = new AdministrativeUser(username, password, id);
+        return a;
+    }
+
+    public void confirmItem(ClientUser a, Item b){
+        a.addWishLend(b.getName());
+    }
+
+    public void changeValue(int a){}
 
 }
