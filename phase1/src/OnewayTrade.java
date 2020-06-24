@@ -52,12 +52,15 @@ public class OnewayTrade extends Trade {
      */
     @Override
     public void makeTrade() {
+        lender.getWishLend().remove(item);
+        borrower.getWishBorrow().remove(item);
 
     }
 
     /**
      * remove item from borrower's willReturn list
      * remove item from lender's will getBack list
+     * ??
      */
     @Override
     public void returnObject() {

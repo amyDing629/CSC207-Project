@@ -4,7 +4,6 @@ public abstract class Trade {
     private Meeting meeting;
     private String status;
     private static int numOfTrade;
-    private static int temDuration = 30;
     private int id;
     private Meeting secondMeeting;
     private final String duration;
@@ -60,9 +59,7 @@ public abstract class Trade {
      * @param meeting the Meeting object, including meeting time, place...
      */
     // can input time and place and create new Meeting object based on Meeting constructor
-    public void setMeeting(Meeting meeting){
-        this.meeting = meeting;
-    }
+    public void setMeeting(Meeting meeting){ this.meeting = meeting; }
 
     /**
      * set 2nd meeting if the trade is a temporary trade
