@@ -1,44 +1,49 @@
-public class AdministrativeUser {
-    public String password;
-    public String username;
+import java.util.*;
+public class AdministrativeUser extends User {
+    private String password;
+    private String username;
     private int id;
 
-    public int getId() {
-        return id;
+    private List<String> notification;
+
+    public AdministrativeUser(String username, String password, int id){
+        super(username, password, id);
     }
 
-    public String getName() {
-        return name;
-    }
 
+    @Override
     public String getPassword() {
         return password;
     }
 
-    pubic void changePassword(String password){
-        this.password = password;
+    @Override
+    public String getUsername() {
+        return username;
     }
 
-    pubic void changeUsername(String username){
-        this.username = username;
+    @Override
+    public int getId() {
+        return id;
     }
 
+    @Override
     public List<String> getNotification() {
         return notification;
     }
 
-    public void freeze();
+    @Override
+    public void addNotification(String no) {
+        notification.add(no);
+    }
 
+    @Override
+    public void changePassword(String password) {
+        this.password=password;
+    }
 
-    public void unfreeze();
-
-
-    public void confirmItem();
-
-
-    public void changeValue();
-
-
-    public addNewAduser();
+    @Override
+    public void changeUsername(String username) {
+        this.username=username;
+    }
 
 }

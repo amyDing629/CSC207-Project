@@ -11,6 +11,10 @@ public class ClientUser extends User {
     private List<String> wishLend;
     private List<String> wishBorrow;
 
+    public ClientUser(String username, String password, int id){
+        super(username, password, id);
+    }
+
     //Inventory
 
     //tradeHistory
