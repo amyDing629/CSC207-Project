@@ -1,3 +1,4 @@
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public abstract class Trade {
@@ -55,19 +56,28 @@ public abstract class Trade {
     }
 
     /**
-     * set meeting(first time) for the trade
-     * @param meeting the Meeting object, including meeting time, place...
+     *
+     * @param dateTime time of the meeting
+     * @param place place of the meeting
+     * @param traderIds the id of the two traders
+     * @return the meeting set
      */
     // can input time and place and create new Meeting object based on Meeting constructor
-    public void setMeeting(Meeting meeting){ this.meeting = meeting; }
+    public Meeting setMeeting(LocalDateTime dateTime, String place, ArrayList<Integer> traderIds){
+        this.meeting = new Meeting(dateTime, place, traderIds);
+        return meeting;
+    }
 
     /**
-     * set 2nd meeting if the trade is a temporary trade
-     * @param meeting second meeting discussed
+     *
+     * @param dateTime time of the meeting
+     * @param place place of the meeting
+     * @param traderIds the id of the two traders
+     * @return the meeting set
      */
-    public void setSecondMeeting(Meeting meeting){
-        this.secondMeeting = meeting;
-
+    public Meeting setSecondMeeting(LocalDateTime dateTime, String place, ArrayList<Integer> traderIds){
+        this.secondMeeting = new Meeting(dateTime, place, traderIds);
+        return meeting;
     }
 
     /**
