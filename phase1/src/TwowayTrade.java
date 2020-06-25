@@ -14,7 +14,7 @@ public class TwowayTrade extends Trade {
      * @param status whether the trade is unconfirmed, confirmed or completed
      * @param duration whether the trade is temporary or permanent
      */
-    public TwowayTrade(ClientUser trader1, ClientUser trader2, Item item1, Item item2, String status, String duration){
+    public TwowayTrade(ClientUser trader1, ClientUser trader2, Item item1, Item item2, String status, int duration){
         super(status, duration);
         this.trader1 = trader1;
         this.trader2 = trader2;
@@ -34,6 +34,12 @@ public class TwowayTrade extends Trade {
         return list;
     }
 
+    public ClientUser getTrader1(){
+        return trader1;
+    }
+    public ClientUser getTrader2(){
+        return trader2;
+    }
     /**
      * getter for item that trader1 give to trader2
      * @return item1to2
@@ -50,19 +56,4 @@ public class TwowayTrade extends Trade {
         return item2to1;
     }
 
-    /**
-     * remove items from wish to trade list
-     */
-    @Override
-    public void makeTrade() {
-
-    }
-
-    /**
-     * remove the item from the traded list that reach 1 month(?)
-     */
-    @Override
-    public void returnObject() {
-
-    }
 }
