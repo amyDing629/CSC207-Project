@@ -1,14 +1,14 @@
 public class Item {
     private String name;
     private String description;
-    private ClientUser owner;
+    private int ownerId;
 
     /**
      * Constructor
      * @param name the name of the item
      * @param description the description of the item
      */
-    public Item(String name, String description, String owner) {
+    public Item(String name, String description, String ownerId) {
         this.name = name;
         this.description = description;
     }
@@ -29,12 +29,12 @@ public class Item {
         return description;
     }
 
-    public ClientUser getOwner(){
-        return owner;
+    public int getOwner(){
+        return ownerId;
     }
 
-    public void setOwner(ClientUser user){
-        owner = user;
+    public void setOwner(int user){
+        ownerId = user;
     }
 }
 
