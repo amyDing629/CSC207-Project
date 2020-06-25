@@ -58,6 +58,8 @@ public class AdministrativeUser extends User {
         a.addWishLend(b.getName());
     }
 
-    public void changeValue(int a){}
+    public void changeValue(int a){
+        
+    }
 
 }
