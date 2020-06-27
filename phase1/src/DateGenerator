@@ -28,5 +28,4 @@ public class DateGenerator {
         LocalDateTime second = dateTime.plusDays(duration);
         return second;
     }
-
 }
