@@ -13,16 +13,16 @@ public class tradeUI {
         Inventory inventory = new Inventory();
     }
 
-    public void createTrade(int UserId, String itemName) throws accountFrozenException, IOException {
+    public void createTrade(int UserId, String itemName) throws AccountFrozenException, IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         ClientUser currUser = (ClientUser) userManager.getUser(UserId);
         if (currUser.getIsFrozen()) {
-            throw new accountFrozenException("your account is frozen!");
+            throw new AccountFrozenException("your account is frozen!");
         }
         Item item = inventory.getItem(itemName);
         ClientUser tarUser = (ClientUser) userManager.getUser(item.getOwner());
         if (tarUser.getIsFrozen()) {
-            throw new accountFrozenException("the owner of the item's owner's account is frozen.");
+            throw new AccountFrozenException("the owner of the item's owner's account is frozen.");
         }
 
 
@@ -41,7 +41,7 @@ public class tradeUI {
                         case "one way(permanent)":
                             trade = new OnewayTrade(currUser, tarUser, item, -1);
                         case "two way(temporary)":
-                            trade = new
+                            trade = new;
 
                     }
                 }
