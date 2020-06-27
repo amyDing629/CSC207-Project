@@ -22,7 +22,7 @@ public class tradeUI {
         Item item = inventory.getItem(itemName);
         ClientUser tarUser = (ClientUser) userManager.getUser(item.getOwner());
         if (tarUser.getIsFrozen()) {
-            throw new AccountFrozenException("the owner of the item's owner's account is frozen.");
+            throw new AccountFrozenException("the account of the item owner is frozen.");
         }
 
 
