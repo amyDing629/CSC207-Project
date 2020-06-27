@@ -25,7 +25,7 @@ class Meeting {
      * This is Meeting's status: "incomplete" (default), "completed", "cancelled";
      *  1. only both Traders are of confirmed in confirmed status, the meeting status should be then set to "completed";
      *  2. as long as one of the Trader exceed their own threshold of timeOfEdition, the meeting status should then be
-     *  set to "cancelled";
+     *  set to "cancelled" --> Trade cancelled;
      */
     public String status = "incomplete";
 
@@ -72,9 +72,7 @@ class Meeting {
      * Returns this Meeting's status. (Getter for status)
      * @return the status
      */
-    public String getStatus() {
-        return status;
-    }
+    public String getStatus() { return status; }
 
     /**
      * Returns a list of two Traders' the confirmed statuses. (Getter for idToConfirmedStatus)
