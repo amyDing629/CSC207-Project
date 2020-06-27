@@ -1,0 +1,32 @@
+import java.time.LocalDateTime;
+import java.util.*;
+
+
+/**
+ * This is a use case for validating AND generating the meeting date/time
+ */
+public class DateGenerator {
+
+    Meeting meeting = new Meeting();
+
+    /**
+     * Check if the suggested meeting datetime is after the current datetime
+     * @return boolean
+     */
+    protected checkDateTime(Meeting meeting) {
+        LocalDateTime today = LocalDateTime.now();
+        LocalDateTime dateTime = meeting.getDateTime();
+        return dateTime.isAfter(today);
+    }
+
+    /**
+     * Generate the datetime for the second meeting
+     * @return the datetime of the second meeting
+     * */
+    public generateDateTime(Meeting meeting, int duration){
+        LocalDateTime dateTime = meeting.getDateTime();
+        LocalDateTime second = dateTime.plusDays(duration);
+        return second;
+    }
+
+}

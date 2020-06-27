@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-/**
+/** This is a controller?
  * confirm the meeting
  * or edit time, place of the Meeting by Trader
  * update timeOfEdition in Trader
