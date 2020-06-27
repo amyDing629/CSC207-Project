@@ -1,5 +1,3 @@
-import com.sun.java.util.jar.pack.Instruction;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -40,6 +38,11 @@ public class tradeUI {
                     switch (line) {
                         case "one way(temporary)":
                             trade = new OnewayTrade(currUser, tarUser, item, 30);
+                        case "one way(permanent)":
+                            trade = new OnewayTrade(currUser, tarUser, item, -1);
+                        case "two way(temporary)":
+                            trade = new
+
                     }
                 }
                 } catch (IOException e) {
