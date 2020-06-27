@@ -1,23 +1,38 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class UserManager {
-    private static ArrayList<User> userlist = new ArrayList<>();
-
-    public void addUser(User u){
-        userlist.add(u);
+    public ArrayList<String> readfile() throws IOException {
+        BufferedReader bufReader = new BufferedReader(new FileReader("username.txt"));
+        ArrayList<String> listOfLines = new ArrayList<>();
+        String line = bufReader.readLine();
+        while (line != null) {
+            listOfLines.add(line); line = bufReader.readLine(); }
+        bufReader.close();
+        return null;
     }
 
-    public User getUser(int id){
-        for(User u : userlist){
-            if(u.getId() == id)
+    public void addUser(User u) throws IOException {
+
+        ArrayList<String> userlist = readfile();
+        userlist.add(u.getUsername());
+    }
+
+    public String getUser(String name) throws IOException {
+        ArrayList<String> userlist = readfile();
+        for(String u : userlist){
+            if(u.equals(name))
                 return u;
         }
         return null;
     }
 
-    public boolean verifyUser(int id, String password){
-        for(User u : userlist){
-            if(u.getId() ==id && u.getPassword().equals(password))
+    public boolean verifyUser(String name, String password) throws IOException {
+        ArrayList<String> userlist = readfile();
+        for(String u : userlist){
+            if(u.equals(name) && u.getPassword().equals(password))
                 return true;
         }
         return false;
