@@ -2,7 +2,7 @@ import java.util.*;
 public class ClientUser extends User {
     private String password;
     private String username;
-    private int id;
+    private static int id;
 
     private boolean isFrozen;
     private List<String> notification;
@@ -11,8 +11,9 @@ public class ClientUser extends User {
     private List<String> wishLend;
     private List<String> wishBorrow;
 
-    public ClientUser(String username, String password, int id){
-        super(username, password, id);
+    public ClientUser(String username, String password){
+        super(username, password);
+        id ++;
     }
 
     //Inventory

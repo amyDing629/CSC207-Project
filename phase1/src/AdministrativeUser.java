@@ -2,12 +2,13 @@ import java.util.*;
 public class AdministrativeUser extends User {
     private String password;
     private String username;
-    private int id;
+    private static int id;
 
     private List<String> notification;
 
-    public AdministrativeUser(String username, String password, int id){
-        super(username, password, id);
+    public AdministrativeUser(String username, String password){
+        super(username, password);
+        id ++;
     }
 
     @Override
@@ -49,17 +50,21 @@ public class AdministrativeUser extends User {
 
     public void unfreeze(ClientUser a){a.setIsFrozen(true);}
 
-    public AdministrativeUser addNewUser(String username, String password, int id){
-        AdministrativeUser a = new AdministrativeUser(username, password, id);
-        return a;
+    public void addNewUser(String username, String password){
+        if (id == 0){
+        AdministrativeUser a = new AdministrativeUser(username, password);}
     }
 
     public void confirmItem(ClientUser a, Item b){
         a.addWishLend(b.getName());
     }
 
-    public void changeValue(int a){
-        
+    public void tradelimit(int a){
+
+    }
+
+    public void incompletelimit(int a){
+
     }
 
 }
