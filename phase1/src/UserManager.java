@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class userManager {
+public class UserManager {
     private static ArrayList<User> userlist = new ArrayList<>();
 
     public void addUser(User u){

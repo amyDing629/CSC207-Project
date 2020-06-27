@@ -64,4 +64,13 @@ public class Inventory {
         }
         return unfrozenList;
     }
+
+    public Item getItem(String name){
+        for (Item item: lendingList){
+            if (item.getName() == name){
+                return item;
+            }
+        }
+        return null;
+    }
 }

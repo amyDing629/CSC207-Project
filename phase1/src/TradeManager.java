@@ -51,10 +51,9 @@ public class TradeManager {
         for (Trade trade : tradeList) {
             if (trade.getId() == id) {
                 return trade;
-            } else {
-                System.out.println("no id existed"); // need to change to raise XXX error.
             }
         }
+        return null;
     }
 
     /**
