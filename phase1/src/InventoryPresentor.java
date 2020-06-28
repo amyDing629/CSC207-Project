@@ -10,6 +10,7 @@ public class InventoryPresentor {
 
     public void run(){
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("type 'see inventory' to see the items that you an trade");
         try {
             String line = br.readLine();
             if (line.equals("see inventory")){
