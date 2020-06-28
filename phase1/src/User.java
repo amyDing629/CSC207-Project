@@ -1,14 +1,14 @@
 import java.util.*;
 abstract class User {
-    private int id;
-    private String password;
-    private String username;
+    protected int id = 0;
+    protected String password;
+    protected String username;
     private List<String> notification;
 
-    public User(String username, String password, int id){
+    public User(String username, String password /**int id*/){
         this.username = username;
         this.password = password;
-        this.id = id;
+        //this.id = id;
     }
 
     public abstract String getPassword();
