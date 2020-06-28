@@ -11,7 +11,7 @@ public class UserManager {
         while (line != null) {
             listOfLines.add(line); line = bufReader.readLine(); }
         bufReader.close();
-        return null;
+        return listOfLines;
     }
 
     public void addUser(User u) throws IOException {
