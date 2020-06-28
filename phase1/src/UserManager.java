@@ -1,5 +1,6 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -18,6 +19,9 @@ public class UserManager {
 
         ArrayList<String> userlist = readfile();
         userlist.add(u.getUsername());
+        FileWriter fw = new FileWriter("username.txt");
+        fw.write(u.getUsername());
+        fw.close();
     }
 
     public String getUser(String name) throws IOException {
