@@ -9,25 +9,31 @@ import java.util.ArrayList;
  * [Controller class]
  * confirm the meeting
  * or edit time, place of the Meeting by Trader
- * update timeOfEdition in Trader
+ * update timeOfEdition in MeetingEditor
  */
 public class MeetingSystem {
 
-//    private User u1 = new User(1);
-//    private User u2 = new User(2);
-
     public LocalDateTime dateTime;
     public String place;
-    public Integer userId;
-    public Integer otherUserId;
+    public static Integer userId;
+    public static Integer otherUserId;
 
-    private MeetingEditor t1 = new MeetingEditor(1);
-    private MeetingEditor t2 = new MeetingEditor(2);
+    public static Meeting meeting;
+
 //    private SetUpMeetingPresenter setUpMeeting = new SetUpMeetingPresenter();
 
+    /**
+     * Construct a MeetingSystem object with two ClientUsers
+     * @param u1
+     * @param u2
+     */
+    public MeetingSystem(ClientUser u1, ClientUser u2){
+        userId = u1.getId();
+        otherUserId = u2.getId();
+    }
 
     /**
-     * Interacts with the user to prompt input of student and course information.
+     * Run the Meeting system, which interacts with the user to prompt input of meeting information.
      */
     public void run() {
         // allow input: "exit", "setup meeting", "edit", "confirm"
@@ -44,8 +50,7 @@ public class MeetingSystem {
                     SetUpMeetingPresenter setUpMeeting = new SetUpMeetingPresenter();
                     dateTime = setUpMeeting.dateTime;
                     place = setUpMeeting.place;
-
-
+                    meeting = MeetingActivities.setUpMeeting(userId, otherUserId, dateTime, place);
 
                     System.out.println("A meeting has been set up!");
                     System.out.println("  " + "- proposed time is:" + dateTime.toString());
@@ -76,7 +81,7 @@ public class MeetingSystem {
         }
 
 //        MeetingIterator prompts = new MeetingIterator();
-//        ArrayList<String> temp = new ArrayList<>();
+//        Array©<String> temp = new ArrayList<>();
 //        int curr = 0;
 //
 //

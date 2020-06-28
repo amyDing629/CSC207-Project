@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * [Use Case class]
@@ -11,6 +12,20 @@ import java.util.ArrayList;
  */
 
 public class MeetingActivities {
+    /**
+     * Sets up a meeting by constructing one meeting, and returning the meeting that is set up
+     * @param userId the userId of the user who sets up the meeting
+     * @param otherUserId the userId of the user who receives the invitation of the meeting
+     * @param dateTime the proposed the date-time to meet
+     * @param place the proposed the place to meet
+     * @return the meeting that is newly constructed
+     */
+    public static Meeting setUpMeeting(Integer userId, Integer otherUserId, LocalDateTime dateTime, String place) {
+        ArrayList<Integer> userIds = new ArrayList<>(Arrays.asList(userId, otherUserId));
+        Meeting meeting = new Meeting(dateTime, place, userIds);
+        return meeting;
+    }
+
     /**
      * Interacts with the user to prompt input of setting up a meeting: allow input, construct a meeting
      */
@@ -40,10 +55,10 @@ public class MeetingActivities {
      * - record user id
      */
     public void editTime(Meeting meeting, User u1, LocalDateTime dateTime) {
-        // If the current edit times < threshold, update the new dateTime in meeting
-        if () { meeting.editMeetingTime(dateTime);}
-        // Update the edit history of this user
-        meeting.
+//        // If the current edit times < threshold, update the new dateTime in meeting
+//        if () { meeting.editMeetingTime(dateTime);}
+//        // Update the edit history of this user
+//        meeting.
     }
 }
 
