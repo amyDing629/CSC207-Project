@@ -51,8 +51,9 @@ public class MeetingActivities {
 
     /**
      * Interacts with the user to prompt input of editing a meeting:
-     * - allow input of time only; place only; time+place
+     * - allow input of time only; place only; time + place
      * - record user id
+     * It is the user's choice to input either time only, place only, or time + place.
      */
     public void editTime(Meeting meeting, Integer userId, LocalDateTime dateTime) {
         /*
@@ -70,5 +71,35 @@ public class MeetingActivities {
             meeting.setStatus();
         }
     }
+
+    public void editPlace(Meeting meeting, Integer userId, String place){
+        /*
+        If the current number of edits does not exceed the threshold:
+        update the new place in meeting, and update the edit history of this user
+
+        If the current number of edits exceeds the threshold:
+        cancel the meeting
+         */
+        MeetingEditor editHistory = meeting.getIdToEditor().get(userId);
+        if (!editHistory.editsOverThreshold()) {
+            meeting.editMeetingPlace(place);
+            editHistory.updateTimeOfEdition();
+        }else{
+            meeting.setStatus();
+        }
+    }
+
+    public void editMeeting(Meeting meeting, Integer userId, LocalDateTime dateTime, String place){
+        MeetingEditor editHistory = meeting.getIdToEditor().get(userId);
+        if (!editHistory.editsOverThreshold()) {
+            meeting.editMeetingTime(dateTime);
+            meeting.editMeetingPlace(place);
+            editHistory.updateTimeOfEdition();
+        }else{
+            meeting.setStatus();
+        }
+    }
+
+
 }
 
