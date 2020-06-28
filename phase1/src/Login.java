@@ -55,7 +55,7 @@ public class Login {
                 FileWriter fw = new FileWriter("username.txt");
                 fw.write(username);
                 fw.close();
-                ClientUser user1 = new ClientUser(username, password, 1);
+                ClientUser user1 = new ClientUser(username, password);
                 System.out.println("Your account has been successfully created!");
                 System.out.println("Your id: " + user1.getId());
                 System.out.println("Your username: " + user1.getUsername());
