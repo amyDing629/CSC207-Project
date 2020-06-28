@@ -54,11 +54,21 @@ public class MeetingActivities {
      * - allow input of time only; place only; time+place
      * - record user id
      */
-    public void editTime(Meeting meeting, User u1, LocalDateTime dateTime) {
-//        // If the current edit times < threshold, update the new dateTime in meeting
-//        if () { meeting.editMeetingTime(dateTime);}
-//        // Update the edit history of this user
-//        meeting.
+    public void editTime(Meeting meeting, Integer userId, LocalDateTime dateTime) {
+        /*
+        If the current number of edits does not exceed the threshold:
+        update the new dateTime in meeting, and update the edit history of this user
+
+        If the current number of edits exceeds the threshold:
+        cancel the meeting
+        */
+        MeetingEditor editHistory = meeting.getIdToEditor().get(userId);
+        if (!editHistory.editsOverThreshold()) {
+            meeting.editMeetingTime(dateTime);
+            editHistory.updateTimeOfEdition();
+        }else{
+            meeting.setStatus();
+        }
     }
 }
 
