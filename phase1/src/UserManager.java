@@ -16,28 +16,39 @@ public class UserManager {
     }
 
     public void addUser(User u) throws IOException {
-
-        ArrayList<String> userlist = readfile();
-        userlist.add(u.getUsername());
-        FileWriter fw = new FileWriter("username.txt");
-        fw.write(u.getUsername());
-        fw.close();
+        try{
+            ArrayList<String> userlist = readfile();
+            userlist.add(u.getUsername());
+            FileWriter fw = new FileWriter("username.txt");
+            fw.write(u.getUsername());
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public String getUser(String name) throws IOException {
-        ArrayList<String> userlist = readfile();
-        for(String u : userlist){
-            if(u.equals(name))
-                return u;
+        try{
+            ArrayList<String> userlist = readfile();
+            for(String u : userlist){
+                if(u.equals(name))
+                    return u;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return null;
     }
 
     public boolean verifyUser(String name, String password) throws IOException {
-        ArrayList<String> userlist = readfile();
-        for(String u : userlist){
-            if(u.equals(name) && u.getPassword().equals(password))
-                return true;
+        try{
+            ArrayList<String> userlist = readfile();
+            for(String u : userlist){
+                if(u.equals(name) && u.getPassword().equals(password))
+                    return true;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return false;
     }
