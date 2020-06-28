@@ -10,7 +10,7 @@ public class DateGenerator {
      * Check if the suggested meeting datetime is after the current datetime
      * @return boolean
      */
-    protected boolean checkDateTime(Meeting meeting) {
+    public boolean checkDateTime(Meeting meeting) {
         LocalDateTime today = LocalDateTime.now();
         LocalDateTime dateTime = meeting.getDateTime();
         return dateTime.isAfter(today);
