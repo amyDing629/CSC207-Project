@@ -6,11 +6,9 @@ public class Item {
     /**
      * Constructor
      * @param name the name of the item
-     * @param description the description of the item
      */
-    public Item(String name, String description, String owner) {
+    public Item(String name, String owner) {
         this.name = name;
-        this.description = description;
         this.ownerName = owner;
     }
 
@@ -29,6 +27,8 @@ public class Item {
     public String getDescription(){
         return description;
     }
+
+    public void setDescription(String description){this.description = description;}
 
     public String getOwnerName(){
         return ownerName;
