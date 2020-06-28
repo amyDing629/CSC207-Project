@@ -21,9 +21,7 @@ public class DateTime {
 
     @Override
     public String toString() {
-        return "DateTime{" +
-                "currentTime=" + currentTime +
-                '}';
+        return "DateTime{" + "currentTime=" + currentTime + '}';
     }
 
     /**

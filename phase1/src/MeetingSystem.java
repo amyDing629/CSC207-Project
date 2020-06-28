@@ -12,8 +12,8 @@ import java.util.ArrayList;
  */
 public class MeetingSystem {
 
-    private User u1 = new User(1);
-    private User u2 = new User(2);
+    private User u1 = new ClientUser(1);
+    private User u2 = new ClientUser(2);
 
     /**
      * Interacts with the user to prompt input of student and course information.
