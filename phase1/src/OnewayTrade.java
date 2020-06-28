@@ -12,7 +12,7 @@ public class OnewayTrade extends Trade {
      * @param item the two item traders what to trade
      * @param duration whether the trade is temporary or permanent
      */
-    public OnewayTrade(ClientUser lender, ClientUser borrower, Item item, int duration){
+    public OnewayTrade(ClientUser borrower, ClientUser lender, Item item, int duration){
         super(duration);
         this.lender = lender;
         this.borrower = borrower;
@@ -44,6 +44,12 @@ public class OnewayTrade extends Trade {
         return item;
     }
 
+    public ArrayList<ClientUser> getUsers(){
+        ArrayList<ClientUser> users = new ArrayList<ClientUser>();
+        users.add(borrower);
+        users.add(lender);
+        return users;
+    }
 
 }
 

@@ -11,6 +11,7 @@ public class Inventory {
      */
     public Inventory() {
         lendingList = new ArrayList<Item>();
+        frozenList = new ArrayList<Item>();
     }
 
     /**
@@ -29,6 +30,10 @@ public class Inventory {
         lendingList.add(item);
     }
 
+    public void addItemFrozen(Item item){
+        frozenList.add(item);
+    }
+
     /**
      * delete the item from the inventory (when a trade is completed or clentUser remove the item from the lendinglist,
      * the item should be removed from the inventory.
@@ -42,13 +47,13 @@ public class Inventory {
         }
     }
 
+
+
     public ArrayList<Item> getFrozenList(){
         return frozenList;
     }
 
-    public void addItemFrozen(Item item){
-        frozenList.add(item);
-    }
+
 
     /**
      * the inventory that shows tradable items.

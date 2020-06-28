@@ -55,4 +55,11 @@ public class TwowayTrade extends Trade {
         return item2to1;
     }
 
+    public ArrayList<ClientUser> getUsers(){
+        ArrayList<ClientUser> users = new ArrayList<ClientUser>();
+        users.add(trader1);
+        users.add(trader2);
+        return users;
+    }
+
 }

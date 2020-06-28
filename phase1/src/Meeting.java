@@ -20,7 +20,7 @@ class Meeting {
     /**
      * This is Meeting's two Traders.
      */
-    private HashMap<Integer, Trader> idToTraders = new HashMap<Integer, Trader>();
+    private HashMap<Integer, MeetingEditor> idToTraders = new HashMap<>();
 
     /**
      * This is Meeting's status: "incomplete" (default), "completed", "cancelled";
@@ -35,7 +35,7 @@ class Meeting {
      * true stands for confirmed,
      * false stands for not yet confirmed
      */
-    private HashMap<Integer, Boolean> idToConfirmedStatus = new HashMap<Integer, Boolean>();
+    private HashMap<Integer, Boolean> idToConfirmedStatus = new HashMap<>();
 
     /**
      * Constructs a new Meeting with proposed date-time to meet dateTime, proposed place to meet place, info of both
@@ -48,7 +48,7 @@ class Meeting {
         this.dateTime = dateTime;
         this.place = place;
         for (Integer i: traderIds) {
-            this.idToTraders.put(i, new Trader(i));
+            this.idToTraders.put(i, new MeetingEditor(i));
             this.idToConfirmedStatus.put(i, false);
         }
     }
@@ -82,11 +82,7 @@ class Meeting {
      * @return the confirmed status of two Traders respectively
      */
     private ArrayList<Boolean> getConfirmedStatuses() {
-        ArrayList<Boolean> result = new ArrayList<>();
-        for (Boolean b: idToConfirmedStatus.values()){
-            result.add(b);
-        }
-        return result;
+        return new ArrayList<>(idToConfirmedStatus.values());
     }
 
     /**
@@ -95,6 +91,14 @@ class Meeting {
      */
     private Boolean getConfirmedStatuses(Integer userId) {
         return idToConfirmedStatus.get(userId);
+    }
+
+    /**
+     * Returns the MeetingEditor with given userId. (Getter for idToTraders)
+     * @return the MeetingEditor of given MeetingEditor's userId
+     */
+    private MeetingEditor getEditorById(Integer userId) {
+        return idToTraders.get(userId);
     }
 
     /**
@@ -145,7 +149,7 @@ class Meeting {
     }
 
     private boolean isMeetingCancelled() {
-        for (Trader t: idToTraders.values()){
+        for (MeetingEditor t: idToTraders.values()){
             if (t.editsOverThreshold()) {
                 return true;
             }

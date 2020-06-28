@@ -1,9 +1,13 @@
 import java.time.LocalDateTime;
+import java.util.concurrent.ConcurrentLinkedDeque;
 
 public class MeetingMain {
-    public static void main(String[] args) {
+    public static ClientUser u1 = new ClientUser(1);
+    public static ClientUser u2 = new ClientUser(2);
+
+    public static void main (String[] args) {
         System.out.println("Please register a meeting!");
-        MeetingSystem mt = new MeetingSystem();
+        MeetingSystem mt = new MeetingSystem(u1, u2);
         mt.run();
 
 
@@ -32,6 +36,8 @@ public class MeetingMain {
 
         LocalDateTime datetime22 = DateTime.convertToLocalDateTime(datetime2);
         System.out.println(datetime22.isAfter(now)); // false
+
+
 
 
     }

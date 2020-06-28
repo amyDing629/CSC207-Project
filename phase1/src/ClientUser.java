@@ -21,6 +21,10 @@ public class ClientUser extends User {
     //tradeHistory
     private List<String> tradeHistory;
 
+    public ClientUser(Integer i) {
+        super();
+    }
+
     @Override
     public String getPassword() {
         return password;
