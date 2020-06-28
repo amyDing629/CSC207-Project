@@ -3,7 +3,7 @@ import java.util.Dictionary;
  * A Trader who attends to a Meeting.
  */
 
-class Trader {
+class MeetingEditor {
 
     /** This Trader's user id. */
     public int userId;
@@ -18,7 +18,7 @@ class Trader {
      * Constructs a new Trader with user id userId.
      * @param userId the user id
      */
-    public Trader(int userId) {
+    public MeetingEditor (int userId) {
         this.userId = userId;
     }
 
