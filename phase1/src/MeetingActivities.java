@@ -39,8 +39,11 @@ public class MeetingActivities {
      * - allow input of time only; place only; time+place
      * - record user id
      */
-    public void editMeeting(ClientUser u1) {
-        u1.
+    public void editTime(Meeting meeting, User u1, LocalDateTime dateTime) {
+        // If the current edit times < threshold, update the new dateTime in meeting
+        if () { meeting.editMeetingTime(dateTime);}
+        // Update the edit history of this user
+        meeting.
     }
 }
 

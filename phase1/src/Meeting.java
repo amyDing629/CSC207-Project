@@ -79,6 +79,14 @@ class Meeting {
     }
 
     /**
+     * Return this meeting's edit history with corresponded user id
+     * @return the idToEditor
+     */
+    public HashMap<Integer, MeetingEditor> getIdToEditor() {
+        return idToEditor;
+    }
+
+    /**
      * Returns a list of two Traders' the confirmed statuses. (Getter for idToConfirmedStatus)
      * @return the confirmed status of two Traders respectively
      */
@@ -112,7 +120,7 @@ class Meeting {
      * Edit the Meeting with new date-time to meet dateTime. (setter for dateTime)
      * @param newDateTime the date-time newly proposed to the meeting
      */
-    public void editMeeting (LocalDateTime newDateTime) {
+    public void editMeetingTime (LocalDateTime newDateTime) {
         this.dateTime = newDateTime;
     }
 
@@ -120,7 +128,7 @@ class Meeting {
      * Edit the Meeting with new place to meet place. (Setter for place)
      * @param newPlace the place newly proposed to the meeting
      */
-    public void editMeeting (String newPlace) {
+    public void editMeetingPlace (String newPlace) {
         this.place = newPlace;
     }
 
