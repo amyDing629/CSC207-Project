@@ -2,7 +2,7 @@ import java.util.*;
 public class AdministrativeUser extends User {
     private String password;
     private String username;
-    private static int id;
+    private static Integer id;
 
     private List<String> notification;
 
@@ -22,7 +22,7 @@ public class AdministrativeUser extends User {
     }
 
     @Override
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 

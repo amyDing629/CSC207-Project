@@ -1,6 +1,6 @@
 import java.util.*;
 abstract class User {
-    protected int id = 0;
+    protected Integer id = 0;
     protected String password;
     protected String username;
     private List<String> notification;
@@ -11,9 +11,13 @@ abstract class User {
         //this.id = id;
     }
 
+    public User() {
+
+    }
+
     public abstract String getPassword();
     public abstract String getUsername();
-    public abstract int getId();
+    public abstract Integer getId();
 
     public abstract List<String> getNotification();
     public abstract void addNotification(String no);
