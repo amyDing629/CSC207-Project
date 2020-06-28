@@ -74,7 +74,7 @@ public abstract class Trade {
      */
     public Meeting setSecondMeeting(LocalDateTime dateTime, String place, ArrayList<Integer> traderIds){
         this.secondMeeting = new Meeting(dateTime, place, traderIds);
-        return meeting;
+        return secondMeeting;
     }
 
     /**
