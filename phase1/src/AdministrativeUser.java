@@ -2,7 +2,7 @@ import java.util.*;
 public class AdministrativeUser extends User {
     private String password;
     private String username;
-    private static int id;
+    private static Integer id;
 
     private List<String> notification;
 
@@ -59,11 +59,11 @@ public class AdministrativeUser extends User {
         a.addWishLend(b.getName());
     }
 
-    public void tradelimit(int a){
+    public void tradelimit(){
 
     }
 
-    public void incompletelimit(int a){
+    public void incompletelimit(){
 
     }
 
