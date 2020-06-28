@@ -2,7 +2,7 @@ import java.util.*;
 public class ClientUser extends User {
     private String password;
     private String username;
-    private static int id;
+    private static Integer id;
 
     private boolean isFrozen;
     private List<String> notification;
