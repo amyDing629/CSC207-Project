@@ -40,7 +40,7 @@ public class MeetingActivities {
      * - record user id
      */
     public void editMeeting(ClientUser u1) {
-
+        u1.
     }
 }
 
