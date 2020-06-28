@@ -1,16 +1,17 @@
 public class Item {
     private String name;
     private String description;
-    private int ownerId;
+    private String ownerName;
 
     /**
      * Constructor
      * @param name the name of the item
      * @param description the description of the item
      */
-    public Item(String name, String description, String ownerId) {
+    public Item(String name, String description, String owner) {
         this.name = name;
         this.description = description;
+        this.ownerName = owner;
     }
 
     /**
@@ -29,12 +30,17 @@ public class Item {
         return description;
     }
 
-    public int getOwner(){
-        return ownerId;
+    public String getOwnerName(){
+        return ownerName;
     }
 
-    public void setOwner(int user){
-        ownerId = user;
+    public void setOwner(String user){
+        ownerName = user;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }
 

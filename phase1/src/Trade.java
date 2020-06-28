@@ -14,7 +14,7 @@ public abstract class Trade {
      * @param duration number of date, -1 means permanent
      */
     public Trade(int duration){
-        this.status = "incomplete";
+        this.status = "disagreed";
         this.duration = duration;
         numOfTrade++;
         id = numOfTrade;
@@ -92,7 +92,7 @@ public abstract class Trade {
     public void changeMeeting(){
     }
 
-
+    abstract ArrayList<ClientUser> getUsers();
 
 
 
