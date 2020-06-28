@@ -39,6 +39,8 @@ public class MeetingActivities {
      * - allow input of time only; place only; time+place
      * - record user id
      */
-    public void editMeeting() {}
+    public void editMeeting(ClientUser u1) {
+
+    }
 }
 

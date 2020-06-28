@@ -18,9 +18,10 @@ class Meeting {
     private String place;
 
     /**
-     * This is Meeting's two Traders.
+     * This is Meeting's two editors.
+     * Each ClientUser in a single meeting has a MeetingEditor to record the number of edits
      */
-    private HashMap<Integer, Trader> idToTraders = new HashMap<Integer, Trader>();
+    private HashMap<Integer, MeetingEditor> idToEditor = new HashMap<Integer, MeetingEditor>();
 
     /**
      * This is Meeting's status: "incomplete" (default), "completed", "cancelled";
@@ -48,7 +49,7 @@ class Meeting {
         this.dateTime = dateTime;
         this.place = place;
         for (Integer i: traderIds) {
-            this.idToTraders.put(i, new Trader(i));
+            this.idToEditor.put(i, new MeetingEditor(i));
             this.idToConfirmedStatus.put(i, false);
         }
     }
@@ -145,7 +146,7 @@ class Meeting {
     }
 
     private boolean isMeetingCancelled() {
-        for (Trader t: idToTraders.values()){
+        for (MeetingEditor t: idToEditor.values()){
             if (t.editsOverThreshold()) {
                 return true;
             }
