@@ -6,7 +6,7 @@ public class inventoryMain {
         Item pear = new Item("pear", "amy");
         inventory.addItemLending(apple);
         inventory.addItemLending(pear);
-        inventory.addItemFrozen(pear);
+        inventory.addItemFrozen(apple);
         InventoryPresentor ip = new InventoryPresentor(inventory);
         ip.run();
 

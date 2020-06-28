@@ -11,6 +11,7 @@ public class Inventory {
      */
     public Inventory() {
         lendingList = new ArrayList<Item>();
+        frozenList = new ArrayList<Item>();
     }
 
     /**
@@ -27,6 +28,10 @@ public class Inventory {
      */
     public void addItemLending(Item item){
         lendingList.add(item);
+    }
+
+    public void addItemFrozen(Item item){
+        frozenList.add(item);
     }
 
     /**
@@ -48,9 +53,7 @@ public class Inventory {
         return frozenList;
     }
 
-    public void addItemFrozen(Item item){
-        frozenList.add(item);
-    }
+
 
     /**
      * the inventory that shows tradable items.
