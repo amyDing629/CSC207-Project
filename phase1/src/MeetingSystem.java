@@ -5,61 +5,100 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-/** This is a controller?
+/**
+ * [Controller class]
  * confirm the meeting
  * or edit time, place of the Meeting by Trader
  * update timeOfEdition in Trader
  */
 public class MeetingSystem {
 
-    private User u1 = new ClientUser(1);
-    private User u2 = new ClientUser(2);
+//    private User u1 = new User(1);
+//    private User u2 = new User(2);
+
+    public LocalDateTime dateTime;
+    public String place;
+    public Integer userId;
+    public Integer otherUserId;
+
+    private MeetingEditor t1 = new MeetingEditor(1);
+    private MeetingEditor t2 = new MeetingEditor(2);
+//    private SetUpMeetingPresenter setUpMeeting = new SetUpMeetingPresenter();
+
 
     /**
      * Interacts with the user to prompt input of student and course information.
      */
     public void run() {
+        // allow input: "exit", "setup meeting", "edit", "confirm"
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        MeetingIterator prompts = new MeetingIterator();
-        ArrayList<String> temp = new ArrayList<>();
-        int curr = 0;
 
-
-        System.out.println("Type 'exit' to quit or 'ok' to continue.");
+        System.out.println("Type 'exit' to quit or 'setup meeting' to set up a meeting.");
         try {
             String input = br.readLine();
             while (!input.equals("exit")) { // != compares memory addresses.
-                if (prompts.hasNext()) {
-                    System.out.println(prompts.next());
+
+                // set up meeting
+                if (input.equals("setup meeting")) {
+                    SetUpMeetingPresenter setUpMeeting = new SetUpMeetingPresenter();
+                    dateTime = setUpMeeting.dateTime;
+                    place = setUpMeeting.place;
+
+
+
+                    System.out.println("A meeting has been set up!");
+                    System.out.println("  " + "- proposed time is:" + dateTime.toString());
+                    System.out.println("  " + "- proposed place is:" + place);
+
                 }
+
+                // edit meeting
                 input = br.readLine();
-                if (!input.equals("exit")) {
-                    temp.add(input);
-                    curr++;
+                if (input.equals("edit meeting")) {
+                    // update time place
+                    EditMeetingPresenter editMeeting = new EditMeetingPresenter();
+                    LocalDateTime time = editMeeting.dateTime;
+                    String place = editMeeting.place;
+
+
+
+                    System.out.println("A meeting has been edited!");
+                    System.out.println("  " + "- the new proposed time is:" + time.toString());
+                    System.out.println("  " + "- the new proposed place is:" + place);
+
                 }
+
             }
-            System.out.println(temp);
+//            System.out.println(temp);
         } catch (IOException e) {
             System.out.println("Something went wrong");
         }
 
-        try{
-            String str1 = temp.get(0);
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-            LocalDateTime dateTime = LocalDateTime.parse(str1, formatter);
-            // Read more: https://www.java67.com/2016/04/how-to-convert-string-to-localdatetime-in-java8-example.html#ixzz6PvuyR5EV
+//        MeetingIterator prompts = new MeetingIterator();
+//        ArrayList<String> temp = new ArrayList<>();
+//        int curr = 0;
+//
+//
+//        System.out.println("Type 'exit' to quit or 'ok' to continue.");
+//        try {
+//            String input = br.readLine();
+//            while (!input.equals("exit")) { // != compares memory addresses.
+//                if (prompts.hasNext()) {
+//                    System.out.println(prompts.next());
+//                }
+//                input = br.readLine();
+//                if (!input.equals("exit")) {
+//                    temp.add(input);
+//                    curr++;
+//                }
+//            }
+//            System.out.println(temp);
+//        } catch (IOException e) {
+//            System.out.println("Something went wrong");
+//        }
 
-            String place = temp.get(1);
 
-            Integer otherUserId = Integer.valueOf(temp.get(2));
-
-            u1.initiateMeeting(dateTime, place, otherUserId);
-            System.out.println(u1);
-
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println("Empty enrolment");
-        }
 
 
 
@@ -120,6 +159,14 @@ public class MeetingSystem {
 //        // password according to your rules.
 //        return true;
 //    }
+//
+//    // Dummy change method.
+//    static void change(String login, char[] password) {
+//        // Modify this method to change
+//        // password according to your rules.
+//    }
+//}
+
 //
 //    // Dummy change method.
 //    static void change(String login, char[] password) {
