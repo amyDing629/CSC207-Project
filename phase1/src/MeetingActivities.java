@@ -67,7 +67,7 @@ public class MeetingActivities {
         if (!editHistory.editsOverThreshold()) {
             meeting.editMeetingTime(dateTime);
             editHistory.updateTimeOfEdition();
-        }else{
+        }else {
             meeting.setStatus();
         }
     }
@@ -84,7 +84,7 @@ public class MeetingActivities {
         if (!editHistory.editsOverThreshold()) {
             meeting.editMeetingPlace(place);
             editHistory.updateTimeOfEdition();
-        }else{
+        }else {
             meeting.setStatus();
         }
     }
@@ -95,11 +95,17 @@ public class MeetingActivities {
             meeting.editMeetingTime(dateTime);
             meeting.editMeetingPlace(place);
             editHistory.updateTimeOfEdition();
-        }else{
+        }else {
             meeting.setStatus();
         }
     }
 
-
+    /**
+     * Allow user to confirm the meeting
+     * Update the confirm status history idToConfirmedStatus in this meeting
+     */
+    public void confirmMeeting(Meeting meeting, Integer userId) {
+        meeting.getConfirmedStatusFull();
+    }
 }
 
