@@ -6,41 +6,47 @@ public class ClientUser extends User {
 
     private boolean isFrozen;
     private List<String> notification;
-    private int weekTransactiion;
-    private int incompleteTransaction;
+    private int weekTransactiionLimit;
+    private int incompleteTransactionLimit;
 
     //wish list
     private List<String> wishLend;
     private List<String> wishBorrow;
 
-    public ClientUser(String username, String password){
-        super(username, password);
-        id ++;
-    }
+    private List<String> lend;
+    private List<String> borrowed;
+
+    private boolean isBorrow;
 
     //Inventory
 
     //tradeHistory
-    private List<String> tradeHistory;
+    private List<Trade> tradeHistory;
 
-    public ClientUser(Integer i) {
-        super();
+    public ClientUser(String username, String password ,List<String> notification,Boolean isAdmin){
+        super(username, password, notification, isAdmin);
+        isBorrow=true;
+        id ++;
     }
 
-    public int getIncompleteTransaction() {
-        return incompleteTransaction;
+    public void setBorrow(boolean borrow) {
+        isBorrow = borrow;
     }
 
-    public int getWeekTransactiion() {
-        return weekTransactiion;
+    public int getIncompleteTransactionLimit() {
+        return incompleteTransactionLimit;
+    }
+
+    public int getWeekTransactiionLimit() {
+        return weekTransactiionLimit;
     }
 
     public void setIncompleteTransaction(int incompleteTransaction) {
-        this.incompleteTransaction = incompleteTransaction;
+        this.incompleteTransactionLimit = incompleteTransaction;
     }
 
-    public void setWeekTransactiion(int weekTransactiion) {
-        this.weekTransactiion = weekTransactiion;
+    public void setWeekTransactiionLimit(int weekTransactiion) {
+        this.weekTransactiionLimit = weekTransactiion;
     }
 
     @Override
@@ -58,6 +64,14 @@ public class ClientUser extends User {
         return id;
     }
 
+    public List<String> getLend() {
+        return lend;
+    }
+
+    public List<String> getBorrowed() {
+        return borrowed;
+    }
+
     @Override
     public List<String> getNotification() {
         return notification;
@@ -65,12 +79,12 @@ public class ClientUser extends User {
 
     @Override
     public void addNotification(String no) {
-          notification.add(no);
+        notification.add(no);
     }
 
     @Override
     public void changePassword(String password) {
-         this.password=password;
+        this.password=password;
     }
 
     @Override
@@ -89,12 +103,21 @@ public class ClientUser extends User {
         return wishBorrow;
     }
 
-    public List<String> getTradeHistory() {
-        List<String> trade=new ArrayList<String>();
+    public List<Trade> getTradeHistory() {
+        List<Trade> trade=new ArrayList<>();
         for (int i=0;i<3;i++){
             trade.add(tradeHistory.get(tradeHistory.size()-1-i));
         }
         return trade;
+    }
+    public int getIncompleteTransaction(){
+        int number=0;
+        for (Trade trade : tradeHistory) {
+            if (trade.status.equals("incomplete")) {
+                number++;
+            }
+        }
+        return number;
     }
     public void addWishLend(String wish) {
         wishLend.add(wish);

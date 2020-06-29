@@ -4,11 +4,13 @@ abstract class User {
     protected String password;
     protected String username;
     private List<String> notification;
-
-    public User(String username, String password /**int id*/){
+    private boolean isAdmin;
+    public User(String username, String password, /**int id*/List<String> notification, boolean isAdmin){
         this.username = username;
         this.password = password;
         //this.id = id;
+        this.notification = notification;
+        this.isAdmin = isAdmin;
     }
 
     public User() {
