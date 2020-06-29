@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 /**
  * [Use Case class]
@@ -84,7 +85,10 @@ public class MeetingActivities {
      * Update the confirm status history idToConfirmedStatus in this meeting
      */
     public void confirmMeeting(Meeting meeting, Integer userId) {
-        meeting.getConfirmedStatusFull();
+        HashMap<Integer, Boolean> status = meeting.getConfirmedStatusFull();
+        if (status.containsKey(userId)){
+            status.put(userId, true);
+        }else{System.out.println("Error: mismatch between the input id and id in meeting");}
     }
 }
 
