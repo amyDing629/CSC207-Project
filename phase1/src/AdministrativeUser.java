@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.*;
 public class AdministrativeUser extends User {
     private String password;
@@ -59,12 +60,27 @@ public class AdministrativeUser extends User {
         a.addWishLend(b.getName());
     }
 
-    public void tradelimit(){
-
+    public void tradelimit(ClientUser a){
     }
 
-    public void incompletelimit(){
-
+    public void incompleteTransaction(ClientUser a){
+        if(a.getIncompleteTransaction() > a.getIncompleteTransactionLimit()){
+            a.setIsFrozen(false);
+        }
+        else{
+            a.setIsFrozen(false);
+        }
     }
+
+    public void canBorrow(int a, ClientUser b){
+        if(b.getLend().size() + a >= b.getBorrowed().size()){
+            b.setBorrow(true);
+        }
+        else{
+            b.setBorrow(false);
+        }
+    }
+
+
 
 }

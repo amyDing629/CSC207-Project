@@ -31,6 +31,10 @@ public class ClientUser extends User {
         id ++;
     }
 
+    public void setBorrow(boolean borrow) {
+        isBorrow = borrow;
+    }
+
     public int getIncompleteTransactionLimit() {
         return incompleteTransactionLimit;
     }
@@ -60,6 +64,14 @@ public class ClientUser extends User {
     @Override
     public int getId() {
         return id;
+    }
+
+    public List<String> getLend() {
+        return lend;
+    }
+
+    public List<String> getBorrowed() {
+        return borrowed;
     }
 
     @Override
