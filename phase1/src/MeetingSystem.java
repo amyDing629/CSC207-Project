@@ -24,8 +24,8 @@ public class MeetingSystem {
 
     /**
      * Construct a MeetingSystem object with two ClientUsers
-     * @param u1
-     * @param u2
+     * @param u1 the ClientUser who sets up the meeting
+     * @param u2 the ClientUser who receives the meeting invitation
      */
     public MeetingSystem(ClientUser u1, ClientUser u2){
         userId = u1.getId();
@@ -63,13 +63,13 @@ public class MeetingSystem {
                 if (input.equals("edit meeting")) {
                     // update time place
                     EditMeetingPresenter editMeeting = new EditMeetingPresenter(dateTime, place);
-                    LocalDateTime time = editMeeting.dateTime;
-                    String place = editMeeting.place;
+                    dateTime = editMeeting.dateTime;
+                    place = editMeeting.place;
 
                     if(editMeeting.isEdited()){
                         System.out.println("Meeting has been edited!");
-                        System.out.println("  " + "- the new proposed time is:" + time.toString());
-                        System.out.println("  " + "- the new proposed place is:" + place);
+                        System.out.println("  " + "- the current proposed time is:" + dateTime.toString());
+                        System.out.println("  " + "- the current proposed place is:" + place);
                     }else{
                         System.out.println("Meeting has NOT been edited!");
                     }
