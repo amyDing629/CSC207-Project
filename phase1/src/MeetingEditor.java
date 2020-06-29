@@ -1,4 +1,5 @@
 import java.util.Dictionary;
+import java.util.*;
 /**
  * A Trader who attends to a Meeting.
  */
@@ -6,7 +7,7 @@ import java.util.Dictionary;
 class MeetingEditor {
 
     /** This Trader's user id. */
-    public int userId;
+    public Integer userId;
 
     /** This Trader's threshold of times to edit place and/or time of meeting; Set to 3 by default. */
     private int threshold = 3;
@@ -18,9 +19,17 @@ class MeetingEditor {
      * Constructs a new Trader with user id userId.
      * @param userId the user id
      */
-    public MeetingEditor (int userId) {
+    public MeetingEditor (Integer userId) {
         this.userId = userId;
     }
+
+//    /**
+//     * Constructs a new Trader with meeting editor builder.
+//     * @param meetingEditorBuilder the meeting editor builder
+//     */
+//    public MeetingEditor (MeetingEditorBuilder meetingEditorBuilder) {
+//        this.userId = meetingEditorBuilder.getId();
+//    }
 
     /**
      * Returns this Trader's user id.
@@ -54,3 +63,5 @@ class MeetingEditor {
     }
 
 }
+
+

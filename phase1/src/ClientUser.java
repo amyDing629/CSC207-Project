@@ -60,7 +60,7 @@ public class ClientUser extends User {
     }
 
     @Override
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 

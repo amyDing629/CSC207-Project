@@ -24,8 +24,8 @@ public class MeetingSystem {
 
     /**
      * Construct a MeetingSystem object with two ClientUsers
-     * @param u1
-     * @param u2
+     * @param u1 the ClientUser who sets up the meeting
+     * @param u2 the ClientUser who receives the meeting invitation
      */
     public MeetingSystem(ClientUser u1, ClientUser u2){
         userId = u1.getId();
@@ -62,15 +62,18 @@ public class MeetingSystem {
                 input = br.readLine();
                 if (input.equals("edit meeting")) {
                     // update time place
-                    EditMeetingPresenter editMeeting = new EditMeetingPresenter();
-                    LocalDateTime time = editMeeting.dateTime;
-                    String place = editMeeting.place;
+                    EditMeetingPresenter editMeeting = new EditMeetingPresenter(dateTime, place);
+                    dateTime = editMeeting.dateTime;
+                    place = editMeeting.place;
 
+                    if(editMeeting.isEdited()){
+                        System.out.println("Meeting has been edited!");
+                        System.out.println("  " + "- the current proposed time is:" + dateTime.toString());
+                        System.out.println("  " + "- the current proposed place is:" + place);
+                    }else{
+                        System.out.println("Meeting has NOT been edited!");
+                    }
 
-
-                    System.out.println("A meeting has been edited!");
-                    System.out.println("  " + "- the new proposed time is:" + time.toString());
-                    System.out.println("  " + "- the new proposed place is:" + place);
 
                 }
 
@@ -79,6 +82,12 @@ public class MeetingSystem {
         } catch (IOException e) {
             System.out.println("Something went wrong");
         }
+
+
+
+
+
+
 
 //        MeetingIterator prompts = new MeetingIterator();
 //        Array©<String> temp = new ArrayList<>();
