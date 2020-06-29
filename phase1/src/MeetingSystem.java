@@ -40,13 +40,22 @@ public class MeetingSystem {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        System.out.println("Type 'exit' to quit or 'setup meeting' to set up a meeting.");
+//        System.out.println("------------------------------");
+//        System.out.print("Meeting Menu: \n " +
+//                "1. Enter 'ss': to set up a meeting \n" +
+//                "2. Enter 'ee': to edit the meeting \n" +
+//                "3. Enter 'cc': to confirm the meeting \n" +
+//                "4. Enter 'menu': to print menu"+
+//                "5. Enter 'exit' to quit meeting system\n");
+//        System.out.println("------------------------------");
+        printMenu();
+
         try {
             String input = br.readLine();
             while (!input.equals("exit")) { // != compares memory addresses.
 
-                // set up meeting
-                if (input.equals("setup meeting")) {
+                // instruction 1: set up meeting
+                if (input.equals("ss")) {
                     SetUpMeetingPresenter setUpMeeting = new SetUpMeetingPresenter();
                     dateTime = setUpMeeting.dateTime;
                     place = setUpMeeting.place;
@@ -58,9 +67,9 @@ public class MeetingSystem {
 
                 }
 
-                // edit meeting
+                // instruction 2: edit meeting
                 input = br.readLine();
-                if (input.equals("edit meeting")) {
+                if (input.equals("ee")) {
                     // update time place
                     EditMeetingPresenter editMeeting = new EditMeetingPresenter(dateTime, place);
                     dateTime = editMeeting.dateTime;
@@ -73,63 +82,52 @@ public class MeetingSystem {
                     }else{
                         System.out.println("Meeting has NOT been edited!");
                     }
+                }
 
+
+                // instruction 3: confirm meeting
+                input = br.readLine();
+                if (input.equals("cc")) {
+                    // confirm code
+                    System.out.println("TODO: confirmed~");
 
                 }
 
+                // instruction 4: print Meeting System menu
+                input = br.readLine();
+                if (input.equals("menu")) {
+                    printMenu();
+
+                }
+
+
+                // other instruction
+                input = br.readLine();
+                if (!input.equals("ss") && !input.equals("ee") && !input.equals("cc") && !input.equals("menu")) {
+                    System.out.println("Error: Invalid Instruction!");
+                }
+
             }
-//            System.out.println(temp);
         } catch (IOException e) {
             System.out.println("Something went wrong");
         }
+    }
 
 
-
-
-
-
-
-//        MeetingIterator prompts = new MeetingIterator();
-//        Array©<String> temp = new ArrayList<>();
-//        int curr = 0;
-//
-//
-//        System.out.println("Type 'exit' to quit or 'ok' to continue.");
-//        try {
-//            String input = br.readLine();
-//            while (!input.equals("exit")) { // != compares memory addresses.
-//                if (prompts.hasNext()) {
-//                    System.out.println(prompts.next());
-//                }
-//                input = br.readLine();
-//                if (!input.equals("exit")) {
-//                    temp.add(input);
-//                    curr++;
-//                }
-//            }
-//            System.out.println(temp);
-//        } catch (IOException e) {
-//            System.out.println("Something went wrong");
-//        }
-
-
-
-
-
-//        try {
-//            if(temp.get(0) != null) {
-//                u1.addMeeting(temp);
-//                Course c = new Course(temp.get(curr - 1));
-//                sm1.enrolAllInCourse(c);
-//                System.out.println(sm1);
-//            }
-//        } catch (IndexOutOfBoundsException e) {
-//            System.out.println("Empty enrolment");
-//        }
-
-
+    private void printMenu(){
+        System.out.println("------------------------------");
+        System.out.print("Meeting Menu: \n " +
+                "1. Enter 'ss': to set up a meeting \n" +
+                "2. Enter 'ee': to edit the meeting \n" +
+                "3. Enter 'cc': to confirm the meeting \n" +
+                "4. Enter 'menu': to print menu"+
+                "5. Enter 'exit' to quit meeting system\n");
+        System.out.println("------------------------------");
     }
 }
+
+
+
 
 
 //public class Password {
