@@ -20,7 +20,7 @@ class Meeting {
     /**
      * This is Meeting's two Traders.
      */
-    private HashMap<Integer, MeetingEditor> idToTraders = new HashMap<>();
+    public HashMap<Integer, MeetingEditor> idToTraders = new HashMap<Integer, MeetingEditor>();
 
     /**
      * This is Meeting's status: "incomplete" (default), "completed", "cancelled";
@@ -48,7 +48,8 @@ class Meeting {
         this.dateTime = dateTime;
         this.place = place;
         for (Integer i: traderIds) {
-            this.idToTraders.put(i, new MeetingEditor(i));
+            MeetingEditor meetingEditor = new MeetingEditor(i);
+            this.idToTraders.put(i, meetingEditor);
             this.idToConfirmedStatus.put(i, false);
         }
     }

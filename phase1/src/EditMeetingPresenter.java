@@ -6,17 +6,30 @@ public class EditMeetingPresenter {
     public String place;
 
     /**
-     * Obtain user prompts of editing time and/or place
+     * This is the status of this editing action, representing if the meeting accessed this time is edited or not
+     * Note: this edition action is defaulted to be not yet edited
+     */
+    private boolean edited = false;
+
+    /**
+     * Obtain user prompts of editing "time" and/or "place", or closing edition with "close".
      * TODO: record the edition time of each Trader (User)
      */
-    public EditMeetingPresenter() {
+    public EditMeetingPresenter(LocalDateTime dateTime, String place) {
+        // Set the instance variables "dateTime", "place" with  before editing
+        this.dateTime = dateTime;
+        this.place = place;
+
+
+        // Obtain User input of edition info
         Scanner user_input = new Scanner(System.in);
 
-        System.out.print("Enter \"time\" to change a new time, or enter \"place\" to change a new place");
+        System.out.print("Enter \"time\" to change a new time, or enter \"place\" to change a new place, " +
+                "or enter \"close\" to quit edition process \n");
         String input_str = user_input.nextLine();
 
-        boolean close = false;
-        do {
+        while (!input_str.equals("close")) {
+            // instruction 1: "time"
             if (input_str.equals("time")) {
                 boolean good = false;
                 do {
@@ -27,51 +40,67 @@ public class EditMeetingPresenter {
                     // check valid format
                     if (!DateTime.isValidFormat(dateTimeStr)) {
                         System.out.println("Invalid input format!");
-                        break;
-                    }
-
-                    // check if time in future
-                    LocalDateTime now = DateTime.getCurrentTime();
-                    LocalDateTime newDateTime = DateTime.convertToLocalDateTime(dateTimeStr);
-                    if (!newDateTime.isAfter(now)) {
-                        System.out.println("Invalid input date-time! Only future time accepted");
-                        break;
-                    }
-
-                    // check if different from the old time input
-                    if (newDateTime.isEqual(dateTime)) {
-                        good = true;
-                        dateTime = newDateTime;
-                        System.out.println("New Edition Successful! proposed new date-time is: " + dateTime.toString());
                     } else {
-                        System.out.println("Invalid input date-time! Input time is same as the old time");
-                        break;
-                    }
+                        // check if time in future
+                        LocalDateTime now = DateTime.getCurrentTime();
+                        LocalDateTime newDateTime = DateTime.convertToLocalDateTime(dateTimeStr);
+                        if (!newDateTime.isAfter(now)) {
+                            System.out.println("Invalid input date-time! Only future time accepted");
+                        } else {
+                            // check if different from the old time input
+                            if (!newDateTime.isEqual(dateTime)) {
+                                good = true;
+                                edited = true;
+                                this.dateTime = newDateTime;
+                                System.out.println("New Edition Successful! proposed new date-time is: " + this.dateTime.toString());
+                            } else {
+                                System.out.println("Invalid input date-time! Input time is same as the old time");
+                            }
 
+                        }
+
+                    }
                 } while (!good);
 
-            } else if (input_str.equals("place")) {
+            }
+
+            // instruction 2: "place"
+            input_str = user_input.nextLine();
+            if (input_str.equals("place")) {
                 boolean good = false;
                 do {
                     System.out.print("Enter the new place: ");
                     String newPlace = user_input.nextLine();
                     if (isNewPlaceEditable(newPlace)) {
-                        place = newPlace;
+                        this.place = newPlace;
                         good = true;
+                        edited = true;
                     } else {
                         System.out.println("Error: Propose a new place!");
                     }
                 } while (!good);
-                System.out.print("New Edition Successful! Proposed new place: " + place + "\n");
+                System.out.print("New Edition Successful! Proposed new place: " + this.place + "\n");
 
-            } else if (input_str.equals("close")) {
-                close = true;
-            } else {
+            }
+
+
+            // other instructions
+            input_str = user_input.nextLine();
+            if (!(input_str.equals("time") || !input_str.equals("place"))) {
                 System.out.println("Invalid instruction!");
             }
-        } while (close);
-
+        }
     }
+
+    /**
+     * Return whether any info in EditMeetingPresenter is successfully edited
+     * @return true iff successfully edited the place and/or time
+     */
+    public boolean isEdited(){
+        return edited;
+    }
+
+
 
     /**
      * Return true iff successfully edited the place (i.e change the old place to a new one);

@@ -62,15 +62,18 @@ public class MeetingSystem {
                 input = br.readLine();
                 if (input.equals("edit meeting")) {
                     // update time place
-                    EditMeetingPresenter editMeeting = new EditMeetingPresenter();
+                    EditMeetingPresenter editMeeting = new EditMeetingPresenter(dateTime, place);
                     LocalDateTime time = editMeeting.dateTime;
                     String place = editMeeting.place;
 
+                    if(editMeeting.isEdited()){
+                        System.out.println("Meeting has been edited!");
+                        System.out.println("  " + "- the new proposed time is:" + time.toString());
+                        System.out.println("  " + "- the new proposed place is:" + place);
+                    }else{
+                        System.out.println("Meeting has NOT been edited!");
+                    }
 
-
-                    System.out.println("A meeting has been edited!");
-                    System.out.println("  " + "- the new proposed time is:" + time.toString());
-                    System.out.println("  " + "- the new proposed place is:" + place);
 
                 }
 
@@ -79,6 +82,12 @@ public class MeetingSystem {
         } catch (IOException e) {
             System.out.println("Something went wrong");
         }
+
+
+
+
+
+
 
 //        MeetingIterator prompts = new MeetingIterator();
 //        Array©<String> temp = new ArrayList<>();
