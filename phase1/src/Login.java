@@ -50,7 +50,6 @@ public class Login {
                 System.out.println("Please enter your password!");
                 System.out.print(">");
                 String password = sc.nextLine();
-
                 //usermanger username verification?
                 FileWriter fw = new FileWriter("username.txt");
                 fw.write(username);
