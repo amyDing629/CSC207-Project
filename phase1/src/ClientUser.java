@@ -17,8 +17,6 @@ public class ClientUser extends User {
     private List<String> borrowed;
 
     private boolean isBorrow;
-    private int limits;
-    private int incompLimit;
 
     //Inventory
 
