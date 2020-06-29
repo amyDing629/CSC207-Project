@@ -5,10 +5,12 @@ abstract class User {
     protected String username;
     private List<String> notification;
     private boolean isAdmin;
-    public User(String username, String password /**int id*/){
+    public User(String username, String password, /**int id*/List<String> notification, boolean isAdmin){
         this.username = username;
         this.password = password;
         //this.id = id;
+        this.notification = notification;
+        this.isAdmin = isAdmin;
     }
 
     public abstract String getPassword();
