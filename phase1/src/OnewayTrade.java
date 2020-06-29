@@ -51,5 +51,9 @@ public class OnewayTrade extends Trade {
         return users;
     }
 
+    public String toString(){
+        return borrower +  " makes a one way trade with " + lender + "to borrow" + item;
+    }
+
 }
 

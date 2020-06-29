@@ -2,12 +2,12 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class RequestTradePresentor {
+public class RequestTradePresenter {
     TradeManager tradeManager;
     UserManager userManager;
     Inventory inventory;
 
-    public RequestTradePresentor() {
+    public RequestTradePresenter() {
         TradeManager tradeManager = new TradeManager();
         UserManager userManager = new UserManager();
         Inventory inventory = new Inventory();
@@ -37,7 +37,8 @@ public class RequestTradePresentor {
                     throw new IOException("Wrong input, please type again.");
                 } else {
                     Trade newTrade = createTrade(currUser, tarUser, item, line);
-                    //tarUser.tradeList.append(newTrade);
+                    //tarUser.getNotification().add("Trade" + newTrade.getId()+" : " + newTrade + "/ accept or not");
+                    //user needs to have a trade request list
                     System.out.println("your trade has been created, please wait for the target user to reply");
                     break;
                 }
@@ -48,7 +49,7 @@ public class RequestTradePresentor {
 
     }
 
-    private Trade createTrade(ClientUser currUser, ClientUser tarUser, Item item, String line) throws IOException {
+    private Trade createTrade(ClientUser currUser, ClientUser tarUser, Item item, String line){
         Trade trade;
         if (line.equals("one way(temporary)")){
             trade = tradeManager.createOnewayTrade(currUser, tarUser, item, 30);

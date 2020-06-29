@@ -22,32 +22,11 @@ public class MeetingActivities {
      */
     public static Meeting setUpMeeting(Integer userId, Integer otherUserId, LocalDateTime dateTime, String place) {
         ArrayList<Integer> userIds = new ArrayList<>(Arrays.asList(userId, otherUserId));
-        Meeting meeting = new Meeting(dateTime, place, userIds);
-        return meeting;
-    }
+//        Meeting meeting = new Meeting(dateTime, place, userIds);
+//        return meeting;
 
-    /**
-     * Interacts with the user to prompt input of setting up a meeting: allow input, construct a meeting
-     */
-    public void setUpMeeting(User u1) {
-//        try{
-//            String str1 = temp.get(0);
-//            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-//            LocalDateTime dateTime = LocalDateTime.parse(str1, formatter);
-//            // Read more: https://www.java67.com/2016/04/how-to-convert-string-to-localdatetime-in-java8-example.html#ixzz6PvuyR5EV
-//
-//            String place = temp.get(1);
-//
-//            Integer otherUserId = Integer.valueOf(temp.get(2));
-//
-//            u1.initiateMeeting(dateTime, place, otherUserId);
-//            System.out.println(u1);
-//
-//        } catch (IndexOutOfBoundsException e) {
-//            System.out.println("Empty enrolment");
-//        }
+        return new Meeting(dateTime, place, userIds);
     }
-
 
     /**
      * Interacts with the user to prompt input of editing a meeting:

@@ -62,4 +62,8 @@ public class TwowayTrade extends Trade {
         return users;
     }
 
+    public String toString(){
+        return trader1 +" makes two way trade with " + trader2 + " for item " + item1to2 + "and" + item2to1;
+    }
+
 }

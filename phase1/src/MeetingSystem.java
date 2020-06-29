@@ -7,12 +7,26 @@ import java.util.ArrayList;
 
 /**
  * [Controller class]
- * confirm the meeting
- * or edit time, place of the Meeting by Trader
- * update timeOfEdition in MeetingEditor
+ * This is a meeting's controlling system.
+ *
+ * The meeting system controller that interacts with the user, makes decisions based on user input instructions, and
+ * calls corresponding use case method.
+ *
+ * Main functions of this controller class:
+ *      1. allows setup meeting, once the Trade is set up [TODO: TradeSystem's Responsibility??????]
+ *      2. apply use case method of setting up meeting
+ *      3. allows edit meeting, once the
+ *      4. allows confirming the meeting
+ *      5. update timeOfEdition in MeetingEditor
  */
 public class MeetingSystem {
 
+    /**
+     * This is the current meeting date-time.
+     * Update this variable when
+     *  - a meeting is setup;
+     *  - the date-time info of this meeting is edited.
+     */
     public LocalDateTime dateTime;
     public String place;
     public static Integer userId;
@@ -24,8 +38,8 @@ public class MeetingSystem {
 
     /**
      * Construct a MeetingSystem object with two ClientUsers
-     * @param u1
-     * @param u2
+     * @param u1 the ClientUser who sets up the meeting
+     * @param u2 the ClientUser who receives the meeting invitation
      */
     public MeetingSystem(ClientUser u1, ClientUser u2){
         userId = u1.getId();
@@ -33,20 +47,27 @@ public class MeetingSystem {
     }
 
     /**
-     * Run the Meeting system, which interacts with the user to prompt input of meeting information.
+     * Run the Meeting system, which interacts with the user and makes decisions upon user input actions.
+     *
+     * TODO: interact with Trade System
+     * 1. allows setting up a meeting, only when there is no meeting stored in Trade (i.e. first meeting)
+     * 2. allows editing the meeting / confirming the meeting, only when
+     *          - the meeting has been set up already;
+     *          - the meeting has not been cancelled (i.e edit time of each ClientUser < threshold of edition time)
      */
     public void run() {
         // allow input: "exit", "setup meeting", "edit", "confirm"
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        System.out.println("Type 'exit' to quit or 'setup meeting' to set up a meeting.");
+        printMenu();
+
         try {
             String input = br.readLine();
             while (!input.equals("exit")) { // != compares memory addresses.
 
-                // set up meeting
-                if (input.equals("setup meeting")) {
+                // instruction 1: set up meeting
+                if (input.equals("ss")) {
                     SetUpMeetingPresenter setUpMeeting = new SetUpMeetingPresenter();
                     dateTime = setUpMeeting.dateTime;
                     place = setUpMeeting.place;
@@ -58,69 +79,67 @@ public class MeetingSystem {
 
                 }
 
-                // edit meeting
+                // instruction 2: edit meeting
                 input = br.readLine();
-                if (input.equals("edit meeting")) {
+                if (input.equals("ee")) {
                     // update time place
-                    EditMeetingPresenter editMeeting = new EditMeetingPresenter();
-                    LocalDateTime time = editMeeting.dateTime;
-                    String place = editMeeting.place;
+                    EditMeetingPresenter editMeeting = new EditMeetingPresenter(dateTime, place);
+                    dateTime = editMeeting.dateTime;
+                    place = editMeeting.place;
+
+                    if(editMeeting.isEdited()){
+                        System.out.println("Meeting has been edited!");
+                        System.out.println("  " + "- the current proposed time is:" + dateTime.toString());
+                        System.out.println("  " + "- the current proposed place is:" + place);
+                    }else{
+                        System.out.println("Meeting has NOT been edited!");
+                    }
+                }
 
 
-
-                    System.out.println("A meeting has been edited!");
-                    System.out.println("  " + "- the new proposed time is:" + time.toString());
-                    System.out.println("  " + "- the new proposed place is:" + place);
+                // instruction 3: confirm meeting
+                input = br.readLine();
+                if (input.equals("cc")) {
+                    // confirm code
+                    System.out.println("TODO: confirmed~");
 
                 }
 
+                // instruction 4: print Meeting System menu
+                input = br.readLine();
+                if (input.equals("menu")) {
+                    printMenu();
+
+                }
+
+
+                // other instruction
+                input = br.readLine();
+                if (!input.equals("ss") && !input.equals("ee") && !input.equals("cc") && !input.equals("menu")) {
+                    System.out.println("Error: Invalid Instruction!");
+                }
+
             }
-//            System.out.println(temp);
         } catch (IOException e) {
             System.out.println("Something went wrong");
         }
-
-//        MeetingIterator prompts = new MeetingIterator();
-//        Array©<String> temp = new ArrayList<>();
-//        int curr = 0;
-//
-//
-//        System.out.println("Type 'exit' to quit or 'ok' to continue.");
-//        try {
-//            String input = br.readLine();
-//            while (!input.equals("exit")) { // != compares memory addresses.
-//                if (prompts.hasNext()) {
-//                    System.out.println(prompts.next());
-//                }
-//                input = br.readLine();
-//                if (!input.equals("exit")) {
-//                    temp.add(input);
-//                    curr++;
-//                }
-//            }
-//            System.out.println(temp);
-//        } catch (IOException e) {
-//            System.out.println("Something went wrong");
-//        }
+    }
 
 
-
-
-
-//        try {
-//            if(temp.get(0) != null) {
-//                u1.addMeeting(temp);
-//                Course c = new Course(temp.get(curr - 1));
-//                sm1.enrolAllInCourse(c);
-//                System.out.println(sm1);
-//            }
-//        } catch (IndexOutOfBoundsException e) {
-//            System.out.println("Empty enrolment");
-//        }
-
-
+    private void printMenu(){
+        System.out.println("------------------------------");
+        System.out.print("Meeting Menu: \n " +
+                "1. Enter 'ss': to set up a meeting \n" +
+                "2. Enter 'ee': to edit the meeting \n" +
+                "3. Enter 'cc': to confirm the meeting \n" +
+                "4. Enter 'menu': to print menu"+
+                "5. Enter 'exit' to quit meeting system\n");
+        System.out.println("------------------------------");
     }
 }
+
+
+
 
 
 //public class Password {
