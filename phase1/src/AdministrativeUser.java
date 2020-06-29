@@ -1,13 +1,14 @@
 import java.util.*;
 public class AdministrativeUser extends User {
+    private boolean isAdmin;
     private String password;
     private String username;
     private static Integer id;
 
     private List<String> notification;
 
-    public AdministrativeUser(String username, String password){
-        super(username, password);
+    public AdministrativeUser(String username, String password,List<String> notification,boolean isAdmin){
+        super(username, password, notification, isAdmin);
         id ++;
     }
 
@@ -52,7 +53,7 @@ public class AdministrativeUser extends User {
 
     public void addNewUser(String username, String password){
         if (id == 0){
-        AdministrativeUser a = new AdministrativeUser(username, password);}
+        AdministrativeUser a = new AdministrativeUser(username, password,notification,isAdmin);}
     }
 
     public void confirmItem(ClientUser a, Item b){

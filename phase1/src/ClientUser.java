@@ -25,8 +25,8 @@ public class ClientUser extends User {
     //tradeHistory
     private List<Trade> tradeHistory;
 
-    public ClientUser(String username, String password){
-        super(username, password);
+    public ClientUser(String username, String password ,List<String> notification,Boolean isAdmin){
+        super(username, password, notification, isAdmin);
         isBorrow=true;
         id ++;
     }
