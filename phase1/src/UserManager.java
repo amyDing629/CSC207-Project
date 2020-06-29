@@ -3,16 +3,28 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+
 
 public class UserManager {
-    public ArrayList<String> readfile() throws IOException {
-        BufferedReader bufReader = new BufferedReader(new FileReader("username.txt"));
-        ArrayList<String> listOfLines = new ArrayList<>();
-        String line = bufReader.readLine();
-        while (line != null) {
-            listOfLines.add(line); line = bufReader.readLine(); }
-        bufReader.close();
-        return listOfLines;
+
+    public ArrayList<ArrayList<String>> readfile() throws IOException {
+        ArrayList<ArrayList<String>> myList = new ArrayList<>();
+        try {
+            BufferedReader in = new BufferedReader(new FileReader("username.txt"));
+            while(in.ready()) {
+                String line = in.readLine();
+                String[] parts = line.split(", ");
+                ArrayList<String> lineList = new ArrayList<>();
+                lineList.addAll(Arrays.asList(parts));
+                myList.add(lineList);
+            }
+            return myList;
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+        return myList;
     }
 
     public void addUser(User u) throws IOException {
