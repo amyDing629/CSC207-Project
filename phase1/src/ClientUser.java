@@ -7,7 +7,7 @@ public class ClientUser extends User {
 
     private boolean isFrozen;
     private List<String> notification;
-    private int weekTransactiionLimit;
+    private int weekTransactionLimit;
     private int incompleteTransactionLimit;
 
     //wish list
@@ -39,7 +39,7 @@ public class ClientUser extends User {
     }
 
     public int getWeekTransactiionLimit() {
-        return weekTransactiionLimit;
+        return weekTransactionLimit;
     }
 
     public void setIncompleteTransaction(int incompleteTransaction) {
@@ -47,7 +47,7 @@ public class ClientUser extends User {
     }
 
     public void setWeekTransactiionLimit(int weekTransactiion) {
-        this.weekTransactiionLimit = weekTransactiion;
+        this.weekTransactionLimit = weekTransactiion;
     }
 
     @Override
