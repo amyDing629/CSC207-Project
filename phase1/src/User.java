@@ -4,7 +4,7 @@ abstract class User {
     protected String password;
     protected String username;
     private List<String> notification;
-
+    private boolean isAdmin;
     public User(String username, String password /**int id*/){
         this.username = username;
         this.password = password;
