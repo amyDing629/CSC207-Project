@@ -1,3 +1,4 @@
+import java.time.LocalDateTime;
 import java.util.*;
 public class ClientUser extends User {
     private String password;
@@ -119,6 +120,21 @@ public class ClientUser extends User {
         }
         return number;
     }
+
+    public int getTradeNumber(){
+        Trade s = tradeHistory.get(tradeHistory.size() - 1);
+        LocalDateTime x  = s.getMeeting().getDateTime();
+        LocalDateTime y = x.minusDays(7);
+        int number = 0;
+        for (Trade trade : tradeHistory){
+            if(trade.getMeeting().getDateTime().isAfter(y) && trade.getMeeting().getDateTime().isBefore(x)){
+                number ++;
+            }
+        }
+        return number;
+    }
+
+
     public void addWishLend(String wish) {
         wishLend.add(wish);
     }

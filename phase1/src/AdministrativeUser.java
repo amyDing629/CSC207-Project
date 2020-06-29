@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 public class AdministrativeUser extends User {
     private boolean isAdmin;
@@ -62,6 +63,7 @@ public class AdministrativeUser extends User {
     }
 
     public void tradelimit(ClientUser a){
+        a.setIsFrozen(a.getTradeNumber() > a.getWeekTransactiionLimit());
     }
 
     public void incompleteTransaction(ClientUser a){
