@@ -73,15 +73,13 @@ public class AdministrativeUser extends User {
         }
     }
 
-    public void canBorrow(int a, ClientUser b){
-        if(b.getLend().size() + a >= b.getBorrowed().size()){
+    public void canBorrow(int c, ClientUser b){
+        if(b.getLend().size() + c >= b.getBorrowed().size()){
             b.setBorrow(true);
         }
         else{
             b.setBorrow(false);
         }
     }
-
-
 
 }
