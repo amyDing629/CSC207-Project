@@ -65,21 +65,11 @@ public class AdministrativeUser extends User {
     }
 
     public void incompleteTransaction(ClientUser a){
-        if(a.getIncompleteTransaction() > a.getIncompleteTransactionLimit()){
-            a.setIsFrozen(false);
-        }
-        else{
-            a.setIsFrozen(false);
-        }
+        a.setIsFrozen(a.getIncompleteTransaction() <= a.getIncompleteTransactionLimit());
     }
 
     public void canBorrow(int c, ClientUser b){
-        if(b.getLend().size() + c >= b.getBorrowed().size()){
-            b.setBorrow(true);
-        }
-        else{
-            b.setBorrow(false);
-        }
+        b.setBorrow(b.getLend().size() + c >= b.getBorrowed().size());
     }
 
 }
