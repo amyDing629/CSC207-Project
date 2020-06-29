@@ -94,6 +94,10 @@ public abstract class Trade {
 
     abstract ArrayList<ClientUser> getUsers();
 
+    public String toString(){
+        return "this is an abstract trade class";
+    };
+
 
 
 }
