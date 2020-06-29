@@ -7,12 +7,26 @@ import java.util.ArrayList;
 
 /**
  * [Controller class]
- * confirm the meeting
- * or edit time, place of the Meeting by Trader
- * update timeOfEdition in MeetingEditor
+ * This is a meeting's controlling system.
+ *
+ * The meeting system controller that interacts with the user, makes decisions based on user input instructions, and
+ * calls corresponding use case method.
+ *
+ * Main functions of this controller class:
+ *      1. allows setup meeting, once the Trade is set up [TODO: TradeSystem's Responsibility??????]
+ *      2. apply use case method of setting up meeting
+ *      3. allows edit meeting, once the
+ *      4. allows confirming the meeting
+ *      5. update timeOfEdition in MeetingEditor
  */
 public class MeetingSystem {
 
+    /**
+     * This is the current meeting date-time.
+     * Update this variable when
+     *  - a meeting is setup;
+     *  - the date-time info of this meeting is edited.
+     */
     public LocalDateTime dateTime;
     public String place;
     public static Integer userId;
@@ -33,21 +47,19 @@ public class MeetingSystem {
     }
 
     /**
-     * Run the Meeting system, which interacts with the user to prompt input of meeting information.
+     * Run the Meeting system, which interacts with the user and makes decisions upon user input actions.
+     *
+     * TODO: interact with Trade System
+     * 1. allows setting up a meeting, only when there is no meeting stored in Trade (i.e. first meeting)
+     * 2. allows editing the meeting / confirming the meeting, only when
+     *          - the meeting has been set up already;
+     *          - the meeting has not been cancelled (i.e edit time of each ClientUser < threshold of edition time)
      */
     public void run() {
         // allow input: "exit", "setup meeting", "edit", "confirm"
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-//        System.out.println("------------------------------");
-//        System.out.print("Meeting Menu: \n " +
-//                "1. Enter 'ss': to set up a meeting \n" +
-//                "2. Enter 'ee': to edit the meeting \n" +
-//                "3. Enter 'cc': to confirm the meeting \n" +
-//                "4. Enter 'menu': to print menu"+
-//                "5. Enter 'exit' to quit meeting system\n");
-//        System.out.println("------------------------------");
         printMenu();
 
         try {

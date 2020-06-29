@@ -6,7 +6,12 @@ import java.util.Scanner;
 
 /**
  * This is a presenter class for edit meeting action, which interacts with the user and obtains the meeting editing
- * information
+ * information.
+ *
+ * The User can interact with prompts and choose to
+ *      - edit time
+ *      - edit place
+ *      - edit both time and place
  */
 public class EditMeetingPresenter {
 
@@ -20,8 +25,8 @@ public class EditMeetingPresenter {
     private boolean edited = false;
 
     /**
-     * Obtain user prompts of editing "time" and/or "place", or closing edition with "close".
-     * TODO: record the edition time of each Trader (User)
+     * Obtain user prompts of editing time and/or place.
+     * TODO: record the edition time of each Trader (User); print meeting "cancelled" if edit >= threshold
      */
     public EditMeetingPresenter(LocalDateTime dateTime, String place) {
         // Set the instance variables "dateTime", "place" with  before editing
@@ -32,13 +37,7 @@ public class EditMeetingPresenter {
         // Obtain User input of edition info
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-
-        System.out.println("------------------------------");
-        System.out.print("Menu: \n " + "1. Enter '1': only change time \n" +
-                "2. Enter '2': only change place \n" +
-                "3. Enter '3': change both time and place \n" +
-                "4. Enter '..' to quit edition process \n");
-        System.out.println("------------------------------");
+        printMenu();
 
         try{
             String input = br.readLine();
@@ -47,6 +46,8 @@ public class EditMeetingPresenter {
                 // instruction 1: edits time only
                 // instruction 2: edits place only
                 // instruction 3: edits time and place
+                // instruction 4: print edit-meeting menu
+                // instruction "..": quit
                 // other instructions
                 switch (input) {
                     case "1" -> {
@@ -62,6 +63,7 @@ public class EditMeetingPresenter {
                         editPlacePresenter();
                         break label;
                     }
+                    case "4" -> printMenu();
                     default -> System.out.println("Invalid instruction!");
                 }
             }
@@ -143,6 +145,17 @@ public class EditMeetingPresenter {
             }
         } while (!good);
         System.out.print("New Edition Successful! Proposed new place: " + this.place + "\n");
+    }
+
+    private void printMenu(){
+        System.out.println("------------------------------");
+        System.out.print("Menu: \n " +
+                "1. Enter '1': only change time \n" +
+                "2. Enter '2': only change place \n" +
+                "3. Enter '3': change both time and place \n" +
+                "4. Enter '4': print edit-meeting menu \n" +
+                "5. Enter '..' to quit edition process \n");
+        System.out.println("------------------------------");
     }
 
 }
