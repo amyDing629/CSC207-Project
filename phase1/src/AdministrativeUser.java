@@ -59,11 +59,11 @@ public class AdministrativeUser extends User {
         a.addWishLend(b.getName());
     }
 
-    public void tradelimit(int a){
+    public void tradelimit(){
 
     }
 
-    public void incompletelimit(int a){
+    public void incompletelimit(){
 
     }
 

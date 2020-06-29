@@ -18,9 +18,10 @@ class Meeting {
     private String place;
 
     /**
-     * This is Meeting's two Traders.
+     * This is Meeting's two editors.
+     * Each ClientUser in a single meeting has a MeetingEditor to record the number of edits
      */
-    public HashMap<Integer, MeetingEditor> idToTraders = new HashMap<Integer, MeetingEditor>();
+    private HashMap<Integer, MeetingEditor> idToEditor = new HashMap<Integer, MeetingEditor>();
 
     /**
      * This is Meeting's status: "incomplete" (default), "completed", "cancelled";
@@ -35,7 +36,7 @@ class Meeting {
      * true stands for confirmed,
      * false stands for not yet confirmed
      */
-    private HashMap<Integer, Boolean> idToConfirmedStatus = new HashMap<>();
+    private HashMap<Integer, Boolean> idToConfirmedStatus = new HashMap<Integer, Boolean>();
 
     /**
      * Constructs a new Meeting with proposed date-time to meet dateTime, proposed place to meet place, info of both
@@ -48,8 +49,7 @@ class Meeting {
         this.dateTime = dateTime;
         this.place = place;
         for (Integer i: traderIds) {
-            MeetingEditor meetingEditor = new MeetingEditor(i);
-            this.idToTraders.put(i, meetingEditor);
+            this.idToEditor.put(i, new MeetingEditor(i));
             this.idToConfirmedStatus.put(i, false);
         }
     }
@@ -79,11 +79,23 @@ class Meeting {
     }
 
     /**
+     * Return this meeting's edit history, Hashmap(userId, MeetingEditor)
+     * @return the idToEditor
+     */
+    public HashMap<Integer, MeetingEditor> getIdToEditor() {
+        return idToEditor;
+    }
+
+    /**
      * Returns a list of two Traders' the confirmed statuses. (Getter for idToConfirmedStatus)
      * @return the confirmed status of two Traders respectively
      */
     private ArrayList<Boolean> getConfirmedStatuses() {
-        return new ArrayList<>(idToConfirmedStatus.values());
+        ArrayList<Boolean> result = new ArrayList<>();
+        for (Boolean b: idToConfirmedStatus.values()){
+            result.add(b);
+        }
+        return result;
     }
 
     /**
@@ -92,14 +104,6 @@ class Meeting {
      */
     private Boolean getConfirmedStatuses(Integer userId) {
         return idToConfirmedStatus.get(userId);
-    }
-
-    /**
-     * Returns the MeetingEditor with given userId. (Getter for idToTraders)
-     * @return the MeetingEditor of given MeetingEditor's userId
-     */
-    private MeetingEditor getEditorById(Integer userId) {
-        return idToTraders.get(userId);
     }
 
     /**
@@ -116,7 +120,7 @@ class Meeting {
      * Edit the Meeting with new date-time to meet dateTime. (setter for dateTime)
      * @param newDateTime the date-time newly proposed to the meeting
      */
-    public void editMeeting (LocalDateTime newDateTime) {
+    public void editMeetingTime (LocalDateTime newDateTime) {
         this.dateTime = newDateTime;
     }
 
@@ -124,7 +128,7 @@ class Meeting {
      * Edit the Meeting with new place to meet place. (Setter for place)
      * @param newPlace the place newly proposed to the meeting
      */
-    public void editMeeting (String newPlace) {
+    public void editMeetingPlace (String newPlace) {
         this.place = newPlace;
     }
 
@@ -143,14 +147,14 @@ class Meeting {
         ArrayList<Boolean> bothTrue = new ArrayList<>(Arrays.asList(true, true));
 
         if (this.getConfirmedStatuses().equals(bothTrue)) {
-            this.status = "confirmed";
+            this.status = "completed";
         }else if (this.isMeetingCancelled()){
             this.status = "cancelled";
         }
     }
 
     private boolean isMeetingCancelled() {
-        for (MeetingEditor t: idToTraders.values()){
+        for (MeetingEditor t: idToEditor.values()){
             if (t.editsOverThreshold()) {
                 return true;
             }

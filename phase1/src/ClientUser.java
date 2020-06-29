@@ -6,6 +6,8 @@ public class ClientUser extends User {
 
     private boolean isFrozen;
     private List<String> notification;
+    private int weekTransactiion;
+    private int incompleteTransaction;
 
     //wish list
     private List<String> wishLend;
@@ -23,6 +25,22 @@ public class ClientUser extends User {
 
     public ClientUser(Integer i) {
         super();
+    }
+
+    public int getIncompleteTransaction() {
+        return incompleteTransaction;
+    }
+
+    public int getWeekTransactiion() {
+        return weekTransactiion;
+    }
+
+    public void setIncompleteTransaction(int incompleteTransaction) {
+        this.incompleteTransaction = incompleteTransaction;
+    }
+
+    public void setWeekTransactiion(int weekTransactiion) {
+        this.weekTransactiion = weekTransactiion;
     }
 
     @Override
