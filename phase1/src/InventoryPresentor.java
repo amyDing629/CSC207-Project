@@ -14,7 +14,7 @@ public class InventoryPresentor {
         try {
             String line = br.readLine();
             if (line.equals("see inventory")){
-                System.out.println(inventory.getUnfrozenList());
+                System.out.println(inventory.getLendingList());
             }
 
         } catch (IOException e) {

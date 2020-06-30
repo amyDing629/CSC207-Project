@@ -5,9 +5,10 @@ public abstract class Trade {
     private Meeting meeting;
     protected String status;
     private static int numOfTrade;
-    private int id;
+    private final int id;
     private Meeting secondMeeting;
     private final int duration;
+    private LocalDateTime createTime; //the time trade is created
 
     /**
      * Constructor
@@ -18,6 +19,14 @@ public abstract class Trade {
         this.duration = duration;
         numOfTrade++;
         id = numOfTrade;
+    }
+
+    public LocalDateTime getCreateTime(){
+        return createTime;
+    }
+
+    public void setCreateTime(LocalDateTime time){
+        createTime = time;
     }
 
     /**
@@ -92,7 +101,7 @@ public abstract class Trade {
     public void changeMeeting(){
     }
 
-    abstract ArrayList<ClientUser> getUsers();
+    abstract ArrayList<Integer> getUsers();
 
     public String toString(){
         return "this is an abstract trade class";

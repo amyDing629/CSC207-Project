@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 
 public class OnewayTrade extends Trade {
-    private final ClientUser lender;
-    private final ClientUser borrower;
+    private final int lenderId;
+    private final int borrowerId;
     private final Item item;
 
     /**
@@ -12,10 +12,10 @@ public class OnewayTrade extends Trade {
      * @param item the two item traders what to trade
      * @param duration whether the trade is temporary or permanent
      */
-    public OnewayTrade(ClientUser borrower, ClientUser lender, Item item, int duration){
+    public OnewayTrade(int borrower, int lender, Item item, int duration){
         super(duration);
-        this.lender = lender;
-        this.borrower = borrower;
+        borrowerId = borrower;
+        lenderId = lender;
         this.item = item;
     }
 
@@ -24,16 +24,16 @@ public class OnewayTrade extends Trade {
      * getter for lender of the trade
      * @return lender
      */
-    public ClientUser getLender() {
-        return lender;
+    public int getLenderId() {
+        return lenderId;
     }
 
     /**
      * getter for borrow of the trade
      * @return borrower
      */
-    public ClientUser getBorrower() {
-        return borrower;
+    public int getBorrower() {
+        return borrowerId;
     }
 
     /**
@@ -44,15 +44,15 @@ public class OnewayTrade extends Trade {
         return item;
     }
 
-    public ArrayList<ClientUser> getUsers(){
-        ArrayList<ClientUser> users = new ArrayList<ClientUser>();
-        users.add(borrower);
-        users.add(lender);
+    public ArrayList<Integer> getUsers(){
+        ArrayList<Integer> users = new ArrayList<Integer>();
+        users.add(borrowerId);
+        users.add(lenderId);
         return users;
     }
 
     public String toString(){
-        return borrower +  " makes a one way trade with " + lender + "to borrow" + item;
+        return "Trader " + borrowerId +  " makes a one way trade with trader " + lenderId + " to borrow " + item;
     }
 
 }
