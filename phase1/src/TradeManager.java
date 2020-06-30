@@ -1,49 +1,71 @@
 import java.util.ArrayList;
+import java.util.List;
 
 /**
- * store trade
- * set up trade
- * cancel trade
+ * This is a use case class TradeManager
+ * store Trades in system
+ * Allow users to set up trade, cancel trade
+ * Automatically update the trade history for both users in the trade.
  */
 public class TradeManager {
-    ArrayList<Trade> tradeList;
+    private ArrayList<Trade> tradeList;
+    private User currentUser;
+    private Integer currentUserId;
+    private UserManager userManager;
 
 
     /**
-     * constructor, tradeList is an instance variable that stores all the Trade.
+     * Constructor
+     * tradeList stores all the Trade in the system.
+     * currentUser is the User who is currently interacting with this TradeManager.
      */
-    public TradeManager(){
+    public TradeManager(User currentUser){
         tradeList = new ArrayList<Trade>();
+        this.currentUser = currentUser;
+        currentUserId = currentUser.getId();
+        userManager = new UserManager();
     }
 
 
     /**
-     * if the User wants to make a one way trade, tradeManager will create a one way trade
-     * @param lender
-     * @param borrower
-     * @param item
-     * @param duration
-     * @return
+     * Allow the currentUser to create a one-way trade with input otherUserId, item, and trade duration.
+     * Update the trade history for both users
+     * @param otherUserId the userId of another User in the particular Trade.
+     * @param item the only one Item to be trade in this created Trade.
+     * @param duration the duration of this Trade, unit (days). -1 means the Trade is permanent.
+     * @return the created newTrade
      */
-    public Trade createOnewayTrade(ClientUser lender, ClientUser borrower, Item item, int duration){
-        OnewayTrade newTrade = new OnewayTrade(lender, borrower, item, duration);
-        tradeList.add(newTrade);
+    public Trade createOnewayTrade(Integer otherUserId, Item item, int duration){
+        OnewayTrade newTrade = new OnewayTrade(currentUserId, otherUserId, item, duration);
+        tradeList.add(newTrade); // Record this new Trade in system
+
+        // Update trade history for both users
+        this.updateTradeHistory(otherUserId, newTrade);
         return newTrade;
     }
 
     /**
      * if the User wants to make a two way trade, tradeManager will create a two way trade.
-     * @param user1
-     * @param user2
-     * @param item1to2
-     * @param item2to1
-     * @param duration
-     * @return
+     * @param otherUserId the userId of another User in the particular Trade
+     * @param item1to2 the Item to be trade in this created Trade.
+     * @param item2to1 the other Item to be trade in this created Trade.
+     * @param duration the duration of this Trade, unit (days). -1 means the Trade is permanent.
+     * @return the created newTrade
      */
-    public Trade createTwowayTrade(ClientUser user1, ClientUser user2, Item item1to2, Item item2to1, int duration){
-        TwowayTrade newTrade = new TwowayTrade(user1, user2, item1to2, item2to1, duration);
+    public Trade createTwowayTrade(Integer otherUserId, Item item1to2, Item item2to1, int duration){
+        TwowayTrade newTrade = new TwowayTrade(currentUserId, otherUserId, item1to2, item2to1, duration);
         tradeList.add(newTrade);
+        // Update trade history for both users
+        this.updateTradeHistory(otherUserId, newTrade);
         return newTrade;
+    }
+
+
+    private void updateTradeHistory(Integer otherUserId, Trade newTrade){
+        List<Trade> currentTradeHistory = userManager.findTrade(currentUserId);
+        currentTradeHistory.add(newTrade);
+        List<Trade> otherTradeHistory = userManager.findTrade(otherUserId);
+        otherTradeHistory.add(newTrade);
     }
 
 
