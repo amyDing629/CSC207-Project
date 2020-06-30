@@ -21,7 +21,7 @@ class Meeting {
      * This is Meeting's two editors.
      * Each ClientUser in a single meeting has a MeetingEditor to record the number of edits
      */
-    private HashMap<Integer, MeetingEditor> idToEditor = new HashMap<Integer, MeetingEditor>();
+    private HashMap<Integer, MeetingEditor> idToEditor = new HashMap<>();
 
     /**
      * This is Meeting's status: "incomplete" (default), "completed", "cancelled";
@@ -99,11 +99,19 @@ class Meeting {
     }
 
     /**
-     * Returns the confirmed statuses with given userId. (Getter for idToConfirmedStatus)
+     * Returns the confirmed statuses for given userId. (Getter for idToConfirmedStatus)
      * @return the confirmed status of given Trader's userId
      */
     private Boolean getConfirmedStatuses(Integer userId) {
         return idToConfirmedStatus.get(userId);
+    }
+
+    /**
+     * Returns the confirmed statuses with userIds. (Getter for idToConfirmedStatus)
+     * @return idToConfirmedStatus itself
+     */
+    public HashMap<Integer, Boolean> getConfirmedStatusFull() {
+        return idToConfirmedStatus;
     }
 
     /**
