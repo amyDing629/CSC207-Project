@@ -1,3 +1,4 @@
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class OnewayTrade extends Trade {
@@ -12,8 +13,8 @@ public class OnewayTrade extends Trade {
      * @param item the two item traders what to trade
      * @param duration whether the trade is temporary or permanent
      */
-    public OnewayTrade(Integer borrower, Integer lender, Item item, int duration){
-        super(duration);
+    public OnewayTrade(Integer borrower, Integer lender, Item item, int duration, LocalDateTime time){
+        super(duration, time);
         borrowerId = borrower;
         lenderId = lender;
         this.item = item;

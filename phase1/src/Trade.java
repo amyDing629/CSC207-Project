@@ -14,11 +14,12 @@ public abstract class Trade {
      * Constructor
      * @param duration number of date, -1 means permanent
      */
-    public Trade(int duration){
+    public Trade(int duration, LocalDateTime time){
         this.status = "disagreed";
         this.duration = duration;
         numOfTrade++;
         id = numOfTrade;
+        createTime  = time;
     }
 
     public LocalDateTime getCreateTime(){

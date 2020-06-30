@@ -1,3 +1,4 @@
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 public class TwowayTrade extends Trade {
     private final Integer trader1Id;
@@ -13,15 +14,13 @@ public class TwowayTrade extends Trade {
      * @param item2 the item that trader2 give to trader1
      * @param duration whether the trade is temporary or permanent
      */
-    public TwowayTrade(Integer trader1Id, Integer trader2Id, Item item1, Item item2, int duration){
-        super(duration);
+    public TwowayTrade(Integer trader1Id, Integer trader2Id, Item item1, Item item2, int duration, LocalDateTime time){
+        super(duration, time);
         this.trader1Id = trader1Id;
         this.trader2Id = trader2Id;
         item1to2 = item1;
         item2to1 = item2;
     }
-
-
 
 
     public int getTrader1Id(){

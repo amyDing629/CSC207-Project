@@ -1,14 +1,15 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.time.LocalDateTime;
 
 public class RequestTradePresenter {
     TradeManager tradeManager;
     UserManager userManager;
     Inventory inventory;
 
-    public RequestTradePresenter() {
-        TradeManager tradeManager = new TradeManager();
+    public RequestTradePresenter(ClientUser currUser) {
+        TradeManager tradeManager = new TradeManager(currUser);
         UserManager userManager = new UserManager();
         Inventory inventory = new Inventory();
 
@@ -36,9 +37,7 @@ public class RequestTradePresenter {
                         && !line.equals("two way(temporary)") && !line.equals("two way(permanent)")) {
                     throw new IOException("Wrong input, please type again.");
                 } else {
-                    Trade newTrade = createTrade(currUser, tarUser, item, line);
-                    //tarUser.getNotification().add("Trade" + newTrade.getId()+" : " + newTrade + "/ accept or not");
-                    //user needs to have a trade request list
+                    Trade newTrade = createTrade(tarUser.getId(), item, line);
                     System.out.println("your trade has been created, please wait for the target user to reply");
                     break;
                 }
@@ -49,20 +48,21 @@ public class RequestTradePresenter {
 
     }
 
-    private Trade createTrade(ClientUser currUser, ClientUser tarUser, Item item, String line){
+    private Trade createTrade(Integer tarUser, Item item, String line){
         Trade trade;
+        LocalDateTime time = LocalDateTime.now();
         if (line.equals("one way(temporary)")){
-            trade = tradeManager.createOnewayTrade(currUser, tarUser, item, 30);
+            trade = tradeManager.createOnewayTrade(tarUser, item, 30, time);
         }
         else if (line.equals("one way(permanent)")){
-            trade = tradeManager.createOnewayTrade(currUser, tarUser, item, -1);
+            trade = tradeManager.createOnewayTrade(tarUser, item, -1, time);
         }
         else if (line.equals("two way(temporary)")){
-            Item item2 = inventory.getItem(getSecondItem(currUser));
-            trade = tradeManager.createTwowayTrade(currUser, tarUser, item, item2, 30);
+            Item item2 = inventory.getItem(getSecondItem(tradeManager.getCurrentUser()));
+            trade = tradeManager.createTwowayTrade(tarUser, item, item2, 30, time);
         }else{
-            Item item2 = inventory.getItem(getSecondItem(currUser));
-            trade = tradeManager.createTwowayTrade(currUser, tarUser, item, item2, -1);
+            Item item2 = inventory.getItem(getSecondItem(tradeManager.getCurrentUser()));
+            trade = tradeManager.createTwowayTrade(tarUser, item, item2, -1, time);
         }
         return trade;
 
