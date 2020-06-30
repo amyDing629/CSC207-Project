@@ -1,6 +1,5 @@
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * inventory: present items of unfrozen account
@@ -14,18 +13,16 @@ public class Inventory {
     public Inventory() {
         lendingList = new ArrayList<Item>();
         try {
-            ClassLoader classLoader = this.getClass().getClassLoader();
-            File configFile=new File(classLoader.getResource("inventory.txt").getFile());
-            Scanner myReader = new Scanner(configFile);
-            while (myReader.hasNextLine()) {
-                String data = myReader.nextLine();
-                String[] lst = data.split(",");
+            BufferedReader reader = new BufferedReader(new FileReader("phase1/src/Inventory.txt"));
+            String line = reader.readLine();
+            while (line != null) {
+                String[] lst = line.split(",");
                 Item newItem = new Item(lst[0], lst[2]);
                 lendingList.add(newItem);
+                line = reader.readLine();
             }
-            myReader.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("An error occurred.");
+            reader.close();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -44,60 +41,45 @@ public class Inventory {
      *
      * @param item the item added
      */
-    public void addItemLending(Item item) {
+    public void addItem(Item item) throws IOException {
         lendingList.add(item);
-        try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter("inventory.txt"));
-            writer.write(item.getName()+","+item.getDescription()+","+item.getOwnerName());
-            writer.close();
-        } catch (IOException e) {
-            System.out.println("error");
-            e.printStackTrace();
-        }
+        updateFile();
     }
 
 
-    public void deleteItemLending(Item item) throws FileNotFoundException {
-        if (lendingList.contains(item)){
+    public void deleteItem(Item item) throws IOException {
+        if (lendingList.contains(item)) {
             lendingList.remove(item);
-        }else{
+            updateFile();
+        } else {
             System.out.println("the item is not in the inventory");
         }
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader("inventory.txt"));
-            BufferedWriter writer = new BufferedWriter(new FileWriter("inventory.txt"));
-            String lineToRemove = item.getName() + "," + item.getDescription() + "," + item.getOwnerName();
-            String currLine;
-            while((currLine = reader.readLine()) != null) {
-                // trim newline when comparing with lineToRemove
-                String trimmedLine = currLine.trim();
-                if(!trimmedLine.equals(lineToRemove)){
-                    writer.write(currLine + System.getProperty("line.separator"));
-                };
-            }
-            writer.close();
-            reader.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+    }
+
+    public void editItem(Item item, String target, String newContent) throws IOException {
+        if (target.equals("description")){
+            item.setDescription(newContent);
+        }else{
+            item.setOwner(newContent);
+        }
+        updateFile();
+    }
+
+    public void updateFile() throws IOException {
+        File file = new File("phase1/src/Inventory.txt");
+        file.delete();
+        for (Item item: lendingList){
+            addItemToFile(item);
         }
     }
-    //name can not be changed
-    public void editItemLending(Item newItem) throws FileNotFoundException{
-        try{
-            BufferedReader reader = new BufferedReader(new FileReader("inventory.txt"));
-            BufferedWriter writer = new BufferedWriter(new FileWriter("inventory.txt"));
-            String name = newItem.getName();
-            String currLine;
-            while((currLine = reader.readLine()) != null){
-                if (name.equals(currLine.split(",")[0])){
-                    String trimmedLine = currLine.trim();
-                    writer.write(newItem.getName() + "," + newItem.getDescription() + newItem.getOwnerName());
-                }else{
-                    throw new IOException("the item you want to exit is not existed");
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+
+    private void addItemToFile(Item item) throws IOException{
+        try {
+            FileOutputStream fos = new FileOutputStream("phase1/src/inventory.txt", true);
+            fos.write((item.getName()+","+item.getDescription()+","+item.getOwnerName()+"\n").getBytes());
+        }catch(IOException e){
+            System.out.println("cannot edit file");
+
         }
     }
 
