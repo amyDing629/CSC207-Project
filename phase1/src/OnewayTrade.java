@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 
 public class OnewayTrade extends Trade {
-    private final int lenderId;
-    private final int borrowerId;
+    private final Integer lenderId;
+    private final Integer borrowerId;
     private final Item item;
 
     /**
@@ -12,7 +12,7 @@ public class OnewayTrade extends Trade {
      * @param item the two item traders what to trade
      * @param duration whether the trade is temporary or permanent
      */
-    public OnewayTrade(int borrower, int lender, Item item, int duration){
+    public OnewayTrade(Integer borrower, Integer lender, Item item, int duration){
         super(duration);
         borrowerId = borrower;
         lenderId = lender;

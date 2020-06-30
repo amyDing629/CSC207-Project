@@ -32,5 +32,7 @@ abstract class User {
 
     public abstract void setTradeHistory(ArrayList<Trade> lineList5);
 
+    public abstract List<Trade> getTradeHistory();
+
     public abstract void setFrozen(boolean aTrue);
 }

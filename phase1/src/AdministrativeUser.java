@@ -49,6 +49,11 @@ public class AdministrativeUser extends User {
 
     }
 
+    @Override
+    public List<Trade> getTradeHistory() {
+        return tradeHistory;
+    }
+
     public void setBorrow(boolean borrow) {
         isBorrow = borrow;
     }

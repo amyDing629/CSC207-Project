@@ -4,6 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 
 public class UserManager {
@@ -179,6 +180,21 @@ public class UserManager {
         return null;
     }
 
+    public List<Trade> findTrade(Integer id){
+        try{
+            ArrayList<User> userlist = splitUser(readfile());
+            for(User u : userlist){
+                if(u.getId().equals(id))
+                    return u.getTradeHistory();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+
     public boolean verifyUser(String name, String password) throws IOException {
         try{
             ArrayList<User> userlist = splitUser(readfile());
@@ -193,3 +209,4 @@ public class UserManager {
     }
 
 }
+
