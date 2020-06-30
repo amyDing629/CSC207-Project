@@ -9,7 +9,7 @@ import java.util.HashMap;
 
 /**
  * [Use Case class]
- * Interacts with the user to prompt input for Meeting activities (i.e. set up meeting, edit meeting, confirm meeting)
+ * Allow users to set up meeting, edit meeting, confirm meeting
  */
 
 public class MeetingActivities {
