@@ -5,18 +5,64 @@ public class AdministrativeUser extends User {
     private boolean isAdmin;
     private String password;
     private String username;
-    private static Integer id;
+    private  Integer id;
 
+    private boolean isFrozen;
     private List<String> notification;
+    private int weekTransactionLimit;
+    private int incompleteTransactionLimit;
+    private boolean isBorrow;
+
+    private List<String> wishLend;
+    private List<String> wishBorrow;
+    private List<Trade> tradeHistory;
 
     public AdministrativeUser(String username, String password,List<String> notification,boolean isAdmin){
         super(username, password, notification, isAdmin);
-        id ++;
     }
 
     @Override
     public String getPassword() {
         return password;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setFrozen(boolean frozen) {
+        isFrozen = frozen;
+    }
+
+    @Override
+    public void setWishLend(ArrayList<String> lineList2) {
+
+    }
+
+    @Override
+    public void setWishBorrow(ArrayList<String> lineList3) {
+
+    }
+
+    @Override
+    public void setTradeHistory(ArrayList<Trade> lineList5) {
+
+    }
+
+    public void setBorrow(boolean borrow) {
+        isBorrow = borrow;
+    }
+
+    public void setWishBorrow(List<String> wishBorrow) {
+        this.wishBorrow = wishBorrow;
+    }
+
+    public void setWishLend(List<String> wishLend) {
+        this.wishLend = wishLend;
+    }
+
+    public void setTradeHistory(List<Trade> tradeHistory) {
+        this.tradeHistory = tradeHistory;
     }
 
     @Override

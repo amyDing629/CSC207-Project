@@ -3,7 +3,7 @@ import java.util.*;
 public class ClientUser extends User {
     private String password;
     private String username;
-    private static Integer id;
+    private Integer id;
 
     private boolean isFrozen;
     private List<String> notification;
@@ -27,11 +27,14 @@ public class ClientUser extends User {
     public ClientUser(String username, String password ,List<String> notification,Boolean isAdmin){
         super(username, password, notification, isAdmin);
         isBorrow=true;
-        id ++;
     }
 
     public void setBorrow(boolean borrow) {
         isBorrow = borrow;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public int getIncompleteTransactionLimit() {
@@ -92,6 +95,27 @@ public class ClientUser extends User {
     public void changeUsername(String username) {
         this.username=username;
     }
+
+    @Override
+    public void setWishLend(ArrayList<String> lineList2) {
+
+    }
+
+    @Override
+    public void setWishBorrow(ArrayList<String> lineList3) {
+
+    }
+
+    @Override
+    public void setTradeHistory(ArrayList<Trade> lineList5) {
+
+    }
+
+    @Override
+    public void setFrozen(boolean aTrue) {
+
+    }
+
     public boolean getIsFrozen(){
         return isFrozen;
     }
@@ -111,6 +135,8 @@ public class ClientUser extends User {
         }
         return trade;
     }
+
+
     public int getIncompleteTransaction(){
         int number=0;
         for (Trade trade : tradeHistory) {
@@ -123,7 +149,7 @@ public class ClientUser extends User {
 
     public int getTradeNumber(){
         Trade s = tradeHistory.get(tradeHistory.size() - 1);
-        LocalDateTime x  = s.getMeeting().getDateTime();
+        LocalDateTime x  = s.getCreateTime();
         LocalDateTime y = x.minusDays(7);
         int number = 0;
         for (Trade trade : tradeHistory){

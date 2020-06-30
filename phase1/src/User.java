@@ -26,4 +26,11 @@ abstract class User {
     public abstract void changePassword(String password);
     public abstract void changeUsername(String username);
 
+    public abstract void setWishLend(ArrayList<String> lineList2);
+
+    public abstract void setWishBorrow(ArrayList<String> lineList3);
+
+    public abstract void setTradeHistory(ArrayList<Trade> lineList5);
+
+    public abstract void setFrozen(boolean aTrue);
 }
