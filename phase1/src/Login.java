@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Login {
-    public void mainMenu() throws IOException {
+    public static void main (String[] args) throws IOException {
         int a=-1;
         while (a!=0) {
             //print out the list of current users-------------------------------
@@ -41,7 +41,7 @@ public class Login {
         }
 
     }
-    public void login() throws IOException {
+    public static void login() throws IOException {
         Scanner sc = new Scanner(System.in);
         int input=0;
         while (input==0) {
@@ -84,7 +84,7 @@ public class Login {
             }
         }
     }
-    public void register() throws IOException {
+    public static void register() throws IOException {
         Scanner sc = new Scanner(System.in);
         int input=sc.nextInt();
         sc.nextLine();
@@ -111,7 +111,7 @@ public class Login {
         }
     }
 
-    public void editInfo(User user){
+    public static void editInfo(User user){
         Scanner sc=new Scanner(System.in);
         int exit=-1;
         while(exit!=0) {
@@ -123,7 +123,7 @@ public class Login {
             System.out.println("0. exit");
             int input = sc.nextInt();
             sc.nextLine();
-            System.out.println("-----------------------------")
+            System.out.println("-----------------------------");
             switch (input) {
                 case 1:
                     System.out.println("Change username");

@@ -195,7 +195,7 @@ public class UserManager {
 
 
 
-    public boolean verifyUser(String name, String password) throws IOException {
+    public static boolean verifyUser(String name, String password) throws IOException {
         try{
             ArrayList<User> userlist = splitUser(readfile());
             for(User u : userlist){
