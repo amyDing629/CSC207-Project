@@ -29,19 +29,7 @@ public class Login {
             sc.nextLine();
             System.out.println("------------------------------");
             if (a==1){
-                System.out.println("Please enter your account username!");
-                System.out.print(">");
-                String username = sc.nextLine();
-                System.out.println("Please enter your password!");
-                System.out.print(">");
-                String password = sc.nextLine();
-
-                //usermanger account verification? and returns a user object.
-
-                System.out.println("Notifications:\n");// display all user's notifications.
-
-                System.out.println("Actions:\n1.Trade\n2.Message");
-
+                register();
             }
             else if (a == 2){
                 System.out.println("Please enter your username!");
@@ -62,6 +50,42 @@ public class Login {
             }
             System.out.println("------------------------------");
         }
+
+    }
+    public static void register(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Please enter your account username!");
+        System.out.print(">");
+        String username = sc.nextLine();
+        System.out.println("Please enter your password!");
+        System.out.print(">");
+        String password = sc.nextLine();
+
+        //usermanger account verification? and returns a user object.
+
+        System.out.println("Notifications:\n");// display all user's notifications.
+
+        System.out.println("Actions:\n1.Trade\n2.Message");
+    }
+    public static void login() throws IOException {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Please enter your username!");
+        System.out.print(">");
+        String username = sc.nextLine();
+        System.out.println("Please enter your password!");
+        System.out.print(">");
+        String password = sc.nextLine();
+        //usermanger username verification?
+        FileWriter fw = new FileWriter("username.txt");
+        fw.write(username);
+        fw.close();
+        ClientUser user1 = new ClientUser(username, password);
+        System.out.println("Your account has been successfully created!");
+        System.out.println("Your id: " + user1.getId());
+        System.out.println("Your username: " + user1.getUsername());
+        System.out.println("Your password: " + user1.getPassword());
+    }
+            System.out.println("------------------------------");
     }
 }
 
