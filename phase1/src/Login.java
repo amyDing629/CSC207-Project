@@ -117,7 +117,7 @@ public class Login {
         while(exit!=0) {
             System.out.println("Hello,user," + user.getUsername());
             System.out.println("Actions:\n1.Change username\n2.Change password\n");
-            if (user.getIsAdmin() == true) {
+            if (user.getIsAdmin()) {
                 System.out.print("3.Freeze a user\n4.Change user's limit\n5.Set user into admin\n");
             }
             System.out.println("0. exit");
