@@ -23,6 +23,7 @@ public class ClientUser extends User {
 
     //tradeHistory
     private List<Trade> tradeHistory;
+    private boolean isAdmin;
 
     public ClientUser(String username, String password ,List<String> notification,Boolean isAdmin){
         super(username, password, notification, isAdmin);
@@ -160,6 +161,9 @@ public class ClientUser extends User {
         return number;
     }
 
+    public boolean getIsAdmin(){
+        return isAdmin;
+    }
 
     public void addWishLend(String wish) {
         wishLend.add(wish);
