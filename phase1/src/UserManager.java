@@ -180,6 +180,19 @@ public class UserManager {
         return null;
     }
 
+    public User getUser(int userId) throws IOException {
+        try{
+            ArrayList<User> userlist = splitUser(readfile());
+            for(User u : userlist){
+                if(u.getId().equals(userId))
+                    return u;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public List<Trade> findTrade(Integer id){
         try{
             ArrayList<User> userlist = splitUser(readfile());

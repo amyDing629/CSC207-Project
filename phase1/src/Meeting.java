@@ -78,12 +78,20 @@ class Meeting {
         return status;
     }
 
+    public void setStatus(String status){
+        this.status = status;
+    }
+
     /**
      * Return this meeting's edit history, Hashmap(userId, MeetingEditor)
      * @return the idToEditor
      */
     public HashMap<Integer, MeetingEditor> getIdToEditor() {
         return idToEditor;
+    }
+
+    public void setIdToEditor(HashMap<Integer, MeetingEditor> me) {
+        idToEditor = me;
     }
 
     /**
@@ -97,6 +105,7 @@ class Meeting {
         }
         return result;
     }
+
 
     /**
      * Returns the confirmed statuses for given userId. (Getter for idToConfirmedStatus)
@@ -113,6 +122,11 @@ class Meeting {
     public HashMap<Integer, Boolean> getConfirmedStatusFull() {
         return idToConfirmedStatus;
     }
+
+    public void setConfirmedStatusFull(HashMap<Integer, Boolean> confirmedStatus) {
+        idToConfirmedStatus = confirmedStatus;
+    }
+
 
     /**
      * Edit the Meeting with new date-time to meet dateTime, and new place to meet place. (setter for dateTime + place)

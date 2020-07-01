@@ -5,7 +5,7 @@ public abstract class Trade {
     private Meeting meeting;
     protected String status;
     private static int numOfTrade;
-    private final int id;
+    private int id;
     private Meeting secondMeeting;
     private final int duration;
     private LocalDateTime createTime; //the time trade is created
@@ -37,6 +37,8 @@ public abstract class Trade {
     public int getId(){
         return id;
     }
+
+    public void setId(int id){this.id = id;}
 
     /**
      * getter for status
@@ -87,6 +89,10 @@ public abstract class Trade {
         return secondMeeting;
     }
 
+    public Meeting getSecondMeeting(){
+        return secondMeeting;
+    }
+
     /**
      * getter for meeting
      * @return the Meeting object inside the trade
@@ -107,6 +113,8 @@ public abstract class Trade {
     public String toString(){
         return "this is an abstract trade class";
     };
+
+    public abstract ArrayList<Item> getItemList();
 
 
 

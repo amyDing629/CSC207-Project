@@ -50,21 +50,21 @@ public class EditMeetingPresenter {
                 // instruction "..": quit
                 // other instructions
                 switch (input) {
-                    case "1" -> {
+                    case "1" : {
                         editTimePresenter();
                         break label;
                     }
-                    case "2" -> {
+                    case "2" : {
                         editPlacePresenter();
                         break label;
                     }
-                    case "3" -> {
+                    case "3" : {
                         editTimePresenter();
                         editPlacePresenter();
                         break label;
                     }
-                    case "4" -> printMenu();
-                    default -> System.out.println("Invalid instruction!");
+                    case "4" : printMenu();
+                    default : System.out.println("Invalid instruction!");
                 }
             }
         }catch (IOException e) {

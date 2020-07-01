@@ -47,6 +47,10 @@ class MeetingEditor {
         return timeOfEdition;
     }
 
+    public void setTimeOfEdition(Integer time){
+        timeOfEdition = time;
+    }
+
     /**
      * Update this Trader's number of time for editing time and/or place of meeting by 1.
      */

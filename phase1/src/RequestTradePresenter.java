@@ -8,16 +8,16 @@ public class RequestTradePresenter {
     UserManager userManager;
     Inventory inventory;
 
-    public RequestTradePresenter(ClientUser currUser) {
-        TradeManager tradeManager = new TradeManager(currUser);
+    public RequestTradePresenter() {
+        TradeManager tradeManager = new TradeManager();
         UserManager userManager = new UserManager();
         Inventory inventory = new Inventory();
 
     }
 
     public void run(String currUserName, String itemName) throws AccountFrozenException, IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         ClientUser currUser = (ClientUser) userManager.getUser(currUserName);
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         if (currUser.getIsFrozen()) {
             throw new AccountFrozenException("your account is frozen!");
         }
@@ -37,7 +37,7 @@ public class RequestTradePresenter {
                         && !line.equals("two way(temporary)") && !line.equals("two way(permanent)")) {
                     throw new IOException("Wrong input, please type again.");
                 } else {
-                    Trade newTrade = createTrade(tarUser.getId(), item, line);
+                    Trade newTrade = createTrade(currUser, tarUser, item, line);
                     System.out.println("your trade has been created, please wait for the target user to reply");
                     break;
                 }
@@ -48,21 +48,21 @@ public class RequestTradePresenter {
 
     }
 
-    private Trade createTrade(Integer tarUser, Item item, String line){
+    private Trade createTrade(ClientUser currUser, ClientUser tarUser, Item item, String line) throws IOException {
         Trade trade;
         LocalDateTime time = LocalDateTime.now();
         if (line.equals("one way(temporary)")){
-            trade = tradeManager.createOnewayTrade(tarUser, item, 30, time);
+            trade = tradeManager.createOnewayTrade(currUser.getId(), tarUser.getId(), item, 30, time);
         }
         else if (line.equals("one way(permanent)")){
-            trade = tradeManager.createOnewayTrade(tarUser, item, -1, time);
+            trade = tradeManager.createOnewayTrade(currUser.getId(), tarUser.getId(), item, -1, time);
         }
         else if (line.equals("two way(temporary)")){
-            Item item2 = inventory.getItem(getSecondItem(tradeManager.getCurrentUser()));
-            trade = tradeManager.createTwowayTrade(tarUser, item, item2, 30, time);
+            Item item2 = inventory.getItem(getSecondItem(currUser));
+            trade = tradeManager.createTwowayTrade(currUser.getId(), tarUser.getId(), item, item2, 30, time);
         }else{
-            Item item2 = inventory.getItem(getSecondItem(tradeManager.getCurrentUser()));
-            trade = tradeManager.createTwowayTrade(tarUser, item, item2, -1, time);
+            Item item2 = inventory.getItem(getSecondItem(currUser));
+            trade = tradeManager.createTwowayTrade(currUser.getId(), tarUser.getId(), item, item2, -1, time);
         }
         return trade;
 

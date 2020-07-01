@@ -56,4 +56,13 @@ public class TwowayTrade extends Trade {
         return "trader1 " + trader1Id +" makes two way trade with trader" + trader2Id + " for item " + item1to2 + "and" + item2to1;
     }
 
+    @Override
+    public ArrayList<Item> getItemList() {
+        ArrayList<Item> rst = new ArrayList<Item>();
+        rst.add(item1to2);
+        rst.add(item2to1);
+        return rst;
+
+
+}
 }

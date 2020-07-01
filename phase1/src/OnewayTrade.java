@@ -56,5 +56,12 @@ public class OnewayTrade extends Trade {
         return "Trader " + borrowerId +  " makes a one way trade with trader " + lenderId + " to borrow " + item;
     }
 
+    public ArrayList<Item> getItemList(){
+        ArrayList<Item> rst = new ArrayList<Item>();
+        rst.add(item);
+        return rst;
+    }
+
+
 }
 
