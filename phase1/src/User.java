@@ -5,11 +5,14 @@ abstract class User {
     protected String username;
     private List<String> notification;
     private boolean isAdmin;
-    public User(String username, String password, /**int id*/List<String> notification, boolean isAdmin){
+    private List<String> wishLend;
+    private List<String> wishBorrow;
+    private List<Integer> tradeHistory;
+    public User(String username, String password, boolean isAdmin){
         this.username = username;
         this.password = password;
         //this.id = id;
-        this.notification = notification;
+        this.notification=new ArrayList<String>();
         this.isAdmin = isAdmin;
     }
 
@@ -20,6 +23,8 @@ abstract class User {
     public abstract String getPassword();
     public abstract String getUsername();
     public abstract Integer getId();
+    public abstract boolean getIsadmin();
+    public abstract boolean getIsBorrow();
 
     public abstract List<String> getNotification();
     public abstract void addNotification(String no);
@@ -30,9 +35,25 @@ abstract class User {
 
     public abstract void setWishBorrow(ArrayList<String> lineList3);
 
-    public abstract void setTradeHistory(ArrayList<Trade> lineList5);
+    public void setNotification(List<String> notification) {}
 
-    public abstract List<Trade> getTradeHistory();
+    public abstract void setTradeHistory(ArrayList<Integer> lineList5);
+
+    public abstract List<Integer> getTradeHistory();
 
     public abstract void setFrozen(boolean aTrue);
+
+    public abstract boolean getIsAdmin();
+
+    public abstract List<String> getWishLend();
+    public abstract List<String> getWishBorrow();
+
+    public List<Trade> getAllTrade(){
+        TradeManager a = new TradeManager();
+        ArrayList<Trade> b = new ArrayList<>();
+        for(Integer i: tradeHistory){
+            b.add(a.getTrade(i));
+        }
+        return b;
+    }
 }

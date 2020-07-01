@@ -1,7 +1,4 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -28,7 +25,7 @@ public class UserManager {
         return myList;
     }
 
-    public ArrayList<User> splitUser(ArrayList<ArrayList<String>> a){
+    public static ArrayList<User> splitUser(ArrayList<ArrayList<String>> a){
         ArrayList<User> myList = new ArrayList<>();
         for(ArrayList<String> b: a){
             if(b.get(3).equals("true")){
@@ -36,7 +33,8 @@ public class UserManager {
                 ArrayList<String> lineList = new ArrayList<>();
                 lineList.addAll(Arrays.asList(c));
 
-                AdministrativeUser d = new AdministrativeUser(b.get(1), b.get(2),lineList, true);
+                AdministrativeUser d = new AdministrativeUser(b.get(1), b.get(2), true);
+                d.setNotification(lineList);
 
                 int i = Integer.parseInt(b.get(0));
                 d.setId(i);
@@ -58,36 +56,12 @@ public class UserManager {
                 String[] h = b.get(b.size() - 1).split("; ");
                 ArrayList<String> lineList4 = new ArrayList<>();
                 lineList4.addAll(Arrays.asList(h));
-                ArrayList<Trade> lineList5 = new ArrayList<>();
-                for(String t: lineList4){
-                    String[] p = t.split(": ");
-                    ArrayList<String> q = new ArrayList<>();
-                    q.addAll(Arrays.asList(p));
-                    if(q.size() == 4){
-                        String[] r = q.get(2).split("| ");
-                        ArrayList<String> s = new ArrayList<>();
-                        s.addAll(Arrays.asList(r));
-                        Item u = new Item(s.get(0), s.get(1));
-                        int m = Integer.parseInt(q.get(3));
-                        OnewayTrade t1 = new OnewayTrade(Integer.parseInt(q.get(0)), Integer.parseInt(q.get(1)), u, m);
-                        lineList5.add(t1);
-                    }
-                    else{
-                        String[] r = q.get(2).split("| ");
-                        ArrayList<String> s = new ArrayList<>();
-                        s.addAll(Arrays.asList(r));
-                        Item u = new Item(s.get(0), s.get(1));
+                ArrayList<Integer> lineList5 = new ArrayList<>();
 
-                        String[] v = q.get(3).split("| ");
-                        ArrayList<String> w = new ArrayList<>();
-                        w.addAll(Arrays.asList(r));
-                        Item k = new Item(w.get(0), w.get(1));
-
-                        int m = Integer.parseInt(q.get(4));
-                        TwowayTrade t2 = new TwowayTrade(Integer.parseInt(q.get(0)), Integer.parseInt(q.get(1)), u, k, m);
-                        lineList5.add(t2);
-                    }
+                for(String p: lineList4){
+                    lineList5.add(Integer.parseInt(p));
                 }
+
                 d.setTradeHistory(lineList5);
                 myList.add(d);
             }
@@ -96,7 +70,9 @@ public class UserManager {
                 ArrayList<String> lineList = new ArrayList<>();
                 lineList.addAll(Arrays.asList(c));
 
-                ClientUser d = new ClientUser(b.get(1), b.get(2),lineList, true);
+                ClientUser d = new ClientUser(b.get(1), b.get(2), true);
+                d.setNotification(lineList);
+
 
                 int i = Integer.parseInt(b.get(0));
                 d.setId(i);
@@ -119,36 +95,17 @@ public class UserManager {
                 ArrayList<String> lineList4 = new ArrayList<>();
                 lineList4.addAll(Arrays.asList(h));
                 ArrayList<Trade> lineList5 = new ArrayList<>();
-                for(String t: lineList4){
-                    String[] p = t.split(": ");
-                    ArrayList<String> q = new ArrayList<>();
-                    q.addAll(Arrays.asList(p));
-                    if(q.size() == 4){
-                        String[] r = q.get(2).split("| ");
-                        ArrayList<String> s = new ArrayList<>();
-                        s.addAll(Arrays.asList(r));
-                        Item u = new Item(s.get(0), s.get(1));
-                        int m = Integer.parseInt(q.get(3));
-                        OnewayTrade t1 = new OnewayTrade(Integer.parseInt(q.get(0)), Integer.parseInt(q.get(1)), u, m);
-                        lineList5.add(t1);
-                    }
-                    else{
-                        String[] r = q.get(2).split("| ");
-                        ArrayList<String> s = new ArrayList<>();
-                        s.addAll(Arrays.asList(r));
-                        Item u = new Item(s.get(0), s.get(1));
 
-                        String[] v = q.get(3).split("| ");
-                        ArrayList<String> w = new ArrayList<>();
-                        w.addAll(Arrays.asList(r));
-                        Item k = new Item(w.get(0), w.get(1));
+                String[] k = b.get(b.size() - 1).split("; ");
+                ArrayList<String> lineList6 = new ArrayList<>();
+                lineList6.addAll(Arrays.asList(h));
+                ArrayList<Integer> lineList7 = new ArrayList<>();
 
-                        int m = Integer.parseInt(q.get(4));
-                        TwowayTrade t2 = new TwowayTrade(Integer.parseInt(q.get(0)), Integer.parseInt(q.get(1)), u, k, m);
-                        lineList5.add(t2);
-                    }
+                for(String p: lineList4){
+                    lineList7.add(Integer.parseInt(p));
                 }
-                d.setTradeHistory(lineList5);
+
+                d.setTradeHistory(lineList7);
                 myList.add(d);
             }
         }
@@ -157,17 +114,38 @@ public class UserManager {
 
     public void addUser(User u) throws IOException {
         try{
-            ArrayList<User> userlist = splitUser(readfile());
-            userlist.add(u);
-            FileWriter fw = new FileWriter("username.txt");
-            fw.write(u.getUsername());
-            fw.close();
+            BufferedWriter output = new BufferedWriter(new FileWriter("username", true));
+            String name = u.getUsername();
+            String s = u.getId()+ ", " + name + ", "  + u.getPassword()+ ", "  + u.getIsAdmin()+ ", "  + u.getIsAdmin()+ ", "  + u.getIsBorrow()+ ", ";
+            String m = "";
+            for(String i: u.getNotification()){
+                m = m + i + "; ";
+            }
+            s = s + m + ", ";
+            String n = " ";
+            for(String i: u.getWishLend()){
+                n = n + i+ "; ";
+            }
+            s = s + n + ", ";
+            String k = " ";
+            for(String i: u.getWishBorrow()){
+                k = k + i+ "; ";
+            }
+            s = s + k + ", ";
+            String l = " ";
+            for(String i: u.getWishBorrow()){
+                l = l + i+ "; ";
+            }
+            s = s + l;
+            s = s + "\n";
+            output.append(s);
+            output.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public static User getUser(String name) throws IOException {
+    public User getUser(String name) throws IOException {
         try{
             ArrayList<User> userlist = splitUser(readfile());
             for(User u : userlist){
@@ -195,10 +173,11 @@ public class UserManager {
 
     public List<Trade> findTrade(Integer id){
         try{
+            TradeManager a = new TradeManager();
             ArrayList<User> userlist = splitUser(readfile());
             for(User u : userlist){
                 if(u.getId().equals(id))
-                    return u.getTradeHistory();
+                    return u.getAllTrade();
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -208,7 +187,7 @@ public class UserManager {
 
 
 
-    public static boolean verifyUser(String name, String password) throws IOException {
+    public boolean verifyUser(String name, String password) throws IOException {
         try{
             ArrayList<User> userlist = splitUser(readfile());
             for(User u : userlist){

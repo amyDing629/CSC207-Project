@@ -3,7 +3,8 @@ import java.util.*;
 public class ClientUser extends User {
     private String password;
     private String username;
-    private Integer id;
+    private static Integer id;
+    private boolean isAdmin;
 
     private boolean isFrozen;
     private List<String> notification;
@@ -22,12 +23,12 @@ public class ClientUser extends User {
     //Inventory
 
     //tradeHistory
-    private List<Trade> tradeHistory;
-    private boolean isAdmin;
+    private List<Integer> tradeHistory;
 
     public ClientUser(String username, String password ,Boolean isAdmin){
         super(username, password, isAdmin);
         isBorrow=true;
+        id ++;
     }
 
     public void setBorrow(boolean borrow) {
@@ -69,6 +70,17 @@ public class ClientUser extends User {
         return id;
     }
 
+    @Override
+    public boolean getIsadmin() {
+        return isAdmin;
+    }
+
+    @Override
+    public boolean getIsBorrow() {
+        return isBorrow;
+    }
+
+
     public List<String> getLend() {
         return lend;
     }
@@ -85,6 +97,10 @@ public class ClientUser extends User {
     @Override
     public void addNotification(String no) {
         notification.add(no);
+    }
+
+    public void setNotification(List<String> notification) {
+        this.notification = notification;
     }
 
     @Override
@@ -108,8 +124,13 @@ public class ClientUser extends User {
     }
 
     @Override
-    public void setTradeHistory(ArrayList<Trade> lineList5) {
+    public void setTradeHistory(ArrayList<Integer> lineList5) {
 
+    }
+
+    @Override
+    public List<Integer> getTradeHistory() {
+        return tradeHistory;
     }
 
     @Override
@@ -129,19 +150,21 @@ public class ClientUser extends User {
         return wishBorrow;
     }
 
-    public List<Trade> getTradeHistory() {
+    public List<Trade> getTradeHistorytop() {
         List<Trade> trade=new ArrayList<>();
+        TradeManager a = new TradeManager();
         for (int i=0;i<3;i++){
-            trade.add(tradeHistory.get(tradeHistory.size()-1-i));
+            trade.add(a.getTrade(tradeHistory.get(tradeHistory.size()-1-i)));
         }
         return trade;
     }
 
 
     public int getIncompleteTransaction(){
+        TradeManager a = new TradeManager();
         int number=0;
-        for (Trade trade : tradeHistory) {
-            if (trade.status.equals("incomplete")) {
+        for (Integer i : tradeHistory) {
+            if (a.getTrade(i).status.equals("incomplete")) {
                 number++;
             }
         }
@@ -149,17 +172,20 @@ public class ClientUser extends User {
     }
 
     public int getTradeNumber(){
-        Trade s = tradeHistory.get(tradeHistory.size() - 1);
+        TradeManager a = new TradeManager();
+        Trade s = a.getTrade(tradeHistory.get(tradeHistory.size() - 1));
         LocalDateTime x  = s.getCreateTime();
         LocalDateTime y = x.minusDays(7);
         int number = 0;
-        for (Trade trade : tradeHistory){
-            if(trade.getMeeting().getDateTime().isAfter(y) && trade.getMeeting().getDateTime().isBefore(x)){
+        for (Integer i : tradeHistory){
+            if(a.getTrade(i).getCreateTime().isAfter(y) && a.getTrade(i).getCreateTime().isBefore(x)){
                 number ++;
             }
         }
         return number;
     }
+
+
 
     public boolean getIsAdmin(){
         return isAdmin;

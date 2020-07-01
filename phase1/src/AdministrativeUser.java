@@ -5,7 +5,7 @@ public class AdministrativeUser extends User {
     private boolean isAdmin;
     private String password;
     private String username;
-    private  Integer id;
+    private static Integer id;
 
     private boolean isFrozen;
     private List<String> notification;
@@ -15,10 +15,11 @@ public class AdministrativeUser extends User {
 
     private List<String> wishLend;
     private List<String> wishBorrow;
-    private List<Trade> tradeHistory;
+    private List<Integer> tradeHistory;
 
-    public AdministrativeUser(String username, String password,List<String> notification,boolean isAdmin){
-        super(username, password, notification, isAdmin);
+    public AdministrativeUser(String username, String password, boolean isAdmin){
+        super(username, password, isAdmin);
+        id ++;
     }
 
     @Override
@@ -35,6 +36,21 @@ public class AdministrativeUser extends User {
     }
 
     @Override
+    public boolean getIsAdmin() {
+        return false;
+    }
+
+    @Override
+    public List<String> getWishLend() {
+        return null;
+    }
+
+    @Override
+    public List<String> getWishBorrow() {
+        return null;
+    }
+
+    @Override
     public void setWishLend(ArrayList<String> lineList2) {
 
     }
@@ -45,12 +61,14 @@ public class AdministrativeUser extends User {
     }
 
     @Override
-    public void setTradeHistory(ArrayList<Trade> lineList5) {
+    public void setTradeHistory(ArrayList<Integer> lineList5) {
 
     }
 
+
+
     @Override
-    public List<Trade> getTradeHistory() {
+    public List<Integer> getTradeHistory() {
         return tradeHistory;
     }
 
@@ -66,7 +84,7 @@ public class AdministrativeUser extends User {
         this.wishLend = wishLend;
     }
 
-    public void setTradeHistory(List<Trade> tradeHistory) {
+    public void setTradeHistory(List<Integer> tradeHistory) {
         this.tradeHistory = tradeHistory;
     }
 
@@ -81,6 +99,17 @@ public class AdministrativeUser extends User {
     }
 
     @Override
+    public boolean getIsadmin() {
+        return false;
+    }
+
+    @Override
+    public boolean getIsBorrow() {
+        return false;
+    }
+
+
+    @Override
     public List<String> getNotification() {
         return notification;
     }
@@ -88,6 +117,10 @@ public class AdministrativeUser extends User {
     @Override
     public void addNotification(String no) {
         notification.add(no);
+    }
+
+    public void setNotification(List<String> notification) {
+        this.notification = notification;
     }
 
     @Override
@@ -106,7 +139,7 @@ public class AdministrativeUser extends User {
 
     public void addNewUser(String username, String password){
         if (id == 0){
-        AdministrativeUser a = new AdministrativeUser(username, password,notification,isAdmin);}
+        AdministrativeUser a = new AdministrativeUser(username, password,isAdmin);}
     }
 
     public void confirmItem(ClientUser a, Item b){
