@@ -64,13 +64,13 @@ public class Login {
                     if (op == 1) {
                         editInfo(UserManager.getUser(username));
                     } else if (op == 2) {
-                        message();
+                        message(UserManager.getUser(username));
                     } else if (op == 3) {
-                        inventory();
+                        inventory(UserManager.getUser(username));
                     } else if (op == 4) {
-                        message();
+                        message(UserManager.getUser(username));
                     } else if (op == 5) {
-                        tradeHistory();
+                        tradeHistory(UserManager.getUser(username));
                     } else if (op == 0) {
                         exit = 1;
                     } else {
@@ -89,6 +89,7 @@ public class Login {
         int input=sc.nextInt();
         sc.nextLine();
         while(input!=1) {
+            System.out.println("--------------------\nRegister");
             System.out.println("Please enter your username!");
             System.out.print(">");
             String username = sc.nextLine();
@@ -115,6 +116,7 @@ public class Login {
         Scanner sc=new Scanner(System.in);
         int exit=-1;
         while(exit!=0) {
+            System.out.println("--------------------\nEdit user information");
             System.out.println("Hello,user," + user.getUsername());
             System.out.println("Actions:\n1.Change username\n2.Change password\n");
             if (user.getIsAdmin()) {
@@ -146,13 +148,40 @@ public class Login {
             }
         }
     }
-    public static void inventory(){
+    public static void inventory(User user){
+        Scanner sc=new Scanner(System.in);
+        int exit=-1;
+        while(exit!=0) {
+            System.out.println("--------------------\nInventory");
+            System.out.println("Hello,user," + user.getUsername());
+            System.out.println("Actions:\n1.Lend wishes\n2.Borrow wishes\n3.edit lend wishes\n4.edit borrow wishes\n0.exit");
+            int input = sc.nextInt();
+            sc.nextLine();
+            System.out.println("-----------------------------");
+            switch (input) {
+                case 1:
+                    System.out.println("Lend wishes");
+                    break;
+                case 2:
+                    System.out.println("Borrow wishes");
+                    break;
+                case 3:
+                    System.out.println("Edit lend wishes");
+                    break;
+                case 4:
+                    System.out.println("Edit borrow wishes");
+                    break;
+                case 0:
+                    exit=0;
+                    break;
+            }
+        }
 
     }
-    public static void message(){
+    public static void message(User user){
 
     }
-    public static void tradeHistory(){
+    public static void tradeHistory(User user){
 
     }
 }
