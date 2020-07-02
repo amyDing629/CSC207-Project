@@ -210,8 +210,9 @@ public class UserManager {
     }
 
     public void updateFile() throws IOException {
-        File file = new File("phase1/src/username.txt");
-        file.delete();
+        PrintWriter writer = new PrintWriter("phase1/src/username.txt");
+        writer.print("");
+        writer.close();
         ArrayList<User> userList = splitUser(readFile());
         for (User u: userList){
             addUser(u);
