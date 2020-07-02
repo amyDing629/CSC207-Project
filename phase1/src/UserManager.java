@@ -18,7 +18,9 @@ public class UserManager {
                 myList.add(lineList);
             }
             in.close();
-            myList.remove(0);
+            if(myList.size()!=0) {
+                myList.remove(0);
+            }
             return myList;
         }
         catch(Exception e) {
@@ -208,9 +210,8 @@ public class UserManager {
     }
 
     public void updateFile() throws IOException {
-        PrintWriter writer = new PrintWriter("phase1/src/username.txt");
-        writer.println("");
-        writer.close();
+        File file = new File("phase1/src/username.txt");
+        file.delete();
         ArrayList<User> userList = splitUser(readFile());
         for (User u: userList){
             addUser(u);
