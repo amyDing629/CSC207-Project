@@ -4,9 +4,7 @@ import java.time.LocalDateTime;
 import java.util.*;
 public class AdministrativeUser extends User {
     private boolean isAdmin;
-    private String password;
-    private String username;
-    private static Integer id;
+    private static Integer id = 0;
 
     private boolean isFrozen;
     private List<String> notification;
