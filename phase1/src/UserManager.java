@@ -17,6 +17,7 @@ public class UserManager {
                 lineList.addAll(Arrays.asList(parts));
                 myList.add(lineList);
             }
+            myList.remove(0);
             return myList;
         }
         catch(Exception e) {
