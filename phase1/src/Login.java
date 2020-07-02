@@ -99,6 +99,7 @@ public class Login {
             //usermanger username verification?
             if (a.getUser(username) == null) {
                 ClientUser user1 = new ClientUser(username, password, false);
+                a.addUser(user1);
                 System.out.println("Your account has been successfully created!");
                 System.out.println("Your id: " + user1.getId());
                 System.out.println("Your username: " + user1.getUsername());
