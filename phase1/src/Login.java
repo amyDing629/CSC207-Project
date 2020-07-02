@@ -31,7 +31,6 @@ public class Login {
             System.out.print(">");
             a = sc.nextInt();
             sc.nextLine();
-            System.out.println("------------------------------");
             if (a==1){
                 login();
             }
@@ -87,8 +86,7 @@ public class Login {
     }
     public void register() throws IOException {
         Scanner sc = new Scanner(System.in);
-        int input=sc.nextInt();
-        sc.nextLine();
+        int input=0;
         while(input!=1) {
             System.out.println("--------------------\nRegister");
             System.out.println("Please enter your username!");

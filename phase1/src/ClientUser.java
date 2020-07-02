@@ -4,7 +4,7 @@ import java.util.*;
 public class ClientUser extends User {
     private String password;
     private String username;
-    private static Integer id;
+    private static Integer id=0;
     private boolean isAdmin;
 
     private boolean isFrozen;
