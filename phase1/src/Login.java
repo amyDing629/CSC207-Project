@@ -3,10 +3,11 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Login {
-    public static void main (String[] args) throws IOException {
+    public void mainUI () throws IOException {
         int a=-1;
         while (a!=0) {
             //print out the list of current users-------------------------------
@@ -41,7 +42,7 @@ public class Login {
         }
 
     }
-    public static void login() throws IOException {
+    public void login() throws IOException {
         Scanner sc = new Scanner(System.in);
         int input=0;
         while (input==0) {
@@ -84,7 +85,7 @@ public class Login {
             }
         }
     }
-    public static void register() throws IOException {
+    public void register() throws IOException {
         Scanner sc = new Scanner(System.in);
         int input=sc.nextInt();
         sc.nextLine();
@@ -112,7 +113,7 @@ public class Login {
         }
     }
 
-    public static void editInfo(User user){
+    public void editInfo(User user){
         Scanner sc=new Scanner(System.in);
         int exit=-1;
         while(exit!=0) {
@@ -148,7 +149,7 @@ public class Login {
             }
         }
     }
-    public static void inventory(User user){
+    public void inventory(User user){
         Scanner sc=new Scanner(System.in);
         int exit=-1;
         while(exit!=0) {
@@ -161,9 +162,17 @@ public class Login {
             switch (input) {
                 case 1:
                     System.out.println("Lend wishes");
+                    List<String> lw=user.getWishLend();
+                    for (int i=0;i<lw.size();i++){
+                        System.out.println("wish lend item:"+i+" "+lw.get(i));
+                    }
                     break;
                 case 2:
                     System.out.println("Borrow wishes");
+                    List<String> lb=user.getWishLend();
+                    for (int i=0;i<lb.size();i++){
+                        System.out.println("wish borrow item:"+i+" "+lb.get(i));
+                    }
                     break;
                 case 3:
                     System.out.println("Edit lend wishes");
@@ -178,10 +187,10 @@ public class Login {
         }
 
     }
-    public static void message(User user){
+    public void message(User user){
 
     }
-    public static void tradeHistory(User user){
+    public void tradeHistory(User user){
 
     }
 }
