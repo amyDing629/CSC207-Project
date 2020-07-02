@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -50,19 +51,13 @@ public class AdministrativeUser extends User {
         return null;
     }
 
-    @Override
-    public void setWishLend(ArrayList<String> lineList2) {
 
+    public int getIncompleteTransactionLimit() {
+        return incompleteTransactionLimit;
     }
 
-    @Override
-    public void setWishBorrow(ArrayList<String> lineList3) {
-
-    }
-
-    @Override
-    public void setTradeHistory(ArrayList<Integer> lineList5) {
-
+    public int getWeekTransactionLimit() {
+        return weekTransactionLimit;
     }
 
 
@@ -84,9 +79,6 @@ public class AdministrativeUser extends User {
         this.wishLend = wishLend;
     }
 
-    public void setTradeHistory(List<Integer> tradeHistory) {
-        this.tradeHistory = tradeHistory;
-    }
 
     @Override
     public String getUsername() {
@@ -124,38 +116,62 @@ public class AdministrativeUser extends User {
     }
 
     @Override
-    public void changePassword(String password) {
+    public void changePassword(String password) throws IOException {
         this.password=password;
+        UserManager u = new UserManager();
+        u.updateFile();
     }
 
     @Override
-    public void changeUsername(String username) {
+    public void changeUsername(String username) throws IOException {
         this.username=username;
+        UserManager u = new UserManager();
+        u.updateFile();
     }
 
-    public void freeze(ClientUser a){a.setIsFrozen(false);}
+    public void freeze(ClientUser a) throws IOException {
+        a.setIsFrozen(false);
+        UserManager u = new UserManager();
+        u.updateFile();
+    }
 
-    public void unfreeze(ClientUser a){a.setIsFrozen(true);}
+    public void unfreeze(ClientUser a) throws IOException {
+        a.setIsFrozen(true);
+        UserManager u = new UserManager();
+        u.updateFile();
+    }
 
-    public void addNewUser(String username, String password){
+    public void addNewUser(String username, String password) throws IOException {
+        UserManager u = new UserManager();
         if (id == 0){
-        AdministrativeUser a = new AdministrativeUser(username, password,isAdmin);}
+        AdministrativeUser a = new AdministrativeUser(username, password,isAdmin);
+        u.addUser(a);
+        }
+        u.updateFile();
     }
 
-    public void confirmItem(ClientUser a, Item b){
+    public void confirmItem(ClientUser a, Item b) throws IOException {
         a.addWishLend(b.getName());
+        UserManager u = new UserManager();
+        u.updateFile();
     }
 
-    public void tradelimit(ClientUser a){
+    public void tradelimit(ClientUser a) throws IOException {
         a.setIsFrozen(a.getTradeNumber() > a.getWeekTransactiionLimit());
+        UserManager u = new UserManager();
+        u.updateFile();
     }
 
-    public void incompleteTransaction(ClientUser a){
+    public void incompleteTransaction(ClientUser a) throws IOException {
         a.setIsFrozen(a.getIncompleteTransaction() <= a.getIncompleteTransactionLimit());
+        UserManager u = new UserManager();
+        u.updateFile();
     }
 
-    public void canBorrow(int c, ClientUser b){
+    public void canBorrow(int c, ClientUser b) throws IOException {
         b.setBorrow(b.getLend().size() + c >= b.getBorrowed().size());
+        UserManager u = new UserManager();
+        u.updateFile();
     }
 
 }

@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.*;
 public class ClientUser extends User {
@@ -35,8 +36,10 @@ public class ClientUser extends User {
         isBorrow = borrow;
     }
 
-    public void setId(Integer id) {
+    public void setId(Integer id) throws IOException {
         this.id = id;
+        UserManager u = new UserManager();
+        u.updateFile();
     }
 
     public int getIncompleteTransactionLimit() {
@@ -47,13 +50,6 @@ public class ClientUser extends User {
         return weekTransactionLimit;
     }
 
-    public void setIncompleteTransaction(int incompleteTransaction) {
-        this.incompleteTransactionLimit = incompleteTransaction;
-    }
-
-    public void setWeekTransactiionLimit(int weekTransactiion) {
-        this.weekTransactionLimit = weekTransactiion;
-    }
 
     @Override
     public String getPassword() {
@@ -113,20 +109,6 @@ public class ClientUser extends User {
         this.username=username;
     }
 
-    @Override
-    public void setWishLend(ArrayList<String> lineList2) {
-
-    }
-
-    @Override
-    public void setWishBorrow(ArrayList<String> lineList3) {
-
-    }
-
-    @Override
-    public void setTradeHistory(ArrayList<Integer> lineList5) {
-
-    }
 
     @Override
     public List<Integer> getTradeHistory() {
@@ -149,6 +131,7 @@ public class ClientUser extends User {
     public List<String> getWishBorrow() {
         return wishBorrow;
     }
+
 
     public List<Trade> getTradeHistorytop() {
         List<Trade> trade=new ArrayList<>();

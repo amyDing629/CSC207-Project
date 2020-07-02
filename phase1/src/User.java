@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.*;
 abstract class User {
     protected Integer id = 0;
@@ -8,6 +9,8 @@ abstract class User {
     private List<String> wishLend;
     private List<String> wishBorrow;
     private List<Integer> tradeHistory;
+    private int weekTransactionLimit;
+    private int incompleteTransactionLimit;
     public User(String username, String password, boolean isAdmin){
         this.username = username;
         this.password = password;
@@ -28,16 +31,30 @@ abstract class User {
 
     public abstract List<String> getNotification();
     public abstract void addNotification(String no);
-    public abstract void changePassword(String password);
-    public abstract void changeUsername(String username);
+    public abstract void changePassword(String password) throws IOException;
+    public abstract void changeUsername(String username) throws IOException;
 
-    public abstract void setWishLend(ArrayList<String> lineList2);
+    public void setIncompleteTransaction(int incompleteTransaction) {
+        this.incompleteTransactionLimit = incompleteTransaction;
+    }
 
-    public abstract void setWishBorrow(ArrayList<String> lineList3);
+    public void setWeekTransactionLimit(int weekTransaction) {
+        this.weekTransactionLimit = weekTransaction;
+    }
+
+    public void setWishBorrow(List<String> wishBorrow) {
+        this.wishBorrow = wishBorrow;
+    }
+
+    public void setWishLend(List<String> wishLend) {
+        this.wishLend = wishLend;
+    }
 
     public void setNotification(List<String> notification) {}
 
-    public abstract void setTradeHistory(ArrayList<Integer> lineList5);
+    public void setTradeHistory(List<Integer> tradeHistory) {
+        this.tradeHistory = tradeHistory;
+    }
 
     public abstract List<Integer> getTradeHistory();
 
@@ -55,5 +72,13 @@ abstract class User {
             b.add(a.getTrade(i));
         }
         return b;
+    }
+
+    public int getWeekTransactionLimit() {
+        return weekTransactionLimit;
+    }
+
+    public int getIncompleteTransactionLimit() {
+        return incompleteTransactionLimit;
     }
 }

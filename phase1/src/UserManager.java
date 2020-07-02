@@ -25,7 +25,7 @@ public class UserManager {
         return myList;
     }
 
-    public static ArrayList<User> splitUser(ArrayList<ArrayList<String>> a){
+    public static ArrayList<User> splitUser(ArrayList<ArrayList<String>> a) throws IOException {
         ArrayList<User> myList = new ArrayList<>();
         for(ArrayList<String> b: a){
             if(b.get(3).equals("true")){
@@ -43,17 +43,17 @@ public class UserManager {
 
                 d.setBorrow(b.get(5).equals("true"));
 
-                String[] f = b.get(7).split("; ");
+                String[] f = b.get(6).split("; ");
                 ArrayList<String> lineList2 = new ArrayList<>();
                 lineList2.addAll(Arrays.asList(f));
                 d.setWishLend(lineList2);
 
-                String[] g = b.get(8).split("; ");
+                String[] g = b.get(7).split("; ");
                 ArrayList<String> lineList3 = new ArrayList<>();
                 lineList2.addAll(Arrays.asList(g));
                 d.setWishBorrow(lineList3);
 
-                String[] h = b.get(b.size() - 1).split("; ");
+                String[] h = b.get(8).split("; ");
                 ArrayList<String> lineList4 = new ArrayList<>();
                 lineList4.addAll(Arrays.asList(h));
                 ArrayList<Integer> lineList5 = new ArrayList<>();
@@ -63,6 +63,9 @@ public class UserManager {
                 }
 
                 d.setTradeHistory(lineList5);
+                d.setWeekTransactionLimit(Integer.parseInt(b.get(9)));
+                d.setIncompleteTransaction(Integer.parseInt(b.get(10)));
+
                 myList.add(d);
             }
             if(b.get(3).equals("false")){
@@ -81,31 +84,30 @@ public class UserManager {
 
                 d.setBorrow(b.get(5).equals("true"));
 
-                String[] f = b.get(7).split("; ");
+                String[] f = b.get(6).split("; ");
                 ArrayList<String> lineList2 = new ArrayList<>();
                 lineList2.addAll(Arrays.asList(f));
                 d.setWishLend(lineList2);
 
-                String[] g = b.get(8).split("; ");
+                String[] g = b.get(7).split("; ");
                 ArrayList<String> lineList3 = new ArrayList<>();
                 lineList2.addAll(Arrays.asList(g));
                 d.setWishBorrow(lineList3);
 
-                String[] h = b.get(b.size() - 1).split("; ");
-                ArrayList<String> lineList4 = new ArrayList<>();
-                lineList4.addAll(Arrays.asList(h));
-                ArrayList<Trade> lineList5 = new ArrayList<>();
 
-                String[] k = b.get(b.size() - 1).split("; ");
+                String[] k = b.get(8).split("; ");
                 ArrayList<String> lineList6 = new ArrayList<>();
-                lineList6.addAll(Arrays.asList(h));
+                lineList6.addAll(Arrays.asList(k));
                 ArrayList<Integer> lineList7 = new ArrayList<>();
 
-                for(String p: lineList4){
+                for(String p: lineList6){
                     lineList7.add(Integer.parseInt(p));
                 }
 
                 d.setTradeHistory(lineList7);
+                d.setWeekTransactionLimit(Integer.parseInt(b.get(9)));
+                d.setIncompleteTransaction(Integer.parseInt(b.get(10)));
+
                 myList.add(d);
             }
         }
@@ -129,14 +131,16 @@ public class UserManager {
             s = s + n + ", ";
             String k = " ";
             for(String i: u.getWishBorrow()){
-                k = k + i+ "; ";
+                k = k + i + "; ";
             }
             s = s + k + ", ";
             String l = " ";
-            for(String i: u.getWishBorrow()){
-                l = l + i+ "; ";
+            for(Integer i: u.getTradeHistory()){
+                l = l + i + "; ";
             }
-            s = s + l;
+            s = s + l + ", ";
+            s = s+ u.getWeekTransactionLimit() + ", ";
+            s = s+ u.getIncompleteTransactionLimit()+ ", ";
             s = s + "\n";
             output.append(s);
             output.close();
@@ -199,6 +203,16 @@ public class UserManager {
         }
         return false;
     }
+
+    public void updateFile() throws IOException {
+        File file = new File("phase1/username.txt");
+        file.delete();
+        ArrayList<User> userlist = splitUser(readfile());
+        for (User u: userlist){
+            addUser(u);
+        }
+    }
+
 
 }
 
