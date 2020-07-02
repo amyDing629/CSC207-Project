@@ -1,7 +1,7 @@
 import java.io.IOException;
 
-public class main {
-    public static void main(String[] args) throws IOException {
+public class Main {
+    public static void Main(String[] args) throws IOException {
         Login ln = new Login();
         ln.mainUI();
     }
