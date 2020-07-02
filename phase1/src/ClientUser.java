@@ -6,7 +6,6 @@ public class ClientUser extends User {
     private boolean isAdmin;
 
     private boolean isFrozen;
-    private List<String> notification;
     private int weekTransactionLimit;
     private int incompleteTransactionLimit;
 
@@ -19,10 +18,6 @@ public class ClientUser extends User {
 
     private boolean isBorrow;
 
-    //Inventory
-
-    //tradeHistory
-    private List<Integer> tradeHistory;
 
     public ClientUser(String username, String password ,Boolean isAdmin){
         super(username, password, isAdmin);
@@ -75,11 +70,6 @@ public class ClientUser extends User {
         return borrowed;
     }
 
-    @Override
-    public List<String> getNotification() {
-        return notification;
-    }
-
 
     @Override
     public List<Integer> getTradeHistory() {
@@ -102,12 +92,6 @@ public class ClientUser extends User {
         u.updateFile();
     }
 
-    public List<String> getWishLend() {
-        return wishLend;
-    }
-    public List<String> getWishBorrow() {
-        return wishBorrow;
-    }
 
 
     public List<Trade> getTradeHistoryTop() {

@@ -9,14 +9,17 @@ abstract class User {
     private List<String> wishLend;
     private List<String> wishBorrow;
     private boolean isBorrow;
-    private List<Integer> tradeHistory;
+    protected List<Integer> tradeHistory;
     private int weekTransactionLimit;
     private int incompleteTransactionLimit;
     public User(String username, String password, boolean isAdmin){
         this.username = username;
         this.password = password;
         //this.id = id;
-        this.notification=new ArrayList<String>();
+        this.notification=new ArrayList<>();
+        this.wishLend=new ArrayList<>();
+        this.wishBorrow=new ArrayList<>();
+        this.tradeHistory=new ArrayList<>();
         this.isAdmin = isAdmin;
     }
 
@@ -25,7 +28,7 @@ abstract class User {
     public abstract Integer getId();
     public abstract boolean getIsBorrow();
 
-    public abstract List<String> getNotification();
+    public List<String> getNotification(){return notification;}
     public void changePassword(String password) throws IOException {
         this.password=password;
         UserManager u = new UserManager();
@@ -74,8 +77,12 @@ abstract class User {
 
     public abstract boolean getIsAdmin();
 
-    public abstract List<String> getWishLend();
-    public abstract List<String> getWishBorrow();
+    public List<String> getWishLend() {
+        return wishLend;
+    }
+    public List<String> getWishBorrow() {
+        return wishBorrow;
+    }
 
     public void setId(Integer id) throws IOException {
 
