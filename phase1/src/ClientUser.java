@@ -32,16 +32,6 @@ public class ClientUser extends User {
         id ++;
     }
 
-    public void setBorrow(boolean borrow) {
-        isBorrow = borrow;
-    }
-
-    public void setId(Integer id) throws IOException {
-        this.id = id;
-        UserManager u = new UserManager();
-        u.updateFile();
-    }
-
     public int getIncompleteTransactionLimit() {
         return incompleteTransactionLimit;
     }
@@ -66,10 +56,16 @@ public class ClientUser extends User {
         return id;
     }
 
-
     @Override
     public boolean getIsBorrow() {
         return isBorrow;
+    }
+
+
+    public void setWishBorrow(List<String> wishBorrow) throws IOException {
+        this.wishBorrow= wishBorrow;
+        UserManager u = new UserManager();
+        u.updateFile();
     }
 
 
@@ -86,25 +82,6 @@ public class ClientUser extends User {
         return notification;
     }
 
-    @Override
-    public void addNotification(String no) {
-        notification.add(no);
-    }
-
-    public void setNotification(List<String> notification) {
-        this.notification = notification;
-    }
-
-    @Override
-    public void changePassword(String password) {
-        this.password=password;
-    }
-
-    @Override
-    public void changeUsername(String username) {
-        this.username=username;
-    }
-
 
     @Override
     public List<Integer> getTradeHistory() {
@@ -112,8 +89,10 @@ public class ClientUser extends User {
     }
 
     @Override
-    public void setFrozen(boolean aTrue) {
-
+    public void setFrozen(boolean aTrue) throws IOException {
+        isFrozen = aTrue;
+        UserManager u = new UserManager();
+        u.updateFile();
     }
 
     public boolean getIsFrozen(){

@@ -21,17 +21,13 @@ public class AdministrativeUser extends User {
         id ++;
     }
 
+
+
     @Override
     public String getPassword() {
         return password;
     }
 
-    public void setId(Integer id) throws IOException {
-
-        this.id = id;
-        UserManager u = new UserManager();
-        u.updateFile();
-    }
 
     public void setFrozen(boolean frozen) throws IOException {
 
@@ -60,6 +56,7 @@ public class AdministrativeUser extends User {
         return incompleteTransactionLimit;
     }
 
+
     public int getWeekTransactionLimit() {
         return weekTransactionLimit;
     }
@@ -71,12 +68,6 @@ public class AdministrativeUser extends User {
         return tradeHistory;
     }
 
-    public void setBorrow(boolean borrow) throws IOException {
-
-        isBorrow = borrow;
-        UserManager u = new UserManager();
-        u.updateFile();
-    }
 
     @Override
     public String getUsername() {
@@ -99,32 +90,7 @@ public class AdministrativeUser extends User {
         return notification;
     }
 
-    @Override
-    public void addNotification(String no) throws IOException {
-        notification.add(no);
-        UserManager u = new UserManager();
-        u.updateFile();
-    }
 
-    public void setNotification(List<String> notification) throws IOException {
-        this.notification = notification;
-        UserManager u = new UserManager();
-        u.updateFile();
-    }
-
-    @Override
-    public void changePassword(String password) throws IOException {
-        this.password=password;
-        UserManager u = new UserManager();
-        u.updateFile();
-    }
-
-    @Override
-    public void changeUsername(String username) throws IOException {
-        this.username=username;
-        UserManager u = new UserManager();
-        u.updateFile();
-    }
 
     public void freeze(ClientUser a) throws IOException {
         a.setIsFrozen(false);

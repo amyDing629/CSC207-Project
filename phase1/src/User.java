@@ -8,6 +8,7 @@ abstract class User {
     private boolean isAdmin;
     private List<String> wishLend;
     private List<String> wishBorrow;
+    private boolean isBorrow;
     private List<Integer> tradeHistory;
     private int weekTransactionLimit;
     private int incompleteTransactionLimit;
@@ -25,9 +26,17 @@ abstract class User {
     public abstract boolean getIsBorrow();
 
     public abstract List<String> getNotification();
-    public abstract void addNotification(String no) throws IOException;
-    public abstract void changePassword(String password) throws IOException;
-    public abstract void changeUsername(String username) throws IOException;
+    public void changePassword(String password) throws IOException {
+        this.password=password;
+        UserManager u = new UserManager();
+        u.updateFile();
+    }
+
+    public void changeUsername(String username) throws IOException {
+        this.username=username;
+        UserManager u = new UserManager();
+        u.updateFile();
+    }
 
     public void setIncompleteTransaction(int incompleteTransaction) throws IOException {
         this.incompleteTransactionLimit = incompleteTransaction;
@@ -42,11 +51,6 @@ abstract class User {
         u.updateFile();
     }
 
-    public void setWishBorrow(List<String> wishBorrow) throws IOException {
-        this.wishBorrow = wishBorrow;
-        UserManager u = new UserManager();
-        u.updateFile();
-    }
 
     public void setWishLend(List<String> wishLend) throws IOException {
         this.wishLend = wishLend;
@@ -54,7 +58,11 @@ abstract class User {
         u.updateFile();
     }
 
-    public void setNotification(List<String> notification) throws IOException {}
+    public void setNotification(List<String> notification) throws IOException {
+        this.notification = notification;
+        UserManager u = new UserManager();
+        u.updateFile();
+    }
 
     public void setTradeHistory(List<Integer> tradeHistory) {
         this.tradeHistory = tradeHistory;
@@ -69,6 +77,20 @@ abstract class User {
     public abstract List<String> getWishLend();
     public abstract List<String> getWishBorrow();
 
+    public void setId(Integer id) throws IOException {
+
+        this.id = id;
+        UserManager u = new UserManager();
+        u.updateFile();
+    }
+
+    public void setBorrow(boolean borrow) throws IOException {
+
+        isBorrow = borrow;
+        UserManager u = new UserManager();
+        u.updateFile();
+    }
+
     public List<Trade> getAllTrade(){
         TradeManager a = new TradeManager();
         ArrayList<Trade> b = new ArrayList<>();
@@ -78,11 +100,23 @@ abstract class User {
         return b;
     }
 
+    public void addNotification(String no) throws IOException {
+        notification.add(no);
+        UserManager u = new UserManager();
+        u.updateFile();
+    }
+
     public int getWeekTransactionLimit() {
         return weekTransactionLimit;
     }
 
     public int getIncompleteTransactionLimit() {
         return incompleteTransactionLimit;
+    }
+
+    public void setWishBorrow(ArrayList<String> lineList3) throws IOException {
+        wishBorrow = lineList3;
+        UserManager u = new UserManager();
+        u.updateFile();
     }
 }
