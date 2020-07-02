@@ -151,6 +151,7 @@ public class UserManager {
 
     public User getUser(String name) throws IOException {
         try{
+            if(readFile().size() == 0){return null;}
             ArrayList<User> userList = splitUser(readFile());
             for(User u : userList){
                 if(u.getUsername().equals(name))
@@ -164,6 +165,7 @@ public class UserManager {
 
     public User getUser(int userId) throws IOException {
         try{
+            if(readFile().size() == 0){return null;}
             ArrayList<User> userList = splitUser(readFile());
             for(User u : userList){
                 if(u.getId().equals(userId))
@@ -177,6 +179,7 @@ public class UserManager {
 
     public List<Trade> findTrade(Integer id){
         try{
+            if(readFile().size() == 0){return null;}
             TradeManager a = new TradeManager();
             ArrayList<User> userList = splitUser(readFile());
             for(User u : userList){
