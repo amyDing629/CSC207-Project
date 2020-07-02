@@ -6,7 +6,7 @@ import java.util.List;
 
 public class UserManager {
 
-    public ArrayList<ArrayList<String>> readfile() throws IOException {
+    public ArrayList<ArrayList<String>> readFile() throws IOException {
         ArrayList<ArrayList<String>> myList = new ArrayList<>();
         try {
             BufferedReader in = new BufferedReader(new FileReader("phase1/src/username.txt"));
@@ -151,8 +151,8 @@ public class UserManager {
 
     public User getUser(String name) throws IOException {
         try{
-            ArrayList<User> userlist = splitUser(readfile());
-            for(User u : userlist){
+            ArrayList<User> userList = splitUser(readFile());
+            for(User u : userList){
                 if(u.getUsername().equals(name))
                     return u;
             }
@@ -164,8 +164,8 @@ public class UserManager {
 
     public User getUser(int userId) throws IOException {
         try{
-            ArrayList<User> userlist = splitUser(readfile());
-            for(User u : userlist){
+            ArrayList<User> userList = splitUser(readFile());
+            for(User u : userList){
                 if(u.getId().equals(userId))
                     return u;
             }
@@ -178,8 +178,8 @@ public class UserManager {
     public List<Trade> findTrade(Integer id){
         try{
             TradeManager a = new TradeManager();
-            ArrayList<User> userlist = splitUser(readfile());
-            for(User u : userlist){
+            ArrayList<User> userList = splitUser(readFile());
+            for(User u : userList){
                 if(u.getId().equals(id))
                     return u.getAllTrade();
             }
@@ -191,8 +191,8 @@ public class UserManager {
 
     public boolean verifyUser(String name, String password) throws IOException {
         try{
-            ArrayList<User> userlist = splitUser(readfile());
-            for(User u : userlist){
+            ArrayList<User> userList = splitUser(readFile());
+            for(User u : userList){
                 if(u.getUsername().equals(name) && u.getPassword().equals(password))
                     return true;
             }
@@ -205,8 +205,8 @@ public class UserManager {
     public void updateFile() throws IOException {
         File file = new File("phase1/src/username.txt");
         file.delete();
-        ArrayList<User> userlist = splitUser(readfile());
-        for (User u: userlist){
+        ArrayList<User> userList = splitUser(readFile());
+        for (User u: userList){
             addUser(u);
         }
     }
