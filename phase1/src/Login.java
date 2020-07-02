@@ -14,7 +14,7 @@ public class Login {
             System.out.println("Users:");
             try {
                 BufferedReader reader = new BufferedReader(new FileReader(
-                        "username.txt"));
+                        "phase1/src/username.txt"));
                 String line = reader.readLine();
                 while (line != null) {
                     System.out.println(line);
