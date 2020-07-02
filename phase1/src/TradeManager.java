@@ -23,11 +23,8 @@ public class TradeManager {
      * currentUser is the User who is currently interacting with this TradeManager.
      */
     public TradeManager(){
-
         tradeList = new ArrayList<>();
         readFile();
-
-
     }
 
     public ArrayList<Trade> getTradeList(){
