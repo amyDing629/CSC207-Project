@@ -2,8 +2,6 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.*;
 public class ClientUser extends User {
-    private String password;
-    private String username;
     private static Integer id=0;
     private boolean isAdmin;
 
