@@ -19,10 +19,6 @@ abstract class User {
         this.isAdmin = isAdmin;
     }
 
-    public User() {
-
-    }
-
     public abstract String getPassword();
     public abstract String getUsername();
     public abstract Integer getId();
