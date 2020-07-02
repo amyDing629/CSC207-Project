@@ -116,7 +116,7 @@ public class UserManager {
 
     public void addUser(User u) throws IOException {
         try{
-            BufferedWriter output = new BufferedWriter(new FileWriter("username.txt", true));
+            FileOutputStream output = new FileOutputStream("username.txt", true);
             String name = u.getUsername();
             String s = u.getId()+ ", " + name + ", "  + u.getPassword()+ ", "  + u.getIsAdmin()+ ", "  + u.getIsAdmin()+ ", "  + u.getIsBorrow()+ ", ";
             String m = "";
@@ -142,7 +142,7 @@ public class UserManager {
             s = s+ u.getWeekTransactionLimit() + ", ";
             s = s+ u.getIncompleteTransactionLimit()+ ", ";
             s = s + "\n";
-            output.append(s);
+            output.write(s.getBytes());
             output.close();
         } catch (IOException e) {
             e.printStackTrace();
