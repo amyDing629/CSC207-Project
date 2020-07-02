@@ -18,9 +18,12 @@ public class UserManager {
                 myList.add(lineList);
             }
             in.close();
-            if(myList.size()!=0) {
-                myList.remove(0);
+            if(!myList.isEmpty()){
+                if(myList.get(0).size()==0){
+                    myList.remove(0);
+                }
             }
+            System.out.println(myList.size());
             return myList;
         }
         catch(Exception e) {
@@ -199,6 +202,7 @@ public class UserManager {
     public boolean verifyUser(String name, String password) throws IOException {
         try{
             ArrayList<User> userList = splitUser(readFile());
+            System.out.println(userList.size());
             for(User u : userList){
                 if(u.getUsername().equals(name) && u.getPassword().equals(password))
                     return true;
