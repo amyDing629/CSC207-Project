@@ -7,21 +7,23 @@ public class RequestTradePresenter {
     TradeManager tradeManager;
     UserManager userManager;
     Inventory inventory;
+    ClientUser currUser;
+    Item item;
 
-    public RequestTradePresenter() {
+    public RequestTradePresenter(String currUserName, String itemName) throws IOException {
         TradeManager tradeManager = new TradeManager();
         UserManager userManager = new UserManager();
         Inventory inventory = new Inventory();
+        ClientUser currUser = (ClientUser) userManager.getUser(currUserName);
+        Item item= inventory.getItem(itemName);
 
     }
 
-    public void run(String currUserName, String itemName) throws AccountFrozenException, IOException {
-        ClientUser currUser = (ClientUser) userManager.getUser(currUserName);
+    public void run() throws AccountFrozenException, IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         if (currUser.getIsFrozen()) {
             throw new AccountFrozenException("your account is frozen!");
         }
-        Item item = inventory.getItem(itemName);
         ClientUser tarUser = (ClientUser) userManager.getUser(item.getOwnerName());
         if (tarUser.getIsFrozen()) {
             throw new AccountFrozenException("the account of the item owner is frozen.");
@@ -29,15 +31,15 @@ public class RequestTradePresenter {
 
 
         while (true) {
-            System.out.println("'one way(temporary)' or 'one way(permanent)' or " +
-                    "'two way(temporary)' or 'two way(permanent)");
+            System.out.println("menu: \n 1.one way(temporary)\n 2.one way(permanent)" +
+                    "\n 3.two way(temporary)'\n 4.'two way(permanent)");
             try {
                 String line = br.readLine();
                 if (!line.equals("one way(temporary)") && !line.equals("one way(permanent)")
                         && !line.equals("two way(temporary)") && !line.equals("two way(permanent)")) {
                     throw new IOException("Wrong input, please type again.");
                 } else {
-                    Trade newTrade = createTrade(currUser, tarUser, item, line);
+                    Trade newTrade = createTrade(tarUser, line);
                     System.out.println("your trade has been created, please wait for the target user to reply");
                     break;
                 }
@@ -48,7 +50,7 @@ public class RequestTradePresenter {
 
     }
 
-    private Trade createTrade(ClientUser currUser, ClientUser tarUser, Item item, String line) throws IOException {
+    private Trade createTrade(ClientUser tarUser,String line) throws IOException {
         Trade trade;
         LocalDateTime time = LocalDateTime.now();
         if (line.equals("one way(temporary)")){
@@ -58,17 +60,17 @@ public class RequestTradePresenter {
             trade = tradeManager.createOnewayTrade(currUser.getId(), tarUser.getId(), item, -1, time);
         }
         else if (line.equals("two way(temporary)")){
-            Item item2 = inventory.getItem(getSecondItem(currUser));
+            Item item2 = inventory.getItem(getSecondItem());
             trade = tradeManager.createTwowayTrade(currUser.getId(), tarUser.getId(), item, item2, 30, time);
         }else{
-            Item item2 = inventory.getItem(getSecondItem(currUser));
+            Item item2 = inventory.getItem(getSecondItem());
             trade = tradeManager.createTwowayTrade(currUser.getId(), tarUser.getId(), item, item2, -1, time);
         }
         return trade;
 
     }
 
-    private String getSecondItem(ClientUser currUser){
+    private String getSecondItem(){
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         while (true){
             System.out.println(currUser.getWishLend());
