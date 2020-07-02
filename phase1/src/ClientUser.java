@@ -2,9 +2,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.*;
 public class ClientUser extends User {
-    private String password;
-    private String username;
-    private static Integer id;
+    private static Integer id=0;
     private boolean isAdmin;
 
     private boolean isFrozen;
@@ -46,7 +44,7 @@ public class ClientUser extends User {
         return incompleteTransactionLimit;
     }
 
-    public int getWeekTransactiionLimit() {
+    public int getWeekTransactionLimit() {
         return weekTransactionLimit;
     }
 
@@ -66,10 +64,6 @@ public class ClientUser extends User {
         return id;
     }
 
-    @Override
-    public boolean getIsadmin() {
-        return isAdmin;
-    }
 
     @Override
     public boolean getIsBorrow() {
@@ -123,7 +117,11 @@ public class ClientUser extends User {
     public boolean getIsFrozen(){
         return isFrozen;
     }
-    public void setIsFrozen(boolean a){isFrozen = a;}
+    public void setIsFrozen(boolean a) throws IOException {
+        isFrozen = a;
+        UserManager u = new UserManager();
+        u.updateFile();
+    }
 
     public List<String> getWishLend() {
         return wishLend;
@@ -133,7 +131,7 @@ public class ClientUser extends User {
     }
 
 
-    public List<Trade> getTradeHistorytop() {
+    public List<Trade> getTradeHistoryTop() {
         List<Trade> trade=new ArrayList<>();
         TradeManager a = new TradeManager();
         for (int i=0;i<3;i++){
@@ -174,13 +172,19 @@ public class ClientUser extends User {
         return isAdmin;
     }
 
-    public void addWishLend(String wish) {
+    public void addWishLend(String wish) throws IOException {
         wishLend.add(wish);
+        UserManager u = new UserManager();
+        u.updateFile();
     }
-    public void addWishBorrow(String wish) {
+    public void addWishBorrow(String wish) throws IOException {
         wishBorrow.add(wish);
+        UserManager u = new UserManager();
+        u.updateFile();
     }
-    public void addTradeHistory(String history) {
+    public void addTradeHistory(String history) throws IOException {
         wishBorrow.add(history);
+        UserManager u = new UserManager();
+        u.updateFile();
     }
 }

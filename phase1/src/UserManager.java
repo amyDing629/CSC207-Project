@@ -43,17 +43,17 @@ public class UserManager {
 
                 d.setBorrow(b.get(5).equals("true"));
 
-                String[] f = b.get(6).split("; ");
+                String[] f = b.get(7).split("; ");
                 ArrayList<String> lineList2 = new ArrayList<>();
                 lineList2.addAll(Arrays.asList(f));
                 d.setWishLend(lineList2);
 
-                String[] g = b.get(7).split("; ");
+                String[] g = b.get(8).split("; ");
                 ArrayList<String> lineList3 = new ArrayList<>();
                 lineList2.addAll(Arrays.asList(g));
                 d.setWishBorrow(lineList3);
 
-                String[] h = b.get(8).split("; ");
+                String[] h = b.get(9).split("; ");
                 ArrayList<String> lineList4 = new ArrayList<>();
                 lineList4.addAll(Arrays.asList(h));
                 ArrayList<Integer> lineList5 = new ArrayList<>();
@@ -63,8 +63,8 @@ public class UserManager {
                 }
 
                 d.setTradeHistory(lineList5);
-                d.setWeekTransactionLimit(Integer.parseInt(b.get(9)));
-                d.setIncompleteTransaction(Integer.parseInt(b.get(10)));
+                d.setWeekTransactionLimit(Integer.parseInt(b.get(10)));
+                d.setIncompleteTransaction(Integer.parseInt(b.get(11)));
 
                 myList.add(d);
             }
@@ -84,18 +84,18 @@ public class UserManager {
 
                 d.setBorrow(b.get(5).equals("true"));
 
-                String[] f = b.get(6).split("; ");
+                String[] f = b.get(7).split("; ");
                 ArrayList<String> lineList2 = new ArrayList<>();
                 lineList2.addAll(Arrays.asList(f));
                 d.setWishLend(lineList2);
 
-                String[] g = b.get(7).split("; ");
+                String[] g = b.get(8).split("; ");
                 ArrayList<String> lineList3 = new ArrayList<>();
                 lineList2.addAll(Arrays.asList(g));
                 d.setWishBorrow(lineList3);
 
 
-                String[] k = b.get(8).split("; ");
+                String[] k = b.get(9).split("; ");
                 ArrayList<String> lineList6 = new ArrayList<>();
                 lineList6.addAll(Arrays.asList(k));
                 ArrayList<Integer> lineList7 = new ArrayList<>();
@@ -105,8 +105,8 @@ public class UserManager {
                 }
 
                 d.setTradeHistory(lineList7);
-                d.setWeekTransactionLimit(Integer.parseInt(b.get(9)));
-                d.setIncompleteTransaction(Integer.parseInt(b.get(10)));
+                d.setWeekTransactionLimit(Integer.parseInt(b.get(10)));
+                d.setIncompleteTransaction(Integer.parseInt(b.get(11)));
 
                 myList.add(d);
             }
@@ -151,6 +151,7 @@ public class UserManager {
 
     public User getUser(String name) throws IOException {
         try{
+            if(readFile().size() == 0){return null;}
             ArrayList<User> userList = splitUser(readFile());
             for(User u : userList){
                 if(u.getUsername().equals(name))
@@ -164,6 +165,7 @@ public class UserManager {
 
     public User getUser(int userId) throws IOException {
         try{
+            if(readFile().size() == 0){return null;}
             ArrayList<User> userList = splitUser(readFile());
             for(User u : userList){
                 if(u.getId().equals(userId))
@@ -177,6 +179,7 @@ public class UserManager {
 
     public List<Trade> findTrade(Integer id){
         try{
+            if(readFile().size() == 0){return null;}
             TradeManager a = new TradeManager();
             ArrayList<User> userList = splitUser(readFile());
             for(User u : userList){

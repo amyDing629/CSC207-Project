@@ -4,9 +4,7 @@ import java.time.LocalDateTime;
 import java.util.*;
 public class AdministrativeUser extends User {
     private boolean isAdmin;
-    private String password;
-    private String username;
-    private static Integer id;
+    private static Integer id = 0;
 
     private boolean isFrozen;
     private List<String> notification;
@@ -28,27 +26,33 @@ public class AdministrativeUser extends User {
         return password;
     }
 
-    public void setId(Integer id) {
+    public void setId(Integer id) throws IOException {
+
         this.id = id;
+        UserManager u = new UserManager();
+        u.updateFile();
     }
 
-    public void setFrozen(boolean frozen) {
+    public void setFrozen(boolean frozen) throws IOException {
+
         isFrozen = frozen;
+        UserManager u = new UserManager();
+        u.updateFile();
     }
 
     @Override
     public boolean getIsAdmin() {
-        return false;
+        return isAdmin;
     }
 
     @Override
     public List<String> getWishLend() {
-        return null;
+        return wishLend;
     }
 
     @Override
     public List<String> getWishBorrow() {
-        return null;
+        return wishBorrow;
     }
 
 
@@ -67,18 +71,12 @@ public class AdministrativeUser extends User {
         return tradeHistory;
     }
 
-    public void setBorrow(boolean borrow) {
+    public void setBorrow(boolean borrow) throws IOException {
+
         isBorrow = borrow;
+        UserManager u = new UserManager();
+        u.updateFile();
     }
-
-    public void setWishBorrow(List<String> wishBorrow) {
-        this.wishBorrow = wishBorrow;
-    }
-
-    public void setWishLend(List<String> wishLend) {
-        this.wishLend = wishLend;
-    }
-
 
     @Override
     public String getUsername() {
@@ -91,13 +89,8 @@ public class AdministrativeUser extends User {
     }
 
     @Override
-    public boolean getIsadmin() {
-        return false;
-    }
-
-    @Override
     public boolean getIsBorrow() {
-        return false;
+        return isBorrow;
     }
 
 
@@ -107,12 +100,16 @@ public class AdministrativeUser extends User {
     }
 
     @Override
-    public void addNotification(String no) {
+    public void addNotification(String no) throws IOException {
         notification.add(no);
+        UserManager u = new UserManager();
+        u.updateFile();
     }
 
-    public void setNotification(List<String> notification) {
+    public void setNotification(List<String> notification) throws IOException {
         this.notification = notification;
+        UserManager u = new UserManager();
+        u.updateFile();
     }
 
     @Override
@@ -156,8 +153,8 @@ public class AdministrativeUser extends User {
         u.updateFile();
     }
 
-    public void tradelimit(ClientUser a) throws IOException {
-        a.setIsFrozen(a.getTradeNumber() > a.getWeekTransactiionLimit());
+    public void tradeLimit(ClientUser a) throws IOException {
+        a.setIsFrozen(a.getTradeNumber() > a.getWeekTransactionLimit());
         UserManager u = new UserManager();
         u.updateFile();
     }
@@ -173,5 +170,4 @@ public class AdministrativeUser extends User {
         UserManager u = new UserManager();
         u.updateFile();
     }
-
 }

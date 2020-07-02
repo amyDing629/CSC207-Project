@@ -31,7 +31,6 @@ public class Login {
             System.out.print(">");
             a = sc.nextInt();
             sc.nextLine();
-            System.out.println("------------------------------");
             if (a==1){
                 login();
             }
@@ -87,8 +86,7 @@ public class Login {
     }
     public void register() throws IOException {
         Scanner sc = new Scanner(System.in);
-        int input=sc.nextInt();
-        sc.nextLine();
+        int input=0;
         while(input!=1) {
             System.out.println("--------------------\nRegister");
             System.out.println("Please enter your username!");
@@ -105,6 +103,7 @@ public class Login {
                 System.out.println("Your id: " + user1.getId());
                 System.out.println("Your username: " + user1.getUsername());
                 System.out.println("Your password: " + user1.getPassword());
+                input=1;
             }
             else{
                 System.out.println("The username already exists, please try to register again, enter any number to continue. Enter 1 to exit.");
