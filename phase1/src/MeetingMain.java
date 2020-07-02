@@ -4,8 +4,8 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentLinkedDeque;
 
 public class MeetingMain {
-    public static ClientUser u1 = new ClientUser(1);
-    public static ClientUser u2 = new ClientUser(2);
+    public static ClientUser u1 = new ClientUser("123","123",false);
+    public static ClientUser u2 = new ClientUser("1234","1234",false);
 
     public static void main (String[] args) {
         System.out.println("Please register a meeting!");

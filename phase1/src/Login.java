@@ -52,9 +52,9 @@ public class Login {
             System.out.println("Please enter your password!");
             System.out.print(">");
             String password = sc.nextLine();
-
+            UserManager a=new UserManager();
             //usermanger account verification? and returns a user object.
-            if (UserManager.verifyUser(username, password)) {
+            if (a.verifyUser(username, password)) {
                 int exit = 0;
                 while (exit != 1) {
                     System.out.println("Notifications:\n");// display all user's notifications.
@@ -63,15 +63,15 @@ public class Login {
                     int op = sc.nextInt();
                     sc.nextLine();
                     if (op == 1) {
-                        editInfo(UserManager.getUser(username));
+                        editInfo(a.getUser(username));
                     } else if (op == 2) {
-                        message(UserManager.getUser(username));
+                        message(a.getUser(username));
                     } else if (op == 3) {
-                        inventory(UserManager.getUser(username));
+                        inventory(a.getUser(username));
                     } else if (op == 4) {
-                        message(UserManager.getUser(username));
+                        message(a.getUser(username));
                     } else if (op == 5) {
-                        tradeHistory(UserManager.getUser(username));
+                        tradeHistory(a.getUser(username));
                     } else if (op == 0) {
                         exit = 1;
                     } else {
@@ -97,8 +97,9 @@ public class Login {
             System.out.println("Please enter your password!");
             System.out.print(">");
             String password = sc.nextLine();
+            UserManager a=new UserManager();
             //usermanger username verification?
-            if (UserManager.getUser(username) == null) {
+            if (a.getUser(username) == null) {
                 ClientUser user1 = new ClientUser(username, password, false);
                 System.out.println("Your account has been successfully created!");
                 System.out.println("Your id: " + user1.getId());
