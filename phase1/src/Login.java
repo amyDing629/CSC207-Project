@@ -103,6 +103,7 @@ public class Login {
                 System.out.println("Your id: " + user1.getId());
                 System.out.println("Your username: " + user1.getUsername());
                 System.out.println("Your password: " + user1.getPassword());
+                input=1;
             }
             else{
                 System.out.println("The username already exists, please try to register again, enter any number to continue. Enter 1 to exit.");
