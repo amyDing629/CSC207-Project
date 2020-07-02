@@ -22,31 +22,39 @@ abstract class User {
     public abstract String getPassword();
     public abstract String getUsername();
     public abstract Integer getId();
-    public abstract boolean getIsadmin();
     public abstract boolean getIsBorrow();
 
     public abstract List<String> getNotification();
-    public abstract void addNotification(String no);
+    public abstract void addNotification(String no) throws IOException;
     public abstract void changePassword(String password) throws IOException;
     public abstract void changeUsername(String username) throws IOException;
 
-    public void setIncompleteTransaction(int incompleteTransaction) {
+    public void setIncompleteTransaction(int incompleteTransaction) throws IOException {
         this.incompleteTransactionLimit = incompleteTransaction;
+        UserManager u = new UserManager();
+        u.updateFile();
     }
 
-    public void setWeekTransactionLimit(int weekTransaction) {
+    public void setWeekTransactionLimit(int weekTransaction) throws IOException {
+
         this.weekTransactionLimit = weekTransaction;
+        UserManager u = new UserManager();
+        u.updateFile();
     }
 
-    public void setWishBorrow(List<String> wishBorrow) {
+    public void setWishBorrow(List<String> wishBorrow) throws IOException {
         this.wishBorrow = wishBorrow;
+        UserManager u = new UserManager();
+        u.updateFile();
     }
 
-    public void setWishLend(List<String> wishLend) {
+    public void setWishLend(List<String> wishLend) throws IOException {
         this.wishLend = wishLend;
+        UserManager u = new UserManager();
+        u.updateFile();
     }
 
-    public void setNotification(List<String> notification) {}
+    public void setNotification(List<String> notification) throws IOException {}
 
     public void setTradeHistory(List<Integer> tradeHistory) {
         this.tradeHistory = tradeHistory;
@@ -54,7 +62,7 @@ abstract class User {
 
     public abstract List<Integer> getTradeHistory();
 
-    public abstract void setFrozen(boolean aTrue);
+    public abstract void setFrozen(boolean aTrue) throws IOException;
 
     public abstract boolean getIsAdmin();
 
