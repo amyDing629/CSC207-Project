@@ -9,7 +9,7 @@ public class UserManager {
     public ArrayList<ArrayList<String>> readfile() throws IOException {
         ArrayList<ArrayList<String>> myList = new ArrayList<>();
         try {
-            BufferedReader in = new BufferedReader(new FileReader("username.txt"));
+            BufferedReader in = new BufferedReader(new FileReader("phase1/src/username.txt"));
             while(in.ready()) {
                 String line = in.readLine();
                 String[] parts = line.split(", ");
@@ -116,7 +116,7 @@ public class UserManager {
 
     public void addUser(User u) throws IOException {
         try{
-            BufferedWriter output = new BufferedWriter(new FileWriter("username", true));
+            BufferedWriter output = new BufferedWriter(new FileWriter("phase1/src/username.txt", true));
             String name = u.getUsername();
             String s = u.getId()+ ", " + name + ", "  + u.getPassword()+ ", "  + u.getIsAdmin()+ ", "  + u.getIsAdmin()+ ", "  + u.getIsBorrow()+ ", ";
             String m = "";
@@ -189,8 +189,6 @@ public class UserManager {
         return null;
     }
 
-
-
     public boolean verifyUser(String name, String password) throws IOException {
         try{
             ArrayList<User> userlist = splitUser(readfile());
@@ -205,14 +203,12 @@ public class UserManager {
     }
 
     public void updateFile() throws IOException {
-        File file = new File("phase1/username.txt");
+        File file = new File("phase1/src/username.txt");
         file.delete();
         ArrayList<User> userlist = splitUser(readfile());
         for (User u: userlist){
             addUser(u);
         }
     }
-
-
 }
 
