@@ -18,12 +18,13 @@ public class UserManager {
                 myList.add(lineList);
             }
             in.close();
+            System.out.println(myList);
             if(!myList.isEmpty()){
                 if(myList.get(0).size()==0){
                     myList.remove(0);
                 }
             }
-            System.out.println(myList.size());
+            System.out.println(myList);
             return myList;
         }
         catch(Exception e) {
@@ -50,19 +51,27 @@ public class UserManager {
 
                 d.setBorrow(b.get(5).equals("true"));
 
-                String[] f = b.get(7).split("; ");
                 ArrayList<String> lineList2 = new ArrayList<>();
-                lineList2.addAll(Arrays.asList(f));
+                if (!b.get(7).equals("")){
+                    String[] f = b.get(7).split("; ");
+                    lineList2.addAll(Arrays.asList(f));
+                    d.setWishLend(lineList2);
+                }
                 d.setWishLend(lineList2);
 
-                String[] g = b.get(8).split("; ");
                 ArrayList<String> lineList3 = new ArrayList<>();
-                lineList2.addAll(Arrays.asList(g));
-                d.setWishBorrow(lineList3);
+                if (!b.get(7).equals("")){
+                    String[] g = b.get(8).split("; ");
+                    lineList3.addAll(Arrays.asList(g));
+                    d.setWishBorrow(lineList3);
+                }
+                d.setWishLend(lineList3);
 
-                String[] h = b.get(9).split("; ");
                 ArrayList<String> lineList4 = new ArrayList<>();
-                lineList4.addAll(Arrays.asList(h));
+                if(!b.get(9).equals("")){
+                    String[] h = b.get(9).split("; ");
+                    lineList4.addAll(Arrays.asList(h));
+                }
                 ArrayList<Integer> lineList5 = new ArrayList<>();
 
                 for(String p: lineList4){
@@ -91,27 +100,34 @@ public class UserManager {
 
                 d.setBorrow(b.get(5).equals("true"));
 
-                String[] f = b.get(7).split("; ");
                 ArrayList<String> lineList2 = new ArrayList<>();
-                lineList2.addAll(Arrays.asList(f));
+                if (!b.get(7).equals("")){
+                    String[] f = b.get(7).split("; ");
+                    lineList2.addAll(Arrays.asList(f));
+                    d.setWishLend(lineList2);
+                }
                 d.setWishLend(lineList2);
 
-                String[] g = b.get(8).split("; ");
                 ArrayList<String> lineList3 = new ArrayList<>();
-                lineList2.addAll(Arrays.asList(g));
-                d.setWishBorrow(lineList3);
+                if (!b.get(7).equals("")){
+                    String[] g = b.get(8).split("; ");
+                    lineList3.addAll(Arrays.asList(g));
+                    d.setWishBorrow(lineList3);
+                }
+                d.setWishLend(lineList3);
 
+                ArrayList<String> lineList4 = new ArrayList<>();
+                if(!b.get(9).equals("")){
+                    String[] h = b.get(9).split("; ");
+                    lineList4.addAll(Arrays.asList(h));
+                }
+                ArrayList<Integer> lineList5 = new ArrayList<>();
 
-                String[] k = b.get(9).split("; ");
-                ArrayList<String> lineList6 = new ArrayList<>();
-                lineList6.addAll(Arrays.asList(k));
-                ArrayList<Integer> lineList7 = new ArrayList<>();
-
-                for(String p: lineList6){
-                    lineList7.add(Integer.parseInt(p));
+                for(String p: lineList4){
+                    lineList5.add(Integer.parseInt(p));
                 }
 
-                d.setTradeHistory(lineList7);
+                d.setTradeHistory(lineList5);
                 d.setWeekTransactionLimit(Integer.parseInt(b.get(10)));
                 d.setIncompleteTransaction(Integer.parseInt(b.get(11)));
 
@@ -131,17 +147,17 @@ public class UserManager {
                 m = m + i + "; ";
             }
             s = s + m + ", ";
-            String n = " ";
+            String n = "";
             for(String i: u.getWishLend()){
                 n = n + i+ "; ";
             }
             s = s + n + ", ";
-            String k = " ";
+            String k = "";
             for(String i: u.getWishBorrow()){
                 k = k + i + "; ";
             }
             s = s + k + ", ";
-            String l = " ";
+            String l = "";
             for(Integer i: u.getTradeHistory()){
                 l = l + i + "; ";
             }
