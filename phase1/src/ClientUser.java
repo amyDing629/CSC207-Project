@@ -29,6 +29,16 @@ public class ClientUser extends User {
         return incompleteTransactionLimit;
     }
 
+    @Override
+    public void setUsername(String input1) {
+        username=input1;
+    }
+
+    @Override
+    public void setPassword(String input2) {
+        password=input2;
+    }
+
     public int getWeekTransactionLimit() {
         return weekTransactionLimit;
     }
@@ -55,7 +65,7 @@ public class ClientUser extends User {
     }
 
 
-    public void setWishBorrow(List<String> wishBorrow) throws IOException {
+    public void setWishBorrow(List<String> wishBorrow) {
         this.wishBorrow= wishBorrow;
     }
 
@@ -75,14 +85,14 @@ public class ClientUser extends User {
     }
 
     @Override
-    public void setFrozen(boolean aTrue) throws IOException {
+    public void setFrozen(boolean aTrue){
         isFrozen = aTrue;
     }
 
     public boolean getIsFrozen(){
         return isFrozen;
     }
-    public void setIsFrozen(boolean a) throws IOException {
+    public void setIsFrozen(boolean a){
         isFrozen = a;
     }
 
@@ -129,13 +139,13 @@ public class ClientUser extends User {
         return isAdmin;
     }
 
-    public void addWishLend(String wish) throws IOException {
+    public void addWishLend(String wish) {
         wishLend.add(wish);
     }
-    public void addWishBorrow(String wish) throws IOException {
+    public void addWishBorrow(String wish){
         wishBorrow.add(wish);
     }
-    public void addTradeHistory(String history) throws IOException {
+    public void addTradeHistory(String history){
         wishBorrow.add(history);
     }
 }

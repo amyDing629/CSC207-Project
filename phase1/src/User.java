@@ -33,29 +33,29 @@ abstract class User {
     }
 
     public List<String> getNotification(){return notification;}
-    public void changePassword(String password) throws IOException {
+    public void changePassword(String password) {
         this.password=password;
     }
 
-    public void changeUsername(String username) throws IOException {
+    public void changeUsername(String username) {
         this.username=username;
     }
 
-    public void setIncompleteTransaction(int incompleteTransaction) throws IOException {
+    public void setIncompleteTransaction(int incompleteTransaction) {
         this.incompleteTransactionLimit = incompleteTransaction;
     }
 
-    public void setWeekTransactionLimit(int weekTransaction) throws IOException {
+    public void setWeekTransactionLimit(int weekTransaction){
 
         this.weekTransactionLimit = weekTransaction;
     }
 
 
-    public void setWishLend(List<String> wishLend) throws IOException {
+    public void setWishLend(List<String> wishLend){
         this.wishLend = wishLend;
     }
 
-    public void setNotification(List<String> notification) throws IOException {
+    public void setNotification(List<String> notification){
         this.notification = notification;
     }
 
@@ -76,12 +76,12 @@ abstract class User {
         return wishBorrow;
     }
 
-    public void setId(Integer id) throws IOException {
+    public void setId(Integer id) {
 
         this.id = id;
     }
 
-    public void setBorrow(boolean borrow) throws IOException {
+    public void setBorrow(boolean borrow){
 
         isBorrow = borrow;
     }
@@ -95,7 +95,7 @@ abstract class User {
         return b;
     }
 
-    public void addNotification(String no) throws IOException {
+    public void addNotification(String no){
         notification.add(no);
     }
 
@@ -107,7 +107,11 @@ abstract class User {
         return incompleteTransactionLimit;
     }
 
-    public void setWishBorrow(ArrayList<String> lineList3) throws IOException {
+    public void setWishBorrow(ArrayList<String> lineList3) {
         wishBorrow = lineList3;
     }
+
+    public abstract void setUsername(String input1);
+
+    public abstract void setPassword(String input2);
 }
