@@ -1,11 +1,13 @@
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.*;
 public class ClientUser extends User {
-    private static Integer id=0;
+    private String password;
+    private String username;
+    private static Integer id;
     private boolean isAdmin;
 
     private boolean isFrozen;
+    private List<String> notification;
     private int weekTransactionLimit;
     private int incompleteTransactionLimit;
 
@@ -18,6 +20,10 @@ public class ClientUser extends User {
 
     private boolean isBorrow;
 
+    //Inventory
+
+    //tradeHistory
+    private List<Integer> tradeHistory;
 
     public ClientUser(String username, String password ,Boolean isAdmin){
         super(username, password, isAdmin);
@@ -25,14 +31,29 @@ public class ClientUser extends User {
         id ++;
     }
 
+    public void setBorrow(boolean borrow) {
+        isBorrow = borrow;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public int getIncompleteTransactionLimit() {
         return incompleteTransactionLimit;
     }
 
-    public int getWeekTransactionLimit() {
+    public int getWeekTransactiionLimit() {
         return weekTransactionLimit;
     }
 
+    public void setIncompleteTransaction(int incompleteTransaction) {
+        this.incompleteTransactionLimit = incompleteTransaction;
+    }
+
+    public void setWeekTransactiionLimit(int weekTransactiion) {
+        this.weekTransactionLimit = weekTransactiion;
+    }
 
     @Override
     public String getPassword() {
@@ -50,13 +71,13 @@ public class ClientUser extends User {
     }
 
     @Override
-    public boolean getIsBorrow() {
-        return isBorrow;
+    public boolean getIsAdmin() {
+        return isAdmin;
     }
 
-
-    public void setWishBorrow(List<String> wishBorrow) throws IOException {
-        this.wishBorrow= wishBorrow;
+    @Override
+    public boolean getIsBorrow() {
+        return isBorrow;
     }
 
 
@@ -68,6 +89,44 @@ public class ClientUser extends User {
         return borrowed;
     }
 
+    @Override
+    public List<String> getNotification() {
+        return notification;
+    }
+
+    @Override
+    public void addNotification(String no) {
+        notification.add(no);
+    }
+
+    public void setNotification(List<String> notification) {
+        this.notification = notification;
+    }
+
+    @Override
+    public void changePassword(String password) {
+        this.password=password;
+    }
+
+    @Override
+    public void changeUsername(String username) {
+        this.username=username;
+    }
+
+//    @Override
+    public void setWishLend(ArrayList<String> lineList2) {
+
+    }
+
+    @Override
+    public void setWishBorrow(ArrayList<String> lineList3) {
+
+    }
+
+//    @Override
+    public void setTradeHistory(ArrayList<Integer> lineList5) {
+
+    }
 
     @Override
     public List<Integer> getTradeHistory() {
@@ -75,20 +134,23 @@ public class ClientUser extends User {
     }
 
     @Override
-    public void setFrozen(boolean aTrue) throws IOException {
-        isFrozen = aTrue;
+    public void setFrozen(boolean aTrue) {
+
     }
 
     public boolean getIsFrozen(){
         return isFrozen;
     }
-    public void setIsFrozen(boolean a) throws IOException {
-        isFrozen = a;
+    public void setIsFrozen(boolean a){isFrozen = a;}
+
+    public List<String> getWishLend() {
+        return wishLend;
+    }
+    public List<String> getWishBorrow() {
+        return wishBorrow;
     }
 
-
-
-    public List<Trade> getTradeHistoryTop() {
+    public List<Trade> getTradeHistorytop() {
         List<Trade> trade=new ArrayList<>();
         TradeManager a = new TradeManager();
         for (int i=0;i<3;i++){
@@ -123,19 +185,13 @@ public class ClientUser extends User {
         return number;
     }
 
-
-
-    public boolean getIsAdmin(){
-        return isAdmin;
-    }
-
-    public void addWishLend(String wish) throws IOException {
+    public void addWishLend(String wish) {
         wishLend.add(wish);
     }
-    public void addWishBorrow(String wish) throws IOException {
+    public void addWishBorrow(String wish) {
         wishBorrow.add(wish);
     }
-    public void addTradeHistory(String history) throws IOException {
+    public void addTradeHistory(String history) {
         wishBorrow.add(history);
     }
 }

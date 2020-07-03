@@ -1,8 +1,8 @@
-import java.time.LocalDate;
+package MeetingSystem;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.time.format.ResolverStyle;
 
 public class DateTime {
 
@@ -28,7 +28,7 @@ public class DateTime {
      * Return if the input date-time string is of Valid Format
      * https://stackoverflow.com/questions/226910/how-to-sanity-check-a-date-in-java
      * @param inputDateTimeString String of input datetime
-     * @return
+     * @return true if date-time is of valid format
      */
     public static boolean isValidFormat(String inputDateTimeString) throws DateTimeParseException {
         boolean valid = true;
@@ -49,8 +49,7 @@ public class DateTime {
      * @return LocalDateTime object
      */
     public static LocalDateTime convertToLocalDateTime(String inputDateTimeString) {
-        LocalDateTime dateTime = LocalDateTime.parse(inputDateTimeString, formatter);
-        return dateTime;
+        return LocalDateTime.parse(inputDateTimeString, formatter);
     }
 
 }

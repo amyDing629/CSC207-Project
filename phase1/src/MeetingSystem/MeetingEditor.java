@@ -1,16 +1,16 @@
+package MeetingSystem;
+
 import java.util.Dictionary;
 import java.util.*;
 /**
- * A Trader who attends to a Meeting.
+ * A MeetingEditor of a meeting who can edit the meeting.
  */
 
-class MeetingEditor {
+public class MeetingEditor extends IMeetingAttendee {
 
     /** This Trader's user id. */
     public Integer userId;
 
-    /** This Trader's threshold of times to edit place and/or time of meeting; Set to 3 by default. */
-    private int threshold = 3;
 
     /** This Trader's times of editing place and/or time of meeting. */
     private int timeOfEdition = 0;
@@ -27,7 +27,7 @@ class MeetingEditor {
 //     * Constructs a new Trader with meeting editor builder.
 //     * @param meetingEditorBuilder the meeting editor builder
 //     */
-//    public MeetingEditor (MeetingEditorBuilder meetingEditorBuilder) {
+//    public MeetingSystem.MeetingEditor (MeetingEditorBuilder meetingEditorBuilder) {
 //        this.userId = meetingEditorBuilder.getId();
 //    }
 
@@ -47,6 +47,11 @@ class MeetingEditor {
         return timeOfEdition;
     }
 
+    /**
+     * Set the time of edition
+     *  ****** TODO: only accessible for Trade System readFile ******
+     * @param time the new time of edition
+     */
     public void setTimeOfEdition(Integer time){
         timeOfEdition = time;
     }
