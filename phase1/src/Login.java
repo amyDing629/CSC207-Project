@@ -176,7 +176,7 @@ public class Login {
                         if (ha==null){
                             System.out.println("Sorry there is no such user, returning to main menu.");
                         }
-                        else{((AdministrativeUser)user).addNewUser(ha.username,ha.password);}
+                        else{((AdministrativeUser)user).addNewUser(ha.getUsername(),ha.getPassword());}
                     }
                     break;
                 case 0:
