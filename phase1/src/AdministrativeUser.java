@@ -97,8 +97,8 @@ public class AdministrativeUser extends User {
 
     public void addNewUser(String username, String password) throws IOException {
         UserManager u = new UserManager();
-        if (id == 0){
-        AdministrativeUser a = new AdministrativeUser(username, password,isAdmin);
+        if (id == 1){
+        AdministrativeUser a = new AdministrativeUser(username, password, isAdmin);
         u.addUser(a);
         }
     }
