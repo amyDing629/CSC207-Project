@@ -9,7 +9,7 @@ public class UserManager {
     public static ArrayList<ArrayList<String>> readfile() throws IOException {
         ArrayList<ArrayList<String>> myList = new ArrayList<>();
         try {
-            BufferedReader in = new BufferedReader(new FileReader("username.txt"));
+            BufferedReader in = new BufferedReader(new FileReader("phase1/src/username.txt"));
             while(in.ready()) {
                 String line = in.readLine();
                 String[] parts = line.split(", ");

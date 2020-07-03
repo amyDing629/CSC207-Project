@@ -1,10 +1,12 @@
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class OnewayTrade extends Trade {
     private final Integer lenderId;
     private final Integer borrowerId;
     private final Item item;
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     /**
      *
@@ -53,7 +55,8 @@ public class OnewayTrade extends Trade {
     }
 
     public String toString(){
-        return "Trader " + borrowerId +  " makes a one way trade with trader " + lenderId + " to borrow " + item;
+        return "Trade" + getId() + ": Trader " + borrowerId +  " makes a one way trade with trader " + lenderId +
+                " to borrow " + item + " at " + getCreateTime().format(formatter);
     }
 
     public ArrayList<Item> getItemList(){

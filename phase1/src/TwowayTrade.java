@@ -1,10 +1,12 @@
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 public class TwowayTrade extends Trade {
     private final Integer trader1Id;
     private final Integer trader2Id;
     private final Item item1to2;
     private final Item item2to1;
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     /**
      *
@@ -53,7 +55,8 @@ public class TwowayTrade extends Trade {
     }
 
     public String toString(){
-        return "trader1 " + trader1Id +" makes two way trade with trader" + trader2Id + " for item " + item1to2 + "and" + item2to1;
+        return "Trade" + getId() + ": trader1 " + trader1Id +" makes two way trade with trader" + trader2Id +
+                " for item " + item1to2 + "and" + item2to1 +  " at " + getCreateTime().format(formatter);
     }
 
     @Override

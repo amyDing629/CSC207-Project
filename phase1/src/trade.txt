@@ -1,2 +1,2 @@
-id,oneway/twowaytrade,temporary/permanent,user1,user2,item1to2,item2to1/null,(1st)time/place/status/editTimes/meetingConfirmation,(2rd)time/place/status,status(unconfirmed, uncompleted, completed),createTime
-1,oneway,30,2,3,item1,null,2020-06-30 11:49/home/incomplete/0;0/false;false,2020-07-30 11:49/home/incomplete,uncompleted,2020-06-29 10:00
+1,oneway,30,2,3,apple,null,2020-06-30 11:49/home/incomplete/0;0/false;false,2020-07-30 11:49/home/incomplete,uncompleted,2020-06-29 10:00
+2,oneway,30,4,5,pear,null,null,null,disagreed,2020-07-03 01:58

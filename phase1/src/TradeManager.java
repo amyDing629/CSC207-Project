@@ -63,17 +63,15 @@ public class TradeManager {
      * @param item1to2 the Item to be trade in this created Trade.
      * @param item2to1 the other Item to be trade in this created Trade.
      * @param duration the duration of this Trade, unit (days). -1 means the Trade is permanent.
-     * @return the created newTrade
      */
-    public Trade createTwowayTrade(Integer currUserId, Integer otherUserId, Item item1to2, Item item2to1, int duration,
-                                   LocalDateTime time) throws IOException {
+    public void createTwowayTrade(Integer currUserId, Integer otherUserId, Item item1to2, Item item2to1, int duration,
+                                  LocalDateTime time) throws IOException {
         TwowayTrade newTrade = new TwowayTrade(currUserId, otherUserId, item1to2, item2to1, duration, time);
         setId(newTrade);
         tradeList.add(newTrade);
         updateFile();
         // Update trade history for both users
         this.updateTradeHistory(currUserId, otherUserId, newTrade);
-        return newTrade;
     }
 
 
@@ -115,7 +113,7 @@ public class TradeManager {
                 ArrayList<Integer> users = new ArrayList<Integer>();
                 users.add(user1Id);
                 users.add(user2Id);
-                LocalDateTime tradeTime = LocalDateTime.parse(lst[-1],formatter);
+                LocalDateTime tradeTime = LocalDateTime.parse(lst[10],formatter);
                 Item item1 = iv.getItem(lst[5]);
                 String fstMeeting = lst[7];
                 String scdMeeting = lst[8];
@@ -130,7 +128,7 @@ public class TradeManager {
                     Item item2 = iv.getItem(lst[6]);
                     trade = new TwowayTrade(user1Id,user2Id,item1,item2,duration,tradeTime);
                 }
-                if (!fstMeeting.equals("")) {
+                if (!fstMeeting.equals("null")) {
                     String[] fm = fstMeeting.split("/");
                     LocalDateTime fmTime = LocalDateTime.parse(fm[0], formatter);
                     trade.setMeeting(fmTime, fm[1], users);
@@ -151,7 +149,7 @@ public class TradeManager {
                     trade.getMeeting().setStatus(fm[2]);
 
                 }
-                if (!scdMeeting.equals("")){
+                if (!scdMeeting.equals("null")){
                     String[] sm = scdMeeting.split("/");
                     LocalDateTime smTime = LocalDateTime.parse(sm[0],formatter);
                     trade.setSecondMeeting(smTime, sm[1], users);
@@ -171,6 +169,7 @@ public class TradeManager {
     }
 
     public void addTradeToFile(Trade trade) throws IOException{
+        tradeList.add(trade);
         try {
             FileOutputStream fos = new FileOutputStream("phase1/src/trade.txt", true);
             Integer id = trade.getId();
@@ -194,14 +193,18 @@ public class TradeManager {
                 item2 = items.get(1).getName();
             }
             Meeting fm = trade.getMeeting();
+            String fmStr = null;
+            if (fm != null){
             HashMap<Integer, MeetingEditor> idToE = fm.getIdToEditor();
             String idToEdStr = idToE.get(user1).getTimeOfEdition() + ";"+
                     idToE.get(user2).getTimeOfEdition();
             HashMap<Integer, Boolean> conStatus = fm.getConfirmedStatusFull();
             String idToCoStr = Boolean.toString(conStatus.get(user1)) + ";" + Boolean.toString(conStatus.get(user2));
             //2020-06-30 11:49/home/incomplete/0;0/false;false
-            String fmStr = fm.getDateTime().format(formatter)+"/"+fm.getPlace()+"/"+fm.getStatus()
+            fmStr = fm.getDateTime().format(formatter)+"/"+fm.getPlace()+"/"+fm.getStatus()
                     +"/"+idToEdStr+"/"+ idToCoStr;
+            }
+
             Meeting sm = trade.getSecondMeeting();
             String smStr;
             if (sm == null){
@@ -212,7 +215,7 @@ public class TradeManager {
             String status = trade.getStatus();
             String time = trade.getCreateTime().format(formatter);
 
-            fos.write((id+","+type+","+duration+","+user1+","+user2+","+item1+","+item2+fmStr+","
+            fos.write((id+","+type+","+duration+","+user1+","+user2+","+item1+","+item2+","+fmStr+","
                     +smStr+","+status+","+time+"\n").getBytes());
             fos.close();
         }catch(IOException e){
