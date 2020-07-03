@@ -63,17 +63,15 @@ public class TradeManager {
      * @param item1to2 the Item to be trade in this created Trade.
      * @param item2to1 the other Item to be trade in this created Trade.
      * @param duration the duration of this Trade, unit (days). -1 means the Trade is permanent.
-     * @return the created newTrade
      */
-    public Trade createTwowayTrade(Integer currUserId, Integer otherUserId, Item item1to2, Item item2to1, int duration,
-                                   LocalDateTime time) throws IOException {
+    public void createTwowayTrade(Integer currUserId, Integer otherUserId, Item item1to2, Item item2to1, int duration,
+                                  LocalDateTime time) throws IOException {
         TwowayTrade newTrade = new TwowayTrade(currUserId, otherUserId, item1to2, item2to1, duration, time);
         setId(newTrade);
         tradeList.add(newTrade);
         updateFile();
         // Update trade history for both users
         this.updateTradeHistory(currUserId, otherUserId, newTrade);
-        return newTrade;
     }
 
 
@@ -130,7 +128,6 @@ public class TradeManager {
                     Item item2 = iv.getItem(lst[6]);
                     trade = new TwowayTrade(user1Id,user2Id,item1,item2,duration,tradeTime);
                 }
-                System.out.println(fstMeeting.equals("null"));
                 if (!fstMeeting.equals("null")) {
                     String[] fm = fstMeeting.split("/");
                     LocalDateTime fmTime = LocalDateTime.parse(fm[0], formatter);
