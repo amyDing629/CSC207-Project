@@ -12,7 +12,7 @@ public abstract class Trade {
 
     /**
      * Constructor
-     * @param duration number of date, -1 means permanent
+     * @param duration number of date, -1 means permanent, 30 means temporary.
      */
     public Trade(int duration, LocalDateTime time){
         this.status = "disagreed";

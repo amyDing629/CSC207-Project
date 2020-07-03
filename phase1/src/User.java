@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.*;
 abstract class User {
     protected Integer id = 0;
@@ -7,46 +8,83 @@ abstract class User {
     private boolean isAdmin;
     private List<String> wishLend;
     private List<String> wishBorrow;
-    private List<Integer> tradeHistory;
+    private boolean isBorrow;
+    private boolean isFrozen;
+    protected List<Integer> tradeHistory;
+    private int weekTransactionLimit;
+    private int incompleteTransactionLimit;
     public User(String username, String password, boolean isAdmin){
         this.username = username;
         this.password = password;
         //this.id = id;
-        this.notification=new ArrayList<String>();
+        this.notification=new ArrayList<>();
+        this.wishLend=new ArrayList<>();
+        this.wishBorrow=new ArrayList<>();
+        this.tradeHistory=new ArrayList<>();
         this.isAdmin = isAdmin;
-    }
-
-    public User() {
-
     }
 
     public abstract String getPassword();
     public abstract String getUsername();
     public abstract Integer getId();
-    public abstract boolean getIsadmin();
     public abstract boolean getIsBorrow();
+    public boolean getIsfrozen(){
+        return isFrozen;
+    }
 
-    public abstract List<String> getNotification();
-    public abstract void addNotification(String no);
-    public abstract void changePassword(String password);
-    public abstract void changeUsername(String username);
+    public List<String> getNotification(){return notification;}
+    public void changePassword(String password) throws IOException {
+        this.password=password;
+    }
 
-    public abstract void setWishLend(ArrayList<String> lineList2);
+    public void changeUsername(String username) throws IOException {
+        this.username=username;
+    }
 
-    public abstract void setWishBorrow(ArrayList<String> lineList3);
+    public void setIncompleteTransaction(int incompleteTransaction) throws IOException {
+        this.incompleteTransactionLimit = incompleteTransaction;
+    }
 
-    public void setNotification(List<String> notification) {}
+    public void setWeekTransactionLimit(int weekTransaction) throws IOException {
 
-    public abstract void setTradeHistory(ArrayList<Integer> lineList5);
+        this.weekTransactionLimit = weekTransaction;
+    }
+
+
+    public void setWishLend(List<String> wishLend) throws IOException {
+        this.wishLend = wishLend;
+    }
+
+    public void setNotification(List<String> notification) throws IOException {
+        this.notification = notification;
+    }
+
+    public void setTradeHistory(List<Integer> tradeHistory) {
+        this.tradeHistory = tradeHistory;
+    }
 
     public abstract List<Integer> getTradeHistory();
 
-    public abstract void setFrozen(boolean aTrue);
+    public abstract void setFrozen(boolean aTrue) throws IOException;
 
     public abstract boolean getIsAdmin();
 
-    public abstract List<String> getWishLend();
-    public abstract List<String> getWishBorrow();
+    public List<String> getWishLend() {
+        return wishLend;
+    }
+    public List<String> getWishBorrow() {
+        return wishBorrow;
+    }
+
+    public void setId(Integer id) throws IOException {
+
+        this.id = id;
+    }
+
+    public void setBorrow(boolean borrow) throws IOException {
+
+        isBorrow = borrow;
+    }
 
     public List<Trade> getAllTrade(){
         TradeManager a = new TradeManager();
@@ -55,5 +93,21 @@ abstract class User {
             b.add(a.getTrade(i));
         }
         return b;
+    }
+
+    public void addNotification(String no) throws IOException {
+        notification.add(no);
+    }
+
+    public int getWeekTransactionLimit() {
+        return weekTransactionLimit;
+    }
+
+    public int getIncompleteTransactionLimit() {
+        return incompleteTransactionLimit;
+    }
+
+    public void setWishBorrow(ArrayList<String> lineList3) throws IOException {
+        wishBorrow = lineList3;
     }
 }

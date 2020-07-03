@@ -3,17 +3,18 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Login {
-    public static void main (String[] args) throws IOException {
+    public void mainUI () throws IOException {
         int a=-1;
         while (a!=0) {
             //print out the list of current users-------------------------------
             System.out.println("Users:");
             try {
                 BufferedReader reader = new BufferedReader(new FileReader(
-                        "username.txt"));
+                        "phase1/src/username.txt"));
                 String line = reader.readLine();
                 while (line != null) {
                     System.out.println(line);
@@ -30,7 +31,6 @@ public class Login {
             System.out.print(">");
             a = sc.nextInt();
             sc.nextLine();
-            System.out.println("------------------------------");
             if (a==1){
                 login();
             }
@@ -41,7 +41,7 @@ public class Login {
         }
 
     }
-    public static void login() throws IOException {
+    public void login() throws IOException {
         Scanner sc = new Scanner(System.in);
         int input=0;
         while (input==0) {
@@ -51,9 +51,9 @@ public class Login {
             System.out.println("Please enter your password!");
             System.out.print(">");
             String password = sc.nextLine();
-
+            UserManager a=new UserManager();
             //usermanger account verification? and returns a user object.
-            if (UserManager.verifyUser(username, password)) {
+            if (a.verifyUser(username, password)) {
                 int exit = 0;
                 while (exit != 1) {
                     System.out.println("Notifications:\n");// display all user's notifications.
@@ -62,15 +62,15 @@ public class Login {
                     int op = sc.nextInt();
                     sc.nextLine();
                     if (op == 1) {
-                        editInfo(UserManager.getUser(username));
+                        editInfo(a.getUser(username));
                     } else if (op == 2) {
-                        message(UserManager.getUser(username));
+                        message(a.getUser(username));
                     } else if (op == 3) {
-                        inventory(UserManager.getUser(username));
+                        inventory(a.getUser(username));
                     } else if (op == 4) {
-                        message(UserManager.getUser(username));
+                        message(a.getUser(username));
                     } else if (op == 5) {
-                        tradeHistory(UserManager.getUser(username));
+                        tradeHistory(a.getUser(username));
                     } else if (op == 0) {
                         exit = 1;
                     } else {
@@ -84,10 +84,9 @@ public class Login {
             }
         }
     }
-    public static void register() throws IOException {
+    public void register() throws IOException {
         Scanner sc = new Scanner(System.in);
-        int input=sc.nextInt();
-        sc.nextLine();
+        int input=0;
         while(input!=1) {
             System.out.println("--------------------\nRegister");
             System.out.println("Please enter your username!");
@@ -96,13 +95,16 @@ public class Login {
             System.out.println("Please enter your password!");
             System.out.print(">");
             String password = sc.nextLine();
+            UserManager a=new UserManager();
             //usermanger username verification?
-            if (UserManager.getUser(username) == null) {
+            if (a.getUser(username) == null) {
                 ClientUser user1 = new ClientUser(username, password, false);
+                a.addUser(user1);
                 System.out.println("Your account has been successfully created!");
                 System.out.println("Your id: " + user1.getId());
                 System.out.println("Your username: " + user1.getUsername());
                 System.out.println("Your password: " + user1.getPassword());
+                input=1;
             }
             else{
                 System.out.println("The username already exists, please try to register again, enter any number to continue. Enter 1 to exit.");
@@ -112,7 +114,7 @@ public class Login {
         }
     }
 
-    public static void editInfo(User user){
+    public void editInfo(User user){
         Scanner sc=new Scanner(System.in);
         int exit=-1;
         while(exit!=0) {
@@ -148,7 +150,7 @@ public class Login {
             }
         }
     }
-    public static void inventory(User user){
+    public void inventory(User user){
         Scanner sc=new Scanner(System.in);
         int exit=-1;
         while(exit!=0) {
@@ -161,9 +163,17 @@ public class Login {
             switch (input) {
                 case 1:
                     System.out.println("Lend wishes");
+                    List<String> lw=user.getWishLend();
+                    for (int i=0;i<lw.size();i++){
+                        System.out.println("wish lend item:"+i+" "+lw.get(i));
+                    }
                     break;
                 case 2:
                     System.out.println("Borrow wishes");
+                    List<String> lb=user.getWishLend();
+                    for (int i=0;i<lb.size();i++){
+                        System.out.println("wish borrow item:"+i+" "+lb.get(i));
+                    }
                     break;
                 case 3:
                     System.out.println("Edit lend wishes");
@@ -178,10 +188,10 @@ public class Login {
         }
 
     }
-    public static void message(User user){
+    public void message(User user){
 
     }
-    public static void tradeHistory(User user){
+    public void tradeHistory(User user){
 
     }
 }
