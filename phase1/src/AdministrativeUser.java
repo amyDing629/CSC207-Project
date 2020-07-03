@@ -94,14 +94,10 @@ public class AdministrativeUser extends User {
 
     public void freeze(ClientUser a) throws IOException {
         a.setIsFrozen(false);
-        UserManager u = new UserManager();
-        u.updateFile();
     }
 
     public void unfreeze(ClientUser a) throws IOException {
         a.setIsFrozen(true);
-        UserManager u = new UserManager();
-        u.updateFile();
     }
 
     public void addNewUser(String username, String password) throws IOException {
@@ -110,30 +106,22 @@ public class AdministrativeUser extends User {
         AdministrativeUser a = new AdministrativeUser(username, password,isAdmin);
         u.addUser(a);
         }
-        u.updateFile();
     }
 
     public void confirmItem(ClientUser a, Item b) throws IOException {
         a.addWishLend(b.getName());
-        UserManager u = new UserManager();
-        u.updateFile();
+
     }
 
     public void tradeLimit(ClientUser a) throws IOException {
         a.setIsFrozen(a.getTradeNumber() > a.getWeekTransactionLimit());
-        UserManager u = new UserManager();
-        u.updateFile();
     }
 
     public void incompleteTransaction(ClientUser a) throws IOException {
         a.setIsFrozen(a.getIncompleteTransaction() <= a.getIncompleteTransactionLimit());
-        UserManager u = new UserManager();
-        u.updateFile();
     }
 
     public void canBorrow(int c, ClientUser b) throws IOException {
         b.setBorrow(b.getLend().size() + c >= b.getBorrowed().size());
-        UserManager u = new UserManager();
-        u.updateFile();
     }
 }

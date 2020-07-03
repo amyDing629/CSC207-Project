@@ -57,8 +57,6 @@ public class ClientUser extends User {
 
     public void setWishBorrow(List<String> wishBorrow) throws IOException {
         this.wishBorrow= wishBorrow;
-        UserManager u = new UserManager();
-        u.updateFile();
     }
 
 
@@ -79,8 +77,6 @@ public class ClientUser extends User {
     @Override
     public void setFrozen(boolean aTrue) throws IOException {
         isFrozen = aTrue;
-        UserManager u = new UserManager();
-        u.updateFile();
     }
 
     public boolean getIsFrozen(){
@@ -88,8 +84,6 @@ public class ClientUser extends User {
     }
     public void setIsFrozen(boolean a) throws IOException {
         isFrozen = a;
-        UserManager u = new UserManager();
-        u.updateFile();
     }
 
 
@@ -137,17 +131,11 @@ public class ClientUser extends User {
 
     public void addWishLend(String wish) throws IOException {
         wishLend.add(wish);
-        UserManager u = new UserManager();
-        u.updateFile();
     }
     public void addWishBorrow(String wish) throws IOException {
         wishBorrow.add(wish);
-        UserManager u = new UserManager();
-        u.updateFile();
     }
     public void addTradeHistory(String history) throws IOException {
         wishBorrow.add(history);
-        UserManager u = new UserManager();
-        u.updateFile();
     }
 }

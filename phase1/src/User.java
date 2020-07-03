@@ -31,40 +31,28 @@ abstract class User {
     public List<String> getNotification(){return notification;}
     public void changePassword(String password) throws IOException {
         this.password=password;
-        UserManager u = new UserManager();
-        u.updateFile();
     }
 
     public void changeUsername(String username) throws IOException {
         this.username=username;
-        UserManager u = new UserManager();
-        u.updateFile();
     }
 
     public void setIncompleteTransaction(int incompleteTransaction) throws IOException {
         this.incompleteTransactionLimit = incompleteTransaction;
-        UserManager u = new UserManager();
-        u.updateFile();
     }
 
     public void setWeekTransactionLimit(int weekTransaction) throws IOException {
 
         this.weekTransactionLimit = weekTransaction;
-        UserManager u = new UserManager();
-        u.updateFile();
     }
 
 
     public void setWishLend(List<String> wishLend) throws IOException {
         this.wishLend = wishLend;
-        UserManager u = new UserManager();
-        u.updateFile();
     }
 
     public void setNotification(List<String> notification) throws IOException {
         this.notification = notification;
-        UserManager u = new UserManager();
-        u.updateFile();
     }
 
     public void setTradeHistory(List<Integer> tradeHistory) {
@@ -87,15 +75,11 @@ abstract class User {
     public void setId(Integer id) throws IOException {
 
         this.id = id;
-        UserManager u = new UserManager();
-        u.updateFile();
     }
 
     public void setBorrow(boolean borrow) throws IOException {
 
         isBorrow = borrow;
-        UserManager u = new UserManager();
-        u.updateFile();
     }
 
     public List<Trade> getAllTrade(){
@@ -109,8 +93,6 @@ abstract class User {
 
     public void addNotification(String no) throws IOException {
         notification.add(no);
-        UserManager u = new UserManager();
-        u.updateFile();
     }
 
     public int getWeekTransactionLimit() {
@@ -123,7 +105,5 @@ abstract class User {
 
     public void setWishBorrow(ArrayList<String> lineList3) throws IOException {
         wishBorrow = lineList3;
-        UserManager u = new UserManager();
-        u.updateFile();
     }
 }
