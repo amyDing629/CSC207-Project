@@ -9,6 +9,7 @@ abstract class User {
     private List<String> wishLend;
     private List<String> wishBorrow;
     private boolean isBorrow;
+    private boolean isFrozen;
     protected List<Integer> tradeHistory;
     private int weekTransactionLimit;
     private int incompleteTransactionLimit;
@@ -27,6 +28,9 @@ abstract class User {
     public abstract String getUsername();
     public abstract Integer getId();
     public abstract boolean getIsBorrow();
+    public boolean getIsfrozen(){
+        return isFrozen;
+    }
 
     public List<String> getNotification(){return notification;}
     public void changePassword(String password) throws IOException {

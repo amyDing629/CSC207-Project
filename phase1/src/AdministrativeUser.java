@@ -32,8 +32,6 @@ public class AdministrativeUser extends User {
     public void setFrozen(boolean frozen) throws IOException {
 
         isFrozen = frozen;
-        UserManager u = new UserManager();
-        u.updateFile();
     }
 
     @Override
