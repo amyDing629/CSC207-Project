@@ -76,6 +76,7 @@ public abstract class Trade {
     // can input time and place and create new Meeting object based on Meeting constructor
     public Meeting setMeeting(LocalDateTime dateTime, String place, ArrayList<Integer> traderIds){
         this.meeting = new Meeting(dateTime, place, traderIds);
+
         return meeting;
     }
 

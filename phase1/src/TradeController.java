@@ -6,12 +6,14 @@ public class TradeController {
     private final Item item;
     private final ClientUser tarUser;
     private final TradeManager tm = new TradeManager();
+    private UserManager um = new UserManager();
+
 
 
     public TradeController(ClientUser currUser, Item item) throws IOException {
         this.currUser = currUser;
         this.item = item;
-        tarUser = (ClientUser) UserManager.getUser(item.getOwnerName());
+        tarUser = (ClientUser) um.getUser(item.getOwnerName());
     }
 
 

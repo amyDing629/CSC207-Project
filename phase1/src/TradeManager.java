@@ -195,14 +195,15 @@ public class TradeManager {
             Meeting fm = trade.getMeeting();
             String fmStr = null;
             if (fm != null){
-            HashMap<Integer, MeetingEditor> idToE = fm.getIdToEditor();
-            String idToEdStr = idToE.get(user1).getTimeOfEdition() + ";"+
-                    idToE.get(user2).getTimeOfEdition();
-            HashMap<Integer, Boolean> conStatus = fm.getConfirmedStatusFull();
-            String idToCoStr = Boolean.toString(conStatus.get(user1)) + ";" + Boolean.toString(conStatus.get(user2));
-            //2020-06-30 11:49/home/incomplete/0;0/false;false
-            fmStr = fm.getDateTime().format(formatter)+"/"+fm.getPlace()+"/"+fm.getStatus()
-                    +"/"+idToEdStr+"/"+ idToCoStr;
+                HashMap<Integer, MeetingEditor> idToE = fm.getIdToEditor();
+                String idToEdStr = idToE.get(user1).getTimeOfEdition() + ";"+
+                        idToE.get(user2).getTimeOfEdition();
+                HashMap<Integer, Boolean> conStatus = fm.getConfirmedStatusFull();
+                String idToCoStr = Boolean.toString(conStatus.get(user1)) + ";" + Boolean.toString(conStatus.get(user2));
+                //2020-06-30 11:49/home/incomplete/0;0/false;false
+                fmStr = fm.getDateTime().format(formatter)+"/"+fm.getPlace()+"/"+fm.getStatus()
+                        +"/"+idToEdStr+"/"+ idToCoStr;
+
             }
 
             Meeting sm = trade.getSecondMeeting();

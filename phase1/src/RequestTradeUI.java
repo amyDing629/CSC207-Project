@@ -8,9 +8,10 @@ public class RequestTradeUI{
     Item item;
     TradeController trc;
     Inventory iv = new Inventory();
+    UserManager um = new UserManager();
 
     public RequestTradeUI(String currUserName, String itemName) throws IOException {
-        currUser = (ClientUser) UserManager.getUser(currUserName);
+        currUser = (ClientUser) um.getUser(currUserName);
         item= iv.getItem(itemName);
         trc = new TradeController(currUser, item);
 
