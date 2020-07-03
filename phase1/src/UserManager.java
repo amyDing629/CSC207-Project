@@ -141,7 +141,7 @@ public class UserManager {
         try{
             FileOutputStream output = new FileOutputStream("phase1/src/username.txt", true);
             String name = u.getUsername();
-            String s = u.getId()+ ", " + name + ", "  + u.getPassword()+ ", "  + u.getIsAdmin()+ ", "  + u.getIsAdmin()+ ", "  + u.getIsBorrow()+ ", ";
+            String s = u.getId()+ ", " + name + ", "  + u.getPassword()+ ", "  + u.getIsAdmin()+ ", "  + u.getIsfrozen()+ ", "  + u.getIsBorrow()+ ", ";
             String m = "";
             for(String i: u.getNotification()){
                 m = m + i + "; ";
@@ -218,7 +218,6 @@ public class UserManager {
     public boolean verifyUser(String name, String password) throws IOException {
         try{
             ArrayList<User> userList = splitUser(readFile());
-            System.out.println(userList.size());
             for(User u : userList){
                 if(u.getUsername().equals(name) && u.getPassword().equals(password))
                     return true;
@@ -231,12 +230,16 @@ public class UserManager {
 
     public void updateFile() throws IOException {
         ArrayList<User> userList = splitUser(readFile());
+        Integer y = userList.get(userList.size() - 1).getId();
         PrintWriter writer = new PrintWriter("phase1/src/username.txt");
         writer.print("");
         writer.close();
-        for (User u: userList){
+        for (int i = 1; i < y + 1; i++){
+            User u = getUser(i);
             addUser(u);
         }
     }
+
+
 }
 

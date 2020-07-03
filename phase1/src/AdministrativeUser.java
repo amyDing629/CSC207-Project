@@ -30,7 +30,6 @@ public class AdministrativeUser extends User {
 
 
     public void setFrozen(boolean frozen) throws IOException {
-
         isFrozen = frozen;
     }
 
