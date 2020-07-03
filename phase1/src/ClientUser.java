@@ -29,15 +29,6 @@ public class ClientUser extends User {
         return incompleteTransactionLimit;
     }
 
-    @Override
-    public void setUsername(String input1) {
-        username=input1;
-    }
-
-    @Override
-    public void setPassword(String input2) {
-        password=input2;
-    }
 
     public int getWeekTransactionLimit() {
         return weekTransactionLimit;

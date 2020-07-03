@@ -111,7 +111,11 @@ abstract class User {
         wishBorrow = lineList3;
     }
 
-    public abstract void setUsername(String input1);
+    public void setUsername(String input1) {
+        username=input1;
+    }
 
-    public abstract void setPassword(String input2);
+    public void setPassword(String input2) {
+        password=input2;
+    }
 }
