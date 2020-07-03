@@ -1,10 +1,12 @@
+package MeetingSystem;
+
 import java.util.Dictionary;
 import java.util.*;
 /**
  * A Trader who attends to a Meeting.
  */
 
-class MeetingEditor {
+public class MeetingEditor {
 
     /** This Trader's user id. */
     public Integer userId;
@@ -27,7 +29,7 @@ class MeetingEditor {
 //     * Constructs a new Trader with meeting editor builder.
 //     * @param meetingEditorBuilder the meeting editor builder
 //     */
-//    public MeetingEditor (MeetingEditorBuilder meetingEditorBuilder) {
+//    public MeetingSystem.MeetingEditor (MeetingEditorBuilder meetingEditorBuilder) {
 //        this.userId = meetingEditorBuilder.getId();
 //    }
 

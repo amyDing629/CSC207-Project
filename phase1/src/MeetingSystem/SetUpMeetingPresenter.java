@@ -1,9 +1,8 @@
+package MeetingSystem;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Presenter class of Meeting System, functioned for setting up a meeting only
@@ -11,8 +10,8 @@ import java.util.Scanner;
 public class SetUpMeetingPresenter {
     public LocalDateTime dateTime;
     public String place;
-    public Integer userId;
-    public Integer otherUserId;
+//    public Integer userId;
+//    public Integer otherUserId;
 
     /**
      * Feeds the prompts of the Meeting info, including dateTime, place
@@ -52,6 +51,10 @@ public class SetUpMeetingPresenter {
             user_input.close();
         }
 
+    }
+
+    public ArrayList<Object> setUpMeetingPresenterResult(){
+        return new ArrayList<>(Arrays.asList(dateTime, place));
     }
 
 }

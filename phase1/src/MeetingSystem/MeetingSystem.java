@@ -1,12 +1,15 @@
+package MeetingSystem;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 /**
- * [Controller class]
+ * [Use Case Interact class]
  * This is a meeting's controlling system.
  *
  * The meeting system controller that interacts with the user, makes decisions based on user input instructions, and
@@ -24,8 +27,8 @@ public class MeetingSystem {
     /**
      * This is the current meeting date-time.
      * Update this variable when
-     *  - a meeting is setup;
-     *  - the date-time info of this meeting is edited.
+     * - a meeting is setup;
+     * - the date-time info of this meeting is edited.
      */
     public LocalDateTime dateTime;
     public String place;
@@ -34,16 +37,21 @@ public class MeetingSystem {
 
     public static Meeting meeting;
 
-//    private SetUpMeetingPresenter setUpMeeting = new SetUpMeetingPresenter();
+
+    private MeetingSystemMenuPresenter menuPresenter = new MeetingSystemMenuPresenter();
 
     /**
-     * Construct a MeetingSystem object with two ClientUsers
+     * Construct a MeetingSystem.MeetingSystem object with two ClientUsers
+     *
      * @param u1 the ClientUser who sets up the meeting
      * @param u2 the ClientUser who receives the meeting invitation
      */
-    public MeetingSystem(ClientUser u1, ClientUser u2){
-        userId = u1.getId();
-        otherUserId = u2.getId();
+    public MeetingSystem(Integer u1, Integer u2) {
+        userId = u1;
+        otherUserId = u2;
+    }
+
+    public MeetingSystem(ArrayList<Integer> users) {
     }
 
     /**
@@ -52,15 +60,15 @@ public class MeetingSystem {
      * TODO: interact with Trade System
      * 1. allows setting up a meeting, only when there is no meeting stored in Trade (i.e. first meeting)
      * 2. allows editing the meeting / confirming the meeting, only when
-     *          - the meeting has been set up already;
-     *          - the meeting has not been cancelled (i.e edit time of each ClientUser < threshold of edition time)
+     * - the meeting has been set up already;
+     * - the meeting has not been cancelled (i.e edit time of each ClientUser < threshold of edition time)
      */
     public void run() {
         // allow input: "exit", "setup meeting", "edit", "confirm"
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        printMenu();
+        menuPresenter.printMenu("mainMenu");
 
         try {
             String input = br.readLine();
@@ -87,11 +95,11 @@ public class MeetingSystem {
                     dateTime = editMeeting.dateTime;
                     place = editMeeting.place;
 
-                    if(editMeeting.isEdited()){
+                    if (editMeeting.isEdited()) {
                         System.out.println("Meeting has been edited!");
                         System.out.println("  " + "- the current proposed time is:" + dateTime.toString());
                         System.out.println("  " + "- the current proposed place is:" + place);
-                    }else{
+                    } else {
                         System.out.println("Meeting has NOT been edited!");
                     }
                 }
@@ -108,7 +116,7 @@ public class MeetingSystem {
                 // instruction 4: print Meeting System menu
                 input = br.readLine();
                 if (input.equals("menu")) {
-                    printMenu();
+                    menuPresenter.printMenu("mainMenu");
 
                 }
 
@@ -125,76 +133,53 @@ public class MeetingSystem {
         }
     }
 
+    public static class DateTime {
 
-    private void printMenu(){
-        System.out.println("------------------------------");
-        System.out.print("Meeting Menu: \n " +
-                "1. Enter 'ss': to set up a meeting \n" +
-                "2. Enter 'ee': to edit the meeting \n" +
-                "3. Enter 'cc': to confirm the meeting \n" +
-                "4. Enter 'menu': to print menu"+
-                "5. Enter 'exit' to quit meeting system\n");
-        System.out.println("------------------------------");
+        public static DateTimeFormatter formatter = DateTimeFormatter.ofPattern ( "yyyy-MM-dd HH:mm" );
+        //    public static DateTimeFormatter formatter = DateTimeFormatter.ofPattern ( "yyyy-MM-dd HH:mm" ).withResolverStyle ( ResolverStyle.STRICT );
+        public static LocalDateTime currentTime = LocalDateTime.now();
+
+
+        public static LocalDateTime getCurrentTime() {
+            return currentTime;
+        }
+
+        public static DateTimeFormatter getFormat() {
+            return formatter;
+        }
+
+        @Override
+        public String toString() {
+            return "MeetingSystem.MeetingSystem.DateTime{" + "currentTime=" + currentTime + '}';
+        }
+
+        /**
+         * Return if the input date-time string is of Valid Format
+         * https://stackoverflow.com/questions/226910/how-to-sanity-check-a-date-in-java
+         * @param inputDateTimeString String of input datetime
+         * @return true if date-time string is of valid input format
+         */
+        public static boolean isValidFormat(String inputDateTimeString) throws DateTimeParseException {
+            boolean valid = true;
+            try {
+                formatter.parse(inputDateTimeString);
+            } catch (DateTimeParseException e) {
+                valid = false;
+            }
+            return valid;
+        }
+
+
+        /**
+         * Convert the date-time string to LocalDateTime object
+         * precondition: the inputDateTimeString must be of valid format
+         * Read more: https://www.java67.com/2016/04/how-to-convert-string-to-localdatetime-in-java8-example.html#ixzz6PvuyR5EV
+         * @param inputDateTimeString String of input datetime
+         * @return LocalDateTime object
+         */
+        public static LocalDateTime convertToLocalDateTime(String inputDateTimeString) {
+            return LocalDateTime.parse(inputDateTimeString, formatter);
+        }
+
     }
 }
-
-
-
-
-
-//public class Password {
-//
-//    public static void main (String args[]) throws IOException {
-//
-//        Console c = System.console();
-//        if (c == null) {
-//            System.err.println("No console.");
-//            System.exit(1);
-//        }
-//
-//        String login = c.readLine("Enter your login: ");
-//        char [] oldPassword = c.readPassword("Enter your old password: ");
-//
-//        if (verify(login, oldPassword)) {
-//            boolean noMatch;
-//            do {
-//                char [] newPassword1 = c.readPassword("Enter your new password: ");
-//                char [] newPassword2 = c.readPassword("Enter new password again: ");
-//                noMatch = ! Arrays.equals(newPassword1, newPassword2);
-//                if (noMatch) {
-//                    c.format("Passwords don't match. Try again.%n");
-//                } else {
-//                    change(login, newPassword1);
-//                    c.format("Password for %s changed.%n", login);
-//                }
-//                Arrays.fill(newPassword1, ' ');
-//                Arrays.fill(newPassword2, ' ');
-//            } while (noMatch);
-//        }
-//
-//        Arrays.fill(oldPassword, ' ');
-//    }
-//
-//    // Dummy change method.
-//    static boolean verify(String login, char[] password) {
-//        // This method always returns
-//        // true in this example.
-//        // Modify this method to verify
-//        // password according to your rules.
-//        return true;
-//    }
-//
-//    // Dummy change method.
-//    static void change(String login, char[] password) {
-//        // Modify this method to change
-//        // password according to your rules.
-//    }
-//}
-
-//
-//    // Dummy change method.
-//    static void change(String login, char[] password) {
-//        // Modify this method to change
-//        // password according to your rules.
-//    }
-//}

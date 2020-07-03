@@ -1,3 +1,5 @@
+package MeetingSystem;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.io.BufferedReader;
@@ -6,6 +8,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * [Use Case class]
@@ -23,14 +26,11 @@ public class MeetingActivities {
      */
     public static Meeting setUpMeeting(Integer userId, Integer otherUserId, LocalDateTime dateTime, String place) {
         ArrayList<Integer> userIds = new ArrayList<>(Arrays.asList(userId, otherUserId));
-//        Meeting meeting = new Meeting(dateTime, place, userIds);
-//        return meeting;
-
         return new Meeting(dateTime, place, userIds);
     }
 
     /**
-     * Interacts with the user to prompt input of editing a meeting:
+     * Edits a meeting:
      * - allow input of time only; place only; time + place
      * - record user id
      * It is the user's choice to input either time only, place only, or time + place.
@@ -45,7 +45,7 @@ public class MeetingActivities {
         */
         MeetingEditor editHistory = meeting.getIdToEditor().get(userId);
         if (!editHistory.editsOverThreshold()) {
-            meeting.editMeetingTime(dateTime);
+            meeting.editMeeting(dateTime);
             editHistory.updateTimeOfEdition();
         }else {
             meeting.setStatus();
@@ -62,7 +62,7 @@ public class MeetingActivities {
          */
         MeetingEditor editHistory = meeting.getIdToEditor().get(userId);
         if (!editHistory.editsOverThreshold()) {
-            meeting.editMeetingPlace(place);
+            meeting.editMeeting(place);
             editHistory.updateTimeOfEdition();
         }else {
             meeting.setStatus();
@@ -72,8 +72,8 @@ public class MeetingActivities {
     public void editMeeting(Meeting meeting, Integer userId, LocalDateTime dateTime, String place){
         MeetingEditor editHistory = meeting.getIdToEditor().get(userId);
         if (!editHistory.editsOverThreshold()) {
-            meeting.editMeetingTime(dateTime);
-            meeting.editMeetingPlace(place);
+            meeting.editMeeting(dateTime);
+            meeting.editMeeting(place);
             editHistory.updateTimeOfEdition();
         }else {
             meeting.setStatus();
@@ -84,11 +84,26 @@ public class MeetingActivities {
      * Allow user to confirm the meeting
      * Update the confirm status history idToConfirmedStatus in this meeting
      */
-    public void confirmMeeting(Meeting meeting, Integer userId) {
+    public boolean confirmMeeting(Meeting meeting, Integer userId) {
+        boolean confirmed = false;
         HashMap<Integer, Boolean> status = meeting.getConfirmedStatusFull();
         if (status.containsKey(userId)){
-            status.put(userId, true);
-        }else{System.out.println("Error: mismatch between the input id and id in meeting");}
+            // update confirmedStatus
+            if (!status.get(userId)){
+                status.put(userId, true);
+                meeting.setIdToConfirm(userId);
+                confirmed = true;
+            }else{
+                System.out.println("Error: User already confirmed.");
+            }
+
+            //update meeting Status
+            meeting.setStatus();
+
+        }else{
+            System.out.println("Error: mismatch between the input id and id in meeting");
+        }
+        return confirmed;
     }
 }
 

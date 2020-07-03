@@ -1,3 +1,5 @@
+package MeetingSystem;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -9,7 +11,7 @@ import java.util.*;
  * A meeting as a part of the Transaction process.
  */
 
-class Meeting {
+public class Meeting {
 
     /** This is Meeting's date-time. */
     private LocalDateTime dateTime;
@@ -36,7 +38,7 @@ class Meeting {
      * true stands for confirmed,
      * false stands for not yet confirmed
      */
-    private HashMap<Integer, Boolean> idToConfirmedStatus = new HashMap<Integer, Boolean>();
+    private HashMap<Integer, Boolean> idToConfirmedStatus = new HashMap<>();
 
     /**
      * Constructs a new Meeting with proposed date-time to meet dateTime, proposed place to meet place, info of both
@@ -78,10 +80,6 @@ class Meeting {
         return status;
     }
 
-    public void setStatus(String status){
-        this.status = status;
-    }
-
     /**
      * Return this meeting's edit history, Hashmap(userId, MeetingEditor)
      * @return the idToEditor
@@ -98,11 +96,8 @@ class Meeting {
      * Returns a list of two Traders' the confirmed statuses. (Getter for idToConfirmedStatus)
      * @return the confirmed status of two Traders respectively
      */
-    private ArrayList<Boolean> getConfirmedStatuses() {
-        ArrayList<Boolean> result = new ArrayList<>();
-        for (Boolean b: idToConfirmedStatus.values()){
-            result.add(b);
-        }
+    ArrayList<Boolean> getConfirmedStatuses() {
+        ArrayList<Boolean> result = new ArrayList<>(idToConfirmedStatus.values());
         return result;
     }
 
@@ -142,7 +137,7 @@ class Meeting {
      * Edit the Meeting with new date-time to meet dateTime. (setter for dateTime)
      * @param newDateTime the date-time newly proposed to the meeting
      */
-    public void editMeetingTime (LocalDateTime newDateTime) {
+    public void editMeeting (LocalDateTime newDateTime) {
         this.dateTime = newDateTime;
     }
 
@@ -150,7 +145,7 @@ class Meeting {
      * Edit the Meeting with new place to meet place. (Setter for place)
      * @param newPlace the place newly proposed to the meeting
      */
-    public void editMeetingPlace (String newPlace) {
+    public void editMeeting (String newPlace) {
         this.place = newPlace;
     }
 
@@ -158,8 +153,15 @@ class Meeting {
      * Update the confirmed status of the Meeting with Trader's userId. (Setter for idToConfirmedStatus)
      * @param userId the place newly proposed to the meeting
      */
-    public void confirm (Integer userId){
+    public void setIdToConfirm (Integer userId){
         this.idToConfirmedStatus.replace(userId, true);
+    }
+
+    /**
+     * Edit the status of the Meeting (hard Setter for status)
+     */
+    public void setStatus(String status){
+        this.status = status;
     }
 
     /**
@@ -175,7 +177,7 @@ class Meeting {
         }
     }
 
-    private boolean isMeetingCancelled() {
+    boolean isMeetingCancelled() {
         for (MeetingEditor t: idToEditor.values()){
             if (t.editsOverThreshold()) {
                 return true;
