@@ -86,7 +86,7 @@ public class Inventory {
 
     public Item getItem(String name){
         for (Item item: lendingList){
-            if (item.getName() == name){
+            if (item.getName().equals(name)){
                 return item;
             }
         }

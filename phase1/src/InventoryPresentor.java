@@ -4,8 +4,11 @@ import java.io.InputStreamReader;
 
 public class InventoryPresentor {
     Inventory inventory;
-    public InventoryPresentor(Inventory inventory){
-        this.inventory = inventory;
+    ClientUser currUser;
+    public InventoryPresentor(ClientUser currUser){
+        inventory = new Inventory();
+        this.currUser = currUser;
+
     }
 
     public void run(){
