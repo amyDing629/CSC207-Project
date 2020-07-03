@@ -76,6 +76,7 @@ public class Login {
                     } else {
                         System.out.println("Sorry I dont undertand your command, plz enter it again");
                     }
+                    exit = 0;
                 }
             } else {
                 System.out.println("You have incorrect username or password, please try to login again, enter any number to continue. enter 1 to exit.");
@@ -114,35 +115,69 @@ public class Login {
         }
     }
 
-    public void editInfo(User user){
+    public void editInfo(User user) throws IOException {
         Scanner sc=new Scanner(System.in);
         int exit=-1;
         while(exit!=0) {
             System.out.println("--------------------\nEdit user information");
             System.out.println("Hello,user," + user.getUsername());
-            System.out.println("Actions:\n1.Change username\n2.Change password\n");
+            System.out.println("Actions:\n1.Change username\n2.Change password");
             if (user.getIsAdmin()) {
-                System.out.print("3.Freeze a user\n4.Change user's limit\n5.Set user into admin\n");
+                user=(AdministrativeUser) user;
+                System.out.print("3.Freeze a user\n4.Change user's limit\n");
+                if(user.getId()==1){
+                    System.out.print("5.Set user into admin\n");
+                }
             }
-            System.out.println("0. exit");
+            System.out.println("0.exit");
+            System.out.print(">");
+            UserManager a=new UserManager();
             int input = sc.nextInt();
             sc.nextLine();
             System.out.println("-----------------------------");
             switch (input) {
                 case 1:
                     System.out.println("Change username");
+                    System.out.println("Type in the username you wanted to change, type 0 to quit.");
+                    String input1=sc.nextLine();
+                    if (!input1.equals("0")){
+                        user.setUsername(input1);
+                    }
                     break;
                 case 2:
                     System.out.println("Change password");
+                    System.out.println("Type in the password you wanted to change, type 0 to quit.");
+                    String input2=sc.nextLine();
+                    if (!input2.equals("0")){
+                        user.setPassword(input2);
+                    }
                     break;
                 case 3:
                     System.out.println("Freeze a user");
+                    System.out.println("Type in the username of user you want to freeze, type 0 to quit.");
+                    String input3=sc.nextLine();
+                    if (!input3.equals("0")){
+                        ClientUser ha= (ClientUser) a.getUser(input3);
+                        if (ha==null){
+                            System.out.println("Sorry there is no such user, returning to main menu.");
+                        }
+                        else{((AdministrativeUser)user).freeze(ha);}
+                    }
                     break;
                 case 4:
                     System.out.println("Change user's limit");
                     break;
                 case 5:
-                    System.out.println("Set user into admin");
+                    System.out.println("Set a user into admin");
+                    System.out.println("Type in the user you want to set to admin, type 0 to quit.");
+                    String input4=sc.nextLine();
+                    if (!input4.equals("0")){
+                        ClientUser ha= (ClientUser) a.getUser(input4);
+                        if (ha==null){
+                            System.out.println("Sorry there is no such user, returning to main menu.");
+                        }
+                        else{((AdministrativeUser)user).addNewUser(ha.username,ha.password);}
+                    }
                     break;
                 case 0:
                     exit=0;
