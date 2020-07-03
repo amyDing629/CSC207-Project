@@ -1,5 +1,6 @@
 package MeetingSystem;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 public class MeetingMain {
@@ -7,11 +8,35 @@ public class MeetingMain {
     public static meetingClientUser u1 = new meetingClientUser(1);
     public static meetingClientUser u2 = new meetingClientUser(2);
 
-    public static void main (String[] args) {
-        System.out.println("Please register a meeting!");
-        MeetingSystem mt = new MeetingSystem(u1.getId(), u2.getId());
-        mt.run();
+    private static Meeting meeting = null;
 
+    public static void main (String[] args) throws IOException {
+        System.out.println("Welcome to meeting system!");
+        MeetingSystem mt = new MeetingSystem(u1.getId(), u2.getId());
+//        mt.run();
+
+        // If ClientUser A sets up the meeting,
+        // only when ClientUser B edits/confirms the meeting,
+        // ClientUser A could then edits/confirms the meeting.
+        // Otherwise, ClientUser A could only sees the meeting time/place that A proposed
+        // and proposed meeting not responded info.
+//        String input;
+//        while (input.equals("quit MS"))
+//        if (meeting == null){
+//            mt.runSetupSession();
+//        }else{
+//            mt.runEditConfirmSession();
+//        }
+
+        // hardcode two client user's activities
+        mt.runSetupSession(1);
+        mt.runEditConfirmSession(2);
+        mt.runEditConfirmSession(2);
+//        mt.runEditConfirmSession(1);
+        mt.runEditConfirmSession(2);
+//        mt.runEditConfirmSession(1);
+
+        mt.runEditConfirmSession(2);
 
 
 

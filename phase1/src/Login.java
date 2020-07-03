@@ -74,7 +74,7 @@ public class Login {
                     } else if (op == 0) {
                         exit = 1;
                     } else {
-                        System.out.println("Sorry I dont undertand your command, plz enter it again");
+                        System.out.println("Sorry I don't understand your command, plz enter it again");
                     }
                 }
             } else {
@@ -127,24 +127,12 @@ public class Login {
             sc.nextLine();
             System.out.println("-----------------------------");
             switch (input) {
-                case 1:
-                    System.out.println("Change username");
-                    break;
-                case 2:
-                    System.out.println("Change password");
-                    break;
-                case 3:
-                    System.out.println("Freeze a user");
-                    break;
-                case 4:
-                    System.out.println("Change user's limit");
-                    break;
-                case 5:
-                    System.out.println("Set user into admin");
-                    break;
-                case 0:
-                    exit=0;
-                    break;
+                case 1 -> System.out.println("Change username");
+                case 2 -> System.out.println("Change password");
+                case 3 -> System.out.println("Freeze a user");
+                case 4 -> System.out.println("Change user's limit");
+                case 5 -> System.out.println("Set user into admin");
+                case 0 -> exit = 0;
             }
         }
     }
@@ -159,21 +147,11 @@ public class Login {
             sc.nextLine();
             System.out.println("-----------------------------");
             switch (input) {
-                case 1:
-                    System.out.println("Lend wishes");
-                    break;
-                case 2:
-                    System.out.println("Borrow wishes");
-                    break;
-                case 3:
-                    System.out.println("Edit lend wishes");
-                    break;
-                case 4:
-                    System.out.println("Edit borrow wishes");
-                    break;
-                case 0:
-                    exit=0;
-                    break;
+                case 1 -> System.out.println("Lend wishes");
+                case 2 -> System.out.println("Borrow wishes");
+                case 3 -> System.out.println("Edit lend wishes");
+                case 4 -> System.out.println("Edit borrow wishes");
+                case 0 -> exit = 0;
             }
         }
 

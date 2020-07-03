@@ -29,13 +29,14 @@ public class MeetingActivities {
         return new Meeting(dateTime, place, userIds);
     }
 
+
     /**
      * Edits a meeting:
      * - allow input of time only; place only; time + place
      * - record user id
      * It is the user's choice to input either time only, place only, or time + place.
      */
-    public void editTime(Meeting meeting, Integer userId, LocalDateTime dateTime) {
+    public static void editMeeting(Meeting meeting, Integer userId, LocalDateTime dateTime) {
         /*
         If the current number of edits does not exceed the threshold:
         update the new dateTime in meeting, and update the edit history of this user
@@ -52,7 +53,7 @@ public class MeetingActivities {
         }
     }
 
-    public void editPlace(Meeting meeting, Integer userId, String place){
+    public static void editMeeting(Meeting meeting, Integer userId, String place){
         /*
         If the current number of edits does not exceed the threshold:
         update the new place in meeting, and update the edit history of this user
@@ -69,8 +70,8 @@ public class MeetingActivities {
         }
     }
 
-    public void editMeeting(Meeting meeting, Integer userId, LocalDateTime dateTime, String place){
-        MeetingEditor editHistory = meeting.getIdToEditor().get(userId);
+    public static void editMeeting(Meeting meeting, Integer userId, LocalDateTime dateTime, String place){
+        MeetingEditor editHistory = meeting.getEditor(userId);
         if (!editHistory.editsOverThreshold()) {
             meeting.editMeeting(dateTime);
             meeting.editMeeting(place);
@@ -84,7 +85,7 @@ public class MeetingActivities {
      * Allow user to confirm the meeting
      * Update the confirm status history idToConfirmedStatus in this meeting
      */
-    public boolean confirmMeeting(Meeting meeting, Integer userId) {
+    public static boolean confirmMeeting(Meeting meeting, Integer userId) {
         boolean confirmed = false;
         HashMap<Integer, Boolean> status = meeting.getConfirmedStatusFull();
         if (status.containsKey(userId)){
@@ -104,6 +105,11 @@ public class MeetingActivities {
             System.out.println("Error: mismatch between the input id and id in meeting");
         }
         return confirmed;
+    }
+
+    public static boolean cancelMeeting(Meeting meeting){
+        meeting.setStatus("cancelled");
+        return meeting.getStatus().equals("cancelled");
     }
 }
 

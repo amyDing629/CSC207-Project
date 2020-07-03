@@ -68,8 +68,11 @@ public class EditMeetingPresenter {
                         editPlacePresenter();
                         break label;
                     }
-                    case "4" : printMenu();
-                    default : System.out.println("Invalid instruction!");
+                    case "4" : {
+                        printMenu();
+                        input = br.readLine();
+                    }
+                    default : System.out.println("Invalid instruction in EditMeetingPresenter!");
                 }
             }
         }catch (IOException e) {
@@ -77,13 +80,13 @@ public class EditMeetingPresenter {
         }
     }
 
-    /**
-     * Return whether any info in EditMeetingPresenter is successfully edited
-     * @return true iff successfully edited the place and/or time
-     */
-    public boolean isEdited(){
-        return edited;
-    }
+//    /**
+//     * Return whether any info in EditMeetingPresenter is successfully edited
+//     * @return true iff successfully edited the place and/or time
+//     */
+//    public boolean isEdited(){
+//        return edited;
+//    }
 
     /**
      * Return true iff successfully edited the place (i.e change the old place to a new one);

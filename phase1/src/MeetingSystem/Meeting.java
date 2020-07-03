@@ -88,6 +88,10 @@ public class Meeting {
         return idToEditor;
     }
 
+    public MeetingEditor getEditor(Integer userId) {
+        return idToEditor.get(userId);
+    }
+
     public void setIdToEditor(HashMap<Integer, MeetingEditor> me) {
         idToEditor = me;
     }
@@ -97,8 +101,7 @@ public class Meeting {
      * @return the confirmed status of two Traders respectively
      */
     ArrayList<Boolean> getConfirmedStatuses() {
-        ArrayList<Boolean> result = new ArrayList<>(idToConfirmedStatus.values());
-        return result;
+        return new ArrayList<>(idToConfirmedStatus.values());
     }
 
 
