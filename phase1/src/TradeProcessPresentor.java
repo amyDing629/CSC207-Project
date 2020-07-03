@@ -1,18 +1,15 @@
-import java.io.IOException;
+import MeetingSystem.MeetingSystem;
 
 public class TradeProcessPresentor {
-    TradeManager tradeManager;
-    UserManager userManager = new UserManager();
+    TradeManager tradeManager = new TradeManager();
 
     public TradeProcessPresentor(){
         TradeManager tradeManager = new TradeManager();
     }
 
-    public void run(int tradeId) throws IOException {
+    public void run(int tradeId){
         Trade trade = tradeManager.getTrade(tradeId);
-        ClientUser user1 = (ClientUser) userManager.getUser(trade.getUsers().get(0));
-        ClientUser user2 = (ClientUser) userManager.getUser(trade.getUsers().get(1));
-        MeetingSystem mt = new MeetingSystem(user1,user2);
+        MeetingSystem mt = new MeetingSystem(trade.getUsers());
         mt.run();
     }
 
