@@ -16,8 +16,6 @@ public class AdministrativeUser extends User {
     }
 
 
-
-
     @Override
     public List<Integer> getTradeHistory() {
         return tradeHistory;
@@ -52,10 +50,6 @@ public class AdministrativeUser extends User {
         }
     }
 
-    public void confirmItem(ClientUser a, Item b) throws IOException {
-        a.addWishLend(b.getName());
-
-    }
 
     public void tradeLimit(ClientUser a) throws IOException {
         a.setIsFrozen(a.getTradeNumber() > a.getWeekTransactionLimit());
