@@ -158,4 +158,5 @@ abstract class User {
     public void setPassword(String input2) {
         password=input2;
     }
+
 }
