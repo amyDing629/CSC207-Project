@@ -4,13 +4,13 @@ import java.io.InputStreamReader;
 
 public class InventoryUI {
     Inventory inventory;
-    ClientUser currUser;
+    User currUser;
     InventoryPresenter ip;
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     InventoryController ic = new InventoryController(currUser);
     Item currItem;
 
-    public InventoryUI(ClientUser currUser){
+    public InventoryUI(User currUser){
         inventory = new Inventory();
         this.currUser = currUser;
         ip = new InventoryPresenter(currUser);
@@ -45,7 +45,7 @@ public class InventoryUI {
         }
 
         while (true){
-            System.out.println("menu:\n 1.add to wish list \n2.make trade directly");
+            System.out.println("menu:\n type '1' to add to wish borrow list");
             try{
                 String line3 = br.readLine();
                 if (line3.equals("1")){
@@ -53,12 +53,8 @@ public class InventoryUI {
                     System.out.println("the item has been moved to the wish list");
                     break;//move back to see inventory
                 }
-                else if (line3.equals("2")){
-                    RequestTradeUI rtUI = new RequestTradeUI(currUser, currItem);
-                    rtUI.run(); //move back to see inventory
-                }
 
-            } catch (IOException | AccountFrozenException e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
