@@ -27,7 +27,9 @@ abstract class User {
     public abstract String getPassword();
     public abstract String getUsername();
     public abstract Integer getId();
-    public abstract boolean getIsBorrow();
+    public boolean getIsBorrow(){
+        return isBorrow;
+    }
     public boolean getIsfrozen(){
         return isFrozen;
     }
@@ -63,11 +65,11 @@ abstract class User {
         this.tradeHistory = tradeHistory;
     }
 
-    public abstract List<Integer> getTradeHistory();
+    public List<Integer> getTradeHistory(){
+        return tradeHistory;
+    }
 
-    public abstract void setFrozen(boolean aTrue) throws IOException;
-
-    public abstract boolean getIsAdmin();
+    public boolean getIsAdmin(){return isAdmin;}
 
     public List<String> getWishLend() {
         return wishLend;
@@ -75,7 +77,9 @@ abstract class User {
     public List<String> getWishBorrow() {
         return wishBorrow;
     }
-
+    public void setFrozen(boolean aTrue){
+        isFrozen = aTrue;
+    }
     public void setId(Integer id) {
 
         this.id = id;
@@ -93,6 +97,46 @@ abstract class User {
             b.add(a.getTrade(i));
         }
         return b;
+    }
+
+    public List<Trade> getUnconfirmed(){
+        List<Trade> trade=new ArrayList<>();
+        for(Trade t: getAllTrade()){
+            if(t.status.equals("unconfirmed")){
+                trade.add(t);
+            }
+        }
+        return trade;
+    }
+
+    public List<Trade> getIncomplete(){
+        List<Trade> trade=new ArrayList<>();
+        for(Trade t: getAllTrade()){
+            if(t.status.equals("incomplete")){
+                trade.add(t);
+            }
+        }
+        return trade;
+    }
+
+    public List<Trade> getTradeHistoryTop() {
+        List<Trade> trade=new ArrayList<>();
+        TradeManager a = new TradeManager();
+        int y = 0;
+        while(y <  3) {
+            for (int i = getAllTrade().size(); i-- > 0; ) {
+                if ((!(getAllTrade().get(i).status.equals("unconfirmed"))) || (!(getAllTrade().get(i).status.equals("cancelled")))) {
+                    trade.add(getAllTrade().get(i));
+                    y++;
+                }
+            }
+        }
+        return trade;
+    }
+
+    public void decideTrade(boolean a, Trade b){
+        if(a){b.setStatus("incomplete");}
+        else {b.setStatus("cancelled");}
     }
 
     public void addNotification(String no){

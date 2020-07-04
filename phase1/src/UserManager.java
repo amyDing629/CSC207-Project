@@ -23,13 +23,11 @@ public class UserManager {
                 myList.add(lineList);
             }
             in.close();
-            //System.out.println(myList);
             if(!myList.isEmpty()){
                 if(myList.get(0).size()==0){
                     myList.remove(0);
                 }
             }
-            //System.out.println(myList);
             return myList;
         }
         catch(Exception e) {
@@ -38,7 +36,7 @@ public class UserManager {
         return myList;
     }
 
-    public static ArrayList<User> splitUser(ArrayList<ArrayList<String>> a) throws IOException {
+    public ArrayList<User> splitUser(ArrayList<ArrayList<String>> a) throws IOException {
         ArrayList<User> myList = new ArrayList<>();
         for(ArrayList<String> b: a){
             if(b.get(3).equals("true")){
@@ -244,7 +242,6 @@ public class UserManager {
             addUser(u);
         }
     }
-
 
 }
 

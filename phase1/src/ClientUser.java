@@ -70,16 +70,6 @@ public class ClientUser extends User {
     }
 
 
-    @Override
-    public List<Integer> getTradeHistory() {
-        return tradeHistory;
-    }
-
-    @Override
-    public void setFrozen(boolean aTrue){
-        isFrozen = aTrue;
-    }
-
     public boolean getIsFrozen(){
         return isFrozen;
     }
@@ -87,16 +77,6 @@ public class ClientUser extends User {
         isFrozen = a;
     }
 
-
-
-    public List<Trade> getTradeHistoryTop() {
-        List<Trade> trade=new ArrayList<>();
-        TradeManager a = new TradeManager();
-        for (int i=0;i<3;i++){
-            trade.add(a.getTrade(tradeHistory.get(tradeHistory.size()-1-i)));
-        }
-        return trade;
-    }
 
 
     public int getIncompleteTransaction(){
