@@ -27,6 +27,7 @@ public class Login {
             }
             //------------------------------------------------------------------
             System.out.println("\nMenu:\n 1.login\n 2.register\n 0.quit");
+            System.out.println("Please enter the number only.");
             Scanner sc = new Scanner(System.in);
             System.out.print(">");
             a = sc.nextInt();
@@ -36,7 +37,7 @@ public class Login {
             }
             else if (a == 2){
                 register();
-            }else{System.out.println("Invalid input! Please enter the number only.");}
+            }
             System.out.println("------------------------------");
         }
 
