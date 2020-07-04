@@ -39,6 +39,26 @@ public class MeetingMain {
 
 
         // the start of the second meeting
+        System.out.println("Welcome to meeting system!");
+        System.out.println(" == SECOND MEETING ==");
+        meeting2 = mt_temp.setUpSecondMeeting(meeting);
+        boolean turnIsUser1_m2 = true;
+        while (meeting2 == null || meeting2.getStatus().equals("incomplete")){
+            if (turnIsUser1_m2){
+                mt_temp.run(false, tradeIds.get(0));
+                mt_temp.runResult();
+                meeting2 = mt_temp.getMeeting();
+
+                turnIsUser1_m2 = false;
+            }else{
+                mt_temp.run(false, tradeIds.get(1));
+                mt_temp.runResult();
+                meeting2 = mt_temp.getMeeting();
+
+                turnIsUser1_m2 = true;
+            }
+
+        } // here is the end of the second meeting
 
 
 

@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Set;
 
 /**
  * [Use Case Interact class]
@@ -37,7 +38,7 @@ public class MeetingSystem {
     public boolean isPermanent;
 
     public static Meeting meeting = null;
-    public static Meeting meeting2 = null;
+//    public static Meeting meeting2 = null;
     public ArrayList<MeetingLogInfo> meetingLog = new ArrayList<MeetingLogInfo>();
 
 
@@ -79,7 +80,6 @@ public class MeetingSystem {
                 runEditConfirmSession(currLogInUser);
             }
         } else { // only second (temporary) meeting
-            meeting2 = MeetingActivities.setUpMeeting(userId, otherUserId, dateTime.plusMonths(1), place);
             runConfirmSession(currLogInUser);
         }
 
@@ -89,9 +89,9 @@ public class MeetingSystem {
         // return time, place, status
         ArrayList<Object> result = new ArrayList<>(Arrays.asList(dateTime, place));
         String meetingStatus = meeting.getStatus();
-        if (meetingStatus.equals("completed") && meeting2 != null){
-            meetingStatus = meeting2.getStatus();
-        }
+//        if (meetingStatus.equals("completed") && meeting2 != null){
+//            meetingStatus = meeting2.getStatus();
+//        }
         result.add(meetingStatus);
 
         System.out.println("RESULT:");
@@ -108,8 +108,14 @@ public class MeetingSystem {
     }
 
 
-    public Meeting setUpSecondMeeting(){
-        return MeetingActivities.setUpMeeting(userId, otherUserId, dateTime.plusMonths(1), place);
+    public Meeting setUpSecondMeeting(Meeting firstMeeting){
+        Integer[] ids = (Integer[]) firstMeeting.getIdToEditor().keySet().toArray();
+        dateTime = firstMeeting.getDateTime().plusMonths(1);
+        place = firstMeeting.getPlace();
+        userId = ids[0];
+        otherUserId = ids[1];
+
+        return MeetingActivities.setUpMeeting(userId, otherUserId, dateTime, place);
     }
 
     /**
