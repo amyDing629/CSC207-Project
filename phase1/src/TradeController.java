@@ -3,21 +3,19 @@ import java.time.LocalDateTime;
 
 public class TradeController {
     private final ClientUser currUser;
-    private final Item item;
-    private final ClientUser tarUser;
+    private ClientUser tarUser;
     private final TradeManager tm = new TradeManager();
     private UserManager um = new UserManager();
 
 
-
-    public TradeController(ClientUser currUser, Item item) throws IOException {
+    public TradeController(ClientUser currUser) throws IOException {
         this.currUser = currUser;
-        this.item = item;
-        tarUser = (ClientUser) um.getUser(item.getOwnerName());
+
     }
 
 
-    public ClientUser getTarUser(){
+    public ClientUser getTarUser(Item item) throws IOException {
+        tarUser = (ClientUser) um.getUser(item.getOwnerName());
         return tarUser;
     }
 
@@ -26,14 +24,13 @@ public class TradeController {
         if (currUser.getIsFrozen()) {
             throw new AccountFrozenException("your account is frozen!");
         }
-        ClientUser tarUser = getTarUser();
         assert tarUser != null;
         if (tarUser.getIsFrozen()) {
             throw new AccountFrozenException("the account of the item owner is frozen!");
         }
     }
 
-    public boolean createTrade(String line) throws IOException {
+    public boolean createTrade(String line, Item item) throws IOException {
         LocalDateTime time = LocalDateTime.now();
         Trade trade;
         switch (line) {
@@ -48,14 +45,35 @@ public class TradeController {
             }
         }
     }
-    public void createTrade(String line, Item item2) throws IOException {
+    public void createTrade(String line, Item item1, Item item2) throws IOException {
         LocalDateTime time = LocalDateTime.now();
         if (line.equals("3")){
-            tm.createTwowayTrade(currUser.getId(), tarUser.getId(), item, item2, 30, time);
+            tm.createTwowayTrade(currUser.getId(), tarUser.getId(), item1, item2, 30, time);
         }else{
-            tm.createTwowayTrade(currUser.getId(), tarUser.getId(), item, item2, -1, time);
+            tm.createTwowayTrade(currUser.getId(), tarUser.getId(), item1, item2, -1, time);
         }
     }
+
+    public String checkTradeMeeting(Trade currTrade){
+        if (currTrade.getMeeting() == null){
+            return "no first meeting";
+        }else if (currTrade.getMeeting().getStatus().equals("incomplete")){
+            return "first meeting";
+        }else if (currTrade.getDuration()==Trade.temp){
+            if (currTrade.getSecondMeeting().getStatus().equals("incomplete")){
+                return "second meeting";
+            }else{
+                return "complete";
+            }
+        }else{
+            return "complete";
+        }
+    }
+
+    public void completeTrade(){
+
+    }
+
 
 }
 

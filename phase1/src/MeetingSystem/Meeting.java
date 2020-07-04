@@ -109,7 +109,7 @@ public class Meeting {
      * Returns the confirmed statuses for given userId. (Getter for idToConfirmedStatus)
      * @return the confirmed status of given Trader's userId
      */
-    private Boolean getConfirmedStatuses(Integer userId) {
+    public Boolean getConfirmedStatuses(Integer userId) {
         return idToConfirmedStatus.get(userId);
     }
 

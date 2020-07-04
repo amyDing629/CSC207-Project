@@ -10,7 +10,7 @@ public class RequestTradeUI{
     UserManager um = new UserManager();
 
     public RequestTradeUI(ClientUser currUser, Item item) throws IOException {
-        trc = new TradeController(currUser, item);
+        trc = new TradeController(currUser);
 
     }
 
@@ -26,11 +26,11 @@ public class RequestTradeUI{
                         && !line.equals("3") && !line.equals("4")) {
                     throw new IOException("Wrong input, please type again.");
                 } else {
-                    if (trc.createTrade(line)){
+                    if (trc.createTrade(line, item)){
                         System.out.println("your trade has been created, please wait for the target user to reply");
                     }else{
                         String item2 = getSecondItem();
-                        trc.createTrade(line, iv.getItem(item2));
+                        trc.createTrade(line, item, iv.getItem(item2));
                         System.out.println("your trade has been created, please wait for the target user to reply");
                     }
                     break;
