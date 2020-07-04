@@ -245,11 +245,38 @@ public class Login {
                     break;
                 case 3:
                     System.out.println("Edit lend wishes");
-                    InventoryUI iui=new InventoryUI(user);
-                    iui.run();
+                    System.out.println("Menu:\n1.add wish\n2.delete wish");
+                    String input44=sc.nextLine();
+                    if (input44.equals("1")) {
+
+                    }else if(input44.equals("2")){
+                        System.out.println("Input the item you wanted to delete");
+                        String input43=sc.nextLine();
+                        if (user.getWishLend().contains(input43)) {
+                            user.removeLWishes(input43);
+                        }
+                        else{
+                            System.out.println("The item does not contain in your wish lend list");
+                        }
+                    }
                     break;
                 case 4:
                     System.out.println("Edit borrow wishes");
+                    System.out.println("Menu:\n1.add wish\n2.delete wish");
+                    String input55=sc.nextLine();
+                    if (input55.equals("1")) {
+                        InventoryUI iui = new InventoryUI(user);
+                        iui.run();
+                    }else if(input55.equals("2")){
+                        System.out.println("Input the item you wanted to delete");
+                        String input54=sc.nextLine();
+                        if (user.getWishBorrow().contains(input54)) {
+                            user.removeBWishes(input54);
+                        }
+                        else{
+                            System.out.println("The item does not contain in your wish borrow list");
+                        }
+                    }
                     break;
                 case 0:
                     exit=0;
@@ -261,6 +288,15 @@ public class Login {
 
     }
     public void tradeHistory(User user){
+
+    }
+    public void wishLendAdd(User user){
+        Scanner sc=new Scanner(System.in);
+        System.out.println("Please enter the name of the item");
+        String input=sc.nextLine();
+        System.out.println("Please enter the description of the item");
+        String input1=sc.nextLine();
+
 
     }
     public void market(User user) throws IOException {

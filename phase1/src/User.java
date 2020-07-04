@@ -51,6 +51,12 @@ abstract class User {
     public void addWishes(String hi){
         this.wishLend.add(hi);
     }
+    public void removeBWishes(String hi){
+        this.wishBorrow.remove(hi);
+    }
+    public void removeLWishes(String hi){
+        this.wishLend.remove(hi);
+    }
     public void setWishLend(List<String> wishLend){
         this.wishLend = wishLend;
     }
