@@ -4,9 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * [Use Case Interact class]
@@ -35,7 +34,7 @@ public class MeetingSystem {
     public static Integer userId;
     public static Integer otherUserId;
 
-    public boolean isOneWay;
+    public boolean isPermanent;
 
     public static Meeting meeting = null;
     public static Meeting meeting2 = null;
@@ -50,50 +49,70 @@ public class MeetingSystem {
      * @param u1 the ClientUser who sets up the meeting
      * @param u2 the ClientUser who receives the meeting invitation
      */
-    public MeetingSystem(Integer u1, Integer u2, boolean isOneWay) {
+    public MeetingSystem(Integer u1, Integer u2, boolean isPermanent) {
         userId = u1;
         otherUserId = u2;
-        this.isOneWay = isOneWay;
+        this.isPermanent = isPermanent;
     }
 
-    public MeetingSystem(ArrayList<Integer> users, boolean isOneWay) {
+    public MeetingSystem(ArrayList<Integer> users, boolean isPermanent) {
         userId = users.get(0);
         userId = users.get(1);
-        this.isOneWay = isOneWay;
+        this.isPermanent = isPermanent;
     }
 
     /**
-     * Run the Meeting system, which interacts with the user and makes decisions upon user input actions.
-     * <p>
-     * TODO: interact with Trade System
+     * Run the Meeting system, which interacts with the user and makes decisions upon meeting progress.
+     *
      * 1. allows setting up a meeting, only when there is no meeting stored in Trade (i.e. first meeting)
      * 2. allows editing the meeting / confirming the meeting, only when
      * - the meeting has been set up already;
      * - the meeting has not been cancelled (i.e edit time of each ClientUser < threshold of edition time)
      */
-    public void run(boolean isFirst, Integer logInUser) throws IOException {
+    public void run(boolean isFirst, Integer currLogInUser) throws IOException {
 
         // first meeting
-        if (meeting == null){
-            runSetupSession(logInUser);
-        } else {
-            runEditConfirmSession(logInUser);
-        }
-
-
-        if(!isFirst){ // only second meeting
+        if (isFirst){
+            if (meeting == null){
+                runSetupSession(currLogInUser);
+            } else if (!meeting.getStatus().equals("cancelled")) {
+                runEditConfirmSession(currLogInUser);
+            }
+        } else { // only second (temporary) meeting
             meeting2 = MeetingActivities.setUpMeeting(userId, otherUserId, dateTime.plusMonths(1), place);
-            runEditConfirmSession(logInUser);
+            runConfirmSession(currLogInUser);
         }
 
     }
+
+    public ArrayList<Object> runResult(){
+        // return time, place, status
+        ArrayList<Object> result = new ArrayList<>(Arrays.asList(dateTime, place));
+        String meetingStatus = meeting.getStatus();
+        if (meetingStatus.equals("completed") && meeting2 != null){
+            meetingStatus = meeting2.getStatus();
+        }
+        result.add(meetingStatus);
+
+        System.out.println("RESULT:");
+        System.out.println("current meeting time: " + dateTime);
+        System.out.println("current meeting place: " + place);
+        System.out.println("current meeting status: " + meetingStatus);
+
+        return result;
+
+    }
+
+//    public Meeting potentialSecondMeeting(){
+//        return MeetingActivities.setUpMeeting(userId, otherUserId, dateTime.plusMonths(1), place);
+//    }
 
     /**
      * Run this session only when the meeting is not yet been set up.
      * @param userId the user id of the ClientUser who sets up the meeting
      * @throws IOException unpredicted situation error
      */
-    public void runSetupSession (Integer userId) throws IOException {
+    private void runSetupSession (Integer userId) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         System.out.println("Enter \"exit\" to quit set-up-meeting session, or enter \"ok\" to continue.");
@@ -123,12 +142,12 @@ public class MeetingSystem {
         }
     }
 
-    public boolean isEdited(LocalDateTime enteredDateTime, String enteredPlace){
+    private boolean isEdited(LocalDateTime enteredDateTime, String enteredPlace){
         return !enteredDateTime.equals(dateTime) || !enteredPlace.equals(place);
     }
 
 
-    public void runEditConfirmSession(Integer userId) throws IOException {
+    private void runEditConfirmSession(Integer userId) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         System.out.println("Enter \"exit\" to quit set-up-meeting session, or enter \"ee\" to edit, or enter \"cc\" to confirm.");
@@ -202,9 +221,23 @@ public class MeetingSystem {
         }
     }
 
-    public boolean isEditable(Integer userId){
+    private boolean isEditable(Integer userId){
         MeetingEditor editor = meeting.getEditor(userId);
         return !editor.editsOverThreshold();
+    }
+
+
+    private void runConfirmSession(Integer logInUser) {
+        if (MeetingActivities.confirmMeeting(meeting, userId)) {
+            System.out.println("Success: Meeting has been confirmed by " + userId);
+            System.out.println("Meeting current status: " + meeting.getStatus());
+
+            MeetingLogInfo log = new CreateLogRecord().createLogRecord(userId, "c");
+            meetingLog.add(log);
+            System.out.println("New log added:" + log.toString());
+        } else {
+            System.out.println("Error: confirm error");
+        }
     }
 }
 
