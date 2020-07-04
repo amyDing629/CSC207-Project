@@ -1,8 +1,8 @@
 public class InventoryPresenter {
-    ClientUser currUser;
+    User currUser;
     Inventory iv = new Inventory();
 
-    public InventoryPresenter(ClientUser currUser){
+    public InventoryPresenter(User currUser){
         this.currUser = currUser;
     }
 

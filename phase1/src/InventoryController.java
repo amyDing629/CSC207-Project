@@ -1,9 +1,9 @@
 public class InventoryController {
     Inventory iv = new Inventory();
-    ClientUser currUser;
+    User currUser;
     Item item;
 
-    public InventoryController(ClientUser currUser){
+    public InventoryController(User currUser){
         this.currUser = currUser;
     }
 
