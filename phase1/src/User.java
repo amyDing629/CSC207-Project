@@ -6,8 +6,8 @@ abstract class User {
     protected String username;
     private List<String> notification;
     private boolean isAdmin;
-    private List<String> wishLend;
-    private List<String> wishBorrow;
+    private List<Item> wishLend;
+    private List<Item> wishBorrow;
     private boolean isBorrow;
     private boolean isFrozen;
     protected List<Integer> tradeHistory;
@@ -18,8 +18,8 @@ abstract class User {
         this.password = password;
         //this.id = id;
         this.notification=new ArrayList<>();
-        this.wishLend=new ArrayList<>();
-        this.wishBorrow=new ArrayList<>();
+        this.wishLend= new ArrayList<>();
+        this.wishBorrow= new ArrayList<>();
         this.tradeHistory=new ArrayList<>();
         this.isAdmin = isAdmin;
     }
@@ -53,7 +53,7 @@ abstract class User {
     }
 
 
-    public void setWishLend(List<String> wishLend){
+    public void setWishLend(List<Item> wishLend){
         this.wishLend = wishLend;
     }
 
@@ -71,10 +71,10 @@ abstract class User {
 
     public boolean getIsAdmin(){return isAdmin;}
 
-    public List<String> getWishLend() {
+    public List<Item> getWishLend() {
         return wishLend;
     }
-    public List<String> getWishBorrow() {
+    public List<Item> getWishBorrow() {
         return wishBorrow;
     }
     public void setFrozen(boolean aTrue){
@@ -151,7 +151,7 @@ abstract class User {
         return incompleteTransactionLimit;
     }
 
-    public void setWishBorrow(ArrayList<String> lineList3) {
+    public void setWishBorrow(ArrayList<Item> lineList3) {
         wishBorrow = lineList3;
     }
 

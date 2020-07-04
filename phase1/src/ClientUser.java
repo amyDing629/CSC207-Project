@@ -9,9 +9,6 @@ public class ClientUser extends User {
     private int weekTransactionLimit;
     private int incompleteTransactionLimit;
 
-    //wish list
-    private List<String> wishLend;
-    private List<String> wishBorrow;
 
     private List<String> lend;
     private List<String> borrowed;
@@ -56,9 +53,6 @@ public class ClientUser extends User {
     }
 
 
-    public void setWishBorrow(List<String> wishBorrow) {
-        this.wishBorrow= wishBorrow;
-    }
 
 
     public List<String> getLend() {
@@ -110,13 +104,4 @@ public class ClientUser extends User {
         return isAdmin;
     }
 
-    public void addWishLend(String wish) {
-        wishLend.add(wish);
-    }
-    public void addWishBorrow(String wish){
-        wishBorrow.add(wish);
-    }
-    public void addTradeHistory(String history){
-        wishBorrow.add(history);
-    }
 }

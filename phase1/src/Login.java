@@ -124,7 +124,6 @@ public class Login {
             System.out.println("Hello,user," + user.getUsername());
             System.out.println("Actions:\n1.Change username\n2.Change password");
             if (user.getIsAdmin()) {
-                user=(AdministrativeUser) user;
                 System.out.print("3.Freeze a user\n4.Change user's limit\n");
                 if(user.getId()==1){
                     System.out.print("5.Set user into admin\n");
@@ -199,16 +198,16 @@ public class Login {
             switch (input) {
                 case 1:
                     System.out.println("Lend wishes");
-                    List<String> lw=user.getWishLend();
+                    List<Item> lw=user.getWishLend();
                     for (int i=0;i<lw.size();i++){
                         System.out.println("wish lend item:"+i+" "+lw.get(i));
                     }
                     break;
                 case 2:
                     System.out.println("Borrow wishes");
-                    List<String> lb=user.getWishLend();
+                    List<Item> lb=user.getWishLend();
                     for (int i=0;i<lb.size();i++){
-                        System.out.println("wish borrow item:"+i+" "+lb.get(i));
+                        System.out.println("wish borrow item:"+i+" "+lb.get(i).getName());
                     }
                     break;
                 case 3:
@@ -222,12 +221,69 @@ public class Login {
                     break;
             }
         }
-
     }
     public void message(User user){
 
     }
     public void tradeHistory(User user){
 
+    }
+    public void market(User user) throws IOException {
+        Scanner sc=new Scanner(System.in);
+        System.out.println("Hello "+ user.username);
+        UserManager a=new UserManager();
+        for (User b:a.splitUser(a.readFile())){
+            System.out.println("User 1");
+            for(Item c:user.getWishBorrow()){
+                System.out.println("Item:"+c.getName());
+            }
+            System.out.println("--------------------------");
+        }
+        int exit=0;
+        while (exit==0) {
+            String ip = sc.nextLine();
+            System.out.println("Please enter the name of user you wants to trade with.");
+            if (a.getUser(ip) != null) {
+                selectALendItem(user);
+                exit=1;
+            }
+            else {
+                System.out.println("You enter the wrong name,press 1 to exit.press anything else to try again.");
+                String k=sc.nextLine();
+                if(k.equals("0")){
+                    exit=1;
+                }
+
+            }
+        }
+    }
+    public void selectALendItem(User user){
+        Scanner sc=new Scanner(System.in);
+        System.out.println("Hello,"+ user.username);
+        System.out.println("Please select the item to trade");
+        for (Item a:user.getWishLend()){
+            System.out.println("Item 1:"+a.getName());
+        }
+        int exit=0;
+        while (exit==0) {
+            String ip = sc.nextLine();
+            Boolean t=false;
+            for (Item a:user.getWishLend()){
+                if (a.getName().equals(ip)){
+                    t=true;
+                }
+            }
+            if (t=true){
+                exit=1;
+            }
+            else {
+                System.out.println("You enter the wrong name,press 1 to exit.press anything else to try again.");
+                String k=sc.nextLine();
+                if(k.equals("0")){
+                    exit=1;
+                }
+
+            }
+        }
     }
 }
