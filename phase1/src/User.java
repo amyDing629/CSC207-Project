@@ -39,10 +39,6 @@ abstract class User {
         this.password=password;
     }
 
-    public void changeUsername(String username) {
-        this.username=username;
-    }
-
     public void setIncompleteTransaction(int incompleteTransaction) {
         this.incompleteTransactionLimit = incompleteTransaction;
     }

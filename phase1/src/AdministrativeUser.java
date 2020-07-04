@@ -16,8 +16,6 @@ public class AdministrativeUser extends User {
     }
 
 
-
-
     @Override
     public List<Integer> getTradeHistory() {
         return tradeHistory;
