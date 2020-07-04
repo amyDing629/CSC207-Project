@@ -1,5 +1,6 @@
 import MeetingSystem.Meeting;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -119,6 +120,8 @@ public abstract class Trade {
     };
 
     public abstract ArrayList<Item> getItemList();
+
+    public abstract void makeTrade() throws IOException;
 
 
 

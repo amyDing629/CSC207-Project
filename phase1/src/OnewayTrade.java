@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -7,6 +8,8 @@ public class OnewayTrade extends Trade {
     private final Integer borrowerId;
     private final Item item;
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    private final UserManager um = new UserManager();
+    private final Inventory iv = new Inventory();
 
     /**
      *
@@ -63,6 +66,15 @@ public class OnewayTrade extends Trade {
         ArrayList<Item> rst = new ArrayList<Item>();
         rst.add(item);
         return rst;
+    }
+
+    @Override
+    public void makeTrade() throws IOException {
+        ClientUser bor = (ClientUser)um.getUser(borrowerId);
+        ClientUser lend = (ClientUser)um.getUser(lenderId);
+        bor.getWishBorrow().remove(item.getName());
+        lend.getWishLend().remove(item.getName());
+        iv.getLendingList().remove(item);
     }
 
 

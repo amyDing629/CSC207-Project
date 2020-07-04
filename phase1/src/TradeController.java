@@ -55,9 +55,11 @@ public class TradeController {
     }
 
     public String checkTradeMeeting(Trade currTrade){
-        if (currTrade.getMeeting() == null){
-            return "no first meeting";
-        }else if (currTrade.getMeeting().getStatus().equals("incomplete")){
+        if (currTrade.getStatus().equals("unconfirmed")) {
+            return "confirm trade";
+        }else if (currTrade.getStatus().equals("complete")) {
+            return "complete";
+        } else if (currTrade.getMeeting() == null || currTrade.getMeeting().getStatus().equals("incomplete")){
             return "first meeting";
         }else if (currTrade.getDuration()==Trade.temp){
             if (currTrade.getSecondMeeting().getStatus().equals("incomplete")){
@@ -70,8 +72,13 @@ public class TradeController {
         }
     }
 
-    public void completeTrade(){
+    public void confirmTrade(Trade currTrade){
+        currTrade.setStatus("incomplete");
+    }
 
+    public void completeTrade(Trade currTrade) throws IOException {
+        currTrade.setStatus("complete");
+        currTrade.makeTrade();
     }
 
 

@@ -75,6 +75,7 @@ public class TradeManager {
     }
 
 
+
     private void updateTradeHistory(Integer currUserId, Integer otherUserId, Trade newTrade){
         List<Trade> currentTradeHistory = userManager.findTrade(currUserId);
         currentTradeHistory.add(newTrade);
@@ -97,6 +98,7 @@ public class TradeManager {
         }
         return null;
     }
+
 
     public void readFile(){
         Trade trade;
