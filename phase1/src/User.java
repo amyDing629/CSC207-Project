@@ -18,8 +18,8 @@ abstract class User {
         this.password = password;
         //this.id = id;
         this.notification=new ArrayList<>();
-        this.wishLend=new ArrayList<>();
-        this.wishBorrow=new ArrayList<>();
+        this.wishLend= new ArrayList<>();
+        this.wishBorrow= new ArrayList<>();
         this.tradeHistory=new ArrayList<>();
         this.isAdmin = isAdmin;
     }
@@ -37,10 +37,6 @@ abstract class User {
     public List<String> getNotification(){return notification;}
     public void changePassword(String password) {
         this.password=password;
-    }
-
-    public void changeUsername(String username) {
-        this.username=username;
     }
 
     public void setIncompleteTransaction(int incompleteTransaction) {
@@ -162,4 +158,5 @@ abstract class User {
     public void setPassword(String input2) {
         password=input2;
     }
+
 }
