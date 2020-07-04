@@ -3,12 +3,9 @@ package MeetingSystem;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 
 public class MeetingMain {
     // two ClientUsers
-//    public static meetingClientUser u1 = new meetingClientUser(1);
-//    public static meetingClientUser u2 = new meetingClientUser(2);
     public static ArrayList<Integer> tradeIds = new ArrayList<>(Arrays.asList(1, 2));
 
     private static Meeting meeting = null;
@@ -47,7 +44,7 @@ public class MeetingMain {
 
         // the start of the second meeting
         System.out.println("Welcome to meeting system!");
-        System.out.println(" == SECOND MEETING ==");
+        System.out.println("== SECOND MEETING ==");
         MeetingSystem mt_temp2 = new MeetingSystem(tradeIds, false);
         meeting2 = mt_temp2.setUpSecondMeeting(meeting);
         boolean turnIsUser1_m2 = true;

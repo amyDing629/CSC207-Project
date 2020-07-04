@@ -16,7 +16,7 @@ import java.util.Set;
  * calls corresponding use case method.
  *
  * Main functions of this controller class:
- *      1. allows setup meeting, once the Trade is set up [TODO: TradeSystem's Responsibility??????]
+ *      1. allows setup meeting, once the Trade is set up
  *      2. apply use case method of setting up meeting
  *      3. allows edit meeting, once the
  *      4. allows confirming the meeting
@@ -46,7 +46,7 @@ public class MeetingSystem {
 
     /**
      * Construct a MeetingSystem.MeetingSystem object with two client users (ids)
-     * @param users
+     * @param users the users involved in this meeting
      */
     public MeetingSystem(ArrayList<Integer> users, boolean isFirst) {
         userId = users.get(0);
@@ -148,15 +148,11 @@ public class MeetingSystem {
         }
     }
 
-    private boolean isEdited(LocalDateTime enteredDateTime, String enteredPlace){
-        return !enteredDateTime.equals(dateTime) || !enteredPlace.equals(place);
-    }
-
 
     private void runEditConfirmSession(Integer currLogInUser) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        System.out.println("Enter \"exit\" to quit set-up-meeting session, or enter \"ee\" to edit, or enter \"cc\" to confirm.");
+        System.out.println("Enter \"exit\" to quit edit-confirm-meeting session, or enter \"ee\" to edit, or enter \"cc\" to confirm.");
         String input = br.readLine();
         try{
             switch (input) {
@@ -227,23 +223,39 @@ public class MeetingSystem {
         }
     }
 
+    private boolean isEdited(LocalDateTime enteredDateTime, String enteredPlace){
+        return !enteredDateTime.equals(dateTime) || !enteredPlace.equals(place);
+    }
+
+
     private boolean isEditable(Integer currLogInUser){
         MeetingEditor editor = meeting.getEditor(currLogInUser);
         return !editor.editsOverThreshold();
     }
 
 
-    private void runConfirmSession(Integer currLogInUser) {
-        if (MeetingActivities.confirmMeeting(meeting, currLogInUser)) {
-            System.out.println("Success: Meeting has been confirmed by " + currLogInUser);
-            System.out.println("Meeting current status: " + meeting.getStatus());
+    private void runConfirmSession(Integer currLogInUser) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-            MeetingLogInfo log = new CreateLogRecord().createLogRecord(currLogInUser, "c");
-            meetingLog.add(log);
-            System.out.println("New log added:" + log.toString());
-        } else {
-            System.out.println("Error: confirm error");
+        System.out.println("Enter \"cc\" to confirm, or anything else to quit confirm-meeting session.");
+        String input = br.readLine();
+        try{
+            if (input.equals("cc")){
+                if (MeetingActivities.confirmMeeting(meeting, currLogInUser)) {
+                    System.out.println("Success: Meeting has been confirmed by " + currLogInUser);
+                    System.out.println("Meeting current status: " + meeting.getStatus());
+
+                    MeetingLogInfo log = new CreateLogRecord().createLogRecord(currLogInUser, "c");
+                    meetingLog.add(log);
+                    System.out.println("New log added:" + log.toString());
+                } else {
+                    System.out.println("Error: confirm error");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
     }
 }
 
