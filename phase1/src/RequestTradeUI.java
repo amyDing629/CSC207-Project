@@ -1,7 +1,6 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.time.LocalDateTime;
 
 public class RequestTradeUI{
     ClientUser currUser;
@@ -10,9 +9,7 @@ public class RequestTradeUI{
     Inventory iv = new Inventory();
     UserManager um = new UserManager();
 
-    public RequestTradeUI(String currUserName, String itemName) throws IOException {
-        currUser = (ClientUser) um.getUser(currUserName);
-        item= iv.getItem(itemName);
+    public RequestTradeUI(ClientUser currUser, Item item) throws IOException {
         trc = new TradeController(currUser, item);
 
     }
@@ -22,7 +19,7 @@ public class RequestTradeUI{
         trc.checkFrozen();
         while (true) {
             System.out.println("menu: \n 1.one way(temporary)\n 2.one way(permanent)" +
-                    "\n 3.two way(temporary)'\n 4.'two way(permanent)");
+                    "\n 3.two way(temporary)\n 4.two way(permanent)");
             try {
                 String line = br.readLine();
                 if (!line.equals("1") && !line.equals("2")

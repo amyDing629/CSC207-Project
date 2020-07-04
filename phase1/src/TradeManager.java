@@ -53,7 +53,7 @@ public class TradeManager {
         // Record this new Trade in system
 
         // Update trade history for both users
-        this.updateTradeHistory(currUserId, otherUserId, newTrade);
+        //this.updateTradeHistory(currUserId, otherUserId, newTrade);
         return newTrade;
     }
 
@@ -71,7 +71,7 @@ public class TradeManager {
         tradeList.add(newTrade);
         updateFile();
         // Update trade history for both users
-        this.updateTradeHistory(currUserId, otherUserId, newTrade);
+        //this.updateTradeHistory(currUserId, otherUserId, newTrade);
     }
 
 
@@ -169,7 +169,6 @@ public class TradeManager {
     }
 
     public void addTradeToFile(Trade trade) throws IOException{
-        tradeList.add(trade);
         try {
             FileOutputStream fos = new FileOutputStream("phase1/src/trade.txt", true);
             Integer id = trade.getId();
@@ -221,14 +220,23 @@ public class TradeManager {
             fos.close();
         }catch(IOException e){
             System.out.println("cannot edit file");
-
         }
     }
 
 
     public void updateFile() throws IOException {
         File file = new File("phase1/src/trade.txt");
-        file.delete();
+        try {
+            if(!file.exists()) {
+                file.createNewFile();
+            }
+            FileWriter fileWriter =new FileWriter(file);
+            fileWriter.write("");
+            fileWriter.flush();
+            fileWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         for (Trade trade: tradeList){
             addTradeToFile(trade);
         }

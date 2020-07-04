@@ -9,10 +9,15 @@ public class tradeMain {
         UserManager um = new UserManager();
         um.addUser(amy);
         um.addUser(daniel);
-        Item peach = new Item("peach", "amy");
+        Item peach = new Item("peach", "daniel");
         Inventory iv = new Inventory();
         iv.addItem(peach);
-        RequestTradeUI rtp = new RequestTradeUI("amy", "apple");
+        OnewayTrade owt = new OnewayTrade(amy.getId(), daniel.getId(), peach, 30, LocalDateTime.now());
+        tm.getTradeList().add(owt);
+        tm.updateFile();
+        //System.out.println(tm.getTradeList());
+        RequestTradeUI rtp = new RequestTradeUI(amy, peach);
+
         rtp.run();
     }
 }

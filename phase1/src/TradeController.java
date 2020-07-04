@@ -35,6 +35,7 @@ public class TradeController {
 
     public boolean createTrade(String line) throws IOException {
         LocalDateTime time = LocalDateTime.now();
+        Trade trade;
         switch (line) {
             case "1":
                 tm.createOnewayTrade(currUser.getId(), tarUser.getId(), item, 30, time);

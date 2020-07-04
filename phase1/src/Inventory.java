@@ -36,6 +36,7 @@ public class Inventory {
         return lendingList;
     }
 
+
     /**
      * add the item into the inventory (when clientuser adds Item to the lending list, inventory should add the item)
      *

@@ -2,10 +2,10 @@ import MeetingSystem.MeetingSystem;
 
 import java.io.IOException;
 
-public class TradeProcessPresentor {
+public class TradeUI {
     TradeManager tradeManager = new TradeManager();
 
-    public TradeProcessPresentor(){
+    public TradeUI(){
         TradeManager tradeManager = new TradeManager();
     }
 
@@ -14,5 +14,4 @@ public class TradeProcessPresentor {
         MeetingSystem mt = new MeetingSystem(trade.getUsers());
         mt.run();
     }
-
 }
