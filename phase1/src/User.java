@@ -27,7 +27,9 @@ abstract class User {
     public abstract String getPassword();
     public abstract String getUsername();
     public abstract Integer getId();
-    public abstract boolean getIsBorrow();
+    public boolean getIsBorrow(){
+        return isBorrow;
+    }
     public boolean getIsfrozen(){
         return isFrozen;
     }
@@ -63,11 +65,11 @@ abstract class User {
         this.tradeHistory = tradeHistory;
     }
 
-    public abstract List<Integer> getTradeHistory();
+    public List<Integer> getTradeHistory(){
+        return tradeHistory;
+    }
 
-    public abstract void setFrozen(boolean aTrue) throws IOException;
-
-    public abstract boolean getIsAdmin();
+    public boolean getIsAdmin(){return isAdmin;}
 
     public List<String> getWishLend() {
         return wishLend;
@@ -75,7 +77,9 @@ abstract class User {
     public List<String> getWishBorrow() {
         return wishBorrow;
     }
-
+    public void setFrozen(boolean aTrue){
+        isFrozen = aTrue;
+    }
     public void setId(Integer id) {
 
         this.id = id;

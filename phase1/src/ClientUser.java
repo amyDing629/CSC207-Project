@@ -70,16 +70,6 @@ public class ClientUser extends User {
     }
 
 
-    @Override
-    public List<Integer> getTradeHistory() {
-        return tradeHistory;
-    }
-
-    @Override
-    public void setFrozen(boolean aTrue){
-        isFrozen = aTrue;
-    }
-
     public boolean getIsFrozen(){
         return isFrozen;
     }

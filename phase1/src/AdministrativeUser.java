@@ -1,18 +1,7 @@
 import java.io.IOException;
 import java.util.*;
 public class AdministrativeUser extends User {
-    private boolean isAdmin;
     private static Integer id = 0;
-
-    private boolean isFrozen;
-    private List<String> notification;
-    private int weekTransactionLimit;
-    private int incompleteTransactionLimit;
-    private boolean isBorrow;
-
-    private List<String> wishLend;
-    private List<String> wishBorrow;
-    private List<Integer> tradeHistory;
 
     public AdministrativeUser(String username, String password, boolean isAdmin){
         super(username, password, isAdmin);
@@ -26,35 +15,6 @@ public class AdministrativeUser extends User {
         return password;
     }
 
-
-    public void setFrozen(boolean frozen) throws IOException {
-        isFrozen = frozen;
-    }
-
-    @Override
-    public boolean getIsAdmin() {
-        return isAdmin;
-    }
-
-    @Override
-    public List<String> getWishLend() {
-        return wishLend;
-    }
-
-    @Override
-    public List<String> getWishBorrow() {
-        return wishBorrow;
-    }
-
-
-    public int getIncompleteTransactionLimit() {
-        return incompleteTransactionLimit;
-    }
-
-
-    public int getWeekTransactionLimit() {
-        return weekTransactionLimit;
-    }
 
 
 
@@ -74,17 +34,6 @@ public class AdministrativeUser extends User {
         return id;
     }
 
-    @Override
-    public boolean getIsBorrow() {
-        return isBorrow;
-    }
-
-
-    @Override
-    public List<String> getNotification() {
-        return notification;
-    }
-
 
 
     public void freeze(ClientUser a) throws IOException {
@@ -98,7 +47,7 @@ public class AdministrativeUser extends User {
     public void addNewUser(String username, String password) throws IOException {
         UserManager u = new UserManager();
         if (id == 1){
-        AdministrativeUser a = new AdministrativeUser(username, password, isAdmin);
+        AdministrativeUser a = new AdministrativeUser(username, password, true);
         u.addUser(a);
         }
     }
