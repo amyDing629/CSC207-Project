@@ -18,6 +18,6 @@ public class InventoryController {
     }
 
     public void moveToWishList(){
-        currUser.getWishBorrow().add(item.getName());
+        currUser.addWishes(item.getName());
     }
 }
