@@ -30,52 +30,27 @@ public class MeetingActivities {
     }
 
 
+    public Meeting setUpSecondMeeting(Integer userId, Integer otherUserId, LocalDateTime firstDateTime, String place,
+                                       Integer durationDays){
+        ArrayList<Integer> ids = new ArrayList<>(Arrays.asList(userId, otherUserId));
+        return new Meeting(firstDateTime.plusDays(durationDays), place, ids);
+    }
+
+
+
     /**
      * Edits a meeting:
      * - allow input of time only; place only; time + place
      * - record user id
      * It is the user's choice to input either time only, place only, or time + place.
      */
-    public static void editMeeting(Meeting meeting, Integer userId, LocalDateTime dateTime) {
-        /*
-        If the current number of edits does not exceed the threshold:
-        update the new dateTime in meeting, and update the edit history of this user
-
-        If the current number of edits exceeds the threshold:
-        cancel the meeting
-        */
-        MeetingEditor editHistory = meeting.getIdToEditor().get(userId);
-        if (!editHistory.editsOverThreshold()) {
-            meeting.editMeeting(dateTime);
-            editHistory.updateTimeOfEdition();
-        }else {
-            meeting.setStatus();
-        }
-    }
-
-    public static void editMeeting(Meeting meeting, Integer userId, String place){
-        /*
-        If the current number of edits does not exceed the threshold:
-        update the new place in meeting, and update the edit history of this user
-
-        If the current number of edits exceeds the threshold:
-        cancel the meeting
-         */
-        MeetingEditor editHistory = meeting.getIdToEditor().get(userId);
-        if (!editHistory.editsOverThreshold()) {
-            meeting.editMeeting(place);
-            editHistory.updateTimeOfEdition();
-        }else {
-            meeting.setStatus();
-        }
-    }
-
     public static void editMeeting(Meeting meeting, Integer userId, LocalDateTime dateTime, String place){
         MeetingEditor editHistory = meeting.getEditor(userId);
+        // first update edition time; then check if this time is over the threshold
+        editHistory.updateTimeOfEdition();
         if (!editHistory.editsOverThreshold()) {
             meeting.editMeeting(dateTime);
             meeting.editMeeting(place);
-            editHistory.updateTimeOfEdition();
         }else {
             meeting.setStatus();
         }

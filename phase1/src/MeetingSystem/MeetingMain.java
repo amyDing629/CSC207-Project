@@ -12,8 +12,30 @@ public class MeetingMain {
 
     public static void main (String[] args) throws IOException {
         System.out.println("Welcome to meeting system!");
-        MeetingSystem mt = new MeetingSystem(u1.getId(), u2.getId());
-//        mt.run();
+        MeetingSystem mt_perm = new MeetingSystem(u1.getId(), u2.getId(), true);
+        mt_perm.run(true, u1.getId());
+        mt_perm.runResult();
+
+        mt_perm.run(true, u2.getId());
+        mt_perm.runResult();
+
+        mt_perm.run(true, u2.getId());
+        mt_perm.runResult();
+
+        mt_perm.run(true, u1.getId());
+        mt_perm.runResult();
+
+        mt_perm.run(true, u2.getId());
+        mt_perm.runResult();
+
+        mt_perm.run(true, u2.getId());
+        mt_perm.runResult();
+
+
+
+        MeetingSystem mt_temp = new MeetingSystem(u1.getId(), u2.getId(), false);
+        mt_temp.run(true, u1.getId());
+
 
         // If ClientUser A sets up the meeting,
         // only when ClientUser B edits/confirms the meeting,
@@ -29,14 +51,14 @@ public class MeetingMain {
 //        }
 
         // hardcode two client user's activities
-        mt.runSetupSession(1);
-        mt.runEditConfirmSession(2);
-        mt.runEditConfirmSession(2);
-//        mt.runEditConfirmSession(1);
-        mt.runEditConfirmSession(2);
-//        mt.runEditConfirmSession(1);
-
-        mt.runEditConfirmSession(2);
+//        mt.runSetupSession(1);
+//        mt.runEditConfirmSession(2);
+//        mt.runEditConfirmSession(2);
+////        mt.runEditConfirmSession(1);
+//        mt.runEditConfirmSession(2);
+////        mt.runEditConfirmSession(1);
+//
+//        mt.runEditConfirmSession(2);
 
 
 
