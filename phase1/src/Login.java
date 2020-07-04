@@ -36,7 +36,7 @@ public class Login {
             }
             else if (a == 2){
                 register();
-            }
+            }else{System.out.println("Invalid input! Please enter the number only.");}
             System.out.println("------------------------------");
         }
 
