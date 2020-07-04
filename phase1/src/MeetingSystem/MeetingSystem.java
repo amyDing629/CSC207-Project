@@ -35,7 +35,10 @@ public class MeetingSystem {
     public static Integer userId;
     public static Integer otherUserId;
 
+    public boolean isOneWay;
+
     public static Meeting meeting = null;
+    public static Meeting meeting2 = null;
     public ArrayList<MeetingLogInfo> meetingLog = new ArrayList<MeetingLogInfo>();
 
 
@@ -47,14 +50,16 @@ public class MeetingSystem {
      * @param u1 the ClientUser who sets up the meeting
      * @param u2 the ClientUser who receives the meeting invitation
      */
-    public MeetingSystem(Integer u1, Integer u2) {
+    public MeetingSystem(Integer u1, Integer u2, boolean isOneWay) {
         userId = u1;
         otherUserId = u2;
+        this.isOneWay = isOneWay;
     }
 
-    public MeetingSystem(ArrayList<Integer> users) {
+    public MeetingSystem(ArrayList<Integer> users, boolean isOneWay) {
         userId = users.get(0);
         userId = users.get(1);
+        this.isOneWay = isOneWay;
     }
 
     /**
@@ -66,98 +71,21 @@ public class MeetingSystem {
      * - the meeting has been set up already;
      * - the meeting has not been cancelled (i.e edit time of each ClientUser < threshold of edition time)
      */
-    public void run() throws IOException {
-        // allow input: "exit", "setup meeting", "edit", "confirm"
+    public void run(boolean isFirst, Integer logInUser) throws IOException {
 
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-        menuPresenter.printMenu("mainMenu");
-
-        String input = br.readLine();
-        while (!input.equals("exit")) {
-
-            // instruction 1: set up meeting
-            // precondition:
-            //  - no meeting has been scheduled yet
-            if (input.equals("ss")) {
-                if (meeting == null) {
-                    SetUpMeetingPresenter setUpMeeting = new SetUpMeetingPresenter();
-                    dateTime = setUpMeeting.dateTime;
-                    place = setUpMeeting.place;
-                    meeting = MeetingActivities.setUpMeeting(userId, otherUserId, dateTime, place);
-
-                    System.out.println("A meeting has been set up!");
-                    System.out.println("  " + "- proposed time is:" + dateTime.toString());
-                    System.out.println("  " + "- proposed place is:" + place);
-                } else {
-                    System.out.println("Error: Meeting has been set up. Cannot be reset.");
-                }
-                break;
-            }
-
-
-//            // instruction 2: edit meeting
-//            // precondition:
-//            //  - a meeting must has already been scheduled
-//            if (input.equals("ee")) {
-//                if (meeting != null){ // meeting can be edited
-//                    // update time place
-//                    EditMeetingPresenter editMeeting = new EditMeetingPresenter(dateTime, place);
-//                    dateTime = editMeeting.dateTime;
-//                    place = editMeeting.place;
-//
-//                    if (editMeeting.isEdited()) {
-//                        System.out.println("Meeting has been edited!");
-//                        System.out.println("  " + "- the current proposed time is:" + dateTime.toString());
-//                        System.out.println("  " + "- the current proposed place is:" + place);
-//                    } else {
-//                        System.out.println("Meeting has NOT been edited!");
-//                    }
-//                }else{ // meeting can not be edited
-//                    System.out.println("Error: Meeting has not been set up. Cannot be edited.");
-//                }
-//                break;
-//            }
-//        }
-
-
-//        // instruction 2: edit meeting
-//        // precondition:
-//        //  - a meeting must has already been scheduled
-//        input = br.readLine();
-//        while (!input.equals("exit")) {
-//            if (input.equals("ee")) {
-//                if (meeting != null){ // meeting can be edited
-//                    // update time place
-//                    EditMeetingPresenter editMeeting = new EditMeetingPresenter(dateTime, place);
-//                    dateTime = editMeeting.dateTime;
-//                    place = editMeeting.place;
-//
-//                    if (isEdited()) {
-//                        System.out.println("Meeting has been edited!");
-//                        System.out.println("  " + "- the current proposed time is:" + dateTime.toString());
-//                        System.out.println("  " + "- the current proposed place is:" + place);
-//                    } else {
-//                        System.out.println("Meeting has NOT been edited!");
-//                    }
-//                }else{ // meeting can not be edited
-//                    System.out.println("Error: Meeting has not been set up. Cannot be edited.");
-//                }
-//            }
-//
-//        }
-
-            // instruction 3: confirm meeting
-            // precondition:
-            //  - a meeting must has already been scheduled
-            input = br.readLine();
-            if (input.equals("cc") && (meeting != null)) {
-                // confirm code
-                System.out.println("TODO: confirmed~");
-
-            }
-
+        // first meeting
+        if (meeting == null){
+            runSetupSession(logInUser);
+        } else {
+            runEditConfirmSession(logInUser);
         }
+
+
+        if(!isFirst){ // only second meeting
+            meeting2 = MeetingActivities.setUpMeeting(userId, otherUserId, dateTime.plusMonths(1), place);
+            runEditConfirmSession(logInUser);
+        }
+
     }
 
     /**

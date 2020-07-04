@@ -31,7 +31,6 @@ public class EditMeetingPresenter {
 
     /**
      * Obtain user prompts of editing time and/or place.
-     * TODO: record the edition time of each Trader (User); print meeting "cancelled" if edit >= threshold
      */
     public EditMeetingPresenter(LocalDateTime dateTime, String place) {
         // Set the instance variables "dateTime", "place" with  before editing
