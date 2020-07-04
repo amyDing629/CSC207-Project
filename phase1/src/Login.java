@@ -242,7 +242,7 @@ public class Login {
                     break;
                 case 3:
                     System.out.println("Edit lend wishes");
-                    InventoryUI iui=new InventoryUI((ClientUser) user);
+                    InventoryUI iui=new InventoryUI(user);
                     iui.run();
                     break;
                 case 4:
@@ -264,6 +264,7 @@ public class Login {
         Scanner sc=new Scanner(System.in);
         System.out.println("Hello "+ user.username);
         UserManager a=new UserManager();
+        a.updateFile();
         for (User b:a.splitUser(a.readFile())){
             System.out.println("User 1");
             for(String c:user.getWishBorrow()){
