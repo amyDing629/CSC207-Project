@@ -25,13 +25,11 @@ public class MeetingMain {
                 mt_temp.run(true, tradeIds.get(0));
                 mt_temp.runResult();
                 meeting = mt_temp.getMeeting();
-
                 turnIsUser1 = false;
             }else{
                 mt_temp.run(true, tradeIds.get(1));
                 mt_temp.runResult();
                 meeting = mt_temp.getMeeting();
-
                 turnIsUser1 = true;
             }
 
