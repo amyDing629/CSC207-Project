@@ -23,13 +23,11 @@ public class UserManager {
                 myList.add(lineList);
             }
             in.close();
-            System.out.println(myList);
             if(!myList.isEmpty()){
                 if(myList.get(0).size()==0){
                     myList.remove(0);
                 }
             }
-            System.out.println(myList);
             return myList;
         }
         catch(Exception e) {
@@ -244,8 +242,6 @@ public class UserManager {
             addUser(u);
         }
     }
-
-
 
 }
 
