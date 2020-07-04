@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -7,7 +8,8 @@ public class TwowayTrade extends Trade {
     private final Item item1to2;
     private final Item item2to1;
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-
+    private UserManager um = new UserManager();
+    private Inventory iv = new Inventory();
     /**
      *
      * @param trader1Id Trader who participates in the trade
@@ -65,7 +67,19 @@ public class TwowayTrade extends Trade {
         rst.add(item1to2);
         rst.add(item2to1);
         return rst;
+    }
+
+    @Override
+    public void makeTrade() throws IOException {
+        ClientUser u1 = (ClientUser)um.getUser(trader1Id);
+        ClientUser u2 = (ClientUser)um.getUser(trader2Id);
+        u1.getWishBorrow().remove(item2to1.getName());
+        u1.getWishLend().remove(item1to2.getName());
+        u2.getWishBorrow().remove(item1to2.getName());
+        u2.getWishLend().remove(item2to1.getName());
+        iv.getLendingList().remove(item1to2);
+        iv.getLendingList().remove(item2to1);
+    }
 
 
-}
 }

@@ -13,12 +13,14 @@ public class TradeUI {
     Trade trade;
     TradeController tc;
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    TradePresenter tp;
 
     public TradeUI(ClientUser currUser, Integer tradeId) throws IOException {
         TradeManager tradeManager = new TradeManager();
         this.currUser = currUser;
         trade = tm.getTrade(tradeId);
         tc = new TradeController(currUser);
+        tp = new TradePresenter(currUser, trade);
     }
 
     //view trade information
@@ -31,7 +33,8 @@ public class TradeUI {
         int exit = 0;
         while (exit != 1) {
             while (true) {
-                System.out.println("type 1 to exit, type 0 to continue");
+                tp.presentTradeInfo();
+                System.out.println("type 1 to exit, type anything to continue with current trade");
                 try {
                     String line = br.readLine();
                     if (line.equals("1")) {
@@ -39,23 +42,32 @@ public class TradeUI {
                         break;
                     } else {
                         if (becomeComplete){
-                            tc.completeTrade();
+                            tc.completeTrade(trade);
                         }
-                        System.out.println(trade);
-                        System.out.println("first meeting: " + trade.getMeeting());
-                        System.out.println("second meeting: " + trade.getSecondMeeting());
-                        if (tc.checkTradeMeeting(trade).equals("complete")) {
-                            System.out.println("the trade has been completed");
-                        } else if (tc.checkTradeMeeting(trade).equals("first meeting")) {
-                            MeetingSystem mt = new MeetingSystem(trade.getUsers(), trade.getDuration() == -1);
-                            ArrayList<Object> result = mt.runResult();
-                            if (result.get(2) == "complete" && trade.getDuration() == -1) {
-                                becomeComplete = true;
-                            }
-                        } else if (tc.checkTradeMeeting(trade).equals("second meeting")) {
-                            Meeting sm = trade.getSecondMeeting();
-                            System.out.println(sm);
-                            becomeComplete = confirmSecondMeeting(sm);
+                        switch (tc.checkTradeMeeting(trade)) {
+                            case "complete":
+                                System.out.println("the trade has been completed");
+                                break;
+                            case "confirm trade":
+                                confirmTrade();
+                                break;
+                            case "first meeting" :
+                                MeetingSystem mt = new MeetingSystem(trade.getUsers(), true);
+                                mt.run(currUser.getId());
+                                ArrayList<Object> result = mt.runResult();
+                                if (result.get(2) == "complete" && trade.getDuration() == -1) {
+                                    becomeComplete = true;
+                                }
+                                break;
+                            case "second meeting":
+                                Meeting sm = trade.getSecondMeeting();
+                                MeetingSystem smt = new MeetingSystem(trade.getUsers(), false);
+                                smt.run(currUser.getId());
+                                ArrayList<Object> result2 = smt.runResult();
+                                if (result2.get(2) == "complete") {
+                                    becomeComplete = true;
+                                }
+                                break;
                         }
                     }
 
@@ -66,6 +78,7 @@ public class TradeUI {
         }
     }
     // true means that the trade has been completed
+    /*
     private boolean confirmSecondMeeting(Meeting sm) throws IOException {
         boolean becomeComplete = false;
         while (true) {
@@ -97,7 +110,29 @@ public class TradeUI {
             }
         }
         return becomeComplete;
-
     }
+    */
+
+    private void confirmTrade(){
+        while (true) {
+            System.out.println("type 1 to confirm meeting, type 2 to not confirm");
+            try {
+                String confirm = br.readLine();
+                if (confirm.equals("1")) {
+                    tc.confirmTrade(trade);
+                    break;
+                }
+                else if (confirm.equals("2")){
+                    break;
+                }else{
+                    System.out.println("wrong input, please type again");
+                }
+            } catch (IOException e) {
+                System.out.println("wrong input, please type again");
+                e.printStackTrace();
+            }
+        }
+    }
+
 }
 
