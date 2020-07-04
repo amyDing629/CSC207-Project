@@ -18,8 +18,7 @@ public class UserManager {
             while(in.ready()) {
                 String line = in.readLine();
                 String[] parts = line.split(", ");
-                ArrayList<String> lineList = new ArrayList<>();
-                lineList.addAll(Arrays.asList(parts));
+                ArrayList<String> lineList = new ArrayList<>(Arrays.asList(parts));
                 myList.add(lineList);
             }
             in.close();
@@ -41,8 +40,7 @@ public class UserManager {
         for(ArrayList<String> b: a){
             if(b.get(3).equals("true")){
                 String[] c = b.get(6).split("; ");
-                ArrayList<String> lineList = new ArrayList<>();
-                lineList.addAll(Arrays.asList(c));
+                ArrayList<String> lineList = new ArrayList<>(Arrays.asList(c));
 
                 AdministrativeUser d = new AdministrativeUser(b.get(1), b.get(2), true);
                 d.setNotification(lineList);
@@ -89,8 +87,7 @@ public class UserManager {
             }
             if(b.get(3).equals("false")){
                 String[] c = b.get(6).split("; ");
-                ArrayList<String> lineList = new ArrayList<>();
-                lineList.addAll(Arrays.asList(c));
+                ArrayList<String> lineList = new ArrayList<>(Arrays.asList(c));
 
                 ClientUser d = new ClientUser(b.get(1), b.get(2), true);
                 d.setNotification(lineList);
@@ -145,24 +142,24 @@ public class UserManager {
             FileOutputStream output = new FileOutputStream("phase1/src/username.txt", true);
             String name = u.getUsername();
             String s = u.getId()+ ", " + name + ", "  + u.getPassword()+ ", "  + u.getIsAdmin()+ ", "  + u.getIsfrozen()+ ", "  + u.getIsBorrow()+ ", ";
-            String m = "";
+            StringBuilder m = new StringBuilder();
             for(String i: u.getNotification()){
-                m = m + i + "; ";
+                m.append(i).append("; ");
             }
             s = s + m + ", ";
-            String n = "";
+            StringBuilder n = new StringBuilder();
             for(String i: u.getWishLend()){
-                n = n + i+ "; ";
+                n.append(i).append("; ");
             }
             s = s + n + ", ";
-            String k = "";
+            StringBuilder k = new StringBuilder();
             for(String i: u.getWishBorrow()){
-                k = k + i + "; ";
+                k.append(i).append("; ");
             }
             s = s + k + ", ";
-            String l = "";
+            StringBuilder l = new StringBuilder();
             for(Integer i: u.getTradeHistory()){
-                l = l + i + "; ";
+                l.append(i).append("; ");
             }
             s = s + l + ", ";
             s = s+ u.getWeekTransactionLimit() + ", ";
