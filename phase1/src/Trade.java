@@ -11,6 +11,7 @@ public abstract class Trade {
     private Meeting secondMeeting;
     private final int duration;
     private LocalDateTime createTime; //the time trade is created
+    public static int temp = 30;
 
     /**
      * Constructor
