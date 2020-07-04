@@ -18,19 +18,28 @@ public class MeetingMain {
         System.out.println("Welcome to meeting system!");
 
         // the start of the first meeting
-        MeetingSystem mt_temp = new MeetingSystem(tradeIds, false);
+        MeetingSystem mt_temp = new MeetingSystem(tradeIds, true);
         boolean turnIsUser1 = true;
         while (meeting == null || meeting.getStatus().equals("incomplete")){
             if (turnIsUser1){
-                mt_temp.run(true, tradeIds.get(0));
+                System.out.println("===========================");
+                System.out.println("Login id:" + tradeIds.get(0));
+
+                mt_temp.run(tradeIds.get(0));
                 mt_temp.runResult();
                 meeting = mt_temp.getMeeting();
+                System.out.println(meeting);
                 turnIsUser1 = false;
+                System.out.println("===========================");
             }else{
-                mt_temp.run(true, tradeIds.get(1));
+                System.out.println("===========================");
+                System.out.println("Login id:" + tradeIds.get(1));
+
+                mt_temp.run(tradeIds.get(1));
                 mt_temp.runResult();
                 meeting = mt_temp.getMeeting();
                 turnIsUser1 = true;
+                System.out.println("===========================");
             }
 
         } // here is the end of the first meeting
@@ -39,21 +48,26 @@ public class MeetingMain {
         // the start of the second meeting
         System.out.println("Welcome to meeting system!");
         System.out.println(" == SECOND MEETING ==");
-        meeting2 = mt_temp.setUpSecondMeeting(meeting);
+        MeetingSystem mt_temp2 = new MeetingSystem(tradeIds, false);
+        meeting2 = mt_temp2.setUpSecondMeeting(meeting);
         boolean turnIsUser1_m2 = true;
         while (meeting2 == null || meeting2.getStatus().equals("incomplete")){
             if (turnIsUser1_m2){
-                mt_temp.run(false, tradeIds.get(0));
-                mt_temp.runResult();
-                meeting2 = mt_temp.getMeeting();
+                System.out.println("===========================");
+                mt_temp2.run(tradeIds.get(0));
+                mt_temp2.runResult();
+                meeting2 = mt_temp2.getMeeting();
 
                 turnIsUser1_m2 = false;
+                System.out.println("===========================");
             }else{
-                mt_temp.run(false, tradeIds.get(1));
-                mt_temp.runResult();
-                meeting2 = mt_temp.getMeeting();
+                System.out.println("===========================");
+                mt_temp2.run(tradeIds.get(1));
+                mt_temp2.runResult();
+                meeting2 = mt_temp2.getMeeting();
 
                 turnIsUser1_m2 = true;
+                System.out.println("===========================");
             }
 
         } // here is the end of the second meeting
