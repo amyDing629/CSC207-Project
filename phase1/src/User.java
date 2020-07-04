@@ -48,7 +48,9 @@ abstract class User {
         this.weekTransactionLimit = weekTransaction;
     }
 
-
+    public void addWishes(String hi){
+        this.wishLend.add(hi);
+    }
     public void setWishLend(List<String> wishLend){
         this.wishLend = wishLend;
     }

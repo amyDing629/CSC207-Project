@@ -7,11 +7,6 @@ import java.util.List;
 public class UserManager {
 
     public ArrayList<ArrayList<String>> readFile() throws IOException {
-        File a = new File("phase1/src/username.txt");
-        if(a.length() == 0){
-            AdministrativeUser b = new AdministrativeUser("admin", "123", true);
-            addUser(b);
-        }
         ArrayList<ArrayList<String>> myList = new ArrayList<>();
         try {
             BufferedReader in = new BufferedReader(new FileReader("phase1/src/username.txt"));

@@ -7,7 +7,6 @@ public class InventoryUI {
     User currUser;
     InventoryPresenter ip;
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    InventoryController ic = new InventoryController(currUser);
     Item currItem;
 
     public InventoryUI(User currUser){
@@ -18,6 +17,7 @@ public class InventoryUI {
     }
 
     public void run() {
+        InventoryController ic = new InventoryController(currUser);
         System.out.println("type 'see inventory' to see all the items");
         try {
             String line = br.readLine();

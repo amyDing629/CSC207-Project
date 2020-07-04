@@ -1,7 +1,4 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -11,6 +8,12 @@ public class Login {
         int a=-1;
         while (a!=0) {
             //print out the list of current users-------------------------------
+            File file = new File("phase1/src/username.txt");
+            UserManager user=new UserManager();
+            if(file.length() == 0){
+                AdministrativeUser b = new AdministrativeUser("admin", "123", true);
+                user.addUser(b);
+            }
             System.out.println("Users:");
             try {
                 BufferedReader reader = new BufferedReader(new FileReader(
@@ -230,7 +233,7 @@ public class Login {
                     System.out.println("Lend wishes");
                     List<String> lw=user.getWishLend();
                     for (int i=0;i<lw.size();i++){
-                        System.out.println("wish lend item:"+i+" "+lw.get(i));
+                        System.out.println("item:"+i+1+" "+lw.get(i));
                     }
                     break;
                 case 2:
@@ -242,7 +245,7 @@ public class Login {
                     break;
                 case 3:
                     System.out.println("Edit lend wishes");
-                    InventoryUI iui=new InventoryUI((ClientUser) user);
+                    InventoryUI iui=new InventoryUI(user);
                     iui.run();
                     break;
                 case 4:
@@ -264,6 +267,7 @@ public class Login {
         Scanner sc=new Scanner(System.in);
         System.out.println("Hello "+ user.username);
         UserManager a=new UserManager();
+        a.updateFile();
         for (User b:a.splitUser(a.readFile())){
             System.out.println("User 1");
             for(String c:user.getWishBorrow()){
