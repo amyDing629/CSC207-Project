@@ -1,40 +1,66 @@
 package MeetingSystem;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class MeetingMain {
     // two ClientUsers
-    public static meetingClientUser u1 = new meetingClientUser(1);
-    public static meetingClientUser u2 = new meetingClientUser(2);
+//    public static meetingClientUser u1 = new meetingClientUser(1);
+//    public static meetingClientUser u2 = new meetingClientUser(2);
+    public static ArrayList<Integer> tradeIds = new ArrayList<>(Arrays.asList(1, 2));
 
     private static Meeting meeting = null;
+    private static Meeting meeting2 = null;
 
     public static void main (String[] args) throws IOException {
         System.out.println("Welcome to meeting system!");
-        MeetingSystem mt_perm = new MeetingSystem(u1.getId(), u2.getId(), true);
-        mt_perm.run(true, u1.getId());
-        mt_perm.runResult();
 
-        mt_perm.run(true, u2.getId());
-        mt_perm.runResult();
+        // the start of the first meeting
+        MeetingSystem mt_temp = new MeetingSystem(tradeIds, false);
+        boolean turnIsUser1 = true;
+        while (meeting == null || meeting.getStatus().equals("incomplete")){
+            if (turnIsUser1){
+                mt_temp.run(true, tradeIds.get(0));
+                mt_temp.runResult();
+                meeting = mt_temp.getMeeting();
 
-        mt_perm.run(true, u2.getId());
-        mt_perm.runResult();
+                turnIsUser1 = false;
+            }else{
+                mt_temp.run(true, tradeIds.get(1));
+                mt_temp.runResult();
+                meeting = mt_temp.getMeeting();
 
-        mt_perm.run(true, u1.getId());
-        mt_perm.runResult();
+                turnIsUser1 = true;
+            }
 
-        mt_perm.run(true, u2.getId());
-        mt_perm.runResult();
-
-        mt_perm.run(true, u2.getId());
-        mt_perm.runResult();
-
+        } // here is the end of the first meeting
 
 
-        MeetingSystem mt_temp = new MeetingSystem(u1.getId(), u2.getId(), false);
-        mt_temp.run(true, u1.getId());
+        // the start of the second meeting
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         // If ClientUser A sets up the meeting,

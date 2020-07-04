@@ -103,9 +103,14 @@ public class MeetingSystem {
 
     }
 
-//    public Meeting potentialSecondMeeting(){
-//        return MeetingActivities.setUpMeeting(userId, otherUserId, dateTime.plusMonths(1), place);
-//    }
+    public Meeting getMeeting(){
+        return meeting;
+    }
+
+
+    public Meeting setUpSecondMeeting(){
+        return MeetingActivities.setUpMeeting(userId, otherUserId, dateTime.plusMonths(1), place);
+    }
 
     /**
      * Run this session only when the meeting is not yet been set up.
