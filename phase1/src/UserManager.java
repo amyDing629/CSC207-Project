@@ -38,7 +38,7 @@ public class UserManager {
         return myList;
     }
 
-    public static ArrayList<User> splitUser(ArrayList<ArrayList<String>> a) throws IOException {
+    public ArrayList<User> splitUser(ArrayList<ArrayList<String>> a) throws IOException {
         ArrayList<User> myList = new ArrayList<>();
         for(ArrayList<String> b: a){
             if(b.get(3).equals("true")){
