@@ -60,8 +60,12 @@ public class Login {
             //usermanger account verification? and returns a user object.
             if (a.verifyUser(username, password)) {
                 while (true) {
+                    System.out.println("------------------------------------------------------------");
+                    System.out.println("Hello,"+username);
+                    System.out.println("Freeze Status: "+a.getUser(username).getIsFrozen());
                     System.out.println("Trade limit: " + a.getUser(username).getTradeNumber() + "/" + a.getUser(username).getWeekTransactionLimit());
-                    System.out.println("Incomplete trade limit: " + a.getUser(username).getIncomplete() + "/" + a.getUser(username).getIncompleteTransactionLimit());
+                    System.out.println("Incomplete trade limit: " + (a.getUser(username).getIncomplete()).size() + "/" + a.getUser(username).getIncompleteTransactionLimit());
+                    System.out.println("**************************************************************");
                     System.out.println("Actions:\n1.Edit information\n2.Message\n3.Inventory\n4.Message\n5.Trade History\n6.Market\n0.quit to menu");
                     System.out.print(">");
                     int op = sc.nextInt();
@@ -167,7 +171,12 @@ public class Login {
                         if (ha==null){
                             System.out.println("Sorry there is no such user, returning to main menu.");
                         }
-                        else{((AdministrativeUser)user).freeze(ha);}
+                        else{
+                            ((AdministrativeUser)user).freeze(ha);
+                            System.out.println("User:"+ha.getUsername()+" account has been frozen");
+                            System.out.println("Username: "+ha.getUsername());
+                            System.out.println("Username: "+ha.getPassword());
+                        }
                     }
                     break;
                 case 4:
