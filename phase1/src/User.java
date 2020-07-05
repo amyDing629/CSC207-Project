@@ -135,13 +135,10 @@ public class User {
         List<Trade> trade=new ArrayList<>();
         TradeManager a = new TradeManager();
         int y = 0;
-        while(y <  3) {
-            for (int i = getAllTrade().size(); i>0;i-- ) {
-                if ((!(getAllTrade().get(i).status.equals("unconfirmed"))) || (!(getAllTrade().get(i).status.equals("cancelled")))) {
-                    trade.add(getAllTrade().get(i));
-                    y++;
-                }
-                i = i - 1;
+        for (int i = getAllTrade().size(); i>0;i-- ) {
+            if (((!(getAllTrade().get(i).status.equals("unconfirmed"))) || (!(getAllTrade().get(i).status.equals("cancelled"))))&&y!=3) {
+                trade.add(getAllTrade().get(i));
+                y++;
             }
         }
         return trade;
