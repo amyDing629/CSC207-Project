@@ -34,12 +34,12 @@ public class User {
     public String getPassword() {
         return password;
     }
-    public String getUsername(){return username;};
+    public String getUsername(){return username;}
     public UUID getId() {
         return id;
     }
 
-    public boolean getIsfrozen(){
+    public boolean getIsFrozen(){
         return isFrozen;
     }
 
