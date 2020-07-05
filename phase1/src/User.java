@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.security.KeyStore;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.UUID;
@@ -106,16 +107,25 @@ public class User {
     }
 
     /**
-     * the list of names of items that the user want to lend and borrow
+     * @param hi the name of the item
+     * the name of item that the user wants to lend
      */
     public void addWishes(String hi){
         this.wishLend.add(hi);
     }
 
+    /**
+     * @param hi the name of the item
+     * the name of item that the user does not have to borrow
+     */
     public void removeBWishes(String hi){
         this.wishBorrow.remove(hi);
     }
 
+    /**
+     * @param hi the name of the item
+     * the name of item that the user does not have to lend
+     */
     public void removeLWishes(String hi){
         this.wishLend.remove(hi);
     }
@@ -161,6 +171,9 @@ public class User {
         isBorrow = borrow;
     }
 
+    /**
+     * return the list of
+     */
     public List<Trade> getAllTrade(){
         TradeManager a = new TradeManager();
         ArrayList<Trade> b = new ArrayList<>();
@@ -274,6 +287,32 @@ public class User {
         Inventory b = new Inventory();
         b.getItem(name).setDescription(a);
     }
+
+    public List<User> getFrequentUser() throws IOException {
+        UserManager u = new UserManager();
+        List<Trade> a = getAllTrade();
+        HashMap<UUID, Integer> b = new HashMap<>();
+        for(Trade c: a){
+            for(UUID d: c.getUsers()){
+                if(!(d.equals(id))){
+                    if(b.containsKey(d)){b.replace(d, b.get(d) + 1);}
+                    else {b.put(d, 1);}
+                }
+            }
+        }
+        int e = 0;
+        ArrayList<User> g = new ArrayList<>();
+        int maxValueInMap = (Collections.max(b.values()));  // This will return max value in the Hashmap
+        for (Map.Entry<UUID, Integer> entry : b.entrySet()) {  // Itrate through hashmap
+            if (entry.getValue() == maxValueInMap && e != 3) {
+                g.add(u.getUser(entry.getKey()));
+                e ++;
+                b.remove(entry.getKey());
+            }
+        }
+        return g;
+    }
+
 
 
 }
