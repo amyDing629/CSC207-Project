@@ -214,8 +214,8 @@ public class UserManager {
         try{
             ArrayList<User> userList = splitUser(readFile());
             for(User u : userList){
-                if(u.getUsername().equals(name) && u.getPassword().equals(password))
-                    return true;
+                if(u.getUsername().equals(name) && u.getPassword().equals(password)) {
+                    return true;}
             }
         } catch (IOException e) {
             e.printStackTrace();
