@@ -4,20 +4,19 @@ import java.time.LocalDateTime;
 public class tradeMain {
     public static void main (String[] args) throws IOException, AccountFrozenException {
         TradeManager tm = new TradeManager();
+        UserManager um = new UserManager();
+        Inventory iv = new Inventory();
         ClientUser amy = new ClientUser("amy","1234", false);
         ClientUser daniel = new ClientUser("daniel","345", false);
-        UserManager um = new UserManager();
         um.addUser(amy);
         um.addUser(daniel);
         Item peach = new Item("peach", "daniel");
-        Inventory iv = new Inventory();
+        Item apple = new Item("apple", "amy");
         iv.addItem(peach);
-        OnewayTrade owt = new OnewayTrade(amy.getId(), daniel.getId(), peach, 30, LocalDateTime.now());
-        tm.getTradeList().add(owt);
-        tm.updateFile();
-        //System.out.println(tm.getTradeList());
+        iv.addItem(apple);
+        amy.getWishLend().add("apple");
+        amy.getWishBorrow().add("peach");
         RequestTradeUI rtp = new RequestTradeUI(amy, peach);
-
         rtp.run();
     }
 }

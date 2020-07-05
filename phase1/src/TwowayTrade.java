@@ -81,5 +81,10 @@ public class TwowayTrade extends Trade {
         iv.getLendingList().remove(item2to1);
     }
 
+    @Override
+    public String getType() {
+        return "twoway";
+    }
+
 
 }

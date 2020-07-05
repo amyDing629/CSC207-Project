@@ -10,7 +10,7 @@ abstract class User {
     private List<String> wishBorrow;
     private boolean isBorrow;
     private boolean isFrozen;
-    protected List<Integer> tradeHistory;
+    protected List<UUID> tradeHistory;
     private int weekTransactionLimit;
     private int incompleteTransactionLimit;
     public User(String username, String password, boolean isAdmin){
@@ -65,11 +65,11 @@ abstract class User {
         this.notification = notification;
     }
 
-    public void setTradeHistory(List<Integer> tradeHistory) {
+    public void setTradeHistory(List<UUID> tradeHistory) {
         this.tradeHistory = tradeHistory;
     }
 
-    public List<Integer> getTradeHistory(){
+    public List<UUID> getTradeHistory(){
         return tradeHistory;
     }
 
@@ -97,7 +97,7 @@ abstract class User {
     public List<Trade> getAllTrade(){
         TradeManager a = new TradeManager();
         ArrayList<Trade> b = new ArrayList<>();
-        for(Integer i: tradeHistory){
+        for(UUID i: tradeHistory){
             b.add(a.getTrade(i));
         }
         return b;

@@ -20,13 +20,18 @@ public class TradeController {
     }
 
 
-    public void checkFrozen() throws AccountFrozenException, IOException {
+    public void checkInput() throws IOException {
         if (currUser.getIsFrozen()) {
-            throw new AccountFrozenException("your account is frozen!");
+            throw new IOException("your account is frozen!");
         }
-        assert tarUser != null;
+        if (tarUser == null){
+            System.out.println("tarUser not found");
+        };
         if (tarUser.getIsFrozen()) {
-            throw new AccountFrozenException("the account of the item owner is frozen!");
+            throw new IOException("the account of the item owner is frozen!");
+        }
+        if (tarUser == currUser){
+            throw new IOException("you cannot make trade with yourself");
         }
     }
 
@@ -47,6 +52,7 @@ public class TradeController {
     }
     public void createTrade(String line, Item item1, Item item2) throws IOException {
         LocalDateTime time = LocalDateTime.now();
+        Trade trade;
         if (line.equals("3")){
             tm.createTwowayTrade(currUser.getId(), tarUser.getId(), item1, item2, 30, time);
         }else{

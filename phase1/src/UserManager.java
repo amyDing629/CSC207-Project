@@ -2,6 +2,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 
 public class UserManager {
@@ -68,10 +69,10 @@ public class UserManager {
                     String[] h = b.get(9).split("; ");
                     lineList4.addAll(Arrays.asList(h));
                 }
-                ArrayList<Integer> lineList5 = new ArrayList<>();
+                ArrayList<UUID> lineList5 = new ArrayList<>();
 
                 for(String p: lineList4){
-                    lineList5.add(Integer.parseInt(p));
+                    lineList5.add(UUID.fromString(p));
                 }
 
                 d.setTradeHistory(lineList5);
@@ -116,10 +117,10 @@ public class UserManager {
                     String[] h = b.get(9).split("; ");
                     lineList4.addAll(Arrays.asList(h));
                 }
-                ArrayList<Integer> lineList5 = new ArrayList<>();
+                ArrayList<UUID> lineList5 = new ArrayList<>();
 
                 for(String p: lineList4){
-                    lineList5.add(Integer.parseInt(p));
+                    lineList5.add(UUID.fromString(p));
                 }
 
                 d.setTradeHistory(lineList5);
@@ -153,7 +154,7 @@ public class UserManager {
             }
             s = s + k + ", ";
             StringBuilder l = new StringBuilder();
-            for(Integer i: u.getTradeHistory()){
+            for(UUID i: u.getTradeHistory()){
                 l.append(i).append("; ");
             }
             s = s + l + ", ";
@@ -214,8 +215,8 @@ public class UserManager {
         try{
             ArrayList<User> userList = splitUser(readFile());
             for(User u : userList){
-                if(u.getUsername().equals(name) && u.getPassword().equals(password))
-                    return true;
+                if(u.getUsername().equals(name) && u.getPassword().equals(password)) {
+                    return true;}
             }
         } catch (IOException e) {
             e.printStackTrace();

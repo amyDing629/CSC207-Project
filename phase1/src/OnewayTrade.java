@@ -77,6 +77,11 @@ public class OnewayTrade extends Trade {
         iv.getLendingList().remove(item);
     }
 
+    @Override
+    public String getType() {
+        return "oneway";
+    }
+
 
 }
 

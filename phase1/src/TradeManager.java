@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * This is a use case class TradeManager
@@ -16,7 +17,7 @@ import java.util.List;
  */
 public class TradeManager {
     private ArrayList<Trade> tradeList;
-    private UserManager userManager;
+    private UserManager userManager = new UserManager();
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
 
@@ -46,10 +47,8 @@ public class TradeManager {
     public Trade createOnewayTrade(Integer currUserId, Integer otherUserId, Item item, int duration, LocalDateTime time)
             throws IOException {
         OnewayTrade newTrade = new OnewayTrade(currUserId, otherUserId, item, duration, time);
-        setId(newTrade);
         tradeList.add(newTrade);
         updateFile();
-
         // Record this new Trade in system
 
         // Update trade history for both users
@@ -64,33 +63,29 @@ public class TradeManager {
      * @param item2to1 the other Item to be trade in this created Trade.
      * @param duration the duration of this Trade, unit (days). -1 means the Trade is permanent.
      */
-    public void createTwowayTrade(Integer currUserId, Integer otherUserId, Item item1to2, Item item2to1, int duration,
+    public Trade createTwowayTrade(Integer currUserId, Integer otherUserId, Item item1to2, Item item2to1, int duration,
                                   LocalDateTime time) throws IOException {
         TwowayTrade newTrade = new TwowayTrade(currUserId, otherUserId, item1to2, item2to1, duration, time);
-        setId(newTrade);
         tradeList.add(newTrade);
         updateFile();
         // Update trade history for both users
         //this.updateTradeHistory(currUserId, otherUserId, newTrade);
+        return newTrade;
     }
 
 
 
-    private void updateTradeHistory(Integer currUserId, Integer otherUserId, Trade newTrade){
-        List<Trade> currentTradeHistory = userManager.findTrade(currUserId);
-        currentTradeHistory.add(newTrade);
-        List<Trade> otherTradeHistory = userManager.findTrade(otherUserId);
-        otherTradeHistory.add(newTrade);
+    private void updateTradeHistory(Integer currUserId, Integer tarUserId, Trade newTrade) throws IOException {
+        System.out.println(currUserId);
+        User currentUser = userManager.getUser(currUserId);
+        System.out.println(currentUser);
+        currentUser.getAllTrade().add(newTrade);
+        User tarUser = userManager.getUser(tarUserId);
+        tarUser.getAllTrade().add(newTrade);
     }
 
-    /**
-     * set id to a trade when it is created.
-     * @param trade
-     */
-    public void setId(Trade trade){
-    }
 
-    public Trade getTrade(int id) {
+    public Trade getTrade(UUID id) {
         for (Trade trade : tradeList) {
             if (trade.getId() == id) {
                 return trade;
@@ -108,10 +103,10 @@ public class TradeManager {
             String line = reader.readLine();
             while (line != null) {
                 String[] lst = line.split(",");
-                Integer tradeId = Integer.parseInt(lst[0]);
+                UUID tradeId = UUID.fromString(lst[0]);
                 Integer user1Id = Integer.parseInt(lst[3]);
                 Integer user2Id = Integer.parseInt(lst[4]);
-                Integer duration = Integer.parseInt(lst[2]);
+                int duration = Integer.parseInt(lst[2]);
                 ArrayList<Integer> users = new ArrayList<Integer>();
                 users.add(user1Id);
                 users.add(user2Id);
@@ -173,14 +168,10 @@ public class TradeManager {
     public void addTradeToFile(Trade trade) throws IOException{
         try {
             FileOutputStream fos = new FileOutputStream("phase1/src/trade.txt", true);
-            Integer id = trade.getId();
+            UUID id = trade.getId();
             String type;
             String item;
-            if (OnewayTrade.class.isInstance(trade)){
-                type = "oneway";
-            }else{
-                type = "twoway";
-            }
+            type = trade.getType();
             Integer duration = trade.getDuration();
             Integer user1 = trade.getUsers().get(0);
             Integer user2 = trade.getUsers().get(1);
@@ -239,19 +230,14 @@ public class TradeManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        for (Trade trade: tradeList){
-            addTradeToFile(trade);
+        if (tradeList.size()>0){
+            for (Trade trade: tradeList){
+                addTradeToFile(trade);
+            }
         }
     }
 
-    /**
-     * abstract class
-     * make trade happen, move items in User's list
-     */
-   // public void makeTrade(){
-
-    //};
-
-
-
+    public void setTradeId(Trade trade){
+        trade.setId(UUID.randomUUID());
+    }
 }
