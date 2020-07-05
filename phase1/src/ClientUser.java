@@ -76,7 +76,7 @@ public class ClientUser extends User {
     public int getIncompleteTransaction(){
         TradeManager a = new TradeManager();
         int number=0;
-        for (Integer i : tradeHistory) {
+        for (UUID i : tradeHistory) {
             if (a.getTrade(i).status.equals("incomplete")) {
                 number++;
             }
@@ -90,7 +90,7 @@ public class ClientUser extends User {
         LocalDateTime x  = s.getCreateTime();
         LocalDateTime y = x.minusDays(7);
         int number = 0;
-        for (Integer i : tradeHistory){
+        for (UUID i : tradeHistory){
             if(a.getTrade(i).getCreateTime().isAfter(y) && a.getTrade(i).getCreateTime().isBefore(x)){
                 number ++;
             }

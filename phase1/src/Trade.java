@@ -3,12 +3,12 @@ import MeetingSystem.Meeting;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.UUID;
 
 public abstract class Trade {
     private Meeting meeting;
     protected String status;
-    private static int numOfTrade;
-    private int id;
+    private UUID id;
     private Meeting secondMeeting;
     private final int duration;
     private LocalDateTime createTime; //the time trade is created
@@ -21,9 +21,8 @@ public abstract class Trade {
     public Trade(int duration, LocalDateTime time){
         this.status = "disagreed";
         this.duration = duration;
-        numOfTrade++;
-        id = numOfTrade;
         createTime  = time;
+        id = UUID.randomUUID();
     }
 
     public LocalDateTime getCreateTime(){
@@ -38,11 +37,11 @@ public abstract class Trade {
      * return id of the Trade when print Trade
      * @return id of the Trade
      */
-    public int getId(){
+    public UUID getId(){
         return id;
     }
 
-    public void setId(int id){this.id = id;}
+    public void setId(UUID id){this.id = id;}
 
     /**
      * getter for status
@@ -122,6 +121,8 @@ public abstract class Trade {
     public abstract ArrayList<Item> getItemList();
 
     public abstract void makeTrade() throws IOException;
+
+    public abstract String getType();
 
 
 

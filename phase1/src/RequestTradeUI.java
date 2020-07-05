@@ -5,18 +5,21 @@ import java.io.InputStreamReader;
 public class RequestTradeUI{
     ClientUser currUser;
     Item item;
+    User tarUser;
     TradeController trc;
     Inventory iv = new Inventory();
     UserManager um = new UserManager();
 
     public RequestTradeUI(ClientUser currUser, Item item) throws IOException {
         trc = new TradeController(currUser);
-
+        this.currUser = currUser;
+        tarUser = trc.getTarUser(item);
+        this.item = item;
     }
 
-    public void run() throws AccountFrozenException, IOException {
+    public void run() throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        trc.checkFrozen();
+        trc.checkInput();
         while (true) {
             System.out.println("menu: \n 1.one way(temporary)\n 2.one way(permanent)" +
                     "\n 3.two way(temporary)\n 4.two way(permanent)");

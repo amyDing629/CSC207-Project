@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.UUID;
 
 public class TradeUI {
     TradeManager tm = new TradeManager();
@@ -15,7 +16,7 @@ public class TradeUI {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     TradePresenter tp;
 
-    public TradeUI(ClientUser currUser, Integer tradeId) throws IOException {
+    public TradeUI(ClientUser currUser, UUID tradeId) throws IOException {
         TradeManager tradeManager = new TradeManager();
         this.currUser = currUser;
         trade = tm.getTrade(tradeId);
@@ -27,7 +28,7 @@ public class TradeUI {
     //1st meeting not complete,run meeting system
     //1st meeting complete(temporary), run second meeting system
     //1st meeting complete(permanent), show your trade has completed
-    public void run() throws IOException {
+    public void run() {
         boolean becomeComplete = false;
 
         int exit = 0;
