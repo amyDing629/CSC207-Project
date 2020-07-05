@@ -2,7 +2,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.UUID;
-abstract class User {
+public class User {
     protected UUID id;
     protected String password;
     protected String username;

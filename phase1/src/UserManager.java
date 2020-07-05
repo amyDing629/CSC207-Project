@@ -87,7 +87,7 @@ public class UserManager {
                 String[] c = b.get(6).split("; ");
                 ArrayList<String> lineList = new ArrayList<>(Arrays.asList(c));
 
-                ClientUser d = new ClientUser(b.get(1), b.get(2), true);
+                User d = new User(b.get(1), b.get(2), true);
                 d.setId(UUID.fromString(b.get(0)));
                 d.setNotification(lineList);
 
