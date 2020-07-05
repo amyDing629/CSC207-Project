@@ -54,7 +54,9 @@ public class User {
      */
     private List<String> lend;
     private List<String> borrowed;
-
+    /**
+     * the difference amount between the amount of
+     */
     private int diff;
 
     /**
@@ -266,6 +268,11 @@ public class User {
 
     public List<String> getBorrowed() {
         return borrowed;
+    }
+
+    public void setDescription(String a, String name){
+        Inventory b = new Inventory();
+        b.getItem(name).setDescription(a);
     }
 
 
