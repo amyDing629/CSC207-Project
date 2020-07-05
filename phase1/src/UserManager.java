@@ -140,7 +140,7 @@ public class UserManager {
         try{
             FileOutputStream output = new FileOutputStream("phase1/src/username.txt", true);
             String name = u.getUsername();
-            String s = u.getId().toString() + ", " + name + ", "  + u.getPassword()+ ", "  + u.getIsAdmin()+ ", "  + u.getIsfrozen()+ ", "  + u.getIsBorrow()+ ", ";
+            String s = u.getId().toString() + ", " + name + ", "  + u.getPassword()+ ", "  + u.getIsAdmin()+ ", "  + u.getIsFrozen()+ ", "  + u.getIsBorrow()+ ", ";
             StringBuilder m = new StringBuilder();
             for(String i: u.getNotification()){
                 m.append(i).append("; ");
@@ -199,7 +199,7 @@ public class UserManager {
         return null;
     }
 
-    public List<Trade> findTrade(Integer id){
+    public List<Trade> findTrade(UUID id){
         try{
             if(readFile().size() == 0){return null;}
             TradeManager a = new TradeManager();
