@@ -61,6 +61,7 @@ public class Login {
             if (a.verifyUser(username, password)) {
                 while (true) {
                     System.out.println("Notifications:\n");// display all user's notifications.
+                    System.out.println("Trade limit: "+a.getUser(username).getTradeNumber()+"/"+a.getUser(username).getWeekTransactionLimit());
                     System.out.println("Actions:\n1.Edit information\n2.Message\n3.Inventory\n4.Message\n5.Trade History\n6.Market\n0.quit to menu");
                     System.out.print(">");
                     int op = sc.nextInt();
@@ -162,7 +163,7 @@ public class Login {
                     System.out.println("Type in the username of user you want to freeze, type 0 to quit.");
                     String input3=sc.nextLine();
                     if (!input3.equals("0")){
-                        User ha= (User) a.getUser(input3);
+                        User ha=a.getUser(input3);
                         if (ha==null){
                             System.out.println("Sorry there is no such user, returning to main menu.");
                         }
@@ -177,7 +178,7 @@ public class Login {
                     System.out.println("Type in the user you want to set to admin, type 0 to quit.");
                     String input4=sc.nextLine();
                     if (!input4.equals("0")){
-                        User ha= (User) a.getUser(input4);
+                        User ha=a.getUser(input4);
                         if (ha==null){
                             System.out.println("Sorry there is no such user, returning to main menu.");
                         }

@@ -34,19 +34,16 @@ public class User {
     public String getPassword() {
         return password;
     }
-    public String getUsername(){return username;};
+    public String getUsername(){return username;}
     public UUID getId() {
         return id;
     }
 
-    public boolean getIsfrozen(){
+    public boolean getIsFrozen(){
         return isFrozen;
     }
 
     public List<String> getNotification(){return notification;}
-    public void changePassword(String password) {
-        this.password=password;
-    }
 
     public void setIncompleteTransaction(int incompleteTransaction) {
         this.incompleteTransactionLimit = incompleteTransaction;
@@ -55,19 +52,21 @@ public class User {
     public void setId(UUID a){this.id = a;}
 
     public void setWeekTransactionLimit(int weekTransaction){
-
         this.weekTransactionLimit = weekTransaction;
     }
 
     public void addWishes(String hi){
         this.wishLend.add(hi);
     }
+
     public void removeBWishes(String hi){
         this.wishBorrow.remove(hi);
     }
+
     public void removeLWishes(String hi){
         this.wishLend.remove(hi);
     }
+
     public void setWishLend(List<String> wishLend){
         this.wishLend = wishLend;
     }
@@ -188,6 +187,7 @@ public class User {
 
     public int getTradeNumber(){
         TradeManager a = new TradeManager();
+        if(tradeHistory.size() == 0){return 0;}
         Trade s = a.getTrade(tradeHistory.get(tradeHistory.size() - 1));
         LocalDateTime x  = s.getCreateTime();
         LocalDateTime y = x.minusDays(7);
@@ -210,10 +210,6 @@ public class User {
 
     public List<String> getBorrowed() {
         return borrowed;
-    }
-
-    public boolean getIsFrozen(){
-        return isFrozen;
     }
 
 

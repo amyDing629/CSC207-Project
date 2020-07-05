@@ -6,8 +6,6 @@ public class AdministrativeUser extends User {
         super(username, password, isAdmin);
     }
 
-
-
     public void freeze(User a) throws IOException {
         a.setFrozen(false);
     }
