@@ -7,11 +7,11 @@ public class AdministrativeUser extends User {
     }
 
     public void freeze(User a) throws IOException {
-        a.setFrozen(false);
+        a.setFrozen(true);
     }
 
     public void unfreeze(User a) throws IOException {
-        a.setFrozen(true);
+        a.setFrozen(false);
     }
 
     public void addNewUser(String username, String password) throws IOException {
