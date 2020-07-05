@@ -63,7 +63,7 @@ public class TradeController {
         if (currTrade.getStatus().equals("unconfirmed")) {
             return "confirm trade";
         }else if (currTrade.getStatus().equals("cancelled")){
-            return "cancel";
+            return "cancelled";
         }else if (currTrade.getStatus().equals("complete")) {
             return "complete";
         } else if (currTrade.getMeeting() == null || currTrade.getMeeting().getStatus().equals("incomplete")){

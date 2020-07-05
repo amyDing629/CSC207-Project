@@ -56,7 +56,6 @@ public class TradeUI {
                                 break;
                             case "confirm trade":
                                 confirmTrade();
-                                System.out.println("the trade has been confirmed");
                                 break;
                             case "first meeting" :
                                 System.out.println("enter first meeting");
@@ -139,10 +138,12 @@ public class TradeUI {
                 String confirm = br.readLine();
                 if (confirm.equals("1")) {
                     tc.confirmTrade(trade);
+                    System.out.println("the trade has been confirmed");
                     break;
                 }
                 else if (confirm.equals("2")){
                     tc.cancelTrade(trade);
+                    System.out.println("the trade has been cancelled");
                     break;
                 }else{
                     System.out.println("wrong input, please type again");
