@@ -71,8 +71,8 @@ public class OnewayTrade extends Trade {
 
     @Override
     public void makeTrade() throws IOException {
-        ClientUser bor = (ClientUser)um.getUser(borrowerId);
-        ClientUser lend = (ClientUser)um.getUser(lenderId);
+        User bor = um.getUser(borrowerId);
+        User lend = (User)um.getUser(lenderId);
         bor.getWishBorrow().remove(item.getName());
         lend.getWishLend().remove(item.getName());
         iv.getLendingList().remove(item);

@@ -3,14 +3,14 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class RequestTradeUI{
-    ClientUser currUser;
+    User currUser;
     Item item;
     User tarUser;
     TradeController trc;
     Inventory iv = new Inventory();
     UserManager um = new UserManager();
 
-    public RequestTradeUI(ClientUser currUser, Item item) throws IOException {
+    public RequestTradeUI(User currUser, Item item) throws IOException {
         trc = new TradeController(currUser);
         this.currUser = currUser;
         tarUser = trc.getTarUser(item);

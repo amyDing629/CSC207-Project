@@ -2,20 +2,20 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 
 public class TradeController {
-    private final ClientUser currUser;
-    private ClientUser tarUser;
+    private final User currUser;
+    private User tarUser;
     private final TradeManager tm = new TradeManager();
     private UserManager um = new UserManager();
 
 
-    public TradeController(ClientUser currUser) throws IOException {
+    public TradeController(User currUser) throws IOException {
         this.currUser = currUser;
 
     }
 
 
-    public ClientUser getTarUser(Item item) throws IOException {
-        tarUser = (ClientUser) um.getUser(item.getOwnerName());
+    public User getTarUser(Item item) throws IOException {
+        tarUser = um.getUser(item.getOwnerName());
         return tarUser;
     }
 

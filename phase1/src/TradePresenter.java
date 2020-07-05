@@ -1,9 +1,9 @@
 public class TradePresenter {
-    ClientUser currUser;
+    User currUser;
     Trade trade;
 
 
-    public TradePresenter(ClientUser currUser, Trade trade){
+    public TradePresenter(User currUser, Trade trade){
         this.currUser = currUser;
         this.trade = trade;
     }

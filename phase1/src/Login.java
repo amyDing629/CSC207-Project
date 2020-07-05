@@ -105,7 +105,7 @@ public class Login {
             UserManager a=new UserManager();
             //usermanger username verification?
             if (a.getUser(username) == null) {
-                ClientUser user1 = new ClientUser(username, password, false);
+                User user1 = new User(username, password, false);
                 a.addUser(user1);
                 System.out.println("Your account has been successfully created!");
                 System.out.println("Your id: " + user1.getId());
@@ -162,7 +162,7 @@ public class Login {
                     System.out.println("Type in the username of user you want to freeze, type 0 to quit.");
                     String input3=sc.nextLine();
                     if (!input3.equals("0")){
-                        ClientUser ha= (ClientUser) a.getUser(input3);
+                        User ha= (User) a.getUser(input3);
                         if (ha==null){
                             System.out.println("Sorry there is no such user, returning to main menu.");
                         }
@@ -177,7 +177,7 @@ public class Login {
                     System.out.println("Type in the user you want to set to admin, type 0 to quit.");
                     String input4=sc.nextLine();
                     if (!input4.equals("0")){
-                        ClientUser ha= (ClientUser) a.getUser(input4);
+                        User ha= (User) a.getUser(input4);
                         if (ha==null){
                             System.out.println("Sorry there is no such user, returning to main menu.");
                         }

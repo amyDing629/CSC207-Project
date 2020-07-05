@@ -32,7 +32,7 @@ public class tradeMain {
         tm.updateTradeHistory(amy.getId(),daniel.getId(),trade);//not working
         //amy.getTradeHistory().add(trade.getId());
         System.out.println(amy.getTradeHistory());
-        TradeUI tr = new TradeUI((ClientUser)amy,tm.getTradeList().get(0).getId());
+        TradeUI tr = new TradeUI(amy,tm.getTradeList().get(0).getId());
         tr.run();
 
         /*

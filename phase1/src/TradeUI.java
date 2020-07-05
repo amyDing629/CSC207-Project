@@ -10,13 +10,13 @@ import java.util.UUID;
 
 public class TradeUI {
     TradeManager tm = new TradeManager();
-    ClientUser currUser;
+    User currUser;
     Trade trade;
     TradeController tc;
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     TradePresenter tp;
 
-    public TradeUI(ClientUser currUser, UUID tradeId) throws IOException {
+    public TradeUI(User currUser, UUID tradeId) throws IOException {
         TradeManager tradeManager = new TradeManager();
         this.currUser = currUser;
         trade = tm.getTrade(tradeId);
