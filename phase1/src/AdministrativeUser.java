@@ -8,32 +8,12 @@ public class AdministrativeUser extends User {
 
 
 
-    @Override
-    public String getPassword() {
-        return password;
+    public void freeze(User a) throws IOException {
+        a.setFrozen(false);
     }
 
-
-    @Override
-    public List<UUID> getTradeHistory() {
-        return tradeHistory;
-    }
-
-
-    @Override
-    public String getUsername() {
-        return username;
-    }
-
-
-
-
-    public void freeze(ClientUser a) throws IOException {
-        a.setIsFrozen(false);
-    }
-
-    public void unfreeze(ClientUser a) throws IOException {
-        a.setIsFrozen(true);
+    public void unfreeze(User a) throws IOException {
+        a.setFrozen(true);
     }
 
     public void addNewUser(String username, String password) throws IOException {
@@ -46,15 +26,15 @@ public class AdministrativeUser extends User {
     }
 
 
-    public void tradeLimit(ClientUser a) throws IOException {
-        a.setIsFrozen(a.getTradeNumber() > a.getWeekTransactionLimit());
+    public void tradeLimit(User a) throws IOException {
+        a.setFrozen(a.getTradeNumber() > a.getWeekTransactionLimit());
     }
 
-    public void incompleteTransaction(ClientUser a) throws IOException {
-        a.setIsFrozen(a.getIncompleteTransaction() <= a.getIncompleteTransactionLimit());
+    public void incompleteTransaction(User a) throws IOException {
+        a.setFrozen(a.getIncompleteTransaction() <= a.getIncompleteTransactionLimit());
     }
 
-    public void canBorrow(int c, ClientUser b) throws IOException {
+    public void canBorrow(int c, User b) throws IOException {
         b.setBorrow(b.getLend().size() + c >= b.getBorrowed().size());
     }
 }
