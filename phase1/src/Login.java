@@ -130,7 +130,7 @@ public class Login {
             System.out.println("Actions:\n1.Change username\n2.Change password");
             if (user.getIsAdmin()) {
                 System.out.print("3.Freeze a user\n4.Change user's limit\n5.add new item into the system\n");
-                if(user.getId()==1){
+                if(user.getId()==null){
                     System.out.print("6.Set user into admin\n");
                 }
             }

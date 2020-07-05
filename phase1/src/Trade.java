@@ -75,7 +75,7 @@ public abstract class Trade {
      * @return the meeting set
      */
     // can input time and place and create new Meeting object based on Meeting constructor
-    public Meeting setMeeting(LocalDateTime dateTime, String place, ArrayList<Integer> traderIds){
+    public Meeting setMeeting(LocalDateTime dateTime, String place, ArrayList<UUID> traderIds){
         this.meeting = new Meeting(dateTime, place, traderIds);
 
         return meeting;
@@ -88,7 +88,7 @@ public abstract class Trade {
      * @param traderIds the id of the two traders
      * @return the meeting set
      */
-    public Meeting setSecondMeeting(LocalDateTime dateTime, String place, ArrayList<Integer> traderIds){
+    public Meeting setSecondMeeting(LocalDateTime dateTime, String place, ArrayList<UUID> traderIds){
         this.secondMeeting = new Meeting(dateTime, place, traderIds);
         return secondMeeting;
     }
@@ -112,7 +112,7 @@ public abstract class Trade {
     public void changeMeeting(){
     }
 
-    abstract ArrayList<Integer> getUsers();
+    abstract ArrayList<UUID> getUsers();
 
     public String toString(){
         return "this is an abstract trade class";

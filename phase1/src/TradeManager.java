@@ -6,7 +6,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -17,7 +16,7 @@ import java.util.UUID;
  */
 public class TradeManager {
     private ArrayList<Trade> tradeList;
-    private UserManager userManager = new UserManager();
+    private UserManager userManager;
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
 
@@ -29,6 +28,7 @@ public class TradeManager {
     public TradeManager(){
         tradeList = new ArrayList<>();
         readFile();
+        userManager = new UserManager();
     }
 
     public ArrayList<Trade> getTradeList(){
@@ -44,7 +44,7 @@ public class TradeManager {
      * @param duration the duration of this Trade, unit (days). -1 means the Trade is permanent.
      * @return the created newTrade
      */
-    public Trade createOnewayTrade(Integer currUserId, Integer otherUserId, Item item, int duration, LocalDateTime time)
+    public Trade createOnewayTrade(UUID currUserId, UUID otherUserId, Item item, int duration, LocalDateTime time)
             throws IOException {
         OnewayTrade newTrade = new OnewayTrade(currUserId, otherUserId, item, duration, time);
         tradeList.add(newTrade);
@@ -63,7 +63,7 @@ public class TradeManager {
      * @param item2to1 the other Item to be trade in this created Trade.
      * @param duration the duration of this Trade, unit (days). -1 means the Trade is permanent.
      */
-    public Trade createTwowayTrade(Integer currUserId, Integer otherUserId, Item item1to2, Item item2to1, int duration,
+    public Trade createTwowayTrade(UUID currUserId, UUID otherUserId, Item item1to2, Item item2to1, int duration,
                                   LocalDateTime time) throws IOException {
         TwowayTrade newTrade = new TwowayTrade(currUserId, otherUserId, item1to2, item2to1, duration, time);
         tradeList.add(newTrade);
@@ -104,18 +104,18 @@ public class TradeManager {
             while (line != null) {
                 String[] lst = line.split(",");
                 UUID tradeId = UUID.fromString(lst[0]);
-                Integer user1Id = Integer.parseInt(lst[3]);
-                Integer user2Id = Integer.parseInt(lst[4]);
+                UUID user1Id = UUID.fromString(lst[3]);
+                UUID user2Id = UUID.fromString(lst[4]);
                 int duration = Integer.parseInt(lst[2]);
-                ArrayList<Integer> users = new ArrayList<Integer>();
+                ArrayList<UUID> users = new ArrayList<UUID>();
                 users.add(user1Id);
                 users.add(user2Id);
                 LocalDateTime tradeTime = LocalDateTime.parse(lst[10],formatter);
                 Item item1 = iv.getItem(lst[5]);
                 String fstMeeting = lst[7];
                 String scdMeeting = lst[8];
-                HashMap<Integer, Boolean> idToC = new HashMap<Integer, Boolean>();
-                HashMap<Integer, MeetingEditor> idToE = new HashMap<>();
+                HashMap<UUID, Boolean> idToC = new HashMap<>();
+                HashMap<UUID, MeetingEditor> idToE = new HashMap<>();
 
                 if (lst[1].equals("oneway")){
                     trade = new OnewayTrade(user1Id,user2Id,item1,duration,tradeTime);
@@ -173,8 +173,8 @@ public class TradeManager {
             String item;
             type = trade.getType();
             Integer duration = trade.getDuration();
-            Integer user1 = trade.getUsers().get(0);
-            Integer user2 = trade.getUsers().get(1);
+            UUID user1 = trade.getUsers().get(0);
+            UUID user2 = trade.getUsers().get(1);
             ArrayList<Item> items = trade.getItemList();
             String item1; String item2;
             if (items.size() == 1){
@@ -187,10 +187,10 @@ public class TradeManager {
             Meeting fm = trade.getMeeting();
             String fmStr = null;
             if (fm != null){
-                HashMap<Integer, MeetingEditor> idToE = fm.getIdToEditor();
+                HashMap<UUID, MeetingEditor> idToE = fm.getIdToEditor();
                 String idToEdStr = idToE.get(user1).getTimeOfEdition() + ";"+
                         idToE.get(user2).getTimeOfEdition();
-                HashMap<Integer, Boolean> conStatus = fm.getConfirmedStatusFull();
+                HashMap<UUID, Boolean> conStatus = fm.getConfirmedStatusFull();
                 String idToCoStr = Boolean.toString(conStatus.get(user1)) + ";" + Boolean.toString(conStatus.get(user2));
                 //2020-06-30 11:49/home/incomplete/0;0/false;false
                 fmStr = fm.getDateTime().format(formatter)+"/"+fm.getPlace()+"/"+fm.getStatus()

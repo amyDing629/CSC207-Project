@@ -2,9 +2,11 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.UUID;
+
 public class TwowayTrade extends Trade {
-    private final Integer trader1Id;
-    private final Integer trader2Id;
+    private final UUID trader1Id;
+    private final UUID trader2Id;
     private final Item item1to2;
     private final Item item2to1;
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -18,7 +20,7 @@ public class TwowayTrade extends Trade {
      * @param item2 the item that trader2 give to trader1
      * @param duration whether the trade is temporary or permanent
      */
-    public TwowayTrade(Integer trader1Id, Integer trader2Id, Item item1, Item item2, int duration, LocalDateTime time){
+    public TwowayTrade(UUID trader1Id, UUID trader2Id, Item item1, Item item2, int duration, LocalDateTime time){
         super(duration, time);
         this.trader1Id = trader1Id;
         this.trader2Id = trader2Id;
@@ -27,10 +29,10 @@ public class TwowayTrade extends Trade {
     }
 
 
-    public int getTrader1Id(){
+    public UUID getTrader1Id(){
         return trader1Id;
     }
-    public int getTrader2Id(){
+    public UUID getTrader2Id(){
         return trader2Id;
     }
     /**
@@ -49,8 +51,8 @@ public class TwowayTrade extends Trade {
         return item2to1;
     }
 
-    public ArrayList<Integer> getUsers(){
-        ArrayList<Integer> users = new ArrayList<Integer>();
+    public ArrayList<UUID> getUsers(){
+        ArrayList<UUID> users = new ArrayList<>();
         users.add(trader1Id);
         users.add(trader2Id);
         return users;

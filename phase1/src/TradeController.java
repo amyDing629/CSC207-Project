@@ -52,7 +52,6 @@ public class TradeController {
     }
     public void createTrade(String line, Item item1, Item item2) throws IOException {
         LocalDateTime time = LocalDateTime.now();
-        Trade trade;
         if (line.equals("3")){
             tm.createTwowayTrade(currUser.getId(), tarUser.getId(), item1, item2, 30, time);
         }else{

@@ -2,10 +2,11 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class OnewayTrade extends Trade {
-    private final Integer lenderId;
-    private final Integer borrowerId;
+    private final UUID lenderId;
+    private final UUID borrowerId;
     private final Item item;
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     private final UserManager um = new UserManager();
@@ -18,7 +19,7 @@ public class OnewayTrade extends Trade {
      * @param item the two item traders what to trade
      * @param duration whether the trade is temporary or permanent
      */
-    public OnewayTrade(Integer borrower, Integer lender, Item item, int duration, LocalDateTime time){
+    public OnewayTrade(UUID borrower, UUID lender, Item item, int duration, LocalDateTime time){
         super(duration, time);
         borrowerId = borrower;
         lenderId = lender;
@@ -30,7 +31,7 @@ public class OnewayTrade extends Trade {
      * getter for lender of the trade
      * @return lender
      */
-    public int getLenderId() {
+    public UUID getLenderId() {
         return lenderId;
     }
 
@@ -38,7 +39,7 @@ public class OnewayTrade extends Trade {
      * getter for borrow of the trade
      * @return borrower
      */
-    public int getBorrower() {
+    public UUID getBorrower() {
         return borrowerId;
     }
 
@@ -50,8 +51,8 @@ public class OnewayTrade extends Trade {
         return item;
     }
 
-    public ArrayList<Integer> getUsers(){
-        ArrayList<Integer> users = new ArrayList<Integer>();
+    public ArrayList<UUID> getUsers(){
+        ArrayList<UUID> users = new ArrayList<UUID>();
         users.add(borrowerId);
         users.add(lenderId);
         return users;

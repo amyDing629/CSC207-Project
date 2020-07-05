@@ -18,5 +18,9 @@ public class tradeMain {
         amy.getWishBorrow().add("peach");
         RequestTradeUI rtp = new RequestTradeUI(amy, peach);
         rtp.run();
+        System.out.println(tm.getTradeList());
+        System.out.println(tm.getTradeList().get(0));
+        TradeUI tr = new TradeUI(daniel,tm.getTradeList().get(0).getId());
+        tr.run();
     }
 }

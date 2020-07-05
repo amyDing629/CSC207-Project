@@ -1,5 +1,7 @@
 package MeetingSystem;
 
+import java.util.UUID;
+
 public class CreateLogRecord{
     /**
      * create a log record of the user making an action.
@@ -10,7 +12,7 @@ public class CreateLogRecord{
      *               - "c" for confirm meeting;
      * @return a Log
      */
-    public MeetingLogInfo createLogRecord(Integer userId, String action){
+    public MeetingLogInfo createLogRecord(UUID userId, String action){
         return new MeetingLogInfo(userId, action);
     }
 }
