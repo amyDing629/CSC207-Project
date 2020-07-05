@@ -34,5 +34,6 @@ public class AdministrativeUser extends User {
 
     public void canBorrow(int c, User b) throws IOException {
         b.setBorrow(b.getLend().size() + c >= b.getBorrowed().size());
+        b.setDiff(c);
     }
 }
