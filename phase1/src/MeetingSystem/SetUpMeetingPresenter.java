@@ -10,8 +10,6 @@ import java.util.*;
 public class SetUpMeetingPresenter {
     public LocalDateTime dateTime;
     public String place;
-//    public Integer userId;
-//    public Integer otherUserId;
 
     /**
      * Feeds the prompts of the Meeting info, including dateTime, place
