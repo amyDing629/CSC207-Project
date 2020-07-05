@@ -22,6 +22,8 @@ public class User {
         this.username = username;
         this.password = password;
         //this.id = id;
+        this.weekTransactionLimit=5;
+        this.incompleteTransactionLimit=2;
         this.notification=new ArrayList<>();
         this.wishLend= new ArrayList<>();
         this.wishBorrow= new ArrayList<>();

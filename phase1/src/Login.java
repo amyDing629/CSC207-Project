@@ -60,8 +60,8 @@ public class Login {
             //usermanger account verification? and returns a user object.
             if (a.verifyUser(username, password)) {
                 while (true) {
-                    System.out.println("Notifications:\n");// display all user's notifications.
-                    System.out.println("Trade limit: "+a.getUser(username).getTradeNumber()+"/"+a.getUser(username).getWeekTransactionLimit());
+                    System.out.println("Trade limit: " + a.getUser(username).getTradeNumber() + "/" + a.getUser(username).getWeekTransactionLimit());
+                    System.out.println("Incomplete trade limit: " + a.getUser(username).getIncomplete() + "/" + a.getUser(username).getIncompleteTransactionLimit());
                     System.out.println("Actions:\n1.Edit information\n2.Message\n3.Inventory\n4.Message\n5.Trade History\n6.Market\n0.quit to menu");
                     System.out.print(">");
                     int op = sc.nextInt();
@@ -337,6 +337,9 @@ public class Login {
         }
     }
     public void message(User user){
+        System.out.println("--------------------\nMessage");
+        System.out.println("Hello,user"+user.getUsername());
+
 
     }
     public void tradeHistory(User user){
