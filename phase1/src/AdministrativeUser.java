@@ -7,25 +7,10 @@ public class AdministrativeUser extends User {
     }
 
 
-
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
-
     @Override
     public List<UUID> getTradeHistory() {
         return tradeHistory;
     }
-
-
-    @Override
-    public String getUsername() {
-        return username;
-    }
-
-
 
 
     public void freeze(ClientUser a) throws IOException {

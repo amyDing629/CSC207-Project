@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.UUID;
 abstract class User {
@@ -14,6 +15,8 @@ abstract class User {
     protected List<UUID> tradeHistory;
     private int weekTransactionLimit;
     private int incompleteTransactionLimit;
+    private List<String> lend;
+    private List<String> borrowed;
 
     public User(String username, String password, boolean isAdmin){
         this.username = username;
@@ -28,15 +31,14 @@ abstract class User {
     }
 
 
-    public abstract String getPassword();
-    public abstract String getUsername();
+    public String getPassword() {
+        return password;
+    }
+    public String getUsername(){return username;};
     public UUID getId() {
         return id;
     }
 
-    public boolean getIsBorrow(){
-        return isBorrow;
-    }
     public boolean getIsfrozen(){
         return isFrozen;
     }
@@ -172,5 +174,47 @@ abstract class User {
     public void setPassword(String input2) {
         password=input2;
     }
+
+    public int getIncompleteTransaction(){
+        TradeManager a = new TradeManager();
+        int number=0;
+        for (UUID i : tradeHistory) {
+            if (a.getTrade(i).status.equals("incomplete")) {
+                number++;
+            }
+        }
+        return number;
+    }
+
+    public int getTradeNumber(){
+        TradeManager a = new TradeManager();
+        Trade s = a.getTrade(tradeHistory.get(tradeHistory.size() - 1));
+        LocalDateTime x  = s.getCreateTime();
+        LocalDateTime y = x.minusDays(7);
+        int number = 0;
+        for (UUID i : tradeHistory){
+            if(a.getTrade(i).getCreateTime().isAfter(y) && a.getTrade(i).getCreateTime().isBefore(x)){
+                number ++;
+            }
+        }
+        return number;
+    }
+
+    public boolean getIsBorrow() {
+        return isBorrow;
+    }
+
+    public List<String> getLend() {
+        return lend;
+    }
+
+    public List<String> getBorrowed() {
+        return borrowed;
+    }
+
+    public boolean getIsFrozen(){
+        return isFrozen;
+    }
+
 
 }
