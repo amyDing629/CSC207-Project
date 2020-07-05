@@ -7,11 +7,6 @@ public class AdministrativeUser extends User {
     }
 
 
-    @Override
-    public List<UUID> getTradeHistory() {
-        return tradeHistory;
-    }
-
 
     public void freeze(User a) throws IOException {
         a.setFrozen(false);
