@@ -23,7 +23,7 @@ public class Meeting {
      * This is Meeting's two editors.
      * Each ClientUser in a single meeting has a MeetingEditor to record the number of edits
      */
-    private HashMap<Integer, MeetingEditor> idToEditor = new HashMap<>();
+    private HashMap<UUID, MeetingEditor> idToEditor = new HashMap<>();
 
     /**
      * This is Meeting's status: "incomplete" (default), "completed", "cancelled";
@@ -38,7 +38,7 @@ public class Meeting {
      * true stands for confirmed,
      * false stands for not yet confirmed
      */
-    private HashMap<Integer, Boolean> idToConfirmedStatus = new HashMap<>();
+    private HashMap<UUID, Boolean> idToConfirmedStatus = new HashMap<UUID, Boolean>();
 
     /**
      * Constructs a new Meeting with proposed date-time to meet dateTime, proposed place to meet place, info of both
@@ -47,10 +47,10 @@ public class Meeting {
      * @param place the place proposed to the meeting
      * @param traderIds the ids of two traders attend to this meeting
      */
-    public Meeting (LocalDateTime dateTime, String place, ArrayList<Integer> traderIds) {
+    public Meeting (LocalDateTime dateTime, String place, ArrayList<UUID> traderIds) {
         this.dateTime = dateTime;
         this.place = place;
-        for (Integer i: traderIds) {
+        for (UUID i: traderIds) {
             this.idToEditor.put(i, new MeetingEditor(i));
             this.idToConfirmedStatus.put(i, false);
         }
@@ -84,15 +84,15 @@ public class Meeting {
      * Return this meeting's edit history, Hashmap(userId, MeetingEditor)
      * @return the idToEditor
      */
-    public HashMap<Integer, MeetingEditor> getIdToEditor() {
+    public HashMap<UUID, MeetingEditor> getIdToEditor() {
         return idToEditor;
     }
 
-    public MeetingEditor getEditor(Integer userId) {
+    public MeetingEditor getEditor(UUID userId) {
         return idToEditor.get(userId);
     }
 
-    public void setIdToEditor(HashMap<Integer, MeetingEditor> me) {
+    public void setIdToEditor(HashMap<UUID, MeetingEditor> me) {
         idToEditor = me;
     }
 
@@ -109,7 +109,7 @@ public class Meeting {
      * Returns the confirmed statuses for given userId. (Getter for idToConfirmedStatus)
      * @return the confirmed status of given Trader's userId
      */
-    public Boolean getConfirmedStatuses(Integer userId) {
+    public Boolean getConfirmedStatuses(UUID userId) {
         return idToConfirmedStatus.get(userId);
     }
 
@@ -117,11 +117,11 @@ public class Meeting {
      * Returns the confirmed statuses with userIds. (Getter for idToConfirmedStatus)
      * @return idToConfirmedStatus itself
      */
-    public HashMap<Integer, Boolean> getConfirmedStatusFull() {
+    public HashMap<UUID, Boolean> getConfirmedStatusFull() {
         return idToConfirmedStatus;
     }
 
-    public void setConfirmedStatusFull(HashMap<Integer, Boolean> confirmedStatus) {
+    public void setConfirmedStatusFull(HashMap<UUID, Boolean> confirmedStatus) {
         idToConfirmedStatus = confirmedStatus;
     }
 
@@ -156,7 +156,7 @@ public class Meeting {
      * Update the confirmed status of the Meeting with Trader's userId. (Setter for idToConfirmedStatus)
      * @param userId the place newly proposed to the meeting
      */
-    public void setIdToConfirm (Integer userId){
+    public void setIdToConfirm (UUID userId){
         this.idToConfirmedStatus.replace(userId, true);
     }
 

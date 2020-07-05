@@ -1,5 +1,7 @@
 package MeetingSystem;
 
+import java.util.UUID;
+
 /**
  * A Record of actions of the ClientUsers who attend this meeting.
  *
@@ -10,10 +12,10 @@ package MeetingSystem;
  */
 public class MeetingLogInfo {
 
-    Integer userId;
+    UUID userId;
     String action;
 
-    public MeetingLogInfo(Integer userId, String action) {
+    public MeetingLogInfo(UUID userId, String action) {
         this.userId = userId;
         this.action = action;
     }

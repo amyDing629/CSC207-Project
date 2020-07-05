@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Set;
+import java.util.UUID;
 
 /**
  * [Use Case Interact class]
@@ -32,8 +32,8 @@ public class MeetingSystem {
      */
     public LocalDateTime dateTime;
     public String place;
-    public static Integer userId;
-    public static Integer otherUserId;
+    public static UUID userId;
+    public static UUID otherUserId;
 
     public boolean isPermanent;
     public boolean isFirst;
@@ -48,7 +48,7 @@ public class MeetingSystem {
      * Construct a MeetingSystem.MeetingSystem object with two client users (ids)
      * @param users the users involved in this meeting
      */
-    public MeetingSystem(ArrayList<Integer> users, boolean isFirst) {
+    public MeetingSystem(ArrayList<UUID> users, boolean isFirst) {
         userId = users.get(0);
         otherUserId = users.get(1);
         this.isFirst = isFirst;
@@ -61,8 +61,9 @@ public class MeetingSystem {
      * 2. allows editing the meeting / confirming the meeting, only when
      * - the meeting has been set up already;
      * - the meeting has not been cancelled (i.e edit time of each ClientUser < threshold of edition time)
+     * @param currLogInUser
      */
-    public void run(Integer currLogInUser) throws IOException {
+    public void run(UUID currLogInUser) throws IOException {
 
         // first meeting
         if (isFirst){
@@ -118,7 +119,7 @@ public class MeetingSystem {
      * @param currLogInUser the user id of the ClientUser who sets up the meeting
      * @throws IOException unpredicted situation error
      */
-    private void runSetupSession (Integer currLogInUser) throws IOException {
+    private void runSetupSession (UUID currLogInUser) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         System.out.println("Enter \"exit\" to quit set-up-meeting session, or enter \"ok\" to continue.");
@@ -149,7 +150,7 @@ public class MeetingSystem {
     }
 
 
-    private void runEditConfirmSession(Integer currLogInUser) throws IOException {
+    private void runEditConfirmSession(UUID currLogInUser) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         System.out.println("Enter \"exit\" to quit edit-confirm-meeting session, or enter \"ee\" to edit, or enter \"cc\" to confirm.");
@@ -228,13 +229,13 @@ public class MeetingSystem {
     }
 
 
-    private boolean isEditable(Integer currLogInUser){
+    private boolean isEditable(UUID currLogInUser){
         MeetingEditor editor = meeting.getEditor(currLogInUser);
         return !editor.editsOverThreshold();
     }
 
 
-    private void runConfirmSession(Integer currLogInUser) throws IOException {
+    private void runConfirmSession(UUID currLogInUser) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         System.out.println("Enter \"cc\" to confirm, or anything else to quit confirm-meeting session.");

@@ -28,13 +28,14 @@ public class TradeUI {
     //1st meeting not complete,run meeting system
     //1st meeting complete(temporary), run second meeting system
     //1st meeting complete(permanent), show your trade has completed
-    public void run() {
+    public void run() throws IOException {
         boolean becomeComplete = false;
 
         int exit = 0;
         while (exit != 1) {
             while (true) {
                 tp.presentTradeInfo();
+                tm.updateFile();
                 System.out.println("type 1 to exit, type anything to continue with current trade");
                 try {
                     String line = br.readLine();

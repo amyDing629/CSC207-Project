@@ -171,7 +171,6 @@ public class TradeManager {
             FileOutputStream fos = new FileOutputStream("phase1/src/trade.txt", true);
             UUID id = trade.getId();
             String type;
-            String item;
             type = trade.getType();
             Integer duration = trade.getDuration();
             UUID user1 = trade.getUsers().get(0);

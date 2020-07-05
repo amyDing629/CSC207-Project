@@ -21,8 +21,8 @@ public class tradeMain {
         amy.getWishBorrow().add("peach");
         RequestTradeUI rtp = new RequestTradeUI(amy, peach);
         rtp.run();
+        */
 
-         */
         ArrayList<User> lst = um.splitUser(um.readFile());
         User amy = lst.get(0);
         User daniel = lst.get(1);
@@ -33,7 +33,17 @@ public class tradeMain {
         //amy.getTradeHistory().add(trade.getId());
         System.out.println(amy.getTradeHistory());
         TradeUI tr = new TradeUI((ClientUser)amy,tm.getTradeList().get(0).getId());
-
         tr.run();
+
+        /*
+        ArrayList<Trade> lst = tm.getTradeList();
+        System.out.println(lst);
+        lst.get(0).setStatus("incomplete");
+        tm.updateFile();
+
+         */
+
+
+
     }
 }

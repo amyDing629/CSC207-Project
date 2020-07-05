@@ -19,7 +19,7 @@ public abstract class Trade {
      * @param duration number of date, -1 means permanent, 30 means temporary.
      */
     public Trade(int duration, LocalDateTime time){
-        this.status = "disagreed";
+        this.status = "unconfirmed";
         this.duration = duration;
         createTime  = time;
         id = UUID.randomUUID();

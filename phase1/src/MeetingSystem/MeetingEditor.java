@@ -9,7 +9,7 @@ import java.util.*;
 public class MeetingEditor extends IMeetingAttendee {
 
     /** This Trader's user id. */
-    public Integer userId;
+    public UUID userId;
 
 
     /** This Trader's times of editing place and/or time of meeting. */
@@ -19,7 +19,7 @@ public class MeetingEditor extends IMeetingAttendee {
      * Constructs a new Trader with user id userId.
      * @param userId the user id
      */
-    public MeetingEditor (Integer userId) {
+    public MeetingEditor (UUID userId) {
         this.userId = userId;
     }
 
@@ -35,7 +35,7 @@ public class MeetingEditor extends IMeetingAttendee {
      * Returns this Trader's user id.
      * @return the user id
      */
-    public int getUserId() {
+    public UUID getUserId() {
         return userId;
     }
 

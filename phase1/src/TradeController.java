@@ -77,7 +77,7 @@ public class TradeController {
         }
     }
 
-    public void confirmTrade(Trade currTrade){
+    public void confirmTrade(Trade currTrade) {
         currTrade.setStatus("incomplete");
     }
 
@@ -85,7 +85,5 @@ public class TradeController {
         currTrade.setStatus("complete");
         currTrade.makeTrade();
     }
-
-
 }
 

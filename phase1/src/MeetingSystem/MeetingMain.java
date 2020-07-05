@@ -3,10 +3,11 @@ package MeetingSystem;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.UUID;
 
 public class MeetingMain {
     // two ClientUsers
-    public static ArrayList<Integer> tradeIds = new ArrayList<>(Arrays.asList(1, 2));
+    public static ArrayList<UUID> tradeIds = new ArrayList<>();
 
     private static Meeting meeting = null;
     private static Meeting meeting2 = null;

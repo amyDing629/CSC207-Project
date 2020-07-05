@@ -5,10 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * [Use Case class]
@@ -24,15 +21,15 @@ public class MeetingActivities {
      * @param place the proposed the place to meet
      * @return the meeting that is newly constructed
      */
-    public static Meeting setUpMeeting(Integer userId, Integer otherUserId, LocalDateTime dateTime, String place) {
-        ArrayList<Integer> userIds = new ArrayList<>(Arrays.asList(userId, otherUserId));
+    public static Meeting setUpMeeting(UUID userId, UUID otherUserId, LocalDateTime dateTime, String place) {
+        ArrayList<UUID> userIds = new ArrayList<>(Arrays.asList(userId, otherUserId));
         return new Meeting(dateTime, place, userIds);
     }
 
 
-    public Meeting setUpSecondMeeting(Integer userId, Integer otherUserId, LocalDateTime firstDateTime, String place,
+    public Meeting setUpSecondMeeting(UUID userId, UUID otherUserId, LocalDateTime firstDateTime, String place,
                                        Integer durationDays){
-        ArrayList<Integer> ids = new ArrayList<>(Arrays.asList(userId, otherUserId));
+        ArrayList<UUID> ids = new ArrayList<>(Arrays.asList(userId, otherUserId));
         return new Meeting(firstDateTime.plusDays(durationDays), place, ids);
     }
 
@@ -44,7 +41,7 @@ public class MeetingActivities {
      * - record user id
      * It is the user's choice to input either time only, place only, or time + place.
      */
-    public static void editMeeting(Meeting meeting, Integer userId, LocalDateTime dateTime, String place){
+    public static void editMeeting(Meeting meeting, UUID userId, LocalDateTime dateTime, String place){
         MeetingEditor editHistory = meeting.getEditor(userId);
         // first update edition time; then check if this time is over the threshold
         editHistory.updateTimeOfEdition();
@@ -60,9 +57,9 @@ public class MeetingActivities {
      * Allow user to confirm the meeting
      * Update the confirm status history idToConfirmedStatus in this meeting
      */
-    public static boolean confirmMeeting(Meeting meeting, Integer userId) {
+    public static boolean confirmMeeting(Meeting meeting, UUID userId) {
         boolean confirmed = false;
-        HashMap<Integer, Boolean> status = meeting.getConfirmedStatusFull();
+        HashMap<UUID, Boolean> status = meeting.getConfirmedStatusFull();
         if (status.containsKey(userId)){
             // update confirmedStatus
             if (!status.get(userId)){
