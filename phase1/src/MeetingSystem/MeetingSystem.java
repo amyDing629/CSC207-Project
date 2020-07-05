@@ -37,6 +37,8 @@ public class MeetingSystem {
 
     public boolean isPermanent;
     public boolean isFirst;
+    public boolean isSetUp;
+    public boolean isCancel;
 
     public static Meeting meeting = null;
 //    public static Meeting meeting2 = null;
@@ -52,6 +54,9 @@ public class MeetingSystem {
         userId = users.get(0);
         otherUserId = users.get(1);
         this.isFirst = isFirst;
+        isSetUp = false;
+        isCancel = false;
+
     }
 
     /**
@@ -81,11 +86,21 @@ public class MeetingSystem {
     public ArrayList<Object> runResult(){
         // return time, place, status
         ArrayList<Object> result = new ArrayList<>(Arrays.asList(dateTime, place));
-        String meetingStatus = meeting.getStatus();
+        String status;
+        if (meeting.getStatus().equals("completed")){
+            status = "completed";
+        }else if (isSetUp){
+            status = "setUp";
+        }else if (isCancel){
+            status = "cancel";
+        }else{
+            status = "incomplete";
+        }
+       String meetingStatus = meeting.getStatus();
 //        if (meetingStatus.equals("completed") && meeting2 != null){
 //            meetingStatus = meeting2.getStatus();
 //        }
-        result.add(meetingStatus);
+        result.add(status);
 
         System.out.println("RESULT:");
         System.out.println("current meeting time: " + dateTime);
@@ -110,6 +125,7 @@ public class MeetingSystem {
 //        otherUserId = ids[1];
 
         Meeting m = MeetingActivities.setUpMeeting(userId, otherUserId, dateTime, place);
+        isSetUp = true;
         meeting = m;
         return m;
     }
@@ -133,6 +149,7 @@ public class MeetingSystem {
                 dateTime = setUpMeeting.dateTime;
                 place = setUpMeeting.place;
                 meeting = MeetingActivities.setUpMeeting(userId, otherUserId, dateTime, place);
+                isSetUp = true;
 
                 System.out.println("Success: A meeting has been set up!");
                 System.out.println("  " + "- proposed time is:" + dateTime.toString());
@@ -191,6 +208,7 @@ public class MeetingSystem {
                         assert cancelled;
                         System.out.println("Meeting Cancelled!");
                         System.out.println("Meeting current status: " + meeting.getStatus());
+                        isCancel = true;
                     }
                     break;
 

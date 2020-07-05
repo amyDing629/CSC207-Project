@@ -4,6 +4,7 @@ import MeetingSystem.Meeting;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.UUID;
@@ -41,13 +42,15 @@ public class TradeUI {
                     String line = br.readLine();
                     if (line.equals("1")) {
                         exit = 1;
-                        System.out.println("you have exit the trade UI");
+                        System.out.println("you have exited the trade UI");
                         break;
                     } else {
                         if (becomeComplete){
                             tc.completeTrade(trade);
                         }
                         switch (tc.checkTradeMeeting(trade)) {
+                            case "cancelled":
+                                System.out.println("the trade has been cancelled");
                             case "complete":
                                 System.out.println("the trade has been completed");
                                 break;
@@ -63,6 +66,13 @@ public class TradeUI {
                                 if (result.get(2) == "complete" && trade.getDuration() == -1) {
                                     becomeComplete = true;
                                 }
+                                if (result.get(2) == "setUp"){
+                                    trade.setMeeting((LocalDateTime)result.get(0),
+                                            (String)result.get(1),trade.getUsers());
+                                }
+                                if (result.get(2) == "cancel"){
+                                    trade.setStatus("cancelled");
+                                }
                                 break;
                             case "second meeting":
                                 System.out.println("enter second meeting");
@@ -72,6 +82,10 @@ public class TradeUI {
                                 ArrayList<Object> result2 = smt.runResult();
                                 if (result2.get(2) == "complete") {
                                     becomeComplete = true;
+                                }
+                                if (result2.get(2) == "setUp"){
+                                    trade.setSecondMeeting((LocalDateTime)result2.get(0),
+                                            (String)result2.get(1),trade.getUsers());
                                 }
                                 break;
                         }
@@ -128,6 +142,7 @@ public class TradeUI {
                     break;
                 }
                 else if (confirm.equals("2")){
+                    tc.cancelTrade(trade);
                     break;
                 }else{
                     System.out.println("wrong input, please type again");
