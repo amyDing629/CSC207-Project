@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -58,8 +59,7 @@ public class Login {
             UserManager a=new UserManager();
             //usermanger account verification? and returns a user object.
             if (a.verifyUser(username, password)) {
-                int exit = 0;
-                while (exit != 1) {
+                while (true) {
                     System.out.println("Notifications:\n");// display all user's notifications.
                     System.out.println("Actions:\n1.Edit information\n2.Message\n3.Inventory\n4.Message\n5.Trade History\n6.Market\n0.quit to menu");
                     System.out.print(">");
@@ -78,11 +78,11 @@ public class Login {
                     } else if (op == 6) {
                         market(a.getUser(username));
                     } else if (op == 0) {
-                        exit = 1;
+                        input=1;
+                        break;
                     } else {
                         System.out.println("Sorry I dont undertand your command, plz enter it again");
                     }
-                    exit = 0;
                 }
             } else {
                 System.out.println("You have incorrect username or password, please try to login again, enter any number to continue. enter 1 to exit.");
@@ -120,7 +120,6 @@ public class Login {
             }
         }
     }
-
     public void editInfo(User user) throws IOException {
         Scanner sc=new Scanner(System.in);
         int exit=-1;
@@ -186,32 +185,84 @@ public class Login {
                     }
                     break;
                 case 5:
+                    Inventory v = new Inventory();
                     System.out.println("add new item into the system");
-                    int exit1=0;
-                    Inventory v=new Inventory();
-                    String name="";
-                    while (exit1==0){
-                        System.out.println("Type the name of the item");
-                        name=sc.nextLine();
-                        Boolean t=false;
-                        for(Item n:v.getLendingList()){
-                            if (n.getName().equals(name)){
-                                t=true;
+                    System.out.println("Menu:\n1.Add item your self.\n2.Approve request from users");
+                    String inputa=sc.nextLine();
+                    if(inputa.equals("1")) {
+                        int exit1 = 0;
+                        String name = "";
+                        while (exit1 == 0) {
+                            System.out.println("Type the name of the item");
+                            name = sc.nextLine();
+                            boolean t = false;
+                            for (Item n : v.getLendingList()) {
+                                if (n.getName().equals(name)) {
+                                    t = true;
+                                    break;
+                                }
+                            }
+                            if (t) {
+                                System.out.println("The item is already exist,please enter the name again");
+                            } else {
+                                exit1 = 1;
                             }
                         }
-                        if (t){
-                            System.out.println("The item is already exist,please enter the name again");
-                        }
-                        else{
-                            exit1=1;
+                        System.out.println("Type the description of the item");
+                        String des = sc.nextLine();
+                        Item i = new Item(name, user.getUsername());
+                        i.setDescription(des);
+                        v.addItem(i);
+                    }
+                    else if(inputa.equals("2")){
+                        try {
+                            BufferedReader reader = new BufferedReader(new FileReader(
+                                    "phase1/src/ItemApproval.txt"));
+                            String line = reader.readLine();
+                            ArrayList<ArrayList<String>> hii=new ArrayList<>();
+                            while (line != null) {
+                                System.out.println(line);
+                                String[] parts = line.split(",");
+                                ArrayList<String> hi= new ArrayList<>(Arrays.asList(parts));
+                                hii.add(hi);
+                                line = reader.readLine();
+                            }
+                            reader.close();
+                            int x=0;
+                            for (int i=0;i<hii.size();i++) {
+                                System.out.println("Item " + i + ": " + hii.get(i).get(0));
+                                System.out.println("Description: " + hii.get(i).get(1));
+                                System.out.println("Owner: " + hii.get(i).get(2));
+                                System.out.println("**************************");
+                            }
+                            while(x==0) {
+                                System.out.println("Enter the item number to approval,enter -1 to quit.");
+                                String inputs = sc.nextLine();
+                                int k = Integer.parseInt(inputs);
+                                System.out.println(k);
+                                if (k > -1 && k < (hii.size())) {
+                                    Item i = new Item(hii.get(k).get(0), hii.get(k).get(2));
+                                    i.setDescription(hii.get(k).get(1));
+                                    v.addItem(i);
+                                    hii.remove(k);
+                                    System.out.println("Approve successfully");
+                                }else if(k==-1){
+                                    x=1;
+                                }
+                                else {
+                                    System.out.println("You enter the wrong number!");
+                                }
+                            }
+                            PrintWriter writer = new PrintWriter("phase1/src/ItemApproval.txt");
+                            writer.print("");
+                            for (ArrayList<String> strings : hii) {
+                                writer.write(strings.get(0)+","+strings.get(1)+","+strings.get(2));
+                            }
+                            writer.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
                         }
                     }
-                    System.out.println("Type the description of the item");
-                    String des=sc.nextLine();
-                    Item i=new Item(name,user.getUsername());
-                    i.setDescription(des);
-                    v.addItem(i);
-
                 case 0:
                     exit=0;
                     break;
@@ -248,7 +299,7 @@ public class Login {
                     System.out.println("Menu:\n1.add wish\n2.delete wish");
                     String input44=sc.nextLine();
                     if (input44.equals("1")) {
-
+                        wishLendAdd(user);
                     }else if(input44.equals("2")){
                         System.out.println("Input the item you wanted to delete");
                         String input43=sc.nextLine();
@@ -288,7 +339,25 @@ public class Login {
 
     }
     public void tradeHistory(User user){
-
+        System.out.println("Hi user: "+user.getUsername());
+        System.out.println("Compeleted past trades:");
+        if (user.getTradeHistoryTop().size()>0) {
+            for (Trade i : user.getTradeHistoryTop()) {
+                System.out.println(i.toString());
+            }
+        }
+        System.out.println("****************");
+        for(Trade i:user.getIncomplete()){
+            System.out.println(i.toString());
+        }
+        System.out.println("****************");
+        for(Trade i:user.getIncomplete()){
+            System.out.println(i.toString());
+        }
+        System.out.println("****************");
+        for(Trade i:user.getUnconfirmed()){
+            System.out.println(i.toString());
+        }
     }
     public void wishLendAdd(User user){
         Scanner sc=new Scanner(System.in);
@@ -296,7 +365,15 @@ public class Login {
         String input=sc.nextLine();
         System.out.println("Please enter the description of the item");
         String input1=sc.nextLine();
-
+        try {
+            FileWriter myWriter = new FileWriter("phase1/src/ItemApproval.txt");
+            myWriter.write(input+","+input1+","+user.getUsername());
+            myWriter.close();
+            System.out.println("Successfully");
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
 
     }
     public void market(User user) throws IOException {
@@ -339,13 +416,14 @@ public class Login {
         int exit=0;
         while (exit==0) {
             String ip = sc.nextLine();
-            Boolean t=false;
+            boolean t=false;
             for (String a:user.getWishLend()){
-                if (a.equals(ip)){
-                    t=true;
+                if (a.equals(ip)) {
+                    t = true;
+                    break;
                 }
             }
-            if (t=true){
+            if (t){
                 exit=1;
             }
             else {
