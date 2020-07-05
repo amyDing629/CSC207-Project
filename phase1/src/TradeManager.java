@@ -75,7 +75,7 @@ public class TradeManager {
 
 
 
-    private void updateTradeHistory(Integer currUserId, Integer tarUserId, Trade newTrade) throws IOException {
+    private void updateTradeHistory(UUID currUserId, UUID tarUserId, Trade newTrade) throws IOException {
         System.out.println(currUserId);
         User currentUser = userManager.getUser(currUserId);
         System.out.println(currentUser);

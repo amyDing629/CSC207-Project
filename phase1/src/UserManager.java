@@ -6,6 +6,7 @@ import java.util.UUID;
 
 
 public class UserManager {
+    private List<User> users;
 
     public ArrayList<ArrayList<String>> readFile() throws IOException {
         ArrayList<ArrayList<String>> myList = new ArrayList<>();
@@ -41,8 +42,8 @@ public class UserManager {
                 AdministrativeUser d = new AdministrativeUser(b.get(1), b.get(2), true);
                 d.setNotification(lineList);
 
-                int i = Integer.parseInt(b.get(0));
-                d.setId(i);
+                UUID uid = UUID.fromString(b.get(0));
+                d.setId(uid);
 
                 d.setFrozen(b.get(4).equals("true"));
 
@@ -89,8 +90,8 @@ public class UserManager {
                 d.setNotification(lineList);
 
 
-                int i = Integer.parseInt(b.get(0));
-                d.setId(i);
+                UUID uid = UUID.fromString(b.get(0));
+                d.setId(uid);
 
                 d.setFrozen(b.get(4).equals("true"));
 
@@ -137,7 +138,7 @@ public class UserManager {
         try{
             FileOutputStream output = new FileOutputStream("phase1/src/username.txt", true);
             String name = u.getUsername();
-            String s = u.getId()+ ", " + name + ", "  + u.getPassword()+ ", "  + u.getIsAdmin()+ ", "  + u.getIsfrozen()+ ", "  + u.getIsBorrow()+ ", ";
+            String s = u.getId().toString() + ", " + name + ", "  + u.getPassword()+ ", "  + u.getIsAdmin()+ ", "  + u.getIsfrozen()+ ", "  + u.getIsBorrow()+ ", ";
             StringBuilder m = new StringBuilder();
             for(String i: u.getNotification()){
                 m.append(i).append("; ");
@@ -182,7 +183,7 @@ public class UserManager {
         return null;
     }
 
-    public User getUser(int userId) throws IOException {
+    public User getUser(UUID userId) throws IOException {
         try{
             if(readFile().size() == 0){return null;}
             ArrayList<User> userList = splitUser(readFile());
@@ -226,13 +227,11 @@ public class UserManager {
 
     public void updateFile() throws IOException {
         ArrayList<User> userList = splitUser(readFile());
-        Integer y = userList.get(userList.size() - 1).getId();
         PrintWriter writer = new PrintWriter("phase1/src/username.txt");
         writer.print("");
         writer.close();
-        for (int i = 1; i < y + 1; i++){
-            User u = getUser(i);
-            addUser(u);
+        for (User u: userList){
+            addUser(getUser(u.username));
         }
     }
 

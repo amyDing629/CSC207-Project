@@ -2,7 +2,6 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.*;
 public class ClientUser extends User {
-    private static Integer id=0;
     private boolean isAdmin;
 
     private boolean isFrozen;
@@ -19,7 +18,6 @@ public class ClientUser extends User {
     public ClientUser(String username, String password ,Boolean isAdmin){
         super(username, password, isAdmin);
         isBorrow=true;
-        id ++;
     }
 
     public int getIncompleteTransactionLimit() {
@@ -42,16 +40,11 @@ public class ClientUser extends User {
         return username;
     }
 
-    @Override
-    public Integer getId() {
-        return id;
-    }
 
     @Override
     public boolean getIsBorrow() {
         return isBorrow;
     }
-
 
 
 

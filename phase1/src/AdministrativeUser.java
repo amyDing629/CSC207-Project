@@ -1,11 +1,9 @@
 import java.io.IOException;
 import java.util.*;
 public class AdministrativeUser extends User {
-    private static Integer id = 0;
 
     public AdministrativeUser(String username, String password, boolean isAdmin){
         super(username, password, isAdmin);
-        id ++;
     }
 
 
@@ -27,10 +25,6 @@ public class AdministrativeUser extends User {
         return username;
     }
 
-    @Override
-    public Integer getId() {
-        return id;
-    }
 
 
 
@@ -44,7 +38,8 @@ public class AdministrativeUser extends User {
 
     public void addNewUser(String username, String password) throws IOException {
         UserManager u = new UserManager();
-        if (id == 1){
+        List<User> x = u.splitUser(u.readFile());
+        if (id.equals(x.get(0).getId())){
         AdministrativeUser a = new AdministrativeUser(username, password, true);
         u.addUser(a);
         }

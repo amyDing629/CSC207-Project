@@ -1,7 +1,8 @@
 import java.io.IOException;
 import java.util.*;
+import java.util.UUID;
 abstract class User {
-    protected Integer id = 0;
+    protected UUID id;
     protected String password;
     protected String username;
     private List<String> notification;
@@ -22,11 +23,15 @@ abstract class User {
         this.wishBorrow= new ArrayList<>();
         this.tradeHistory=new ArrayList<>();
         this.isAdmin = isAdmin;
+        id = UUID.randomUUID();
     }
 
     public abstract String getPassword();
     public abstract String getUsername();
-    public abstract Integer getId();
+    public UUID getId() {
+        return id;
+    }
+
     public boolean getIsBorrow(){
         return isBorrow;
     }
@@ -42,6 +47,8 @@ abstract class User {
     public void setIncompleteTransaction(int incompleteTransaction) {
         this.incompleteTransactionLimit = incompleteTransaction;
     }
+
+    public void setId(UUID a){this.id = id;}
 
     public void setWeekTransactionLimit(int weekTransaction){
 
@@ -83,10 +90,6 @@ abstract class User {
     }
     public void setFrozen(boolean aTrue){
         isFrozen = aTrue;
-    }
-    public void setId(Integer id) {
-
-        this.id = id;
     }
 
     public void setBorrow(boolean borrow){
@@ -133,6 +136,7 @@ abstract class User {
                     trade.add(getAllTrade().get(i));
                     y++;
                 }
+                i = i - 1;
             }
         }
         return trade;
