@@ -41,6 +41,7 @@ public class TradeUI {
                     String line = br.readLine();
                     if (line.equals("1")) {
                         exit = 1;
+                        System.out.println("you have exit the trade UI");
                         break;
                     } else {
                         if (becomeComplete){
@@ -52,8 +53,10 @@ public class TradeUI {
                                 break;
                             case "confirm trade":
                                 confirmTrade();
+                                System.out.println("the trade has been confirmed");
                                 break;
                             case "first meeting" :
+                                System.out.println("enter first meeting");
                                 MeetingSystem mt = new MeetingSystem(trade.getUsers(), true);
                                 mt.run(currUser.getId());
                                 ArrayList<Object> result = mt.runResult();
@@ -62,6 +65,7 @@ public class TradeUI {
                                 }
                                 break;
                             case "second meeting":
+                                System.out.println("enter second meeting");
                                 Meeting sm = trade.getSecondMeeting();
                                 MeetingSystem smt = new MeetingSystem(trade.getUsers(), false);
                                 smt.run(currUser.getId());
@@ -72,7 +76,6 @@ public class TradeUI {
                                 break;
                         }
                     }
-
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
