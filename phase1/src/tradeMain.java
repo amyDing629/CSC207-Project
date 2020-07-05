@@ -5,6 +5,7 @@ import java.util.UUID;
 
 public class tradeMain {
     public static void main (String[] args) throws IOException, AccountFrozenException {
+
         TradeManager tm = new TradeManager();
         UserManager um = new UserManager();
         Inventory iv = new Inventory();
@@ -25,18 +26,19 @@ public class tradeMain {
         ArrayList<User> lst = um.splitUser(um.readFile());
         User amy = lst.get(0);
         User daniel = lst.get(1);
-        Trade trade = tm.getTrade(UUID.fromString("97b7d206-1c0b-4f05-aaf4-14ce0f4dccea"));
+        Trade trade = tm.getTrade(UUID.fromString("9251abe4f-1ea2-4ef9-a5a5-6f3931e7b375"));
         //System.out.println(tm.getTradeList().get(0).getId() == trade.getId());
         //System.out.println(trade);
         tm.updateTradeHistory(amy.getId(),daniel.getId(),trade);//not working
         //System.out.println(amy.getTradeHistory());
         amy.getTradeHistory().add(trade.getId());
         System.out.println(amy.getTradeHistory());
-        TradeUI tr = new TradeUI(amy,tm.getTradeList().get(0).getId());
+        TradeUI tr = new TradeUI(amy, trade.getId());
         tr.run();
-        TradeUI tr2 = new TradeUI(daniel,tm.getTradeList().get(0).getId());
+        System.out.println(trade.getMeeting());
+        TradeUI tr2 = new TradeUI(daniel,trade.getId());
         tr2.run();
-
+        tr.run();
         /*
         ArrayList<Trade> lst = tm.getTradeList();
         System.out.println(lst);
@@ -44,6 +46,7 @@ public class tradeMain {
         tm.updateFile();
 
          */
+
 
 
 
