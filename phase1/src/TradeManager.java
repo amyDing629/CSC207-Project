@@ -75,19 +75,20 @@ public class TradeManager {
 
 
 
-    private void updateTradeHistory(UUID currUserId, UUID tarUserId, Trade newTrade) throws IOException {
+    public void updateTradeHistory(UUID currUserId, UUID tarUserId, Trade newTrade) throws IOException {
         System.out.println(currUserId);
         User currentUser = userManager.getUser(currUserId);
-        System.out.println(currentUser);
-        currentUser.getAllTrade().add(newTrade);
+        System.out.println(currentUser.getUsername());
+        currentUser.getTradeHistory().add(newTrade.getId());
+        System.out.println(newTrade);
         User tarUser = userManager.getUser(tarUserId);
-        tarUser.getAllTrade().add(newTrade);
+        tarUser.getTradeHistory().add(newTrade.getId());
     }
 
 
     public Trade getTrade(UUID id) {
         for (Trade trade : tradeList) {
-            if (trade.getId() == id) {
+            if (trade.getId().equals(id)) {
                 return trade;
             }
         }

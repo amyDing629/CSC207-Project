@@ -40,6 +40,7 @@ public class UserManager {
                 ArrayList<String> lineList = new ArrayList<>(Arrays.asList(c));
 
                 AdministrativeUser d = new AdministrativeUser(b.get(1), b.get(2), true);
+                d.setId(UUID.fromString(b.get(0)));
                 d.setNotification(lineList);
 
                 UUID uid = UUID.fromString(b.get(0));
@@ -87,6 +88,7 @@ public class UserManager {
                 ArrayList<String> lineList = new ArrayList<>(Arrays.asList(c));
 
                 ClientUser d = new ClientUser(b.get(1), b.get(2), true);
+                d.setId(UUID.fromString(b.get(0)));
                 d.setNotification(lineList);
 
 

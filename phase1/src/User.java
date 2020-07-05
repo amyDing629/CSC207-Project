@@ -14,6 +14,7 @@ abstract class User {
     protected List<UUID> tradeHistory;
     private int weekTransactionLimit;
     private int incompleteTransactionLimit;
+
     public User(String username, String password, boolean isAdmin){
         this.username = username;
         this.password = password;
@@ -25,6 +26,7 @@ abstract class User {
         this.isAdmin = isAdmin;
         id = UUID.randomUUID();
     }
+
 
     public abstract String getPassword();
     public abstract String getUsername();
@@ -48,7 +50,7 @@ abstract class User {
         this.incompleteTransactionLimit = incompleteTransaction;
     }
 
-    public void setId(UUID a){this.id = id;}
+    public void setId(UUID a){this.id = a;}
 
     public void setWeekTransactionLimit(int weekTransaction){
 
