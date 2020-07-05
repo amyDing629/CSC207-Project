@@ -66,7 +66,7 @@ public class MeetingSystem {
      * 2. allows editing the meeting / confirming the meeting, only when
      * - the meeting has been set up already;
      * - the meeting has not been cancelled (i.e edit time of each ClientUser < threshold of edition time)
-     * @param currLogInUser
+     * @param currLogInUser the user that is currently logging in and use the meeting system
      */
     public void run(UUID currLogInUser) throws IOException {
 
@@ -117,12 +117,9 @@ public class MeetingSystem {
 
 
     public Meeting setUpSecondMeeting(Meeting firstMeeting){
-//        Integer[] ids = firstMeeting.getIdToEditor().keySet().toArray(Integer[]::new);
 
         dateTime = firstMeeting.getDateTime().plusMonths(1);
         place = firstMeeting.getPlace();
-//        userId = ids[0];
-//        otherUserId = ids[1];
 
         Meeting m = MeetingActivities.setUpMeeting(userId, otherUserId, dateTime, place);
         isSetUp = true;

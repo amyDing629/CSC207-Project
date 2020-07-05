@@ -2,22 +2,69 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.UUID;
+/**
+ * [Entity class]
+ * The basic functionality of users
+ */
 public class User {
+    /**
+     * the id of user, evey user has unique id.
+     */
     protected UUID id;
+    /**
+     * the name and password of the user account
+     */
     protected String password;
     protected String username;
+    /**
+     * all the messages the user send
+     */
     private List<String> notification;
-    private boolean isAdmin;
+    /**
+     * boolean attribute shows that if the user is administrative user or not
+     */
+    private final boolean isAdmin;
+    /**
+     * the list of names of items that the user want to lend and borrow
+     */
     private List<String> wishLend;
     private List<String> wishBorrow;
+    /**
+     * boolean attribute shows that if the user have the ability to borrow items or not
+     */
     private boolean isBorrow;
+    /**
+     * boolean attribute shows that if the user account has been frozen or not
+     */
     private boolean isFrozen;
+    /**
+     * List of IDs of all the trade that the user has
+     */
     protected List<UUID> tradeHistory;
+    /**
+     * the maximum number of transactions the user can do within seven days
+     */
     private int weekTransactionLimit;
+    /**
+     * the maximum number of incomplete transactions the user can have.
+     */
     private int incompleteTransactionLimit;
+    /**
+     * the list of names of items that the user has lent and borrowed
+     */
     private List<String> lend;
     private List<String> borrowed;
+    /**
+     * the difference amount between the amount of
+     */
+    private int diff;
 
+    /**
+     * @param username the username of the user account
+     * @param password the password of the user account
+     * @param isAdmin the boolean shows if the user is administrative user or not
+     * ID is random generated and is unique
+     */
     public User(String username, String password, boolean isAdmin){
         this.username = username;
         this.password = password;
@@ -37,6 +84,7 @@ public class User {
         return password;
     }
     public String getUsername(){return username;}
+
     public UUID getId() {
         return id;
     }
@@ -57,6 +105,9 @@ public class User {
         this.weekTransactionLimit = weekTransaction;
     }
 
+    /**
+     * the list of names of items that the user want to lend and borrow
+     */
     public void addWishes(String hi){
         this.wishLend.add(hi);
     }
@@ -75,6 +126,14 @@ public class User {
 
     public void setNotification(List<String> notification){
         this.notification = notification;
+    }
+
+    public int getDiff() {
+        return diff;
+    }
+
+    public void setDiff(int diff) {
+        this.diff = diff;
     }
 
     public void setTradeHistory(List<UUID> tradeHistory) {
@@ -136,7 +195,7 @@ public class User {
         TradeManager a = new TradeManager();
         int y = 0;
         for (int i = getAllTrade().size(); i>0;i-- ) {
-            if (((!(getAllTrade().get(i).status.equals("unconfirmed"))) || (!(getAllTrade().get(i).status.equals("cancelled"))))&&y!=3) {
+            if (((!(getAllTrade().get(i).status.equals("unconfirmed"))) && (!(getAllTrade().get(i).status.equals("cancelled"))))&&y!=3) {
                 trade.add(getAllTrade().get(i));
                 y++;
             }
@@ -209,6 +268,11 @@ public class User {
 
     public List<String> getBorrowed() {
         return borrowed;
+    }
+
+    public void setDescription(String a, String name){
+        Inventory b = new Inventory();
+        b.getItem(name).setDescription(a);
     }
 
 

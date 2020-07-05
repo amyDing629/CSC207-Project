@@ -7,9 +7,8 @@ import java.time.format.DateTimeParseException;
 public class DateTime {
 
     public static DateTimeFormatter formatter = DateTimeFormatter.ofPattern ( "yyyy-MM-dd HH:mm" );
-    //    public static DateTimeFormatter formatter = DateTimeFormatter.ofPattern ( "yyyy-MM-dd HH:mm" ).withResolverStyle ( ResolverStyle.STRICT );
-    public static LocalDateTime currentTime = LocalDateTime.now();
 
+    public static LocalDateTime currentTime = LocalDateTime.now();
 
     public static LocalDateTime getCurrentTime() {
         return currentTime;
