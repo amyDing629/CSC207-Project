@@ -32,16 +32,16 @@ public class MeetingSystem {
      */
     public LocalDateTime dateTime;
     public String place;
-    public static UUID userId;
-    public static UUID otherUserId;
+    public UUID userId;
+    public UUID otherUserId;
 
-    public boolean isPermanent;
     public boolean isFirst;
     public boolean isSetUp;
     public boolean isCancel;
 
-    public static Meeting meeting = null;
-//    public static Meeting meeting2 = null;
+    public UUID lastEditID;
+
+    public Meeting meeting = null;
     public ArrayList<MeetingLogInfo> meetingLog = new ArrayList<MeetingLogInfo>();
 
     final MeetingSystemMenuPresenter menuPresenter = new MeetingSystemMenuPresenter();
@@ -54,6 +54,17 @@ public class MeetingSystem {
         userId = users.get(0);
         otherUserId = users.get(1);
         this.isFirst = isFirst;
+        isSetUp = false;
+        isCancel = false;
+
+    }
+
+    public MeetingSystem(ArrayList<UUID> users, boolean isFirst, Meeting meeting) {
+        userId = users.get(0);
+        otherUserId = users.get(1);
+        this.isFirst = isFirst;
+        this.meeting = meeting;
+
         isSetUp = false;
         isCancel = false;
 
