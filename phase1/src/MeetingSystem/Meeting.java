@@ -85,6 +85,13 @@ public class Meeting {
     public HashMap<UUID, MeetingEditor> getIdToEditor() {
         return idToEditor;
     }
+    /*
+    public void IdToEditorPlusOne(UUID userId){
+        MeetingEditor ed = idToEditor.get(userId);
+        ed.updateTimeOfEdition();
+}
+     */
+
 
     /**
      * Returns the MeetingEditor object by given user ID

@@ -1,1 +1,1 @@
-251abe4f-1ea2-4ef9-a5a5-6f3931e7b375,oneway,30,fbef509a-69f1-484e-82ae-4a64043cb6cc,7940cdd1-6e50-49ba-9ad8-312c618b5af5,peach,null,2020-12-12 12:12/trt/incomplete/0;0/true;false,null,incomplete,2020-07-05 18:47
+251abe4f-1ea2-4ef9-a5a5-6f3931e7b375,oneway,30,fbef509a-69f1-484e-82ae-4a64043cb6cc,7940cdd1-6e50-49ba-9ad8-312c618b5af5,peach,null,2020-07-30 12:20/how/cancelled/0;0/false;false,null,incomplete,2020-07-05 18:47

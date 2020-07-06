@@ -66,6 +66,10 @@ public class MeetingEditor extends IMeetingAttendee {
         return timeOfEdition > threshold;
     }
 
+    public String toString(){
+        return String.valueOf(timeOfEdition);
+    }
+
 }
 
 
