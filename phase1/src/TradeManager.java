@@ -133,7 +133,7 @@ public class TradeManager {
                     //set confirmed status
                     String[] confirmMap = fm[4].split(";");
                     idToC.put(user1Id,Boolean.parseBoolean(confirmMap[0]));
-                    idToC.put(user2Id,Boolean.parseBoolean(confirmMap[0]));
+                    idToC.put(user2Id,Boolean.parseBoolean(confirmMap[1]));
                     trade.getMeeting().setConfirmedStatusFull(idToC);
                     //set edition time
                     String[] editTime = fm[3].split(";");
@@ -141,8 +141,8 @@ public class TradeManager {
                     me1.setTimeOfEdition(Integer.parseInt(editTime[0]));
                     MeetingEditor me2 = new MeetingEditor(user2Id);
                     me2.setTimeOfEdition(Integer.parseInt(editTime[1]));
-                    idToE.put(user1Id,new MeetingEditor(user1Id));
-                    idToE.put(user2Id,new MeetingEditor(user2Id));
+                    idToE.put(user1Id,me1);
+                    idToE.put(user2Id,me2);
                     trade.getMeeting().setIdToEditor(idToE);
                     trade.getMeeting().setStatus(fm[2]);
 
@@ -152,6 +152,10 @@ public class TradeManager {
                     LocalDateTime smTime = LocalDateTime.parse(sm[0],formatter);
                     trade.setSecondMeeting(smTime, sm[1], users);
                     trade.getSecondMeeting().setStatus(sm[2]);
+                    String[] confirmMap = sm[3].split(";");
+                    idToC.put(user1Id,Boolean.parseBoolean(confirmMap[0]));
+                    idToC.put(user2Id,Boolean.parseBoolean(confirmMap[1]));
+                    trade.getSecondMeeting().setConfirmedStatusFull(idToC);
                 }
 
                 trade.setStatus(lst[9]);
@@ -191,7 +195,7 @@ public class TradeManager {
                 String idToEdStr = idToE.get(user1).getTimeOfEdition() + ";"+
                         idToE.get(user2).getTimeOfEdition();
                 HashMap<UUID, Boolean> conStatus = fm.getConfirmedStatusFull();
-                String idToCoStr = Boolean.toString(conStatus.get(user1)) + ";" + Boolean.toString(conStatus.get(user2));
+                String idToCoStr = conStatus.get(user1) + ";" + conStatus.get(user2);
                 //2020-06-30 11:49/home/incomplete/0;0/false;false
                 fmStr = fm.getDateTime().format(formatter)+"/"+fm.getPlace()+"/"+fm.getStatus()
                         +"/"+idToEdStr+"/"+ idToCoStr;
@@ -203,7 +207,9 @@ public class TradeManager {
             if (sm == null){
                 smStr = null;
             }else{
-                smStr = sm.getDateTime().format(formatter)+"/"+sm.getPlace()+"/"+sm.getStatus();
+                HashMap<UUID, Boolean> conStatus = sm.getConfirmedStatusFull();
+                String idToCoStr = conStatus.get(user1) + ";" + conStatus.get(user2);
+                smStr = sm.getDateTime().format(formatter)+"/"+sm.getPlace()+"/"+sm.getStatus()+"/"+idToCoStr;
             }
             String status = trade.getStatus();
             String time = trade.getCreateTime().format(formatter);

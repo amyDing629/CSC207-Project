@@ -72,7 +72,7 @@ public class EditMeetingPresenter {
                         input = br.readLine();
                     }
                     default : System.out.println("Invalid instruction in EditMeetingPresenter!");
-                }
+                }// infinite loop
             }
         }catch (IOException e) {
             System.out.println("Something went wrong within EditMeetingPresenter");

@@ -39,6 +39,9 @@ public class TradeUI {
         int exit = 0;
         while (exit != 1) {
             while (true) {
+                if (becomeComplete){
+                    tc.completeTrade(trade);
+                }
                 tm.updateFile();
                 tp.presentTradeUIInfo();
                 System.out.println("type 1 to exit, type anything to continue with current trade");
@@ -49,9 +52,6 @@ public class TradeUI {
                         System.out.println("you have exited the trade UI");
                         break;
                     } else {
-                        if (becomeComplete){
-                            tc.completeTrade(trade);
-                        }
                         switch (tc.checkTradeMeeting(trade)) {
                             case "cancelled":
                                 System.out.println("the trade has been cancelled");
@@ -65,21 +65,22 @@ public class TradeUI {
                                 System.out.println("enter first meeting");
                                 MeetingSystem mt = new MeetingSystem(trade.getUsers(), true, trade.getMeeting());
                                 mt.run(currUser.getId());
+                                trade.changeMeeting(mt.getMeeting());
                                 ArrayList<Object> result = mt.runResult();
-                                if (result.get(2) == "completed" ){
+                                if (result.get(2).equals("completed")){
                                     if(trade.getDuration() == -1) {
                                         becomeComplete = true;
                                     }else{
                                         trade.changeSecondMeeting(mt.setUpSecondMeeting(trade.getMeeting()));
                                     }
                                 }
-                                if (result.get(2) == "setUp"){
+                                if (result.get(2).equals("setUp")){
                                     System.out.println(result);
                                     trade.setMeeting((LocalDateTime)result.get(0),
                                             (String)result.get(1),trade.getUsers());
                                 }
 
-                                if (result.get(2) == "cancel"){
+                                if (result.get(2).equals("cancelled")){
                                     trade.setStatus("cancelled");
                                 }
                                 break;
@@ -87,8 +88,9 @@ public class TradeUI {
                                 System.out.println("enter second meeting");
                                 MeetingSystem smt = new MeetingSystem(trade.getUsers(), false, trade.getSecondMeeting());
                                 smt.run(currUser.getId());
+                                trade.changeSecondMeeting(smt.getMeeting());
                                 ArrayList<Object> result2 = smt.runResult();
-                                if (result2.get(2).equals("complete")) {
+                                if (result2.get(2).equals("completed")) {
                                     becomeComplete = true;
                                 }
                                 break;
