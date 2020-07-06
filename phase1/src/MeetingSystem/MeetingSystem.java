@@ -32,16 +32,16 @@ public class MeetingSystem {
      */
     public LocalDateTime dateTime;
     public String place;
-    public UUID userId;
-    public UUID otherUserId;
+    public static UUID userId;
+    public static UUID otherUserId;
 
+    public boolean isPermanent;
     public boolean isFirst;
     public boolean isSetUp;
     public boolean isCancel;
 
-    public UUID lastEditID;
-
-    public Meeting meeting = null;
+    public Meeting meeting;
+//    public static Meeting meeting2 = null;
     public ArrayList<MeetingLogInfo> meetingLog = new ArrayList<MeetingLogInfo>();
 
     final MeetingSystemMenuPresenter menuPresenter = new MeetingSystemMenuPresenter();
@@ -64,10 +64,12 @@ public class MeetingSystem {
         otherUserId = users.get(1);
         this.isFirst = isFirst;
         this.meeting = meeting;
-
+        if (meeting!=null) {
+            dateTime = meeting.getDateTime();
+            place = meeting.getPlace();
+        }
         isSetUp = false;
         isCancel = false;
-
     }
 
     /**
@@ -103,7 +105,7 @@ public class MeetingSystem {
         }else if (isSetUp){
             status = "setUp";
         }else if (isCancel){
-            status = "cancel";
+            status = "cancelled";
         }else{
             status = "incomplete";
         }
@@ -196,6 +198,8 @@ public class MeetingSystem {
                             MeetingActivities.editMeeting(meeting, currLogInUser, dateTime, place);
                             dateTime = editMeeting.dateTime;
                             place = editMeeting.place;
+                            meeting.editMeeting(dateTime, place);//add by amy
+
 
                             System.out.println("Success: Meeting has been edited!");
                             System.out.println("  " + "- the current proposed time is:" + dateTime.toString());
