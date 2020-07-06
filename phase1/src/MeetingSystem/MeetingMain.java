@@ -7,7 +7,7 @@ import java.util.UUID;
 
 public class MeetingMain {
     // two ClientUsers
-    public static ArrayList<UUID> tradeIds = new ArrayList<>();
+    public static ArrayList<UUID> tradeIds = new ArrayList<>(Arrays.asList(UUID.fromString("251abe4f-1ea2-4ef9-a5a5-6f3931e7b375"), UUID.fromString("123abe4f-1ea2-4ef9-a5a5-6f3931e7b375")));
 
     private static Meeting meeting = null;
     private static Meeting meeting2 = null;
@@ -16,9 +16,12 @@ public class MeetingMain {
         System.out.println("Welcome to meeting system!");
 
         // the start of the first meeting
-        MeetingSystem mt_temp = new MeetingSystem(tradeIds, true);
+        MeetingSystem mt_temp = new MeetingSystem(tradeIds, true); // create a meeting system for the first meeting
         boolean turnIsUser1 = true;
         while (meeting == null || meeting.getStatus().equals("incomplete")){
+            // allow the users make actions only when
+            // the meeting is not "cancelled" or "completed"
+
             if (turnIsUser1){
                 System.out.println("===========================");
                 System.out.println("Login id:" + tradeIds.get(0));
@@ -46,10 +49,13 @@ public class MeetingMain {
         // the start of the second meeting
         System.out.println("Welcome to meeting system!");
         System.out.println("== SECOND MEETING ==");
-        MeetingSystem mt_temp2 = new MeetingSystem(tradeIds, false);
-        meeting2 = mt_temp2.setUpSecondMeeting(meeting);
+        MeetingSystem mt_temp2 = new MeetingSystem(tradeIds, false); // create a meeting system for the second meeting
+        meeting2 = mt_temp2.setUpSecondMeeting(meeting); // trade system sets up the second meeting according to the rule (1 month duration)
         boolean turnIsUser1_m2 = true;
         while (meeting2 == null || meeting2.getStatus().equals("incomplete")){
+            // allow the users make actions only when
+            // the meeting is not "cancelled" or "completed"
+
             if (turnIsUser1_m2){
                 System.out.println("===========================");
                 mt_temp2.run(tradeIds.get(0));
