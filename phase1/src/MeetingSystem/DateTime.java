@@ -18,10 +18,15 @@ public class DateTime {
         return formatter;
     }
 
+    /**
+     * Returns a String object of current date-time.
+     * @return the string of current date-time
+     */
     @Override
     public String toString() {
         return "DateTime{" + "currentTime=" + currentTime + '}';
     }
+
 
     /**
      * Return if the input date-time string is of Valid Format

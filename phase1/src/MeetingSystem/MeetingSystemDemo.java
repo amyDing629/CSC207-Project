@@ -5,40 +5,54 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.UUID;
 
-public class MeetingMain {
+
+/**
+ * This is a demo of how to use the MeetingSystem.
+ *
+ * This takes a Temporary Trade, which generally takes two meetings in total, as an example.
+ * Assumes Trade stores:
+ *      - tradeIds: an arraylist of two ids, which associating with two users who are part of the trade
+ *      - meeting: the first meeting
+ *      - meeting2: the second meeting
+ * For each meeting, the demo imitates the two users entering meeting system in turns, by making no more than one action
+ * (setup meeting, edit meeting, confirm meeting) per entry.
+ */
+public class MeetingSystemDemo {
     // two ClientUsers
-    public static ArrayList<UUID> tradeIds = new ArrayList<>(Arrays.asList(UUID.fromString("251abe4f-1ea2-4ef9-a5a5-6f3931e7b375"), UUID.fromString("123abe4f-1ea2-4ef9-a5a5-6f3931e7b375")));
+    private static ArrayList<UUID> tradeIds = new ArrayList<>(Arrays.asList(
+            UUID.fromString("251abe4f-1ea2-4ef9-a5a5-6f3931e7b375"),
+            UUID.fromString("123abe4f-1ea2-4ef9-a5a5-6f3931e7b375")));
 
     private static Meeting meeting = null;
     private static Meeting meeting2 = null;
-    /*
-    public static void main (String[] args) throws IOException {
+
+    public static void main(String[] args) throws IOException {
         System.out.println("Welcome to meeting system!");
 
         // the start of the first meeting
-        MeetingSystem mt_temp = new MeetingSystem(tradeIds, true); // create a meeting system for the first meeting
+        MeetingSystem mt1 = new MeetingSystem(tradeIds, true); // create a meeting system for the first meeting
         boolean turnIsUser1 = true;
-        while (meeting == null || meeting.getStatus().equals("incomplete")){
+        while (meeting == null || meeting.getStatus().equals("incomplete")) {
             // allow the users make actions only when
             // the meeting is not "cancelled" or "completed"
 
-            if (turnIsUser1){
+            if (turnIsUser1) {
                 System.out.println("===========================");
                 System.out.println("Login id:" + tradeIds.get(0));
 
-                mt_temp.run(tradeIds.get(0));
-                mt_temp.runResult();
-                meeting = mt_temp.getMeeting();
+                mt1.run(tradeIds.get(0));
+                mt1.runResult();
+                meeting = mt1.getMeeting();
                 System.out.println(meeting);
                 turnIsUser1 = false;
                 System.out.println("===========================");
-            }else{
+            } else {
                 System.out.println("===========================");
                 System.out.println("Login id:" + tradeIds.get(1));
 
-                mt_temp.run(tradeIds.get(1));
-                mt_temp.runResult();
-                meeting = mt_temp.getMeeting();
+                mt1.run(tradeIds.get(1));
+                mt1.runResult();
+                meeting = mt1.getMeeting();
                 turnIsUser1 = true;
                 System.out.println("===========================");
             }
@@ -46,37 +60,42 @@ public class MeetingMain {
         } // here is the end of the first meeting
 
 
-        // the start of the second meeting
-        System.out.println("Welcome to meeting system!");
-        System.out.println("== SECOND MEETING ==");
-        MeetingSystem mt_temp2 = new MeetingSystem(tradeIds, false); // create a meeting system for the second meeting
-        meeting2 = mt_temp2.setUpSecondMeeting(meeting); // trade system sets up the second meeting according to the rule (1 month duration)
-        boolean turnIsUser1_m2 = true;
-        while (meeting2 == null || meeting2.getStatus().equals("incomplete")){
-            // allow the users make actions only when
-            // the meeting is not "cancelled" or "completed"
+        if (!meeting.getStatus().equals("cancelled")){ // first meeting status: "completed"
+            // the start of the second meeting
+            System.out.println("Welcome to meeting system!");
+            System.out.println("== SECOND MEETING ==");
+            MeetingSystem mt2 = new MeetingSystem(tradeIds, false); // create a meeting system for the second meeting
+            meeting2 = mt2.setUpSecondMeeting(meeting); // trade system sets up the second meeting according to the rule (1 month duration)
+            boolean turnIsUser1_m2 = true;
+            while (meeting2 == null || meeting2.getStatus().equals("incomplete")) {
+                // allow the users make actions only when
+                // the meeting is not "cancelled" or "completed"
 
-            if (turnIsUser1_m2){
-                System.out.println("===========================");
-                mt_temp2.run(tradeIds.get(0));
-                mt_temp2.runResult();
-                meeting2 = mt_temp2.getMeeting();
+                if (turnIsUser1_m2) {
+                    System.out.println("===========================");
+                    mt2.run(tradeIds.get(0));
+                    mt2.runResult();
+                    meeting2 = mt2.getMeeting();
 
-                turnIsUser1_m2 = false;
-                System.out.println("===========================");
-            }else{
-                System.out.println("===========================");
-                mt_temp2.run(tradeIds.get(1));
-                mt_temp2.runResult();
-                meeting2 = mt_temp2.getMeeting();
+                    turnIsUser1_m2 = false;
+                    System.out.println("===========================");
+                } else {
+                    System.out.println("===========================");
+                    mt2.run(tradeIds.get(1));
+                    mt2.runResult();
+                    meeting2 = mt2.getMeeting();
 
-                turnIsUser1_m2 = true;
-                System.out.println("===========================");
-            }
+                    turnIsUser1_m2 = true;
+                    System.out.println("===========================");
+                }
 
-        } // here is the end of the second meeting
+            } // here is the end of the second meeting
+        } else{ // first meeting status: "cancelled"
+            System.out.println("Error: Trade cancelled");
+        }
+    }
+}
 
-     */
 
 
 
@@ -167,5 +186,5 @@ public class MeetingMain {
 
 
 
-    }
+//    }
 

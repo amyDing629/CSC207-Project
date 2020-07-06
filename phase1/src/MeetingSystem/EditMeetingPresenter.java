@@ -23,11 +23,6 @@ public class EditMeetingPresenter {
     public LocalDateTime dateTime;
     public String place;
 
-    /**
-     * This is the status of this editing action, representing if the meeting accessed this time is edited or not
-     * Note: this edition action is defaulted to be not yet edited
-     */
-    private boolean edited = false;
 
     /**
      * Obtain user prompts of editing time and/or place.
@@ -71,21 +66,17 @@ public class EditMeetingPresenter {
                         printMenu();
                         input = br.readLine();
                     }
-                    default : System.out.println("Invalid instruction in EditMeetingPresenter!");
+                    default : {
+                        System.out.println("Error: Invalid instruction in EditMeetingPresenter!");
+                        input = br.readLine();
+                    }
                 }
             }
         }catch (IOException e) {
-            System.out.println("Something went wrong within EditMeetingPresenter");
+            System.out.println("Error: Something went wrong within EditMeetingPresenter");
         }
     }
 
-//    /**
-//     * Return whether any info in EditMeetingPresenter is successfully edited
-//     * @return true iff successfully edited the place and/or time
-//     */
-//    public boolean isEdited(){
-//        return edited;
-//    }
 
     /**
      * Return true iff successfully edited the place (i.e change the old place to a new one);
@@ -120,10 +111,7 @@ public class EditMeetingPresenter {
                     // check if different from the old time input
                     if (!newDateTime.isEqual(dateTime)) {
                         this.dateTime = newDateTime;
-//                        System.out.println("New Edition Successful! " +
-//                                "proposed new date-time is: " + this.dateTime.toString());
                         good = true;
-                        edited = true;
                     } else {
                         System.out.println("Error: Invalid input date-time! Input time is same as the old time");
                     }
@@ -146,7 +134,6 @@ public class EditMeetingPresenter {
             if (isNewPlaceEditable(newPlace)) {
                 this.place = newPlace;
                 good = true;
-                edited = true;
             } else {
                 System.out.println("Error: Propose a new place!");
             }
@@ -165,6 +152,10 @@ public class EditMeetingPresenter {
         System.out.println("------------------------------");
     }
 
+    /**
+     * Returns the results, including time and place, of this presenter
+     * @return an arraylist of the date-time, place
+     */
     public ArrayList<Object> editMeetingPresenterResult(){
         return new ArrayList<>(Arrays.asList(dateTime, place));
     }

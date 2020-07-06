@@ -1,7 +1,7 @@
 package MeetingSystem;
 
 
-// only for testing!!! NO USE!!!
+// TO BE DELETED!!!
 public class meetingClientUser {
     public Integer id;
 

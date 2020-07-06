@@ -3,8 +3,6 @@ package MeetingSystem;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-//import java.util.HashMap;
-//import java.util.ArrayList;
 
 /**
  * [Entity class]
@@ -38,7 +36,7 @@ public class Meeting {
      * true stands for confirmed,
      * false stands for not yet confirmed
      */
-    private HashMap<UUID, Boolean> idToConfirmedStatus = new HashMap<UUID, Boolean>();
+    private HashMap<UUID, Boolean> idToConfirmedStatus = new HashMap<>();
 
     /**
      * Constructs a new Meeting with proposed date-time to meet dateTime, proposed place to meet place, info of both
@@ -88,10 +86,19 @@ public class Meeting {
         return idToEditor;
     }
 
+    /**
+     * Returns the MeetingEditor object by given user ID
+     * @param userId the user ID of type UUID
+     * @return the MeetingEditor of given ID
+     */
     public MeetingEditor getEditor(UUID userId) {
         return idToEditor.get(userId);
     }
 
+    /**
+     * Replace the hashmap idToEditor with a new one
+     * @param me the new hashmap of idToEditor
+     */
     public void setIdToEditor(HashMap<UUID, MeetingEditor> me) {
         idToEditor = me;
     }
@@ -121,6 +128,10 @@ public class Meeting {
         return idToConfirmedStatus;
     }
 
+    /**
+     * Replaces the the hashmap of confirm statuses with a new one
+     * @param confirmedStatus the new hashmap of confirm statuses
+     */
     public void setConfirmedStatusFull(HashMap<UUID, Boolean> confirmedStatus) {
         idToConfirmedStatus = confirmedStatus;
     }

@@ -94,6 +94,15 @@ public class MeetingSystem {
 
     }
 
+    /**
+     * Returns an arraylist of key results of the current meeting system.
+     * The key results contains:
+     *      - date-time object
+     *      - place string
+     *      - status string: "completed", "setUp", "cancel", "incomplete"
+     *
+     * @return an arraylist containing date-time object, place string, status string.
+     */
     public ArrayList<Object> runResult(){
         // return time, place, status
         ArrayList<Object> result = new ArrayList<>(Arrays.asList(dateTime, place));
@@ -107,26 +116,31 @@ public class MeetingSystem {
         }else{
             status = "incomplete";
         }
-       String meetingStatus = meeting.getStatus();
-//        if (meetingStatus.equals("completed") && meeting2 != null){
-//            meetingStatus = meeting2.getStatus();
-//        }
         result.add(status);
-
-        System.out.println("RESULT:");
-        System.out.println("current meeting time: " + dateTime);
-        System.out.println("current meeting place: " + place);
-        System.out.println("current meeting status: " + meetingStatus);
 
         return result;
 
     }
 
+    /**
+     * Returns the current meeting object.
+     * This method is used for updating the meeting stored in the Trade system.
+     *
+     * @return the meeting object
+     */
     public Meeting getMeeting(){
         return meeting;
     }
 
 
+    /**
+     * Sets up the second meeting exactly one month after the first meeting, and returns the second meeting object
+     * itself, by given the first meeting object.
+     * This is a shortcut method for setting up the second meeting from outside the meeting system (by trade system)
+     *
+     * @param firstMeeting the first Meeting object
+     * @return the second meeting object
+     */
     public Meeting setUpSecondMeeting(Meeting firstMeeting){
 
         dateTime = firstMeeting.getDateTime().plusMonths(1);
@@ -146,7 +160,8 @@ public class MeetingSystem {
     private void runSetupSession (UUID currLogInUser) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        System.out.println("Enter \"exit\" to quit set-up-meeting session, or enter \"ok\" to continue.");
+        System.out.println("<Set-Up-Meeting Session> \n " +
+                "Enter \"ok\" to continue, or anything else to quit this session.");
         String input = br.readLine();
         try {
             // instruction 1: set up meeting
@@ -178,7 +193,8 @@ public class MeetingSystem {
     private void runEditConfirmSession(UUID currLogInUser) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        System.out.println("Enter \"exit\" to quit edit-confirm-meeting session, or enter \"ee\" to edit, or enter \"cc\" to confirm.");
+        System.out.println("<Edit-Confirm-Meeting Session> \n " +
+                "Enter \"ee\" to edit, or enter \"cc\" to confirm, or anything else to quit this session.");
         String input = br.readLine();
         try{
             switch (input) {
@@ -205,7 +221,8 @@ public class MeetingSystem {
                             meetingLog.add(log);
                             System.out.println("New log added:" + log.toString());
 
-                            System.out.println("User " + currLogInUser + " current edit time:" + meeting.getEditor(currLogInUser).getTimeOfEdition());
+                            System.out.println("User " + currLogInUser + " current edit time:" +
+                                    meeting.getEditor(currLogInUser).getTimeOfEdition());
                         } else {
                             System.out.println("Meeting has NOT been edited!");
                         }
@@ -222,8 +239,6 @@ public class MeetingSystem {
 
 
                 case "cc":
-//                if (meeting.getStatus().equals("incomplete")){ ;
-//                }
                     if (MeetingActivities.confirmMeeting(meeting, currLogInUser)) {
                         System.out.println("Success: Meeting has been confirmed by " + currLogInUser);
                         System.out.println("Meeting current status: " + meeting.getStatus());
@@ -237,12 +252,9 @@ public class MeetingSystem {
                     break;
 
 
-                case "exit":
+                default:
                     System.out.println("Exit Edit-Confirm Session.");
                     break;
-
-                default:
-                    throw new IllegalStateException("Unexpected value: " + input);
             }
 
         } catch (Exception e) {
@@ -256,6 +268,7 @@ public class MeetingSystem {
 
 
     private boolean isEditable(UUID currLogInUser){
+        // edits <= 3: editable
         MeetingEditor editor = meeting.getEditor(currLogInUser);
         return !editor.editsOverThreshold();
     }
@@ -264,7 +277,8 @@ public class MeetingSystem {
     private void runConfirmSession(UUID currLogInUser) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        System.out.println("Enter \"cc\" to confirm, or anything else to quit confirm-meeting session.");
+        System.out.println("<Confirm-Meeting Session>\n" +
+                "Enter \"cc\" to confirm, or anything else to quit confirm-meeting session.");
         String input = br.readLine();
         try{
             if (input.equals("cc")){
@@ -285,76 +299,3 @@ public class MeetingSystem {
 
     }
 }
-
-
-// ===========================================================================================
-//    public void run2() throws IOException {
-//        // allow input: "exit", "setup meeting", "edit", "confirm"
-//
-//        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-//
-//        menuPresenter.printMenu("mainMenu");
-//
-//        String input = br.readLine();
-//        try {
-//            while (!input.equals("exit")) { // != compares memory addresses.
-//
-//                // instruction 1: set up meeting
-//                if (input.equals("ss")) {
-//                    SetUpMeetingPresenter setUpMeeting = new SetUpMeetingPresenter();
-//                    dateTime = setUpMeeting.dateTime;
-//                    place = setUpMeeting.place;
-//                    meeting = MeetingActivities.setUpMeeting(userId, otherUserId, dateTime, place);
-//
-//                    System.out.println("A meeting has been set up!");
-//                    System.out.println("  " + "- proposed time is:" + dateTime.toString());
-//                    System.out.println("  " + "- proposed place is:" + place);
-//
-//                }
-//
-//                // instruction 2: edit meeting
-//                input = br.readLine();
-//                if (input.equals("ee")) {
-//                    // update time place
-//                    EditMeetingPresenter editMeeting = new EditMeetingPresenter(dateTime, place);
-//                    dateTime = editMeeting.dateTime;
-//                    place = editMeeting.place;
-//
-//                    if (editMeeting.isEdited()) {
-//                        System.out.println("Meeting has been edited!");
-//                        System.out.println("  " + "- the current proposed time is:" + dateTime.toString());
-//                        System.out.println("  " + "- the current proposed place is:" + place);
-//                    } else {
-//                        System.out.println("Meeting has NOT been edited!");
-//                    }
-//                }
-//
-//
-//                // instruction 3: confirm meeting
-//                input = br.readLine();
-//                if (input.equals("cc")) {
-//                    // confirm code
-//                    System.out.println(" confirmed~");
-//
-//                }
-//
-//                // instruction 4: print Meeting System menu
-//                input = br.readLine();
-//                if (input.equals("menu")) {
-//                    menuPresenter.printMenu("mainMenu");
-//
-//                }
-//
-//
-//                // other instruction
-//                input = br.readLine();
-//                if (!input.equals("ss") && !input.equals("ee") && !input.equals("cc") && !input.equals("menu")) {
-//                    System.out.println("Error: Invalid Instruction!");
-//                }
-//
-//            }
-//        } catch (IOException e) {
-//            System.out.println("Something went wrong");
-//        }
-//    }
-//}
