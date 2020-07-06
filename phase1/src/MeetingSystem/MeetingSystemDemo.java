@@ -16,6 +16,10 @@ import java.util.UUID;
  *      - meeting2: the second meeting
  * For each meeting, the demo imitates the two users entering meeting system in turns, by making no more than one action
  * (setup meeting, edit meeting, confirm meeting) per entry.
+ *
+ *
+ * Allow each user a max of 3 times of edition;
+ * cancels the meeting when one of the user edits at its fourth time of edition
  */
 public class MeetingSystemDemo {
     // two ClientUsers
