@@ -81,6 +81,15 @@ public abstract class Trade {
         return meeting;
     }
 
+    public void changeMeeting(Meeting mt){
+        meeting = mt;
+
+    }
+
+    public void changeSecondMeeting(Meeting mt){
+        secondMeeting = mt;
+    }
+
     /**
      *
      * @param dateTime time of the meeting
@@ -105,12 +114,6 @@ public abstract class Trade {
         return meeting;
     }
 
-    /**
-     * change meeting information, use Meeting's methods
-     * add Message information in the messageList
-     */
-    public void changeMeeting(){
-    }
 
     abstract ArrayList<UUID> getUsers();
 

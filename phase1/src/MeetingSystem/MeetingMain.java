@@ -11,7 +11,7 @@ public class MeetingMain {
 
     private static Meeting meeting = null;
     private static Meeting meeting2 = null;
-
+    /*
     public static void main (String[] args) throws IOException {
         System.out.println("Welcome to meeting system!");
 
@@ -75,6 +75,8 @@ public class MeetingMain {
             }
 
         } // here is the end of the second meeting
+
+     */
 
 
 
@@ -167,4 +169,3 @@ public class MeetingMain {
 
     }
 
-}

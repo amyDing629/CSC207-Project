@@ -10,19 +10,23 @@ import java.util.Arrays;
 import java.util.UUID;
 
 public class TradeUI {
-    TradeManager tm = new TradeManager();
+    TradeManager tm;
     User currUser;
     Trade trade;
     TradeController tc;
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     TradePresenter tp;
 
+
+
     public TradeUI(User currUser, UUID tradeId) throws IOException {
-        TradeManager tradeManager = new TradeManager();
+        tm = new TradeManager();
         this.currUser = currUser;
         trade = tm.getTrade(tradeId);
         tc = new TradeController(currUser);
         tp = new TradePresenter(currUser, trade);
+
+
     }
 
     //view trade information
@@ -35,8 +39,8 @@ public class TradeUI {
         int exit = 0;
         while (exit != 1) {
             while (true) {
-                tp.presentTradeInfo();
                 tm.updateFile();
+                tp.presentTradeUIInfo();
                 System.out.println("type 1 to exit, type anything to continue with current trade");
                 try {
                     String line = br.readLine();
@@ -59,32 +63,33 @@ public class TradeUI {
                                 break;
                             case "first meeting" :
                                 System.out.println("enter first meeting");
-                                MeetingSystem mt = new MeetingSystem(trade.getUsers(), true);
+                                MeetingSystem mt = new MeetingSystem(trade.getUsers(), true, trade.getMeeting());
                                 mt.run(currUser.getId());
                                 ArrayList<Object> result = mt.runResult();
-                                if (result.get(2) == "complete" && trade.getDuration() == -1) {
-                                    becomeComplete = true;
+                                if (result.get(2) == "completed" ){
+                                    if(trade.getDuration() == -1) {
+                                        becomeComplete = true;
+                                    }else{
+                                        trade.changeSecondMeeting(mt.setUpSecondMeeting(trade.getMeeting()));
+                                    }
                                 }
                                 if (result.get(2) == "setUp"){
+                                    System.out.println(result);
                                     trade.setMeeting((LocalDateTime)result.get(0),
                                             (String)result.get(1),trade.getUsers());
                                 }
+
                                 if (result.get(2) == "cancel"){
                                     trade.setStatus("cancelled");
                                 }
                                 break;
                             case "second meeting":
                                 System.out.println("enter second meeting");
-                                Meeting sm = trade.getSecondMeeting();
-                                MeetingSystem smt = new MeetingSystem(trade.getUsers(), false);
+                                MeetingSystem smt = new MeetingSystem(trade.getUsers(), false, trade.getSecondMeeting());
                                 smt.run(currUser.getId());
                                 ArrayList<Object> result2 = smt.runResult();
-                                if (result2.get(2) == "complete") {
+                                if (result2.get(2).equals("complete")) {
                                     becomeComplete = true;
-                                }
-                                if (result2.get(2) == "setUp"){
-                                    trade.setSecondMeeting((LocalDateTime)result2.get(0),
-                                            (String)result2.get(1),trade.getUsers());
                                 }
                                 break;
                         }
