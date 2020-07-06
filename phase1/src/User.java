@@ -172,7 +172,7 @@ public class User {
     }
 
     /**
-     * return the list of
+     * return the list of all trades that the user has
      */
     public List<Trade> getAllTrade(){
         TradeManager a = new TradeManager();
@@ -183,6 +183,9 @@ public class User {
         return b;
     }
 
+    /**
+     * return the list of all unconfirmed trades that the user has
+     */
     public List<Trade> getUnconfirmed(){
         List<Trade> trade=new ArrayList<>();
         for(Trade t: getAllTrade()){
@@ -193,6 +196,9 @@ public class User {
         return trade;
     }
 
+    /**
+     * return the list of all incomlete trades that the user has
+     */
     public List<Trade> getIncomplete(){
         List<Trade> trade=new ArrayList<>();
         for(Trade t: getAllTrade()){
@@ -203,12 +209,17 @@ public class User {
         return trade;
     }
 
+    /**
+     * return the list of most recent three trades that the user has
+     * if the user has less than three trades, return all the trades the user has
+     */
     public List<Trade> getTradeHistoryTop() {
         List<Trade> trade=new ArrayList<>();
         TradeManager a = new TradeManager();
         int y = 0;
         for (int i = getAllTrade().size(); i>0;i-- ) {
-            if (((!(getAllTrade().get(i).status.equals("unconfirmed"))) && (!(getAllTrade().get(i).status.equals("cancelled"))))&&y!=3) {
+            if (((!(getAllTrade().get(i).status.equals("unconfirmed"))) &&
+                    (!(getAllTrade().get(i).status.equals("cancelled"))))&&y!=3) {
                 trade.add(getAllTrade().get(i));
                 y++;
             }
@@ -216,11 +227,21 @@ public class User {
         return trade;
     }
 
-    public void decideTrade(boolean a, Trade b){
-        if(a){b.setStatus("incomplete");}
-        else {b.setStatus("cancelled");}
+    /**
+     * @param decision the boolean shows that whether the user accepts the trade decided or not
+     * @param decided the trade sent by other users, the user decided accept or not
+     * the user decides whether to accept trade or not, if the user accept, set the trade status as incomplete
+     * if the user rejects, set the status as cancelled
+     */
+    public void decideTrade(boolean decision, Trade decided){
+        if(decision){decided.setStatus("incomplete");}
+        else {decided.setStatus("cancelled");}
     }
 
+    /**
+     * @param no the new message that the user send
+     * renew the notification list
+     */
     public void addNotification(String no){
         notification.add(no);
     }
@@ -245,6 +266,9 @@ public class User {
         password=input2;
     }
 
+    /**
+     * return the number of incomplete transactions that the user has
+     */
     public int getIncompleteTransaction(){
         TradeManager a = new TradeManager();
         int number=0;
@@ -256,6 +280,9 @@ public class User {
         return number;
     }
 
+    /**
+     * return the number of transactions of the user has in seven days from the most recent trade
+     */
     public int getTradeNumber(){
         TradeManager a = new TradeManager();
         if(tradeHistory.size() == 0){return 0;}
@@ -282,37 +309,50 @@ public class User {
     public List<String> getBorrowed() {
         return borrowed;
     }
-
-    public void setDescription(String a, String name){
+    /**
+     * @param description the description string the user wants to give to the item
+     * @param name the name of the item
+     * the user set the item with the new description
+     */
+    public void setDescription(String description, String name){
         Inventory b = new Inventory();
-        b.getItem(name).setDescription(a);
+        b.getItem(name).setDescription(description);
     }
 
+    /**
+     * return the list of most frequent three traders that the user trades with
+     * if the user trades with less than three traders, return all the traders the user trades with
+     */
     public List<User> getFrequentUser() throws IOException {
-        UserManager u = new UserManager();
-        List<Trade> a = getAllTrade();
-        HashMap<UUID, Integer> b = new HashMap<>();
-        for(Trade c: a){
-            for(UUID d: c.getUsers()){
-                if(!(d.equals(id))){
-                    if(b.containsKey(d)){b.replace(d, b.get(d) + 1);}
-                    else {b.put(d, 1);}
+        try {
+            UserManager u = new UserManager();
+            List<Trade> a = getAllTrade();
+            HashMap<UUID, Integer> b = new HashMap<>();
+            for (Trade c : a) {
+                for (UUID d : c.getUsers()) {
+                    if (!(d.equals(id))) {
+                        if (b.containsKey(d)) {
+                            b.replace(d, b.get(d) + 1);
+                        } else {
+                            b.put(d, 1);
+                        }
+                    }
                 }
             }
-        }
-        int e = 0;
-        ArrayList<User> g = new ArrayList<>();
-        int maxValueInMap = (Collections.max(b.values()));  // This will return max value in the Hashmap
-        for (Map.Entry<UUID, Integer> entry : b.entrySet()) {  // Itrate through hashmap
-            if (entry.getValue() == maxValueInMap && e != 3) {
-                g.add(u.getUser(entry.getKey()));
-                e ++;
-                b.remove(entry.getKey());
+            int e = 0;
+            ArrayList<User> g = new ArrayList<>();
+            int maxValueInMap = (Collections.max(b.values()));
+            for (Map.Entry<UUID, Integer> entry : b.entrySet()) {
+                if (entry.getValue() == maxValueInMap && e != 3) {
+                    g.add(u.getUser(entry.getKey()));
+                    e++;
+                    b.remove(entry.getKey());
+                }
             }
+            return g;
+        }catch (IOException e) {
+            e.printStackTrace();
         }
-        return g;
+        return null;
     }
-
-
-
 }

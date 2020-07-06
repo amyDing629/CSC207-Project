@@ -4,10 +4,14 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
-
+/**
+ * [UseCase class]
+ * The renew and modification of users
+ */
 public class UserManager {
-    private List<User> users;
-
+    /**
+     * read the username.txt file, return a list of list that contains all the information of the user
+     */
     public ArrayList<ArrayList<String>> readFile() throws IOException {
         ArrayList<ArrayList<String>> myList = new ArrayList<>();
         try {
@@ -32,10 +36,14 @@ public class UserManager {
         return myList;
     }
 
+    /**
+     * @param a the  list of list that contains all the information of the user
+     * return list of all users , set the attribute information of all the users
+     */
     public ArrayList<User> splitUser(ArrayList<ArrayList<String>> a) throws IOException {
         ArrayList<User> myList = new ArrayList<>();
-        for(ArrayList<String> b: a){
-            if(b.get(3).equals("true")){
+        for (ArrayList<String> b : a) {
+            if (b.get(3).equals("true")) {
                 String[] c = b.get(6).split("; ");
                 ArrayList<String> lineList = new ArrayList<>(Arrays.asList(c));
 
@@ -51,7 +59,7 @@ public class UserManager {
                 d.setBorrow(b.get(5).equals("true"));
 
                 ArrayList<String> lineList2 = new ArrayList<>();
-                if (!b.get(7).equals("")){
+                if (!b.get(7).equals("")) {
                     String[] f = b.get(7).split("; ");
                     lineList2.addAll(Arrays.asList(f));
                     d.setWishLend(lineList2);
@@ -59,7 +67,7 @@ public class UserManager {
                 d.setWishLend(lineList2);
 
                 ArrayList<String> lineList3 = new ArrayList<>();
-                if (!b.get(7).equals("")){
+                if (!b.get(7).equals("")) {
                     String[] g = b.get(8).split("; ");
                     lineList3.addAll(Arrays.asList(g));
                     d.setWishBorrow(lineList3);
@@ -67,13 +75,13 @@ public class UserManager {
                 d.setWishLend(lineList3);
 
                 ArrayList<String> lineList4 = new ArrayList<>();
-                if(!b.get(9).equals("")){
+                if (!b.get(9).equals("")) {
                     String[] h = b.get(9).split("; ");
                     lineList4.addAll(Arrays.asList(h));
                 }
                 ArrayList<UUID> lineList5 = new ArrayList<>();
 
-                for(String p: lineList4){
+                for (String p : lineList4) {
                     lineList5.add(UUID.fromString(p));
                 }
 
@@ -83,7 +91,7 @@ public class UserManager {
 
                 myList.add(d);
             }
-            if(b.get(3).equals("false")){
+            if (b.get(3).equals("false")) {
                 String[] c = b.get(6).split("; ");
                 ArrayList<String> lineList = new ArrayList<>(Arrays.asList(c));
 
@@ -100,7 +108,7 @@ public class UserManager {
                 d.setBorrow(b.get(5).equals("true"));
 
                 ArrayList<String> lineList2 = new ArrayList<>();
-                if (!b.get(7).equals("")){
+                if (!b.get(7).equals("")) {
                     String[] f = b.get(7).split("; ");
                     lineList2.addAll(Arrays.asList(f));
                     d.setWishLend(lineList2);
@@ -108,7 +116,7 @@ public class UserManager {
                 d.setWishLend(lineList2);
 
                 ArrayList<String> lineList3 = new ArrayList<>();
-                if (!b.get(7).equals("")){
+                if (!b.get(7).equals("")) {
                     String[] g = b.get(8).split("; ");
                     lineList3.addAll(Arrays.asList(g));
                     d.setWishBorrow(lineList3);
@@ -116,13 +124,13 @@ public class UserManager {
                 d.setWishLend(lineList3);
 
                 ArrayList<String> lineList4 = new ArrayList<>();
-                if(!b.get(9).equals("")){
+                if (!b.get(9).equals("")) {
                     String[] h = b.get(9).split("; ");
                     lineList4.addAll(Arrays.asList(h));
                 }
                 ArrayList<UUID> lineList5 = new ArrayList<>();
 
-                for(String p: lineList4){
+                for (String p : lineList4) {
                     lineList5.add(UUID.fromString(p));
                 }
 
@@ -134,13 +142,19 @@ public class UserManager {
             }
         }
         return myList;
+
     }
 
+    /**
+     * @param u the user that the manager wants to add in
+     * add the user into the txt file in the type of string
+     */
     public void addUser(User u) throws IOException {
         try{
             FileOutputStream output = new FileOutputStream("phase1/src/username.txt", true);
             String name = u.getUsername();
-            String s = u.getId().toString() + ", " + name + ", "  + u.getPassword()+ ", "  + u.getIsAdmin()+ ", "  + u.getIsFrozen()+ ", "  + u.getIsBorrow()+ ", ";
+            String s = u.getId().toString() + ", " + name + ", "  + u.getPassword()+ ", "  + u.getIsAdmin()+ ", "
+                    + u.getIsFrozen()+ ", "  + u.getIsBorrow()+ ", ";
             StringBuilder m = new StringBuilder();
             for(String i: u.getNotification()){
                 m.append(i).append("; ");
@@ -171,6 +185,10 @@ public class UserManager {
         }
     }
 
+    /**
+     * @param name the name of the user that the manager wants to get
+     * find the user by the user name
+     */
     public User getUser(String name) throws IOException {
         try{
             if(readFile().size() == 0){return null;}
@@ -185,6 +203,10 @@ public class UserManager {
         return null;
     }
 
+    /**
+     * @param userId the ID of the user that the manager wants to get
+     * find the user by the user ID
+     */
     public User getUser(UUID userId) throws IOException {
         try{
             if(readFile().size() == 0){return null;}
@@ -199,6 +221,10 @@ public class UserManager {
         return null;
     }
 
+    /**
+     * @param id the id of the user that the manager wants to get
+     * find the trade list of the user by the user id
+     */
     public List<Trade> findTrade(UUID id){
         try{
             if(readFile().size() == 0){return null;}
@@ -214,6 +240,11 @@ public class UserManager {
         return null;
     }
 
+    /**
+     * @param name the name of the user that the manager check
+     * @param password the password of the user that the manager check
+     * Check if the name matches with the password
+     */
     public boolean verifyUser(String name, String password) throws IOException {
         try{
             ArrayList<User> userList = splitUser(readFile());
@@ -227,13 +258,20 @@ public class UserManager {
         return false;
     }
 
+    /**
+     * update all the information in the username.txt
+     */
     public void updateFile() throws IOException {
-        ArrayList<User> userList = splitUser(readFile());
-        PrintWriter writer = new PrintWriter("phase1/src/username.txt");
-        writer.print("");
-        writer.close();
-        for (User u: userList){
-            addUser(getUser(u.username));
+        try {
+            ArrayList<User> userList = splitUser(readFile());
+            PrintWriter writer = new PrintWriter("phase1/src/username.txt");
+            writer.print("");
+            writer.close();
+            for (User u : userList) {
+                addUser(getUser(u.username));
+            }
+        }catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
