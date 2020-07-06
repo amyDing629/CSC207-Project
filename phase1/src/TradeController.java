@@ -75,6 +75,7 @@ public class TradeController {
             if (currTrade.getSecondMeeting().getStatus().equals("incomplete")){
                 return "second meeting";
             }else{
+                currTrade.setStatus("complete");
                 return "complete";
             }
         }else{

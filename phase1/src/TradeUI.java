@@ -55,6 +55,7 @@ public class TradeUI {
                         switch (tc.checkTradeMeeting(trade)) {
                             case "cancelled":
                                 System.out.println("the trade has been cancelled");
+                                break;
                             case "complete":
                                 System.out.println("the trade has been completed");
                                 break;
