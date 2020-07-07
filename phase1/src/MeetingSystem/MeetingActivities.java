@@ -46,6 +46,35 @@ public class MeetingActivities {
     }
 
     /**
+     * Agree the proposal of date and time in the given meeting object by the user with given userId
+     * @param meeting the meeting contains current proposal of date and time to agree
+     * @param userId the user id of the user who performs agreement action
+     * @return true if agreement action successes; false if the given userId did not register in this meeting or the
+     * user has already agreed this meeting before this agreement process.
+     */
+    public static boolean agreeMeeting(Meeting meeting, UUID userId) {
+        boolean agreed = false;
+        HashMap<UUID, Boolean> status = meeting.getAgreedStatusFull();
+        if (status.containsKey(userId)){// if such id exists in this meeting
+            // update agreedStatus
+            if (!status.get(userId)){ // if idToStatus is false
+                status.put(userId, true);
+                meeting.setIdToAgree(userId);
+                agreed = true;
+            }else{
+                System.out.println("Error: User already confirmed.");
+            }
+
+            //update meeting Status
+            meeting.setStatus();
+
+        }else{ // if such id does NOT exist in this meeting
+            System.out.println("Error: mismatch between the input id and id in meeting");
+        }
+        return agreed;
+    }
+
+    /**
      * Performs the confirmation action to the given meeting object by the user with given userId
      * @param meeting the meeting to confirm
      * @param userId the user id of the user who performs confirmation action
@@ -80,8 +109,8 @@ public class MeetingActivities {
      * @return true if the status of meeting is finally be set to "cancelled".
      */
     public static boolean cancelMeeting(Meeting meeting){
-        meeting.setStatus("cancelled");
-        return meeting.getStatus().equals("cancelled");
+        meeting.setStatus(MeetingStatus.CANCELLED);
+        return meeting.getStatus().equals(MeetingStatus.CANCELLED);
     }
 }
 

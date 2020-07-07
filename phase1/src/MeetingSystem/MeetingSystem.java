@@ -41,10 +41,10 @@ public class MeetingSystem {
     public boolean isCancel;
 
     public Meeting meeting;
-//    public static Meeting meeting2 = null;
+
     public ArrayList<MeetingLogInfo> meetingLog = new ArrayList<MeetingLogInfo>();
 
-    final MeetingSystemMenuPresenter menuPresenter = new MeetingSystemMenuPresenter();
+//    final MeetingSystemMenuPresenter menuPresenter = new MeetingSystemMenuPresenter();
 
     /**
      * Construct a MeetingSystem.MeetingSystem object with two client users (ids)
@@ -87,8 +87,10 @@ public class MeetingSystem {
         if (isFirst){
             if (meeting == null){
                 runSetupSession(currLogInUser);
-            } else if (!meeting.getStatus().equals("cancelled")) {
-                runEditConfirmSession(currLogInUser);
+            } else if (meeting.getStatus().equals(MeetingStatus.INCOMPLETE)) {
+                runEditAgreeSession(currLogInUser);
+            } else if (meeting.getStatus().equals(MeetingStatus.AGREED)) {
+                runConfirmSession(currLogInUser);
             }
         } else { // only second (temporary) meeting
             runConfirmSession(currLogInUser);
@@ -109,7 +111,7 @@ public class MeetingSystem {
         // return time, place, status
         ArrayList<Object> result = new ArrayList<>(Arrays.asList(dateTime, place));
         String status;
-        if (meeting.getStatus().equals("completed")){
+        if (meeting.getStatus().equals(MeetingStatus.COMPLETED)){
             status = "completed";
         }else if (isSetUp){
             status = "setUp";
@@ -192,11 +194,11 @@ public class MeetingSystem {
     }
 
 
-    private void runEditConfirmSession(UUID currLogInUser) throws IOException {
+    private void runEditAgreeSession(UUID currLogInUser) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         System.out.println("<Edit-Confirm-Meeting Session> \n " +
-                "Enter \"ee\" to edit, or enter \"cc\" to confirm, or anything else to quit this session.");
+                "Enter \"ee\" to edit, or enter \"aa\" to agree the proposal, or anything else to quit this session.");
         String input = br.readLine();
         try{
             switch (input) {
@@ -241,23 +243,23 @@ public class MeetingSystem {
                     }
                     break;
 
-
-                case "cc":
-                    if (MeetingActivities.confirmMeeting(meeting, currLogInUser)) {
-                        System.out.println("Success: Meeting has been confirmed by " + currLogInUser);
+                    // TODO: change to agree session
+                case "aa":
+                    if (MeetingActivities.agreeMeeting(meeting, currLogInUser)) {
+                        System.out.println("Success: Meeting has been agree by " + currLogInUser);
                         System.out.println("Meeting current status: " + meeting.getStatus());
 
-                        MeetingLogInfo log = new CreateLogRecord().createLogRecord(currLogInUser, "c");
+                        MeetingLogInfo log = new CreateLogRecord().createLogRecord(currLogInUser, "a");
                         meetingLog.add(log);
                         System.out.println("New log added:" + log.toString());
                     } else {
-                        System.out.println("Error: confirm error");
+                        System.out.println("Error: agree error");
                     }
                     break;
 
 
                 default:
-                    System.out.println("Exit Edit-Confirm Session.");
+                    System.out.println("Exit Edit-Agree Session.");
                     break;
             }
 
@@ -282,7 +284,8 @@ public class MeetingSystem {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         System.out.println("<Confirm-Meeting Session>\n" +
-                "Enter \"cc\" to confirm, or anything else to quit confirm-meeting session.");
+                "Enter \"cc\" to confirm the meeting has been taken place, " +
+                "or anything else to quit confirm-meeting session.");
         String input = br.readLine();
         try{
             if (input.equals("cc")){

@@ -36,7 +36,7 @@ public class MeetingSystemDemo {
         // the start of the first meeting
         MeetingSystem mt1 = new MeetingSystem(tradeIds, true); // create a meeting system for the first meeting
         boolean turnIsUser1 = true;
-        while (meeting == null || meeting.getStatus().equals("incomplete")) {
+        while (meeting == null || meeting.getStatus().equals(MeetingStatus.INCOMPLETE) || meeting.getStatus().equals(MeetingStatus.AGREED)) {
             // allow the users make actions only when
             // the meeting is not "cancelled" or "completed"
 
@@ -64,14 +64,14 @@ public class MeetingSystemDemo {
         } // here is the end of the first meeting
 
 
-        if (!meeting.getStatus().equals("cancelled")){ // first meeting status: "completed"
+        if (meeting.getStatus().equals(MeetingStatus.COMPLETED)){ // first meeting status: "completed"
             // the start of the second meeting
             System.out.println("Welcome to meeting system!");
             System.out.println("== SECOND MEETING ==");
             MeetingSystem mt2 = new MeetingSystem(tradeIds, false); // create a meeting system for the second meeting
             meeting2 = mt2.setUpSecondMeeting(meeting); // trade system sets up the second meeting according to the rule (1 month duration)
             boolean turnIsUser1_m2 = true;
-            while (meeting2 == null || meeting2.getStatus().equals("incomplete")) {
+            while (meeting2 == null || meeting2.getStatus().equals(MeetingStatus.INCOMPLETE)) {
                 // allow the users make actions only when
                 // the meeting is not "cancelled" or "completed"
 

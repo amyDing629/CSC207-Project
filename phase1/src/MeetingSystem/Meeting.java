@@ -24,15 +24,23 @@ public class Meeting {
     private HashMap<UUID, MeetingEditor> idToEditor = new HashMap<>();
 
     /**
-     * This is Meeting's status: "incomplete" (default), "completed", "cancelled";
-     *  1. only both Traders are of confirmed in confirmed status, the meeting status should be then set to "completed";
-     *  2. as long as one of the Trader exceed their own threshold of timeOfEdition, the meeting status should then be
+     * This is Meeting's status: INCOMPLETE (default), AGREED, COMPLETED, CANCELLED;
+     *  1. only both MeetingEditors are of agreed in agreed status, the meeting status should be then set to "agreed";
+     *  2. only both MeetingEditors are of confirmed in confirmed status, the meeting status should be then set to "completed";
+     *  3. as long as one of the MeetingEditor exceed their own threshold of timeOfEdition, the meeting status should then be
      *  set to "cancelled";
      */
-    public String status = "incomplete";
+    public MeetingStatus status = MeetingStatus.INCOMPLETE;
 
     /**
-     * This is Meeting's confirm status from both Traders respectively:
+     * This is Meeting's agree status from both MeetingEditors respectively:
+     * true stands for confirmed,
+     * false stands for not yet agreed the proposed time and/or place
+     */
+    private HashMap<UUID, Boolean> idToAgreedStatus = new HashMap<>();
+
+    /**
+     * This is Meeting's confirm status from both MeetingEditors respectively:
      * true stands for confirmed,
      * false stands for not yet confirmed
      */
@@ -40,16 +48,17 @@ public class Meeting {
 
     /**
      * Constructs a new Meeting with proposed date-time to meet dateTime, proposed place to meet place, info of both
-     * Traders traders.
+     * MeetingEditors traderIds.
      * @param dateTime the date-time proposed to the meeting
      * @param place the place proposed to the meeting
-     * @param traderIds the ids of two traders attend to this meeting
+     * @param traderIds the ids of two MeetingEditors attend to this meeting
      */
     public Meeting (LocalDateTime dateTime, String place, ArrayList<UUID> traderIds) {
         this.dateTime = dateTime;
         this.place = place;
         for (UUID i: traderIds) {
             this.idToEditor.put(i, new MeetingEditor(i));
+            this.idToAgreedStatus.put(i, false);
             this.idToConfirmedStatus.put(i, false);
         }
     }
@@ -74,7 +83,7 @@ public class Meeting {
      * Returns this Meeting's status. (Getter for status)
      * @return the status
      */
-    public String getStatus() {
+    public MeetingStatus getStatus() {
         return status;
     }
 
@@ -85,13 +94,6 @@ public class Meeting {
     public HashMap<UUID, MeetingEditor> getIdToEditor() {
         return idToEditor;
     }
-    /*
-    public void IdToEditorPlusOne(UUID userId){
-        MeetingEditor ed = idToEditor.get(userId);
-        ed.updateTimeOfEdition();
-}
-     */
-
 
     /**
      * Returns the MeetingEditor object by given user ID
@@ -111,22 +113,43 @@ public class Meeting {
     }
 
     /**
-     * Returns a list of two Traders' the confirmed statuses. (Getter for idToConfirmedStatus)
-     * @return the confirmed status of two Traders respectively
+     * Returns a list of two MeetingEditors' the agreed statuses. (Getter for idToAgreedStatus)
+     * @return the agreed status of two MeetingEditors respectively
+     */
+    ArrayList<Boolean> getAgreedStatuses() {
+        return new ArrayList<>(idToAgreedStatus.values());
+    }
+
+    /**
+     * Returns a list of two MeetingEditors' the confirmed statuses. (Getter for idToConfirmedStatus)
+     * @return the confirmed status of two MeetingEditors respectively
      */
     ArrayList<Boolean> getConfirmedStatuses() {
         return new ArrayList<>(idToConfirmedStatus.values());
     }
 
-
     /**
      * Returns the confirmed statuses for given userId. (Getter for idToConfirmedStatus)
-     * @return the confirmed status of given Trader's userId
+     * @return the confirmed status of given MeetingEditors's userId
      */
     public Boolean getConfirmedStatuses(UUID userId) {
         return idToConfirmedStatus.get(userId);
     }
+    /**
+     * Returns the agreed statuses with userIds. (Getter for idToAgreedStatus)
+     * @return idToAgreedStatus itself
+     */
+    public HashMap<UUID, Boolean> getAgreedStatusFull() {
+        return idToAgreedStatus;
+    }
 
+    /**
+     * Replaces the the hashmap of agree statuses with a new one
+     * @param agreedStatus the new hashmap of agree statuses
+     */
+    public void setAgreedStatusFull(HashMap<UUID, Boolean> agreedStatus) {
+        idToAgreedStatus = agreedStatus;
+    }
     /**
      * Returns the confirmed statuses with userIds. (Getter for idToConfirmedStatus)
      * @return idToConfirmedStatus itself
@@ -155,24 +178,16 @@ public class Meeting {
     }
 
     /**
-     * Edit the Meeting with new date-time to meet dateTime. (setter for dateTime)
-     * @param newDateTime the date-time newly proposed to the meeting
+     * Update the agreed status of the Meeting with MeetingEditor's userId. (Setter for idToAgreedStatus)
+     * @param userId the user id of the user who agrees the proposal
      */
-    public void editMeeting (LocalDateTime newDateTime) {
-        this.dateTime = newDateTime;
+    public void setIdToAgree (UUID userId){
+        this.idToAgreedStatus.replace(userId, true);
     }
 
     /**
-     * Edit the Meeting with new place to meet place. (Setter for place)
-     * @param newPlace the place newly proposed to the meeting
-     */
-    public void editMeeting (String newPlace) {
-        this.place = newPlace;
-    }
-
-    /**
-     * Update the confirmed status of the Meeting with Trader's userId. (Setter for idToConfirmedStatus)
-     * @param userId the place newly proposed to the meeting
+     * Update the confirmed status of the Meeting with MeetingEditor's userId. (Setter for idToConfirmedStatus)
+     * @param userId the user id of the user who confirms the meeting has taken placed
      */
     public void setIdToConfirm (UUID userId){
         this.idToConfirmedStatus.replace(userId, true);
@@ -181,7 +196,7 @@ public class Meeting {
     /**
      * Edit the status of the Meeting (hard Setter for status)
      */
-    public void setStatus(String status){
+    public void setStatus(MeetingStatus status){
         this.status = status;
     }
 
@@ -192,9 +207,11 @@ public class Meeting {
         ArrayList<Boolean> bothTrue = new ArrayList<>(Arrays.asList(true, true));
 
         if (this.getConfirmedStatuses().equals(bothTrue)) {
-            this.status = "completed";
+            this.status = MeetingStatus.COMPLETED;
+        }else if (this.getAgreedStatuses().equals(bothTrue)){
+            this.status = MeetingStatus.AGREED;
         }else if (this.isMeetingCancelled()){
-            this.status = "cancelled";
+            this.status = MeetingStatus.CANCELLED;
         }
     }
 

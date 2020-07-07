@@ -8,6 +8,7 @@ import java.util.UUID;
  * Log Action Types:
  *     - setup -- "s"
  *     - edit -- "e"
+ *     - agree -- "a"
  *     - confirm -- "c"
  */
 public class MeetingLogInfo {
