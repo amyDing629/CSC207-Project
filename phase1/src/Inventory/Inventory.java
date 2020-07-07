@@ -4,13 +4,19 @@ import java.io.*;
 import java.util.ArrayList;
 
 /**
- * inventory: present items of unfrozen account
+ * [Use Case Class]
+ * inventory: present existed items. Edit(add, delete, edit) existed items. Get item through item name.
+ * Read and write Inventory.txt (temporary, may move to another class).
  */
 public class Inventory {
+    /**
+     * all existed items in user's lending list.
+     */
     ArrayList<Item> lendingList;
 
     /**
-     * Constructor, inventory has an instance variable lendingList.
+     * [Constructor]
+     * get lendingList from file (read file will move to another class).
      */
     public Inventory() {
         lendingList = new ArrayList<Item>();
@@ -31,13 +37,16 @@ public class Inventory {
 
     /**
      * getter for the lending list
-     *
      * @return lendingList
      */
     public ArrayList<Item> getLendingList() {
         return lendingList;
     }
 
+    /**
+     * get a list of items that is not in the trade
+     * @return available item list
+     */
     public ArrayList<Item> getAvailableList() {
         ArrayList<Item> result = new ArrayList<Item>();
         for (Item item : lendingList) {
@@ -50,8 +59,7 @@ public class Inventory {
 
 
     /**
-     * add the item into the inventory (when clientuser adds Inventory.Item to the lending list, inventory should add the item)
-     *
+     * add the item into the inventory
      * @param item the item added
      */
     public void addItem(Item item) throws IOException {
@@ -60,15 +68,27 @@ public class Inventory {
     }
 
 
+    /**
+     *
+     * @param item the deleted item
+     * @throws IOException when the item is not found in the inventory
+     */
     public void deleteItem(Item item) throws IOException {
         if (lendingList.contains(item)) {
             lendingList.remove(item);
             updateFile();
         } else {
-            System.out.println("the item is not in the inventory");
+            throw new IOException("the item is not in the inventory");
         }
     }
 
+    /**
+     *
+     * @param item the item you want to edit
+     * @param target the type that it wants to edit
+     * @param newContent new content
+     * @throws IOException when the the new edition can not be updated in the file.
+     */
     public void editItem(Item item, String target, String newContent) throws IOException {
         if (target.equals("description")){
             item.setDescription(newContent);
@@ -78,25 +98,39 @@ public class Inventory {
         updateFile();
     }
 
+    /**
+     * update the new lendingList to file
+     * @throws IOException when the update is failed
+     */
     public void updateFile() throws IOException {
         File file = new File("phase1/src/Inventory.Inventory.txt");
-        file.delete();
+        boolean result = file.delete();
         for (Item item: lendingList){
             addItemToFile(item);
         }
     }
 
-    private void addItemToFile(Item item) throws IOException{
+    /**
+     *
+     * @param item the item wanted to add to file
+     * @throws IOException when the item cannot be added to file
+     */
+    private void addItemToFile(Item item) throws IOException {
         try {
             FileOutputStream fos = new FileOutputStream("phase1/src/inventory.txt", true);
             fos.write((item.getName()+","+item.getDescription()+","+item.getOwnerName()+"\n").getBytes());
         }catch(IOException e){
-            System.out.println("cannot edit file");
+            throw new IOException("cannot add item to file");
 
         }
     }
 
 
+    /**
+     * get item through its name
+     * @param name the item name you want to get
+     * @return item
+     */
     public Item getItem(String name){
         for (Item item: lendingList){
             if (item.getName().equals(name)){

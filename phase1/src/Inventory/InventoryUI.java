@@ -1,9 +1,17 @@
 package Inventory;
 
+import User.User;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+/**
+ * [User Interface-Inventory]
+ * show available items on the market.
+ * select item.
+ * show selected item information.
+ * add item to user's wishBorrow list
+ */
 public class InventoryUI {
     Inventory inventory;
     User currUser;
@@ -12,14 +20,21 @@ public class InventoryUI {
     Item currItem;
     InventoryController ic;
 
+    /**
+     * [constructor]
+     * @param currUser the user that is using the system.
+     * call inventory presenter and controller
+     */
     public InventoryUI(User currUser){
         inventory = new Inventory();
         this.currUser = currUser;
         ip = new InventoryPresenter(currUser);
         ic = new InventoryController(currUser);
-
     }
 
+    /**
+     * run the system
+     */
     public void run() {
         int exit = 0;
         while (exit !=1){
@@ -47,6 +62,9 @@ public class InventoryUI {
         }
     }
 
+    /**
+     * let user to select whether to add the item in the wishBorrow list.
+     */
     private void itemAction(){
         while (true){
             ip.printItemInfo(currItem);
@@ -56,7 +74,7 @@ public class InventoryUI {
                 String line2 = br.readLine();
                 if (line2.equals("1")){
                     if (ic.isOwnItem(currItem)){
-                       System.out.println("you can not add your own item to wish borrow list");
+                        System.out.println("you can not add your own item to wish borrow list");
                     }else{
                         ic.moveToWishList(currItem);
                         System.out.println("the item has been moved to the wish list");
@@ -75,6 +93,8 @@ public class InventoryUI {
 
 
 }
+
+
 
 
 
