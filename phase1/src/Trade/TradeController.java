@@ -7,25 +7,42 @@ import User.*;
 import java.io.IOException;
 import java.time.LocalDateTime;
 
+/**
+ * [controller]
+ * the action of trade depend on the input of user
+ */
 public class TradeController {
     private final User currUser;
     private User tarUser;
     private final TradeManager tm = new TradeManager();
-    private UserManager um = new UserManager();
+    private final UserManager um = new UserManager();
 
-
-    public TradeController(User currUser) throws IOException {
+    /**
+     * [constructor]
+     * @param currUser the user that is using the system
+     */
+    public TradeController(User currUser){
         this.currUser = currUser;
 
     }
 
 
+    /**
+     * get owner of the item
+     * @param item current item selected by currUser
+     * @return target user
+     * @throws IOException can not find the target user
+     */
     public User getTarUser(Item item) throws IOException {
         tarUser = um.getUser(item.getOwnerName());
         return tarUser;
     }
 
 
+    /**
+     * check the frozen status of two users.
+     * @throws IOException one of the users's account is frozen
+     */
     public void checkInput() throws IOException {
         if (currUser.getIsFrozen()) {
             throw new IOException("your account is frozen!");
@@ -41,6 +58,13 @@ public class TradeController {
         }
     }
 
+    /**
+     * create trade according to the user's input
+     * @param line the user's input
+     * @param item the item of the trade
+     * @return whether or not the trade is a oneway trade
+     * @throws IOException
+     */
     public boolean createTrade(String line, Item item) throws IOException {
         LocalDateTime time = LocalDateTime.now();
         item.setIsInTrade(true);
@@ -56,6 +80,14 @@ public class TradeController {
             }
         }
     }
+
+    /**
+     * create trade if the trade is a two way trade
+     * @param line the input of users
+     * @param item1 the first item
+     * @param item2 the second item
+     * @throws IOException if the trade is not created
+     */
     public void createTrade(String line, Item item1, Item item2) throws IOException {
         item1.setIsInTrade(true);
         item2.setIsInTrade(true);
@@ -67,6 +99,11 @@ public class TradeController {
         }
     }
 
+    /**
+     * check the status of the current trade
+     * @param currTrade the current trade
+     * @return the status
+     */
     public String checkTradeMeeting(Trade currTrade) {
         if (currTrade.getStatus().equals("unconfirmed")) {
             return "confirm trade";
@@ -91,16 +128,29 @@ public class TradeController {
         }
     }
 
+    /**
+     * confirm trade(agree with the trade)
+     * @param currTrade current trade
+     */
     public void confirmTrade(Trade currTrade) {
         currTrade.setStatus("incomplete");
     }
 
+    /**
+     * set the status of trade to complete and make trade
+     * @param currTrade current trade
+     * @throws IOException if the item is not deleted from user's wishlist and inventory
+     */
     public void completeTrade(Trade currTrade) throws IOException {
         currTrade.setStatus("complete");
         currTrade.makeTrade();
     }
 
-    public void cancelTrade(Trade currTrade) throws IOException{
+    /**
+     * set the status of trade to cancelled
+     * @param currTrade current trade
+     */
+    public void cancelTrade(Trade currTrade){
         currTrade.setStatus("cancelled");
     }
 }

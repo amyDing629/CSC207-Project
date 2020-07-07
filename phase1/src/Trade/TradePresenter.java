@@ -2,16 +2,27 @@ package Trade;
 
 import User.User;
 
+/**
+ * [presenter]
+ * present the information of trade
+ */
 public class TradePresenter {
     User currUser;
     Trade trade;
 
-
+    /**
+     * [constructor]
+     * @param currUser current user
+     * @param trade current trade
+     */
     public TradePresenter(User currUser, Trade trade){
         this.currUser = currUser;
         this.trade = trade;
     }
 
+    /**
+     * present trade information (might delete some information)
+     */
     public void presentTradeUIInfo(){
         System.out.println("===========================");
         System.out.println(currUser.getUsername());

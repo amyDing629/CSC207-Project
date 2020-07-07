@@ -32,21 +32,6 @@ public class OnewayTrade extends Trade {
     }
 
 
-    /**
-     * getter for lender of the trade
-     * @return lender
-     */
-    public UUID getLenderId() {
-        return lenderId;
-    }
-
-    /**
-     * getter for borrow of the trade
-     * @return borrower
-     */
-    public UUID getBorrower() {
-        return borrowerId;
-    }
 
     /**
      * getter for item of the trade
@@ -56,6 +41,10 @@ public class OnewayTrade extends Trade {
         return item;
     }
 
+    /**
+     * get users involved in the trade
+     * @return a list of users
+     */
     public ArrayList<UUID> getUsers(){
         ArrayList<UUID> users = new ArrayList<UUID>();
         users.add(borrowerId);
@@ -68,21 +57,32 @@ public class OnewayTrade extends Trade {
                 " to borrow " + item + " at " + getCreateTime().format(formatter);
     }
 
+    /**
+     * get item involved in the trade
+     * @return item
+     */
     public ArrayList<Item> getItemList(){
         ArrayList<Item> rst = new ArrayList<Item>();
         rst.add(item);
         return rst;
     }
 
+    /**
+     * remove items from users' wishLists after the trade is completed.
+     * @throws IOException the trade hasn't been made.
+     */
     @Override
     public void makeTrade() throws IOException {
         User bor = um.getUser(borrowerId);
-        User lend = (User)um.getUser(lenderId);
+        User lend = um.getUser(lenderId);
         bor.getWishBorrow().remove(item.getName());
         lend.getWishLend().remove(item.getName());
         iv.getLendingList().remove(item);
     }
 
+    /**
+     * @return oneway
+     */
     @Override
     public String getType() {
         return "oneway";

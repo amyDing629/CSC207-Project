@@ -2,6 +2,9 @@ package Trade;
 
 import java.time.format.DateTimeFormatter;
 
+/**
+ * read and update trade.txt file (part of job from tradeManager)
+ */
 public class TradeDataAccess {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 /*

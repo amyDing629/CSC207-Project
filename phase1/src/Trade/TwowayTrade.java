@@ -34,29 +34,10 @@ public class TwowayTrade extends Trade {
         item2to1 = item2;
     }
 
-
-    public UUID getTrader1Id(){
-        return trader1Id;
-    }
-    public UUID getTrader2Id(){
-        return trader2Id;
-    }
     /**
-     * getter for item that trader1 give to trader2
-     * @return item1to2
+     * getter for a list of users involved in the trade
+     * @return a list of users
      */
-    public Item getItem1to2() {
-        return item1to2;
-    }
-
-    /**
-     * getter for item that trader2 give to trader1
-     * @return item2to1
-     */
-    public Item getItem2to1(){
-        return item2to1;
-    }
-
     public ArrayList<UUID> getUsers(){
         ArrayList<UUID> users = new ArrayList<>();
         users.add(trader1Id);
@@ -64,11 +45,19 @@ public class TwowayTrade extends Trade {
         return users;
     }
 
+    /**
+     * to string
+     * @return trade information in a string format
+     */
     public String toString(){
         return "trade.Trade" + getId() + ": trader1 " + trader1Id +" makes two way trade with trader" + trader2Id +
                 " for item " + item1to2 + "and" + item2to1 +  " at " + getCreateTime().format(formatter);
     }
 
+    /**
+     * get a list of items involved in the trade
+     * @return a list of items
+     */
     @Override
     public ArrayList<Item> getItemList() {
         ArrayList<Item> rst = new ArrayList<Item>();
@@ -77,6 +66,10 @@ public class TwowayTrade extends Trade {
         return rst;
     }
 
+    /**
+     * remove items from users' wishLists after the trade is completed.
+     * @throws IOException the trade hasn't been made.
+     */
     @Override
     public void makeTrade() throws IOException {
         User u1 = um.getUser(trader1Id);

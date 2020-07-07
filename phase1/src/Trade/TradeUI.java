@@ -9,6 +9,11 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.UUID;
 
+/**
+ * [user interface-trade]
+ * trade system
+ * allow users to confirm and edit trade
+ */
 public class TradeUI {
     TradeManager tm;
     User currUser;
@@ -18,7 +23,12 @@ public class TradeUI {
     TradePresenter tp;
 
 
-
+    /**
+     * constructor
+     * @param currUser the user that is using the system
+     * @param tradeId the trade id of the current trade
+     * @throws IOException if the edition/creation is not completed
+     */
     public TradeUI(User currUser, UUID tradeId) throws IOException {
         tm = new TradeManager();
         this.currUser = currUser;
@@ -29,10 +39,10 @@ public class TradeUI {
 
     }
 
-    //view trade information
-    //1st meeting not complete,run meeting system
-    //1st meeting complete(temporary), run second meeting system
-    //1st meeting complete(permanent), show your trade has completed
+    /**
+     * run the system
+     * @throws IOException can not update edition to file
+     */
     public void run() throws IOException {
         boolean becomeComplete = false;
 
@@ -139,6 +149,9 @@ public class TradeUI {
     }
     */
 
+    /**
+     * allow users to confirm unconfirmed trade
+     */
     private void confirmTrade(){
         while (true) {
             System.out.println("type 1 to confirm meeting, type 2 to not confirm");
