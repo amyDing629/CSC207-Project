@@ -4,6 +4,7 @@ import Inventory.Inventory;
 import Inventory.Item;
 import Trade.MeetingSystem.MeetingEditor;
 import Trade.MeetingSystem.Meeting;
+import Trade.MeetingSystem.MeetingStatus;
 import User.User;
 import User.UserManager;
 
@@ -150,14 +151,14 @@ public class TradeManager {
                     idToE.put(user1Id,me1);
                     idToE.put(user2Id,me2);
                     trade.getMeeting().setIdToEditor(idToE);
-                    trade.getMeeting().setStatus(fm[2]);
+                    trade.getMeeting().setStatus(MeetingStatus.valueOf(fm[2]));
 
                 }
                 if (!scdMeeting.equals("null")){
                     String[] sm = scdMeeting.split("/");
                     LocalDateTime smTime = LocalDateTime.parse(sm[0],formatter);
                     trade.setSecondMeeting(smTime, sm[1], users);
-                    trade.getSecondMeeting().setStatus(sm[2]);
+                    trade.getSecondMeeting().setStatus(MeetingStatus.valueOf(sm[2]));
                     String[] confirmMap = sm[3].split(";");
                     idToC.put(user1Id,Boolean.parseBoolean(confirmMap[0]));
                     idToC.put(user2Id,Boolean.parseBoolean(confirmMap[1]));

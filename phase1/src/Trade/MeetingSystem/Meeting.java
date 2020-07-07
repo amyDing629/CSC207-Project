@@ -30,7 +30,7 @@ public class Meeting {
      *  3. as long as one of the MeetingEditor exceed their own threshold of timeOfEdition, the meeting status should then be
      *  set to "cancelled";
      */
-    public MeetingStatus status = MeetingStatus.INCOMPLETE;
+    public MeetingStatus status = MeetingStatus.incomplete;
 
     /**
      * This is Meeting's agree status from both MeetingEditors respectively:
@@ -207,11 +207,11 @@ public class Meeting {
         ArrayList<Boolean> bothTrue = new ArrayList<>(Arrays.asList(true, true));
 
         if (this.getConfirmedStatuses().equals(bothTrue)) {
-            this.status = MeetingStatus.COMPLETED;
+            this.status = MeetingStatus.completed;
         }else if (this.getAgreedStatuses().equals(bothTrue)){
-            this.status = MeetingStatus.AGREED;
+            this.status = MeetingStatus.agreed;
         }else if (this.isMeetingCancelled()){
-            this.status = MeetingStatus.CANCELLED;
+            this.status = MeetingStatus.cancelled;
         }
     }
 

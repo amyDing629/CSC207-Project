@@ -105,8 +105,8 @@ public class MeetingActivities {
      * @return true if the status of meeting is finally be set to "cancelled".
      */
     public static boolean cancelMeeting(Meeting meeting){
-        meeting.setStatus(MeetingStatus.CANCELLED);
-        return meeting.getStatus().equals(MeetingStatus.CANCELLED);
+        meeting.setStatus(MeetingStatus.cancelled);
+        return meeting.getStatus().equals(MeetingStatus.cancelled);
     }
 }
 

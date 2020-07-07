@@ -1,6 +1,7 @@
 package Trade;
 
 import Inventory.Item;
+import Trade.MeetingSystem.MeetingStatus;
 import User.User;
 import User.*;
 
@@ -112,13 +113,15 @@ public class TradeController {
         }else if (currTrade.getStatus().equals("complete")) {
             return "complete";
 
-        }else if (currTrade.getMeeting() == null || currTrade.getMeeting().getStatus().equals("incomplete")){
+        }else if (currTrade.getMeeting() == null ||
+                currTrade.getMeeting().getStatus() == MeetingStatus.incomplete ||
+                currTrade.getMeeting().getStatus() == MeetingStatus.agreed){
             return "first meeting";
-        }else if (currTrade.getMeeting().getStatus().equals("cancelled")){
+        }else if (currTrade.getMeeting().getStatus() == MeetingStatus.cancelled){
             currTrade.setStatus("cancelled");
             return "cancelled";
         }else if (currTrade.getDuration()==Trade.temp){
-            if (currTrade.getSecondMeeting().getStatus().equals("incomplete")){
+            if (currTrade.getSecondMeeting().getStatus() == MeetingStatus.incomplete){
                 return "second meeting";
             }else{
                 currTrade.setStatus("complete");
