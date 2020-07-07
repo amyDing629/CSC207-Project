@@ -34,6 +34,7 @@ public class TradePresenter {
         if (trade.getMeeting()!= null){
             System.out.println("first meeting status: " + trade.getMeeting().getStatus());
             System.out.println("id to confirm: " + trade.getMeeting().getConfirmedStatusFull());
+            System.out.println("id to agree: " + trade.getMeeting().getAgreedStatusFull());
             System.out.println("id to edition: " + trade.getMeeting().getIdToEditor());
         }
         System.out.println("second meeting: " + trade.getSecondMeeting());

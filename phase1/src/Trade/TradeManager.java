@@ -124,6 +124,7 @@ public class TradeManager {
                 String scdMeeting = lst[8];
                 HashMap<UUID, Boolean> idToC = new HashMap<>();
                 HashMap<UUID, MeetingEditor> idToE = new HashMap<>();
+                HashMap<UUID, Boolean> idToA = new HashMap<>();
 
                 if (lst[1].equals("oneway")){
                     trade = new OnewayTrade(user1Id,user2Id,item1,duration,tradeTime);
@@ -142,6 +143,11 @@ public class TradeManager {
                     idToC.put(user1Id,Boolean.parseBoolean(confirmMap[0]));
                     idToC.put(user2Id,Boolean.parseBoolean(confirmMap[1]));
                     trade.getMeeting().setConfirmedStatusFull(idToC);
+                    //set agreed status
+                    String[] agreeMap = fm[5].split(";");
+                    idToA.put(user1Id,Boolean.parseBoolean(agreeMap[0]));
+                    idToA.put(user2Id,Boolean.parseBoolean(agreeMap[1]));
+                    trade.getMeeting().setAgreedStatusFull(idToA);
                     //set edition time
                     String[] editTime = fm[3].split(";");
                     MeetingEditor me1 = new MeetingEditor(user1Id);
@@ -203,12 +209,13 @@ public class TradeManager {
                         idToE.get(user2).getTimeOfEdition();
                 HashMap<UUID, Boolean> conStatus = fm.getConfirmedStatusFull();
                 String idToCoStr = conStatus.get(user1) + ";" + conStatus.get(user2);
+                HashMap<UUID, Boolean> agreeStatus = fm.getAgreedStatusFull();
+                String idToAgreeStr = agreeStatus.get(user1) + ";" + agreeStatus.get(user2);
                 //2020-06-30 11:49/home/incomplete/0;0/false;false
                 fmStr = fm.getDateTime().format(formatter)+"/"+fm.getPlace()+"/"+fm.getStatus()
-                        +"/"+idToEdStr+"/"+ idToCoStr;
+                        +"/"+idToEdStr+"/"+ idToCoStr+"/"+idToAgreeStr;
 
             }
-
             Meeting sm = trade.getSecondMeeting();
             String smStr;
             if (sm == null){
