@@ -1,6 +1,6 @@
 package User;
 
-import Inventory.Inventory;
+import Inventory.*;
 import Trade.Trade;
 
 import java.io.*;

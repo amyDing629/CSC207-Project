@@ -198,7 +198,7 @@ public class User {
     public List<Trade> getUnconfirmed(){
         List<Trade> trade=new ArrayList<>();
         for(Trade t: getAllTrade()){
-            if(t.status.equals("unconfirmed")){
+            if(t.getStatus().equals("unconfirmed")){
                 trade.add(t);
             }
         }
@@ -211,7 +211,7 @@ public class User {
     public List<Trade> getIncomplete(){
         List<Trade> trade=new ArrayList<>();
         for(Trade t: getAllTrade()){
-            if(t.status.equals("incomplete")){
+            if(t.getStatus().equals("incomplete")){
                 trade.add(t);
             }
         }
@@ -227,8 +227,8 @@ public class User {
         TradeManager a = new TradeManager();
         int y = 0;
         for (int i = getAllTrade().size(); i>0;i-- ) {
-            if (((!(getAllTrade().get(i).status.equals("unconfirmed"))) &&
-                    (!(getAllTrade().get(i).status.equals("cancelled"))))&&y!=3) {
+            if (((!(getAllTrade().get(i).getStatus().equals("unconfirmed"))) &&
+                    (!(getAllTrade().get(i).getStatus().equals("cancelled"))))&&y!=3) {
                 trade.add(getAllTrade().get(i));
                 y++;
             }
@@ -282,7 +282,7 @@ public class User {
         TradeManager a = new TradeManager();
         int number=0;
         for (UUID i : tradeHistory) {
-            if (a.getTrade(i).status.equals("incomplete")) {
+            if (a.getTrade(i).getStatus().equals("incomplete")) {
                 number++;
             }
         }
