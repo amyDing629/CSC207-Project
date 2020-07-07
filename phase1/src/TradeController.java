@@ -37,7 +37,7 @@ public class TradeController {
 
     public boolean createTrade(String line, Item item) throws IOException {
         LocalDateTime time = LocalDateTime.now();
-        Trade trade;
+        item.setIsInTrade(true);
         switch (line) {
             case "1":
                 tm.createOnewayTrade(currUser.getId(), tarUser.getId(), item, 30, time);
@@ -51,6 +51,8 @@ public class TradeController {
         }
     }
     public void createTrade(String line, Item item1, Item item2) throws IOException {
+        item1.setIsInTrade(true);
+        item2.setIsInTrade(true);
         LocalDateTime time = LocalDateTime.now();
         if (line.equals("3")){
             tm.createTwowayTrade(currUser.getId(), tarUser.getId(), item1, item2, 30, time);

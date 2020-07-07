@@ -36,6 +36,16 @@ public class Inventory {
         return lendingList;
     }
 
+    public ArrayList<Item> getAvailableList() {
+        ArrayList<Item> result = new ArrayList<Item>();
+        for (Item item : lendingList) {
+            if (!item.getIsInTrade()) {
+                result.add(item);
+            }
+        }
+        return result;
+    }
+
 
     /**
      * add the item into the inventory (when clientuser adds Item to the lending list, inventory should add the item)

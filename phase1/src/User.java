@@ -114,6 +114,10 @@ public class User {
         this.wishLend.add(hi);
     }
 
+
+    public void addWishBorrow(String name){
+        this.wishBorrow.add(name);
+    }
     /**
      * @param hi the name of the item
      * the name of item that the user does not have to borrow

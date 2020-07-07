@@ -11,13 +11,21 @@ public class InventoryController {
         for (Item it: iv.getLendingList()){
             if (it.getName().equals(line)){
                 item = it;
+                System.out.println();
                 return true;
             }
         }
         return false;
     }
 
-    public void moveToWishList(){
-        currUser.addWishes(item.getName());
+    public boolean isOwnItem(Item it){
+        if (it.getOwnerName().equals(currUser.getUsername())){
+            return true;
+        }
+        return false;
+    }
+
+    public void moveToWishList(Item it){
+        currUser.addWishBorrow(it.getName());
     }
 }

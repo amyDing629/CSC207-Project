@@ -2,6 +2,7 @@ public class Item {
     private String name;
     private String description;
     private String ownerName;
+    private boolean isInTrade;
 
     /**
      * Constructor
@@ -10,6 +11,16 @@ public class Item {
     public Item(String name, String owner) {
         this.name = name;
         this.ownerName = owner;
+        this.isInTrade = false;
+    }
+
+
+    public boolean getIsInTrade(){
+        return isInTrade;
+    }
+
+    public void setIsInTrade(Boolean inTrade){
+        isInTrade = inTrade;
     }
 
     /**
