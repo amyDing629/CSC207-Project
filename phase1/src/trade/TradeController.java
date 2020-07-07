@@ -1,3 +1,5 @@
+package trade;
+
 import Inventory.Item;
 import trade.Trade;
 

@@ -1,3 +1,5 @@
+package trade;
+
 import Inventory.Inventory;
 import trade.Trade;
 
@@ -22,7 +24,7 @@ public class tradeMain {
         iv.addItem(apple);
         amy.getWishLend().add("apple");
         amy.getWishBorrow().add("peach");
-        RequestTradeUI rtp = new RequestTradeUI(amy, peach);
+        trade.RequestTradeUI rtp = new trade.RequestTradeUI(amy, peach);
         rtp.run();
         */
         ArrayList<User> lst = um.splitUser(um.readFile());

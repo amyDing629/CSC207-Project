@@ -1,3 +1,5 @@
+package trade;
+
 import trade.Trade;
 
 public class TradePresenter {
