@@ -1,8 +1,7 @@
-package user;
+package User;
 
-import trade.Trade;
-import trade.TradeManager;
-import user.User;
+import Trade.Trade;
+import Trade.TradeManager;
 
 import java.io.*;
 import java.util.ArrayList;

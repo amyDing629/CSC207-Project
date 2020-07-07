@@ -1,65 +1,95 @@
-package Inventory;
+package Trade;
+
+import Inventory.Inventory;
+import Inventory.Item;
 import User.User;
+import User.UserManager;
 
-/**
- * [controller]
- * call use case class methods. Make edition to inventory system based on user's requests.
- */
-public class InventoryController {
-    /**
-     * the inventory of the system.
-     */
-    Inventory iv = new Inventory();
-    /**
-     * the user that is using the system.
-     */
-    User currUser;
-    /**
-     * the item that the user selects. item equals to null if the user hasn't selected an item.
-     */
-    Item item;
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.UUID;
+
+public class OnewayTrade extends Trade {
+    private final UUID lenderId;
+    private final UUID borrowerId;
+    private final Item item;
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    private final UserManager um = new UserManager();
+    private final Inventory iv = new Inventory();
 
     /**
-     * [constructor]
-     * @param currUser current user
+     *
+     * @param lender Trader who wants to lend item to others
+     * @param borrower Trader who wants to borrow item from others
+     * @param item the two item traders what to trade
+     * @param duration whether the trade is temporary or permanent
      */
-    public InventoryController(User currUser){
-        this.currUser = currUser;
+    public OnewayTrade(UUID borrower, UUID lender, Item item, int duration, LocalDateTime time){
+        super(duration, time);
+        borrowerId = borrower;
+        lenderId = lender;
+        this.item = item;
+    }
+
+
+    /**
+     * getter for lender of the trade
+     * @return lender
+     */
+    public UUID getLenderId() {
+        return lenderId;
     }
 
     /**
-     * user select an item and record the item in the system
-     * @param line the input from user of the item selected.
-     * @return wheter the item has been selected.
+     * getter for borrow of the trade
+     * @return borrower
      */
-    public boolean selectItem(String line){
-        for (Item it: iv.getLendingList()){
-            if (it.getName().equals(line)){
-                item = it;
-                System.out.println(item + " has been selected");
-                return true;
-            }
-        }
-        return false;
+    public UUID getBorrower() {
+        return borrowerId;
     }
 
     /**
-     * if the input item is the user's own item, return true. Else, return false.
-     * @param it the input item
-     * @return whether the input item is the user's own item.
+     * getter for item of the trade
+     * @return item
      */
-    public boolean isOwnItem(Item it){
-        if (it.getOwnerName().equals(currUser.getUsername())){
-            return true;
-        }
-        return false;
+    public Item getItem() {
+        return item;
     }
 
-    /**
-     * move the selected item to user's wishBorrow list.
-     * @param it the selected item.
-     */
-    public void moveToWishList(Item it){
-        currUser.addWishBorrow(it.getName());
+    public ArrayList<UUID> getUsers(){
+        ArrayList<UUID> users = new ArrayList<UUID>();
+        users.add(borrowerId);
+        users.add(lenderId);
+        return users;
     }
+
+    public String toString(){
+        return "Trade" + getId() + ": Trader " + borrowerId +  " makes a one way trade with trader " + lenderId +
+                " to borrow " + item + " at " + getCreateTime().format(formatter);
+    }
+
+    public ArrayList<Item> getItemList(){
+        ArrayList<Item> rst = new ArrayList<Item>();
+        rst.add(item);
+        return rst;
+    }
+
+    @Override
+    public void makeTrade() throws IOException {
+        User bor = um.getUser(borrowerId);
+        User lend = (User)um.getUser(lenderId);
+        bor.getWishBorrow().remove(item.getName());
+        lend.getWishLend().remove(item.getName());
+        iv.deleteItem(item);
+    }
+
+    @Override
+    public String getType() {
+        return "oneway";
+    }
+
+
 }
+

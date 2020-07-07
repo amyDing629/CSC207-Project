@@ -1,12 +1,9 @@
-package trade;
+package Trade;
 
 import Inventory.Inventory;
 import Inventory.Item;
 import MeetingSystem.MeetingEditor;
 import MeetingSystem.Meeting;
-import trade.OnewayTrade;
-import trade.Trade;
-import trade.TwowayTrade;
 
 import java.io.*;
 import java.time.LocalDateTime;

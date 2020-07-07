@@ -1,6 +1,4 @@
-package trade;
-
-import trade.Trade;
+package Trade;
 
 public class TradePresenter {
     User currUser;

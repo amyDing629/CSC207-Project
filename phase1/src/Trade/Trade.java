@@ -1,7 +1,7 @@
-package trade;
+package Trade;
 
 import Inventory.Item;
-import MeetingSystem.Meeting;
+import Trade.MeetingSystem.Meeting;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -37,8 +37,8 @@ public abstract class Trade {
     }
 
     /**
-     * return id of the trade.Trade when print trade.Trade
-     * @return id of the trade.Trade
+     * return id of the Trade.Trade when print Trade.Trade
+     * @return id of the Trade.Trade
      */
     public UUID getId(){
         return id;
@@ -118,7 +118,7 @@ public abstract class Trade {
     }
 
 
-    abstract ArrayList<UUID> getUsers();
+    public abstract ArrayList<UUID> getUsers();
 
     public String toString(){
         return "this is an abstract trade class";

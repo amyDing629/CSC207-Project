@@ -1,8 +1,8 @@
-package user;
+package User;
 
 import Inventory.Inventory;
-import trade.Trade;
-import trade.TradeManager;
+import Trade.Trade;
+import Trade.TradeManager;
 
 import java.io.IOException;
 import java.time.LocalDateTime;

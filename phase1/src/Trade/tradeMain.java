@@ -1,7 +1,6 @@
-package trade;
+package Trade;
 
 import Inventory.Inventory;
-import trade.Trade;
 
 import java.io.IOException;
 import java.util.ArrayList;

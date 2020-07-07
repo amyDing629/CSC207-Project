@@ -1,7 +1,9 @@
-package trade;
+package Trade;
 
 import Inventory.Inventory;
 import Inventory.Item;
+import User.User;
+import User.UserManager;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -70,7 +72,6 @@ public class RequestTradeUI{
 
 
 }
-
 
 
 

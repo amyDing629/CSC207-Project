@@ -1,10 +1,7 @@
-package user;
+package User;
 
 import Inventory.Inventory;
-import trade.Trade;
-import user.AdministrativeUser;
-import user.User;
-import user.UserManager;
+import Trade.Trade;
 
 import java.io.*;
 import java.util.ArrayList;

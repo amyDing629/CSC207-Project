@@ -1,4 +1,4 @@
-package trade;
+package Trade;
 
 import Inventory.Inventory;
 

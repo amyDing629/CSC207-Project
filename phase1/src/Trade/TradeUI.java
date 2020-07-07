@@ -1,9 +1,6 @@
-package trade;
+package Trade;
 
 import MeetingSystem.MeetingSystem;
-import trade.Trade;
-import trade.TradeController;
-import trade.TradePresenter;
 
 import java.io.BufferedReader;
 import java.io.IOException;
