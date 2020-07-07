@@ -1,4 +1,4 @@
-package MeetingSystem;
+package Trade.MeetingSystem;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

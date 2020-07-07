@@ -1,4 +1,4 @@
-package MeetingSystem;
+package Trade.MeetingSystem;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -7,7 +7,7 @@ import java.util.UUID;
 
 
 /**
- * This is a demo of how to use the MeetingSystem.
+ * This is a demo of how to use the Trade.MeetingSystem.
  *
  * This takes a Temporary trade.Trade, which generally takes two meetings in total, as an example.
  * Assumes trade.Trade stores:
@@ -152,7 +152,7 @@ public class MeetingSystemDemo {
 //
 //
 //        //============================================================================
-//        // TESTING: MeetingSystem.MeetingSystem.DateTime.java
+//        // TESTING: Trade.MeetingSystem.Trade.MeetingSystem.DateTime.java
 //        //============================================================================
 //        String datetime1 = "2020-10-02 12:00";
 //        String datetime2 = "2020-02-02 12:00";
@@ -160,21 +160,21 @@ public class MeetingSystemDemo {
 //        String datetime4 = "2020-10-02";
 //
 //        // print current time
-//        LocalDateTime now = MeetingSystem.MeetingSystem.DateTime.getCurrentTime();
+//        LocalDateTime now = Trade.MeetingSystem.Trade.MeetingSystem.DateTime.getCurrentTime();
 //        System.out.println(now);
 //
 //        // check if of valid format
-//        System.out.println(MeetingSystem.MeetingSystem.DateTime.isValidFormat(datetime1));
-//        System.out.println(MeetingSystem.MeetingSystem.DateTime.isValidFormat(datetime2));
-//        System.out.println(MeetingSystem.MeetingSystem.DateTime.isValidFormat(datetime3));
-//        System.out.println(MeetingSystem.MeetingSystem.DateTime.isValidFormat(datetime4));
+//        System.out.println(Trade.MeetingSystem.Trade.MeetingSystem.DateTime.isValidFormat(datetime1));
+//        System.out.println(Trade.MeetingSystem.Trade.MeetingSystem.DateTime.isValidFormat(datetime2));
+//        System.out.println(Trade.MeetingSystem.Trade.MeetingSystem.DateTime.isValidFormat(datetime3));
+//        System.out.println(Trade.MeetingSystem.Trade.MeetingSystem.DateTime.isValidFormat(datetime4));
 //
 //        // convert string to LocalDateTime;
-//        // check if input MeetingSystem.MeetingSystem.DateTime in the future
-//        LocalDateTime datetime11 = MeetingSystem.MeetingSystem.DateTime.convertToLocalDateTime(datetime1);
+//        // check if input Trade.MeetingSystem.Trade.MeetingSystem.DateTime in the future
+//        LocalDateTime datetime11 = Trade.MeetingSystem.Trade.MeetingSystem.DateTime.convertToLocalDateTime(datetime1);
 //        System.out.println(datetime11.isAfter(now)); // true
 //
-//        LocalDateTime datetime22 = MeetingSystem.MeetingSystem.DateTime.convertToLocalDateTime(datetime2);
+//        LocalDateTime datetime22 = Trade.MeetingSystem.Trade.MeetingSystem.DateTime.convertToLocalDateTime(datetime2);
 //        System.out.println(datetime22.isAfter(now)); // false
 
 

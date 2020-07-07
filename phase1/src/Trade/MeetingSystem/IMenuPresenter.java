@@ -1,4 +1,4 @@
-package MeetingSystem;
+package Trade.MeetingSystem;
 
 /**
  * This is an interface of presenting menu in the meeting system.

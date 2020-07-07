@@ -1,4 +1,4 @@
-package MeetingSystem;
+package Trade.MeetingSystem;
 
 import java.util.ArrayList;
 

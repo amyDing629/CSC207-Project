@@ -1,4 +1,4 @@
-package MeetingSystem;
+package Trade.MeetingSystem;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -47,7 +47,7 @@ public class MeetingSystem {
     final MeetingSystemMenuPresenter menuPresenter = new MeetingSystemMenuPresenter();
 
     /**
-     * Construct a MeetingSystem.MeetingSystem object with two client users (ids)
+     * Construct a Trade.MeetingSystem.Trade.MeetingSystem object with two client users (ids)
      * @param users the users involved in this meeting
      */
     public MeetingSystem(ArrayList<UUID> users, boolean isFirst) {

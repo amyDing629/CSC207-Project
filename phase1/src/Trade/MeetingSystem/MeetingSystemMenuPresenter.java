@@ -1,4 +1,4 @@
-package MeetingSystem;
+package Trade.MeetingSystem;
 
 public class MeetingSystemMenuPresenter implements IMenuPresenter {
 

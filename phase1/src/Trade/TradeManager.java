@@ -2,8 +2,8 @@ package Trade;
 
 import Inventory.Inventory;
 import Inventory.Item;
-import MeetingSystem.MeetingEditor;
-import MeetingSystem.Meeting;
+import Trade.MeetingSystem.MeetingEditor;
+import Trade.MeetingSystem.Meeting;
 
 import java.io.*;
 import java.time.LocalDateTime;
