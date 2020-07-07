@@ -1,4 +1,4 @@
-package MeetingSystem;
+package Trade.MeetingSystem;
 
 /**
  * The enumeration of all possibilities of the Meeting status.
