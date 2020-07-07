@@ -1,5 +1,6 @@
 import Inventory.Inventory;
 import trade.Trade;
+import trade.TradeManager;
 
 import java.io.IOException;
 import java.time.LocalDateTime;

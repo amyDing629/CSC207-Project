@@ -1,3 +1,5 @@
+package trade;
+
 import MeetingSystem.MeetingEditor;
 
 import java.io.BufferedReader;

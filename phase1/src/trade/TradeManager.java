@@ -1,3 +1,5 @@
+package trade;
+
 import Inventory.Inventory;
 import Inventory.Item;
 import MeetingSystem.MeetingEditor;
@@ -14,7 +16,7 @@ import java.util.HashMap;
 import java.util.UUID;
 
 /**
- * This is a use case class TradeManager
+ * This is a use case class trade.TradeManager
  * store Trades in system
  * Allow users to set up trade, cancel trade
  * Automatically update the trade history for both users in the trade.
@@ -28,7 +30,7 @@ public class TradeManager {
     /**
      * Constructor
      * tradeList stores all the trade.Trade in the system.
-     * currentUser is the User who is currently interacting with this TradeManager.
+     * currentUser is the User who is currently interacting with this trade.TradeManager.
      */
     public TradeManager(){
         tradeList = new ArrayList<>();

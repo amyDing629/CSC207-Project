@@ -1,4 +1,5 @@
 import trade.Trade;
+import trade.TradeManager;
 
 import java.io.*;
 import java.util.ArrayList;
