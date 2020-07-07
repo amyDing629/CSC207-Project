@@ -13,7 +13,7 @@ import java.util.Scanner;
  * This is a presenter class for edit meeting action, which interacts with the user and obtains the meeting editing
  * information.
  *
- * The User can interact with prompts and choose to
+ * The user.User can interact with prompts and choose to
  *      - edit time
  *      - edit place
  *      - edit both time and place
@@ -33,7 +33,7 @@ public class EditMeetingPresenter {
         this.place = place;
 
 
-        // Obtain User input of edition info
+        // Obtain user.User input of edition info
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         printMenu();

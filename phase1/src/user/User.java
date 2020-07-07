@@ -1,3 +1,5 @@
+package user;
+
 import Inventory.Inventory;
 import trade.Trade;
 import trade.TradeManager;

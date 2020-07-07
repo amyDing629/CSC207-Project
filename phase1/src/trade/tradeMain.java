@@ -14,8 +14,8 @@ public class tradeMain {
         UserManager um = new UserManager();
         Inventory iv = new Inventory();
         /*
-        User amy = new User("amy","1234", false);
-        User daniel = new User("daniel","345", false);
+        user.User amy = new user.User("amy","1234", false);
+        user.User daniel = new user.User("daniel","345", false);
         um.addUser(amy);
         um.addUser(daniel);
         Inventory.Item peach = new Inventory.Item("peach", "daniel");

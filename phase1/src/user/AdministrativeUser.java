@@ -1,3 +1,5 @@
+package user;
+
 import java.io.IOException;
 import java.util.*;
 /**
@@ -18,7 +20,7 @@ public class AdministrativeUser extends User {
 
     /**
      * @param a the user that the administrative user wants to set frozen
-     * set the User a account frozen
+     * set the user.User a account frozen
      */
     public void freeze(User a) throws IOException {
         a.setFrozen(true);
@@ -26,7 +28,7 @@ public class AdministrativeUser extends User {
 
     /**
      * @param a the user that the administrative user wants to set not frozen
-     * set the User a account unfrozen
+     * set the user.User a account unfrozen
      */
     public void unfreeze(User a) throws IOException {
         a.setFrozen(false);
@@ -48,7 +50,7 @@ public class AdministrativeUser extends User {
 
     /**
      * @param a the user that the administrative user wants to check the transaction limit
-     * set the User a account frozen a has exceeded the week transaction limit
+     * set the user.User a account frozen a has exceeded the week transaction limit
      */
     public void tradeLimit(User a) throws IOException {
         a.setFrozen(a.getTradeNumber() > a.getWeekTransactionLimit());
@@ -56,17 +58,17 @@ public class AdministrativeUser extends User {
 
     /**
      * @param a the user that the administrative user wants to check the incomplete transaction limit
-     * set the User a account frozen if a has exceeded the incomplete transaction limit
+     * set the user.User a account frozen if a has exceeded the incomplete transaction limit
      */
     public void incompleteTransaction(User a) throws IOException {
         a.setFrozen(a.getIncompleteTransaction() <= a.getIncompleteTransactionLimit());
     }
 
     /**
-     * @param c the difference between the amount of User b borrows and lends
-     * @param b the user that the administrative user wants to check the difference between the amount of User b
+     * @param c the difference between the amount of user.User b borrows and lends
+     * @param b the user that the administrative user wants to check the difference between the amount of user.User b
      *          borrows and lends
-     *set the User a account isBorrow false if b does not lend more than c items of the amount that User b borrows
+     *set the user.User a account isBorrow false if b does not lend more than c items of the amount that user.User b borrows
      */
     public void canBorrow(int c, User b) throws IOException {
         b.setBorrow(b.getLend().size() + c >= b.getBorrowed().size());

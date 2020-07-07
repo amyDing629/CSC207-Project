@@ -1,5 +1,10 @@
+package user;
+
 import Inventory.Inventory;
 import trade.Trade;
+import user.AdministrativeUser;
+import user.User;
+import user.UserManager;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -176,7 +181,7 @@ public class Login {
                         }
                         else{
                             ((AdministrativeUser)user).freeze(ha);
-                            System.out.println("User:"+ha.getUsername()+" account has been frozen");
+                            System.out.println("user.User:"+ha.getUsername()+" account has been frozen");
                             System.out.println("Username: "+ha.getUsername());
                             System.out.println("Username: "+ha.getPassword());
                         }
@@ -398,7 +403,7 @@ public class Login {
         UserManager a=new UserManager();
         a.updateFile();
         for (User b:a.splitUser(a.readFile())){
-            System.out.println("User 1");
+            System.out.println("user.User 1");
             for(String c:user.getWishBorrow()){
                 System.out.println("Inventory.Item:"+c);
             }

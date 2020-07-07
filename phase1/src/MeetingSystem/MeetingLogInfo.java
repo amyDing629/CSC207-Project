@@ -3,7 +3,7 @@ package MeetingSystem;
 import java.util.UUID;
 
 /**
- * A Record of an action of the Client User who attends this meeting.
+ * A Record of an action of the Client user.User who attends this meeting.
  *
  * Log Action Types:
  *     - setup -- "s"

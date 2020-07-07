@@ -6,7 +6,7 @@ import java.util.*;
  * [Entity class]
  * A MeetingEditor of a meeting who can edit the meeting.
  *
- * This class is used as a record of editing time of each User who attends to a meeting.
+ * This class is used as a record of editing time of each user.User who attends to a meeting.
  */
 
 public class MeetingEditor extends IMeetingAttendee {

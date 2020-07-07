@@ -30,7 +30,7 @@ public class TradeManager {
     /**
      * Constructor
      * tradeList stores all the trade.Trade in the system.
-     * currentUser is the User who is currently interacting with this trade.TradeManager.
+     * currentUser is the user.User who is currently interacting with this trade.TradeManager.
      */
     public TradeManager(){
         tradeList = new ArrayList<>();
@@ -46,7 +46,7 @@ public class TradeManager {
     /**
      * Allow the currentUser to create a one-way trade with input otherUserId, item, and trade duration.
      * Update the trade history for both users
-     * @param otherUserId the userId of another User in the particular trade.Trade.
+     * @param otherUserId the userId of another user.User in the particular trade.Trade.
      * @param item the only one Inventory.Item to be trade in this created trade.Trade.
      * @param duration the duration of this trade.Trade, unit (days). -1 means the trade.Trade is permanent.
      * @return the created newTrade
@@ -64,8 +64,8 @@ public class TradeManager {
     }
 
     /**
-     * if the User wants to make a two way trade, tradeManager will create a two way trade.
-     * @param otherUserId the userId of another User in the particular trade.Trade
+     * if the user.User wants to make a two way trade, tradeManager will create a two way trade.
+     * @param otherUserId the userId of another user.User in the particular trade.Trade
      * @param item1to2 the Inventory.Item to be trade in this created trade.Trade.
      * @param item2to1 the other Inventory.Item to be trade in this created trade.Trade.
      * @param duration the duration of this trade.Trade, unit (days). -1 means the trade.Trade is permanent.

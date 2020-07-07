@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
- * [User Interface-Inventory]
+ * [user.User Interface-Inventory]
  * show available items on the market.
  * select item.
  * show selected item information.

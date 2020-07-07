@@ -62,7 +62,7 @@ public class MeetingActivities {
                 meeting.setIdToConfirm(userId);
                 confirmed = true;
             }else{
-                System.out.println("Error: User already confirmed.");
+                System.out.println("Error: user.User already confirmed.");
             }
 
             //update meeting Status

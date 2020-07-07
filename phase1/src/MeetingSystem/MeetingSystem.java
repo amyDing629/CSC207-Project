@@ -225,7 +225,7 @@ public class MeetingSystem {
                             meetingLog.add(log);
                             System.out.println("New log added:" + log.toString());
 
-                            System.out.println("User " + currLogInUser + " current edit time:" +
+                            System.out.println("user.User " + currLogInUser + " current edit time:" +
                                     meeting.getEditor(currLogInUser).getTimeOfEdition());
                         } else {
                             System.out.println("Meeting has NOT been edited!");

@@ -42,7 +42,7 @@ public class MeetingSystemDemo {
 
             if (turnIsUser1) {
                 System.out.println("===========================");
-                System.out.println("Login id:" + tradeIds.get(0));
+                System.out.println("user.Login id:" + tradeIds.get(0));
 
                 mt1.run(tradeIds.get(0));
                 mt1.runResult();
@@ -52,7 +52,7 @@ public class MeetingSystemDemo {
                 System.out.println("===========================");
             } else {
                 System.out.println("===========================");
-                System.out.println("Login id:" + tradeIds.get(1));
+                System.out.println("user.Login id:" + tradeIds.get(1));
 
                 mt1.run(tradeIds.get(1));
                 mt1.runResult();
