@@ -1,3 +1,6 @@
+import Inventory.Inventory;
+import Inventory.Item;
+
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

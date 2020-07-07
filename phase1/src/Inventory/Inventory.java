@@ -1,3 +1,5 @@
+package Inventory;
+
 import java.io.*;
 import java.util.ArrayList;
 
@@ -13,7 +15,7 @@ public class Inventory {
     public Inventory() {
         lendingList = new ArrayList<Item>();
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("phase1/src/Inventory.txt"));
+            BufferedReader reader = new BufferedReader(new FileReader("phase1/src/Inventory.Inventory.txt"));
             String line = reader.readLine();
             while (line != null) {
                 String[] lst = line.split(",");
@@ -48,7 +50,7 @@ public class Inventory {
 
 
     /**
-     * add the item into the inventory (when clientuser adds Item to the lending list, inventory should add the item)
+     * add the item into the inventory (when clientuser adds Inventory.Item to the lending list, inventory should add the item)
      *
      * @param item the item added
      */
@@ -77,7 +79,7 @@ public class Inventory {
     }
 
     public void updateFile() throws IOException {
-        File file = new File("phase1/src/Inventory.txt");
+        File file = new File("phase1/src/Inventory.Inventory.txt");
         file.delete();
         for (Item item: lendingList){
             addItemToFile(item);

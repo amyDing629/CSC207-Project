@@ -1,3 +1,5 @@
+package Inventory;
+
 import java.io.IOException;
 
 public class inventoryMain {

@@ -1,5 +1,6 @@
+import Inventory.Inventory;
+
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -14,8 +15,8 @@ public class tradeMain {
         User daniel = new User("daniel","345", false);
         um.addUser(amy);
         um.addUser(daniel);
-        Item peach = new Item("peach", "daniel");
-        Item apple = new Item("apple", "amy");
+        Inventory.Item peach = new Inventory.Item("peach", "daniel");
+        Inventory.Item apple = new Inventory.Item("apple", "amy");
         iv.addItem(peach);
         iv.addItem(apple);
         amy.getWishLend().add("apple");

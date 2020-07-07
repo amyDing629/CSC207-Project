@@ -1,3 +1,5 @@
+import Inventory.Inventory;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -66,7 +68,7 @@ public class Login {
                     System.out.println("Trade limit: " + a.getUser(username).getTradeNumber() + "/" + a.getUser(username).getWeekTransactionLimit());
                     System.out.println("Incomplete trade limit: " + (a.getUser(username).getIncomplete()).size() + "/" + a.getUser(username).getIncompleteTransactionLimit());
                     System.out.println("**************************************************************");
-                    System.out.println("Actions:\n1.Edit information\n2.Message\n3.Inventory\n4.Message\n5.Trade History\n6.Market\n0.quit to menu");
+                    System.out.println("Actions:\n1.Edit information\n2.Message\n3.Inventory.Inventory\n4.Message\n5.Trade History\n6.Market\n0.quit to menu");
                     System.out.print(">");
                     int op = sc.nextInt();
                     sc.nextLine();
@@ -240,7 +242,7 @@ public class Login {
                             reader.close();
                             int x=0;
                             for (int i=0;i<hii.size();i++) {
-                                System.out.println("Item " + i + ": " + hii.get(i).get(0));
+                                System.out.println("Inventory.Item " + i + ": " + hii.get(i).get(0));
                                 System.out.println("Description: " + hii.get(i).get(1));
                                 System.out.println("Owner: " + hii.get(i).get(2));
                                 System.out.println("**************************");
@@ -283,7 +285,7 @@ public class Login {
         Scanner sc=new Scanner(System.in);
         int exit=-1;
         while(exit!=0) {
-            System.out.println("--------------------\nInventory");
+            System.out.println("--------------------\nInventory.Inventory");
             System.out.println("Hello,user," + user.getUsername());
             System.out.println("Actions:\n1.Lend wishes\n2.Borrow wishes\n3.edit lend wishes\n4.edit borrow wishes\n0.exit");
             int input = sc.nextInt();
@@ -397,7 +399,7 @@ public class Login {
         for (User b:a.splitUser(a.readFile())){
             System.out.println("User 1");
             for(String c:user.getWishBorrow()){
-                System.out.println("Item:"+c);
+                System.out.println("Inventory.Item:"+c);
             }
             System.out.println("--------------------------");
         }
@@ -424,7 +426,7 @@ public class Login {
         System.out.println("Hello,"+ user.username);
         System.out.println("Please select the item to trade");
         for (String a:user.getWishLend()){
-            System.out.println("Item 1:"+a);
+            System.out.println("Inventory.Item 1:"+a);
         }
         int exit=0;
         while (exit==0) {

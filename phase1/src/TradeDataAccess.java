@@ -15,7 +15,7 @@ public class TradeDataAccess {
     public void readFile(){
         Trade trade;
         try {
-            Inventory iv = new Inventory();
+            Inventory.Inventory iv = new Inventory.Inventory();
             BufferedReader reader = new BufferedReader(new FileReader("phase1/src/trade.txt"));
             String line = reader.readLine();
             while (line != null) {
@@ -28,7 +28,7 @@ public class TradeDataAccess {
                 users.add(user1Id);
                 users.add(user2Id);
                 LocalDateTime tradeTime = LocalDateTime.parse(lst[10],formatter);
-                Item item1 = iv.getItem(lst[5]);
+                Inventory.Item item1 = iv.getItem(lst[5]);
                 String fstMeeting = lst[7];
                 String scdMeeting = lst[8];
                 HashMap<UUID, Boolean> idToC = new HashMap<>();
@@ -39,7 +39,7 @@ public class TradeDataAccess {
 
 
                 }else{
-                    Item item2 = iv.getItem(lst[6]);
+                    Inventory.Item item2 = iv.getItem(lst[6]);
                     trade = new TwowayTrade(user1Id,user2Id,item1,item2,duration,tradeTime);
                 }
                 if (!fstMeeting.equals("null")) {

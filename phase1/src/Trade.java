@@ -1,3 +1,4 @@
+import Inventory.Item;
 import MeetingSystem.Meeting;
 
 import java.io.IOException;

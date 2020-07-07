@@ -1,3 +1,5 @@
+package Inventory;
+
 public class InventoryController {
     Inventory iv = new Inventory();
     User currUser;

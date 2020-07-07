@@ -1,3 +1,5 @@
+import Inventory.Inventory;
+import Inventory.Item;
 import MeetingSystem.MeetingEditor;
 import MeetingSystem.Meeting;
 
@@ -40,7 +42,7 @@ public class TradeManager {
      * Allow the currentUser to create a one-way trade with input otherUserId, item, and trade duration.
      * Update the trade history for both users
      * @param otherUserId the userId of another User in the particular Trade.
-     * @param item the only one Item to be trade in this created Trade.
+     * @param item the only one Inventory.Item to be trade in this created Trade.
      * @param duration the duration of this Trade, unit (days). -1 means the Trade is permanent.
      * @return the created newTrade
      */
@@ -59,12 +61,12 @@ public class TradeManager {
     /**
      * if the User wants to make a two way trade, tradeManager will create a two way trade.
      * @param otherUserId the userId of another User in the particular Trade
-     * @param item1to2 the Item to be trade in this created Trade.
-     * @param item2to1 the other Item to be trade in this created Trade.
+     * @param item1to2 the Inventory.Item to be trade in this created Trade.
+     * @param item2to1 the other Inventory.Item to be trade in this created Trade.
      * @param duration the duration of this Trade, unit (days). -1 means the Trade is permanent.
      */
     public Trade createTwowayTrade(UUID currUserId, UUID otherUserId, Item item1to2, Item item2to1, int duration,
-                                  LocalDateTime time) throws IOException {
+                                   LocalDateTime time) throws IOException {
         TwowayTrade newTrade = new TwowayTrade(currUserId, otherUserId, item1to2, item2to1, duration, time);
         tradeList.add(newTrade);
         updateFile();
