@@ -1,4 +1,5 @@
 package Trade;
+import Trade.MeetingSystem.MeetingSystem;
 import User.*;
 
 import java.io.BufferedReader;

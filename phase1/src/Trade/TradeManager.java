@@ -4,6 +4,8 @@ import Inventory.Inventory;
 import Inventory.Item;
 import Trade.MeetingSystem.MeetingEditor;
 import Trade.MeetingSystem.Meeting;
+import User.User;
+import User.UserManager;
 
 import java.io.*;
 import java.time.LocalDateTime;

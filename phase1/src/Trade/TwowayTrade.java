@@ -79,8 +79,8 @@ public class TwowayTrade extends Trade {
 
     @Override
     public void makeTrade() throws IOException {
-        User u1 = (User)um.getUser(trader1Id);
-        User u2 = (User)um.getUser(trader2Id);
+        User u1 = um.getUser(trader1Id);
+        User u2 = um.getUser(trader2Id);
         u1.getWishBorrow().remove(item2to1.getName());
         u1.getWishLend().remove(item1to2.getName());
         u2.getWishBorrow().remove(item1to2.getName());

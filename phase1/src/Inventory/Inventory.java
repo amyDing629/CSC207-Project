@@ -21,7 +21,7 @@ public class Inventory {
     public Inventory() {
         lendingList = new ArrayList<Item>();
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("phase1/src/Inventory.Inventory.txt"));
+            BufferedReader reader = new BufferedReader(new FileReader("phase1/src/Inventory.txt"));
             String line = reader.readLine();
             while (line != null) {
                 String[] lst = line.split(",");

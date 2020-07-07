@@ -1,5 +1,7 @@
 package Trade;
 
+import User.User;
+
 public class TradePresenter {
     User currUser;
     Trade trade;

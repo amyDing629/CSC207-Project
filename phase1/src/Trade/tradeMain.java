@@ -1,13 +1,15 @@
 package Trade;
 
 import Inventory.Inventory;
+import User.User;
+import User.UserManager;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.UUID;
 
 public class tradeMain {
-    public static void main (String[] args) throws IOException, AccountFrozenException {
+    public static void main (String[] args) throws IOException{
 
         TradeManager tm = new TradeManager();
         UserManager um = new UserManager();
