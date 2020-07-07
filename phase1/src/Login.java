@@ -1,4 +1,5 @@
 import Inventory.Inventory;
+import trade.Trade;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -65,10 +66,10 @@ public class Login {
                     System.out.println("------------------------------------------------------------");
                     System.out.println("Hello,"+username);
                     System.out.println("Freeze Status: "+a.getUser(username).getIsFrozen());
-                    System.out.println("Trade limit: " + a.getUser(username).getTradeNumber() + "/" + a.getUser(username).getWeekTransactionLimit());
+                    System.out.println("trade.Trade limit: " + a.getUser(username).getTradeNumber() + "/" + a.getUser(username).getWeekTransactionLimit());
                     System.out.println("Incomplete trade limit: " + (a.getUser(username).getIncomplete()).size() + "/" + a.getUser(username).getIncompleteTransactionLimit());
                     System.out.println("**************************************************************");
-                    System.out.println("Actions:\n1.Edit information\n2.Message\n3.Inventory.Inventory\n4.Message\n5.Trade History\n6.Market\n0.quit to menu");
+                    System.out.println("Actions:\n1.Edit information\n2.Message\n3.Inventory.Inventory\n4.Message\n5.trade.Trade History\n6.Market\n0.quit to menu");
                     System.out.print(">");
                     int op = sc.nextInt();
                     sc.nextLine();

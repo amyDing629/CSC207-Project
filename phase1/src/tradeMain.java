@@ -1,4 +1,5 @@
 import Inventory.Inventory;
+import trade.Trade;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -51,7 +52,7 @@ public class tradeMain {
         //System.out.println(amy.getTradeHistory());
 
         /*
-        ArrayList<Trade> lst = tm.getTradeList();
+        ArrayList<trade.Trade> lst = tm.getTradeList();
         System.out.println(lst);
         lst.get(0).setStatus("incomplete");
         tm.updateFile();

@@ -1,3 +1,5 @@
+package trade;
+
 import Inventory.Item;
 import MeetingSystem.Meeting;
 
@@ -35,8 +37,8 @@ public abstract class Trade {
     }
 
     /**
-     * return id of the Trade when print Trade
-     * @return id of the Trade
+     * return id of the trade.Trade when print trade.Trade
+     * @return id of the trade.Trade
      */
     public UUID getId(){
         return id;

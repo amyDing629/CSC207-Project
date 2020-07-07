@@ -1,4 +1,5 @@
 import Inventory.Item;
+import trade.Trade;
 
 import java.io.IOException;
 import java.time.LocalDateTime;

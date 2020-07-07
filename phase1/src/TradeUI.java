@@ -1,12 +1,11 @@
 import MeetingSystem.MeetingSystem;
-import MeetingSystem.Meeting;
+import trade.Trade;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.UUID;
 
 public class TradeUI {

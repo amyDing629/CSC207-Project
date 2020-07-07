@@ -9,8 +9,8 @@ import java.util.UUID;
 /**
  * This is a demo of how to use the MeetingSystem.
  *
- * This takes a Temporary Trade, which generally takes two meetings in total, as an example.
- * Assumes Trade stores:
+ * This takes a Temporary trade.Trade, which generally takes two meetings in total, as an example.
+ * Assumes trade.Trade stores:
  *      - tradeIds: an arraylist of two ids, which associating with two users who are part of the trade
  *      - meeting: the first meeting
  *      - meeting2: the second meeting
@@ -95,7 +95,7 @@ public class MeetingSystemDemo {
 
             } // here is the end of the second meeting
         } else{ // first meeting status: "cancelled"
-            System.out.println("Error: Trade cancelled");
+            System.out.println("Error: trade.Trade cancelled");
         }
     }
 }

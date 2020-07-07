@@ -16,7 +16,7 @@ import java.util.UUID;
  * calls corresponding use case method.
  *
  * Main functions of this controller class:
- *      1. allows setup meeting, once the Trade is set up
+ *      1. allows setup meeting, once the trade.Trade is set up
  *      2. apply use case method of setting up meeting
  *      3. allows edit meeting, once the
  *      4. allows confirming the meeting
@@ -75,7 +75,7 @@ public class MeetingSystem {
     /**
      * Run the Meeting system, which interacts with the user and makes decisions upon meeting progress.
      *
-     * 1. allows setting up a meeting, only when there is no meeting stored in Trade (i.e. first meeting)
+     * 1. allows setting up a meeting, only when there is no meeting stored in trade.Trade (i.e. first meeting)
      * 2. allows editing the meeting / confirming the meeting, only when
      * - the meeting has been set up already;
      * - the meeting has not been cancelled (i.e edit time of each ClientUser < threshold of edition time)
@@ -126,7 +126,7 @@ public class MeetingSystem {
 
     /**
      * Returns the current meeting object.
-     * This method is used for updating the meeting stored in the Trade system.
+     * This method is used for updating the meeting stored in the trade.Trade system.
      *
      * @return the meeting object
      */

@@ -1,3 +1,5 @@
+package trade;
+
 import Inventory.Inventory;
 
 import java.io.IOException;
@@ -61,7 +63,7 @@ public class OnewayTrade extends Trade {
     }
 
     public String toString(){
-        return "Trade" + getId() + ": Trader " + borrowerId +  " makes a one way trade with trader " + lenderId +
+        return "trade.Trade" + getId() + ": Trader " + borrowerId +  " makes a one way trade with trader " + lenderId +
                 " to borrow " + item + " at " + getCreateTime().format(formatter);
     }
 

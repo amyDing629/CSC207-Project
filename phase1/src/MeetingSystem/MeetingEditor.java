@@ -44,7 +44,7 @@ public class MeetingEditor extends IMeetingAttendee {
 
     /**
      * Set the time of edition
-     *  ****** TODO: only accessible for Trade System readFile ******
+     *  ****** TODO: only accessible for trade.Trade System readFile ******
      * @param time the new time of edition
      */
     public void setTimeOfEdition(Integer time){

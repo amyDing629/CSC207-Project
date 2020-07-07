@@ -1,5 +1,8 @@
+package trade;
+
 import Inventory.Inventory;
 import Inventory.Item;
+import trade.Trade;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -62,7 +65,7 @@ public class TwowayTrade extends Trade {
     }
 
     public String toString(){
-        return "Trade" + getId() + ": trader1 " + trader1Id +" makes two way trade with trader" + trader2Id +
+        return "trade.Trade" + getId() + ": trader1 " + trader1Id +" makes two way trade with trader" + trader2Id +
                 " for item " + item1to2 + "and" + item2to1 +  " at " + getCreateTime().format(formatter);
     }
 

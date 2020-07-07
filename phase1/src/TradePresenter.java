@@ -1,3 +1,5 @@
+import trade.Trade;
+
 public class TradePresenter {
     User currUser;
     Trade trade;

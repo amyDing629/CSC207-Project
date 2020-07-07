@@ -13,7 +13,7 @@ public class TradeDataAccess {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 /*
     public void readFile(){
-        Trade trade;
+        trade.Trade trade;
         try {
             Inventory.Inventory iv = new Inventory.Inventory();
             BufferedReader reader = new BufferedReader(new FileReader("phase1/src/trade.txt"));
@@ -35,12 +35,12 @@ public class TradeDataAccess {
                 HashMap<UUID, MeetingEditor> idToE = new HashMap<>();
 
                 if (lst[1].equals("oneway")){
-                    trade = new OnewayTrade(user1Id,user2Id,item1,duration,tradeTime);
+                    trade = new trade.OnewayTrade(user1Id,user2Id,item1,duration,tradeTime);
 
 
                 }else{
                     Inventory.Item item2 = iv.getItem(lst[6]);
-                    trade = new TwowayTrade(user1Id,user2Id,item1,item2,duration,tradeTime);
+                    trade = new trade.TwowayTrade(user1Id,user2Id,item1,item2,duration,tradeTime);
                 }
                 if (!fstMeeting.equals("null")) {
                     String[] fm = fstMeeting.split("/");
