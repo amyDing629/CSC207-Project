@@ -63,7 +63,7 @@ public class TradeController {
      * @param line the user's input
      * @param item the item of the trade
      * @return whether or not the trade is a oneway trade
-     * @throws IOException
+     * @throws IOException the trade is not created
      */
     public boolean createTrade(String line, Item item) throws IOException {
         LocalDateTime time = LocalDateTime.now();
@@ -111,11 +111,12 @@ public class TradeController {
             return "cancelled";
         }else if (currTrade.getStatus().equals("complete")) {
             return "complete";
+
+        }else if (currTrade.getMeeting() == null || currTrade.getMeeting().getStatus().equals("incomplete")){
+            return "first meeting";
         }else if (currTrade.getMeeting().getStatus().equals("cancelled")){
             currTrade.setStatus("cancelled");
             return "cancelled";
-        }else if (currTrade.getMeeting() == null || currTrade.getMeeting().getStatus().equals("incomplete")){
-            return "first meeting";
         }else if (currTrade.getDuration()==Trade.temp){
             if (currTrade.getSecondMeeting().getStatus().equals("incomplete")){
                 return "second meeting";
