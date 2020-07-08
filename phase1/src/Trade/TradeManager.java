@@ -86,8 +86,11 @@ public class TradeManager {
        // System.out.println("userList:"+userManager.getUserList());
         User currentUser = userManager.getUser(currUserId);
         User tarUser = userManager.getUser(tarUserId);
+        System.out.println(currentUser);
+        System.out.println(userManager.getUserList());
         currentUser.getTradeHistory().add(newTrade.getId());
         tarUser.getTradeHistory().add(newTrade.getId());
+        userManager.updateFile();
     }
 
 
