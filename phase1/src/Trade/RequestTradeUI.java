@@ -61,13 +61,12 @@ public class RequestTradeUI{
                         && !line.equals("3") && !line.equals("4")) {
                     throw new IOException("Wrong input, please type again.");
                 } else {
-                    if (trc.createTrade(line, item)){
-                        System.out.println("your trade has been created, please wait for the target user to reply");
-                    }else{
+                    if (!trc.createTrade(line, item)) {
                         String item2 = getSecondItem();
                         trc.createTrade(line, item, iv.getItem(item2));
-                        System.out.println("your trade has been created, please wait for the target user to reply");
                     }
+
+                    System.out.println("your trade has been created, please wait for the target user to reply");
                     break;
                 }
             } catch (IOException e) {

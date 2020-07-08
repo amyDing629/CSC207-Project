@@ -24,7 +24,7 @@ public class OnewayTrade extends Trade {
      * @param item the two item traders what to trade
      * @param duration whether the trade is temporary or permanent
      */
-    public OnewayTrade(UUID borrower, UUID lender, Item item, int duration, LocalDateTime time){
+    public OnewayTrade(UUID borrower, UUID lender, Item item, int duration, LocalDateTime time) throws IOException {
         super(duration, time);
         borrowerId = borrower;
         lenderId = lender;
