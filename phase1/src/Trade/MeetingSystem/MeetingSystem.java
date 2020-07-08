@@ -9,8 +9,8 @@ import java.util.Arrays;
 import java.util.UUID;
 
 /**
- * [Use Case Interact class]
- * This is a meeting's controlling system.
+ * [Use Case Interactor class]
+ * This is a meeting's main interactor.
  *
  * The meeting system controller that interacts with the user, makes decisions based on user input instructions, and
  * calls corresponding use case method.
@@ -35,30 +35,21 @@ public class MeetingSystem {
     public static UUID userId;
     public static UUID otherUserId;
 
-    public boolean isPermanent;
     public boolean isFirst;
     public boolean isSetUp;
     public boolean isCancel;
 
     public Meeting meeting;
 
-    public ArrayList<MeetingLogInfo> meetingLog = new ArrayList<MeetingLogInfo>();
+    public ArrayList<MeetingLogInfo> meetingLog = new ArrayList<>();
 
-//    final MeetingSystemMenuPresenter menuPresenter = new MeetingSystemMenuPresenter();
 
     /**
      * Construct a Trade.MeetingSystem.Trade.MeetingSystem object with two client users (ids)
      * @param users the users involved in this meeting
+     * @param isFirst if the input meeting is the first meeting
+     * @param meeting the meeting object
      */
-    public MeetingSystem(ArrayList<UUID> users, boolean isFirst) {
-        userId = users.get(0);
-        otherUserId = users.get(1);
-        this.isFirst = isFirst;
-        isSetUp = false;
-        isCancel = false;
-
-    }
-
     public MeetingSystem(ArrayList<UUID> users, boolean isFirst, Meeting meeting) {
         userId = users.get(0);
         otherUserId = users.get(1);
@@ -168,20 +159,21 @@ public class MeetingSystem {
                 "Enter \"ok\" to continue, or anything else to quit this session.");
         String input = br.readLine();
         try {
-            // instruction 1: set up meeting
             // precondition:
             //  - no meeting has been scheduled yet
             if (input.equals("ok")) {
-                SetUpMeetingPresenter setUpMeeting = new SetUpMeetingPresenter();
-                dateTime = setUpMeeting.dateTime;
-                place = setUpMeeting.place;
+                SetUpMeetingInputPort setUpMeeting = new SetUpMeetingInputPort();
+                dateTime = (LocalDateTime) setUpMeeting.setUpMeetingInputPortResult().get(0);
+                place = (String) setUpMeeting.setUpMeetingInputPortResult().get(1);
                 meeting = MeetingActivities.setUpMeeting(userId, otherUserId, dateTime, place);
                 isSetUp = true;
 
+                // print successful setting-up
                 System.out.println("Success: A meeting has been set up!");
                 System.out.println("  " + "- proposed time is:" + dateTime.toString());
                 System.out.println("  " + "- proposed place is:" + place);
 
+                // create log
                 MeetingLogInfo log = new CreateLogRecord().createLogRecord(currLogInUser, "s");
                 meetingLog.add(log);
                 System.out.println("New log added:" + log.toString());
@@ -205,28 +197,26 @@ public class MeetingSystem {
                 case "ee":
                     if (meeting != null && isEditable(currLogInUser)) { // meeting can be edited
 
-                        System.out.println("isOverThreshold: " + meeting.getEditor(currLogInUser).editsOverThreshold());
-                        System.out.println("isEditable: " + isEditable(currLogInUser));
-
-                        EditMeetingPresenter editMeeting = new EditMeetingPresenter(dateTime, place);
-                        LocalDateTime enteredDateTime = (LocalDateTime) editMeeting.editMeetingPresenterResult().get(0);
-                        String enteredPlace = (String) editMeeting.editMeetingPresenterResult().get(1);
+                        EditMeetingInputPort editMeeting = new EditMeetingInputPort(dateTime, place);
+                        LocalDateTime enteredDateTime = (LocalDateTime) editMeeting.editMeetingInputPortResult().get(0);
+                        String enteredPlace = (String) editMeeting.editMeetingInputPortResult().get(1);
 
                         if (isEdited(enteredDateTime, enteredPlace)) {
                             MeetingActivities.editMeeting(meeting, currLogInUser, dateTime, place);
-                            dateTime = editMeeting.dateTime;
-                            place = editMeeting.place;
-                            meeting.editMeeting(dateTime, place);//add by amy
+                            dateTime = enteredDateTime;
+                            place = enteredPlace;
 
-
+                            // print successful edition
                             System.out.println("Success: Meeting has been edited!");
                             System.out.println("  " + "- the current proposed time is:" + dateTime.toString());
                             System.out.println("  " + "- the current proposed place is:" + place);
 
+                            // create log
                             MeetingLogInfo log = new CreateLogRecord().createLogRecord(currLogInUser, "e");
                             meetingLog.add(log);
                             System.out.println("New log added:" + log.toString());
 
+                            // print time of edition of this user
                             System.out.println("user.User " + currLogInUser + " current edit time:" +
                                     meeting.getEditor(currLogInUser).getTimeOfEdition());
                         } else {
@@ -243,12 +233,14 @@ public class MeetingSystem {
                     }
                     break;
 
-                    // TODO: change to agree session
+
                 case "aa":
                     if (MeetingActivities.agreeMeeting(meeting, currLogInUser)) {
+                        // print successful agreement
                         System.out.println("Success: Meeting has been agree by " + currLogInUser);
                         System.out.println("Meeting current status: " + meeting.getStatus());
 
+                        //create log
                         MeetingLogInfo log = new CreateLogRecord().createLogRecord(currLogInUser, "a");
                         meetingLog.add(log);
                         System.out.println("New log added:" + log.toString());
@@ -290,9 +282,11 @@ public class MeetingSystem {
         try{
             if (input.equals("cc")){
                 if (MeetingActivities.confirmMeeting(meeting, currLogInUser)) {
+                    // print successful confirmation
                     System.out.println("Success: Meeting has been confirmed by " + currLogInUser);
                     System.out.println("Meeting current status: " + meeting.getStatus());
 
+                    // create log
                     MeetingLogInfo log = new CreateLogRecord().createLogRecord(currLogInUser, "c");
                     meetingLog.add(log);
                     System.out.println("New log added:" + log.toString());

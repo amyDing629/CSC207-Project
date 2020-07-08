@@ -1,8 +1,7 @@
 package User;
 
 import Inventory.*;
-import Trade.Trade;
-
+import Trade.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -78,11 +77,11 @@ public class Login {
                     if (op == 1) {
                         editInfo(a.getUser(username));
                     } else if (op == 2) {
-                        message(a.getUser(username));
+                        UserTradeUI(a.getUser(username));
                     } else if (op == 3) {
                         inventory(a.getUser(username));
                     } else if (op == 4) {
-                        message(a.getUser(username));
+                        UserTradeUI(a.getUser(username));
                     } else if (op == 5) {
                         tradeHistory(a.getUser(username));
                     } else if (op == 6) {
@@ -286,6 +285,7 @@ public class Login {
     }
     public void inventory(User user){
         Scanner sc=new Scanner(System.in);
+        Inventory iv=new Inventory();
         int exit=-1;
         while(exit!=0) {
             System.out.println("--------------------\nInventory.Inventory");
@@ -307,6 +307,20 @@ public class Login {
                     List<String> lb=user.getWishLend();
                     for (int i=0;i<lb.size();i++){
                         System.out.println("wish borrow item:"+i+" "+lb.get(i));
+                    }
+                    System.out.println("Select a item to start the trade! enter -1 to quit to menu");
+                    String input22=sc.nextLine();
+                    if(input22.equals("-1")){
+                        break;
+                    }
+                    Item k=iv.getItem(input22);
+                    if (k!=null){
+                        try {
+                            RequestTradeUI ru = new RequestTradeUI(user, k);
+                            ru.run();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
                     }
                     break;
                 case 3:
@@ -350,11 +364,55 @@ public class Login {
             }
         }
     }
-    public void message(User user){
-        System.out.println("--------------------\nMessage");
-        System.out.println("Hello,user"+user.getUsername());
+    public void UserTradeUI(User user) throws IOException {
+        Scanner sc=new Scanner(System.in);
+        TradeController tc=new TradeController(user);
+        int escape=0;
+        while (escape==0) {
+            System.out.println("--------------------\nMessage");
+            System.out.println("Hello,user" + user.getUsername());
+            System.out.println("Menu: 1.confirm trades\n2.compelete trade\n0.quit");
+            int input1 = sc.nextInt();
+            sc.nextLine();
+            switch (input1) {
+                case 1:
+                    for (Trade a : user.getUnconfirmed()) {
+                        System.out.println(a.toString());
+                        System.out.println("Do you want to confirm the trade? use yes or no to confirm or cancel the trade.-1 to quit to menu.");
+                        String input = sc.nextLine();
+                        if (input.equals("-1")) {
+                            break;
+                        } else {
+                            if (input.equals("yes")) {
+                                tc.confirmTrade(a);
+                            } else if (input.equals("no")) {
+                                tc.cancelTrade(a);
+                            }
+                        }
+                    }
+                    break;
+                case 2:
+                    for (Trade a : user.getIncomplete()) {
+                        System.out.println(a.toString());
+                        System.out.println("Do you want to complete the trade? use yes or no to complete or cancel the trade.-1 to quit to menu. Anything else to skip to next.");
+                        String input = sc.nextLine();
+                        if (input.equals("-1")) {
+                            break;
+                        } else {
+                            if (input.equals("yes")) {
+                                tc.completeTrade(a);
+                            } else if (input.equals("no")) {
+                                tc.cancelTrade(a);
+                            }
+                        }
+                    }
+                    break;
+                case 0:
+                    escape=1;
+                    break;
+            }
 
-
+        }
     }
     public void tradeHistory(User user) throws IOException {
         System.out.println("Hi user: "+user.getUsername());
@@ -392,7 +450,6 @@ public class Login {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
-
     }
     public void market(User user) throws IOException {
         Scanner sc=new Scanner(System.in);
@@ -405,23 +462,6 @@ public class Login {
                 System.out.println("Inventory.Item:"+c);
             }
             System.out.println("--------------------------");
-        }
-        int exit=0;
-        while (exit==0) {
-            String ip = sc.nextLine();
-            System.out.println("Please enter the name of user you wants to trade with.");
-            if (a.getUser(ip) != null) {
-                selectALendItem(user);
-                exit=1;
-            }
-            else {
-                System.out.println("You enter the wrong name,press 1 to exit.press anything else to try again.");
-                String k=sc.nextLine();
-                if(k.equals("0")){
-                    exit=1;
-                }
-
-            }
         }
     }
     public void selectALendItem(User user){

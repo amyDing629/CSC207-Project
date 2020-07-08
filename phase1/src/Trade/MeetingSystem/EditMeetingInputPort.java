@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 /**
- * This is a presenter class for edit meeting action, which interacts with the user and obtains the meeting editing
+ * This is a input port for edit meeting action, which interacts with the user and obtains the meeting editing
  * information.
  *
  * The user.User can interact with prompts and choose to
@@ -17,27 +17,28 @@ import java.util.Scanner;
  *      - edit place
  *      - edit both time and place
  */
-public class EditMeetingPresenter {
+public class EditMeetingInputPort {
 
-    public LocalDateTime dateTime;
-    public String place;
+    private LocalDateTime dateTime;
+    private String place;
+
+    MeetingSystemMenuPresenter msMenuPresenter = new MeetingSystemMenuPresenter();
 
 
     /**
      * Obtain user prompts of editing time and/or place.
      */
-    public EditMeetingPresenter(LocalDateTime dateTime, String place) {
+    public EditMeetingInputPort(LocalDateTime dateTime, String place) {
         // Set the instance variables "dateTime", "place" with  before editing
         this.dateTime = dateTime;
         this.place = place;
 
-
         // Obtain user.User input of edition info
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        printMenu();
-
         try{
+            msMenuPresenter.editMenu();
+
             String input = br.readLine();
             label:
             while (!input.equals("..")) {
@@ -48,48 +49,35 @@ public class EditMeetingPresenter {
                 // instruction "..": quit
                 // other instructions
                 switch (input) {
-                    case "1" : {
-                        editTimePresenter();
+                    case "1" -> {
+                        editTimeInputPort();
                         break label;
                     }
-                    case "2" : {
-                        editPlacePresenter();
+                    case "2" -> {
+                        editPlaceInputPort();
                         break label;
                     }
-                    case "3" : {
-                        editTimePresenter();
-                        editPlacePresenter();
+                    case "3" -> {
+                        editTimeInputPort();
+                        editPlaceInputPort();
                         break label;
                     }
-                    case "4" : {
-                        printMenu();
-                        input = br.readLine();
-                    }
-                    default : {
-                        System.out.println("Error: Invalid instruction in EditMeetingPresenter!");
-                        input = br.readLine();
+                    default -> {
+                        {
+                            System.out.println("Error: Invalid instruction in EditMeetingInputPort!");
+                            input = br.readLine();
+                        }
+                        msMenuPresenter.editMenu();
                     }
                 }
             }
         }catch (IOException e) {
-            System.out.println("Error: Something went wrong within EditMeetingPresenter");
+            System.out.println("Error: Something went wrong within EditMeetingInputPort");
         }
     }
 
 
-    /**
-     * Return true iff successfully edited the place (i.e change the old place to a new one);
-     * return false on the contrary
-     *
-     * @param newPlace the new place to change
-     * @return true iff successfully edited the place (i.e change the old place to a new one)
-     */
-    private boolean isNewPlaceEditable(String newPlace) {
-        return !newPlace.equals(place);
-
-    }
-
-    private void editTimePresenter(){
+    private void editTimeInputPort(){
         Scanner user_input = new Scanner(System.in);
         boolean good = false;
         do {
@@ -114,9 +102,7 @@ public class EditMeetingPresenter {
                     } else {
                         System.out.println("Error: Invalid input date-time! Input time is same as the old time");
                     }
-
                 }
-
             }
         } while (!good);
         System.out.println("New Edition Successful! " +
@@ -124,7 +110,7 @@ public class EditMeetingPresenter {
     }
 
 
-    private void editPlacePresenter(){
+    private void editPlaceInputPort(){
         Scanner user_input = new Scanner(System.in);
         boolean good = false;
         do {
@@ -140,22 +126,23 @@ public class EditMeetingPresenter {
         System.out.print("New Edition Successful! Proposed new place: " + this.place + "\n");
     }
 
-    private void printMenu(){
-        System.out.println("------------------------------");
-        System.out.print("Menu: \n " +
-                "1. Enter '1': only change time \n" +
-                "2. Enter '2': only change place \n" +
-                "3. Enter '3': change both time and place \n" +
-                "4. Enter '4': print edit-meeting menu \n" +
-                "5. Enter '..' to quit edition process \n");
-        System.out.println("------------------------------");
+    /**
+     * Return true iff successfully edited the place (i.e change the old place to a new one);
+     * return false on the contrary
+     *
+     * @param newPlace the new place to change
+     * @return true iff successfully edited the place (i.e change the old place to a new one)
+     */
+    private boolean isNewPlaceEditable(String newPlace) {
+        return !newPlace.equals(place);
+
     }
 
     /**
-     * Returns the results, including time and place, of this presenter
+     * Returns the results, including time and place, of this input port
      * @return an arraylist of the date-time, place
      */
-    public ArrayList<Object> editMeetingPresenterResult(){
+    public ArrayList<Object> editMeetingInputPortResult(){
         return new ArrayList<>(Arrays.asList(dateTime, place));
     }
 

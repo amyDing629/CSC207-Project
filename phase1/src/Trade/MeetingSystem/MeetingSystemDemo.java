@@ -34,7 +34,7 @@ public class MeetingSystemDemo {
         System.out.println("Welcome to meeting system!");
 
         // the start of the first meeting
-        MeetingSystem mt1 = new MeetingSystem(tradeIds, true); // create a meeting system for the first meeting
+        MeetingSystem mt1 = new MeetingSystem(tradeIds, true, meeting); // create a meeting system for the first meeting
         boolean turnIsUser1 = true;
         while (meeting == null || meeting.getStatus().equals(MeetingStatus.incomplete) || meeting.getStatus().equals(MeetingStatus.agreed)) {
             // allow the users make actions only when
@@ -68,7 +68,7 @@ public class MeetingSystemDemo {
             // the start of the second meeting
             System.out.println("Welcome to meeting system!");
             System.out.println("== SECOND MEETING ==");
-            MeetingSystem mt2 = new MeetingSystem(tradeIds, false); // create a meeting system for the second meeting
+            MeetingSystem mt2 = new MeetingSystem(tradeIds, false, meeting2); // create a meeting system for the second meeting
             meeting2 = mt2.setUpSecondMeeting(meeting); // trade system sets up the second meeting according to the rule (1 month duration)
             boolean turnIsUser1_m2 = true;
             while (meeting2 == null || meeting2.getStatus().equals(MeetingStatus.incomplete)) {
