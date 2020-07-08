@@ -163,6 +163,8 @@ public class User {
         return tradeHistory;
     }
 
+    public void addTradeHistory(UUID id){tradeHistory.add(id);}
+
     public boolean getIsAdmin(){return isAdmin;}
 
     public List<String> getWishLend() {

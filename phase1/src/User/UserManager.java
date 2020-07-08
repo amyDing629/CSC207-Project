@@ -14,6 +14,17 @@ import java.util.UUID;
  * The renew and modification of users
  */
 public class UserManager {
+    private List<User> userList;
+
+    public List<User> getUserList() {
+        return userList;
+    }
+
+    public void setUserList(List<User> userList) {
+        this.userList = userList;
+    }
+
+
     /**
      * read the username.txt file, return a list of list that contains all the information of the user
      */
@@ -95,6 +106,7 @@ public class UserManager {
                 d.setIncompleteTransaction(Integer.parseInt(b.get(11)));
 
                 myList.add(d);
+                userList.add(d);
             }
             if (b.get(3).equals("false")) {
                 String[] c = b.get(6).split("; ");
@@ -144,6 +156,7 @@ public class UserManager {
                 d.setIncompleteTransaction(Integer.parseInt(b.get(11)));
 
                 myList.add(d);
+                userList.add(d);
             }
         }
         return myList;
@@ -185,6 +198,7 @@ public class UserManager {
             s = s + "\n";
             output.write(s.getBytes());
             output.close();
+            userList.add(u);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -268,7 +282,6 @@ public class UserManager {
      */
     public void updateFile() throws IOException {
         try {
-            ArrayList<User> userList = splitUser(readFile());
             PrintWriter writer = new PrintWriter("phase1/src/username.txt");
             writer.print("");
             writer.close();
