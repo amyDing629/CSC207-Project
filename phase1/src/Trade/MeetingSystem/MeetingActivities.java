@@ -1,11 +1,15 @@
 package Trade.MeetingSystem;
 
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.UUID;
 
 /**
  * [Use Case class]
- * Allow users to set up meeting, edit meeting, confirm meeting
+ * This is a set of meeting activities allowing the actual realisation of setting up meeting, editing meeting, agree on
+ * meeting proposal, confirming meeting, and cancelling the meeting
  */
 
 public class MeetingActivities {

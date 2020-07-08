@@ -1,19 +1,21 @@
 package Trade.MeetingSystem;
 
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Scanner;
 
 /**
- * Presenter class of Meeting System, functioned for setting up a meeting only
+ * Input port of Meeting System, functioned for setting up a meeting only
  */
-public class SetUpMeetingPresenter {
-    public LocalDateTime dateTime;
-    public String place;
+public class SetUpMeetingInputPort {
+    private LocalDateTime dateTime;
+    private String place;
 
     /**
      * Feeds the prompts of the Meeting info, including dateTime, place
      */
-    public SetUpMeetingPresenter() {
+    public SetUpMeetingInputPort() {
 
         Scanner user_input = new Scanner(System.in);
         boolean good = false;
@@ -50,7 +52,7 @@ public class SetUpMeetingPresenter {
 
     }
 
-    public ArrayList<Object> setUpMeetingPresenterResult(){
+    public ArrayList<Object> setUpMeetingInputPortResult(){
         return new ArrayList<>(Arrays.asList(dateTime, place));
     }
 

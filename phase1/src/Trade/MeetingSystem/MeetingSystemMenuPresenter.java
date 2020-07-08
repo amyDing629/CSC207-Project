@@ -29,8 +29,7 @@ public class MeetingSystemMenuPresenter implements IMenuPresenter {
                 "1. Enter '1': only change time \n" +
                 "2. Enter '2': only change place \n" +
                 "3. Enter '3': change both time and place \n" +
-                "4. Enter '4': print edit-meeting menu \n" +
-                "5. Enter '..' to quit edition process \n");
+                "4. Enter '..' to quit edition process \n");
         System.out.println("------------------------------");
     }
 }

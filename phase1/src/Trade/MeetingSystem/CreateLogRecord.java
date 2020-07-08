@@ -2,6 +2,9 @@ package Trade.MeetingSystem;
 
 import java.util.UUID;
 
+/**
+ * This is a repository class of creating a log record.
+ */
 public class CreateLogRecord{
     /**
      * create a log record of the user making an action.
