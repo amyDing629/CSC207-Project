@@ -1,6 +1,8 @@
 package Trade.MeetingSystem;
 
 /**
+ * [Entity class]
+ * This is a meeting attendee.
  *
  * Allows at most 3 times of editing
  */

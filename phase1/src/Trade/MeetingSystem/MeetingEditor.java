@@ -1,6 +1,6 @@
 package Trade.MeetingSystem;
 
-import java.util.*;
+import java.util.UUID;
 
 /**
  * [Entity class]
@@ -63,7 +63,7 @@ public class MeetingEditor extends IMeetingAttendee {
      * @return true or false
      */
     public boolean editsOverThreshold() {
-        return timeOfEdition > threshold;
+        return timeOfEdition > getThreshold();
     }
 
     public String toString(){

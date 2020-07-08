@@ -26,7 +26,7 @@ public class TwowayTrade extends Trade {
      * @param item2 the item that trader2 give to trader1
      * @param duration whether the trade is temporary or permanent
      */
-    public TwowayTrade(UUID trader1Id, UUID trader2Id, Item item1, Item item2, int duration, LocalDateTime time){
+    public TwowayTrade(UUID trader1Id, UUID trader2Id, Item item1, Item item2, int duration, LocalDateTime time) throws IOException {
         super(duration, time);
         this.trader1Id = trader1Id;
         this.trader2Id = trader2Id;

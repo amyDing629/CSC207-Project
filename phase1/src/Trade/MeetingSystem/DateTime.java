@@ -10,10 +10,18 @@ public class DateTime {
 
     public static LocalDateTime currentTime = LocalDateTime.now();
 
+    /**
+     * Returns the system's current date-time
+     * @return system's current date-time
+     */
     public static LocalDateTime getCurrentTime() {
         return currentTime;
     }
 
+    /**
+     * Returns the formatter of the date-time
+     * @return the formatter
+     */
     public static DateTimeFormatter getFormat() {
         return formatter;
     }

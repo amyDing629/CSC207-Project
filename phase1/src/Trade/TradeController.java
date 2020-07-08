@@ -22,7 +22,7 @@ public class TradeController {
      * [constructor]
      * @param currUser the user that is using the system
      */
-    public TradeController(User currUser){
+    public TradeController(User currUser) throws IOException {
         this.currUser = currUser;
 
     }

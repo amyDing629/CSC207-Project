@@ -414,7 +414,7 @@ public class Login {
 
         }
     }
-    public void tradeHistory(User user){
+    public void tradeHistory(User user) throws IOException {
         System.out.println("Hi user: "+user.getUsername());
         System.out.println("Compeleted past trades:");
         if (user.getTradeHistoryTop().size()>0) {
