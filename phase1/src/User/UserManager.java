@@ -4,23 +4,26 @@ import Trade.Trade;
 import Trade.TradeManager;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * [UseCase class]
  * The renew and modification of users
  */
 public class UserManager {
-    private List<User> userList;
+    private ArrayList<User> userList;
+
+
+    public UserManager() throws IOException {
+        userList = new ArrayList<User>();
+        splitUser(readFile());
+    }
 
     public List<User> getUserList() {
         return userList;
     }
 
-    public void setUserList(List<User> userList) {
+    public void setUserList(ArrayList<User> userList) {
         this.userList = userList;
     }
 
@@ -198,7 +201,7 @@ public class UserManager {
             s = s + "\n";
             output.write(s.getBytes());
             output.close();
-            userList.add(u);
+            //userList.add(u);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -211,7 +214,7 @@ public class UserManager {
     public User getUser(String name) throws IOException {
         try{
             if(readFile().size() == 0){return null;}
-            ArrayList<User> userList = splitUser(readFile());
+            //ArrayList<User> userList = splitUser(readFile());
             for(User u : userList){
                 if(u.getUsername().equals(name))
                     return u;
@@ -229,7 +232,7 @@ public class UserManager {
     public User getUser(UUID userId) throws IOException {
         try{
             if(readFile().size() == 0){return null;}
-            ArrayList<User> userList = splitUser(readFile());
+            //ArrayList<User> userList = splitUser(readFile());
             for(User u : userList){
                 if(u.getId().equals(userId))
                     return u;
@@ -265,14 +268,10 @@ public class UserManager {
      * Check if the name matches with the password
      */
     public boolean verifyUser(String name, String password) throws IOException {
-        try{
-            ArrayList<User> userList = splitUser(readFile());
-            for(User u : userList){
-                if(u.getUsername().equals(name) && u.getPassword().equals(password)) {
-                    return true;}
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        //ArrayList<User> userList = splitUser(readFile());
+        for(User u : userList){
+            if(u.getUsername().equals(name) && u.getPassword().equals(password)) {
+                return true;}
         }
         return false;
     }
@@ -286,7 +285,7 @@ public class UserManager {
             writer.print("");
             writer.close();
             for (User u : userList) {
-                addUser(getUser(u.username));
+                addUser(u);
             }
         }catch (IOException e) {
             e.printStackTrace();

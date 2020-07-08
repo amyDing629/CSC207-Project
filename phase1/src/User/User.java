@@ -185,7 +185,7 @@ public class User {
     /**
      * return the list of all trades that the user has
      */
-    public List<Trade> getAllTrade(){
+    public List<Trade> getAllTrade() throws IOException {
         TradeManager a = new TradeManager();
         ArrayList<Trade> b = new ArrayList<>();
         for(UUID i: tradeHistory){
@@ -197,7 +197,7 @@ public class User {
     /**
      * return the list of all unconfirmed trades that the user has
      */
-    public List<Trade> getUnconfirmed(){
+    public List<Trade> getUnconfirmed() throws IOException {
         List<Trade> trade=new ArrayList<>();
         for(Trade t: getAllTrade()){
             if(t.getStatus().equals("unconfirmed")){
@@ -210,7 +210,7 @@ public class User {
     /**
      * return the list of all incomlete trades that the user has
      */
-    public List<Trade> getIncomplete(){
+    public List<Trade> getIncomplete() throws IOException {
         List<Trade> trade=new ArrayList<>();
         for(Trade t: getAllTrade()){
             if(t.getStatus().equals("incomplete")){
@@ -224,7 +224,7 @@ public class User {
      * return the list of most recent three trades that the user has
      * if the user has less than three trades, return all the trades the user has
      */
-    public List<Trade> getTradeHistoryTop() {
+    public List<Trade> getTradeHistoryTop() throws IOException {
         List<Trade> trade=new ArrayList<>();
         TradeManager a = new TradeManager();
         int y = 0;
@@ -280,7 +280,7 @@ public class User {
     /**
      * return the number of incomplete transactions that the user has
      */
-    public int getIncompleteTransaction(){
+    public int getIncompleteTransaction() throws IOException {
         TradeManager a = new TradeManager();
         int number=0;
         for (UUID i : tradeHistory) {
@@ -294,7 +294,7 @@ public class User {
     /**
      * return the number of transactions of the user has in seven days from the most recent trade
      */
-    public int getTradeNumber(){
+    public int getTradeNumber() throws IOException {
         TradeManager a = new TradeManager();
         if(tradeHistory.size() == 0){return 0;}
         Trade s = a.getTrade(tradeHistory.get(tradeHistory.size() - 1));
