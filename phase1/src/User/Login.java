@@ -372,43 +372,57 @@ public class Login {
         Scanner sc=new Scanner(System.in);
         TradeController tc=new TradeController(user);
         int escape=0;
-        List<Trade> tHis=user.getTradeHistoryTop();
         List<Trade> iL=user.getIncomplete();
         List<Trade> iU=user.getUnconfirmed();
+        TradeManager tm=new TradeManager();
         while (escape==0) {
             System.out.println("--------------------\nMessage");
             System.out.println("Hello,user" + user.getUsername());
-            System.out.println("Menu: 1.confirm trades\n2.compelete trade\n3.Cancel trade\n0.quit");
+            System.out.println("Menu: 1.confirm trades\n2.compelete trade\n3.Trade History\n0.quit");
             int input1 = sc.nextInt();
             sc.nextLine();
             switch (input1) {
                 case 1:
-                    for(int i=0;i<iL.size();i++){
-                        System.out.println((i+1)+". "+iL.get(i).toString());
+                    for(int i=0;i<iU.size();i++){
+                        System.out.println((i+1)+". "+iU.get(i).toString());
                     }
-                    System.out.println("Which trade do you want to confirm? select item no to confirm");
+                    System.out.println("Which trade do you want to confirm? select item no. to confirm");
                     int input2 = sc.nextInt();
                     sc.nextLine();
-                    if((input2<(iL.size()+1))&&(input2>0)){
-
+                    if((input2<(iU.size()+1))&&(input2>0)){
+                        iU.get(input2-1).setStatus("confirm trade");
+                    }
+                    else{
+                        System.out.println("Wrong Number, returning to UserTrade menu....");
                     }
                     break;
                 case 2:
-                    for (Trade a : user.getIncomplete()) {
-                        System.out.println(a.toString());
-                        System.out.println("Do you want to complete the trade? use yes or no to complete or cancel the trade.-1 to quit to menu. Anything else to skip to next.");
-                        String input = sc.nextLine();
-                        if (input.equals("-1")) {
-                            break;
-                        } else {
-                            if (input.equals("yes")) {
-                                tc.completeTrade(a);
-                            } else if (input.equals("no")) {
-                                tc.cancelTrade(a);
-                            }
-                        }
+                    for(int i=0;i<iL.size();i++){
+                        System.out.println((i+1)+". "+iL.get(i).toString());
                     }
-                    break;
+                    System.out.println("Which trade do you want to complete? select item no. to confirm");
+                    int input3 = sc.nextInt();
+                    sc.nextLine();
+                    if((input3<(iL.size()+1))&&(input3>0)){
+                        TradeUI tu=new TradeUI(user,iL.get(input3-1).getId());
+                        tu.run();
+                    }
+                    else{
+                        System.out.println("Wrong Number, returning to UserTrade menu....");
+                    }
+                case 3:
+                    System.out.println("Hi user: "+user.getUsername());
+                    System.out.println("Compeleted past trades:");
+                    List<Trade> tHis=user.getTradeHistoryTop();
+                    System.out.println("****************");
+                    for(int i=0;i<tHis.size();i++){
+                        System.out.println((i+1)+". "+tHis.get(i).toString());
+                    }
+                    System.out.println("****************");
+                    System.out.println("Most frequent user:");
+                    for(int i=0;i<user.getFrequentUser().size();i++){
+                        System.out.println(user.getFrequentUser().get(i));
+                    }
                 case 0:
                     escape=1;
                     break;
@@ -422,7 +436,6 @@ public class Login {
         List<Trade> tHis=user.getTradeHistoryTop();
         List<Trade> iL=user.getIncomplete();
         List<Trade> iU=user.getUnconfirmed();
-
         System.out.println("****************");
         for(int i=0;i<iL.size();i++){
             System.out.println((i+1)+". "+iL.get(i).toString());
