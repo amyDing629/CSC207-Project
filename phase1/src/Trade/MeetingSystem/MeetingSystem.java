@@ -9,8 +9,8 @@ import java.util.Arrays;
 import java.util.UUID;
 
 /**
- * [Use Case Interactor class]
- * This is a meeting's main interactor.
+ * [Controller class]
+ * This is a meeting's main controller (facade controller).
  *
  * The meeting system controller that interacts with the user, makes decisions based on user input instructions, and
  * calls corresponding use case method.
@@ -22,7 +22,7 @@ import java.util.UUID;
  *      4. allows confirming the meeting
  *      5. update timeOfEdition in MeetingEditor
  */
-public class MeetingSystem {
+public class MeetingSystem implements IMeetingSystem {
 
     /**
      * This is the current meeting date-time.
@@ -32,8 +32,8 @@ public class MeetingSystem {
      */
     public LocalDateTime dateTime;
     public String place;
-    public static UUID userId;
-    public static UUID otherUserId;
+    public UUID userId;
+    public UUID otherUserId;
 
     public boolean isFirst;
     public boolean isSetUp;
@@ -72,6 +72,7 @@ public class MeetingSystem {
      * - the meeting has not been cancelled (i.e edit time of each ClientUser < threshold of edition time)
      * @param currLogInUser the user that is currently logging in and use the meeting system
      */
+    @Override
     public void run(UUID currLogInUser) throws IOException {
 
         // first meeting
@@ -299,4 +300,5 @@ public class MeetingSystem {
         }
 
     }
+
 }
