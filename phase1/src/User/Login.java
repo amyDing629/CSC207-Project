@@ -420,8 +420,8 @@ public class Login {
                     }
                     System.out.println("****************");
                     System.out.println("Most frequent user:");
-                    for(int i=0;i<user.getFrequentUser().size();i++){
-                        System.out.println(user.getFrequentUser().get(i));
+                    for(User a:user.getFrequentUser()){
+                        System.out.println(user.username);
                     }
                 case 0:
                     escape=1;
@@ -465,7 +465,7 @@ public class Login {
             e.printStackTrace();
         }
     }
-    public void market(User user) throws IOException {
+    public void market(User user){
         Scanner sc=new Scanner(System.in);
         FileEditor fe=new FileEditor();
         System.out.println("Hello "+ user.username);
