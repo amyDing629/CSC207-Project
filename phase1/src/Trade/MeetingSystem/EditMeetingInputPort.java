@@ -11,24 +11,28 @@ import java.util.Scanner;
 /**
  * This is a input port for edit meeting action, which interacts with the user and obtains the meeting editing
  * information.
- *
+ * <p>
  * The user.User can interact with prompts and choose to
- *      - edit time
- *      - edit place
- *      - edit both time and place
+ * - edit time
+ * - edit place
+ * - edit both time and place
  */
-public class EditMeetingInputPort {
+class EditMeetingInputPort {
 
     private LocalDateTime dateTime;
     private String place;
 
+    DateTime dt = new DateTime();
+
     MeetingSystemMenuPresenter msMenuPresenter = new MeetingSystemMenuPresenter();
+
+    EditMeetingInputPortPresenter editMeetingInputPortPresenter = new EditMeetingInputPortPresenter();
 
 
     /**
      * Obtain user prompts of editing time and/or place.
      */
-    public EditMeetingInputPort(LocalDateTime dateTime, String place) {
+    EditMeetingInputPort(LocalDateTime dateTime, String place) {
         // Set the instance variables "dateTime", "place" with  before editing
         this.dateTime = dateTime;
         this.place = place;
@@ -36,8 +40,8 @@ public class EditMeetingInputPort {
         // Obtain user.User input of edition info
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        try{
-            msMenuPresenter.editMenu();
+        try {
+            msMenuPresenter.printMenu(MeetingMenuName.EDIT);
 
             String input = br.readLine();
             label:
@@ -49,22 +53,22 @@ public class EditMeetingInputPort {
                 // instruction "..": quit
                 // other instructions
                 switch (input) {
-                    case "1": {
+                    case "1" -> {
                         editTimeInputPort();
                         break label;
                     }
-                    case "2": {
+                    case "2" -> {
                         editPlaceInputPort();
                         break label;
                     }
-                    case "3": {
+                    case "3" -> {
                         editTimeInputPort();
                         editPlaceInputPort();
                         break label;
                     }
-                    default: {
+                    default -> {
                         {
-                            System.out.println("Error: Invalid instruction in EditMeetingInputPort!");
+                            editMeetingInputPortPresenter.invalidInstructionError();
                             input = br.readLine();
                         }
                         msMenuPresenter.editMenu();
@@ -72,7 +76,8 @@ public class EditMeetingInputPort {
                 }
             }
         }catch (IOException e) {
-            System.out.println("Error: Something went wrong within EditMeetingInputPort");
+            editMeetingInputPortPresenter.wentWrongError();
+
         }
     }
 
@@ -81,32 +86,32 @@ public class EditMeetingInputPort {
         Scanner user_input = new Scanner(System.in);
         boolean good = false;
         do {
-            System.out.print("Enter the new date-time: (should be in pattern of \"yyyy-MM-dd HH:mm\") \n");
+            editMeetingInputPortPresenter.printDateTimeIntro();
             String dateTimeStr = user_input.nextLine();
             // change time: must be valid (valid format + in the future); different from the old input
 
             // check valid format
-            if (!DateTime.isValidFormat(dateTimeStr)) {
-                System.out.println("Error: Invalid input format!");
+            if (!dt.isValidFormat(dateTimeStr)) {
+                editMeetingInputPortPresenter.printInvalidFormatError();
             } else {
                 // check if time in future
-                LocalDateTime now = DateTime.getCurrentTime();
-                LocalDateTime newDateTime = DateTime.convertToLocalDateTime(dateTimeStr);
+                LocalDateTime now = dt.getCurrentTime();
+                LocalDateTime newDateTime = dt.convertToLocalDateTime(dateTimeStr);
                 if (!newDateTime.isAfter(now)) {
-                    System.out.println("Error: Invalid input date-time! Only future time accepted");
+                    editMeetingInputPortPresenter.printInvalidDateTimeError();
                 } else {
                     // check if different from the old time input
                     if (!newDateTime.isEqual(dateTime)) {
                         this.dateTime = newDateTime;
                         good = true;
                     } else {
-                        System.out.println("Error: Invalid input date-time! Input time is same as the old time");
+                        editMeetingInputPortPresenter.printDateTimeUnchangedError();
+
                     }
                 }
             }
         } while (!good);
-        System.out.println("New Edition Successful! " +
-                "proposed new date-time is: " + this.dateTime.toString());
+        editMeetingInputPortPresenter.printTimeSuccess(dateTime);
     }
 
 
@@ -114,16 +119,16 @@ public class EditMeetingInputPort {
         Scanner user_input = new Scanner(System.in);
         boolean good = false;
         do {
-            System.out.print("Enter the new place: ");
+            editMeetingInputPortPresenter.printPlaceIntro();
             String newPlace = user_input.nextLine();
             if (isNewPlaceEditable(newPlace)) {
                 this.place = newPlace;
                 good = true;
             } else {
-                System.out.println("Error: Propose a new place!");
+                editMeetingInputPortPresenter.printPlaceUnchangedError();
             }
         } while (!good);
-        System.out.print("New Edition Successful! Proposed new place: " + this.place + "\n");
+        editMeetingInputPortPresenter.printPlaceSuccess(place);
     }
 
     /**
@@ -140,9 +145,10 @@ public class EditMeetingInputPort {
 
     /**
      * Returns the results, including time and place, of this input port
+     *
      * @return an arraylist of the date-time, place
      */
-    public ArrayList<Object> editMeetingInputPortResult(){
+    ArrayList<Object> editMeetingInputPortResult() {
         return new ArrayList<>(Arrays.asList(dateTime, place));
     }
 

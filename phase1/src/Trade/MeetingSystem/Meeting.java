@@ -2,7 +2,10 @@ package Trade.MeetingSystem;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.UUID;
 
 /**
  * [Entity class]
@@ -46,6 +49,7 @@ public class Meeting {
      */
     private HashMap<UUID, Boolean> idToConfirmedStatus = new HashMap<>();
 
+    private final DateTime dt = new DateTime();
     /**
      * Constructs a new Meeting with proposed date-time to meet dateTime, proposed place to meet place, info of both
      * MeetingEditors traderIds.
@@ -225,20 +229,26 @@ public class Meeting {
     }
 
     /**
-     * Represents a Meeting as a String containing its time and place
-     * @return a String of meeting datetime and place, separated by commas.
+     * Represents a Meeting as a String containing its time and place and status
+     *
+     * @return a String of meeting datetime, place and status, separated by commas.
      */
     @Override
     public String toString() {
         String res = "";
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        DateTimeFormatter formatter = dt.getFormat();
+
         String formattedDateTime = this.dateTime.format(formatter);
         res += formattedDateTime;
 
         res += ", ";
 
         res += this.place;
+
+        res += ", ";
+
+        res += this.status;
 
         return res;
     }

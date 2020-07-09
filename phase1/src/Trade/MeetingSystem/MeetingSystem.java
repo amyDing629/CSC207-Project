@@ -1,8 +1,7 @@
 package Trade.MeetingSystem;
 
-import java.io.BufferedReader;
+
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,35 +23,37 @@ import java.util.UUID;
  */
 public class MeetingSystem implements IMeetingSystem {
 
+    private final ArrayList<UUID> users;
+    private final boolean isFirst;
+    private final ArrayList<MeetingLogInfo> meetingLog = new ArrayList<>();
+    //    public UUID userId;
+//    public UUID otherUserId;
+    MeetingActivities meetingActivities = new MeetingActivities();
+    SetupSession setupSession = new SetupSession();
+    EditAgreeSession editAgreeSession = new EditAgreeSession();
+    ConfirmSession confirmSession = new ConfirmSession();
     /**
      * This is the current meeting date-time.
      * Update this variable when
      * - a meeting is setup;
      * - the date-time info of this meeting is edited.
      */
-    public LocalDateTime dateTime;
-    public String place;
-    public UUID userId;
-    public UUID otherUserId;
-
-    public boolean isFirst;
-    public boolean isSetUp;
-    public boolean isCancel;
-
-    public Meeting meeting;
-
-    public ArrayList<MeetingLogInfo> meetingLog = new ArrayList<>();
+    private LocalDateTime dateTime;
+    private String place;
+    private boolean isSetUp;
+    private boolean isCancel;
+    private Meeting meeting;
 
 
     /**
      * Construct a Trade.MeetingSystem.Trade.MeetingSystem object with two client users (ids)
-     * @param users the users involved in this meeting
+     *
+     * @param users   the users involved in this meeting
      * @param isFirst if the input meeting is the first meeting
      * @param meeting the meeting object
      */
     public MeetingSystem(ArrayList<UUID> users, boolean isFirst, Meeting meeting) {
-        userId = users.get(0);
-        otherUserId = users.get(1);
+        this.users = users;
         this.isFirst = isFirst;
         this.meeting = meeting;
         if (meeting!=null) {
@@ -76,16 +77,75 @@ public class MeetingSystem implements IMeetingSystem {
     public void run(UUID currLogInUser) throws IOException {
 
         // first meeting
-        if (isFirst){
-            if (meeting == null){
-                runSetupSession(currLogInUser);
+        if (isFirst) {
+            if (meeting == null) {
+                setupSession.runSetupSession(currLogInUser, users);
+                updateSessionInfo(MeetingSessionName.SETUP);
+
+                System.out.println("``````````````````````````````````");
+                System.out.println(dateTime + "\n" + place + "\n" + isSetUp + "\n" + meetingLog + "\n");
+                System.out.println("log size:" + meetingLog.size() + "\n");
             } else if (meeting.getStatus().equals(MeetingStatus.incomplete)) {
-                runEditAgreeSession(currLogInUser);
+                editAgreeSession.runEditAgreeSession(currLogInUser, meeting);
+                updateSessionInfo(MeetingSessionName.EDIT_AGREE);
+
+                System.out.println("``````````````````````````````````");
+                System.out.println(meeting.getDateTime() + "\n" + meeting.getPlace() + "\n" + meeting.getStatus());
+                System.out.println("log size:" + meetingLog.size() + "\n");
             } else if (meeting.getStatus().equals(MeetingStatus.agreed)) {
-                runConfirmSession(currLogInUser);
+                confirmSession.runConfirmSession(currLogInUser, meeting);
+                updateSessionInfo(MeetingSessionName.CONFIRM);
+
+                System.out.println("``````````````````````````````````");
+                System.out.println(meeting.getDateTime() + "\n" + meeting.getPlace() + "\n" + meeting.getStatus());
+                System.out.println("log size:" + meetingLog.size() + "\n");
             }
         } else { // only second (temporary) meeting
-            runConfirmSession(currLogInUser);
+            System.out.println(dateTime + "\n" + place + "\n" + isCancel + "\n" + meetingLog + "\n");
+            confirmSession.runConfirmSession(currLogInUser, meeting);
+            updateSessionInfo(MeetingSessionName.CONFIRM);
+            System.out.println(dateTime + "\n" + place + "\n" + isCancel + "\n" + meetingLog + "\n");
+
+            System.out.println("``````````````````````````````````");
+            System.out.println(meeting.getDateTime() + "\n" + meeting.getPlace() + "\n" + meeting.getStatus());
+            System.out.println("log size:" + meetingLog.size() + "\n");
+        }
+
+    }
+
+
+    void updateSessionInfo(MeetingSessionName sessionName) {
+        if (sessionName.equals(MeetingSessionName.SETUP)) {
+            ArrayList<Object> result = setupSession.getSetupSessionResult();
+            meeting = (Meeting) result.get(0);
+            dateTime = (LocalDateTime) result.get(1);
+            place = (String) result.get(2);
+            isSetUp = (boolean) result.get(3);
+            MeetingLogInfo log = setupSession.getSessionLog();
+            if (log != null) {
+                meetingLog.add(setupSession.getSessionLog());
+            }
+
+
+        } else if (sessionName.equals(MeetingSessionName.EDIT_AGREE)) {
+            ArrayList<Object> result = editAgreeSession.getEditAgreeSessionResult();
+            meeting = (Meeting) result.get(0);
+            dateTime = (LocalDateTime) result.get(1);
+            place = (String) result.get(2);
+            isCancel = (boolean) result.get(3);
+//            meetingLog.addAll(editAgreeSession.getSessionLog());
+            MeetingLogInfo log = editAgreeSession.getSessionLog();
+            if (log != null) {
+                meetingLog.add(editAgreeSession.getSessionLog());
+            }
+
+        } else { // sessionName.equals(MeetingSessionName.CONFIRM)
+            meeting = confirmSession.getConfirmSessionResult();
+//            meetingLog.addAll(confirmSession.getSessionLog());
+            MeetingLogInfo log = confirmSession.getSessionLog();
+            if (log != null) {
+                meetingLog.add(confirmSession.getSessionLog());
+            }
         }
 
     }
@@ -142,163 +202,10 @@ public class MeetingSystem implements IMeetingSystem {
         dateTime = firstMeeting.getDateTime().plusMonths(1);
         place = firstMeeting.getPlace();
 
-        Meeting m = MeetingActivities.setUpMeeting(userId, otherUserId, dateTime, place);
+        Meeting m = meetingActivities.setUpMeeting(users, dateTime, place);
         isSetUp = true;
         meeting = m;
         return m;
-    }
-
-    /**
-     * Run this session only when the meeting is not yet been set up.
-     * @param currLogInUser the user id of the ClientUser who sets up the meeting
-     * @throws IOException unpredicted situation error
-     */
-    private void runSetupSession (UUID currLogInUser) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-        System.out.println("<Set-Up-Meeting Session> \n " +
-                "Enter \"ok\" to continue, or anything else to quit this session.");
-        String input = br.readLine();
-        try {
-            // precondition:
-            //  - no meeting has been scheduled yet
-            if (input.equals("ok")) {
-                SetUpMeetingInputPort setUpMeeting = new SetUpMeetingInputPort();
-                dateTime = (LocalDateTime) setUpMeeting.setUpMeetingInputPortResult().get(0);
-                place = (String) setUpMeeting.setUpMeetingInputPortResult().get(1);
-                meeting = MeetingActivities.setUpMeeting(userId, otherUserId, dateTime, place);
-                isSetUp = true;
-
-                // print successful setting-up
-                System.out.println("Success: A meeting has been set up!");
-                System.out.println("  " + "- proposed time is:" + dateTime.toString());
-                System.out.println("  " + "- proposed place is:" + place);
-
-                // create log
-                MeetingLogInfo log = new CreateLogRecord().createLogRecord(currLogInUser, "s");
-                meetingLog.add(log);
-                System.out.println("New log added:" + log.toString());
-            } else {
-                System.out.println("Exit Set-Up session.");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    private void runEditAgreeSession(UUID currLogInUser) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-        System.out.println("<Edit-Confirm-Meeting Session> \n " +
-                "Enter \"ee\" to edit, or enter \"aa\" to agree the proposal, or anything else to quit this session.");
-        String input = br.readLine();
-        try{
-            switch (input) {
-                case "ee":
-                    if (meeting != null && isEditable(currLogInUser)) { // meeting can be edited
-
-                        EditMeetingInputPort editMeeting = new EditMeetingInputPort(dateTime, place);
-                        LocalDateTime enteredDateTime = (LocalDateTime) editMeeting.editMeetingInputPortResult().get(0);
-                        String enteredPlace = (String) editMeeting.editMeetingInputPortResult().get(1);
-
-                        if (isEdited(enteredDateTime, enteredPlace)) {
-                            MeetingActivities.editMeeting(meeting, currLogInUser, dateTime, place);
-                            dateTime = enteredDateTime;
-                            place = enteredPlace;
-
-                            // print successful edition
-                            System.out.println("Success: Meeting has been edited!");
-                            System.out.println("  " + "- the current proposed time is:" + dateTime.toString());
-                            System.out.println("  " + "- the current proposed place is:" + place);
-
-                            // create log
-                            MeetingLogInfo log = new CreateLogRecord().createLogRecord(currLogInUser, "e");
-                            meetingLog.add(log);
-                            System.out.println("New log added:" + log.toString());
-
-                            // print time of edition of this user
-                            System.out.println("user.User " + currLogInUser + " current edit time:" +
-                                    meeting.getEditor(currLogInUser).getTimeOfEdition());
-                        } else {
-                            System.out.println("Meeting has NOT been edited!");
-                        }
-                    } else if (meeting == null) { // meeting can not be edited
-                        System.out.println("Error: Meeting has not been set up. Cannot be edited.");
-                    } else { // not editable -> cancels the meeting
-                        boolean cancelled = MeetingActivities.cancelMeeting(meeting);
-                        assert cancelled;
-                        System.out.println("Meeting Cancelled!");
-                        System.out.println("Meeting current status: " + meeting.getStatus());
-                        isCancel = true;
-                    }
-                    break;
-
-
-                case "aa":
-                    if (MeetingActivities.agreeMeeting(meeting, currLogInUser)) {
-                        // print successful agreement
-                        System.out.println("Success: Meeting has been agree by " + currLogInUser);
-                        System.out.println("Meeting current status: " + meeting.getStatus());
-
-                        //create log
-                        MeetingLogInfo log = new CreateLogRecord().createLogRecord(currLogInUser, "a");
-                        meetingLog.add(log);
-                        System.out.println("New log added:" + log.toString());
-                    } else {
-                        System.out.println("Error: agree error");
-                    }
-                    break;
-
-
-                default:
-                    System.out.println("Exit Edit-Agree Session.");
-                    break;
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private boolean isEdited(LocalDateTime enteredDateTime, String enteredPlace){
-        return !enteredDateTime.equals(dateTime) || !enteredPlace.equals(place);
-    }
-
-
-    private boolean isEditable(UUID currLogInUser){
-        // edits <= 3: editable
-        MeetingEditor editor = meeting.getEditor(currLogInUser);
-        return !editor.editsOverThreshold();
-    }
-
-
-    private void runConfirmSession(UUID currLogInUser) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-        System.out.println("<Confirm-Meeting Session>\n" +
-                "Enter \"cc\" to confirm the meeting has been taken place, " +
-                "or anything else to quit confirm-meeting session.");
-        String input = br.readLine();
-        try{
-            if (input.equals("cc")){
-                if (MeetingActivities.confirmMeeting(meeting, currLogInUser)) {
-                    // print successful confirmation
-                    System.out.println("Success: Meeting has been confirmed by " + currLogInUser);
-                    System.out.println("Meeting current status: " + meeting.getStatus());
-
-                    // create log
-                    MeetingLogInfo log = new CreateLogRecord().createLogRecord(currLogInUser, "c");
-                    meetingLog.add(log);
-                    System.out.println("New log added:" + log.toString());
-                } else {
-                    System.out.println("Error: confirm error");
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
     }
 
 }

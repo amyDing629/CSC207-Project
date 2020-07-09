@@ -3,27 +3,27 @@ package Trade.MeetingSystem;
 public class MeetingSystemMenuPresenter implements IMenuPresenter {
 
     @Override
-    public void printMenu(String menuName) {
-        if (menuName.equals("meetingMain")){
-            mainMenu();
-        }else if(menuName.equals("meetingEdit")){
+    public void printMenu(MeetingMenuName menuName) {
+        if (menuName.equals(MeetingMenuName.SETUP)) {
+            setUpSessionMenu();
+        } else if (menuName.equals(MeetingMenuName.EDIT)) {
+            editMenu();
+        } else if (menuName.equals(MeetingMenuName.AGREE)) {
+            editAgreeSessionMenu();
+        } else if (menuName.equals(MeetingMenuName.CONFIRM)) {
+            confirmSessionMenu();
+        } else if (menuName.equals(MeetingMenuName.CANCEL)) {
             editMenu();
         }
     }
 
 
-    public void mainMenu() {
-        System.out.println("------------------------------");
-        System.out.print("Meeting Menu: \n " +
-                "1. Enter 'ss': to set up a meeting \n" +
-                "2. Enter 'ee': to edit the meeting \n" +
-                "3. Enter 'cc': to confirm the meeting \n" +
-                "4. Enter 'menu': to print menu"+
-                "5. Enter 'exit' to quit meeting system\n");
-        System.out.println("------------------------------");
+    void setUpSessionMenu() {
+        System.out.println("<Set-Up-Meeting Session> \n " +
+                "Enter \"ok\" to continue, or anything else to quit this session.");
     }
 
-    public void editMenu() {
+    void editMenu() {
         System.out.println("------------------------------");
         System.out.print("Menu: \n " +
                 "1. Enter '1': only change time \n" +
@@ -32,4 +32,13 @@ public class MeetingSystemMenuPresenter implements IMenuPresenter {
                 "4. Enter '..' to quit edition process \n");
         System.out.println("------------------------------");
     }
+
+    void editAgreeSessionMenu() {
+
+    }
+
+    void confirmSessionMenu() {
+
+    }
+
 }

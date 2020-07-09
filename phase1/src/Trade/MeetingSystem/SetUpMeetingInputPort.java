@@ -8,51 +8,55 @@ import java.util.Scanner;
 /**
  * Input port of Meeting System, functioned for setting up a meeting only
  */
-public class SetUpMeetingInputPort {
+class SetUpMeetingInputPort {
     private LocalDateTime dateTime;
-    private String place;
+    private final String place;
+
+    DateTime dt = new DateTime();
+
+    SetUpMeetingInputPortPresenter setUpMeetingInputPortPresenter = new SetUpMeetingInputPortPresenter();
 
     /**
      * Feeds the prompts of the Meeting info, including dateTime, place
      */
-    public SetUpMeetingInputPort() {
+    SetUpMeetingInputPort() {
 
         Scanner user_input = new Scanner(System.in);
         boolean good = false;
         do {
-            System.out.print("Enter the date-time: (should be in pattern of \"yyyy-MM-dd HH:mm\") \n");
+            setUpMeetingInputPortPresenter.printDateTimeIntro();
             String dateTimeStr = user_input.nextLine();
 
             // valid datetime format + in the future than now
-            if (DateTime.isValidFormat(dateTimeStr)) {
-                LocalDateTime now = DateTime.getCurrentTime();
-                LocalDateTime datetime = DateTime.convertToLocalDateTime(dateTimeStr);
+            if (dt.isValidFormat(dateTimeStr)) {
+                LocalDateTime now = dt.getCurrentTime();
+                LocalDateTime datetime = dt.convertToLocalDateTime(dateTimeStr);
                 if (datetime.isAfter(now)) {
                     good = true;
-                    dateTime = DateTime.convertToLocalDateTime(dateTimeStr);
-                    System.out.println("proposed date-time is: " + dateTime.toString());
-                }else{
-                    System.out.println("Invalid input date-time! Only future time accepted");
+                    dateTime = dt.convertToLocalDateTime(dateTimeStr);
+                    setUpMeetingInputPortPresenter.printTimeSuccess(dateTime);
+                } else {
+                    setUpMeetingInputPortPresenter.printInvalidDateTimeError();
                 }
             } else {
-                System.out.println("Invalid input format!");
+                setUpMeetingInputPortPresenter.printInvalidFormatError();
             }
         }
         while (!good);
 
 
-        System.out.print("Enter the place: ");
-        place = user_input.nextLine( );
-        System.out.print("Proposed place: " + place + "\n");
+        setUpMeetingInputPortPresenter.printPlaceIntro();
+        place = user_input.nextLine();
+        setUpMeetingInputPortPresenter.printPlaceSuccess(place);
 
 
-        if (user_input.nextLine().equals("close")){
+        if (user_input.nextLine().equals("close")) {
             user_input.close();
         }
 
     }
 
-    public ArrayList<Object> setUpMeetingInputPortResult(){
+    ArrayList<Object> setUpMeetingInputPortResult() {
         return new ArrayList<>(Arrays.asList(dateTime, place));
     }
 
