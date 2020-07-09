@@ -1,5 +1,7 @@
 package User;
 
+import Main.GateWay;
+
 import java.io.IOException;
 import java.util.*;
 /**
@@ -40,11 +42,10 @@ public class AdministrativeUser extends User {
      * the initial administrative user can add the new administrative user
      */
     public void addNewUser(String username, String password) throws IOException {
-        UserManager u = new UserManager();
-        List<User> x = u.splitUser(u.readFile());
+        List<User> x = GateWay.users;
         if (id.equals(x.get(0).getId())){
         AdministrativeUser a = new AdministrativeUser(username, password, true);
-        u.addUser(a);
+        x.add(a);
         }
     }
 

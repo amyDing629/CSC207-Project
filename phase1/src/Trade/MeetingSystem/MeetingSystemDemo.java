@@ -23,7 +23,7 @@ import java.util.UUID;
  */
 public class MeetingSystemDemo {
     // two ClientUsers
-    private static ArrayList<UUID> tradeIds = new ArrayList<>(Arrays.asList(
+    private static final ArrayList<UUID> tradeIds = new ArrayList<>(Arrays.asList(
             UUID.fromString("251abe4f-1ea2-4ef9-a5a5-6f3931e7b375"),
             UUID.fromString("123abe4f-1ea2-4ef9-a5a5-6f3931e7b375")));
 
@@ -45,9 +45,13 @@ public class MeetingSystemDemo {
                 System.out.println("user.Login id:" + tradeIds.get(0));
 
                 mt1.run(tradeIds.get(0));
-                mt1.runResult();
+
+                // new change: check null -> TODO: trade modification
+                if (meeting != null) {
+                    mt1.runResult();
+                }
                 meeting = mt1.getMeeting();
-                System.out.println(meeting);
+
                 turnIsUser1 = false;
                 System.out.println("===========================");
             } else {
@@ -55,16 +59,23 @@ public class MeetingSystemDemo {
                 System.out.println("user.Login id:" + tradeIds.get(1));
 
                 mt1.run(tradeIds.get(1));
-                mt1.runResult();
+
+                // new change: check null -> TODO: trade modification
+                if (meeting != null) {
+                    mt1.runResult();
+                }
                 meeting = mt1.getMeeting();
+
                 turnIsUser1 = true;
                 System.out.println("===========================");
             }
 
-        } // here is the end of the first meeting
+        }
+        System.out.println(meeting.toString());
+        // here is the end of the first meeting
 
 
-        if (meeting.getStatus().equals(MeetingStatus.completed)){ // first meeting status: "completed"
+        if (meeting.getStatus().equals(MeetingStatus.completed)) { // first meeting status: "completed"
             // the start of the second meeting
             System.out.println("Welcome to meeting system!");
             System.out.println("== SECOND MEETING ==");

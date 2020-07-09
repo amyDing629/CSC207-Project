@@ -6,23 +6,25 @@ import java.time.format.DateTimeParseException;
 
 public class DateTime {
 
-    public static DateTimeFormatter formatter = DateTimeFormatter.ofPattern ( "yyyy-MM-dd HH:mm" );
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
-    public static LocalDateTime currentTime = LocalDateTime.now();
+    LocalDateTime currentTime = LocalDateTime.now();
 
     /**
      * Returns the system's current date-time
+     *
      * @return system's current date-time
      */
-    public static LocalDateTime getCurrentTime() {
+    public LocalDateTime getCurrentTime() {
         return currentTime;
     }
 
     /**
      * Returns the formatter of the date-time
+     *
      * @return the formatter
      */
-    public static DateTimeFormatter getFormat() {
+    public DateTimeFormatter getFormat() {
         return formatter;
     }
 
@@ -39,10 +41,11 @@ public class DateTime {
     /**
      * Return if the input date-time string is of Valid Format
      * https://stackoverflow.com/questions/226910/how-to-sanity-check-a-date-in-java
+     *
      * @param inputDateTimeString String of input datetime
      * @return true if date-time is of valid format
      */
-    public static boolean isValidFormat(String inputDateTimeString) throws DateTimeParseException {
+    boolean isValidFormat(String inputDateTimeString) throws DateTimeParseException {
         boolean valid = true;
         try {
             formatter.parse(inputDateTimeString);
@@ -56,11 +59,12 @@ public class DateTime {
     /**
      * Convert the date-time string to LocalDateTime object
      * precondition: the inputDateTimeString must be of valid format
-     * Read more: https://www.java67.com/2016/04/how-to-convert-string-to-localdatetime-in-java8-example.html#ixzz6PvuyR5EV
+     *
      * @param inputDateTimeString String of input datetime
      * @return LocalDateTime object
+     * https://www.java67.com/2016/04/how-to-convert-string-to-localdatetime-in-java8-example.html#ixzz6PvuyR5EV
      */
-    public static LocalDateTime convertToLocalDateTime(String inputDateTimeString) {
+    LocalDateTime convertToLocalDateTime(String inputDateTimeString) {
         return LocalDateTime.parse(inputDateTimeString, formatter);
     }
 

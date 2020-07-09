@@ -147,10 +147,6 @@ public class User {
         this.notification = notification;
     }
 
-    public int getDiff() {
-        return diff;
-    }
-
     public void setDiff(int diff) {
         this.diff = diff;
     }
@@ -265,16 +261,16 @@ public class User {
         return incompleteTransactionLimit;
     }
 
-    public void setWishBorrow(ArrayList<String> lineList3) {
-        wishBorrow = lineList3;
+    public void setWishBorrow(ArrayList<String> wishBorrow) {
+        this.wishBorrow =wishBorrow;
     }
 
-    public void setUsername(String input1) {
-        username=input1;
+    public void setUsername(String name) {
+        username=name;
     }
 
-    public void setPassword(String input2) {
-        password=input2;
+    public void setPassword(String password) {
+        this.password=password;
     }
 
     /**

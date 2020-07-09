@@ -2,6 +2,7 @@ package Trade;
 
 import Inventory.Item;
 import Main.GateWay;
+import Trade.MeetingSystem.DateTime;
 import Trade.MeetingSystem.Meeting;
 import Trade.MeetingSystem.MeetingEditor;
 import Trade.MeetingSystem.MeetingStatus;
@@ -17,9 +18,10 @@ import java.util.UUID;
  * read and update trade.txt file (part of job from tradeManager)
  */
 public class TradeDataAccess {
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    DateTime dt = new DateTime();
+    DateTimeFormatter formatter = dt.getFormat(); // yyyy-MM-dd HH:mm
 
-    public void readFile(){
+    public void readFile() {
         Trade trade;
         try {
             Inventory.Inventory iv = new Inventory.Inventory();
