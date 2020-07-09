@@ -1,15 +1,26 @@
 package Trade;
 
+import Inventory.Item;
+import Main.GateWay;
+import Trade.MeetingSystem.Meeting;
+import Trade.MeetingSystem.MeetingEditor;
+import Trade.MeetingSystem.MeetingStatus;
+
+import java.io.*;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.UUID;
 
 /**
  * read and update trade.txt file (part of job from tradeManager)
  */
 public class TradeDataAccess {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-/*
+
     public void readFile(){
-        trade.Trade trade;
+        Trade trade;
         try {
             Inventory.Inventory iv = new Inventory.Inventory();
             BufferedReader reader = new BufferedReader(new FileReader("phase1/src/trade.txt"));
@@ -31,12 +42,12 @@ public class TradeDataAccess {
                 HashMap<UUID, MeetingEditor> idToE = new HashMap<>();
 
                 if (lst[1].equals("oneway")){
-                    trade = new trade.OnewayTrade(user1Id,user2Id,item1,duration,tradeTime);
+                    trade = new OnewayTrade(user1Id,user2Id,item1,duration,tradeTime);
 
 
                 }else{
                     Inventory.Item item2 = iv.getItem(lst[6]);
-                    trade = new trade.TwowayTrade(user1Id,user2Id,item1,item2,duration,tradeTime);
+                    trade = new TwowayTrade(user1Id,user2Id,item1,item2,duration,tradeTime);
                 }
                 if (!fstMeeting.equals("null")) {
                     String[] fm = fstMeeting.split("/");
@@ -56,19 +67,19 @@ public class TradeDataAccess {
                     idToE.put(user1Id,new MeetingEditor(user1Id));
                     idToE.put(user2Id,new MeetingEditor(user2Id));
                     trade.getMeeting().setIdToEditor(idToE);
-                    trade.getMeeting().setStatus(fm[2]);
+                    trade.getMeeting().setStatus(MeetingStatus.valueOf(fm[2]));
 
                 }
                 if (!scdMeeting.equals("null")){
                     String[] sm = scdMeeting.split("/");
                     LocalDateTime smTime = LocalDateTime.parse(sm[0],formatter);
                     trade.setSecondMeeting(smTime, sm[1], users);
-                    trade.getSecondMeeting().setStatus(sm[2]);
+                    trade.getSecondMeeting().setStatus(MeetingStatus.valueOf(sm[2]));
                 }
 
                 trade.setStatus(lst[9]);
                 trade.setId(tradeId);
-                tradeList.add(trade);
+                GateWay.trades.add(trade);
                 line = reader.readLine();
             }
             reader.close();
@@ -78,5 +89,77 @@ public class TradeDataAccess {
 
     }
 
- */
+    public void addTradeToFile(Trade trade) {
+        try {
+            FileOutputStream fos = new FileOutputStream("phase1/src/trade.txt", true);
+            UUID id = trade.getId();
+            String type;
+            type = trade.getType();
+            Integer duration = trade.getDuration();
+            UUID user1 = trade.getUsers().get(0);
+            UUID user2 = trade.getUsers().get(1);
+            ArrayList<Item> items = trade.getItemList();
+            String item1; String item2;
+            if (items.size() == 1){
+                item1 = items.get(0).getName();
+                item2 = null;
+            }else{
+                item1 = items.get(0).getName();
+                item2 = items.get(1).getName();
+            }
+            Meeting fm = trade.getMeeting();
+            String fmStr = null;
+            if (fm != null){
+                HashMap<UUID, MeetingEditor> idToE = fm.getIdToEditor();
+                String idToEdStr = idToE.get(user1).getTimeOfEdition() + ";"+
+                        idToE.get(user2).getTimeOfEdition();
+                HashMap<UUID, Boolean> conStatus = fm.getConfirmedStatusFull();
+                String idToCoStr = conStatus.get(user1) + ";" + conStatus.get(user2);
+                HashMap<UUID, Boolean> agreeStatus = fm.getAgreedStatusFull();
+                String idToAgreeStr = agreeStatus.get(user1) + ";" + agreeStatus.get(user2);
+                //2020-06-30 11:49/home/incomplete/0;0/false;false
+                fmStr = fm.getDateTime().format(formatter)+"/"+fm.getPlace()+"/"+fm.getStatus()
+                        +"/"+idToEdStr+"/"+ idToCoStr+"/"+idToAgreeStr;
+
+            }
+            Meeting sm = trade.getSecondMeeting();
+            String smStr;
+            if (sm == null){
+                smStr = null;
+            }else{
+                HashMap<UUID, Boolean> conStatus = sm.getConfirmedStatusFull();
+                String idToCoStr = conStatus.get(user1) + ";" + conStatus.get(user2);
+                smStr = sm.getDateTime().format(formatter)+"/"+sm.getPlace()+"/"+sm.getStatus()+"/"+idToCoStr;
+            }
+            String status = trade.getStatus();
+            String time = trade.getCreateTime().format(formatter);
+
+            fos.write((id+","+type+","+duration+","+user1+","+user2+","+item1+","+item2+","+fmStr+","
+                    +smStr+","+status+","+time+"\n").getBytes());
+            fos.close();
+        }catch(IOException e){
+            System.out.println("cannot edit file");
+        }
+    }
+
+    public void updateFile() throws IOException {
+        File file = new File("phase1/src/trade.txt");
+        try {
+            if(!file.exists()) {
+                boolean result = file.createNewFile();
+            }
+            FileWriter fileWriter =new FileWriter(file);
+            fileWriter.write("");
+            fileWriter.flush();
+            fileWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (GateWay.trades.size()>0){
+            for (Trade trade: GateWay.trades){
+                addTradeToFile(trade);
+            }
+        }
+    }
+
 }

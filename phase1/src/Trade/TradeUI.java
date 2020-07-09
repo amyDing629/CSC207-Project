@@ -21,6 +21,7 @@ public class TradeUI {
     TradeController tc;
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     TradePresenter tp;
+    TradeDataAccess tda = new TradeDataAccess();
 
 
     /**
@@ -52,7 +53,7 @@ public class TradeUI {
                 if (becomeComplete){
                     tc.completeTrade(trade);
                 }
-                tm.updateFile();
+                tda.updateFile();
                 tp.presentTradeUIInfo();
                 System.out.println("type 1 to exit, type anything to continue with current trade");
                 try {

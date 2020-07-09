@@ -15,7 +15,7 @@ import java.util.UUID;
  * The meeting system controller that interacts with the user, makes decisions based on user input instructions, and
  * calls corresponding use case method.
  *
- * Main functions of this controller class:
+ * Main.Main functions of this controller class:
  *      1. allows setup meeting, once the trade.Trade is set up
  *      2. apply use case method of setting up meeting
  *      3. allows edit meeting, once the

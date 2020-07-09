@@ -2,6 +2,7 @@ package Inventory;
 
 import java.io.*;
 import java.util.ArrayList;
+import Main.GateWay;
 
 /**
  * [Use Case Class]
@@ -12,35 +13,22 @@ public class Inventory {
     /**
      * all existed items in user's lending list.
      */
-    ArrayList<Item> lendingList;
+    //ArrayList<Item> lendingList;
 
     /**
      * [Constructor]
      * get lendingList from file (read file will move to another class).
      */
-    public Inventory() {
-        lendingList = new ArrayList<Item>();
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader("phase1/src/Inventory.txt"));
-            String line = reader.readLine();
-            while (line != null) {
-                String[] lst = line.split(",");
-                Item newItem = new Item(lst[0], lst[2]);
-                lendingList.add(newItem);
-                line = reader.readLine();
-            }
-            reader.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+    //public Inventory() {
+    //lendingList = new ArrayList<Item>();
+    //}
 
     /**
      * getter for the lending list
      * @return lendingList
      */
     public ArrayList<Item> getLendingList() {
-        return lendingList;
+        return GateWay.inventory;
     }
 
     /**
@@ -49,7 +37,7 @@ public class Inventory {
      */
     public ArrayList<Item> getAvailableList() {
         ArrayList<Item> result = new ArrayList<Item>();
-        for (Item item : lendingList) {
+        for (Item item : GateWay.inventory) {
             if (!item.getIsInTrade()) {
                 result.add(item);
             }
@@ -63,8 +51,7 @@ public class Inventory {
      * @param item the item added
      */
     public void addItem(Item item) throws IOException {
-        lendingList.add(item);
-        updateFile();
+        GateWay.inventory.add(item);
     }
 
 
@@ -74,9 +61,8 @@ public class Inventory {
      * @throws IOException when the item is not found in the inventory
      */
     public void deleteItem(Item item) throws IOException {
-        if (lendingList.contains(item)) {
-            lendingList.remove(item);
-            updateFile();
+        if (GateWay.inventory.contains(item)) {
+            GateWay.inventory.remove(item);
         } else {
             throw new IOException("the item is not in the inventory");
         }
@@ -95,34 +81,6 @@ public class Inventory {
         }else{
             item.setOwner(newContent);
         }
-        updateFile();
-    }
-
-    /**
-     * update the new lendingList to file
-     * @throws IOException when the update is failed
-     */
-    public void updateFile() throws IOException {
-        File file = new File("phase1/src/Inventory.Inventory.txt");
-        boolean result = file.delete();
-        for (Item item: lendingList){
-            addItemToFile(item);
-        }
-    }
-
-    /**
-     *
-     * @param item the item wanted to add to file
-     * @throws IOException when the item cannot be added to file
-     */
-    private void addItemToFile(Item item) throws IOException {
-        try {
-            FileOutputStream fos = new FileOutputStream("phase1/src/inventory.txt", true);
-            fos.write((item.getName()+","+item.getDescription()+","+item.getOwnerName()+"\n").getBytes());
-        }catch(IOException e){
-            throw new IOException("cannot add item to file");
-
-        }
     }
 
 
@@ -132,7 +90,7 @@ public class Inventory {
      * @return item
      */
     public Item getItem(String name){
-        for (Item item: lendingList){
+        for (Item item: GateWay.inventory){
             if (item.getName().equals(name)){
                 return item;
             }
