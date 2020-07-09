@@ -1,6 +1,7 @@
 package User;
 
 import Inventory.*;
+import Main.GateWay;
 import Trade.*;
 import java.io.*;
 import java.util.ArrayList;
@@ -14,10 +15,11 @@ public class Login {
         while (a!=0) {
             //print out the list of current users-------------------------------
             File file = new File("phase1/src/username.txt");
+            FileEditor fe=new FileEditor();
             UserManager user=new UserManager();
             if(file.length() == 0){
                 AdministrativeUser b = new AdministrativeUser("admin", "123", true);
-                user.addUser(b);
+                fe.addToUsers(b);
             }
             System.out.println("Users:");
             try {
@@ -34,7 +36,7 @@ public class Login {
                 e.printStackTrace();
             }
             //------------------------------------------------------------------
-            System.out.println("\nMenu:\n 1.login\n 2.register\n 0.quit");
+            System.out.println("\nMenu:\n1.login\n2.register\n0.quit");
             System.out.println("Please enter the number only.");
             Scanner sc = new Scanner(System.in);
             System.out.print(">");
@@ -52,6 +54,7 @@ public class Login {
     }
     public void login() throws IOException {
         Scanner sc = new Scanner(System.in);
+        FileEditor fe=new FileEditor();
         int input=0;
         while (input==0) {
             System.out.println("Please enter your account username!");
@@ -102,6 +105,7 @@ public class Login {
     }
     public void register() throws IOException {
         Scanner sc = new Scanner(System.in);
+        FileEditor fe=new FileEditor();
         int input=0;
         while(input!=1) {
             System.out.println("--------------------\nRegister");
@@ -115,7 +119,7 @@ public class Login {
             //usermanger username verification?
             if (a.getUser(username) == null) {
                 User user1 = new User(username, password, false);
-                a.addUser(user1);
+                fe.addToUsers(user1);
                 System.out.println("Your account has been successfully created!");
                 System.out.println("Your id: " + user1.getId());
                 System.out.println("Your username: " + user1.getUsername());
@@ -368,27 +372,25 @@ public class Login {
         Scanner sc=new Scanner(System.in);
         TradeController tc=new TradeController(user);
         int escape=0;
+        List<Trade> tHis=user.getTradeHistoryTop();
+        List<Trade> iL=user.getIncomplete();
+        List<Trade> iU=user.getUnconfirmed();
         while (escape==0) {
             System.out.println("--------------------\nMessage");
             System.out.println("Hello,user" + user.getUsername());
-            System.out.println("Menu: 1.confirm trades\n2.compelete trade\n0.quit");
+            System.out.println("Menu: 1.confirm trades\n2.compelete trade\n3.Cancel trade\n0.quit");
             int input1 = sc.nextInt();
             sc.nextLine();
             switch (input1) {
                 case 1:
-                    for (Trade a : user.getUnconfirmed()) {
-                        System.out.println(a.toString());
-                        System.out.println("Do you want to confirm the trade? use yes or no to confirm or cancel the trade.-1 to quit to menu.");
-                        String input = sc.nextLine();
-                        if (input.equals("-1")) {
-                            break;
-                        } else {
-                            if (input.equals("yes")) {
-                                tc.confirmTrade(a);
-                            } else if (input.equals("no")) {
-                                tc.cancelTrade(a);
-                            }
-                        }
+                    for(int i=0;i<iL.size();i++){
+                        System.out.println((i+1)+". "+iL.get(i).toString());
+                    }
+                    System.out.println("Which trade do you want to confirm? select item no to confirm");
+                    int input2 = sc.nextInt();
+                    sc.nextLine();
+                    if((input2<(iL.size()+1))&&(input2>0)){
+
                     }
                     break;
                 case 2:
@@ -417,14 +419,13 @@ public class Login {
     public void tradeHistory(User user) throws IOException {
         System.out.println("Hi user: "+user.getUsername());
         System.out.println("Compeleted past trades:");
-        if (user.getTradeHistoryTop().size()>0) {
-            for (Trade i : user.getTradeHistoryTop()) {
-                System.out.println(i.toString());
-            }
-        }
+        List<Trade> tHis=user.getTradeHistoryTop();
+        List<Trade> iL=user.getIncomplete();
+        List<Trade> iU=user.getUnconfirmed();
+
         System.out.println("****************");
-        for(Trade i:user.getIncomplete()){
-            System.out.println(i.toString());
+        for(int i=0;i<iL.size();i++){
+            System.out.println((i+1)+". "+iL.get(i).toString());
         }
         System.out.println("****************");
         for(Trade i:user.getIncomplete()){
@@ -453,10 +454,10 @@ public class Login {
     }
     public void market(User user) throws IOException {
         Scanner sc=new Scanner(System.in);
+        FileEditor fe=new FileEditor();
         System.out.println("Hello "+ user.username);
         UserManager a=new UserManager();
-        a.updateFile();
-        for (User b:a.splitUser(a.readFile())){
+        for (User b: GateWay.users){
             System.out.println("user.User 1");
             for(String c:user.getWishBorrow()){
                 System.out.println("Inventory.Item:"+c);
