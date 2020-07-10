@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.UUID;
 
-class SetupSession {
+class SetUpSession {
 
     MeetingLogInfo meetingLog = null;
 

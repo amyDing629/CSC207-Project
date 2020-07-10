@@ -32,15 +32,6 @@ public class MeetingEditor extends IMeetingAttendee {
     }
 
     /**
-     * Returns this MeetingEditor's user id.
-     *
-     * @return the user id
-     */
-    UUID getUserId() {
-        return userId;
-    }
-
-    /**
      * Returns this MeetingEditor's number of time for editing time and/or place of meeting.
      * @return the number of time for edition
      */

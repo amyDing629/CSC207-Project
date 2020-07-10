@@ -26,23 +26,18 @@ public class MeetingSystem implements IMeetingSystem {
     private final ArrayList<UUID> users;
     private final boolean isFirst;
     private final ArrayList<MeetingLogInfo> meetingLog = new ArrayList<>();
-    //    public UUID userId;
-//    public UUID otherUserId;
+
     MeetingActivities meetingActivities = new MeetingActivities();
-    SetupSession setupSession = new SetupSession();
+    SetUpSession setupSession = new SetUpSession();
     EditAgreeSession editAgreeSession = new EditAgreeSession();
     ConfirmSession confirmSession = new ConfirmSession();
-    /**
-     * This is the current meeting date-time.
-     * Update this variable when
-     * - a meeting is setup;
-     * - the date-time info of this meeting is edited.
-     */
+
     private LocalDateTime dateTime;
     private String place;
+    private Meeting meeting;
+
     private boolean isSetUp;
     private boolean isCancel;
-    private Meeting meeting;
 
 
     /**
@@ -81,40 +76,22 @@ public class MeetingSystem implements IMeetingSystem {
             if (meeting == null) {
                 setupSession.runSetupSession(currLogInUser, users);
                 updateSessionInfo(MeetingSessionName.SETUP);
-
-                System.out.println("``````````````````````````````````");
-                System.out.println(dateTime + "\n" + place + "\n" + isSetUp + "\n" + meetingLog + "\n");
-                System.out.println("log size:" + meetingLog.size() + "\n");
             } else if (meeting.getStatus().equals(MeetingStatus.incomplete)) {
                 editAgreeSession.runEditAgreeSession(currLogInUser, meeting);
                 updateSessionInfo(MeetingSessionName.EDIT_AGREE);
-
-                System.out.println("``````````````````````````````````");
-                System.out.println(meeting.getDateTime() + "\n" + meeting.getPlace() + "\n" + meeting.getStatus());
-                System.out.println("log size:" + meetingLog.size() + "\n");
             } else if (meeting.getStatus().equals(MeetingStatus.agreed)) {
                 confirmSession.runConfirmSession(currLogInUser, meeting);
                 updateSessionInfo(MeetingSessionName.CONFIRM);
-
-                System.out.println("``````````````````````````````````");
-                System.out.println(meeting.getDateTime() + "\n" + meeting.getPlace() + "\n" + meeting.getStatus());
-                System.out.println("log size:" + meetingLog.size() + "\n");
             }
         } else { // only second (temporary) meeting
-            System.out.println(dateTime + "\n" + place + "\n" + isCancel + "\n" + meetingLog + "\n");
             confirmSession.runConfirmSession(currLogInUser, meeting);
             updateSessionInfo(MeetingSessionName.CONFIRM);
-            System.out.println(dateTime + "\n" + place + "\n" + isCancel + "\n" + meetingLog + "\n");
-
-            System.out.println("``````````````````````````````````");
-            System.out.println(meeting.getDateTime() + "\n" + meeting.getPlace() + "\n" + meeting.getStatus());
-            System.out.println("log size:" + meetingLog.size() + "\n");
         }
 
     }
 
 
-    void updateSessionInfo(MeetingSessionName sessionName) {
+    private void updateSessionInfo(MeetingSessionName sessionName) {
         if (sessionName.equals(MeetingSessionName.SETUP)) {
             ArrayList<Object> result = setupSession.getSetupSessionResult();
             meeting = (Meeting) result.get(0);
@@ -133,7 +110,6 @@ public class MeetingSystem implements IMeetingSystem {
             dateTime = (LocalDateTime) result.get(1);
             place = (String) result.get(2);
             isCancel = (boolean) result.get(3);
-//            meetingLog.addAll(editAgreeSession.getSessionLog());
             MeetingLogInfo log = editAgreeSession.getSessionLog();
             if (log != null) {
                 meetingLog.add(editAgreeSession.getSessionLog());
@@ -141,7 +117,6 @@ public class MeetingSystem implements IMeetingSystem {
 
         } else { // sessionName.equals(MeetingSessionName.CONFIRM)
             meeting = confirmSession.getConfirmSessionResult();
-//            meetingLog.addAll(confirmSession.getSessionLog());
             MeetingLogInfo log = confirmSession.getSessionLog();
             if (log != null) {
                 meetingLog.add(confirmSession.getSessionLog());
