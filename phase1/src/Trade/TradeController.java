@@ -34,7 +34,7 @@ public class TradeController {
      * @return target user
      * @throws IOException can not find the target user
      */
-    public User getTarUser(Item item) throws IOException {
+    User getTarUser(Item item) throws IOException {
         tarUser = um.getUser(item.getOwnerName());
         return tarUser;
     }
@@ -44,7 +44,7 @@ public class TradeController {
      * check the frozen status of two users.
      * @throws IOException one of the users's account is frozen
      */
-    public void checkInput() throws IOException {
+    void checkInput() throws IOException {
         if (currUser.getIsFrozen()) {
             throw new IOException("your account is frozen!");
         }
@@ -66,7 +66,7 @@ public class TradeController {
      * @return whether or not the trade is a oneway trade
      * @throws IOException the trade is not created
      */
-    public boolean createTrade(String line, Item item) throws IOException {
+    boolean createTrade(String line, Item item) throws IOException {
         LocalDateTime time = LocalDateTime.now();
         item.setIsInTrade(true);
         switch (line) {
@@ -89,7 +89,7 @@ public class TradeController {
      * @param item2 the second item
      * @throws IOException if the trade is not created
      */
-    public void createTrade(String line, Item item1, Item item2) throws IOException {
+    void createTrade(String line, Item item1, Item item2) throws IOException {
         item1.setIsInTrade(true);
         item2.setIsInTrade(true);
         LocalDateTime time = LocalDateTime.now();
@@ -105,7 +105,7 @@ public class TradeController {
      * @param currTrade the current trade
      * @return the status
      */
-    public String checkTradeMeeting(Trade currTrade) {
+    String checkTradeMeeting(Trade currTrade) {
         if (currTrade.getStatus().equals("unconfirmed")) {
             return "confirm trade";
         }else if (currTrade.getStatus().equals("cancelled")) {
@@ -136,7 +136,7 @@ public class TradeController {
      * confirm trade(agree with the trade)
      * @param currTrade current trade
      */
-    public void confirmTrade(Trade currTrade) {
+    void confirmTrade(Trade currTrade) {
         currTrade.setStatus("incomplete");
     }
 
@@ -145,7 +145,7 @@ public class TradeController {
      * @param currTrade current trade
      * @throws IOException if the item is not deleted from user's wishlist and inventory
      */
-    public void completeTrade(Trade currTrade) throws IOException {
+    void completeTrade(Trade currTrade) throws IOException {
         currTrade.setStatus("complete");
         currTrade.makeTrade();
     }
@@ -154,8 +154,9 @@ public class TradeController {
      * set the status of trade to cancelled
      * @param currTrade current trade
      */
-    public void cancelTrade(Trade currTrade){
+    void cancelTrade(Trade currTrade){
         currTrade.setStatus("cancelled");
     }
+
 }
 

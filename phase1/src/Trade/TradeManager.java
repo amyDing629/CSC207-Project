@@ -34,7 +34,7 @@ public class TradeManager {
      * tradeList stores all the trade.Trade in the system.
      * currentUser is the user.User who is currently interacting with this trade.TradeManager.
      */
-    public TradeManager() throws IOException {
+    public TradeManager(){
         userManager = new UserManager();
     }
 
@@ -50,7 +50,7 @@ public class TradeManager {
      * @param item the only one Inventory.Item to be trade in this created trade.Trade.
      * @param duration the duration of this trade.Trade, unit (days). -1 means the trade.Trade is permanent.
      */
-    public Trade createOnewayTrade(UUID currUserId, UUID otherUserId, Item item, int duration, LocalDateTime time)
+    Trade createOnewayTrade(UUID currUserId, UUID otherUserId, Item item, int duration, LocalDateTime time)
             throws IOException {
         OnewayTrade newTrade = new OnewayTrade(currUserId, otherUserId, item, duration, time);
         GateWay.trades.add(newTrade);
@@ -69,7 +69,7 @@ public class TradeManager {
      * @param item2to1 the other Inventory.Item to be trade in this created trade.Trade.
      * @param duration the duration of this trade.Trade, unit (days). -1 means the trade.Trade is permanent.
      */
-    public void createTwowayTrade(UUID currUserId, UUID otherUserId, Item item1to2, Item item2to1, int duration,
+    void createTwowayTrade(UUID currUserId, UUID otherUserId, Item item1to2, Item item2to1, int duration,
                                   LocalDateTime time) throws IOException {
         TwowayTrade newTrade = new TwowayTrade(currUserId, otherUserId, item1to2, item2to1, duration, time);
         GateWay.trades.add(newTrade);
@@ -79,7 +79,7 @@ public class TradeManager {
 
 
 
-    public void updateTradeHistory(UUID currUserId, UUID tarUserId, Trade newTrade) throws IOException {
+    void updateTradeHistory(UUID currUserId, UUID tarUserId, Trade newTrade) throws IOException {
         // System.out.println("userList:"+userManager.getUserList());
         User currentUser = userManager.getUser(currUserId);
         User tarUser = userManager.getUser(tarUserId);

@@ -28,7 +28,7 @@ public class RequestTradeUI{
     User tarUser;
     TradeController trc;
     Inventory iv = new Inventory();
-    UserManager um = new UserManager();
+    TradePresenter tp;
 
     /**
      * [constructor]
@@ -41,6 +41,7 @@ public class RequestTradeUI{
         this.currUser = currUser;
         tarUser = trc.getTarUser(item);
         this.item = item;
+        tp = new TradePresenter(currUser);
     }
 
     /**
@@ -53,24 +54,23 @@ public class RequestTradeUI{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         trc.checkInput();
         while (true) {
-            System.out.println("menu: \n 1.one way(temporary)\n 2.one way(permanent)" +
-                    "\n 3.two way(temporary)\n 4.two way(permanent)");
+            tp.requestTradeMenu();
             try {
                 String line = br.readLine();
                 if (!line.equals("1") && !line.equals("2")
                         && !line.equals("3") && !line.equals("4")) {
-                    throw new IOException("Wrong input, please type again.");
+                    tp.wrongInput();
                 } else {
                     if (!trc.createTrade(line, item)) {
                         String item2 = getSecondItem();
                         trc.createTrade(line, item, iv.getItem(item2));
                     }
 
-                    System.out.println("your trade has been created, please wait for the target user to reply");
+                    tp.requestTrade();
                     break;
                 }
             } catch (IOException e) {
-                System.out.println("Error! Please type again!");
+                tp.wrongInput();
             }
         }
 
@@ -83,17 +83,17 @@ public class RequestTradeUI{
     private String getSecondItem(){
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         while (true){
-            System.out.println(currUser.getWishLend());
-            System.out.println("choose the item you want to lend");
+            tp.selectSecondItem();
             try {
                 String line2 = br.readLine();
                 if (currUser.getWishLend().contains(line2)){
                     return line2;
                 }else{
-                    throw new IOException("wrong input, you should type again!");
+                    tp.wrongInput();
+                    throw new IOException();
                 }
             } catch (IOException e) {
-                System.out.println("your input is invalid");
+                tp.wrongInput();
             }
         }
     }

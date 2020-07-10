@@ -370,15 +370,13 @@ public class Login {
     }
     public void UserTradeUI(User user) throws IOException {
         Scanner sc=new Scanner(System.in);
-        TradeController tc=new TradeController(user);
         int escape=0;
         List<Trade> iL=user.getIncomplete();
         List<Trade> iU=user.getUnconfirmed();
-        TradeManager tm=new TradeManager();
         while (escape==0) {
             System.out.println("--------------------\nMessage");
             System.out.println("Hello,user" + user.getUsername());
-            System.out.println("Menu: 1.confirm trades\n2.compelete trade\n3.Trade History\n0.quit");
+            System.out.println("Menu: 1.confirm trades\n2.complete trade\n3.Trade History\n0.quit");
             int input1 = sc.nextInt();
             sc.nextLine();
             switch (input1) {
@@ -386,7 +384,7 @@ public class Login {
                     for(int i=0;i<iU.size();i++){
                         System.out.println((i+1)+". "+iU.get(i).toString());
                     }
-                    System.out.println("Which trade do you want to confirm? select item no. to confirm");
+                    System.out.println("Which trade do you want to confirm? select trade ID to confirm");
                     int input2 = sc.nextInt();
                     sc.nextLine();
                     if((input2<(iU.size()+1))&&(input2>0)){
@@ -400,7 +398,7 @@ public class Login {
                     for(int i=0;i<iL.size();i++){
                         System.out.println((i+1)+". "+iL.get(i).toString());
                     }
-                    System.out.println("Which trade do you want to complete? select item no. to confirm");
+                    System.out.println("Which trade do you want to complete? select trade ID to confirm");
                     int input3 = sc.nextInt();
                     sc.nextLine();
                     if((input3<(iL.size()+1))&&(input3>0)){
@@ -421,7 +419,7 @@ public class Login {
                     System.out.println("****************");
                     System.out.println("Most frequent user:");
                     for(User a:user.getFrequentUser()){
-                        System.out.println(user.username);
+                        System.out.println(a.username);
                     }
                 case 0:
                     escape=1;

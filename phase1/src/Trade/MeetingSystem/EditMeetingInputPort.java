@@ -53,26 +53,23 @@ class EditMeetingInputPort {
                 // instruction "..": quit
                 // other instructions
                 switch (input) {
-                    case "1" -> {
+                    case "1" :
                         editTimeInputPort();
                         break label;
-                    }
-                    case "2" -> {
+                    case "2" :
                         editPlaceInputPort();
                         break label;
-                    }
-                    case "3" -> {
+
+                    case "3" :
                         editTimeInputPort();
                         editPlaceInputPort();
                         break label;
-                    }
-                    default -> {
+                    default :
                         {
                             editMeetingInputPortPresenter.invalidInstructionError();
                             input = br.readLine();
                         }
                         msMenuPresenter.editMenu();
-                    }
                 }
             }
         }catch (IOException e) {
