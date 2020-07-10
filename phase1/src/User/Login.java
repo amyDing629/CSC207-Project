@@ -73,7 +73,7 @@ public class Login {
                     System.out.println("trade.Trade limit: " + a.getUser(username).getTradeNumber() + "/" + a.getUser(username).getWeekTransactionLimit());
                     System.out.println("Incomplete trade limit: " + (a.getUser(username).getIncomplete()).size() + "/" + a.getUser(username).getIncompleteTransactionLimit());
                     System.out.println("**************************************************************");
-                    System.out.println("Actions:\n1.Edit information\n2.Message\n3.Inventory.Inventory\n4.Message\n5.trade.Trade History\n6.Market\n0.quit to menu");
+                    System.out.println("Actions:\n1.Edit information\n2.Message\n3.Inventory.Inventory\n4.Message\n5.UserTradeUI\n6.Market\n0.quit to menu");
                     System.out.print(">");
                     int op = sc.nextInt();
                     sc.nextLine();
@@ -86,7 +86,7 @@ public class Login {
                     } else if (op == 4) {
                         UserTradeUI(a.getUser(username));
                     } else if (op == 5) {
-                        tradeHistory(a.getUser(username));
+                        UserTradeUI(a.getUser(username));
                     } else if (op == 6) {
                         market(a.getUser(username));
                     } else if (op == 0) {
@@ -428,25 +428,6 @@ public class Login {
                     break;
             }
 
-        }
-    }
-    public void tradeHistory(User user) throws IOException {
-        System.out.println("Hi user: "+user.getUsername());
-        System.out.println("Compeleted past trades:");
-        List<Trade> tHis=user.getTradeHistoryTop();
-        List<Trade> iL=user.getIncomplete();
-        List<Trade> iU=user.getUnconfirmed();
-        System.out.println("****************");
-        for(int i=0;i<iL.size();i++){
-            System.out.println((i+1)+". "+iL.get(i).toString());
-        }
-        System.out.println("****************");
-        for(Trade i:user.getIncomplete()){
-            System.out.println(i.toString());
-        }
-        System.out.println("****************");
-        for(Trade i:user.getUnconfirmed()){
-            System.out.println(i.toString());
         }
     }
     public void wishLendAdd(User user){
