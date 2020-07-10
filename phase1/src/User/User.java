@@ -346,6 +346,7 @@ public class User {
                     }
                 }
             }
+            if(b.size() == 0){return null;}
             int e = 0;
             ArrayList<User> g = new ArrayList<>();
             int maxValueInMap = (Collections.max(b.values()));
