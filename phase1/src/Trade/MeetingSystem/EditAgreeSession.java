@@ -55,9 +55,7 @@ class EditAgreeSession {
                             editAgreeSessionPresenter.printSuccessInfo(dateTime, place);
 
                             // create log
-                            MeetingLogInfo log = new CreateLogRecord().createLogRecord(currLogInUser, "e");
-                            meetingLog = log;
-                            editAgreeSessionPresenter.printLog(log);
+                            meetingLog = new CreateLogRecord().createLogRecord(currLogInUser, MeetingAction.EDIT);
 
                             // print time of edition of this user
                             editAgreeSessionPresenter.printEditionTime(currLogInUser, meeting);
@@ -79,11 +77,9 @@ class EditAgreeSession {
                         // print successful agreement
                         editAgreeSessionPresenter.printSuccessInfo(currLogInUser, meeting);
 
-
                         //create log
-                        MeetingLogInfo log = new CreateLogRecord().createLogRecord(currLogInUser, "a");
-                        meetingLog = log;
-                        editAgreeSessionPresenter.printLog(log);
+                        meetingLog = new CreateLogRecord().createLogRecord(currLogInUser, MeetingAction.AGREE);
+
                     } else {
                         editAgreeSessionPresenter.RepeatedAgreementError();
                     }

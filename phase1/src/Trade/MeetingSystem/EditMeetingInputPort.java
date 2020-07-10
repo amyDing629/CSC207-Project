@@ -24,8 +24,6 @@ class EditMeetingInputPort {
 
     DateTime dt = new DateTime();
 
-    MeetingSystemMenuPresenter msMenuPresenter = new MeetingSystemMenuPresenter();
-
     EditMeetingInputPortPresenter editMeetingInputPortPresenter = new EditMeetingInputPortPresenter();
 
 
@@ -41,10 +39,10 @@ class EditMeetingInputPort {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         try {
-            msMenuPresenter.printMenu(MeetingMenuName.EDIT);
+//            msMenuPresenter.printMenu(MeetingMenuName.EDIT);
+            editMeetingInputPortPresenter.printEditMenu();
 
             String input = br.readLine();
-            label:
             while (!input.equals("..")) {
                 // instruction 1: edits time only
                 // instruction 2: edits place only
@@ -53,23 +51,19 @@ class EditMeetingInputPort {
                 // instruction "..": quit
                 // other instructions
                 switch (input) {
-                    case "1" :
-                        editTimeInputPort();
-                        break label;
-                    case "2" :
-                        editPlaceInputPort();
-                        break label;
-
-                    case "3" :
+                    case "1" -> editTimeInputPort();
+                    case "2" -> editPlaceInputPort();
+                    case "3" -> {
                         editTimeInputPort();
                         editPlaceInputPort();
-                        break label;
-                    default :
+                    }
+                    default -> {
                         {
                             editMeetingInputPortPresenter.invalidInstructionError();
                             input = br.readLine();
                         }
-                        msMenuPresenter.editMenu();
+                        editMeetingInputPortPresenter.printEditMenu();
+                    }
                 }
             }
         }catch (IOException e) {
@@ -128,13 +122,6 @@ class EditMeetingInputPort {
         editMeetingInputPortPresenter.printPlaceSuccess(place);
     }
 
-    /**
-     * Return true iff successfully edited the place (i.e change the old place to a new one);
-     * return false on the contrary
-     *
-     * @param newPlace the new place to change
-     * @return true iff successfully edited the place (i.e change the old place to a new one)
-     */
     private boolean isNewPlaceEditable(String newPlace) {
         return !newPlace.equals(place);
 

@@ -16,7 +16,6 @@ class SetUpSession {
 
     SetUpSessionPresenter setUpSessionPresenter = new SetUpSessionPresenter();
 
-
     private Meeting meeting;
     private LocalDateTime dateTime;
     private String place;
@@ -49,9 +48,7 @@ class SetUpSession {
                 setUpSessionPresenter.printSuccessInfo(dateTime, place);
 
                 // create log
-                MeetingLogInfo log = new CreateLogRecord().createLogRecord(currLogInUser, "s");
-                meetingLog = log;
-                setUpSessionPresenter.printLog(log);
+                meetingLog = new CreateLogRecord().createLogRecord(currLogInUser, MeetingAction.SETUP);
             } else {
                 setUpSessionPresenter.printExit();
             }
