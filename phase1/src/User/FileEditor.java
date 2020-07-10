@@ -150,7 +150,7 @@ public class FileEditor {
      * @param u the user that the manager wants to add in
      * add the user into the txt file in the type of string
      */
-    public void addUser(User u) throws IOException {
+    private void addUser(User u) throws IOException {
         try{
             FileOutputStream output = new FileOutputStream("phase1/src/username.txt", true);
             String name = u.getUsername();

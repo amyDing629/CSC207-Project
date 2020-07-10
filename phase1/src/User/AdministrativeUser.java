@@ -24,7 +24,7 @@ public class AdministrativeUser extends User {
      * @param a the user that the administrative user wants to set frozen
      * set the user.User a account frozen
      */
-    public void freeze(User a) throws IOException {
+    public void freeze(User a) {
         a.setFrozen(true);
     }
 
@@ -32,7 +32,7 @@ public class AdministrativeUser extends User {
      * @param a the user that the administrative user wants to set not frozen
      * set the user.User a account unfrozen
      */
-    public void unfreeze(User a) throws IOException {
+    public void unfreeze(User a){
         a.setFrozen(false);
     }
 
