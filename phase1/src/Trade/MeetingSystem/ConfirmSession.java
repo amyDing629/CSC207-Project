@@ -34,9 +34,7 @@ class ConfirmSession {
                     confirmSessionPresenter.printSuccessInfo(currLogInUser, meeting);
 
                     // create log
-                    MeetingLogInfo log = new CreateLogRecord().createLogRecord(currLogInUser, "c");
-                    meetingLog = log;
-                    confirmSessionPresenter.printLog(log);
+                    meetingLog = new CreateLogRecord().createLogRecord(currLogInUser, MeetingAction.CONFIRM);
                 } else {
                     confirmSessionPresenter.RepeatedConfirmationError();
                 }
