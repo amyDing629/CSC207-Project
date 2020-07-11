@@ -51,13 +51,13 @@ class EditMeetingInputPort {
                 // instruction "..": quit
                 // other instructions
                 switch (input) {
-                    case "1" -> editTimeInputPort();
-                    case "2" -> editPlaceInputPort();
-                    case "3" -> {
+                    case "1": editTimeInputPort();
+                    case "2": editPlaceInputPort();
+                    case "3": {
                         editTimeInputPort();
                         editPlaceInputPort();
                     }
-                    default -> {
+                    default: {
                         {
                             editMeetingInputPortPresenter.invalidInstructionError();
                             input = br.readLine();
