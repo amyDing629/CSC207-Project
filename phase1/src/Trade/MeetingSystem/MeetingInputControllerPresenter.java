@@ -2,7 +2,7 @@ package Trade.MeetingSystem;
 
 import java.time.LocalDateTime;
 
-abstract class MeetingPresenter {
+abstract class MeetingInputControllerPresenter {
     abstract void printDateTimeIntro();
 
     abstract void printPlaceIntro();

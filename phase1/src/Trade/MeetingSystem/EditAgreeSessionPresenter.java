@@ -38,6 +38,7 @@ class EditAgreeSessionPresenter extends MeetingSessionPresenter {
     }
 
     // for agree session
+    @Override
     void printSuccessInfo(UUID currLogInUser, Meeting meeting) {
         System.out.println("Success: Meeting has been agreed by " + currLogInUser);
         super.printMeetingStatusInfo(meeting);

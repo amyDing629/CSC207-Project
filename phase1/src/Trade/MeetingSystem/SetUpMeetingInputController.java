@@ -8,23 +8,23 @@ import java.util.Scanner;
 /**
  * Input port of Meeting System, functioned for setting up a meeting only
  */
-class SetUpMeetingInputPort {
+class SetUpMeetingInputController {
     private LocalDateTime dateTime;
     private final String place;
 
     DateTime dt = new DateTime();
 
-    SetUpMeetingInputPortPresenter setUpMeetingInputPortPresenter = new SetUpMeetingInputPortPresenter();
+    SetUpMeetingInputControllerPresenter setUpMeetingInputControllerPresenter = new SetUpMeetingInputControllerPresenter();
 
     /**
      * Feeds the prompts of the Meeting info, including dateTime, place
      */
-    SetUpMeetingInputPort() {
+    SetUpMeetingInputController() {
 
         Scanner user_input = new Scanner(System.in);
         boolean good = false;
         do {
-            setUpMeetingInputPortPresenter.printDateTimeIntro();
+            setUpMeetingInputControllerPresenter.printDateTimeIntro();
             String dateTimeStr = user_input.nextLine();
 
             // valid datetime format + in the future than now
@@ -34,20 +34,20 @@ class SetUpMeetingInputPort {
                 if (datetime.isAfter(now)) {
                     good = true;
                     dateTime = dt.convertToLocalDateTime(dateTimeStr);
-                    setUpMeetingInputPortPresenter.printTimeSuccess(dateTime);
+                    setUpMeetingInputControllerPresenter.printTimeSuccess(dateTime);
                 } else {
-                    setUpMeetingInputPortPresenter.printInvalidDateTimeError();
+                    setUpMeetingInputControllerPresenter.printInvalidDateTimeError();
                 }
             } else {
-                setUpMeetingInputPortPresenter.printInvalidFormatError();
+                setUpMeetingInputControllerPresenter.printInvalidFormatError();
             }
         }
         while (!good);
 
 
-        setUpMeetingInputPortPresenter.printPlaceIntro();
+        setUpMeetingInputControllerPresenter.printPlaceIntro();
         place = user_input.nextLine();
-        setUpMeetingInputPortPresenter.printPlaceSuccess(place);
+        setUpMeetingInputControllerPresenter.printPlaceSuccess(place);
 
 
         if (user_input.nextLine().equals("close")) {
@@ -56,7 +56,7 @@ class SetUpMeetingInputPort {
 
     }
 
-    ArrayList<Object> setUpMeetingInputPortResult() {
+    ArrayList<Object> setUpMeetingInputControllerResult() {
         return new ArrayList<>(Arrays.asList(dateTime, place));
     }
 

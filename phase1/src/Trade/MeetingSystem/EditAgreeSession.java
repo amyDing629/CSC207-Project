@@ -41,9 +41,9 @@ class EditAgreeSession {
                 case "ee":
                     if (isEditable(currLogInUser)) { // meeting can be edited
 
-                        EditMeetingInputPort editMeeting = new EditMeetingInputPort(dateTime, place);
-                        LocalDateTime enteredDateTime = (LocalDateTime) editMeeting.editMeetingInputPortResult().get(0);
-                        String enteredPlace = (String) editMeeting.editMeetingInputPortResult().get(1);
+                        EditMeetingInputController editMeeting = new EditMeetingInputController(dateTime, place);
+                        LocalDateTime enteredDateTime = (LocalDateTime) editMeeting.editMeetingInputControllerResult().get(0);
+                        String enteredPlace = (String) editMeeting.editMeetingInputControllerResult().get(1);
 
                         if (isEdited(enteredDateTime, enteredPlace)) {
                             // update meeting, datetime, place

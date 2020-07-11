@@ -1,7 +1,6 @@
 package Trade.MeetingSystem;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 class SetUpSessionPresenter extends MeetingSessionPresenter {
     @Override
@@ -19,10 +18,5 @@ class SetUpSessionPresenter extends MeetingSessionPresenter {
     @Override
     void printExit() {
         System.out.println("Exit Set-Up session.");
-    }
-
-    @Override
-    void printSuccessInfo(UUID currLogInUser, Meeting meeting) {
-
     }
 }

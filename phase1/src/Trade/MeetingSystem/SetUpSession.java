@@ -38,9 +38,9 @@ class SetUpSession {
             // precondition:
             //  - no meeting has been scheduled yet
             if (input.equals("ok")) {
-                SetUpMeetingInputPort setUpMeeting = new SetUpMeetingInputPort();
-                dateTime = (LocalDateTime) setUpMeeting.setUpMeetingInputPortResult().get(0);
-                place = (String) setUpMeeting.setUpMeetingInputPortResult().get(1);
+                SetUpMeetingInputController setUpMeeting = new SetUpMeetingInputController();
+                dateTime = (LocalDateTime) setUpMeeting.setUpMeetingInputControllerResult().get(0);
+                place = (String) setUpMeeting.setUpMeetingInputControllerResult().get(1);
                 meeting = meetingActivities.setUpMeeting(users, dateTime, place);
                 isSetUp = true;
 

@@ -1,6 +1,6 @@
 package Trade.MeetingSystem;
 
-class SetUpMeetingInputPortPresenter extends MeetingPresenter {
+class SetUpMeetingInputControllerPresenter extends MeetingInputControllerPresenter {
 
     @Override
     void printDateTimeIntro() {

@@ -2,7 +2,7 @@ package Trade.MeetingSystem;
 
 import java.time.LocalDateTime;
 
-class EditMeetingInputPortPresenter extends MeetingPresenter {
+class EditMeetingInputControllerPresenter extends MeetingInputControllerPresenter {
 
     void printEditMenu() {
         System.out.println("------------------------------");
