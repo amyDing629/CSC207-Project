@@ -27,7 +27,7 @@ public class Inventory {
      * getter for the lending list
      * @return lendingList
      */
-    ArrayList<Item> getLendingList() {
+    public ArrayList<Item> getLendingList() {
         return GateWay.inventory;
     }
 
