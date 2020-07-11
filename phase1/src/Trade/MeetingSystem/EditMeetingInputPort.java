@@ -1,5 +1,7 @@
 package Trade.MeetingSystem;
 
+import Trade.MeetingSystem.MeetingExceptions.InvalidInstructionException;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -30,7 +32,7 @@ class EditMeetingInputPort {
     /**
      * Obtain user prompts of editing time and/or place.
      */
-    EditMeetingInputPort(LocalDateTime dateTime, String place) {
+    EditMeetingInputPort(LocalDateTime dateTime, String place) throws IOException {
         // Set the instance variables "dateTime", "place" with  before editing
         this.dateTime = dateTime;
         this.place = place;
@@ -38,18 +40,18 @@ class EditMeetingInputPort {
         // Obtain user.User input of edition info
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        try {
-//            msMenuPresenter.printMenu(MeetingMenuName.EDIT);
-            editMeetingInputPortPresenter.printEditMenu();
+        boolean isInputValid = true;
+        label:
+        do {
+            try {
+                editMeetingInputPortPresenter.printEditMenu();
 
-            String input = br.readLine();
-            while (!input.equals("..")) {
+                String input = br.readLine();
                 // instruction 1: edits time only
                 // instruction 2: edits place only
                 // instruction 3: edits time and place
-                // instruction 4: print edit-meeting menu
                 // instruction "..": quit
-                // other instructions
+                // other instructions: informs invalid and asks input again
                 switch (input) {
                     case "1" -> editTimeInputPort();
                     case "2" -> editPlaceInputPort();
@@ -57,23 +59,19 @@ class EditMeetingInputPort {
                         editTimeInputPort();
                         editPlaceInputPort();
                     }
-                    default -> {
-                        {
-                            editMeetingInputPortPresenter.invalidInstructionError();
-                            input = br.readLine();
-                        }
-                        editMeetingInputPortPresenter.printEditMenu();
+                    case ".." -> {
+                        break label;
                     }
+                    default -> throw new InvalidInstructionException();
                 }
+            } catch (InvalidInstructionException e) {
+                isInputValid = false;
             }
-        }catch (IOException e) {
-            editMeetingInputPortPresenter.wentWrongError();
-
-        }
+        } while (!isInputValid);
     }
 
 
-    private void editTimeInputPort(){
+    private void editTimeInputPort() {
         Scanner user_input = new Scanner(System.in);
         boolean good = false;
         do {
@@ -105,14 +103,13 @@ class EditMeetingInputPort {
         editMeetingInputPortPresenter.printTimeSuccess(dateTime);
     }
 
-
     private void editPlaceInputPort(){
         Scanner user_input = new Scanner(System.in);
         boolean good = false;
         do {
             editMeetingInputPortPresenter.printPlaceIntro();
             String newPlace = user_input.nextLine();
-            if (isNewPlaceEditable(newPlace)) {
+            if (!newPlace.equals(place)) {
                 this.place = newPlace;
                 good = true;
             } else {
@@ -120,11 +117,6 @@ class EditMeetingInputPort {
             }
         } while (!good);
         editMeetingInputPortPresenter.printPlaceSuccess(place);
-    }
-
-    private boolean isNewPlaceEditable(String newPlace) {
-        return !newPlace.equals(place);
-
     }
 
     /**

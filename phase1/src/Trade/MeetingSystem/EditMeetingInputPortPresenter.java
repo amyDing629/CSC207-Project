@@ -14,14 +14,6 @@ class EditMeetingInputPortPresenter extends MeetingPresenter {
         System.out.println("------------------------------");
     }
 
-    void invalidInstructionError() {
-        System.out.println("Error: Invalid instruction in EditMeetingInputPort!");
-    }
-
-    void wentWrongError() {
-        System.out.println("Error: Something went wrong within EditMeetingInputPort");
-    }
-
     // Edit time part
     @Override
     void printDateTimeIntro() {

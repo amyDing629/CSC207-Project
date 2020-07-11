@@ -3,7 +3,6 @@ package Trade.MeetingSystem;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -199,24 +198,10 @@ public class Meeting {
     /**
      * Edit the status of the Meeting (hard Setter for status)
      */
-    void setStatus(MeetingStatus status) {
+    public void setStatus(MeetingStatus status) {
         this.status = status;
     }
 
-    /**
-     * Update the status of the Meeting (Setter for status)
-     */
-    void setStatus() {
-        ArrayList<Boolean> bothTrue = new ArrayList<>(Arrays.asList(true, true));
-
-        if (this.getConfirmedStatuses().equals(bothTrue)) {
-            this.status = MeetingStatus.completed;
-        } else if (this.getAgreedStatuses().equals(bothTrue)) {
-            this.status = MeetingStatus.agreed;
-        } else if (this.isMeetingCancelled()) {
-            this.status = MeetingStatus.cancelled;
-        }
-    }
 
     boolean isMeetingCancelled() {
         for (MeetingEditor t: idToEditor.values()){
