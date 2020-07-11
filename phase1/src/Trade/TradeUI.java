@@ -15,7 +15,6 @@ import java.util.UUID;
  * allow users to confirm and edit trade
  */
 public class TradeUI {
-    TradeManager tm;
     User currUser;
     Trade trade;
     TradeController tc;
@@ -31,10 +30,10 @@ public class TradeUI {
      * @throws IOException if the edition/creation is not completed
      */
     public TradeUI(User currUser, UUID tradeId) throws IOException {
-        tm = new TradeManager();
+        TradeManager tm = new TradeManager();
         this.currUser = currUser;
         trade = tm.getTrade(tradeId);
-        tc = new TradeController(currUser);
+        tc = new TradeController(currUser, trade);
         tp = new TradePresenter(currUser, trade);
 
 
@@ -51,7 +50,7 @@ public class TradeUI {
         while (exit != 1) {
             while (true) {
                 if (becomeComplete){
-                    tc.completeTrade(trade);
+                    tc.completeTrade();
                 }
                 tda.updateFile();
                 tp.presentTradeUIInfo();
@@ -63,7 +62,7 @@ public class TradeUI {
                         tp.exitTrade();
                         break;
                     } else {
-                        switch (tc.checkTradeMeeting(trade)) {
+                        switch (tc.checkTradeMeeting()) {
                             case "cancelled":
                                 tp.cancelTrade();
                                 break;
@@ -93,7 +92,7 @@ public class TradeUI {
                                 }
 
                                 if (result.get(2).equals("cancelled")){
-                                    tc.cancelTrade(trade);
+                                    tc.cancelTrade();
                                 }
                                 break;
                             case "second meeting":
@@ -124,12 +123,12 @@ public class TradeUI {
             try {
                 String confirm = br.readLine();
                 if (confirm.equals("1")) {
-                    tc.confirmTrade(trade);
+                    tc.confirmTrade();
                     tp.confirmTrade();
                     break;
                 }
                 else if (confirm.equals("2")){
-                    tc.cancelTrade(trade);
+                    tc.cancelTrade();
                     tp.cancelTrade();
                     break;
                 }else{

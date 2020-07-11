@@ -9,21 +9,17 @@ public class InventoryController {
     /**
      * the inventory of the system.
      */
-    Inventory iv = new Inventory();
+    private final Inventory iv = new Inventory();
     /**
      * the user that is using the system.
      */
-    User currUser;
-    /**
-     * the item that the user selects. item equals to null if the user hasn't selected an item.
-     */
-    Item item;
+    private final User currUser;
 
     /**
      * [constructor]
      * @param currUser current user
      */
-    public InventoryController(User currUser){
+    InventoryController(User currUser){
         this.currUser = currUser;
     }
 
@@ -32,11 +28,13 @@ public class InventoryController {
      * @param line the input from user of the item selected.
      * @return wheter the item has been selected.
      */
-    public boolean selectItem(String line){
+    boolean selectItem(String line){
         for (Item it: iv.getLendingList()){
             if (it.getName().equals(line)){
-                item = it;
-                System.out.println(item + " has been selected");
+                /**
+                 * the item that the user selects. item equals to null if the user hasn't selected an item.
+                 */
+                System.out.println(it + " has been selected");
                 return true;
             }
         }
@@ -48,7 +46,7 @@ public class InventoryController {
      * @param it the input item
      * @return whether the input item is the user's own item.
      */
-    public boolean isOwnItem(Item it){
+    boolean isOwnItem(Item it){
         if (it.getOwnerName().equals(currUser.getUsername())){
             return true;
         }
@@ -59,7 +57,7 @@ public class InventoryController {
      * move the selected item to user's wishBorrow list.
      * @param it the selected item.
      */
-    public void moveToWishList(Item it){
+    void moveToWishList(Item it){
         currUser.addWishBorrow(it.getName());
     }
 }
