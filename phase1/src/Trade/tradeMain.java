@@ -1,6 +1,7 @@
 package Trade;
 
 import Inventory.*;
+import Main.DataAccessFull;
 import Main.GateWay;
 import User.User;
 import User.UserManager;
@@ -30,16 +31,39 @@ public class tradeMain {
         trade.RequestTradeUI rtp = new trade.RequestTradeUI(amy, peach);
         rtp.run();
 
-        ArrayList<User> lst = um.splitUser(um.readFile());
-        User amy = lst.get(0);
-        User daniel = lst.get(1);
-        Trade trade = tm.getTrade(UUID.fromString("251abe4f-1ea2-4ef9-a5a5-6f3931e7b375"));
-        tm.updateTradeHistory(amy.getId(),daniel.getId(),trade);//not working
-        ArrayList<UUID> userList = trade.getUsers();
+
+        User amy = new User("amy","1234", false);
+        User daniel = new User("daniel","345", false);
+        GateWay.users.add(amy);
+        GateWay.users.add(daniel);
+        new DataAccessFull().updateFile();
+
+        new DataAccessFull().readFile();
+        User amy = new User("amy","1234", false);
+        User daniel = new User("daniel","345", false);
+        GateWay.users.add(amy);
+        GateWay.users.add(daniel);
+        Item peach = new Inventory().getLendingList().get(0);
+
+
+
+        new DataAccessFull().updateFile();
+        new DataAccessFull().readFile();
+        RequestTradeUI rtp = new RequestTradeUI(amy, peach);
+        rtp.run();
+
+         */
+
+        //tm.updateTradeHistory(amy.getId(),daniel.getId(),trade);//not working
+        //ArrayList<UUID> userList = trade.getUsers();
         //System.out.println(tm.getTradeList().get(0).getId() == trade.getId());
         //System.out.println(trade);
 
         //System.out.println(amy.getTradeHistory());
+        new DataAccessFull().readFile();
+        Trade trade = GateWay.trades.get(0);
+        User amy = GateWay.users.get(0);
+        User daniel = GateWay.users.get(1);
         int num = 0;
         while (!trade.status.equals("complete")){
             if (num == 1){
@@ -63,16 +87,18 @@ public class tradeMain {
         tm.updateFile();
 
          */
+/*
 
+        GateWay.users.add(amy);
+        GateWay.users.add(daniel);
+        new TradeDataAccess().readFile();
+        Trade trade = GateWay.trades.get(0);
+        */
+        /*
         User amy = new User("amy","1234", false);
         User daniel = new User("daniel","345", false);
         GateWay.users.add(amy);
         GateWay.users.add(daniel);
-        Trade trade = new TradeManager().getTradeList().get(0);
-        new TradeManager().updateTradeHistory(amy.getId(), daniel.getId(), trade);
-        /*
-        um.getUserList().add(amy);
-        um.getUserList().add(daniel);
         //ArrayList<User> lst = um.splitUser(um.readFile());
         //User amy = lst.get(0);
         Item peach = new Inventory().getLendingList().get(0);

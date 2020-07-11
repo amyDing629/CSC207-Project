@@ -9,7 +9,7 @@ import java.util.UUID;
  * This class is used as a record of editing time of each user.User who attends to a meeting.
  */
 
-public class MeetingEditor extends IMeetingAttendee {
+public class MeetingEditor implements IMeetingAttendee {
 
     /**
      * This MeetingEditor's user id.
@@ -29,15 +29,6 @@ public class MeetingEditor extends IMeetingAttendee {
      */
     public MeetingEditor(UUID userId) {
         this.userId = userId;
-    }
-
-    /**
-     * Returns this MeetingEditor's user id.
-     *
-     * @return the user id
-     */
-    UUID getUserId() {
-        return userId;
     }
 
     /**
@@ -87,6 +78,15 @@ public class MeetingEditor extends IMeetingAttendee {
         return String.valueOf(timeOfEdition);
     }
 
+    /**
+     * Returns the threshold of editing time to the meeting.
+     *
+     * @return an int of the threshold of editing time
+     */
+    @Override
+    public int getThreshold() {
+        return threshold;
+    }
 }
 
 

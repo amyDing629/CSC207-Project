@@ -2,6 +2,7 @@ package Trade.MeetingSystem;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -41,7 +42,7 @@ class MeetingActivities {
         if (!editHistory.editsOverThreshold()) {
             meeting.editMeeting(dateTime, place);
         } else {
-            meeting.setStatus();
+            updateStatus(meeting);
         }
         return meeting;
     }
@@ -68,7 +69,7 @@ class MeetingActivities {
             }
 
             //update meeting Status
-            meeting.setStatus();
+            updateStatus(meeting);
 
         }else{ // if such id does NOT exist in this meeting
             System.out.println("Error: mismatch between the input id and id in meeting");
@@ -98,7 +99,7 @@ class MeetingActivities {
             }
 
             //update meeting Status
-            meeting.setStatus();
+            updateStatus(meeting);
 
         }else{ // if such id does NOT exist in this meeting
             System.out.println("Error: mismatch between the input id and id in meeting");
@@ -115,6 +116,23 @@ class MeetingActivities {
     boolean cancelMeeting(Meeting meeting) {
         meeting.setStatus(MeetingStatus.cancelled);
         return meeting.getStatus().equals(MeetingStatus.cancelled);
+    }
+
+    /**
+     * Update the status of the Meeting
+     *
+     * @param meeting the meeting to be updated
+     */
+    private void updateStatus(Meeting meeting) {
+        ArrayList<Boolean> bothTrue = new ArrayList<>(Arrays.asList(true, true));
+
+        if (meeting.getConfirmedStatuses().equals(bothTrue)) {
+            meeting.setStatus(MeetingStatus.completed);
+        } else if (meeting.getAgreedStatuses().equals(bothTrue)) {
+            meeting.setStatus(MeetingStatus.agreed);
+        } else if (meeting.isMeetingCancelled()) {
+            meeting.setStatus(MeetingStatus.cancelled);
+        }
     }
 }
 

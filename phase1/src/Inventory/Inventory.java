@@ -35,7 +35,7 @@ public class Inventory {
      * get a list of items that is not in the trade
      * @return available item list
      */
-    public ArrayList<Item> getAvailableList() {
+    ArrayList<Item> getAvailableList() {
         ArrayList<Item> result = new ArrayList<Item>();
         for (Item item : GateWay.inventory) {
             if (!item.getIsInTrade()) {

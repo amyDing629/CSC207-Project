@@ -16,8 +16,7 @@ public class TwowayTrade extends Trade {
     private final Item item1to2;
     private final Item item2to1;
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-    private UserManager um = new UserManager();
-    private Inventory iv = new Inventory();
+
     /**
      *
      * @param trader1Id Trader who participates in the trade
@@ -72,6 +71,8 @@ public class TwowayTrade extends Trade {
      */
     @Override
     public void makeTrade() throws IOException {
+        UserManager um = new UserManager();
+        Inventory iv = new Inventory();
         User u1 = um.getUser(trader1Id);
         User u2 = um.getUser(trader2Id);
         u1.getWishBorrow().remove(item2to1.getName());

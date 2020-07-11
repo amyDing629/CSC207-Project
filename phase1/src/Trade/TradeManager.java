@@ -1,20 +1,14 @@
 package Trade;
 
-import Inventory.Inventory;
 import Inventory.Item;
 import Main.GateWay;
-import Trade.MeetingSystem.MeetingEditor;
-import Trade.MeetingSystem.Meeting;
 import Trade.MeetingSystem.MeetingStatus;
 import User.User;
 import User.UserManager;
 
-import java.io.*;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -25,22 +19,6 @@ import java.util.UUID;
  */
 public class TradeManager {
     //private ArrayList<Trade> tradeList;
-    private UserManager userManager;
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-
-
-    /**
-     * Constructor
-     * tradeList stores all the trade.Trade in the system.
-     * currentUser is the user.User who is currently interacting with this trade.TradeManager.
-     */
-    public TradeManager() throws IOException {
-        userManager = new UserManager();
-    }
-
-    public ArrayList<Trade> getTradeList(){
-        return GateWay.trades;
-    }
 
 
     /**
@@ -50,7 +28,7 @@ public class TradeManager {
      * @param item the only one Inventory.Item to be trade in this created trade.Trade.
      * @param duration the duration of this trade.Trade, unit (days). -1 means the trade.Trade is permanent.
      */
-    public Trade createOnewayTrade(UUID currUserId, UUID otherUserId, Item item, int duration, LocalDateTime time)
+    Trade createOnewayTrade(UUID currUserId, UUID otherUserId, Item item, int duration, LocalDateTime time)
             throws IOException {
         OnewayTrade newTrade = new OnewayTrade(currUserId, otherUserId, item, duration, time);
         GateWay.trades.add(newTrade);
@@ -69,7 +47,7 @@ public class TradeManager {
      * @param item2to1 the other Inventory.Item to be trade in this created trade.Trade.
      * @param duration the duration of this trade.Trade, unit (days). -1 means the trade.Trade is permanent.
      */
-    public void createTwowayTrade(UUID currUserId, UUID otherUserId, Item item1to2, Item item2to1, int duration,
+    void createTwowayTrade(UUID currUserId, UUID otherUserId, Item item1to2, Item item2to1, int duration,
                                   LocalDateTime time) throws IOException {
         TwowayTrade newTrade = new TwowayTrade(currUserId, otherUserId, item1to2, item2to1, duration, time);
         GateWay.trades.add(newTrade);
@@ -79,8 +57,9 @@ public class TradeManager {
 
 
 
-    public void updateTradeHistory(UUID currUserId, UUID tarUserId, Trade newTrade) throws IOException {
+    void updateTradeHistory(UUID currUserId, UUID tarUserId, Trade newTrade) throws IOException {
         // System.out.println("userList:"+userManager.getUserList());
+        UserManager userManager = new UserManager();
         User currentUser = userManager.getUser(currUserId);
         User tarUser = userManager.getUser(tarUserId);
         System.out.println(currentUser);
@@ -98,6 +77,65 @@ public class TradeManager {
         }
         return null;
     }
+
+    /**
+     * check the status of the current trade
+     * @param currTrade the current trade
+     * @return the status
+     */
+    String checkTradeMeeting(Trade currTrade) {
+        if (currTrade.getStatus().equals("unconfirmed")) {
+            return "confirm trade";
+        }else if (currTrade.getStatus().equals("cancelled")) {
+            return "cancelled";
+        }else if (currTrade.getStatus().equals("complete")) {
+            return "complete";
+
+        }else if (currTrade.getMeeting() == null ||
+                currTrade.getMeeting().getStatus() == MeetingStatus.incomplete ||
+                currTrade.getMeeting().getStatus() == MeetingStatus.agreed){
+            return "first meeting";
+        }else if (currTrade.getMeeting().getStatus() == MeetingStatus.cancelled){
+            currTrade.setStatus("cancelled");
+            return "cancelled";
+        }else if (currTrade.getDuration()==Trade.temp){
+            if (currTrade.getSecondMeeting().getStatus() == MeetingStatus.incomplete){
+                return "second meeting";
+            }else{
+                currTrade.setStatus("complete");
+                return "complete";
+            }
+        }else{
+            return "complete";
+        }
+    }
+
+    /**
+     * confirm trade(agree with the trade)
+     * @param currTrade current trade
+     */
+    void confirmTrade(Trade currTrade) {
+        currTrade.setStatus("incomplete");
+    }
+
+    /**
+     * set the status of trade to complete and make trade
+     * @param currTrade current trade
+     * @throws IOException if the item is not deleted from user's wishlist and inventory
+     */
+    void completeTrade(Trade currTrade) throws IOException {
+        currTrade.setStatus("complete");
+        currTrade.makeTrade();
+    }
+
+    /**
+     * set the status of trade to cancelled
+     * @param currTrade current trade
+     */
+    void cancelTrade(Trade currTrade){
+        currTrade.setStatus("cancelled");
+    }
+
 
 
 

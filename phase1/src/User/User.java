@@ -101,10 +101,18 @@ public class User {
 
     public List<String> getNotification(){return notification;}
 
+    /**
+     * @param incompleteTransaction the maximum number of incomplete transactions user can have
+     * set the input integer as the maximum incomplete transaction number of a user
+     */
     public void setIncompleteTransaction(int incompleteTransaction) {
         this.incompleteTransactionLimit = incompleteTransaction;
     }
 
+    /**
+     * @param a id we want to set for the user
+     * set the input id for the user
+     */
     public void setId(UUID a){this.id = a;}
 
     public void setWeekTransactionLimit(int weekTransaction){
@@ -346,6 +354,7 @@ public class User {
                     }
                 }
             }
+            if(b.size() == 0){return null;}
             int e = 0;
             ArrayList<User> g = new ArrayList<>();
             int maxValueInMap = (Collections.max(b.values()));

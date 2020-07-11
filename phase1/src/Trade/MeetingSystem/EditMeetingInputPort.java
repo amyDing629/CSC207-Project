@@ -1,5 +1,7 @@
 package Trade.MeetingSystem;
 
+import Trade.MeetingSystem.MeetingExceptions.InvalidInstructionException;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -24,15 +26,13 @@ class EditMeetingInputPort {
 
     DateTime dt = new DateTime();
 
-    MeetingSystemMenuPresenter msMenuPresenter = new MeetingSystemMenuPresenter();
-
     EditMeetingInputPortPresenter editMeetingInputPortPresenter = new EditMeetingInputPortPresenter();
 
 
     /**
      * Obtain user prompts of editing time and/or place.
      */
-    EditMeetingInputPort(LocalDateTime dateTime, String place) {
+    EditMeetingInputPort(LocalDateTime dateTime, String place) throws IOException {
         // Set the instance variables "dateTime", "place" with  before editing
         this.dateTime = dateTime;
         this.place = place;
@@ -40,49 +40,38 @@ class EditMeetingInputPort {
         // Obtain user.User input of edition info
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        try {
-            msMenuPresenter.printMenu(MeetingMenuName.EDIT);
+        boolean isInputValid = true;
+        label:
+        do {
+            try {
+                editMeetingInputPortPresenter.printEditMenu();
 
-            String input = br.readLine();
-            label:
-            while (!input.equals("..")) {
+                String input = br.readLine();
                 // instruction 1: edits time only
                 // instruction 2: edits place only
                 // instruction 3: edits time and place
-                // instruction 4: print edit-meeting menu
                 // instruction "..": quit
-                // other instructions
+                // other instructions: informs invalid and asks input again
                 switch (input) {
-                    case "1" -> {
-                        editTimeInputPort();
-                        break label;
-                    }
-                    case "2" -> {
-                        editPlaceInputPort();
-                        break label;
-                    }
+                    case "1" -> editTimeInputPort();
+                    case "2" -> editPlaceInputPort();
                     case "3" -> {
                         editTimeInputPort();
                         editPlaceInputPort();
+                    }
+                    case ".." -> {
                         break label;
                     }
-                    default -> {
-                        {
-                            editMeetingInputPortPresenter.invalidInstructionError();
-                            input = br.readLine();
-                        }
-                        msMenuPresenter.editMenu();
-                    }
+                    default -> throw new InvalidInstructionException();
                 }
+            } catch (InvalidInstructionException e) {
+                isInputValid = false;
             }
-        }catch (IOException e) {
-            editMeetingInputPortPresenter.wentWrongError();
-
-        }
+        } while (!isInputValid);
     }
 
 
-    private void editTimeInputPort(){
+    private void editTimeInputPort() {
         Scanner user_input = new Scanner(System.in);
         boolean good = false;
         do {
@@ -114,14 +103,13 @@ class EditMeetingInputPort {
         editMeetingInputPortPresenter.printTimeSuccess(dateTime);
     }
 
-
     private void editPlaceInputPort(){
         Scanner user_input = new Scanner(System.in);
         boolean good = false;
         do {
             editMeetingInputPortPresenter.printPlaceIntro();
             String newPlace = user_input.nextLine();
-            if (isNewPlaceEditable(newPlace)) {
+            if (!newPlace.equals(place)) {
                 this.place = newPlace;
                 good = true;
             } else {
@@ -129,18 +117,6 @@ class EditMeetingInputPort {
             }
         } while (!good);
         editMeetingInputPortPresenter.printPlaceSuccess(place);
-    }
-
-    /**
-     * Return true iff successfully edited the place (i.e change the old place to a new one);
-     * return false on the contrary
-     *
-     * @param newPlace the new place to change
-     * @return true iff successfully edited the place (i.e change the old place to a new one)
-     */
-    private boolean isNewPlaceEditable(String newPlace) {
-        return !newPlace.equals(place);
-
     }
 
     /**

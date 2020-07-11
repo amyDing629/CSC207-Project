@@ -12,15 +12,17 @@ public abstract class MeetingSessionPresenter {
         System.out.println("  " + "- the current proposed place is:" + place);
     }
 
-    void printLog(MeetingLogInfo log) {
-        System.out.println("New log added:" + log.toString());
+    abstract void printSuccessInfo(UUID currLogInUser, Meeting meeting);
+
+    void printMeetingStatusInfo(Meeting meeting) {
+        System.out.println("Meeting current status: " + meeting.getStatus());
     }
+
+//    void printLog(MeetingLogInfo log) {
+//        System.out.println("New log added:" + log.toString());
+//    }
 
     abstract void printExit();
 
-    abstract void printSuccessInfo(UUID currLogInUser, Meeting meeting);
 
-    protected void printMeetingStatusInfo(Meeting meeting) {
-        System.out.println("Meeting current status: " + meeting.getStatus());
-    }
 }
