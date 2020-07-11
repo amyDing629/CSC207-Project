@@ -9,7 +9,7 @@ public class Item {
     /**
      * The name of the item. Each item has a unique name.
      */
-    private String name;
+    private final String name;
     /**
      * Description of the item. Can be null.
      */

@@ -14,8 +14,6 @@ public class OnewayTrade extends Trade {
     private final UUID borrowerId;
     private final Item item;
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-    private final UserManager um = new UserManager();
-    private final Inventory iv = new Inventory();
 
     /**
      *
@@ -73,6 +71,8 @@ public class OnewayTrade extends Trade {
      */
     @Override
     public void makeTrade() throws IOException {
+        UserManager um = new UserManager();
+        Inventory iv = new Inventory();
         User bor = um.getUser(borrowerId);
         User lend = um.getUser(lenderId);
         bor.getWishBorrow().remove(item.getName());

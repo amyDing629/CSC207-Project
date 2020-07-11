@@ -13,12 +13,11 @@ import java.io.InputStreamReader;
  * add item to user's wishBorrow list
  */
 public class InventoryUI {
-    Inventory inventory;
-    User currUser;
-    InventoryPresenter ip;
-    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    Item currItem;
-    InventoryController ic;
+    private final Inventory inventory;
+    private final InventoryPresenter ip;
+    private final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    private Item currItem;
+    private final InventoryController ic;
 
     /**
      * [constructor]
@@ -27,7 +26,6 @@ public class InventoryUI {
      */
     public InventoryUI(User currUser){
         inventory = new Inventory();
-        this.currUser = currUser;
         ip = new InventoryPresenter(currUser);
         ic = new InventoryController(currUser);
     }
@@ -40,7 +38,7 @@ public class InventoryUI {
         while (exit !=1){
             while (true){
                 ip.printAvailable();
-                System.out.println("type '1' to exit, or select an item");
+                ip.selectItem();
                 try {
                     String line = br.readLine();
                     if (line.equals("1")) {
@@ -48,7 +46,8 @@ public class InventoryUI {
                         break;
                     }else{
                         if (!ic.selectItem(line)) {
-                            throw new IOException("your input is not found, please type again");
+                            ip.wrongInput();
+                            throw new IOException();
                         } else{
                             currItem = inventory.getItem(line);
                             itemAction();
@@ -56,7 +55,7 @@ public class InventoryUI {
                         }
                     }
                 } catch (IOException e) {
-                    System.out.println("your input is not correct, please try again");
+                    ip.wrongInput();
                 }
             }
         }
@@ -68,16 +67,15 @@ public class InventoryUI {
     private void itemAction(){
         while (true){
             ip.printItemInfo(currItem);
-            System.out.println("menu:\n type '1' to add to wish borrow list and return back to the inventory" +
-                    "\n type '2' to return back to inventory directly");
+            ip.itemAction();
             try{
                 String line2 = br.readLine();
                 if (line2.equals("1")){
                     if (ic.isOwnItem(currItem)){
-                        System.out.println("you can not add your own item to wish borrow list");
+                        ip.addToWishBorrow(false);
                     }else{
                         ic.moveToWishList(currItem);
-                        System.out.println("the item has been moved to the wish list");
+                        ip.addToWishBorrow(true);
                         break;//move back to see inventory
                     }
                 }else if (line2.equals("2")){

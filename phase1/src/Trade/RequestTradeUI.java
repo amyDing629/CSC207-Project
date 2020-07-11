@@ -17,18 +17,17 @@ public class RequestTradeUI{
     /**
      * current user that use this system
      */
-    User currUser;
+    private final User currUser;
     /**
      * the item selected that is used to request trade
      */
-    Item item;
+    private final Item item;
     /**
      * owner of the selected item
      */
-    User tarUser;
-    TradeController trc;
-    Inventory iv = new Inventory();
-    TradePresenter tp;
+    private final TradeController trc;
+    private final TradePresenter tp;
+    private final Inventory iv = new Inventory();
 
     /**
      * [constructor]
@@ -39,7 +38,6 @@ public class RequestTradeUI{
     public RequestTradeUI(User currUser, Item item) throws IOException {
         trc = new TradeController(currUser);
         this.currUser = currUser;
-        tarUser = trc.getTarUser(item);
         this.item = item;
         tp = new TradePresenter(currUser);
     }

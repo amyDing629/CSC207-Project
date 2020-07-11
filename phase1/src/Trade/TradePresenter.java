@@ -7,8 +7,8 @@ import User.User;
  * present the information of trade
  */
 public class TradePresenter {
-    User currUser;
-    Trade trade;
+    private final User currUser;
+    private Trade trade;
 
     /**
      * [constructor]

@@ -13,14 +13,14 @@ public class InventoryPresenter {
      * [constructor]
      * @param currUser the user that is using the system
      */
-    public InventoryPresenter(User currUser){
+    InventoryPresenter(User currUser){
         this.currUser = currUser;
     }
 
     /**
      * print the item that is not in the trade.
      */
-    public void printAvailable(){
+    void printAvailable(){
         System.out.println(iv.getAvailableList());
     }
 
@@ -28,10 +28,33 @@ public class InventoryPresenter {
      * print name, description and owner of the item
      * @param item selected item
      */
-    public void printItemInfo(Item item) {
+    void printItemInfo(Item item) {
         System.out.println("item name: " + item.getName());
         System.out.println("item description: " + item.getDescription());
         System.out.println("item owner: " + item.getOwnerName());
     }
+
+    void wrongInput(){
+        System.out.println("wrong input, please type again");
+    }
+
+    void selectItem(){
+        System.out.println("type '1' to exit, or select an item");
+    }
+
+    void itemAction(){
+        System.out.println("menu:\n type '1' to add to wish borrow list and return back to the inventory" +
+                "\n type '2' to return back to inventory directly");
+    }
+
+    void addToWishBorrow(boolean isAdded){
+        if (isAdded){
+            System.out.println("the item has been moved to the wish list");
+        }else{
+            System.out.println("you can not add your own item to wish borrow list");
+        }
+
+    }
+
 
 }

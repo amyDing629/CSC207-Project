@@ -16,16 +16,22 @@ public class TradeController {
     private final User currUser;
     private User tarUser;
     private final TradeManager tm = new TradeManager();
-    private final UserManager um = new UserManager();
+    private Trade currTrade;
 
     /**
      * [constructor]
      * @param currUser the user that is using the system
      */
-    public TradeController(User currUser) throws IOException {
+    TradeController(User currUser) throws IOException {
         this.currUser = currUser;
-
     }
+
+    TradeController(User currUser, Trade currTrade){
+        this.currUser = currUser;
+        this.currTrade = currTrade;
+    }
+
+
 
 
     /**
@@ -35,6 +41,7 @@ public class TradeController {
      * @throws IOException can not find the target user
      */
     User getTarUser(Item item) throws IOException {
+        UserManager um = new UserManager();
         tarUser = um.getUser(item.getOwnerName());
         return tarUser;
     }
@@ -102,60 +109,31 @@ public class TradeController {
 
     /**
      * check the status of the current trade
-     * @param currTrade the current trade
      * @return the status
      */
-    String checkTradeMeeting(Trade currTrade) {
-        if (currTrade.getStatus().equals("unconfirmed")) {
-            return "confirm trade";
-        }else if (currTrade.getStatus().equals("cancelled")) {
-            return "cancelled";
-        }else if (currTrade.getStatus().equals("complete")) {
-            return "complete";
-
-        }else if (currTrade.getMeeting() == null ||
-                currTrade.getMeeting().getStatus() == MeetingStatus.incomplete ||
-                currTrade.getMeeting().getStatus() == MeetingStatus.agreed){
-            return "first meeting";
-        }else if (currTrade.getMeeting().getStatus() == MeetingStatus.cancelled){
-            currTrade.setStatus("cancelled");
-            return "cancelled";
-        }else if (currTrade.getDuration()==Trade.temp){
-            if (currTrade.getSecondMeeting().getStatus() == MeetingStatus.incomplete){
-                return "second meeting";
-            }else{
-                currTrade.setStatus("complete");
-                return "complete";
-            }
-        }else{
-            return "complete";
-        }
+    String checkTradeMeeting() {
+        return tm.checkTradeMeeting(currTrade);
     }
-
     /**
      * confirm trade(agree with the trade)
-     * @param currTrade current trade
      */
-    void confirmTrade(Trade currTrade) {
-        currTrade.setStatus("incomplete");
+    void confirmTrade() {
+        tm.confirmTrade(currTrade);
     }
 
     /**
      * set the status of trade to complete and make trade
-     * @param currTrade current trade
      * @throws IOException if the item is not deleted from user's wishlist and inventory
      */
-    void completeTrade(Trade currTrade) throws IOException {
-        currTrade.setStatus("complete");
-        currTrade.makeTrade();
+    void completeTrade() throws IOException {
+        tm.completeTrade(currTrade);
     }
 
     /**
      * set the status of trade to cancelled
-     * @param currTrade current trade
      */
-    void cancelTrade(Trade currTrade){
-        currTrade.setStatus("cancelled");
+    void cancelTrade(){
+        tm.cancelTrade(currTrade);
     }
 
 }
