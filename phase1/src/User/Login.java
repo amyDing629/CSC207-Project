@@ -455,7 +455,7 @@ public class Login {
         UserManager a=new UserManager();
         for (User b: GateWay.users){
             System.out.println(b.username);
-            for(String c:user.getWishBorrow()){
+            for(String c:user.getWishLend()){
                 System.out.println("Item:"+c);
             }
             System.out.println("--------------------------");
