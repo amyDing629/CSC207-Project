@@ -69,7 +69,7 @@ public class FileEditor {
                     lineList3.addAll(Arrays.asList(g));
                     d.setWishBorrow(lineList3);
                 }
-                d.setWishLend(lineList3);
+                d.setWishBorrow(lineList3);
 
                 ArrayList<String> lineList4 = new ArrayList<>();
                 if (!b.get(9).equals("")) {
@@ -118,7 +118,7 @@ public class FileEditor {
                     lineList3.addAll(Arrays.asList(g));
                     d.setWishBorrow(lineList3);
                 }
-                d.setWishLend(lineList3);
+                d.setWishBorrow(lineList3);
 
                 ArrayList<String> lineList4 = new ArrayList<>();
                 if (!b.get(9).equals("")) {
