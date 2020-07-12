@@ -78,7 +78,7 @@ public class Login {
                     System.out.println("trade.Trade limit: " + a.getUser(username).getTradeNumber() + "/" + a.getUser(username).getWeekTransactionLimit());
                     System.out.println("Incomplete trade limit: " + (a.getUser(username).getIncomplete()).size() + "/" + a.getUser(username).getIncompleteTransactionLimit());
                     System.out.println("**************************************************************");
-                    System.out.println("Actions:\n1.Edit information\n2.Message\n3.Inventory.Inventory\n4.Message\n5.UserTradeUI\n6.Market\n0.quit to menu");
+                    System.out.println("Actions:\n1.Edit information\n2.Message\n3.Inventory.Inventory\n4.Message\n5.Trade\n6.Market\n0.quit to menu");
                     System.out.print(">");
                     int op = sc.nextInt();
                     sc.nextLine();
@@ -448,7 +448,7 @@ public class Login {
         UserManager a=new UserManager();
         int counter=1;
         for (User b: GateWay.users){
-            System.out.println(user.username+" "+counter);
+            System.out.println(b.username+" "+counter);
             for(String c:user.getWishBorrow()){
                 System.out.println("Inventory.Item:"+c);
             }
