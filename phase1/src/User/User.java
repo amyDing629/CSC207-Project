@@ -3,6 +3,7 @@ package User;
 import Inventory.Inventory;
 import Trade.Trade;
 import Trade.TradeManager;
+import Trade.TradeStatus;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -204,7 +205,7 @@ public class User {
     public List<Trade> getUnconfirmed() throws IOException {
         List<Trade> trade=new ArrayList<>();
         for(Trade t: getAllTrade()){
-            if(t.getStatus().equals("unconfirmed")){
+            if(t.getStatus().equals(TradeStatus.unconfirmed)){
                 trade.add(t);
             }
         }
@@ -217,7 +218,7 @@ public class User {
     public List<Trade> getIncomplete() throws IOException {
         List<Trade> trade=new ArrayList<>();
         for(Trade t: getAllTrade()){
-            if(t.getStatus().equals("incomplete")){
+            if(t.getStatus().equals(TradeStatus.incomplete)){
                 trade.add(t);
             }
         }
@@ -233,8 +234,8 @@ public class User {
         TradeManager a = new TradeManager();
         int y = 0;
         for (int i = getAllTrade().size(); i>0;i-- ) {
-            if (((!(getAllTrade().get(i).getStatus().equals("unconfirmed"))) &&
-                    (!(getAllTrade().get(i).getStatus().equals("cancelled"))))&&y!=3) {
+            if (((!(getAllTrade().get(i).getStatus().equals(TradeStatus.unconfirmed))) &&
+                    (!(getAllTrade().get(i).getStatus().equals(TradeStatus.cancelled))))&&y!=3) {
                 trade.add(getAllTrade().get(i));
                 y++;
             }
@@ -242,16 +243,6 @@ public class User {
         return trade;
     }
 
-    /**
-     * @param decision the boolean shows that whether the user accepts the trade decided or not
-     * @param decided the trade sent by other users, the user decided accept or not
-     * the user decides whether to accept trade or not, if the user accept, set the trade status as incomplete
-     * if the user rejects, set the status as cancelled
-     */
-    public void decideTrade(boolean decision, Trade decided){
-        if(decision){decided.setStatus("incomplete");}
-        else {decided.setStatus("cancelled");}
-    }
 
     /**
      * @param no the new message that the user send
@@ -288,7 +279,7 @@ public class User {
         TradeManager a = new TradeManager();
         int number=0;
         for (UUID i : tradeHistory) {
-            if (a.getTrade(i).getStatus().equals("incomplete")) {
+            if (a.getTrade(i).getStatus().equals(TradeStatus.incomplete)) {
                 number++;
             }
         }
