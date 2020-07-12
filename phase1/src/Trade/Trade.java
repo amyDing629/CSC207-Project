@@ -2,6 +2,7 @@ package Trade;
 
 import Inventory.Item;
 import Trade.MeetingSystem.Meeting;
+import User.User;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -42,7 +43,10 @@ public abstract class Trade {
      * the time the trade is created/requested
      */
     private final LocalDateTime createTime; //the time trade is created
+    private User creater;
+
     public static int temp = 30;
+
 
     /**
      * [constructor]
@@ -55,6 +59,11 @@ public abstract class Trade {
         createTime  = time;
         id = UUID.randomUUID();
     }
+
+    public User getCreater(){
+        return creater;
+    }
+
 
     /**
      * getter for createTime
