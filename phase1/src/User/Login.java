@@ -1,8 +1,11 @@
 package User;
 
 import Inventory.*;
+import Main.DataAccessFull;
 import Main.GateWay;
 import Trade.*;
+
+import javax.xml.crypto.Data;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -50,7 +53,6 @@ public class Login {
             }
             System.out.println("------------------------------");
         }
-
     }
     public void login() throws IOException {
         Scanner sc = new Scanner(System.in);
@@ -72,14 +74,6 @@ public class Login {
                     System.out.println("Freeze Status: "+a.getUser(username).getIsFrozen());
                     System.out.println("trade.Trade limit: " + a.getUser(username).getTradeNumber() + "/" + a.getUser(username).getWeekTransactionLimit());
                     System.out.println("Incomplete trade limit: " + (a.getUser(username).getIncomplete()).size() + "/" + a.getUser(username).getIncompleteTransactionLimit());
-                    System.out.println("Borrwed:");
-                    for(int i=0;i<a.getUser(username).getBorrowed().size();i++){
-                       System.out.print(" "+a.getUser(username).getBorrowed().get(i));
-                    }
-                    System.out.println("Lended:");
-                    for(int i=0;i<a.getUser(username).getLend().size();i++){
-                        System.out.print(" "+a.getUser(username).getLend().get(i));
-                    }
                     System.out.println("**************************************************************");
                     System.out.println("Actions:\n1.Edit information\n2.Message\n3.Inventory.Inventory\n4.Message\n5.UserTradeUI\n6.Market\n0.quit to menu");
                     System.out.print(">");
