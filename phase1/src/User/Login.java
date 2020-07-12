@@ -297,7 +297,7 @@ public class Login {
                     System.out.println("Lend wishes");
                     List<String> lw=user.getWishLend();
                     for (int i=0;i<lw.size();i++){
-                        System.out.println("item:"+" "+lw.get(i));
+                        System.out.println("item:"+lw.get(i));
                     }
                     break;
                 case 2:
