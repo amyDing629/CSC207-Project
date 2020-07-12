@@ -8,7 +8,6 @@ import User.UserManager;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
 /**
@@ -28,7 +27,7 @@ public class TradeManager {
      * @param item the only one Inventory.Item to be trade in this created trade.Trade.
      * @param duration the duration of this trade.Trade, unit (days). -1 means the trade.Trade is permanent.
      */
-    Trade createOnewayTrade(UUID currUserId, UUID otherUserId, Item item, int duration, LocalDateTime time)
+    void createOnewayTrade(UUID currUserId, UUID otherUserId, Item item, int duration, LocalDateTime time)
             throws IOException {
         OnewayTrade newTrade = new OnewayTrade(currUserId, otherUserId, item, duration, time);
         GateWay.trades.add(newTrade);
@@ -36,7 +35,6 @@ public class TradeManager {
 
         //Update trade history for both users
         updateTradeHistory(currUserId, otherUserId, newTrade);
-        return newTrade;
 
     }
 
@@ -84,11 +82,11 @@ public class TradeManager {
      * @return the status
      */
     String checkTradeMeeting(Trade currTrade) {
-        if (currTrade.getStatus().equals("unconfirmed")) {
+        if (currTrade.getStatus() == TradeStatus.unconfirmed) {
             return "confirm trade";
-        }else if (currTrade.getStatus().equals("cancelled")) {
+        }else if (currTrade.getStatus() == TradeStatus.cancelled) {
             return "cancelled";
-        }else if (currTrade.getStatus().equals("complete")) {
+        }else if (currTrade.getStatus() == TradeStatus.complete) {
             return "complete";
 
         }else if (currTrade.getMeeting() == null ||
@@ -96,13 +94,13 @@ public class TradeManager {
                 currTrade.getMeeting().getStatus() == MeetingStatus.agreed){
             return "first meeting";
         }else if (currTrade.getMeeting().getStatus() == MeetingStatus.cancelled){
-            currTrade.setStatus("cancelled");
+            currTrade.setStatus(TradeStatus.cancelled);
             return "cancelled";
         }else if (currTrade.getDuration()==Trade.temp){
             if (currTrade.getSecondMeeting().getStatus() == MeetingStatus.incomplete){
                 return "second meeting";
             }else{
-                currTrade.setStatus("complete");
+                currTrade.setStatus(TradeStatus.complete);
                 return "complete";
             }
         }else{
@@ -115,7 +113,7 @@ public class TradeManager {
      * @param currTrade current trade
      */
     void confirmTrade(Trade currTrade) {
-        currTrade.setStatus("incomplete");
+        currTrade.setStatus(TradeStatus.incomplete);
     }
 
     /**
@@ -124,7 +122,7 @@ public class TradeManager {
      * @throws IOException if the item is not deleted from user's wishlist and inventory
      */
     void completeTrade(Trade currTrade) throws IOException {
-        currTrade.setStatus("complete");
+        currTrade.setStatus(TradeStatus.incomplete);
         currTrade.makeTrade();
     }
 
@@ -133,7 +131,7 @@ public class TradeManager {
      * @param currTrade current trade
      */
     void cancelTrade(Trade currTrade){
-        currTrade.setStatus("cancelled");
+        currTrade.setStatus(TradeStatus.cancelled);
     }
 
 
