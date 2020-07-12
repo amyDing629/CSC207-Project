@@ -233,7 +233,6 @@ public class Login {
                             String line = reader.readLine();
                             ArrayList<ArrayList<String>> hii=new ArrayList<>();
                             while (line != null) {
-                                System.out.println(line);
                                 String[] parts = line.split("/");
                                 ArrayList<String> hi= new ArrayList<>(Arrays.asList(parts));
                                 hii.add(hi);
@@ -242,7 +241,7 @@ public class Login {
                             reader.close();
                             int x=0;
                             for (int i=0;i<hii.size();i++) {
-                                System.out.println("Inventory.Item " + i + ": " + hii.get(i).get(1));
+                                System.out.println("Item " + i + ": " + hii.get(i).get(1));
                                 System.out.println("Description: " + hii.get(i).get(2));
                                 System.out.println("Owner: " + hii.get(i).get(3));
                                 System.out.println("**************************");
@@ -298,7 +297,7 @@ public class Login {
                     System.out.println("Lend wishes");
                     List<String> lw=user.getWishLend();
                     for (int i=0;i<lw.size();i++){
-                        System.out.println("item:"+i+1+" "+lw.get(i));
+                        System.out.println("item:"+(i+1)+" "+lw.get(i));
                     }
                     break;
                 case 2:
