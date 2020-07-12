@@ -69,11 +69,12 @@ public class Login {
             System.out.print(">");
             String password = sc.nextLine();
             UserManager a=new UserManager();
-            //usermanger account verification? and returns a user object.
             if (a.verifyUser(username, password)) {
                 while (true) {
                     System.out.println("------------------------------------------------------------");
                     System.out.println("Hello,"+username);
+                    ((AdministrativeUser)a.getUser("admin")).incompleteTransaction(a.getUser(username));
+                    ((AdministrativeUser)a.getUser("admin")).tradeLimit(a.getUser(username));
                     System.out.println("Freeze Status: "+a.getUser(username).getIsFrozen());
                     System.out.println("trade.Trade limit: " + a.getUser(username).getTradeNumber() + "/" + a.getUser(username).getWeekTransactionLimit());
                     System.out.println("Incomplete trade limit: " + (a.getUser(username).getIncomplete()).size() + "/" + a.getUser(username).getIncompleteTransactionLimit());
@@ -386,7 +387,7 @@ public class Login {
                     int input2 = sc.nextInt();
                     sc.nextLine();
                     if((input2<(iU.size()+1))&&(input2>0)){
-                        iU.get(input2-1).setStatus(TradeStat);
+                        iU.get(input2-1).setStatus(TradeStatus.incomplete);
                     }
                     else{
                         System.out.println("Wrong Number, returning to UserTrade menu....");
