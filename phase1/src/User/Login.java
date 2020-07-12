@@ -377,7 +377,7 @@ public class Login {
         List<Trade> iL=user.getIncomplete();
         List<Trade> iU=user.getUnconfirmed();
         while (escape==0) {
-            System.out.println("--------------------\nMessage");
+            System.out.println("--------------------\nTrade");
             System.out.println("Hello,user" + user.getUsername());
             System.out.println("Menu:\n 1.confirm trades\n2.complete trade\n3.Trade History\n0.quit");
             int input1 = sc.nextInt();
