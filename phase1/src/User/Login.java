@@ -55,6 +55,7 @@ public class Login {
             }
             System.out.println("------------------------------");
         }
+        w.updateFile();
     }
     public void login() throws IOException {
         Scanner sc = new Scanner(System.in);
