@@ -29,6 +29,9 @@ public class InvDataAccess {
     public void updateFile() throws IOException {
         File file = new File("phase1/src/Inventory.Inventory.txt");
         boolean result = file.delete();
+        if (!result){
+            System.out.println("can not update inventory files");
+        }
         for (Item item: GateWay.inventory){
             addItemToFile(item);
         }

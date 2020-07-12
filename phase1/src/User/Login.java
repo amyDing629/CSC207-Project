@@ -15,6 +15,9 @@ import java.util.Scanner;
 public class Login {
     public void mainUI () throws IOException {
         int a=-1;
+        GateWay.trades = new ArrayList<Trade>();
+        GateWay.inventory = new ArrayList<Item>();
+        GateWay.users = new ArrayList<User>();
         DataAccessFull w=new DataAccessFull();
         File file = new File("phase1/src/username.txt");
         FileEditor fe=new FileEditor();
