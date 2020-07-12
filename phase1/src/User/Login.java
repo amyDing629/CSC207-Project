@@ -446,14 +446,12 @@ public class Login {
         FileEditor fe=new FileEditor();
         System.out.println("Hello "+ user.username);
         UserManager a=new UserManager();
-        int counter=1;
         for (User b: GateWay.users){
-            System.out.println(b.username+" "+counter);
+            System.out.println(b.username);
             for(String c:user.getWishBorrow()){
                 System.out.println("Inventory.Item:"+c);
             }
             System.out.println("--------------------------");
-            counter++;
         }
     }
     public void selectALendItem(User user){
