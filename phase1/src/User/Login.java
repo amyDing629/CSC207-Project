@@ -16,16 +16,16 @@ public class Login {
     public void mainUI () throws IOException {
         int a=-1;
         DataAccessFull w=new DataAccessFull();
+        File file = new File("phase1/src/username.txt");
+        FileEditor fe=new FileEditor();
+        if(file.length() == 0){
+            AdministrativeUser b = new AdministrativeUser("admin", "123", true);
+            fe.addToUsers(b);
+        }
         w.readFile();
         while (a!=0) {
             //print out the list of current users-------------------------------
-            File file = new File("phase1/src/username.txt");
-            FileEditor fe=new FileEditor();
             UserManager user=new UserManager();
-            if(file.length() == 0){
-                AdministrativeUser b = new AdministrativeUser("admin", "123", true);
-                fe.addToUsers(b);
-            }
             System.out.println("Users:");
             try {
                 BufferedReader reader = new BufferedReader(new FileReader(
@@ -78,7 +78,7 @@ public class Login {
                     System.out.println("trade.Trade limit: " + a.getUser(username).getTradeNumber() + "/" + a.getUser(username).getWeekTransactionLimit());
                     System.out.println("Incomplete trade limit: " + (a.getUser(username).getIncomplete()).size() + "/" + a.getUser(username).getIncompleteTransactionLimit());
                     System.out.println("**************************************************************");
-                    System.out.println("Actions:\n1.Edit information\n2.Message\n3.Inventory.Inventory\n4.Message\n5.Trade\n6.Market\n0.quit to menu");
+                    System.out.println("Actions:\n1.Edit information\n2.Message\n3.Inventory\n4.Message\n5.Trade\n6.Market\n0.quit to menu");
                     System.out.print(">");
                     int op = sc.nextInt();
                     sc.nextLine();
@@ -245,9 +245,9 @@ public class Login {
                             reader.close();
                             int x=0;
                             for (int i=0;i<hii.size();i++) {
-                                System.out.println("Inventory.Item " + i + ": " + hii.get(i).get(0));
-                                System.out.println("Description: " + hii.get(i).get(1));
-                                System.out.println("Owner: " + hii.get(i).get(2));
+                                System.out.println("Inventory.Item " + i + ": " + hii.get(i).get(1));
+                                System.out.println("Description: " + hii.get(i).get(2));
+                                System.out.println("Owner: " + hii.get(i).get(3));
                                 System.out.println("**************************");
                             }
                             while(x==0) {
@@ -256,8 +256,9 @@ public class Login {
                                 int k = Integer.parseInt(inputs);
                                 System.out.println(k);
                                 if (k > -1 && k < (hii.size())) {
-                                    Item i = new Item(hii.get(k).get(0), hii.get(k).get(2));
-                                    i.setDescription(hii.get(k).get(1));
+                                    Item i = new Item(hii.get(k).get(1), hii.get(k).get(3));
+                                    i.setDescription(hii.get(k).get(2));
+                                    a.getUser(hii.get(k).get(3)).addWishes(hii.get(k).get(1));
                                     v.addItem(i);
                                     hii.remove(k);
                                     System.out.println("Approve successfully");
@@ -433,9 +434,10 @@ public class Login {
         String input1=sc.nextLine();
         try {
             FileWriter myWriter = new FileWriter("phase1/src/ItemApproval.txt");
-            myWriter.write(input+","+input1+","+user.getUsername());
+            myWriter.write("1"+","+input+","+input1+","+user.getUsername());
             myWriter.close();
             System.out.println("Successfully");
+            System.out.println("please waiting for admin to approve");
         } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
@@ -452,36 +454,6 @@ public class Login {
                 System.out.println("Inventory.Item:"+c);
             }
             System.out.println("--------------------------");
-        }
-    }
-    public void selectALendItem(User user){
-        Scanner sc=new Scanner(System.in);
-        System.out.println("Hello,"+ user.username);
-        System.out.println("Please select the item to trade");
-        for (String a:user.getWishLend()){
-            System.out.println("Inventory.Item 1:"+a);
-        }
-        int exit=0;
-        while (exit==0) {
-            String ip = sc.nextLine();
-            boolean t=false;
-            for (String a:user.getWishLend()){
-                if (a.equals(ip)) {
-                    t = true;
-                    break;
-                }
-            }
-            if (t){
-                exit=1;
-            }
-            else {
-                System.out.println("You enter the wrong name,press 1 to exit.press anything else to try again.");
-                String k=sc.nextLine();
-                if(k.equals("0")){
-                    exit=1;
-                }
-
-            }
         }
     }
 }
