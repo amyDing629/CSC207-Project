@@ -53,16 +53,15 @@ class EditMeetingInputController {
                 // instruction "..": quit
                 // other instructions: informs invalid and asks input again
                 switch (input) {
-                    case "1" -> editTimeInputController();
-                    case "2" -> editPlaceInputController();
-                    case "3" -> {
+                    case "1": editTimeInputController();
+                    case "2": editPlaceInputController();
+                    case "3":
                         editTimeInputController();
                         editPlaceInputController();
-                    }
-                    case ".." -> {
+                    case "..": {
                         break label;
                     }
-                    default -> throw new InvalidInstructionException();
+                    default: throw new InvalidInstructionException();
                 }
             } catch (InvalidInstructionException e) {
                 isInputValid = false;
