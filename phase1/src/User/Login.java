@@ -76,7 +76,7 @@ public class Login {
                     ((AdministrativeUser)a.getUser("admin")).incompleteTransaction(a.getUser(username));
                     ((AdministrativeUser)a.getUser("admin")).tradeLimit(a.getUser(username));
                     System.out.println("Freeze Status: "+a.getUser(username).getIsFrozen());
-                    System.out.println("trade.Trade limit: " + a.getUser(username).getTradeNumber() + "/" + a.getUser(username).getWeekTransactionLimit());
+                    System.out.println("Trade limit: " + a.getUser(username).getTradeNumber() + "/" + a.getUser(username).getWeekTransactionLimit());
                     System.out.println("Incomplete trade limit: " + (a.getUser(username).getIncomplete()).size() + "/" + a.getUser(username).getIncompleteTransactionLimit());
                     System.out.println("**************************************************************");
                     System.out.println("Actions:\n1.Edit information\n2.Message\n3.Inventory\n4.Message\n5.Trade\n6.Market\n0.quit to menu");
