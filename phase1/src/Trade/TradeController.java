@@ -1,7 +1,6 @@
 package Trade;
 
 import Inventory.Item;
-import Trade.MeetingSystem.MeetingStatus;
 import User.User;
 import User.*;
 
@@ -22,7 +21,7 @@ public class TradeController {
      * [constructor]
      * @param currUser the user that is using the system
      */
-    TradeController(User currUser) throws IOException {
+    TradeController(User currUser){
         this.currUser = currUser;
     }
 
@@ -37,13 +36,11 @@ public class TradeController {
     /**
      * get owner of the item
      * @param item current item selected by currUser
-     * @return target user
      * @throws IOException can not find the target user
      */
-    User getTarUser(Item item) throws IOException {
+    void getTarUser(Item item) throws IOException {
         UserManager um = new UserManager();
         tarUser = um.getUser(item.getOwnerName());
-        return tarUser;
     }
 
 
@@ -57,7 +54,7 @@ public class TradeController {
         }
         if (tarUser == null){
             System.out.println("tarUser not found");
-        };
+        }
         if (tarUser.getIsFrozen()) {
             throw new IOException("the account of the item owner is frozen!");
         }

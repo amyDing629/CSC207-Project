@@ -33,7 +33,7 @@ public class TradeDataAccess {
                 UUID user1Id = UUID.fromString(lst[3]);
                 UUID user2Id = UUID.fromString(lst[4]);
                 int duration = Integer.parseInt(lst[2]);
-                ArrayList<UUID> users = new ArrayList<UUID>();
+                ArrayList<UUID> users = new ArrayList<>();
                 users.add(user1Id);
                 users.add(user2Id);
                 LocalDateTime tradeTime = LocalDateTime.parse(lst[10],formatter);
@@ -79,7 +79,7 @@ public class TradeDataAccess {
                     trade.getSecondMeeting().setStatus(MeetingStatus.valueOf(sm[2]));
                 }
 
-                trade.setStatus(lst[9]);
+                trade.setStatus(TradeStatus.valueOf(lst[9]));
                 trade.setId(tradeId);
                 GateWay.trades.add(trade);
                 line = reader.readLine();
@@ -91,7 +91,7 @@ public class TradeDataAccess {
 
     }
 
-    public void addTradeToFile(Trade trade) {
+    private void addTradeToFile(Trade trade) {
         try {
             FileOutputStream fos = new FileOutputStream("phase1/src/trade.txt", true);
             UUID id = trade.getId();
@@ -133,7 +133,7 @@ public class TradeDataAccess {
                 String idToCoStr = conStatus.get(user1) + ";" + conStatus.get(user2);
                 smStr = sm.getDateTime().format(formatter)+"/"+sm.getPlace()+"/"+sm.getStatus()+"/"+idToCoStr;
             }
-            String status = trade.getStatus();
+            String status = trade.getStatus().toString();
             String time = trade.getCreateTime().format(formatter);
 
             fos.write((id+","+type+","+duration+","+user1+","+user2+","+item1+","+item2+","+fmStr+","
@@ -144,7 +144,7 @@ public class TradeDataAccess {
         }
     }
 
-    public void updateFile() throws IOException {
+    public void updateFile(){
         File file = new File("phase1/src/trade.txt");
         try {
             if(!file.exists()) {

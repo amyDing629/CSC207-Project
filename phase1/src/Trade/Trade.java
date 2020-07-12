@@ -24,7 +24,7 @@ public abstract class Trade {
      * complete: the trade is complete
      * cancelled: the trade has been cancelled
      */
-    protected String status;
+    protected TradeStatus status;
     /**
      * id of the trade. Each trade has unique id.
      */
@@ -41,7 +41,7 @@ public abstract class Trade {
     /**
      * the time the trade is created/requested
      */
-    private LocalDateTime createTime; //the time trade is created
+    private final LocalDateTime createTime; //the time trade is created
     public static int temp = 30;
 
     /**
@@ -50,7 +50,7 @@ public abstract class Trade {
      * @param time create time ot the trade
      */
     public Trade(int duration, LocalDateTime time){
-        this.status = "unconfirmed";
+        this.status = TradeStatus.unconfirmed;
         this.duration = duration;
         createTime  = time;
         id = UUID.randomUUID();
@@ -79,7 +79,7 @@ public abstract class Trade {
      * getter for status
      * @return status
      */
-    public String getStatus(){
+    public TradeStatus getStatus(){
         return status;
     }
 
@@ -87,7 +87,7 @@ public abstract class Trade {
      * setter for status
      * @param newStatus unconfirmed, incomplete, complete or cancelled
      */
-    public void setStatus(String newStatus){
+    public void setStatus(TradeStatus newStatus){
         status = newStatus;
     }
 
@@ -104,13 +104,11 @@ public abstract class Trade {
      * @param dateTime time of the meeting
      * @param place place of the meeting
      * @param traderIds the id of the two traders
-     * @return the meeting set
      */
     // can input time and place and create new Meeting object based on Meeting constructor
-    public Meeting setMeeting(LocalDateTime dateTime, String place, ArrayList<UUID> traderIds){
+    public void setMeeting(LocalDateTime dateTime, String place, ArrayList<UUID> traderIds){
         this.meeting = new Meeting(dateTime, place, traderIds);
 
-        return meeting;
     }
 
     /**
@@ -135,11 +133,9 @@ public abstract class Trade {
      * @param dateTime time of the meeting
      * @param place place of the meeting
      * @param traderIds the id of the two traders
-     * @return new meeting
      */
-    public Meeting setSecondMeeting(LocalDateTime dateTime, String place, ArrayList<UUID> traderIds){
+    public void setSecondMeeting(LocalDateTime dateTime, String place, ArrayList<UUID> traderIds){
         this.secondMeeting = new Meeting(dateTime, place, traderIds);
-        return secondMeeting;
     }
 
     /**
@@ -170,7 +166,7 @@ public abstract class Trade {
      */
     public String toString(){
         return "this is an abstract trade class";
-    };
+    }
 
     /**
      * getter for items involved in the trade

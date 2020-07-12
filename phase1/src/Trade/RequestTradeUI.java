@@ -3,8 +3,6 @@ package Trade;
 import Inventory.Inventory;
 import Inventory.Item;
 import User.User;
-import User.UserManager;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -40,6 +38,7 @@ public class RequestTradeUI{
         this.currUser = currUser;
         this.item = item;
         tp = new TradePresenter(currUser);
+        trc.getTarUser(item);
     }
 
     /**
