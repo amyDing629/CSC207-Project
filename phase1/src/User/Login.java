@@ -379,7 +379,7 @@ public class Login {
         while (escape==0) {
             System.out.println("--------------------\nMessage");
             System.out.println("Hello,user" + user.getUsername());
-            System.out.println("Menu: 1.confirm trades\n2.complete trade\n3.Trade History\n0.quit");
+            System.out.println("Menu:\n 1.confirm trades\n2.complete trade\n3.Trade History\n0.quit");
             int input1 = sc.nextInt();
             sc.nextLine();
             switch (input1) {
@@ -455,7 +455,7 @@ public class Login {
         UserManager a=new UserManager();
         for (User b: GateWay.users){
             System.out.println(b.username);
-            for(String c:user.getWishLend()){
+            for(String c:b.getWishLend()){
                 System.out.println("Item:"+c);
             }
             System.out.println("--------------------------");
