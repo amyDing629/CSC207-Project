@@ -1,8 +1,11 @@
 package User;
 
 import Inventory.*;
+import Main.DataAccessFull;
 import Main.GateWay;
 import Trade.*;
+
+import javax.xml.crypto.Data;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -50,7 +53,8 @@ public class Login {
             }
             System.out.println("------------------------------");
         }
-
+        DataAccessFull q=new DataAccessFull();
+        q.updateFile();
     }
     public void login() throws IOException {
         Scanner sc = new Scanner(System.in);
