@@ -448,7 +448,7 @@ public class Login {
         UserManager a=new UserManager();
         int counter=1;
         for (User b: GateWay.users){
-            System.out.println(user.username+" "+counter);
+            System.out.println(b.username+" "+counter);
             for(String c:user.getWishBorrow()){
                 System.out.println("Inventory.Item:"+c);
             }
