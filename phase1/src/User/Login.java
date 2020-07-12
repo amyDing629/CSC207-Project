@@ -237,7 +237,7 @@ public class Login {
                             ArrayList<ArrayList<String>> hii=new ArrayList<>();
                             while (line != null) {
                                 System.out.println(line);
-                                String[] parts = line.split(",");
+                                String[] parts = line.split("/");
                                 ArrayList<String> hi= new ArrayList<>(Arrays.asList(parts));
                                 hii.add(hi);
                                 line = reader.readLine();
@@ -386,7 +386,7 @@ public class Login {
                     int input2 = sc.nextInt();
                     sc.nextLine();
                     if((input2<(iU.size()+1))&&(input2>0)){
-                        iU.get(input2-1).setStatus("confirm trade");
+                        iU.get(input2-1).setStatus(TradeStat);
                     }
                     else{
                         System.out.println("Wrong Number, returning to UserTrade menu....");
@@ -434,7 +434,7 @@ public class Login {
         String input1=sc.nextLine();
         try {
             FileWriter myWriter = new FileWriter("phase1/src/ItemApproval.txt");
-            myWriter.write("1"+","+input+","+input1+","+user.getUsername());
+            myWriter.write("1"+"/"+input+"/"+input1+"/"+user.getUsername());
             myWriter.close();
             System.out.println("Successfully");
             System.out.println("please waiting for admin to approve");
