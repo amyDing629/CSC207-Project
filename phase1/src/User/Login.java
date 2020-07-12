@@ -15,6 +15,8 @@ import java.util.Scanner;
 public class Login {
     public void mainUI () throws IOException {
         int a=-1;
+        DataAccessFull w=new DataAccessFull();
+        w.readFile();
         while (a!=0) {
             //print out the list of current users-------------------------------
             File file = new File("phase1/src/username.txt");
