@@ -22,7 +22,7 @@ public class OnewayTrade extends Trade {
      * @param item the two item traders what to trade
      * @param duration whether the trade is temporary or permanent
      */
-    public OnewayTrade(UUID borrower, UUID lender, Item item, int duration, LocalDateTime time) throws IOException {
+    public OnewayTrade(UUID borrower, UUID lender, Item item, int duration, LocalDateTime time) {
         super(duration, time);
         borrowerId = borrower;
         lenderId = lender;
@@ -44,7 +44,7 @@ public class OnewayTrade extends Trade {
      * @return a list of users
      */
     public ArrayList<UUID> getUsers(){
-        ArrayList<UUID> users = new ArrayList<UUID>();
+        ArrayList<UUID> users = new ArrayList<>();
         users.add(borrowerId);
         users.add(lenderId);
         return users;

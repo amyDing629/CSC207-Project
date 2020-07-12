@@ -29,13 +29,12 @@ public class TradeUI {
      * @param tradeId the trade id of the current trade
      * @throws IOException if the edition/creation is not completed
      */
-    public TradeUI(User currUser, UUID tradeId) throws IOException {
+    public TradeUI(User currUser, UUID tradeId){
         TradeManager tm = new TradeManager();
         this.currUser = currUser;
         trade = tm.getTrade(tradeId);
         tc = new TradeController(currUser, trade);
         tp = new TradePresenter(currUser, trade);
-
 
     }
 
