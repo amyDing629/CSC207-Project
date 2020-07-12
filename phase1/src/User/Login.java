@@ -145,11 +145,11 @@ public class Login {
             System.out.println("--------------------\nEdit user information");
             System.out.println("Hello,user," + user.getUsername());
             System.out.println("Admin:"+user.getIsAdmin());
-            System.out.println("Actions:\n1.Change username\n2.Change password");
+            System.out.println("Actions:\n1.Change password");
             if (user.getIsAdmin()) {
-                System.out.print("3.Freeze a user\n4.Change user's limit\n5.add new item into the system\n");
+                System.out.print("2.Freeze a user\n3.Change user's limit\n4.add new item into the system\n");
                 if(user.getId()==null){
-                    System.out.print("6.Set user into admin\n");
+                    System.out.print("5.Set user into admin\n");
                 }
             }
             System.out.println("0.exit");
@@ -160,14 +160,6 @@ public class Login {
             System.out.println("-----------------------------");
             switch (input) {
                 case 1:
-                    System.out.println("Change username");
-                    System.out.println("Type in the username you wanted to change, type 0 to quit.");
-                    String input1=sc.nextLine();
-                    if (!input1.equals("0")){
-                        user.setUsername(input1);
-                    }
-                    break;
-                case 2:
                     System.out.println("Change password");
                     System.out.println("Type in the password you wanted to change, type 0 to quit.");
                     String input2=sc.nextLine();
@@ -175,7 +167,7 @@ public class Login {
                         user.setPassword(input2);
                     }
                     break;
-                case 3:
+                case 2:
                     System.out.println("Freeze a user");
                     System.out.println("Type in the username of user you want to freeze, type 0 to quit.");
                     String input3=sc.nextLine();
@@ -192,10 +184,10 @@ public class Login {
                         }
                     }
                     break;
-                case 4:
+                case 3:
                     System.out.println("Change user's limit");
                     break;
-                case 6:
+                case 5:
                     System.out.println("Set a user into admin");
                     System.out.println("Type in the user you want to set to admin, type 0 to quit.");
                     String input4=sc.nextLine();
@@ -207,7 +199,7 @@ public class Login {
                         else{((AdministrativeUser)user).addNewUser(ha.getUsername(),ha.getPassword());}
                     }
                     break;
-                case 5:
+                case 4:
                     Inventory v = new Inventory();
                     System.out.println("add new item into the system");
                     System.out.println("Menu:\n1.Add item your self.\n2.Approve request from users");
