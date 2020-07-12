@@ -55,10 +55,9 @@ class EditMeetingInputController {
                 switch (input) {
                     case "1": editTimeInputController();
                     case "2": editPlaceInputController();
-                    case "3": {
+                    case "3":
                         editTimeInputController();
                         editPlaceInputController();
-                    }
                     case "..": {
                         break label;
                     }

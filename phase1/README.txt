@@ -5,7 +5,12 @@ Instructions to run the systems:
 =============== User ===============
 
 =============== Inventory ===============
-
-=============== Trading System ===============
-
+Users can view all available items in the market(items in the trade excluded). They can choose an item from the market,
+view the information of the item and choose to move the item to his/her wish-to-borrow list. Then, users can choose to
+request a trade with the owner of the item. If the user request a two-way trade, he should also choose an item from
+his/her wish-to-lend list. Users can edit the description of items and add items to their wish-to-lend list.
+=============== Trade System ===============
+Users can view the trade information in trade history. They can confirm requested trade from other users. If the trade
+is confirmed, users can set up and edit first meeting. If the trade is a temporary trade, users should confirm the second
+meeting to complete the trade.
 =============== Meeting System ===============
