@@ -281,7 +281,7 @@ public class Login {
             }
         }
     }
-    public void inventory(User user){
+    public void inventory(User user) throws IOException {
         Scanner sc=new Scanner(System.in);
         Inventory iv=new Inventory();
         int exit=-1;
@@ -328,10 +328,15 @@ public class Login {
                     if (input44.equals("1")) {
                         wishLendAdd(user);
                     }else if(input44.equals("2")){
+                        List<String> lw1=user.getWishLend();
+                        for (int i=0;i<lw1.size();i++){
+                            System.out.println("item:"+lw1.get(i));
+                        }
                         System.out.println("Input the item you wanted to delete");
                         String input43=sc.nextLine();
                         if (user.getWishLend().contains(input43)) {
                             user.removeLWishes(input43);
+                            iv.deleteItem(iv.getItem(input43));
                         }
                         else{
                             System.out.println("The item does not contain in your wish lend list");
@@ -346,6 +351,10 @@ public class Login {
                         InventoryUI iui = new InventoryUI(user);
                         iui.run();
                     }else if(input55.equals("2")){
+                        List<String> bw1=user.getWishBorrow();
+                        for (int i=0;i<bw1.size();i++){
+                            System.out.println("item:"+bw1.get(i));
+                        }
                         System.out.println("Input the item you wanted to delete");
                         String input54=sc.nextLine();
                         if (user.getWishBorrow().contains(input54)) {
@@ -447,7 +456,7 @@ public class Login {
         for (User b: GateWay.users){
             System.out.println(b.username);
             for(String c:user.getWishBorrow()){
-                System.out.println("Inventory.Item:"+c);
+                System.out.println("Item:"+c);
             }
             System.out.println("--------------------------");
         }
