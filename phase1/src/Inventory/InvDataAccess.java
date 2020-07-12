@@ -13,6 +13,7 @@ public class InvDataAccess {
             while (line != null) {
                 String[] lst = line.split(",");
                 Item newItem = new Item(lst[0], lst[2]);
+                newItem.setDescription(lst[1]);
                 GateWay.inventory.add(newItem);
                 line = reader.readLine();
             }
