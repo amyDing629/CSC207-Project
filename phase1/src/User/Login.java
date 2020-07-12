@@ -302,7 +302,7 @@ public class Login {
                     break;
                 case 2:
                     System.out.println("Borrow wishes");
-                    List<String> lb=user.getWishLend();
+                    List<String> lb=user.getWishBorrow();
                     for (int i=0;i<lb.size();i++){
                         System.out.println("wish borrow item:"+i+" "+lb.get(i));
                     }
