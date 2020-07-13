@@ -13,7 +13,7 @@ import java.io.InputStreamReader;
  * add item to user's wishBorrow list
  */
 public class InventoryUI {
-    private final Inventory inventory;
+    private final Inventory iv;
     private final InventoryPresenter ip;
     private final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     private Item currItem;
@@ -24,10 +24,10 @@ public class InventoryUI {
      * @param currUser the user that is using the system.
      * call inventory presenter and controller
      */
-    public InventoryUI(User currUser){
-        inventory = new Inventory();
-        ip = new InventoryPresenter(currUser);
-        ic = new InventoryController(currUser);
+    public InventoryUI(User currUser, Inventory iv){
+        ip = new InventoryPresenter(currUser, iv);
+        ic = new InventoryController(currUser, iv);
+        this.iv = iv;
     }
 
     /**
@@ -49,7 +49,7 @@ public class InventoryUI {
                             ip.wrongInput();
                             throw new IOException();
                         } else{
-                            currItem = inventory.getItem(line);
+                            currItem = iv.getItem(line);
                             itemAction();
                             break;
                         }

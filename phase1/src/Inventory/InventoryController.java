@@ -9,7 +9,7 @@ public class InventoryController {
     /**
      * the inventory of the system.
      */
-    private final Inventory iv = new Inventory();
+    private final Inventory iv;
     /**
      * the user that is using the system.
      */
@@ -19,8 +19,9 @@ public class InventoryController {
      * [constructor]
      * @param currUser current user
      */
-    InventoryController(User currUser){
+    InventoryController(User currUser, Inventory iv){
         this.currUser = currUser;
+        this.iv = iv;
     }
 
     /**

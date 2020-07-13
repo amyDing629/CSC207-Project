@@ -20,11 +20,16 @@ import java.util.UUID;
 public class TradeDataAccess {
     DateTime dt = new DateTime();
     DateTimeFormatter formatter = dt.getFormat(); // yyyy-MM-dd HH:mm
+    GateWay gw;
+
+    public TradeDataAccess(GateWay gw){
+        this.gw = gw;
+    }
 
     public void readFile() {
         Trade trade;
         try {
-            Inventory.Inventory iv = new Inventory.Inventory();
+            Inventory.Inventory iv = new Inventory.Inventory(gw);
             BufferedReader reader = new BufferedReader(new FileReader("phase1/src/trade.txt"));
             String line = reader.readLine();
             while (line != null) {
@@ -81,7 +86,7 @@ public class TradeDataAccess {
 
                 trade.setStatus(TradeStatus.valueOf(lst[9]));
                 trade.setId(tradeId);
-                GateWay.trades.add(trade);
+                gw.trades.add(trade);
                 line = reader.readLine();
             }
             reader.close();
@@ -157,8 +162,8 @@ public class TradeDataAccess {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        if (GateWay.trades.size()>0){
-            for (Trade trade: GateWay.trades){
+        if (gw.trades.size()>0){
+            for (Trade trade: gw.trades){
                 addTradeToFile(trade);
             }
         }

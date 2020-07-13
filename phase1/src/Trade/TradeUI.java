@@ -20,20 +20,19 @@ public class TradeUI {
     TradeController tc;
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     TradePresenter tp;
-    TradeDataAccess tda = new TradeDataAccess();
+    TradeManager tm;
 
 
     /**
      * constructor
      * @param currUser the user that is using the system
      * @param tradeId the trade id of the current trade
-     * @throws IOException if the edition/creation is not completed
      */
-    public TradeUI(User currUser, UUID tradeId){
-        TradeManager tm = new TradeManager();
+    public TradeUI(User currUser, UUID tradeId, TradeManager tm, UserManager um){
+        this.tm = tm;
         this.currUser = currUser;
         trade = tm.getTrade(tradeId);
-        tc = new TradeController(currUser, trade);
+        tc = new TradeController(currUser, trade, tm, um);
         tp = new TradePresenter(currUser, trade);
 
     }
@@ -51,7 +50,6 @@ public class TradeUI {
                 if (becomeComplete){
                     tc.completeTrade();
                 }
-                tda.updateFile();
                 tp.presentTradeUIInfo();
                 tp.enterTrade();
                 try {
@@ -118,6 +116,9 @@ public class TradeUI {
      */
     private void confirmTrade(){
         while (true) {
+            if (trade.getCreater().equals(currUser)){
+                System.out.println("you can not confirm the trade, please wait for another user to confirm");
+            }
             tp.selectConfirm();
             try {
                 String confirm = br.readLine();

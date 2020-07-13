@@ -5,7 +5,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.UUID;
 import Main.GateWay;
+import Trade.TradeManager;
+
 public class FileEditor {
+    GateWay gw;
+
+    public FileEditor(GateWay gw){
+        this.gw= gw;
+    }
+
+
     /**
      * read the username.txt file, return a list of list that contains all the information of the user
      */
@@ -44,7 +53,7 @@ public class FileEditor {
                 String[] c = b.get(6).split("; ");
                 ArrayList<String> lineList = new ArrayList<>(Arrays.asList(c));
 
-                AdministrativeUser d = new AdministrativeUser(b.get(1), b.get(2), true);
+                AdministrativeUser d = new AdministrativeUser(b.get(1), b.get(2), true, new TradeManager(gw), new UserManager(gw));
                 d.setId(UUID.fromString(b.get(0)));
                 d.setNotification(lineList);
 
@@ -86,7 +95,7 @@ public class FileEditor {
                 d.setWeekTransactionLimit(Integer.parseInt(b.get(10)));
                 d.setIncompleteTransaction(Integer.parseInt(b.get(11)));
 
-                GateWay.users.add(d);
+                gw.users.add(d);
             }
             if (b.get(3).equals("false")) {
                 String[] c = b.get(6).split("; ");
@@ -135,14 +144,14 @@ public class FileEditor {
                 d.setWeekTransactionLimit(Integer.parseInt(b.get(10)));
                 d.setIncompleteTransaction(Integer.parseInt(b.get(11)));
 
-                GateWay.users.add(d);
+                gw.users.add(d);
             }
         }
 
     }
 
     public void addToUsers(User u){
-        GateWay.users.add(u);
+        gw.users.add(u);
     }
 
 
@@ -195,7 +204,7 @@ public class FileEditor {
             PrintWriter writer = new PrintWriter("phase1/src/username.txt");
             writer.print("");
             writer.close();
-            for (User u : GateWay.users) {
+            for (User u : gw.users) {
                 addUser(u);
             }
         }catch (IOException e) {

@@ -13,7 +13,7 @@ import java.util.UUID;
 
 public class tradeMain {
     public static void main (String[] args) throws IOException{
-
+/*
         TradeManager tm = new TradeManager();
         UserManager um = new UserManager();
         Inventory iv = new Inventory();
@@ -52,7 +52,6 @@ public class tradeMain {
         RequestTradeUI rtp = new RequestTradeUI(amy, peach);
         rtp.run();
 
-         */
 
         //tm.updateTradeHistory(amy.getId(),daniel.getId(),trade);//not working
         //ArrayList<UUID> userList = trade.getUsers();
@@ -61,6 +60,10 @@ public class tradeMain {
 
         //System.out.println(amy.getTradeHistory());
         new DataAccessFull().readFile();
+
+
+ */
+        /*
         Trade trade = GateWay.trades.get(0);
         User amy = GateWay.users.get(0);
         User daniel = GateWay.users.get(1);
