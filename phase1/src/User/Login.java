@@ -296,8 +296,8 @@ public class Login {
                 case 1:
                     System.out.println("Lend wishes");
                     List<String> lw=user.getWishLend();
-                    for (int i=0;i<lw.size();i++){
-                        System.out.println("item:"+lw.get(i));
+                    for (String s : lw) {
+                        System.out.println("item:" + s);
                     }
                     break;
                 case 2:
@@ -329,8 +329,8 @@ public class Login {
                         wishLendAdd(user);
                     }else if(input44.equals("2")){
                         List<String> lw1=user.getWishLend();
-                        for (int i=0;i<lw1.size();i++){
-                            System.out.println("item:"+lw1.get(i));
+                        for (String s : lw1) {
+                            System.out.println("item:" + s);
                         }
                         System.out.println("Input the item you wanted to delete");
                         String input43=sc.nextLine();
@@ -352,8 +352,8 @@ public class Login {
                         iui.run();
                     }else if(input55.equals("2")){
                         List<String> bw1=user.getWishBorrow();
-                        for (int i=0;i<bw1.size();i++){
-                            System.out.println("item:"+bw1.get(i));
+                        for (String s : bw1) {
+                            System.out.println("item:" + s);
                         }
                         System.out.println("Input the item you wanted to delete");
                         String input54=sc.nextLine();
@@ -461,4 +461,5 @@ public class Login {
             System.out.println("--------------------------");
         }
     }
+
 }

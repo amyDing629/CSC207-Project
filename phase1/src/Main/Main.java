@@ -1,12 +1,61 @@
 package Main;
 
-import User.Login;
-
+import Main.UI.Register;
+import User.AdministrativeUser;
+import User.FileEditor;
+import User.UserManager;
+import Main.UI.Login;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        Login ln = new Login();
-        ln.mainUI();
+        int a=-1;
+        DataAccessFull w=new DataAccessFull();
+        File file = new File("phase1/src/username.txt");
+        FileEditor fe=new FileEditor();
+        if(file.length() == 0){
+            AdministrativeUser b = new AdministrativeUser("admin", "123", true);
+            fe.addToUsers(b);
+        }
+        w.readFile();
+        while (a!=0) {
+            //print out the list of current users-------------------------------
+            UserManager user=new UserManager();
+            System.out.println("Users:");
+            try {
+                BufferedReader reader = new BufferedReader(new FileReader(
+                        "phase1/src/username.txt"));
+                String line = reader.readLine();
+                while (line != null) {
+                    System.out.println(line);
+                    // read next line
+                    line = reader.readLine();
+                }
+                reader.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            //------------------------------------------------------------------
+            System.out.println("\nMenu:\n1.login\n2.register\n0.quit");
+            System.out.println("Please enter the number only.");
+            Scanner sc = new Scanner(System.in);
+            System.out.print(">");
+            a = sc.nextInt();
+            sc.nextLine();
+            if (a==1){
+                Login login=new Login();
+                login.run();
+            }
+            else if (a == 2){
+                Register reg=new Register();
+                reg.run();
+            }
+            System.out.println("------------------------------");
+            w.updateFile();
+        }
     }
 }
