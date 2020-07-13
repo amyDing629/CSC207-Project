@@ -14,8 +14,8 @@ public class Market {
     public Market(User u) {
         user = u;
         sc = new Scanner(System.in);
-        um = new UserManager();
         gw =new GateWay();
+        um = new UserManager(gw);
     }
 
     public void run(){
