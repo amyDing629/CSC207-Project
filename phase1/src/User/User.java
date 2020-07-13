@@ -279,7 +279,7 @@ public class User {
      */
 
     /**
-     * return the list of all incomlete trades that the user has
+     * return the list of all incomplete trades that the user has
      */
     /*
     public List<Trade> getIncomplete() throws IOException {
@@ -382,14 +382,23 @@ public class User {
 
      */
 
+    /**
+     * return the status that whether the user can borrow or not
+     */
     public boolean getIsBorrow() {
         return isBorrow;
     }
 
+    /**
+     * return the lst of names of items that the user lends
+     */
     public List<String> getLend() {
         return lend;
     }
 
+    /**
+     * return the lst of names of items that the user borrows
+     */
     public List<String> getBorrowed() {
         return borrowed;
     }
