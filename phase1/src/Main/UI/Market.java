@@ -20,7 +20,7 @@ public class Market {
 
     public void run(){
         System.out.println("Hello "+ user.getUsername());
-        for (User b: gw.getUsers()){
+        for (User b: um.getUserList()){
             System.out.println(b.getUsername());
             for(String c:b.getWishLend()){
                 System.out.println("Item:"+c);

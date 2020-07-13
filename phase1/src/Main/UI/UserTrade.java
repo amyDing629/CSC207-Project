@@ -1,5 +1,6 @@
 package Main.UI;
 
+import Main.GateWay;
 import Trade.Trade;
 import User.AdministrativeUser;
 import User.User;
@@ -12,19 +13,21 @@ import java.util.Scanner;
 public class UserTrade {
     public Scanner sc;
     public UserManager um;
+    public TradeManager tm;
     public User user;
 
-    public UserTrade(User u) {
+    public UserTrade(User u, GateWay gw) {
         user = u;
         sc = new Scanner(System.in);
-        um=new UserManager();
+        um = new UserManager(gw);
+        tm = new TradeManager(gw);
     }
 
     public void run() throws IOException {
         Scanner sc = new Scanner(System.in);
         int escape = 0;
-        List<Trade> iL = user.getIncomplete();
-        List<Trade> iU = user.getUnconfirmed();
+        List<Trade> iL = tm.getIncomplete(user);
+        List<Trade> iU = tm.getUnconfirmed(user);
         while (escape == 0) {
             System.out.println("--------------------\nTrade");
             System.out.println("Hello,user" + user.getUsername());
@@ -53,7 +56,7 @@ public class UserTrade {
                     int input3 = sc.nextInt();
                     sc.nextLine();
                     if ((input3 < (iL.size() + 1)) && (input3 > 0)) {
-                        TradeUI tu = new TradeUI(user, iL.get(input3 - 1).getId());
+                        TradeUI tu = new TradeUI(user, iL.get(input3 - 1).getId(), tm, um);
                         tu.run();
                     } else {
                         System.out.println("Wrong Number, returning to UserTrade menu....");
@@ -61,14 +64,14 @@ public class UserTrade {
                 case 3:
                     System.out.println("Hi user: " + user.getUsername());
                     System.out.println("Compeleted past trades:");
-                    List<Trade> tHis = user.getTradeHistoryTop();
+                    List<Trade> tHis = tm.getTradeHistoryTop(user);
                     System.out.println("****************");
                     for (int i = 0; i < tHis.size(); i++) {
                         System.out.println((i + 1) + ". " + tHis.get(i).toString());
                     }
                     System.out.println("****************");
                     System.out.println("Most frequent user:");
-                    for (User a : user.getFrequentUser()) {
+                    for (User a : um.getFrequentUser(tm, user)) {
                         System.out.println(a.getUsername());
                     }
                 case 0:

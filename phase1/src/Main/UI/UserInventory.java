@@ -2,6 +2,7 @@ package Main.UI;
 
 import Inventory.InventoryUI;
 import Inventory.Item;
+import Main.GateWay;
 import Trade.Trade;
 import User.User;
 import User.UserManager;
@@ -17,12 +18,14 @@ public class UserInventory {
     public UserManager um;
     public User user;
     public Inventory iv;
+    public TradeManager tm;
 
-    public UserInventory(User u) {
+    public UserInventory(User u, GateWay gw) {
         user = u;
         sc = new Scanner(System.in);
-        um=new UserManager();
-        iv=new Inventory();
+        um=new UserManager(gw);
+        iv=new Inventory(gw);
+        tm = new TradeManager(gw);
     }
 
     public void run() throws IOException {
@@ -56,7 +59,7 @@ public class UserInventory {
                     Item k=iv.getItem(input22);
                     if (k!=null){
                         try {
-                            RequestTradeUI ru = new RequestTradeUI(user, k);
+                            RequestTradeUI ru = new RequestTradeUI(user, k, tm, um, iv);
                             ru.run();
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -103,7 +106,7 @@ public class UserInventory {
                     System.out.println("Menu:\n1.add wish\n2.delete wish");
                     String input55=sc.nextLine();
                     if (input55.equals("1")) {
-                        InventoryUI iui = new InventoryUI(user);
+                        InventoryUI iui = new InventoryUI(user, iv);
                         iui.run();
                     }else if(input55.equals("2")){
                         List<String> bw1=user.getWishBorrow();

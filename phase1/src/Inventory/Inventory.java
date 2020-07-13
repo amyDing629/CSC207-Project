@@ -33,7 +33,7 @@ public class Inventory {
      * @return lendingList
      */
     public ArrayList<Item> getLendingList() {
-        return gw.inventory;
+        return gw.getInv();
     }
 
     /**
@@ -42,7 +42,7 @@ public class Inventory {
      */
     ArrayList<Item> getAvailableList() {
         ArrayList<Item> result = new ArrayList<Item>();
-        for (Item item : gw.inventory) {
+        for (Item item : gw.getInv()) {
             if (!item.getIsInTrade()) {
                 result.add(item);
             }
@@ -56,7 +56,7 @@ public class Inventory {
      * @param item the item added
      */
     public void addItem(Item item) throws IOException {
-        gw.inventory.add(item);
+        gw.getInv().add(item);
     }
 
 
@@ -66,8 +66,8 @@ public class Inventory {
      * @throws IOException when the item is not found in the inventory
      */
     public void deleteItem(Item item) throws IOException {
-        if (gw.inventory.contains(item)) {
-            gw.inventory.remove(item);
+        if (gw.getInv().contains(item)) {
+            gw.getInv().remove(item);
         } else {
             throw new IOException("the item is not in the inventory");
         }
@@ -95,7 +95,7 @@ public class Inventory {
      * @return item
      */
     public Item getItem(String name){
-        for (Item item: gw.inventory){
+        for (Item item: gw.getInv()){
             if (item.getName().equals(name)){
                 return item;
             }

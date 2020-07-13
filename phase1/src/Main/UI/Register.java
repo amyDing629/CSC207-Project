@@ -1,5 +1,6 @@
 package Main.UI;
 
+import Main.GateWay;
 import User.AdministrativeUser;
 import User.FileEditor;
 import User.User;
@@ -10,16 +11,17 @@ import java.util.Scanner;
 
 public class Register {
     public Scanner sc;
-    public UserManager um;
+    public UserManager a;
+    public FileEditor fe;
 
-    public Register(){
+    public Register(GateWay gw){
         sc = new Scanner(System.in);
-        um=new UserManager();
+        a=new UserManager(gw);
+        fe=new FileEditor(gw);
     }
 
     public void run() throws IOException {
         Scanner sc = new Scanner(System.in);
-        FileEditor fe=new FileEditor();
         int input=0;
         while(input!=1) {
             System.out.println("--------------------\nRegister");
@@ -29,7 +31,6 @@ public class Register {
             System.out.println("Please enter your password!");
             System.out.print(">");
             String password = sc.nextLine();
-            UserManager a=new UserManager();
             if (a.getUser(username) == null) {
                 User user1 = new User(username, password, false);
                 fe.addToUsers(user1);

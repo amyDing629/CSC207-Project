@@ -10,10 +10,8 @@ public class DataAccessFull {
     private final InvDataAccess ida;
     private final TradeDataAccess tda;
     private final FileEditor fe;
-    private final GateWay gw;
 
     public DataAccessFull(GateWay gw){
-        this.gw = gw;
         ida = new InvDataAccess(gw);
         tda = new TradeDataAccess(gw);
         fe = new FileEditor(gw);
@@ -35,3 +33,4 @@ public class DataAccessFull {
 
 
 }
+

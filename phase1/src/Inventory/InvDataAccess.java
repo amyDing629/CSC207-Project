@@ -20,7 +20,7 @@ public class InvDataAccess {
                 String[] lst = line.split(",");
                 Item newItem = new Item(lst[0], lst[2]);
                 newItem.setDescription(lst[1]);
-                gw.inventory.add(newItem);
+                gw.getInv().add(newItem);
                 line = reader.readLine();
             }
             reader.close();
@@ -49,7 +49,7 @@ public class InvDataAccess {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        for (Item item: gw.inventory){
+        for (Item item: gw.getInv()){
             addItemToFile(item);
         }
     }

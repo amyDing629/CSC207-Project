@@ -7,9 +7,9 @@ import com.sun.deploy.net.MessageHeader;
 import java.util.ArrayList;
 
 public class GateWay {
-    public ArrayList<User> users;
-    public ArrayList<Trade> trades;
-    public ArrayList<Item> inventory;
+    private final ArrayList<User> users;
+    private final ArrayList<Trade> trades;
+    private final ArrayList<Item> inventory;
 
 
     public GateWay(){
@@ -20,5 +20,13 @@ public class GateWay {
 
     public ArrayList<User> getUsers(){
         return users;
+    }
+
+    public ArrayList<Trade> getTrades(){
+        return trades;
+    }
+
+    public ArrayList<Item> getInv(){
+        return inventory;
     }
 }

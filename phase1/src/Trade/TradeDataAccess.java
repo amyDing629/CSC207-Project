@@ -86,7 +86,7 @@ public class TradeDataAccess {
 
                 trade.setStatus(TradeStatus.valueOf(lst[9]));
                 trade.setId(tradeId);
-                gw.trades.add(trade);
+                gw.getTrades().add(trade);
                 line = reader.readLine();
             }
             reader.close();
@@ -162,8 +162,8 @@ public class TradeDataAccess {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        if (gw.trades.size()>0){
-            for (Trade trade: gw.trades){
+        if (gw.getTrades().size()>0){
+            for (Trade trade: gw.getTrades()){
                 addTradeToFile(trade);
             }
         }

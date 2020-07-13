@@ -1,6 +1,8 @@
 package Main;
 
+import Inventory.Inventory;
 import Main.UI.Register;
+import Trade.TradeManager;
 import User.AdministrativeUser;
 import User.FileEditor;
 import User.UserManager;
@@ -14,17 +16,19 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) throws IOException {
         int a=-1;
-        DataAccessFull w=new DataAccessFull();
+        GateWay gw = new GateWay();
+        UserManager um = new UserManager(gw);
+        TradeManager tm = new TradeManager(gw);
+        DataAccessFull w=new DataAccessFull(gw);
         File file = new File("phase1/src/username.txt");
-        FileEditor fe=new FileEditor();
+        FileEditor fe=new FileEditor(gw);
         if(file.length() == 0){
-            AdministrativeUser b = new AdministrativeUser("admin", "123", true);
+            AdministrativeUser b = new AdministrativeUser("admin", "123", true, tm, um);
             fe.addToUsers(b);
         }
         w.readFile();
         while (a!=0) {
             //print out the list of current users-------------------------------
-            UserManager user=new UserManager();
             System.out.println("Users:");
             try {
                 BufferedReader reader = new BufferedReader(new FileReader(
@@ -47,11 +51,11 @@ public class Main {
             a = sc.nextInt();
             sc.nextLine();
             if (a==1){
-                Login login=new Login();
+                Login login=new Login(gw);
                 login.run();
             }
             else if (a == 2){
-                Register reg=new Register();
+                Register reg=new Register(gw);
                 reg.run();
             }
             System.out.println("------------------------------");

@@ -2,6 +2,7 @@ package Main.UI;
 
 import Inventory.Inventory;
 import Inventory.Item;
+import Main.GateWay;
 import User.AdministrativeUser;
 import User.User;
 import User.UserManager;
@@ -16,12 +17,14 @@ import java.util.Scanner;
 
 public class EditInfo {
     public Scanner sc;
-    public UserManager um;
+    public UserManager a;
     public User user;
-    public EditInfo(User u){
+    public Inventory v;
+    public EditInfo(User u, GateWay gw){
         user=u;
         sc = new Scanner(System.in);
-        um=new UserManager();
+        a=new UserManager(gw);
+        v = new Inventory(gw);
     }
 
     public void run() throws IOException {
@@ -40,7 +43,6 @@ public class EditInfo {
             }
             System.out.println("0.exit");
             System.out.print(">");
-            UserManager a=new UserManager();
             int input = sc.nextInt();
             sc.nextLine();
             System.out.println("-----------------------------");
@@ -86,7 +88,7 @@ public class EditInfo {
                     }
                     break;
                 case 4:
-                    Inventory v = new Inventory();
+
                     System.out.println("add new item into the system");
                     System.out.println("Menu:\n1.Add item your self.\n2.Approve request from users");
                     String inputa=sc.nextLine();

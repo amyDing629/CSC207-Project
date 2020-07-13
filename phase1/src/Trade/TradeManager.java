@@ -39,7 +39,7 @@ public class TradeManager {
     void createOnewayTrade(UUID currUserId, UUID otherUserId, Item item, int duration, LocalDateTime time)
             throws IOException {
         OnewayTrade newTrade = new OnewayTrade(currUserId, otherUserId, item, duration, time);
-        gw.trades.add(newTrade);
+        gw.getTrades().add(newTrade);
         // Record this new trade.Trade in system
 
         //Update trade history for both users
@@ -55,9 +55,9 @@ public class TradeManager {
      * @param duration the duration of this trade.Trade, unit (days). -1 means the trade.Trade is permanent.
      */
     void createTwowayTrade(UUID currUserId, UUID otherUserId, Item item1to2, Item item2to1, int duration,
-                                  LocalDateTime time) throws IOException {
+                           LocalDateTime time) throws IOException {
         TwowayTrade newTrade = new TwowayTrade(currUserId, otherUserId, item1to2, item2to1, duration, time);
-        gw.trades.add(newTrade);
+        gw.getTrades().add(newTrade);
         // Update trade history for both users
         updateTradeHistory(currUserId, otherUserId, newTrade);
     }
@@ -70,14 +70,14 @@ public class TradeManager {
         User currentUser = userManager.getUser(currUserId);
         User tarUser = userManager.getUser(tarUserId);
         System.out.println(currentUser);
-        System.out.println(gw.trades);
+        System.out.println(gw.getTrades());
         currentUser.getTradeHistory().add(newTrade.getId());
         tarUser.getTradeHistory().add(newTrade.getId());
     }
 
 
     public Trade getTrade(UUID id) {
-        for (Trade trade : gw.trades) {
+        for (Trade trade : gw.getTrades()) {
             if (trade.getId().equals(id)) {
                 return trade;
             }
@@ -258,4 +258,5 @@ public class TradeManager {
 
 
 }
+
 
