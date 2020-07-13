@@ -14,7 +14,6 @@ public class FileEditor {
         this.gw= gw;
     }
 
-
     /**
      * read the username.txt file, return a list of list that contains all the information of the user
      */
@@ -47,7 +46,6 @@ public class FileEditor {
      * return list of all users , set the attribute information of all the users
      */
     public void splitUser(ArrayList<ArrayList<String>> a) throws IOException {
-        ArrayList<User> myList = new ArrayList<>();
         for (ArrayList<String> b : a) {
             if (b.get(3).equals("true")) {
                 String[] c = b.get(6).split("; ");
@@ -95,7 +93,7 @@ public class FileEditor {
                 d.setWeekTransactionLimit(Integer.parseInt(b.get(10)));
                 d.setIncompleteTransaction(Integer.parseInt(b.get(11)));
 
-                gw.users.add(d);
+                gw.getUsers().add(d);
             }
             if (b.get(3).equals("false")) {
                 String[] c = b.get(6).split("; ");
@@ -144,14 +142,14 @@ public class FileEditor {
                 d.setWeekTransactionLimit(Integer.parseInt(b.get(10)));
                 d.setIncompleteTransaction(Integer.parseInt(b.get(11)));
 
-                gw.users.add(d);
+                gw.getUsers().add(d);
             }
         }
 
     }
 
     public void addToUsers(User u){
-        gw.users.add(u);
+        gw.getUsers().add(u);
     }
 
 
@@ -186,7 +184,7 @@ public class FileEditor {
             }
             s = s + l + ", ";
             s = s+ u.getWeekTransactionLimit() + ", ";
-            s = s+ u.getIncompleteTransactionLimit()+ ", ";
+            s = s+ u.getIncompleteTransactionLimit();
             s = s + "\n";
             output.write(s.getBytes());
             output.close();
@@ -204,7 +202,7 @@ public class FileEditor {
             PrintWriter writer = new PrintWriter("phase1/src/username.txt");
             writer.print("");
             writer.close();
-            for (User u : gw.users) {
+            for (User u : gw.getUsers()) {
                 addUser(u);
             }
         }catch (IOException e) {

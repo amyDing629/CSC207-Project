@@ -17,7 +17,7 @@ public class UserManager {
 
     public UserManager(GateWay gw){
         this.gw = gw;
-        userList = gw.users;
+        userList = gw.getUsers();
     }
 
 
@@ -33,7 +33,7 @@ public class UserManager {
             FileEditor f = new FileEditor(gw);
             if(f.readFile().size() == 0){return null;}
             //ArrayList<User> userList = splitUser(readFile());
-            for(User u : gw.users){
+            for(User u : gw.getUsers()){
                 if(u.getUsername().equals(name))
                     return u;
             }
@@ -52,7 +52,7 @@ public class UserManager {
             FileEditor f = new FileEditor(gw);
             if(f.readFile().size() == 0){return null;}
             //ArrayList<User> userList = splitUser(readFile());
-            for(User u : gw.users){
+            for(User u : gw.getUsers()){
                 if(u.getId().equals(userId))
                     return u;
             }
@@ -90,7 +90,7 @@ public class UserManager {
      */
     public boolean verifyUser(String name, String password) throws IOException {
         //ArrayList<User> userList = splitUser(readFile());
-        for(User u : gw.users){
+        for(User u : gw.getUsers()){
             if(u.getUsername().equals(name) && u.getPassword().equals(password)) {
                 return true;}
         }
