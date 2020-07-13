@@ -184,12 +184,6 @@ public abstract class Trade {
     public abstract ArrayList<Item> getItemList();
 
     /**
-     * remove items from users' wishLists after the trade is completed.
-     * @throws IOException the trade hasn't been made.
-     */
-    public abstract void makeTrade() throws IOException;
-
-    /**
      * get whether the trade is a onewayTrade or a twowayTrade
      * @return onewayTrade or twowayTrade
      */

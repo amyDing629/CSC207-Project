@@ -1,7 +1,7 @@
 package Inventory;
 import User.User;
 import java.io.IOException;
-
+/*
 public class inventoryMain {
     public static void main(String[] args) throws IOException {
         User amy = new User("amy", "123", false);
@@ -10,3 +10,5 @@ public class inventoryMain {
         System.out.println(amy.getWishBorrow());
     }
 }
+
+ */

@@ -65,20 +65,6 @@ public class OnewayTrade extends Trade {
         return rst;
     }
 
-    /**
-     * remove items from users' wishLists after the trade is completed.
-     * @throws IOException the trade hasn't been made.
-     */
-    @Override
-    public void makeTrade() throws IOException {
-        UserManager um = new UserManager();
-        Inventory iv = new Inventory();
-        User bor = um.getUser(borrowerId);
-        User lend = um.getUser(lenderId);
-        bor.getWishBorrow().remove(item.getName());
-        lend.getWishLend().remove(item.getName());
-        iv.getLendingList().remove(item);
-    }
 
     /**
      * @return oneway

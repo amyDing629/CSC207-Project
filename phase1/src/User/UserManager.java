@@ -12,18 +12,28 @@ import java.util.*;
  * The renew and modification of users
  */
 public class UserManager {
+    GateWay gw;
+    ArrayList<User> userList;
+
+    public UserManager(GateWay gw){
+        this.gw = gw;
+        userList = gw.users;
+    }
 
 
+    public ArrayList<User> getUserList(){
+        return userList;
+    }
     /**
      * @param name the name of the user that the manager wants to get
      * find the user by the user name
      */
     public User getUser(String name) throws IOException {
         try{
-            FileEditor f = new FileEditor();
+            FileEditor f = new FileEditor(gw);
             if(f.readFile().size() == 0){return null;}
             //ArrayList<User> userList = splitUser(readFile());
-            for(User u : GateWay.users){
+            for(User u : gw.users){
                 if(u.getUsername().equals(name))
                     return u;
             }
@@ -39,10 +49,10 @@ public class UserManager {
      */
     public User getUser(UUID userId) throws IOException {
         try{
-            FileEditor f = new FileEditor();
+            FileEditor f = new FileEditor(gw);
             if(f.readFile().size() == 0){return null;}
             //ArrayList<User> userList = splitUser(readFile());
-            for(User u : GateWay.users){
+            for(User u : gw.users){
                 if(u.getId().equals(userId))
                     return u;
             }
@@ -56,12 +66,12 @@ public class UserManager {
      * @param id the id of the user that the manager wants to get
      * find the trade list of the user by the user id
      */
+    /*
     public List<Trade> findTrade(UUID id){
         try{
             FileEditor f = new FileEditor();
             if(f.readFile().size() == 0){return null;}
-            TradeManager a = new TradeManager();
-            for(User u : GateWay.users){
+            for(User u : gm.users){
                 if(u.getId().equals(id))
                     return u.getAllTrade();
             }
@@ -71,6 +81,8 @@ public class UserManager {
         return null;
     }
 
+     */
+
     /**
      * @param name the name of the user that the manager check
      * @param password the password of the user that the manager check
@@ -78,11 +90,48 @@ public class UserManager {
      */
     public boolean verifyUser(String name, String password) throws IOException {
         //ArrayList<User> userList = splitUser(readFile());
-        for(User u : GateWay.users){
+        for(User u : gw.users){
             if(u.getUsername().equals(name) && u.getPassword().equals(password)) {
                 return true;}
         }
         return false;
+    }
+
+    /**
+     * return the list of most frequent three traders that the user trades with
+     * if the user trades with less than three traders, return all the traders the user trades with
+     */
+    public List<User> getFrequentUser(TradeManager tm, User user) throws IOException {
+        try {
+            List<Trade> a = tm.getAllTrade(user);
+            HashMap<UUID, Integer> b = new HashMap<>();
+            for (Trade c : a) {
+                for (UUID d : c.getUsers()) {
+                    if (!(d.equals(user.getId()))) {
+                        if (b.containsKey(d)) {
+                            b.replace(d, b.get(d) + 1);
+                        } else {
+                            b.put(d, 1);
+                        }
+                    }
+                }
+            }
+            if(b.size() == 0){return null;}
+            int e = 0;
+            ArrayList<User> g = new ArrayList<>();
+            int maxValueInMap = (Collections.max(b.values()));
+            for (Map.Entry<UUID, Integer> entry : b.entrySet()) {
+                if (entry.getValue() == maxValueInMap && e != 3) {
+                    g.add(getUser(entry.getKey()));
+                    e++;
+                    b.remove(entry.getKey());
+                }
+            }
+            return g;
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
 

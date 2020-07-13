@@ -10,6 +10,8 @@ import Main.GateWay;
  * Read and write Inventory.txt (temporary, may move to another class).
  */
 public class Inventory {
+    GateWay gw;
+
     /**
      * all existed items in user's lending list.
      */
@@ -23,12 +25,15 @@ public class Inventory {
     //lendingList = new ArrayList<Item>();
     //}
 
+    public Inventory(GateWay gw){
+        this.gw = gw;
+    }
     /**
      * getter for the lending list
      * @return lendingList
      */
     public ArrayList<Item> getLendingList() {
-        return GateWay.inventory;
+        return gw.inventory;
     }
 
     /**
@@ -37,7 +42,7 @@ public class Inventory {
      */
     ArrayList<Item> getAvailableList() {
         ArrayList<Item> result = new ArrayList<Item>();
-        for (Item item : GateWay.inventory) {
+        for (Item item : gw.inventory) {
             if (!item.getIsInTrade()) {
                 result.add(item);
             }
@@ -51,7 +56,7 @@ public class Inventory {
      * @param item the item added
      */
     public void addItem(Item item) throws IOException {
-        GateWay.inventory.add(item);
+        gw.inventory.add(item);
     }
 
 
@@ -61,8 +66,8 @@ public class Inventory {
      * @throws IOException when the item is not found in the inventory
      */
     public void deleteItem(Item item) throws IOException {
-        if (GateWay.inventory.contains(item)) {
-            GateWay.inventory.remove(item);
+        if (gw.inventory.contains(item)) {
+            gw.inventory.remove(item);
         } else {
             throw new IOException("the item is not in the inventory");
         }
@@ -90,7 +95,7 @@ public class Inventory {
      * @return item
      */
     public Item getItem(String name){
-        for (Item item: GateWay.inventory){
+        for (Item item: gw.inventory){
             if (item.getName().equals(name)){
                 return item;
             }

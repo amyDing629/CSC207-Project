@@ -1,5 +1,5 @@
 package Trade;
-
+import User.UserManager;
 import Inventory.Inventory;
 import Inventory.Item;
 import User.User;
@@ -25,7 +25,7 @@ public class RequestTradeUI{
      */
     private final TradeController trc;
     private final TradePresenter tp;
-    private final Inventory iv = new Inventory();
+    private final Inventory iv;
 
     /**
      * [constructor]
@@ -33,12 +33,13 @@ public class RequestTradeUI{
      * @param item item selected by the current user
      * @throws IOException tarUser is not found
      */
-    public RequestTradeUI(User currUser, Item item) throws IOException {
-        trc = new TradeController(currUser);
+    public RequestTradeUI(User currUser, Item item, TradeManager tm, UserManager um, Inventory iv) throws IOException {
+        trc = new TradeController(currUser, tm, um, iv);
         this.currUser = currUser;
         this.item = item;
         tp = new TradePresenter(currUser);
         trc.getTarUser(item);
+        this.iv = iv;
     }
 
     /**

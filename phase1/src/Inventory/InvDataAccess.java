@@ -1,20 +1,26 @@
 package Inventory;
 
 import Main.GateWay;
+import Trade.Trade;
 
 import java.io.*;
 
 public class InvDataAccess {
+    private final GateWay gw;
+
+    public InvDataAccess(GateWay gw){
+        this.gw = gw;
+    }
 
     public void readFile(){
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("phase1/src/Inventory.txt"));
+            BufferedReader reader = new BufferedReader(new FileReader("phase1/src/ItemList.txt"));
             String line = reader.readLine();
             while (line != null) {
                 String[] lst = line.split(",");
                 Item newItem = new Item(lst[0], lst[2]);
                 newItem.setDescription(lst[1]);
-                GateWay.inventory.add(newItem);
+                gw.inventory.add(newItem);
                 line = reader.readLine();
             }
             reader.close();
@@ -28,15 +34,26 @@ public class InvDataAccess {
      * @throws IOException when the update is failed
      */
     public void updateFile() throws IOException {
-        File file = new File("phase1/src/Inventory.Inventory.txt");
-        boolean result = file.delete();
-        if (!result){
-            System.out.println("can not update inventory files");
+        File file = new File("phase1/src/ItemList.txt");
+        try {
+            if(!file.exists()) {
+                boolean result = file.createNewFile();
+                if (!result){
+                    System.out.println("the new file is not created");
+                }
+            }
+            FileWriter fileWriter =new FileWriter(file);
+            fileWriter.write("");
+            fileWriter.flush();
+            fileWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        for (Item item: GateWay.inventory){
+        for (Item item: gw.inventory){
             addItemToFile(item);
         }
     }
+
 
     /**
      *
@@ -45,7 +62,7 @@ public class InvDataAccess {
      */
     private void addItemToFile(Item item) throws IOException {
         try {
-            FileOutputStream fos = new FileOutputStream("phase1/src/inventory.txt", true);
+            FileOutputStream fos = new FileOutputStream("phase1/src/ItemList.txt", true);
             fos.write((item.getName()+","+item.getDescription()+","+item.getOwnerName()+"\n").getBytes());
         }catch(IOException e){
             throw new IOException("cannot add item to file");

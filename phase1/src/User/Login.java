@@ -13,22 +13,25 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Login {
+    private final GateWay gw = new GateWay();
+    private final Inventory iv = new Inventory(gw);
+    private final TradeManager tm = new TradeManager(gw);
+    private final UserManager um = new UserManager(gw);
+    private final FileEditor fe = new FileEditor(gw);
+    DataAccessFull w = new DataAccessFull(gw);
+
     public void mainUI () throws IOException {
         int a=-1;
-        GateWay.trades = new ArrayList<Trade>();
-        GateWay.inventory = new ArrayList<Item>();
-        GateWay.users = new ArrayList<User>();
-        DataAccessFull w=new DataAccessFull();
         File file = new File("phase1/src/username.txt");
-        FileEditor fe=new FileEditor();
+
         if(file.length() == 0){
-            AdministrativeUser b = new AdministrativeUser("admin", "123", true);
+            AdministrativeUser b = new AdministrativeUser("admin", "123", true, tm, um);
             fe.addToUsers(b);
         }
-        w.readFile();
+
         while (a!=0) {
             //print out the list of current users-------------------------------
-            UserManager user=new UserManager();
+            w.readFile();
             System.out.println("Users:");
             try {
                 BufferedReader reader = new BufferedReader(new FileReader(
@@ -62,7 +65,6 @@ public class Login {
     }
     public void login() throws IOException {
         Scanner sc = new Scanner(System.in);
-        FileEditor fe=new FileEditor();
         int input=0;
         while (input==0) {
             System.out.println("Please enter your account username!");
@@ -71,29 +73,28 @@ public class Login {
             System.out.println("Please enter your password!");
             System.out.print(">");
             String password = sc.nextLine();
-            UserManager a=new UserManager();
-            if (a.verifyUser(username, password)) {
+            if (um.verifyUser(username, password)) {
                 while (true) {
                     System.out.println("------------------------------------------------------------");
                     System.out.println("Hello,"+username);
-                    ((AdministrativeUser)a.getUser("admin")).incompleteTransaction(a.getUser(username));
-                    ((AdministrativeUser)a.getUser("admin")).tradeLimit(a.getUser(username));
-                    System.out.println("Freeze Status: "+a.getUser(username).getIsFrozen());
-                    System.out.println("Trade limit: " + a.getUser(username).getTradeNumber() + "/" + a.getUser(username).getWeekTransactionLimit());
-                    System.out.println("Incomplete trade limit: " + (a.getUser(username).getIncomplete()).size() + "/" + a.getUser(username).getIncompleteTransactionLimit());
+                    ((AdministrativeUser)um.getUser("admin")).incompleteTransaction(um.getUser(username));
+                    ((AdministrativeUser)um.getUser("admin")).tradeLimit(um.getUser(username));
+                    System.out.println("Freeze Status: "+um.getUser(username).getIsFrozen());
+                    System.out.println("Trade limit: " + tm.getTradeNumber(um.getUser(username)) + "/" + um.getUser(username).getWeekTransactionLimit());
+                    System.out.println("Incomplete trade limit: " + (tm.getIncomplete(um.getUser(username))).size() + "/" + um.getUser(username).getIncompleteTransactionLimit());
                     System.out.println("**************************************************************");
                     System.out.println("Actions:\n1.Edit information\n2.Trade\n3.Inventory\n4.Market\n0.quit to menu");
                     System.out.print(">");
                     int op = sc.nextInt();
                     sc.nextLine();
                     if (op == 1) {
-                        editInfo(a.getUser(username));
+                        editInfo(um.getUser(username));
                     } else if (op == 2) {
-                        UserTradeUI(a.getUser(username));
+                        UserTradeUI(um.getUser(username));
                     } else if (op == 3) {
-                        inventory(a.getUser(username));
+                        inventory(um.getUser(username));
                     } else if (op == 4) {
-                        market(a.getUser(username));
+                        market(um.getUser(username));
                     } else if (op == 0) {
                         input=1;
                         break;
@@ -110,7 +111,6 @@ public class Login {
     }
     public void register() throws IOException {
         Scanner sc = new Scanner(System.in);
-        FileEditor fe=new FileEditor();
         int input=0;
         while(input!=1) {
             System.out.println("--------------------\nRegister");
@@ -120,9 +120,8 @@ public class Login {
             System.out.println("Please enter your password!");
             System.out.print(">");
             String password = sc.nextLine();
-            UserManager a=new UserManager();
             //usermanger username verification?
-            if (a.getUser(username) == null) {
+            if (um.getUser(username) == null) {
                 User user1 = new User(username, password, false);
                 fe.addToUsers(user1);
                 System.out.println("Your account has been successfully created!");
@@ -154,7 +153,6 @@ public class Login {
             }
             System.out.println("0.exit");
             System.out.print(">");
-            UserManager a=new UserManager();
             int input = sc.nextInt();
             sc.nextLine();
             System.out.println("-----------------------------");
@@ -172,7 +170,7 @@ public class Login {
                     System.out.println("Type in the username of user you want to freeze, type 0 to quit.");
                     String input3=sc.nextLine();
                     if (!input3.equals("0")){
-                        User ha=a.getUser(input3);
+                        User ha=um.getUser(input3);
                         if (ha==null){
                             System.out.println("Sorry there is no such user, returning to main menu.");
                         }
@@ -192,7 +190,7 @@ public class Login {
                     System.out.println("Type in the user you want to set to admin, type 0 to quit.");
                     String input4=sc.nextLine();
                     if (!input4.equals("0")){
-                        User ha=a.getUser(input4);
+                        User ha=um.getUser(input4);
                         if (ha==null){
                             System.out.println("Sorry there is no such user, returning to main menu.");
                         }
@@ -200,7 +198,6 @@ public class Login {
                     }
                     break;
                 case 4:
-                    Inventory v = new Inventory();
                     System.out.println("add new item into the system");
                     System.out.println("Menu:\n1.Add item your self.\n2.Approve request from users");
                     String inputa=sc.nextLine();
@@ -211,7 +208,7 @@ public class Login {
                             System.out.println("Type the name of the item");
                             name = sc.nextLine();
                             boolean t = false;
-                            for (Item n : v.getLendingList()) {
+                            for (Item n : iv.getLendingList()) {
                                 if (n.getName().equals(name)) {
                                     t = true;
                                     break;
@@ -227,7 +224,7 @@ public class Login {
                         String des = sc.nextLine();
                         Item i = new Item(name, user.getUsername());
                         i.setDescription(des);
-                        v.addItem(i);
+                        iv.addItem(i);
                     }
                     else if(inputa.equals("2")){
                         try {
@@ -257,8 +254,8 @@ public class Login {
                                 if (k > -1 && k < (hii.size())) {
                                     Item i = new Item(hii.get(k).get(1), hii.get(k).get(3));
                                     i.setDescription(hii.get(k).get(2));
-                                    a.getUser(hii.get(k).get(3)).addWishes(hii.get(k).get(1));
-                                    v.addItem(i);
+                                    um.getUser(hii.get(k).get(3)).addWishes(hii.get(k).get(1));
+                                    iv.addItem(i);
                                     hii.remove(k);
                                     System.out.println("Approve successfully");
                                 }else if(k==-1){
@@ -286,7 +283,6 @@ public class Login {
     }
     public void inventory(User user) throws IOException {
         Scanner sc=new Scanner(System.in);
-        Inventory iv=new Inventory();
         int exit=-1;
         while(exit!=0) {
             System.out.println("--------------------\nInventory.Inventory");
@@ -317,7 +313,7 @@ public class Login {
                     Item k=iv.getItem(input22);
                     if (k!=null){
                         try {
-                            RequestTradeUI ru = new RequestTradeUI(user, k);
+                            RequestTradeUI ru = new RequestTradeUI(user, k, tm, um, iv);
                             ru.run();
                             } catch (IOException e) {
                                 e.printStackTrace();
@@ -351,7 +347,7 @@ public class Login {
                     System.out.println("Menu:\n1.add wish\n2.delete wish");
                     String input55=sc.nextLine();
                     if (input55.equals("1")) {
-                        InventoryUI iui = new InventoryUI(user);
+                        InventoryUI iui = new InventoryUI(user, iv);
                         iui.run();
                     }else if(input55.equals("2")){
                         List<String> bw1=user.getWishBorrow();
@@ -377,8 +373,8 @@ public class Login {
     public void UserTradeUI(User user) throws IOException {
         Scanner sc=new Scanner(System.in);
         int escape=0;
-        List<Trade> iL=user.getIncomplete();
-        List<Trade> iU=user.getUnconfirmed();
+        List<Trade> iL=tm.getIncomplete(user);
+        List<Trade> iU=tm.getUnconfirmed(user);
         while (escape==0) {
             System.out.println("--------------------\nTrade");
             System.out.println("Hello,user" + user.getUsername());
@@ -408,7 +404,7 @@ public class Login {
                     int input3 = sc.nextInt();
                     sc.nextLine();
                     if((input3<(iL.size()+1))&&(input3>0)){
-                        TradeUI tu=new TradeUI(user,iL.get(input3-1).getId());
+                        TradeUI tu=new TradeUI(user,iL.get(input3-1).getId(), tm, um);
                         tu.run();
                     }
                     else{
@@ -417,14 +413,14 @@ public class Login {
                 case 3:
                     System.out.println("Hi user: "+user.getUsername());
                     System.out.println("Compeleted past trades:");
-                    List<Trade> tHis=user.getTradeHistoryTop();
+                    List<Trade> tHis=tm.getTradeHistoryTop(user);
                     System.out.println("****************");
                     for(int i=0;i<tHis.size();i++){
                         System.out.println((i+1)+". "+tHis.get(i).toString());
                     }
                     System.out.println("****************");
                     System.out.println("Most frequent user:");
-                    for(User a:user.getFrequentUser()){
+                    for(User a:um.getFrequentUser(tm, user)){
                         System.out.println(a.username);
                     }
                 case 0:
@@ -452,11 +448,8 @@ public class Login {
         }
     }
     public void market(User user){
-        Scanner sc=new Scanner(System.in);
-        FileEditor fe=new FileEditor();
         System.out.println("Hello "+ user.username);
-        UserManager a=new UserManager();
-        for (User b: GateWay.users){
+        for (User b: gw.users){
             System.out.println(b.username);
             for(String c:b.getWishLend()){
                 System.out.println("Item:"+c);

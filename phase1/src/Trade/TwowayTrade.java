@@ -65,25 +65,7 @@ public class TwowayTrade extends Trade {
         return rst;
     }
 
-    /**
-     * remove items from users' wishLists after the trade is completed.
-     * @throws IOException the trade hasn't been made.
-     */
-    @Override
-    public void makeTrade() throws IOException {
-        UserManager um = new UserManager();
-        Inventory iv = new Inventory();
-        User u1 = um.getUser(trader1Id);
-        User u2 = um.getUser(trader2Id);
-        u1.getWishBorrow().remove(item2to1.getName());
-        u1.getWishLend().remove(item1to2.getName());
-        u2.getWishBorrow().remove(item1to2.getName());
-        u2.getWishLend().remove(item2to1.getName());
-        iv.getLendingList().remove(item1to2);
-        iv.getLendingList().remove(item2to1);
-    }
 
-    @Override
     public String getType() {
         return "twoway";
     }

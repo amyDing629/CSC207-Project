@@ -7,14 +7,15 @@ import User.User;
  */
 public class InventoryPresenter {
     User currUser;
-    Inventory iv = new Inventory();
+    Inventory iv;
 
     /**
      * [constructor]
      * @param currUser the user that is using the system
      */
-    InventoryPresenter(User currUser){
+    InventoryPresenter(User currUser, Inventory iv){
         this.currUser = currUser;
+        this.iv = iv;
     }
 
     /**

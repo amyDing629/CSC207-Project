@@ -187,9 +187,11 @@ public class User {
         isBorrow = borrow;
     }
 
+
     /**
      * return the list of all trades that the user has
      */
+    /*
     public List<Trade> getAllTrade() throws IOException {
         TradeManager a = new TradeManager();
         ArrayList<Trade> b = new ArrayList<>();
@@ -199,9 +201,12 @@ public class User {
         return b;
     }
 
+     */
+
     /**
      * return the list of all unconfirmed trades that the user has
      */
+    /*
     public List<Trade> getUnconfirmed() throws IOException {
         List<Trade> trade=new ArrayList<>();
         for(Trade t: getAllTrade()){
@@ -212,9 +217,12 @@ public class User {
         return trade;
     }
 
+     */
+
     /**
      * return the list of all incomlete trades that the user has
      */
+    /*
     public List<Trade> getIncomplete() throws IOException {
         List<Trade> trade=new ArrayList<>();
         for(Trade t: getAllTrade()){
@@ -225,10 +233,13 @@ public class User {
         return trade;
     }
 
+     */
+
     /**
      * return the list of most recent three trades that the user has
      * if the user has less than three trades, return all the trades the user has
      */
+    /*
     public List<Trade> getTradeHistoryTop() throws IOException {
         List<Trade> trade=new ArrayList<>();
         TradeManager a = new TradeManager();
@@ -242,6 +253,8 @@ public class User {
         }
         return trade;
     }
+
+     */
 
 
     /**
@@ -275,6 +288,7 @@ public class User {
     /**
      * return the number of incomplete transactions that the user has
      */
+    /*
     public int getIncompleteTransaction() throws IOException {
         TradeManager a = new TradeManager();
         int number=0;
@@ -286,9 +300,12 @@ public class User {
         return number;
     }
 
+     */
+
     /**
      * return the number of transactions of the user has in seven days from the most recent trade
      */
+    /*
     public int getTradeNumber() throws IOException {
         TradeManager a = new TradeManager();
         if(tradeHistory.size() == 0){return 0;}
@@ -304,6 +321,8 @@ public class User {
         return number;
     }
 
+     */
+
     public boolean getIsBorrow() {
         return isBorrow;
     }
@@ -315,20 +334,25 @@ public class User {
     public List<String> getBorrowed() {
         return borrowed;
     }
+
     /**
      * @param description the description string the user wants to give to the item
      * @param name the name of the item
      * the user set the item with the new description
      */
+    /*
     public void setDescription(String description, String name){
         Inventory b = new Inventory();
         b.getItem(name).setDescription(description);
     }
 
+     */
+
     /**
      * return the list of most frequent three traders that the user trades with
      * if the user trades with less than three traders, return all the traders the user trades with
      */
+    /*
     public List<User> getFrequentUser() throws IOException {
         try {
             UserManager u = new UserManager();
@@ -362,4 +386,6 @@ public class User {
         }
         return null;
     }
+
+     */
 }

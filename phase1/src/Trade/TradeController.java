@@ -1,5 +1,6 @@
 package Trade;
 
+import Inventory.Inventory;
 import Inventory.Item;
 import User.User;
 import User.*;
@@ -14,20 +15,27 @@ import java.time.LocalDateTime;
 public class TradeController {
     private final User currUser;
     private User tarUser;
-    private final TradeManager tm = new TradeManager();
+    private final TradeManager tm;
     private Trade currTrade;
+    private UserManager um;
+    private Inventory iv;
 
     /**
      * [constructor]
      * @param currUser the user that is using the system
      */
-    TradeController(User currUser){
+    TradeController(User currUser, TradeManager tm, UserManager um, Inventory iv){
         this.currUser = currUser;
+        this.tm = tm;
+        this.um = um;
+        this.iv = iv;
     }
 
-    TradeController(User currUser, Trade currTrade){
+    TradeController(User currUser, Trade currTrade, TradeManager tm, UserManager um){
         this.currUser = currUser;
         this.currTrade = currTrade;
+        this.tm = tm;
+        this.um = um;
     }
 
 
@@ -39,7 +47,6 @@ public class TradeController {
      * @throws IOException can not find the target user
      */
     void getTarUser(Item item) throws IOException {
-        UserManager um = new UserManager();
         tarUser = um.getUser(item.getOwnerName());
     }
 
@@ -132,6 +139,8 @@ public class TradeController {
     void cancelTrade(){
         tm.cancelTrade(currTrade);
     }
+
+
 
 }
 

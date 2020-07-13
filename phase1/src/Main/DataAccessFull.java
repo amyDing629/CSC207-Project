@@ -7,9 +7,19 @@ import User.FileEditor;
 import java.io.IOException;
 
 public class DataAccessFull {
-    private final InvDataAccess ida = new InvDataAccess();
-    private final TradeDataAccess tda = new TradeDataAccess();
-    private final FileEditor fe = new FileEditor();
+    private final InvDataAccess ida;
+    private final TradeDataAccess tda;
+    private final FileEditor fe;
+    private final GateWay gw;
+
+    public DataAccessFull(GateWay gw){
+        this.gw = gw;
+        ida = new InvDataAccess(gw);
+        tda = new TradeDataAccess(gw);
+        fe = new FileEditor(gw);
+
+
+    }
 
     public void updateFile() throws IOException {
         ida.updateFile();
