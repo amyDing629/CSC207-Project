@@ -54,8 +54,12 @@ public class InventoryPresenter {
         }else{
             System.out.println("you can not add your own item to wish borrow list");
         }
-
     }
+
+    void isInWishBorrow(){
+        System.out.println("the item has already been in your wish list");
+    }
+
 
 
 }

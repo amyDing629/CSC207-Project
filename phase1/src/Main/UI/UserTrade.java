@@ -39,7 +39,7 @@ public class UserTrade {
                     for (int i = 0; i < iU.size(); i++) {
                         System.out.println(i+". " + iU.get(i).toString());
                     }
-                    System.out.println("Which trade do you want to confirm? select trade number to confirm, enter anything else to exit");
+                    System.out.println("Which trade do you want to confirm? select the number before trade id enter anything else integers to exit");
                     int input2 = sc.nextInt();
                     sc.nextLine();
                     if ((input2 < iU.size()) && (input2 >= 0)) {
@@ -51,7 +51,7 @@ public class UserTrade {
                     for (int i = 0; i < iL.size(); i++) {
                         System.out.println((i + 1) + ". " + iL.get(i).toString());
                     }
-                    System.out.println("Which trade do you want to complete? select trade ID to confirm");
+                    System.out.println("Which trade do you want to complete? select the number before trade id");
                     int input3 = sc.nextInt();
                     sc.nextLine();
                     if ((input3 < (iL.size() + 1)) && (input3 > 0)) {
@@ -70,8 +70,8 @@ public class UserTrade {
                     }
                     System.out.println("****************");
                     System.out.println("Most frequent user:");
-                    for (User a : um.getFrequentUser(tm, user)) {
-                        System.out.println(a.getUsername());
+                    for (String a : um.getFrequentUser(tm, user)) {
+                        System.out.println(a);
                     }
                 case 0:
                     escape = 1;

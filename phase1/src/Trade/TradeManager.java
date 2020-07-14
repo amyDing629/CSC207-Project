@@ -133,7 +133,7 @@ public class TradeManager {
      * @throws IOException if the item is not deleted from user's wishlist and inventory
      */
     void completeTrade(Trade currTrade) throws IOException {
-        currTrade.setStatus(TradeStatus.incomplete);
+        currTrade.setStatus(TradeStatus.complete);
         makeTrade(currTrade);
     }
 
@@ -193,7 +193,7 @@ public class TradeManager {
 
 
     /**
-     * return the list of all incomlete trades that the user has
+     * return the list of all incomplete trades that the user has
      */
     public List<Trade> getIncomplete(User user) throws IOException {
         List<Trade> trade=new ArrayList<>();
@@ -212,6 +212,10 @@ public class TradeManager {
     public List<Trade> getTradeHistoryTop(User user) throws IOException {
         List<Trade> trade=new ArrayList<>();
         int y = 0;
+        if(getAllTrade(user).size() < 3){
+            trade.addAll(getAllTrade(user));
+            return trade;
+        }
         for (int i = getAllTrade(user).size(); i>0;i-- ) {
             if (((!(getAllTrade(user).get(i).getStatus().equals(TradeStatus.unconfirmed))) &&
                     (!(getAllTrade(user).get(i).getStatus().equals(TradeStatus.cancelled))))&&y!=3) {
@@ -243,7 +247,7 @@ public class TradeManager {
         Trade s = getTrade(user.getTradeHistory().get(user.getTradeHistory().size() - 1));
         LocalDateTime x  = s.getCreateTime();
         LocalDateTime y = x.minusDays(7);
-        int number = 0;
+        int number = 1;
         for (UUID i : user.getTradeHistory()){
             if(getTrade(i).getCreateTime().isAfter(y) && getTrade(i).getCreateTime().isBefore(x)){
                 number ++;

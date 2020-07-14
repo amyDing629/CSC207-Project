@@ -101,7 +101,7 @@ public class UserManager {
      * return the list of most frequent three traders that the user trades with
      * if the user trades with less than three traders, return all the traders the user trades with
      */
-    public List<User> getFrequentUser(TradeManager tm, User user) throws IOException {
+    public List<String> getFrequentUser(TradeManager tm, User user) throws IOException {
         try {
             List<Trade> a = tm.getAllTrade(user);
             HashMap<UUID, Integer> b = new HashMap<>();
@@ -116,13 +116,16 @@ public class UserManager {
                     }
                 }
             }
-            if(b.size() == 0){return null;}
+            if(b.size() == 0){
+                List<String> EmptyList = new ArrayList<>(Collections.emptyList());
+                EmptyList.add("no user");
+                return EmptyList;}
             int e = 0;
-            ArrayList<User> g = new ArrayList<>();
+            ArrayList<String> g = new ArrayList<>();
             int maxValueInMap = (Collections.max(b.values()));
             for (Map.Entry<UUID, Integer> entry : b.entrySet()) {
                 if (entry.getValue() == maxValueInMap && e != 3) {
-                    g.add(getUser(entry.getKey()));
+                    g.add(getUser(entry.getKey()).getUsername());
                     e++;
                     b.remove(entry.getKey());
                 }
@@ -132,6 +135,17 @@ public class UserManager {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public boolean checkFrozen(User user) throws IOException {
+        TradeManager a = new TradeManager(gw);
+        if(a.getTradeNumber(user) > user.getWeekTransactionLimit()){
+            return true;
+        }
+        else if(a.getIncomplete(user).size() > user.getIncompleteTransactionLimit()){
+            return true;
+        }
+        else return user.getLend().size() - user.getBorrowed().size() < user.getDiff();
     }
 }
 

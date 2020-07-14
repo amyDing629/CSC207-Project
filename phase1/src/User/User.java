@@ -64,7 +64,8 @@ public class User {
     /**
      * the difference amount between the amount of
      */
-    private int diff;
+    private int diff = 2;
+
 
     /**
      * @param username the username of the user account
@@ -84,6 +85,10 @@ public class User {
         this.tradeHistory=new ArrayList<>();
         this.isAdmin = isAdmin;
         id = UUID.randomUUID();
+    }
+
+    public int getDiff() {
+        return diff;
     }
 
     /**
