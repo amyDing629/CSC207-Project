@@ -86,7 +86,7 @@ public class TradePresenter {
 
     void requestTradeMenu(){
         System.out.println("menu: \n 1.one way(temporary)\n 2.one way(permanent)" +
-                "\n 3.two way(temporary)\n 4.two way(permanent)");
+                "\n 3.two way(temporary)\n 4.two way(permanent)\n 0.exit");
     }
 
     void requestTrade(){
@@ -96,6 +96,6 @@ public class TradePresenter {
 
     void selectSecondItem(){
         System.out.println(currUser.getWishLend());
-        System.out.println("choose the item you want to lend");
+        System.out.println("choose the item you want to lend, type '0' to quit");
     }
 }
