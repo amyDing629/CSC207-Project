@@ -41,7 +41,7 @@ public class UserManager {
      * @param name the name of the user that the manager wants to get
      * find the user by the user name
      */
-    public User getUser(String name) throws IOException {
+    public User getUser(String name) {
         FileEditor f = new FileEditor(gw);
         //ArrayList<User> userList = splitUser(readFile());
         for(User u : gw.getUsers()){
@@ -55,7 +55,7 @@ public class UserManager {
      * @param userId the ID of the user that the manager wants to get
      * find the user by the user ID
      */
-    public User getUser(UUID userId) throws IOException {
+    public User getUser(UUID userId) {
         FileEditor f = new FileEditor(gw);
         //ArrayList<User> userList = splitUser(readFile());
         for(User u : gw.getUsers()){
@@ -65,6 +65,10 @@ public class UserManager {
         return null;
     }
 
+    /**
+     * @param user the input user
+     *get the administrative user by id
+     */
     public AdministrativeUser getAdmin(User user){
         return new AdministrativeUser(user.getUsername(), user.getPassword(),
                 true, new TradeManager(gw), new UserManager(gw));
@@ -76,7 +80,7 @@ public class UserManager {
      * @param password the password of the user that the manager check
      * Check if the name matches with the password
      */
-    public boolean verifyUser(String name, String password) throws IOException {
+    public boolean verifyUser(String name, String password) {
         //ArrayList<User> userList = splitUser(readFile());
         for(User u : gw.getUsers()){
             if(u.getUsername().equals(name) && u.getPassword().equals(password)) {
