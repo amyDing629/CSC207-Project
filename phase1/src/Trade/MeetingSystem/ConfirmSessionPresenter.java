@@ -1,12 +1,17 @@
 package Trade.MeetingSystem;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 class ConfirmSessionPresenter extends MeetingSessionPresenter {
     @Override
-    void printIntro() {
-        System.out.println("<Confirm-Meeting Session>\n" +
-                "Enter \"cc\" to confirm the meeting has been taken place, " +
+    void printIntro(LocalDateTime dateTime, String place) {
+        System.out.println("<Confirm-Meeting Session> \n");
+        System.out.println("The current proposed date-time, place, status info: \n"
+                + "   - " + dateTime.toString() + "\n"
+                + "   - " + place + "\n");
+
+        System.out.println("Enter \"cc\" to confirm the meeting has been taken place, " +
                 "or anything else to quit confirm-meeting session.");
     }
 

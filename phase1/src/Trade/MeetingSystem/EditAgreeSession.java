@@ -31,7 +31,7 @@ class EditAgreeSession {
         meetingLog = null;
 
         // show session intro
-        editAgreeSessionPresenter.printIntro();
+        editAgreeSessionPresenter.printIntro(dateTime, place);
 
         // allow input
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -44,8 +44,18 @@ class EditAgreeSession {
                         EditMeetingInputController editMeeting = new EditMeetingInputController(dateTime, place);
                         LocalDateTime enteredDateTime = (LocalDateTime) editMeeting.editMeetingInputControllerResult().get(0);
                         String enteredPlace = (String) editMeeting.editMeetingInputControllerResult().get(1);
+                        boolean backToPrevMenu = (boolean) editMeeting.editMeetingInputControllerResult().get(2);
 
-                        if (isEdited(enteredDateTime, enteredPlace)) {
+                        if (backToPrevMenu) {
+                            EditAgreeSession editAgreeSession = new EditAgreeSession();
+                            editAgreeSession.runEditAgreeSession(currLogInUser, meeting);
+                            ArrayList<Object> result = editAgreeSession.getEditAgreeSessionResult();
+                            this.meeting = (Meeting) result.get(0);
+                            dateTime = (LocalDateTime) result.get(1);
+                            place = (String) result.get(2);
+                            isCancel = (boolean) result.get(3);
+                            meetingLog = editAgreeSession.getSessionLog();
+                        } else if (isEdited(enteredDateTime, enteredPlace)) {
                             // update meeting, datetime, place
                             dateTime = enteredDateTime;
                             place = enteredPlace;
@@ -95,6 +105,74 @@ class EditAgreeSession {
             e.printStackTrace();
         }
     }
+//        try {
+//            do {
+//
+//            } while (backToPrevMenu)
+//            label:
+//            switch (input) {
+//                case "ee":
+//                    if (isEditable(currLogInUser)) { // meeting can be edited
+//
+//                        EditMeetingInputController editMeeting = new EditMeetingInputController(dateTime, place);
+//                        LocalDateTime enteredDateTime = (LocalDateTime) editMeeting.editMeetingInputControllerResult().get(0);
+//                        String enteredPlace = (String) editMeeting.editMeetingInputControllerResult().get(1);
+//                        boolean backToPrevMenu = (boolean) editMeeting.editMeetingInputControllerResult().get(2);
+//
+//                        if (backToPrevMenu) {
+//                            break label;
+//                        }
+//
+//                        if (isEdited(enteredDateTime, enteredPlace)) {
+//                            // update meeting, datetime, place
+//                            dateTime = enteredDateTime;
+//                            place = enteredPlace;
+//                            this.meeting = meetingActivities.editMeeting(this.meeting, currLogInUser, dateTime, place);
+//
+//                            // print successful edition
+//                            editAgreeSessionPresenter.printSuccessInfo(dateTime, place);
+//
+//                            // create log
+//                            meetingLog = new CreateLogRecord().createLogRecord(currLogInUser, MeetingAction.EDIT);
+//
+//                            // print time of edition of this user
+//                            editAgreeSessionPresenter.printEditionTime(currLogInUser, meeting);
+//
+//                        } else {
+//                            editAgreeSessionPresenter.noEditionRespond();
+//                        }
+//                    } else { // not editable -> cancels the meeting
+//                        boolean cancelled = meetingActivities.cancelMeeting(meeting);
+//                        assert cancelled;
+//                        editAgreeSessionPresenter.cancelRespond(meeting);
+//                        isCancel = true;
+//                    }
+//                    break;
+//
+//
+//                case "aa":
+//                    if (meetingActivities.agreeMeeting(meeting, currLogInUser)) {
+//                        // print successful agreement
+//                        editAgreeSessionPresenter.printSuccessInfo(currLogInUser, meeting);
+//
+//                        //create log
+//                        meetingLog = new CreateLogRecord().createLogRecord(currLogInUser, MeetingAction.AGREE);
+//
+//                    } else {
+//                        editAgreeSessionPresenter.RepeatedAgreementError();
+//                    }
+//                    break;
+//
+//
+//                default:
+//                    editAgreeSessionPresenter.printExit();
+//                    break;
+//            }
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     private boolean isEdited(LocalDateTime enteredDateTime, String enteredPlace) {
         return !enteredDateTime.equals(dateTime) || !enteredPlace.equals(place);

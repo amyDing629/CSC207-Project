@@ -22,7 +22,7 @@ class ConfirmSession {
         meetingLog = null;
 
         // show session intro
-        confirmSessionPresenter.printIntro();
+        confirmSessionPresenter.printIntro(meeting.getDateTime(), meeting.getPlace());
 
         // allow input
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));

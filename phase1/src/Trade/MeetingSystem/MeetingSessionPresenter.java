@@ -5,7 +5,7 @@ import java.util.UUID;
 
 public abstract class MeetingSessionPresenter {
 
-    abstract void printIntro();
+    abstract void printIntro(LocalDateTime dateTime, String place);
 
     void printSuccessInfo(LocalDateTime dateTime, String place) {
         System.out.println("  " + "- the current proposed time is:" + dateTime.toString());
@@ -21,6 +21,5 @@ public abstract class MeetingSessionPresenter {
     }
 
     abstract void printExit();
-
 
 }

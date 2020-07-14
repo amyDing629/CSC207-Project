@@ -31,7 +31,7 @@ class SetUpSession {
     void runSetupSession(UUID currLogInUser, ArrayList<UUID> users) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        setUpSessionPresenter.printIntro();
+        setUpSessionPresenter.printIntro(dateTime, place);
 
         String input = br.readLine();
         try {
