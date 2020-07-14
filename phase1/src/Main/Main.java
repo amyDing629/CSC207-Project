@@ -1,6 +1,5 @@
 package Main;
 
-import Inventory.Inventory;
 import Main.UI.Register;
 import Trade.TradeManager;
 import User.AdministrativeUser;
@@ -14,6 +13,10 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
+    /**
+     * @param args the arguments for run the system
+     * run the system
+     */
     public static void main(String[] args) throws IOException {
         int a=-1;
         GateWay gw = new GateWay();

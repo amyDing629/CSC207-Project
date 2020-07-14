@@ -3,26 +3,47 @@ package Main.UI;
 import Inventory.InventoryUI;
 import Inventory.Item;
 import Main.GateWay;
-import Trade.Trade;
 import User.User;
 import User.UserManager;
 import Trade.*;
 import Inventory.*;
-
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
-
+/**
+ * [User Interface]
+ * shows the interface that the user uses
+ */
 public class UserInventory {
+    /**
+     * read input
+     */
     public Scanner sc;
+    /**
+     * the object that edits the user list of input gateway
+     */
     public UserManager um;
+    /**
+     * user in user system
+     */
     public User user;
+    /**
+     * the object in the Item list of input gateway
+     */
     public Inventory iv;
+    /**
+     * the object that edits the Item list of input gateway
+     */
     public TradeManager tm;
+    /**
+     * the place we store information
+     */
     public GateWay gw;
 
+    /**
+     * [constructor]
+     * @param u  the input user
+     * @param gw the place we store information
+     */
     public UserInventory(User u, GateWay gw) {
         user = u;
         sc = new Scanner(System.in);
@@ -32,10 +53,13 @@ public class UserInventory {
         tm = new TradeManager(gw);
     }
 
+    /**
+     * run the system
+     */
     public void run() throws IOException {
         int exit=-1;
         while(exit!=0) {
-            System.out.println("--------------------\nInventory.Inventory");
+            System.out.println("--------------------\nInventory");
             System.out.println("Hello," + user.getUsername());
             System.out.println("Actions:\n1.Lend wishes\n2.Borrow wishes\n3.Edit lend wishes\n4.Edit borrow wishes\n0.exit");
             int input = sc.nextInt();

@@ -1,12 +1,5 @@
 package User;
 
-import Inventory.Inventory;
-import Trade.Trade;
-import Trade.TradeManager;
-import Trade.TradeStatus;
-
-import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.*;
 import java.util.UUID;
 /**
@@ -210,11 +203,6 @@ public class User {
         return tradeHistory;
     }
 
-    /**
-     * @param id the trade id the user wants to add
-     * add the trade id into user's trade history
-     */
-    public void addTradeHistory(UUID id){tradeHistory.add(id);}
 
     /**
      * return whether the user is administrative user or not
@@ -252,141 +240,37 @@ public class User {
         isBorrow = borrow;
     }
 
-
     /**
-     * return the list of all trades that the user has
+     * return the week transaction limit
      */
-    /*
-    public List<Trade> getAllTrade() throws IOException {
-        TradeManager a = new TradeManager();
-        ArrayList<Trade> b = new ArrayList<>();
-        for(UUID i: tradeHistory){
-            b.add(a.getTrade(i));
-        }
-        return b;
-    }
-
-     */
-
-    /**
-     * return the list of all unconfirmed trades that the user has
-     */
-    /*
-    public List<Trade> getUnconfirmed() throws IOException {
-        List<Trade> trade=new ArrayList<>();
-        for(Trade t: getAllTrade()){
-            if(t.getStatus().equals(TradeStatus.unconfirmed)){
-                trade.add(t);
-            }
-        }
-        return trade;
-    }
-
-     */
-
-    /**
-     * return the list of all incomplete trades that the user has
-     */
-    /*
-    public List<Trade> getIncomplete() throws IOException {
-        List<Trade> trade=new ArrayList<>();
-        for(Trade t: getAllTrade()){
-            if(t.getStatus().equals(TradeStatus.incomplete)){
-                trade.add(t);
-            }
-        }
-        return trade;
-    }
-
-     */
-
-    /**
-     * return the list of most recent three trades that the user has
-     * if the user has less than three trades, return all the trades the user has
-     */
-    /*
-    public List<Trade> getTradeHistoryTop() throws IOException {
-        List<Trade> trade=new ArrayList<>();
-        TradeManager a = new TradeManager();
-        int y = 0;
-        for (int i = getAllTrade().size(); i>0;i-- ) {
-            if (((!(getAllTrade().get(i).getStatus().equals(TradeStatus.unconfirmed))) &&
-                    (!(getAllTrade().get(i).getStatus().equals(TradeStatus.cancelled))))&&y!=3) {
-                trade.add(getAllTrade().get(i));
-                y++;
-            }
-        }
-        return trade;
-    }
-
-     */
-
-
-    /**
-     * @param no the new message that the user send
-     * renew the notification list
-     */
-    public void addNotification(String no){
-        notification.add(no);
-    }
-
     public int getWeekTransactionLimit() {
         return weekTransactionLimit;
     }
 
+    /**
+     * return the incomplete transaction limit
+     */
     public int getIncompleteTransactionLimit() {
         return incompleteTransactionLimit;
     }
 
+    /**
+     * @param wishBorrow the input item list
+     * set the borrow list as input item list
+     */
     public void setWishBorrow(ArrayList<String> wishBorrow) {
         this.wishBorrow =wishBorrow;
     }
 
-    public void setUsername(String name) {
-        username=name;
-    }
-
+    /**
+     * @param password the input string
+     * set the input string as the password
+     */
     public void setPassword(String password) {
         this.password=password;
     }
 
-    /**
-     * return the number of incomplete transactions that the user has
-     */
-    /*
-    public int getIncompleteTransaction() throws IOException {
-        TradeManager a = new TradeManager();
-        int number=0;
-        for (UUID i : tradeHistory) {
-            if (a.getTrade(i).getStatus().equals(TradeStatus.incomplete)) {
-                number++;
-            }
-        }
-        return number;
-    }
 
-     */
-
-    /**
-     * return the number of transactions of the user has in seven days from the most recent trade
-     */
-    /*
-    public int getTradeNumber() throws IOException {
-        TradeManager a = new TradeManager();
-        if(tradeHistory.size() == 0){return 0;}
-        Trade s = a.getTrade(tradeHistory.get(tradeHistory.size() - 1));
-        LocalDateTime x  = s.getCreateTime();
-        LocalDateTime y = x.minusDays(7);
-        int number = 0;
-        for (UUID i : tradeHistory){
-            if(a.getTrade(i).getCreateTime().isAfter(y) && a.getTrade(i).getCreateTime().isBefore(x)){
-                number ++;
-            }
-        }
-        return number;
-    }
-
-     */
 
     /**
      * return the status that whether the user can borrow or not
@@ -409,57 +293,4 @@ public class User {
         return borrowed;
     }
 
-    /**
-     * @param description the description string the user wants to give to the item
-     * @param name the name of the item
-     * the user set the item with the new description
-     */
-    /*
-    public void setDescription(String description, String name){
-        Inventory b = new Inventory();
-        b.getItem(name).setDescription(description);
-    }
-
-     */
-
-    /**
-     * return the list of most frequent three traders that the user trades with
-     * if the user trades with less than three traders, return all the traders the user trades with
-     */
-    /*
-    public List<User> getFrequentUser() throws IOException {
-        try {
-            UserManager u = new UserManager();
-            List<Trade> a = getAllTrade();
-            HashMap<UUID, Integer> b = new HashMap<>();
-            for (Trade c : a) {
-                for (UUID d : c.getUsers()) {
-                    if (!(d.equals(id))) {
-                        if (b.containsKey(d)) {
-                            b.replace(d, b.get(d) + 1);
-                        } else {
-                            b.put(d, 1);
-                        }
-                    }
-                }
-            }
-            if(b.size() == 0){return null;}
-            int e = 0;
-            ArrayList<User> g = new ArrayList<>();
-            int maxValueInMap = (Collections.max(b.values()));
-            for (Map.Entry<UUID, Integer> entry : b.entrySet()) {
-                if (entry.getValue() == maxValueInMap && e != 3) {
-                    g.add(u.getUser(entry.getKey()));
-                    e++;
-                    b.remove(entry.getKey());
-                }
-            }
-            return g;
-        }catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-     */
 }

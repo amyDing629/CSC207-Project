@@ -1,10 +1,7 @@
 package Trade;
 
-import Inventory.*;
 import Inventory.Item;
-import User.*;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -65,7 +62,9 @@ public class TwowayTrade extends Trade {
         return rst;
     }
 
-
+    /**
+     * return the string shows the type of the trade
+     */
     public String getType() {
         return "twoway";
     }

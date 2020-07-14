@@ -32,9 +32,6 @@ public class InventoryController {
     boolean selectItem(String line){
         for (Item it: iv.getLendingList()){
             if (it.getName().equals(line)){
-                /**
-                 * the item that the user selects. item equals to null if the user hasn't selected an item.
-                 */
                 System.out.println(it + " has been selected");
                 return true;
             }

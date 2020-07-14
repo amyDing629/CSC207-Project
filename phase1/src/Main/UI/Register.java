@@ -1,7 +1,6 @@
 package Main.UI;
 
 import Main.GateWay;
-import User.AdministrativeUser;
 import User.FileEditor;
 import User.User;
 import User.UserManager;
@@ -9,17 +8,37 @@ import User.UserManager;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * [User Interface]
+ * shows the interface that the user uses
+ */
 public class Register {
+    /**
+     * read input
+     */
     public Scanner sc;
+    /**
+     * the object that edits the user list of input gateway
+     */
     public UserManager a;
+    /**
+     * the object that edit the information from username.txt
+     */
     public FileEditor fe;
 
+    /**
+     * [constructor]
+     * @param gw the place we store information
+     */
     public Register(GateWay gw){
         sc = new Scanner(System.in);
         a=new UserManager(gw);
         fe=new FileEditor(gw);
     }
 
+    /**
+     * run the system
+     */
     public void run() throws IOException {
         Scanner sc = new Scanner(System.in);
         int input=0;

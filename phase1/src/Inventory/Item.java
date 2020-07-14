@@ -81,13 +81,6 @@ public class Item {
         return ownerName;
     }
 
-    /**
-     * setter for owner, if the permanent trade is made, the item's owner should be changed.
-     * @param user new owner
-     */
-    public void setOwner(String user){
-        ownerName = user;
-    }
 
     /**
      * to String

@@ -2,9 +2,7 @@ package Trade;
 
 import Inventory.Item;
 import Trade.MeetingSystem.Meeting;
-import User.User;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.UUID;
@@ -61,10 +59,17 @@ public abstract class Trade {
         id = UUID.randomUUID();
     }
 
+    /**
+     * return the id of the user
+     */
     public UUID getCreator(){
         return creator;
     }
 
+    /**
+     * @param currUserID id we want to set
+     * set the id equals the input id
+     */
     public void setCreator(UUID currUserID){
         creator = currUserID;
     }

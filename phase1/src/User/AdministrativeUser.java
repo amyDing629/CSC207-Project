@@ -1,6 +1,5 @@
 package User;
 
-import Main.GateWay;
 import Trade.TradeManager;
 
 import java.io.IOException;
@@ -34,20 +33,13 @@ public class AdministrativeUser extends User {
         a.setFrozen(true);
     }
 
-    /**
-     * @param a the user that the administrative user wants to set not frozen
-     * set the user.User a account unfrozen
-     */
-    public void unfreeze(User a){
-        a.setFrozen(false);
-    }
 
     /**
      * @param username the name of the administrative user that wants to add
      * @param password the password of the administrative user that wants to add
      * the initial administrative user can add the new administrative user
      */
-    public void addNewUser(String username, String password) throws IOException {
+    public void addNewUser(String username, String password) {
         List<User> x = um.getUserList();
         if (id.equals(x.get(0).getId())){
         AdministrativeUser a = new AdministrativeUser(username, password, true, tm, um);
@@ -75,14 +67,4 @@ public class AdministrativeUser extends User {
         }
     }
 
-    /**
-     * @param c the difference between the amount of user.User b borrows and lends
-     * @param b the user that the administrative user wants to check the difference between the amount of user.User b
-     *          borrows and lends
-     *set the user.User a account isBorrow false if b does not lend more than c items of the amount that user.User b borrows
-     */
-    public void canBorrow(int c, User b) throws IOException {
-        b.setBorrow(b.getLend().size() + c >= b.getBorrowed().size());
-        b.setDiff(c);
-    }
 }

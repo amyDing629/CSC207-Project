@@ -23,6 +23,9 @@ public class TradeController {
     /**
      * [constructor]
      * @param currUser the user that is using the system
+     * @param tm the object that edits the trade list of input gateway
+     * @param um the object that edits the user list of input gateway
+     * @param iv the object in the Item list of input gateway
      */
     TradeController(User currUser, TradeManager tm, UserManager um, Inventory iv){
         this.currUser = currUser;

@@ -1,9 +1,7 @@
 package Trade;
 
 import Inventory.*;
-import User.*;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -50,6 +48,9 @@ public class OnewayTrade extends Trade {
         return users;
     }
 
+    /**
+     * extends the to string method of the trade
+     */
     public String toString(){
         return "trade id: " + getId() + "\ntrade type: " + getType()+ "\ntrader: " + getUsers() + "\nitems: "
                 + getItemList() + "\ncreate time: " + getCreateTime().format(formatter);

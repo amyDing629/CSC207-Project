@@ -5,29 +5,25 @@ import java.util.ArrayList;
 import Main.GateWay;
 
 /**
- * [Use Case Class]
- * inventory: present existed items. Edit(add, delete, edit) existed items. Get item through item name.
- * Read and write Inventory.txt (temporary, may move to another class).
+ * [use case class]
+ * the object that edits Item list in gateway
  */
 public class Inventory {
+    /**
+     * the place we store information
+     */
     GateWay gw;
 
-    /**
-     * all existed items in user's lending list.
-     */
-    //ArrayList<Item> lendingList;
 
     /**
      * [Constructor]
+     * @param gw the place we store information
      * get lendingList from file (read file will move to another class).
      */
-    //public Inventory() {
-    //lendingList = new ArrayList<Item>();
-    //}
-
     public Inventory(GateWay gw){
         this.gw = gw;
     }
+
     /**
      * getter for the lending list
      * @return lendingList
@@ -55,7 +51,7 @@ public class Inventory {
      * add the item into the inventory
      * @param item the item added
      */
-    public void addItem(Item item) throws IOException {
+    public void addItem(Item item){
         gw.getInv().add(item);
     }
 
@@ -70,21 +66,6 @@ public class Inventory {
             gw.getInv().remove(item);
         } else {
             throw new IOException("the item is not in the inventory");
-        }
-    }
-
-    /**
-     *
-     * @param item the item you want to edit
-     * @param target the type that it wants to edit
-     * @param newContent new content
-     * @throws IOException when the the new edition can not be updated in the file.
-     */
-    public void editItem(Item item, String target, String newContent) throws IOException {
-        if (target.equals("description")){
-            item.setDescription(newContent);
-        }else{
-            item.setOwner(newContent);
         }
     }
 
