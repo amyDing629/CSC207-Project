@@ -70,17 +70,16 @@ public class MeetingSystem implements IMeetingSystem {
      * - the meeting has not been cancelled (i.e edit time of each ClientUser < threshold of edition time)
      *
      * @param currLogInUser the user that is currently logging in and use the meeting system
-     * @param lastEditUser  the last edit user id
      */
     @Override
-    public void run(UUID currLogInUser, UUID lastEditUser) throws IOException {
+    public void run(UUID currLogInUser) throws IOException {
         // first meeting
         if (isFirst) {
             if (meeting == null) {
                 setupSession.runSetupSession(currLogInUser, users);
                 updateSessionInfo(MeetingSessionName.SETUP, currLogInUser);
             } else if (meeting.getStatus().equals(MeetingStatus.incomplete)) {
-                editAgreeSession.runEditAgreeSession(currLogInUser, meeting, lastEditUser);
+                editAgreeSession.runEditAgreeSession(currLogInUser, meeting, meeting.getLastEditUser());
                 updateSessionInfo(MeetingSessionName.EDIT_AGREE, currLogInUser);
             } else if (meeting.getStatus().equals(MeetingStatus.agreed)) {
                 confirmSession.runConfirmSession(currLogInUser, meeting);
