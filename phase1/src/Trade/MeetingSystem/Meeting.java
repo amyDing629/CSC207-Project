@@ -36,7 +36,7 @@ public class Meeting {
      * true stands for confirmed,
      * false stands for not yet agreed the proposed time and/or place
      */
-    private final HashMap<UUID, Boolean> idToAgreedStatus = new HashMap<>();
+    private HashMap<UUID, Boolean> idToAgreedStatus = new HashMap<>();
     /**
      * This is Meeting's status: INCOMPLETE (default), AGREED, COMPLETED, CANCELLED;
      * 1. only both MeetingEditors are of agreed in agreed status, the meeting status should be then set to "agreed";
@@ -136,6 +136,11 @@ public class Meeting {
         return new ArrayList<>(idToConfirmedStatus.values());
     }
 
+
+
+    public void setAgreedStatusFull(HashMap<UUID, Boolean> agreedStatus) {
+        idToAgreedStatus = agreedStatus;
+    }
     /**
      * Returns the agreed statuses with userIds. (Getter for idToAgreedStatus)
      *
@@ -208,7 +213,11 @@ public class Meeting {
         return false;
     }
 
-    void changeLastEditUser(UUID currLogInUser) {
+    /**
+     * setter for lastEditUser
+     * @param currLogInUser the last user that edit the meeting
+     */
+    public void changeLastEditUser(UUID currLogInUser) {
         lastEditUser = currLogInUser;
     }
 
