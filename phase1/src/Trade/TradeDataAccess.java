@@ -22,10 +22,16 @@ public class TradeDataAccess {
     DateTimeFormatter formatter = dt.getFormat(); // yyyy-MM-dd HH:mm
     GateWay gw;
 
+    /**
+     * @param gw the place we store information
+     */
     public TradeDataAccess(GateWay gw){
         this.gw = gw;
     }
 
+    /**
+     * read the files
+     */
     public void readFile() {
         Trade trade;
         try {
@@ -125,7 +131,6 @@ public class TradeDataAccess {
                 String idToCoStr = conStatus.get(user1) + ";" + conStatus.get(user2);
                 HashMap<UUID, Boolean> agreeStatus = fm.getAgreedStatusFull();
                 String idToAgreeStr = agreeStatus.get(user1) + ";" + agreeStatus.get(user2);
-                //2020-06-30 11:49/home/incomplete/0;0/false;false
                 fmStr = fm.getDateTime().format(formatter)+"/"+fm.getPlace()+"/"+fm.getStatus()
                         +"/"+idToEdStr+"/"+ idToCoStr+"/"+idToAgreeStr;
 
@@ -151,6 +156,9 @@ public class TradeDataAccess {
         }
     }
 
+    /**
+     * update the file
+     */
     public void updateFile(){
         File file = new File("phase1/src/trade.txt");
         try {

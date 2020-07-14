@@ -20,7 +20,6 @@ import java.util.UUID;
  * Automatically update the trade history for both users in the trade.
  */
 public class TradeManager {
-    //private ArrayList<Trade> tradeList;
     public GateWay gw;
 
     public TradeManager(GateWay gw){

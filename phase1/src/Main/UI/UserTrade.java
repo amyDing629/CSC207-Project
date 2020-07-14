@@ -2,7 +2,6 @@ package Main.UI;
 
 import Main.GateWay;
 import Trade.Trade;
-import User.AdministrativeUser;
 import User.User;
 import User.UserManager;
 import Trade.*;
@@ -10,12 +9,33 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * [User Interface]
+ * shows the interface that the user uses
+ */
 public class UserTrade {
+    /**
+     * read input
+     */
     public Scanner sc;
+    /**
+     * the object that edits the user list of input gateway
+     */
     public UserManager um;
+    /**
+     * the object that edits the Item list of input gateway
+     */
     public TradeManager tm;
+    /**
+     * user in user system
+     */
     public User user;
 
+    /**
+     * [constructor]
+     * @param u  the input user
+     * @param gw the place we store information
+     */
     public UserTrade(User u, GateWay gw) {
         user = u;
         sc = new Scanner(System.in);
@@ -23,6 +43,9 @@ public class UserTrade {
         tm = new TradeManager(gw);
     }
 
+    /**
+     * run the system
+     */
     public void run() throws IOException {
         Scanner sc = new Scanner(System.in);
         int escape = 0;

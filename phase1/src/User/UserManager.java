@@ -1,5 +1,5 @@
 package User;
-import Inventory.Inventory;
+
 import Main.GateWay;
 import Trade.Trade;
 import Trade.TradeManager;
@@ -12,15 +12,27 @@ import java.util.*;
  * The renew and modification of users
  */
 public class UserManager {
+    /**
+     * the place we store information
+     */
     GateWay gw;
+    /**
+     * all the user list
+     */
     ArrayList<User> userList;
 
+    /**
+     * [constructor]
+     * @param gw the place we store information
+     */
     public UserManager(GateWay gw){
         this.gw = gw;
         userList = gw.getUsers();
     }
 
-
+    /**
+     * return the user list
+     */
     public ArrayList<User> getUserList(){
         return userList;
     }
@@ -28,17 +40,12 @@ public class UserManager {
      * @param name the name of the user that the manager wants to get
      * find the user by the user name
      */
-    public User getUser(String name) throws IOException {
-        try{
-            FileEditor f = new FileEditor(gw);
-            if(f.readFile().size() == 0){return null;}
-            //ArrayList<User> userList = splitUser(readFile());
-            for(User u : gw.getUsers()){
-                if(u.getUsername().equals(name))
-                    return u;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+    public User getUser(String name) {
+        FileEditor f = new FileEditor(gw);
+        if(f.readFile().size() == 0){return null;}
+        for(User u : gw.getUsers()){
+            if(u.getUsername().equals(name))
+                return u;
         }
         return null;
     }
@@ -47,17 +54,13 @@ public class UserManager {
      * @param userId the ID of the user that the manager wants to get
      * find the user by the user ID
      */
-    public User getUser(UUID userId) throws IOException {
-        try{
-            FileEditor f = new FileEditor(gw);
-            if(f.readFile().size() == 0){return null;}
-            //ArrayList<User> userList = splitUser(readFile());
-            for(User u : gw.getUsers()){
-                if(u.getId().equals(userId))
-                    return u;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+    public User getUser(UUID userId) {
+        FileEditor f = new FileEditor(gw);
+        if(f.readFile().size() == 0){return null;}
+        //ArrayList<User> userList = splitUser(readFile());
+        for(User u : gw.getUsers()){
+            if(u.getId().equals(userId))
+                return u;
         }
         return null;
     }
@@ -67,34 +70,13 @@ public class UserManager {
                 true, new TradeManager(gw), new UserManager(gw));
     }
 
-    /**
-     * @param id the id of the user that the manager wants to get
-     * find the trade list of the user by the user id
-     */
-    /*
-    public List<Trade> findTrade(UUID id){
-        try{
-            FileEditor f = new FileEditor();
-            if(f.readFile().size() == 0){return null;}
-            for(User u : gm.users){
-                if(u.getId().equals(id))
-                    return u.getAllTrade();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-     */
 
     /**
      * @param name the name of the user that the manager check
      * @param password the password of the user that the manager check
      * Check if the name matches with the password
      */
-    public boolean verifyUser(String name, String password) throws IOException {
-        //ArrayList<User> userList = splitUser(readFile());
+    public boolean verifyUser(String name, String password) {
         for(User u : gw.getUsers()){
             if(u.getUsername().equals(name) && u.getPassword().equals(password)) {
                 return true;}
@@ -106,7 +88,7 @@ public class UserManager {
      * return the list of most frequent three traders that the user trades with
      * if the user trades with less than three traders, return all the traders the user trades with
      */
-    public List<String> getFrequentUser(TradeManager tm, User user) throws IOException {
+    public List<String> getFrequentUser(TradeManager tm, User user) {
         try {
             List<Trade> a = tm.getAllTrade(user);
             HashMap<UUID, Integer> b = new HashMap<>();
@@ -142,6 +124,10 @@ public class UserManager {
         return null;
     }
 
+    /**
+     * @param user the input user
+     * return whether the user account is frozen or not
+     */
     public boolean checkFrozen(User user) throws IOException {
         TradeManager a = new TradeManager(gw);
         if(a.getTradeNumber(user) > user.getWeekTransactionLimit()){

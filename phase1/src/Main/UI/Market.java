@@ -6,18 +6,39 @@ import Main.GateWay;
 import User.*;
 import java.util.Scanner;
 
+/**
+ * [User Interface]
+ * shows the interface that the user uses
+ */
 public class Market {
 
+    /**
+     * read input
+     */
     public Scanner sc;
+    /**
+     * user in user system
+     */
     public User user;
+    /**
+     * the object in the Item list of input gateway
+     */
     public Inventory iv;
 
+    /**
+     * [constructor]
+     * @param u the input user
+     * @param gw the place we store information
+     */
     public Market(User u, GateWay gw) {
         this.iv = new Inventory(gw);
         user = u;
         sc = new Scanner(System.in);
     }
 
+    /**
+     * run the system
+     */
     public void run(){
         System.out.println("Hello "+ user.getUsername());
         for(Item item:iv.getAvailableList()){

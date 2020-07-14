@@ -8,8 +8,15 @@ import Main.GateWay;
 import Trade.TradeManager;
 
 public class FileEditor {
+    /**
+     * the place we store information
+     */
     GateWay gw;
 
+    /**
+     * [constructor]
+     * @param gw the place we store information
+     */
     public FileEditor(GateWay gw){
         this.gw= gw;
     }
@@ -17,7 +24,7 @@ public class FileEditor {
     /**
      * read the username.txt file, return a list of list that contains all the information of the user
      */
-    public ArrayList<ArrayList<String>> readFile() throws IOException {
+    public ArrayList<ArrayList<String>> readFile() {
         ArrayList<ArrayList<String>> myList = new ArrayList<>();
         try {
             BufferedReader in = new BufferedReader(new FileReader("phase1/src/username.txt"));
@@ -45,7 +52,7 @@ public class FileEditor {
      * @param a the  list of list that contains all the information of the user
      * return list of all users , set the attribute information of all the users
      */
-    public void splitUser(ArrayList<ArrayList<String>> a) throws IOException {
+    public void splitUser(ArrayList<ArrayList<String>> a) {
         for (ArrayList<String> b : a) {
             if (b.get(3).equals("true")) {
                 String[] c = b.get(6).split("; ");
@@ -156,7 +163,7 @@ public class FileEditor {
      * @param u the user that the manager wants to add in
      * add the user into the txt file in the type of string
      */
-    private void addUser(User u) throws IOException {
+    private void addUser(User u) {
         try{
             FileOutputStream output = new FileOutputStream("phase1/src/username.txt", true);
             String name = u.getUsername();
@@ -196,7 +203,7 @@ public class FileEditor {
     /**
      * update all the information in the username.txt
      */
-    public void updateFile() throws IOException {
+    public void updateFile() {
         try {
             PrintWriter writer = new PrintWriter("phase1/src/username.txt");
             writer.print("");

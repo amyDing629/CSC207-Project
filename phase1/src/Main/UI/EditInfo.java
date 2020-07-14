@@ -9,16 +9,43 @@ import User.UserManager;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
+/**
+ * [User Interface]
+ * shows the interface that the user uses
+ */
 public class EditInfo {
+
+    /**
+     * read input
+     */
     public Scanner sc;
+    /**
+     * the object that edits the user list of input gateway
+     */
     public UserManager a;
+
+    /**
+     * user in user system
+     */
     public User user;
+
+    /**
+     * the object in the Item list of input gateway
+     */
     public Inventory v;
+
+    /**
+     * the place we store information
+     */
     public GateWay gw;
 
+    /**
+     * [constructor]
+     * @param u the input user
+     * @param gw the input gateway
+     */
     public EditInfo(User u, GateWay gw){
         user=u;
         sc = new Scanner(System.in);
@@ -26,6 +53,10 @@ public class EditInfo {
         v = new Inventory(gw);
         this.gw=gw;
     }
+
+    /**
+     * run the system
+     */
     public void run() throws IOException {
         Scanner sc=new Scanner(System.in);
         int exit=-1;

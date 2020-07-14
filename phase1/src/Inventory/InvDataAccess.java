@@ -1,17 +1,29 @@
 package Inventory;
 
 import Main.GateWay;
-import Trade.Trade;
 
 import java.io.*;
-
+/**
+ * [gateway class]
+ * the class that read and write all the item information from ItemList.txt into ItemList in gateway
+ */
 public class InvDataAccess {
+    /**
+     * the place we store information
+     */
     private final GateWay gw;
 
+    /**
+     * [constructor]
+     * @param gw the place we store information
+     */
     public InvDataAccess(GateWay gw){
         this.gw = gw;
     }
 
+    /**
+     * read all the items from ItemList.txt
+     */
     public void readFile(){
         try {
             BufferedReader reader = new BufferedReader(new FileReader("phase1/src/ItemList.txt"));

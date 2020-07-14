@@ -35,19 +35,31 @@ public class InventoryPresenter {
         System.out.println("item owner: " + item.getOwnerName());
     }
 
+    /**
+     * print the message
+     */
     void wrongInput(){
         System.out.println("wrong input, please type again");
     }
 
+    /**
+     * print the guidance
+     */
     void selectItem(){
         System.out.println("type '1' to exit, or select an item");
     }
 
+    /**
+     * print the menu.
+     */
     void itemAction(){
         System.out.println("menu:\n type '1' to add to wish borrow list and return back to the inventory" +
                 "\n type '2' to return back to inventory directly");
     }
 
+    /**
+     * print the notification
+     */
     void addToWishBorrow(boolean isAdded){
         if (isAdded){
             System.out.println("the item has been moved to the wish list");
@@ -56,6 +68,9 @@ public class InventoryPresenter {
         }
     }
 
+    /**
+     * print the message
+     */
     void isInWishBorrow(){
         System.out.println("the item has already been in your wish list");
     }
