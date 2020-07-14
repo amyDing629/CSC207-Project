@@ -39,15 +39,13 @@ public class UserTrade {
                     for (int i = 0; i < iU.size(); i++) {
                         System.out.println(i+". " + iU.get(i).toString());
                     }
-                    System.out.println("Which trade do you want to confirm? select trade number to confirm");
+                    System.out.println("Which trade do you want to confirm? select trade number to confirm, enter anything else to exit");
                     int input2 = sc.nextInt();
                     sc.nextLine();
                     if ((input2 < iU.size()) && (input2 >= 0)) {
                         TradeUI tu=new TradeUI(user,iU.get(input2).getId(),tm,um);
                         tu.run();
                         System.out.println("Success");
-                    } else {
-                        System.out.println("Wrong Number, returning to UserTrade menu....");
                     }
                     break;
                 case 2:
