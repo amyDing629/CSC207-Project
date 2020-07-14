@@ -2,7 +2,7 @@ package Trade;
 import User.UserManager;
 import Inventory.Inventory;
 import Inventory.Item;
-import User.User;
+import User.ClientUser;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -15,7 +15,7 @@ public class RequestTradeUI{
     /**
      * current user that use this system
      */
-    private final User currUser;
+    private final ClientUser currUser;
     /**
      * the item selected that is used to request trade
      */
@@ -33,8 +33,8 @@ public class RequestTradeUI{
      * @param item item selected by the current user
      * @throws IOException tarUser is not found
      */
-    public RequestTradeUI(User currUser, Item item, TradeManager tm, UserManager um, Inventory iv) throws IOException {
-        trc = new TradeController(currUser, tm, um, iv);
+    public RequestTradeUI(ClientUser currUser, Item item, TradeManager tm, UserManager um, Inventory iv) throws IOException {
+        trc = new TradeController(currUser, tm, um);
         this.currUser = currUser;
         this.item = item;
         tp = new TradePresenter(currUser);

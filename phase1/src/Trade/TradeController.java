@@ -2,7 +2,7 @@ package Trade;
 
 import Inventory.Inventory;
 import Inventory.Item;
-import User.User;
+import User.ClientUser;
 import User.*;
 
 import java.io.IOException;
@@ -13,28 +13,25 @@ import java.time.LocalDateTime;
  * the action of trade depend on the input of user
  */
 public class TradeController {
-    private final User currUser;
-    private User tarUser;
+    private final ClientUser currUser;
+    private ClientUser tarUser;
     private final TradeManager tm;
     private Trade currTrade;
-    private UserManager um;
-    private Inventory iv;
+    private final UserManager um;
 
     /**
      * [constructor]
      * @param currUser the user that is using the system
      * @param tm the object that edits the trade list of input gateway
      * @param um the object that edits the user list of input gateway
-     * @param iv the object in the Item list of input gateway
      */
-    TradeController(User currUser, TradeManager tm, UserManager um, Inventory iv){
+    TradeController(ClientUser currUser, TradeManager tm, UserManager um){
         this.currUser = currUser;
         this.tm = tm;
         this.um = um;
-        this.iv = iv;
     }
 
-    TradeController(User currUser, Trade currTrade, TradeManager tm, UserManager um){
+    TradeController(ClientUser currUser, Trade currTrade, TradeManager tm, UserManager um){
         this.currUser = currUser;
         this.currTrade = currTrade;
         this.tm = tm;
@@ -47,9 +44,8 @@ public class TradeController {
     /**
      * get owner of the item
      * @param item current item selected by currUser
-     * @throws IOException can not find the target user
      */
-    void getTarUser(Item item) throws IOException {
+    void getTarUser(Item item){
         tarUser = um.getUser(item.getOwnerName());
     }
 
@@ -140,7 +136,7 @@ public class TradeController {
      * set the status of trade to complete and make trade
      * @throws IOException if the item is not deleted from user's wishlist and inventory
      */
-    void completeTrade() throws IOException {
+    void completeTrade(){
         tm.completeTrade(currTrade);
     }
 

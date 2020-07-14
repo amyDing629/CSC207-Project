@@ -1,7 +1,7 @@
 package Trade;
 
 import Trade.MeetingSystem.MeetingSystem;
-import User.User;
+import User.ClientUser;
 import User.UserManager;
 
 import java.io.BufferedReader;
@@ -17,12 +17,11 @@ import java.util.UUID;
  * allow users to confirm and edit trade
  */
 public class TradeUI {
-    User currUser;
+    ClientUser currUser;
     Trade trade;
     TradeController tc;
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     TradePresenter tp;
-    TradeManager tm;
 
 
     /**
@@ -30,8 +29,7 @@ public class TradeUI {
      * @param currUser the user that is using the system
      * @param tradeId the trade id of the current trade
      */
-    public TradeUI(User currUser, UUID tradeId, TradeManager tm, UserManager um){
-        this.tm = tm;
+    public TradeUI(ClientUser currUser, UUID tradeId, TradeManager tm, UserManager um){
         this.currUser = currUser;
         trade = tm.getTrade(tradeId);
         tc = new TradeController(currUser, trade, tm, um);
@@ -74,10 +72,8 @@ public class TradeUI {
                             case "first meeting" :
                                 tp.enterFirstM();
                                 MeetingSystem mt = new MeetingSystem(trade.getUsers(), true, trade.getMeeting());
-                                System.out.println(trade.getMeeting().getLastEditUser());
                                 mt.run(currUser.getId());
                                 trade.changeMeeting(mt.getMeeting());
-                                System.out.println(trade.getMeeting().getLastEditUser());
                                 if (trade.getMeeting() == null){
                                     break;
                                 }

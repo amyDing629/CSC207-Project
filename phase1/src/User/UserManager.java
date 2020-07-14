@@ -19,7 +19,7 @@ public class UserManager {
     /**
      * the list of users
      */
-    ArrayList<User> userList;
+    ArrayList<ClientUser> userList;
 
     /**
      * [constructor]
@@ -33,7 +33,7 @@ public class UserManager {
     /**
      * return list of users
      */
-    public ArrayList<User> getUserList(){
+    public ArrayList<ClientUser> getUserList(){
         return userList;
     }
 
@@ -41,10 +41,10 @@ public class UserManager {
      * @param name the name of the user that the manager wants to get
      * find the user by the user name
      */
-    public User getUser(String name) {
+    public ClientUser getUser(String name) {
         FileEditor f = new FileEditor(gw);
-        //ArrayList<User> userList = splitUser(readFile());
-        for(User u : gw.getUsers()){
+        //ArrayList<ClientUser> userList = splitUser(readFile());
+        for(ClientUser u : gw.getUsers()){
             if(u.getUsername().equals(name))
                 return u;
         }
@@ -55,10 +55,10 @@ public class UserManager {
      * @param userId the ID of the user that the manager wants to get
      * find the user by the user ID
      */
-    public User getUser(UUID userId) {
+    public ClientUser getUser(UUID userId) {
         FileEditor f = new FileEditor(gw);
-        //ArrayList<User> userList = splitUser(readFile());
-        for(User u : gw.getUsers()){
+        //ArrayList<ClientUser> userList = splitUser(readFile());
+        for(ClientUser u : gw.getUsers()){
             if(u.getId().equals(userId))
                 return u;
         }
@@ -69,7 +69,7 @@ public class UserManager {
      * @param user the input user
      *get the administrative user by id
      */
-    public AdministrativeUser getAdmin(User user){
+    public AdministrativeUser getAdmin(ClientUser user){
         return new AdministrativeUser(user.getUsername(), user.getPassword(),
                 true, new TradeManager(gw), new UserManager(gw));
     }
@@ -81,8 +81,8 @@ public class UserManager {
      * Check if the name matches with the password
      */
     public boolean verifyUser(String name, String password) {
-        //ArrayList<User> userList = splitUser(readFile());
-        for(User u : gw.getUsers()){
+        //ArrayList<ClientUser> userList = splitUser(readFile());
+        for(ClientUser u : gw.getUsers()){
             if(u.getUsername().equals(name) && u.getPassword().equals(password)) {
                 return true;}
         }
@@ -95,55 +95,35 @@ public class UserManager {
      * return the list of most frequent three traders that the user trades with
      * if the user trades with less than three traders, return all the traders the user trades with
      */
-    public List<String> getFrequentUser(TradeManager tm, User user) {
-        try {
-            List<Trade> a = tm.getAllTrade(user);
-            HashMap<UUID, Integer> b = new HashMap<>();
-            for (Trade c : a) {
-                for (UUID d : c.getUsers()) {
-                    if (!(d.equals(user.getId()))) {
-                        if (b.containsKey(d)) {
-                            b.replace(d, b.get(d) + 1);
-                        } else {
-                            b.put(d, 1);
-                        }
+    public List<String> getFrequentUser(TradeManager tm, ClientUser user) {
+        List<Trade> a = tm.getAllTrade(user);
+        HashMap<UUID, Integer> b = new HashMap<>();
+        for (Trade c : a) {
+            for (UUID d : c.getUsers()) {
+                if (!(d.equals(user.getId()))) {
+                    if (b.containsKey(d)) {
+                        b.replace(d, b.get(d) + 1);
+                    } else {
+                        b.put(d, 1);
                     }
                 }
             }
-            if(b.size() == 0){
-                List<String> EmptyList = new ArrayList<>(Collections.emptyList());
-                EmptyList.add("no user");
-                return EmptyList;}
-            int e = 0;
-            ArrayList<String> g = new ArrayList<>();
-            int maxValueInMap = (Collections.max(b.values()));
-            for (Map.Entry<UUID, Integer> entry : b.entrySet()) {
-                if (entry.getValue() == maxValueInMap && e != 3) {
-                    g.add(getUser(entry.getKey()).getUsername());
-                    e++;
-                    b.remove(entry.getKey());
-                }
+        }
+        if(b.size() == 0){
+            List<String> EmptyList = new ArrayList<>(Collections.emptyList());
+            EmptyList.add("no user");
+            return EmptyList;}
+        int e = 0;
+        ArrayList<String> g = new ArrayList<>();
+        int maxValueInMap = (Collections.max(b.values()));
+        for (Map.Entry<UUID, Integer> entry : b.entrySet()) {
+            if (entry.getValue() == maxValueInMap && e != 3) {
+                g.add(getUser(entry.getKey()).getUsername());
+                e++;
+                b.remove(entry.getKey());
             }
-            return g;
-        }catch (IOException e) {
-            e.printStackTrace();
         }
-        return null;
-    }
-
-    /**
-     * @param user the input user
-     * Check the status whether the user account is frozen or not
-     */
-    public boolean checkFrozen(User user) throws IOException {
-        TradeManager a = new TradeManager(gw);
-        if(a.getTradeNumber(user) > user.getWeekTransactionLimit()){
-            return true;
-        }
-        else if(a.getIncomplete(user).size() > user.getIncompleteTransactionLimit()){
-            return true;
-        }
-        else return user.getLend().size() - user.getBorrowed().size() < user.getDiff();
+        return g;
     }
 }
 

@@ -14,7 +14,7 @@ import java.util.Scanner;
  * This is a input port for edit meeting action, which interacts with the user and obtains the meeting editing
  * information.
  * <p>
- * The user.User can interact with prompts and choose to
+ * The user.ClientUser can interact with prompts and choose to
  * - edit time
  * - edit place
  * - edit both time and place
@@ -39,7 +39,7 @@ class EditMeetingInputController {
         this.dateTime = dateTime;
         this.place = place;
 
-        // Obtain user.User input of edition info
+        // Obtain user.ClientUser input of edition info
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         boolean isInputValid = true;

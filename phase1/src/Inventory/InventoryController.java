@@ -1,5 +1,5 @@
 package Inventory;
-import User.User;
+import User.ClientUser;
 
 /**
  * [controller]
@@ -13,13 +13,13 @@ public class InventoryController {
     /**
      * the user that is using the system.
      */
-    private final User currUser;
+    private final ClientUser currUser;
 
     /**
      * [constructor]
      * @param currUser current user
      */
-    InventoryController(User currUser, Inventory iv){
+    InventoryController(ClientUser currUser, Inventory iv){
         this.currUser = currUser;
         this.iv = iv;
     }

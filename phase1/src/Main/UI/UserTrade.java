@@ -4,7 +4,7 @@ import Main.GateWay;
 import Trade.Trade;
 import Trade.TradeManager;
 import Trade.TradeUI;
-import User.User;
+import User.ClientUser;
 import User.UserManager;
 
 import java.io.IOException;
@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * [User Interface]
+ * [ClientUser Interface]
  * shows the interface that the user uses
  */
 public class UserTrade {
@@ -31,14 +31,14 @@ public class UserTrade {
     /**
      * user in user system
      */
-    public User user;
+    public ClientUser user;
 
     /**
      * [constructor]
      * @param u  the input user
      * @param gw the place we store information
      */
-    public UserTrade(User u, GateWay gw) {
+    public UserTrade(ClientUser u, GateWay gw) {
         user = u;
         sc = new Scanner(System.in);
         um = new UserManager(gw);
@@ -55,7 +55,7 @@ public class UserTrade {
             List<Trade> iL = tm.getIncomplete(user);
             List<Trade> iU = tm.getUnconfirmed(user);
             System.out.println("--------------------\nTrade");
-            System.out.println("Hello,user" + user.getUsername());
+            System.out.println("Hello,user "+ user.getUsername());
             System.out.println("Menu:\n1.confirm trades\n2.complete trade\n3.Trade History\n0.quit");
             int input1 = sc.nextInt();
             sc.nextLine();
@@ -89,7 +89,7 @@ public class UserTrade {
                     }
                 case 3:
                     System.out.println("Hi user: " + user.getUsername());
-                    System.out.println("Completed past trades:");
+                    System.out.println("Your trades:");
                     List<Trade> tHis = tm.getTradeHistoryTop(user);
                     System.out.println("****************");
                     for (int i = 0; i < tHis.size(); i++) {

@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 /**
- * [User Interface]
+ * [ClientUser Interface]
  * shows the interface that the user uses
  */
 public class Login {

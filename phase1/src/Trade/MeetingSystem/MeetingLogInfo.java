@@ -3,7 +3,7 @@ package Trade.MeetingSystem;
 import java.util.UUID;
 
 /**
- * A Record of an action of the Client user.User who attends this meeting.
+ * A Record of an action of the Client user.ClientUser who attends this meeting.
  * <p>
  * Log Action Types:
  * + SETUP

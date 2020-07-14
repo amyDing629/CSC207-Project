@@ -6,7 +6,7 @@ import java.util.UUID;
  * [Entity class]
  * A MeetingEditor of a meeting who can edit the meeting.
  * <p>
- * This class is used as a record of editing time of each user.User who attends to a meeting.
+ * This class is used as a record of editing time of each user.ClientUser who attends to a meeting.
  */
 
 public class MeetingEditor implements IMeetingAttendee {

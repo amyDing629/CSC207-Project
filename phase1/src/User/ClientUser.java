@@ -6,7 +6,7 @@ import java.util.UUID;
  * [Entity class]
  * The basic functionality of users
  */
-public class User {
+public class ClientUser {
     /**
      * the id of user, evey user has unique id.
      */
@@ -66,7 +66,7 @@ public class User {
      * @param isAdmin the boolean shows if the user is administrative user or not
      * ID is random generated and is unique
      */
-    public User(String username, String password, boolean isAdmin){
+    public ClientUser(String username, String password, boolean isAdmin){
         this.username = username;
         this.password = password;
         //this.id = id;

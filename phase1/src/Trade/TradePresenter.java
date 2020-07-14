@@ -1,13 +1,13 @@
 package Trade;
 
-import User.User;
+import User.ClientUser;
 
 /**
  * [presenter]
  * present the information of trade
  */
 public class TradePresenter {
-    private final User currUser;
+    private final ClientUser currUser;
     private Trade trade;
 
     /**
@@ -15,12 +15,12 @@ public class TradePresenter {
      * @param currUser current user
      * @param trade current trade
      */
-    TradePresenter(User currUser, Trade trade){
+    TradePresenter(ClientUser currUser, Trade trade){
         this.currUser = currUser;
         this.trade = trade;
     }
 
-    TradePresenter(User currUser){
+    TradePresenter(ClientUser currUser){
         this.currUser = currUser;
     }
 
@@ -69,7 +69,7 @@ public class TradePresenter {
     }
 
     void selectConfirm(){
-        System.out.println("type 1 to confirm trade, type 2 to not confirm");
+        System.out.println("type 1 to confirm the trade, type 2 to disagree/cancel the trade");
     }
 
     void completeTrade(){

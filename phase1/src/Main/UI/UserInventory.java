@@ -3,14 +3,14 @@ package Main.UI;
 import Inventory.InventoryUI;
 import Inventory.Item;
 import Main.GateWay;
-import User.User;
+import User.ClientUser;
 import User.UserManager;
 import Trade.*;
 import Inventory.*;
 import java.io.IOException;
 import java.util.*;
 /**
- * [User Interface]
+ * [ClientUser Interface]
  * shows the interface that the user uses
  */
 public class UserInventory {
@@ -25,7 +25,7 @@ public class UserInventory {
     /**
      * user in user system
      */
-    public User user;
+    public ClientUser user;
     /**
      * the object in the Item list of input gateway
      */
@@ -44,7 +44,7 @@ public class UserInventory {
      * @param u  the input user
      * @param gw the place we store information
      */
-    public UserInventory(User u, GateWay gw) {
+    public UserInventory(ClientUser u, GateWay gw) {
         user = u;
         sc = new Scanner(System.in);
         um=new UserManager(gw);
@@ -69,6 +69,7 @@ public class UserInventory {
                 case 1:
                     System.out.println("Lend wishes");
                     List<String> lw=user.getWishLend();
+                    System.out.println(user.getWishLend());
                     for (String s : lw) {
                         System.out.println("item:" + s);
                     }
@@ -76,8 +77,8 @@ public class UserInventory {
                 case 2:
                     System.out.println("Borrow wishes");
                     List<String> lb=user.getWishBorrow();
-                    for (int i=0;i<lb.size();i++){
-                        System.out.println("wish borrow item:"+i+" "+lb.get(i));
+                    for (String value : lb) {
+                        System.out.println("wish borrow item: " + value);
                     }
                     System.out.println("Select a item to start the trade! Enter -1 to quit to menu");
                     String input22=sc.nextLine();
