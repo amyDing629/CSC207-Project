@@ -1,19 +1,19 @@
 package Inventory;
 
-import User.User;
+import User.ClientUser;
 
 /**
  * present information of the inventory system to user.
  */
 public class InventoryPresenter {
-    User currUser;
+    ClientUser currUser;
     Inventory iv;
 
     /**
      * [constructor]
      * @param currUser the user that is using the system
      */
-    InventoryPresenter(User currUser, Inventory iv){
+    InventoryPresenter(ClientUser currUser, Inventory iv){
         this.currUser = currUser;
         this.iv = iv;
     }

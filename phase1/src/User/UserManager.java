@@ -19,7 +19,7 @@ public class UserManager {
     /**
      * the list of users
      */
-    ArrayList<User> userList;
+    ArrayList<ClientUser> userList;
 
     /**
      * [constructor]
@@ -33,7 +33,7 @@ public class UserManager {
     /**
      * return list of users
      */
-    public ArrayList<User> getUserList(){
+    public ArrayList<ClientUser> getUserList(){
         return userList;
     }
 
@@ -41,10 +41,10 @@ public class UserManager {
      * @param name the name of the user that the manager wants to get
      * find the user by the user name
      */
-    public User getUser(String name) {
+    public ClientUser getUser(String name) {
         FileEditor f = new FileEditor(gw);
-        //ArrayList<User> userList = splitUser(readFile());
-        for(User u : gw.getUsers()){
+        //ArrayList<ClientUser> userList = splitUser(readFile());
+        for(ClientUser u : gw.getUsers()){
             if(u.getUsername().equals(name))
                 return u;
         }
@@ -55,10 +55,10 @@ public class UserManager {
      * @param userId the ID of the user that the manager wants to get
      * find the user by the user ID
      */
-    public User getUser(UUID userId) {
+    public ClientUser getUser(UUID userId) {
         FileEditor f = new FileEditor(gw);
-        //ArrayList<User> userList = splitUser(readFile());
-        for(User u : gw.getUsers()){
+        //ArrayList<ClientUser> userList = splitUser(readFile());
+        for(ClientUser u : gw.getUsers()){
             if(u.getId().equals(userId))
                 return u;
         }
@@ -69,7 +69,7 @@ public class UserManager {
      * @param user the input user
      *get the administrative user by id
      */
-    public AdministrativeUser getAdmin(User user){
+    public AdministrativeUser getAdmin(ClientUser user){
         return new AdministrativeUser(user.getUsername(), user.getPassword(),
                 true, new TradeManager(gw), new UserManager(gw));
     }
@@ -81,8 +81,8 @@ public class UserManager {
      * Check if the name matches with the password
      */
     public boolean verifyUser(String name, String password) {
-        //ArrayList<User> userList = splitUser(readFile());
-        for(User u : gw.getUsers()){
+        //ArrayList<ClientUser> userList = splitUser(readFile());
+        for(ClientUser u : gw.getUsers()){
             if(u.getUsername().equals(name) && u.getPassword().equals(password)) {
                 return true;}
         }
@@ -95,7 +95,7 @@ public class UserManager {
      * return the list of most frequent three traders that the user trades with
      * if the user trades with less than three traders, return all the traders the user trades with
      */
-    public List<String> getFrequentUser(TradeManager tm, User user) {
+    public List<String> getFrequentUser(TradeManager tm, ClientUser user) {
         try {
             List<Trade> a = tm.getAllTrade(user);
             HashMap<UUID, Integer> b = new HashMap<>();

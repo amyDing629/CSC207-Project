@@ -1,14 +1,14 @@
 package Main.UI;
 
 import Main.GateWay;
+import User.ClientUser;
 import User.FileEditor;
-import User.User;
 import User.UserManager;
 
 import java.util.Scanner;
 
 /**
- * [User Interface]
+ * [ClientUser Interface]
  * shows the interface that the user uses
  */
 public class Register {
@@ -50,7 +50,7 @@ public class Register {
             System.out.print(">");
             String password = sc.nextLine();
             if (a.getUser(username) == null) {
-                User user1 = new User(username, password, false);
+                ClientUser user1 = new ClientUser(username, password, false);
                 fe.addToUsers(user1);
                 System.out.println("Your account has been successfully created!");
                 System.out.println("Your id: " + user1.getId());

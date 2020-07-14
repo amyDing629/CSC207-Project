@@ -108,7 +108,7 @@ public class FileEditor {
                 String[] c = b.get(6).split("; ");
                 ArrayList<String> lineList = new ArrayList<>(Arrays.asList(c));
 
-                User d = new User(b.get(1), b.get(2), false);
+                ClientUser d = new ClientUser(b.get(1), b.get(2), false);
                 d.setId(UUID.fromString(b.get(0)));
                 d.setNotification(lineList);
 
@@ -156,7 +156,7 @@ public class FileEditor {
         }
     }
 
-    public void addToUsers(User u){
+    public void addToUsers(ClientUser u){
         gw.getUsers().add(u);
     }
 
@@ -165,7 +165,7 @@ public class FileEditor {
      * @param u the user that the manager wants to add in
      * add the user into the txt file in the type of string
      */
-    private void addUser(User u) {
+    private void addUser(ClientUser u) {
         try{
             FileOutputStream output = new FileOutputStream("phase1/src/username.txt", true);
             String name = u.getUsername();
@@ -210,7 +210,7 @@ public class FileEditor {
             PrintWriter writer = new PrintWriter("phase1/src/username.txt");
             writer.print("");
             writer.close();
-            for (User u : gw.getUsers()) {
+            for (ClientUser u : gw.getUsers()) {
                 addUser(u);
             }
         }catch (IOException e) {

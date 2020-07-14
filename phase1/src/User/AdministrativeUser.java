@@ -8,7 +8,7 @@ import java.util.*;
  * [Entity class]
  * The basic functionality of administrative users
  */
-public class AdministrativeUser extends User {
+public class AdministrativeUser extends ClientUser {
     private final TradeManager tm;
     private final UserManager um;
 
@@ -27,9 +27,9 @@ public class AdministrativeUser extends User {
 
     /**
      * @param a the user that the administrative user wants to set frozen
-     * set the user.User a account frozen
+     * set the user.ClientUser a account frozen
      */
-    public void freeze(User a) {
+    public void freeze(ClientUser a) {
         a.setFrozen(true);
     }
 
@@ -40,7 +40,7 @@ public class AdministrativeUser extends User {
      * the initial administrative user can add the new administrative user
      */
     public void addNewUser(String username, String password) {
-        List<User> x = um.getUserList();
+        List<ClientUser> x = um.getUserList();
         if (id.equals(x.get(0).getId())){
         AdministrativeUser a = new AdministrativeUser(username, password, true, tm, um);
         x.add(a);
@@ -49,9 +49,9 @@ public class AdministrativeUser extends User {
 
     /**
      * @param a the user that the administrative user wants to check the transaction limit
-     * set the user.User a account frozen a has exceeded the week transaction limit
+     * set the user.ClientUser a account frozen a has exceeded the week transaction limit
      */
-    public void tradeLimit(User a) throws IOException {
+    public void tradeLimit(ClientUser a) throws IOException {
         if(!a.getIsFrozen()){
             a.setFrozen(tm.getTradeNumber(a) > a.getWeekTransactionLimit());
         }
@@ -59,9 +59,9 @@ public class AdministrativeUser extends User {
 
     /**
      * @param a the user that the administrative user wants to check the incomplete transaction limit
-     * set the user.User a account frozen if a has exceeded the incomplete transaction limit
+     * set the user.ClientUser a account frozen if a has exceeded the incomplete transaction limit
      */
-    public void incompleteTransaction(User a) throws IOException {
+    public void incompleteTransaction(ClientUser a) throws IOException {
         if(!a.getIsFrozen()){
             a.setFrozen(tm.getIncompleteTransaction(a) > a.getIncompleteTransactionLimit());
         }

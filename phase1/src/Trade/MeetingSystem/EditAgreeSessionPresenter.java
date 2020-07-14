@@ -41,7 +41,7 @@ class EditAgreeSessionPresenter extends MeetingSessionPresenter {
     }
 
     void printEditionTime(UUID currLogInUser, Meeting meeting) {
-        System.out.println("user.User " + currLogInUser + " current edit time:" +
+        System.out.println("user.ClientUser " + currLogInUser + " current edit time:" +
                 meeting.getEditor(currLogInUser).getTimeOfEdition());
     }
 
