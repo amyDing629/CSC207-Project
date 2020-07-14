@@ -71,8 +71,6 @@ public class TradeManager {
         UserManager userManager = new UserManager(gw);
         User currentUser = userManager.getUser(currUserId);
         User tarUser = userManager.getUser(tarUserId);
-        System.out.println(currentUser);
-        System.out.println(gw.getTrades());
         currentUser.getTradeHistory().add(newTrade.getId());
         tarUser.getTradeHistory().add(newTrade.getId());
     }
