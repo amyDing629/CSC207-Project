@@ -113,7 +113,48 @@ public class EditInfo {
                     break;
                 case 3:
                     System.out.println("Change user's limit");
-
+                    System.out.println("Menu\n1.Change trade limit\n2.Change Incomplete Transaction limit\n3.Change the difference between borrowed and lend");
+                    int input30=sc.nextInt();
+                    sc.nextLine();
+                    if(input30==1){
+                        System.out.println("Which user do you want to change?");
+                        String input31=sc.nextLine();
+                        if(a.getUser(input31)==null){
+                            System.out.println("You entered wrong username");
+                            break;
+                        }
+                        User b=a.getUser(input31);
+                        System.out.println("Enter a number to change");
+                        int input33=sc.nextInt();
+                        sc.nextLine();
+                        b.setWeekTransactionLimit(input33);
+                    }
+                    else if(input30==2){
+                        System.out.println("Which user do you want to change?");
+                        String input31=sc.nextLine();
+                        if(a.getUser(input31)==null){
+                            System.out.println("You entered wrong username");
+                            break;
+                        }
+                        User b=a.getUser(input31);
+                        System.out.println("Enter a number to change");
+                        int input33=sc.nextInt();
+                        sc.nextLine();
+                        b.setIncompleteTransaction(input33);
+                    }
+                    else if(input30==3){
+                        System.out.println("Which user do you want to change?");
+                        String input31=sc.nextLine();
+                        if(a.getUser(input31)==null){
+                            System.out.println("You entered wrong username");
+                            break;
+                        }
+                        User b=a.getUser(input31);
+                        System.out.println("Enter a number to change");
+                        int input33=sc.nextInt();
+                        sc.nextLine();
+                        b.setDiff(input33);
+                    }
                     break;
                 case 5:
                     System.out.println("Set a user into admin");
