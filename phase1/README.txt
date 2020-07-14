@@ -20,6 +20,8 @@ NonAdmin login(1): all user functions in the program. (Enter correct user name a
          [login menu]
          --> Edit information(1)
              --> change password (change password or exit)(1)
+             --> user freeze system:
+                 -->request to remove freeze:request to unfreeze with reasons.
              --> exit: exit to main menu(0)
          --> Trade(2)
              [trade menu]
@@ -53,6 +55,9 @@ Admin login(1): admin has all functions as normal users plus its own functions (
              [Edit information menu]
              --> Change password(1)
              --> Freeze a user(2)
+                 -->freeze a user: freeze a user by entering username.
+                 -->unfreeze a user: unfreeze user after user have unfreeze request.
+                 -->request to remove freeze:request to unfreeze with reasons.
              --> Change user's limit(3)
              --> add new item into the system(4)
                  --> Add item your self

@@ -124,6 +124,9 @@ public class EditInfo {
                     if(input30==1){
                         System.out.println("Which user do you want to change?");
                         String input31=sc.nextLine();
+                        if(input31.equals("-1")){
+                            break;
+                        }
                         if(a.getUser(input31)==null){
                             System.out.println("You entered wrong username");
                             break;
@@ -135,8 +138,11 @@ public class EditInfo {
                         b.setWeekTransactionLimit(input33);
                     }
                     else if(input30==2){
-                        System.out.println("Which user do you want to change?");
+                        System.out.println("Which user do you want to change?enter -1 to break");
                         String input31=sc.nextLine();
+                        if(input31.equals("-1")){
+                            break;
+                        }
                         if(a.getUser(input31)==null){
                             System.out.println("You entered wrong username");
                             break;
@@ -148,8 +154,11 @@ public class EditInfo {
                         b.setIncompleteTransaction(input33);
                     }
                     else if(input30==3){
-                        System.out.println("Which user do you want to change?");
+                        System.out.println("Which user do you want to change? enter -1 to break");
                         String input31=sc.nextLine();
+                        if(input31.equals("-1")){
+                            break;
+                        }
                         if(a.getUser(input31)==null){
                             System.out.println("You entered wrong username");
                             break;
