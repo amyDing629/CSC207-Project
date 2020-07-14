@@ -6,8 +6,8 @@ class SetUpSessionPresenter extends MeetingSessionPresenter {
 
     @Override
     void printIntro(LocalDateTime dateTime, String place) {
-        System.out.println("<Set-Up-Meeting Session> \n " +
-                "Enter \"ok\" to continue, or anything else to quit this session.");
+        System.out.println("<Set-Up-Meeting Session>");
+        System.out.println("Enter \"ok\" to continue, or anything else to quit this session.");
     }
 
     @Override
