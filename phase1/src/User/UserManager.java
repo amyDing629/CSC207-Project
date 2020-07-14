@@ -29,16 +29,11 @@ public class UserManager {
      * find the user by the user name
      */
     public User getUser(String name) throws IOException {
-        try{
-            FileEditor f = new FileEditor(gw);
-            if(f.readFile().size() == 0){return null;}
-            //ArrayList<User> userList = splitUser(readFile());
-            for(User u : gw.getUsers()){
-                if(u.getUsername().equals(name))
-                    return u;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        FileEditor f = new FileEditor(gw);
+        //ArrayList<User> userList = splitUser(readFile());
+        for(User u : gw.getUsers()){
+            if(u.getUsername().equals(name))
+                return u;
         }
         return null;
     }
