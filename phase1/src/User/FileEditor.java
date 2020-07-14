@@ -145,7 +145,6 @@ public class FileEditor {
                 gw.getUsers().add(d);
             }
         }
-
     }
 
     public void addToUsers(User u){
