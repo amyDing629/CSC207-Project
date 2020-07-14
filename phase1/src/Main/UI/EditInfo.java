@@ -245,7 +245,6 @@ public class EditInfo {
                         System.out.println("Added successfully!");
                     }
                     else if(inputA.equals("2")){
-                        try {
                             int x=0;
                             while(x==0) {
                                 ArrayList<ArrayList<String>> hii=gw.getApprovalItem();
@@ -276,9 +275,6 @@ public class EditInfo {
                                     System.out.println("You enter the wrong number!");
                                 }
                             }
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
                     }
                 case 0:
                     exit=0;
