@@ -43,7 +43,8 @@ public abstract class Trade {
      * the time the trade is created/requested
      */
     private final LocalDateTime createTime; //the time trade is created
-    private User creater;
+
+    private UUID creator;
 
     public static int temp = 30;
 
@@ -60,9 +61,14 @@ public abstract class Trade {
         id = UUID.randomUUID();
     }
 
-    public User getCreater(){
-        return creater;
+    public UUID getCreator(){
+        return creator;
     }
+
+    public void setCreator(UUID currUserID){
+        creator = currUserID;
+    }
+
 
 
     /**

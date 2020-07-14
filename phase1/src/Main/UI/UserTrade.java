@@ -26,9 +26,9 @@ public class UserTrade {
     public void run() throws IOException {
         Scanner sc = new Scanner(System.in);
         int escape = 0;
-        List<Trade> iL = tm.getIncomplete(user);
-        List<Trade> iU = tm.getUnconfirmed(user);
         while (escape == 0) {
+            List<Trade> iL = tm.getIncomplete(user);
+            List<Trade> iU = tm.getUnconfirmed(user);
             System.out.println("--------------------\nTrade");
             System.out.println("Hello,user" + user.getUsername());
             System.out.println("Menu:\n1.confirm trades\n2.complete trade\n3.Trade History\n0.quit");
@@ -37,15 +37,14 @@ public class UserTrade {
             switch (input1) {
                 case 1:
                     for (int i = 0; i < iU.size(); i++) {
-                        System.out.println((i + 1) + ". " + iU.get(i).toString());
+                        System.out.println(i+". " + iU.get(i).toString());
                     }
-                    System.out.println("Which trade do you want to confirm? select trade ID to confirm");
+                    System.out.println("Which trade do you want to confirm? select trade number to confirm, enter anything else to exit");
                     int input2 = sc.nextInt();
                     sc.nextLine();
-                    if ((input2 < (iU.size() + 1)) && (input2 > 0)) {
-                        iU.get(input2 - 1).setStatus(TradeStatus.incomplete);
-                    } else {
-                        System.out.println("Wrong Number, returning to UserTrade menu....");
+                    if ((input2 < iU.size()) && (input2 >= 0)) {
+                        TradeUI tu=new TradeUI(user,iU.get(input2).getId(),tm,um);
+                        tu.run();
                     }
                     break;
                 case 2:

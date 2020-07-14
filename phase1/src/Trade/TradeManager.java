@@ -36,7 +36,7 @@ public class TradeManager {
      * @param item the only one Inventory.Item to be trade in this created trade.Trade.
      * @param duration the duration of this trade.Trade, unit (days). -1 means the trade.Trade is permanent.
      */
-    void createOnewayTrade(UUID currUserId, UUID otherUserId, Item item, int duration, LocalDateTime time)
+    Trade createOnewayTrade(UUID currUserId, UUID otherUserId, Item item, int duration, LocalDateTime time)
             throws IOException {
         OnewayTrade newTrade = new OnewayTrade(currUserId, otherUserId, item, duration, time);
         gw.getTrades().add(newTrade);
@@ -44,6 +44,7 @@ public class TradeManager {
 
         //Update trade history for both users
         updateTradeHistory(currUserId, otherUserId, newTrade);
+        return newTrade;
 
     }
 
@@ -54,12 +55,13 @@ public class TradeManager {
      * @param item2to1 the other Inventory.Item to be trade in this created trade.Trade.
      * @param duration the duration of this trade.Trade, unit (days). -1 means the trade.Trade is permanent.
      */
-    void createTwowayTrade(UUID currUserId, UUID otherUserId, Item item1to2, Item item2to1, int duration,
+    Trade createTwowayTrade(UUID currUserId, UUID otherUserId, Item item1to2, Item item2to1, int duration,
                            LocalDateTime time) throws IOException {
         TwowayTrade newTrade = new TwowayTrade(currUserId, otherUserId, item1to2, item2to1, duration, time);
         gw.getTrades().add(newTrade);
         // Update trade history for both users
         updateTradeHistory(currUserId, otherUserId, newTrade);
+        return newTrade;
     }
 
 

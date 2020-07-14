@@ -116,7 +116,7 @@ public class TradeUI {
      */
     private void confirmTrade(){
         while (true) {
-            if (trade.getCreater().equals(currUser)){
+            if (trade.getCreator().equals(currUser.getId())){
                 System.out.println("you can not confirm the trade, please wait for another user to confirm");
             }
             tp.selectConfirm();
