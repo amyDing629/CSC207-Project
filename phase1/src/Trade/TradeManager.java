@@ -153,7 +153,6 @@ public class TradeManager {
             User lend = um.getUser(currTrade.getUsers().get(1));
             bor.getWishBorrow().remove(currTrade.getItemList().get(0).getName());
             lend.getWishLend().remove(currTrade.getItemList().get(0).getName());
-            iv.deleteItem(currTrade.getItemList().get(0));
         }else{
             User u1 = um.getUser(currTrade.getUsers().get(0));
             User u2 = um.getUser(currTrade.getUsers().get(1));
@@ -161,8 +160,6 @@ public class TradeManager {
             u1.getWishLend().remove(currTrade.getItemList().get(0).getName());
             u2.getWishBorrow().remove(currTrade.getItemList().get(0).getName());
             u2.getWishLend().remove(currTrade.getItemList().get(1).getName());
-            iv.getLendingList().remove(currTrade.getItemList().get(0));
-            iv.getLendingList().remove(currTrade.getItemList().get(1));
         }
 
     }
