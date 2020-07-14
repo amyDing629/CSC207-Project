@@ -64,7 +64,8 @@ public class EditInfo {
                         System.out.println("2.Freeze user\n3.unfreeze user");
                     }
                     if(!user.getIsFrozen()&&!user.getIsAdmin()){
-                        System.out.println("There nothing you can do here, enter anything to quit.");
+                        System.out.println("Returning to menu.....");
+                        break;
                     }
                     int inputF=sc.nextInt();
                     sc.nextLine();
