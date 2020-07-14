@@ -40,7 +40,7 @@ public class DataAccessFull {
     /**
      * read all the files
      */
-    public void readFile() throws IOException {
+    public void readFile() {
         ida.readFile();
         tda.readFile();
         fe.splitUser(fe.readFile());

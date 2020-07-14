@@ -2,9 +2,11 @@ package Main.UI;
 
 import Main.GateWay;
 import Trade.Trade;
+import Trade.TradeManager;
+import Trade.TradeUI;
 import User.User;
 import User.UserManager;
-import Trade.*;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
@@ -60,13 +62,14 @@ public class UserTrade {
             switch (input1) {
                 case 1:
                     for (int i = 0; i < iU.size(); i++) {
-                        System.out.println(i+". " + iU.get(i).toString());
+                        System.out.println(i + ". " + iU.get(i).toString());
                     }
-                    System.out.println("Which trade do you want to confirm? select the number before trade id or enter any integers else to exit");
+                    System.out.println("Which trade do you want to confirm? select the number before trade id or " +
+                            "enter any integers else to exit");
                     int input2 = sc.nextInt();
                     sc.nextLine();
                     if ((input2 < iU.size()) && (input2 >= 0)) {
-                        TradeUI tu=new TradeUI(user,iU.get(input2).getId(),tm,um);
+                        TradeUI tu = new TradeUI(user, iU.get(input2).getId(), tm, um);
                         tu.run();
                     }
                     break;
@@ -74,7 +77,8 @@ public class UserTrade {
                     for (int i = 0; i < iL.size(); i++) {
                         System.out.println((i + 1) + ". " + iL.get(i).toString());
                     }
-                    System.out.println("Which trade do you want to complete? select the number before trade id or enter any integers else to exit ");
+                    System.out.println("Which trade do you want to complete? select the number before trade id " +
+                            "or enter any integers else to exit ");
                     int input3 = sc.nextInt();
                     sc.nextLine();
                     if ((input3 < (iL.size() + 1)) && (input3 > 0)) {

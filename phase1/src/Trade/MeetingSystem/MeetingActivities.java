@@ -64,10 +64,7 @@ class MeetingActivities {
                 status.put(userId, true);
                 meeting.setIdToAgree(userId);
                 agreed = true;
-            } else {
-                System.out.println("Error: User already confirmed.");
             }
-
             //update meeting Status
             updateStatus(meeting);
 
@@ -94,8 +91,6 @@ class MeetingActivities {
                 status.put(userId, true);
                 meeting.setIdToConfirm(userId);
                 confirmed = true;
-            } else {
-                System.out.println("Error: user.User already confirmed.");
             }
 
             //update meeting Status

@@ -1,6 +1,8 @@
 package Trade;
+
 import Trade.MeetingSystem.MeetingSystem;
-import User.*;
+import User.User;
+import User.UserManager;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -87,19 +89,20 @@ public class TradeUI {
                                         trade.changeSecondMeeting(mt.setUpSecondMeeting(trade.getMeeting()));
                                     }
                                 }
-                                if (result.get(2).equals("setUp")){
+                                if (result.get(2).equals("setUp")) {
                                     System.out.println(result);
-                                    trade.setMeeting((LocalDateTime)result.get(0),
-                                            (String)result.get(1),trade.getUsers());
+                                    trade.setMeeting((LocalDateTime) result.get(0),
+                                            (String) result.get(1), trade.getUsers());
                                 }
 
-                                if (result.get(2).equals("cancelled")){
+                                if (result.get(2).equals("cancelled")) {
                                     tc.cancelTrade();
                                 }
                                 break;
                             case "second meeting":
                                 tp.enterSecondM();
-                                MeetingSystem smt = new MeetingSystem(trade.getUsers(), false, trade.getSecondMeeting());
+                                MeetingSystem smt = new MeetingSystem(trade.getUsers(), false,
+                                        trade.getSecondMeeting());
                                 smt.run(currUser.getId());
                                 trade.changeSecondMeeting(smt.getMeeting());
                                 ArrayList<Object> result2 = smt.runResult();

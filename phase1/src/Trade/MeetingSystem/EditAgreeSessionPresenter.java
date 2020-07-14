@@ -11,7 +11,8 @@ class EditAgreeSessionPresenter extends MeetingSessionPresenter {
         System.out.println("The current proposed date-time, place info: \n"
                 + "   - " + dateTime.toString() + "\n"
                 + "   - " + place + "\n");
-        System.out.println("Enter \"ee\" to edit, or enter \"aa\" to agree the proposal, or anything else to quit this session.");
+        System.out.println("Enter \"ee\" to edit, or enter \"aa\" to agree the proposal, " +
+                "or anything else to quit this session.");
 
     }
 
@@ -27,6 +28,10 @@ class EditAgreeSessionPresenter extends MeetingSessionPresenter {
                 + "   - " + dateTime.toString() + "\n"
                 + "   - " + place + "\n");
         System.out.println("Warn: You are not allowed to edit until the other edit or agree!");
+    }
+
+    void printNoEditionAllowed() {
+        System.out.println("Warn: You are not allowed to edit!");
     }
 
     @Override

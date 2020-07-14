@@ -1,5 +1,5 @@
 package User;
-import Inventory.Inventory;
+
 import Main.GateWay;
 import Trade.Trade;
 import Trade.TradeManager;
@@ -129,21 +129,6 @@ public class UserManager {
             e.printStackTrace();
         }
         return null;
-    }
-
-    /**
-     * @param user the input user
-     * Check the status whether the user account is frozen or not
-     */
-    public boolean checkFrozen(User user) throws IOException {
-        TradeManager a = new TradeManager(gw);
-        if(a.getTradeNumber(user) > user.getWeekTransactionLimit()){
-            return true;
-        }
-        else if(a.getIncomplete(user).size() > user.getIncompleteTransactionLimit()){
-            return true;
-        }
-        else return user.getLend().size() - user.getBorrowed().size() < user.getDiff();
     }
 }
 

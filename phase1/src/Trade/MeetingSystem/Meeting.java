@@ -216,7 +216,7 @@ public class Meeting {
     /**
      * setter for lastEditUser
      *
-     * @param currLogInUser the last user that setup or edit the meeting
+     * @param currLogInUser the last user that setup or edit or agree the meeting
      */
     public void changeLastEditUser(UUID currLogInUser) {
         lastEditUser = currLogInUser;

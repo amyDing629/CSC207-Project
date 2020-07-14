@@ -46,6 +46,14 @@ class EditAgreeSession {
                         editAgreeSessionPresenter.printNoEditionAllowed(dateTime, place);
                         break;
                     }
+
+                    UUID otherUser = meeting.getLastEditUser();
+                    boolean otherUserAgreed = this.meeting.getAgreedStatusFull().get(otherUser);
+                    if (otherUserAgreed) {
+                        editAgreeSessionPresenter.printNoEditionAllowed();
+                        break;
+                    }
+
                     if (isEditable(currLogInUser)) { // meeting can be edited
 
                         EditMeetingInputController editMeeting = new EditMeetingInputController(dateTime, place);
@@ -69,7 +77,7 @@ class EditAgreeSession {
                             place = enteredPlace;
                             this.meeting = meetingActivities.editMeeting(this.meeting, currLogInUser, dateTime, place);
 
-                            // update if edited
+                            // update if edited/agreed
                             edited = true;
 
                             // print successful edition
@@ -100,6 +108,9 @@ class EditAgreeSession {
                     }
 
                     if (meetingActivities.agreeMeeting(meeting, currLogInUser)) {
+                        // update if edited/agreed
+                        edited = true;
+
                         // print successful agreement
                         editAgreeSessionPresenter.printSuccessInfo(currLogInUser, meeting);
 

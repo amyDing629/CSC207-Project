@@ -7,7 +7,6 @@ import User.AdministrativeUser;
 import User.User;
 import User.UserManager;
 
-import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -138,34 +137,35 @@ public class EditInfo {
                         System.out.println("Please enter the reason why you should unfreeze...enter -1 to quit");
                         String des=sc.nextLine();
                         if(!des.equals("-1")){
-                            ArrayList<String> b=new ArrayList<>();
+                            ArrayList<String> b = new ArrayList<>();
                             b.add("2");
                             b.add(user.getUsername());
                             b.add(des);
                             gw.getApprovalUser().add(b);
-                                System.out.println("Request successfully");
-                                System.out.println("Please wait for the administrator to approve");
+                            System.out.println("Request successfully");
+                            System.out.println("Please wait for the administrator to approve");
                         }
                     }
                     break;
                 case 3:
                     System.out.println("Change user's limit");
-                    System.out.println("Menu\n1.Change trade limit\n2.Change Incomplete Transaction limit\n3.Change the difference between borrowed and lend");
-                    int input30=sc.nextInt();
+                    System.out.println("Menu\n1.Change trade limit\n2.Change Incomplete Transaction limit\n" +
+                            "3.Change the difference between borrowed and lend");
+                    int input30 = sc.nextInt();
                     sc.nextLine();
-                    if(input30==1){
+                    if (input30 == 1) {
                         System.out.println("Which user do you want to change?");
-                        String input31=sc.nextLine();
-                        if(input31.equals("-1")){
+                        String input31 = sc.nextLine();
+                        if (input31.equals("-1")) {
                             break;
                         }
-                        if(a.getUser(input31)==null){
+                        if (a.getUser(input31) == null) {
                             System.out.println("You entered wrong username");
                             break;
                         }
-                        User b=a.getUser(input31);
+                        User b = a.getUser(input31);
                         System.out.println("Enter a number to change");
-                        int input33=sc.nextInt();
+                        int input33 = sc.nextInt();
                         sc.nextLine();
                         b.setWeekTransactionLimit(input33);
                     }

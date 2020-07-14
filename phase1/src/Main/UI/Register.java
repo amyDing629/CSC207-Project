@@ -5,7 +5,6 @@ import User.FileEditor;
 import User.User;
 import User.UserManager;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -39,10 +38,10 @@ public class Register {
     /**
      * run the system
      */
-    public void run() throws IOException {
+    public void run() {
         Scanner sc = new Scanner(System.in);
-        int input=0;
-        while(input!=1) {
+        int input = 0;
+        while (input != 1) {
             System.out.println("--------------------\nRegister");
             System.out.println("Please enter your username!");
             System.out.print(">");
@@ -59,9 +58,10 @@ public class Register {
                 System.out.println("Your password: " + user1.getPassword());
                 input=1;
             }
-            else{
-                System.out.println("The username already exists, please try to register again, enter any number to continue. Enter 1 to exit.");
-                input=sc.nextInt();
+            else {
+                System.out.println("The username already exists, please try to register again, " +
+                        "enter any number to continue. Enter 1 to exit.");
+                input = sc.nextInt();
                 sc.nextLine();
             }
         }
