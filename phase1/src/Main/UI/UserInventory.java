@@ -97,7 +97,7 @@ public class UserInventory {
                             iv.deleteItem(iv.getItem(input43));
                         }
                         else{
-                            System.out.println("The item does not contain in your wish lend list");
+                            System.out.println("The item does not exist in your wish lend list");
                         }
                     }
                     break;
@@ -119,7 +119,7 @@ public class UserInventory {
                             user.removeBWishes(input54);
                         }
                         else{
-                            System.out.println("The item does not contain in your wish borrow list");
+                            System.out.println("The item does not exist in your wish borrow list");
                         }
                     }
                     break;
