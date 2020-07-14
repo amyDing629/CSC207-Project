@@ -18,8 +18,10 @@ The system will automatically create the first Admin with name "admin" and passw
 3. =======LOGIN=======
 Login: this is the entry point of trying all other functionalities in the system.
 
-4. ====FUNCTIONALITIES FOR ORDINARY USERS===
+4. ====FUNCTIONALITIES FOR CLIENT USERS===
 ** Change password: --> Edit information
+** Request unfreeze:
+    --> Edit information --> ClientUser Freeze System --> Request unfreeze
 
 ** View list of items in wishlist:
     --> Inventory --> Lend wishes/Borrow wishes
