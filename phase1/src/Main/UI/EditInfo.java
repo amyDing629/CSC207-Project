@@ -241,7 +241,7 @@ public class EditInfo {
                         Item i = new Item(name, user.getUsername());
                         i.setDescription(des);
                         v.addItem(i);
-                        user.addWishes("inputA");
+                        user.addWishes(inputA);
                         System.out.println("Added successfully!");
                     }
                     else if(inputA.equals("2")){
