@@ -6,15 +6,20 @@ import java.util.UUID;
 class EditAgreeSessionPresenter extends MeetingSessionPresenter {
 
     @Override
-    void printIntro() {
-        System.out.println("<Edit-Confirm-Meeting Session> \n " +
-                "Enter \"ee\" to edit, or enter \"aa\" to agree the proposal, or anything else to quit this session.");
+    void printIntro(LocalDateTime dateTime, String place) {
+        System.out.println("<Edit-Agree-Meeting Session>");
+        System.out.println("The current proposed date-time, place info: \n"
+                + "   - " + dateTime.toString() + "\n"
+                + "   - " + place + "\n");
+        System.out.println("Enter \"ee\" to edit, or enter \"aa\" to agree the proposal, or anything else to quit this session.");
+
     }
 
     @Override
     void printExit() {
         System.out.println("Exit Edit-Agree Session.");
     }
+
 
     // for edit session
     @Override

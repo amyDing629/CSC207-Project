@@ -24,6 +24,8 @@ class EditMeetingInputController {
     private LocalDateTime dateTime;
     private String place;
 
+    private boolean backToPreviousMenu = false;
+
     DateTime dt = new DateTime();
 
     EditMeetingInputControllerPresenter editMeetingInputControllerPresenter = new EditMeetingInputControllerPresenter();
@@ -32,7 +34,7 @@ class EditMeetingInputController {
     /**
      * Obtain user prompts of editing time and/or place.
      */
-    EditMeetingInputController(LocalDateTime dateTime, String place) throws IOException {
+    EditMeetingInputController(LocalDateTime dateTime, String place) {
         // Set the instance variables "dateTime", "place" with  before editing
         this.dateTime = dateTime;
         this.place = place;
@@ -41,7 +43,7 @@ class EditMeetingInputController {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         boolean isInputValid = true;
-        label:
+//        label:
         do {
             try {
                 editMeetingInputControllerPresenter.printEditMenu();
@@ -53,21 +55,60 @@ class EditMeetingInputController {
                 // instruction "..": quit
                 // other instructions: informs invalid and asks input again
                 switch (input) {
-                    case "1": editTimeInputController();
-                    case "2": editPlaceInputController();
+                    case "1": {
+                        editTimeInputController();
+                        break;
+                    }
+                    case "2": {
+                        editPlaceInputController();
+                        break;
+                    }
                     case "3":
                         editTimeInputController();
                         editPlaceInputController();
+                        break;
                     case "..": {
-                        break label;
+                        backToPreviousMenu = true;
+                        break;
                     }
-                    default: throw new InvalidInstructionException();
+                    default:
+                        isInputValid = false;
+                        throw new InvalidInstructionException();
                 }
-            } catch (InvalidInstructionException e) {
-                isInputValid = false;
+            } catch (IOException ignored) {
+
             }
         } while (!isInputValid);
     }
+
+//        boolean isInputValid = true;
+//        label:
+//        do {
+//            try {
+//                editMeetingInputControllerPresenter.printEditMenu();
+//
+//                String input = br.readLine();
+//                // instruction 1: edits time only
+//                // instruction 2: edits place only
+//                // instruction 3: edits time and place
+//                // instruction "..": quit
+//                // other instructions: informs invalid and asks input again
+//                switch (input) {
+//                    case "1": editTimeInputController();
+//                    case "2": editPlaceInputController();
+//                    case "3":
+//                        editTimeInputController();
+//                        editPlaceInputController();
+//                    case "..": {
+//                        break label;
+//                    }
+//                    default: throw new InvalidInstructionException();
+//                }
+//            } catch (InvalidInstructionException e) {
+//                isInputValid = false;
+//            }
+//        } while (!isInputValid);
+//    }
 
 
     private void editTimeInputController() {
@@ -124,7 +165,7 @@ class EditMeetingInputController {
      * @return an arraylist of the date-time, place
      */
     ArrayList<Object> editMeetingInputControllerResult() {
-        return new ArrayList<>(Arrays.asList(dateTime, place));
+        return new ArrayList<>(Arrays.asList(dateTime, place, backToPreviousMenu));
     }
 
 }
