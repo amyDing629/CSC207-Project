@@ -60,7 +60,9 @@ public class AdministrativeUser extends User {
      * set the user.User a account frozen a has exceeded the week transaction limit
      */
     public void tradeLimit(User a) throws IOException {
+        if(!a.getIsFrozen()){
         a.setFrozen(tm.getTradeNumber(a) > a.getWeekTransactionLimit());
+        }
     }
 
     /**
@@ -68,7 +70,9 @@ public class AdministrativeUser extends User {
      * set the user.User a account frozen if a has exceeded the incomplete transaction limit
      */
     public void incompleteTransaction(User a) throws IOException {
+        if(!a.getIsFrozen()){
         a.setFrozen(tm.getIncompleteTransaction(a) <= a.getIncompleteTransactionLimit());
+        }
     }
 
     /**
