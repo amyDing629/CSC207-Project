@@ -69,6 +69,7 @@ public class UserInventory {
                 case 1:
                     System.out.println("Lend wishes");
                     List<String> lw=user.getWishLend();
+                    System.out.println(user.getWishLend());
                     for (String s : lw) {
                         System.out.println("item:" + s);
                     }
@@ -76,8 +77,8 @@ public class UserInventory {
                 case 2:
                     System.out.println("Borrow wishes");
                     List<String> lb=user.getWishBorrow();
-                    for (int i=0;i<lb.size();i++){
-                        System.out.println("wish borrow item:"+i+" "+lb.get(i));
+                    for (String value : lb) {
+                        System.out.println("wish borrow item: " + value);
                     }
                     System.out.println("Select a item to start the trade! Enter -1 to quit to menu");
                     String input22=sc.nextLine();
