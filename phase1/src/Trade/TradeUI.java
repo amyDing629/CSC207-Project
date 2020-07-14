@@ -72,6 +72,7 @@ public class TradeUI {
                             case "first meeting" :
                                 tp.enterFirstM();
                                 MeetingSystem mt = new MeetingSystem(trade.getUsers(), true, trade.getMeeting());
+
                                 mt.run(currUser.getId());
                                 trade.changeMeeting(mt.getMeeting());
                                 if (trade.getMeeting() == null){
