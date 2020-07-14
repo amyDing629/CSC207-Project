@@ -33,7 +33,7 @@ public class EditInfo {
             System.out.println("--------------------\nEdit user information");
             System.out.println("Hello,user," + user.getUsername());
             System.out.println("Admin:"+user.getIsAdmin());
-            System.out.println("Actions:\n1.Change password\n2.Freeze a user");
+            System.out.println("Actions:\n1.Change password\n2.User Freeze System");
             if (user.getIsAdmin()) {
                 System.out.print("3.Change user's limit\n4.add new item into the system\n");
                 if(user.getId()==null){
@@ -90,11 +90,12 @@ public class EditInfo {
                         if(usa.size()==0){
                             System.out.println("Currently there is no user freeze request");
                         }
-                        System.out.println("Enter the item number to approve,enter -1 to quit.");
+                        System.out.println("Enter the User number to approve,enter -1 to quit.");
                         String inputU = sc.nextLine();
                         int k = Integer.parseInt(inputU);
                         if(k<usa.size()&&k>-1){
                             a.getUser(usa.get(k).get(1)).setFrozen(false);
+                            usa.remove(k);
                         }
                     }
                     else if(inputF==1){
