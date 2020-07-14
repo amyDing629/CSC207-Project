@@ -33,7 +33,7 @@ public class UserInventory {
         while(exit!=0) {
             System.out.println("--------------------\nInventory.Inventory");
             System.out.println("Hello," + user.getUsername());
-            System.out.println("Actions:\n1.Lend wishes\n2.Borrow wishes\n3.edit lend wishes\n4.edit borrow wishes\n0.exit");
+            System.out.println("Actions:\n1.Lend wishes\n2.Borrow wishes\n3.Edit lend wishes\n4.Edit borrow wishes\n0.exit");
             int input = sc.nextInt();
             sc.nextLine();
             System.out.println("-----------------------------");
@@ -51,7 +51,7 @@ public class UserInventory {
                     for (int i=0;i<lb.size();i++){
                         System.out.println("wish borrow item:"+i+" "+lb.get(i));
                     }
-                    System.out.println("Select a item to start the trade! enter -1 to quit to menu");
+                    System.out.println("Select a item to start the trade! Enter -1 to quit to menu");
                     String input22=sc.nextLine();
                     if(input22.equals("-1")){
                         break;
@@ -79,8 +79,8 @@ public class UserInventory {
                             FileWriter myWriter = new FileWriter("phase1/src/ItemApproval.txt");
                             myWriter.write("1"+"/"+input25+"/"+input1+"/"+user.getUsername());
                             myWriter.close();
-                            System.out.println("Successfully");
-                            System.out.println("please waiting for admin to approve");
+                            System.out.println("Request successfully");
+                            System.out.println("Please wait for the administrator to approve");
                         } catch (IOException e) {
                             System.out.println("An error occurred.");
                             e.printStackTrace();
