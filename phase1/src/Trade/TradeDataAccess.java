@@ -86,7 +86,7 @@ public class TradeDataAccess {
 
                 trade.setStatus(TradeStatus.valueOf(lst[9]));
                 trade.setId(tradeId);
-                trade.setCreator(UUID.fromString(lst[10]));
+                trade.setCreator(UUID.fromString(lst[11]));
                 gw.getTrades().add(trade);
                 line = reader.readLine();
             }
