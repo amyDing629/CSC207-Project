@@ -2,6 +2,11 @@ This is the phase 1 project for CSC207Y1 (summer) Software Design.
 
 Instructions to run the systems:
 
+Running this program requires intellij.
+Before running the program, make sure the txt files (serve as data storage file) are empty and with no blank space.
+For running the program, open class Main in package Main, and click the "run" button.
+
+
 =============== User ===============
 
 =============== Inventory ===============
