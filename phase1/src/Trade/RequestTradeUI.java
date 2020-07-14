@@ -34,7 +34,7 @@ public class RequestTradeUI{
      * @throws IOException tarUser is not found
      */
     public RequestTradeUI(ClientUser currUser, Item item, TradeManager tm, UserManager um, Inventory iv) throws IOException {
-        trc = new TradeController(currUser, tm, um, iv);
+        trc = new TradeController(currUser, tm, um);
         this.currUser = currUser;
         this.item = item;
         tp = new TradePresenter(currUser);

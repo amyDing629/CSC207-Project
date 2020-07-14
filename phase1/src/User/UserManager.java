@@ -96,39 +96,34 @@ public class UserManager {
      * if the user trades with less than three traders, return all the traders the user trades with
      */
     public List<String> getFrequentUser(TradeManager tm, ClientUser user) {
-        try {
-            List<Trade> a = tm.getAllTrade(user);
-            HashMap<UUID, Integer> b = new HashMap<>();
-            for (Trade c : a) {
-                for (UUID d : c.getUsers()) {
-                    if (!(d.equals(user.getId()))) {
-                        if (b.containsKey(d)) {
-                            b.replace(d, b.get(d) + 1);
-                        } else {
-                            b.put(d, 1);
-                        }
+        List<Trade> a = tm.getAllTrade(user);
+        HashMap<UUID, Integer> b = new HashMap<>();
+        for (Trade c : a) {
+            for (UUID d : c.getUsers()) {
+                if (!(d.equals(user.getId()))) {
+                    if (b.containsKey(d)) {
+                        b.replace(d, b.get(d) + 1);
+                    } else {
+                        b.put(d, 1);
                     }
                 }
             }
-            if(b.size() == 0){
-                List<String> EmptyList = new ArrayList<>(Collections.emptyList());
-                EmptyList.add("no user");
-                return EmptyList;}
-            int e = 0;
-            ArrayList<String> g = new ArrayList<>();
-            int maxValueInMap = (Collections.max(b.values()));
-            for (Map.Entry<UUID, Integer> entry : b.entrySet()) {
-                if (entry.getValue() == maxValueInMap && e != 3) {
-                    g.add(getUser(entry.getKey()).getUsername());
-                    e++;
-                    b.remove(entry.getKey());
-                }
-            }
-            return g;
-        }catch (IOException e) {
-            e.printStackTrace();
         }
-        return null;
+        if(b.size() == 0){
+            List<String> EmptyList = new ArrayList<>(Collections.emptyList());
+            EmptyList.add("no user");
+            return EmptyList;}
+        int e = 0;
+        ArrayList<String> g = new ArrayList<>();
+        int maxValueInMap = (Collections.max(b.values()));
+        for (Map.Entry<UUID, Integer> entry : b.entrySet()) {
+            if (entry.getValue() == maxValueInMap && e != 3) {
+                g.add(getUser(entry.getKey()).getUsername());
+                e++;
+                b.remove(entry.getKey());
+            }
+        }
+        return g;
     }
 }
 

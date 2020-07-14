@@ -22,7 +22,6 @@ public class TradeUI {
     TradeController tc;
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     TradePresenter tp;
-    TradeManager tm;
 
 
     /**
@@ -31,7 +30,6 @@ public class TradeUI {
      * @param tradeId the trade id of the current trade
      */
     public TradeUI(ClientUser currUser, UUID tradeId, TradeManager tm, UserManager um){
-        this.tm = tm;
         this.currUser = currUser;
         trade = tm.getTrade(tradeId);
         tc = new TradeController(currUser, trade, tm, um);
