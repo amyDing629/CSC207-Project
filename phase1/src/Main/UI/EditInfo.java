@@ -57,7 +57,7 @@ public class EditInfo {
     /**
      * run the system
      */
-    public void run() throws IOException {
+    public void run(){
         Scanner sc=new Scanner(System.in);
         int exit=-1;
         while(exit!=0) {
@@ -241,11 +241,11 @@ public class EditInfo {
                         Item i = new Item(name, user.getUsername());
                         i.setDescription(des);
                         v.addItem(i);
-                        user.addWishes(inputA);
+                        user.addWishes(name);
+
                         System.out.println("Added successfully!");
                     }
                     else if(inputA.equals("2")){
-                        try {
                             int x=0;
                             while(x==0) {
                                 ArrayList<ArrayList<String>> hii=gw.getApprovalItem();
@@ -276,9 +276,6 @@ public class EditInfo {
                                     System.out.println("You enter the wrong number!");
                                 }
                             }
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
                     }
                 case 0:
                     exit=0;

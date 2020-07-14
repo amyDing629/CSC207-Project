@@ -9,21 +9,27 @@ All files should be in a package named phase1 in the original location relative 
 
 Running the tests:
 For running the program, open class Main in package Main, and click the "run" button.
-After user clicks run, he will enter the main menu in the terminal:
--->
-(user should input 0, 1 or 2)
+The main menu UI will appear at the bottom (in terminal)
+To test all the available functionality, you need to:
+         register at least one ordinary user account into the system
+         (ps: The first admin will be automatically created with name "admin" and password "123")
+         (ps: Admin users are able to perform ordinary functionalities and other admin functionalities)
+         add items into at least two users' lend wish list.
+
+(user should input the serial number (0,1,2,etc.) only to select a menu option)
 [main menu]
-quit(0): stop 'main'
-register(2): register an account. (ps: The first admin will be automatically created with name "admin" and password "123")
+quit(0): stop 'main' execution
+
+register(2): register an account.
          --> enter username and password(only numbers and letters are allowed, else might cause errors.)
 NonAdmin login(1): all user functions in the program. (Enter correct user name and password to login)
          [login menu]
          --> Edit information(1)
              --> change password (change password or exit)(1)
              --> user freeze system:
-                 -->request to remove freeze:request to unfreeze with reasons.
+***                 -->request to remove freeze: request to unfreeze with reasons; option appears only when the account is frozen.
              --> exit: exit to main menu(0)
-         --> Trade(2)
+         --> Trade(2): testable after setting up at least one trade.
              [trade menu]
              --> confirm trade(1): choose an unconfirmed trade to make edition.
                  --> show all unconfirmed trade and enter trade system(input the number before trade).
@@ -35,8 +41,8 @@ NonAdmin login(1): all user functions in the program. (Enter correct user name a
          --> Inventory(3)
              [Inventory menu]
              --> Lend wishes: view a list of items that the user wants to lend
-             --> Borrow wishes: view a list of items that the user wants to borrow.
-                 --> enter trade system(input item name)
+             --> Borrow wishes: view a list of items that the user wants to borrow, entry point of trade system.
+                 --> enter [Trade system menu](input item name): one can set up trade only if there are items in borrow wish list.
              --> Edit lend wishes:
                  [edit lend wishes menu]
                  --> add wish: input item name and description to request to add the item the user wants to lend.
@@ -61,7 +67,7 @@ Admin login(1): admin has all functions as normal users plus its own functions (
                  -->request to remove freeze:request to unfreeze with reasons.
              --> Change user's limit(3)
              --> add new item into the system(4)
-                 --> Add item your self
+                 --> Add item for yourself: directly add item to the admin's lend wishes list.
                  --> Approve request from users: choose an item to approve(input the number before item)
              --> add new admin(5)
                  --> create new admin: create the name and password of the new administrative user

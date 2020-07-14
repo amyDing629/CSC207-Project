@@ -22,16 +22,10 @@ public class TradeDataAccess {
     DateTimeFormatter formatter = dt.getFormat(); // yyyy-MM-dd HH:mm
     GateWay gw;
 
-    /**
-     * @param gw the place we store information
-     */
     public TradeDataAccess(GateWay gw){
         this.gw = gw;
     }
 
-    /**
-     * read the files
-     */
     public void readFile() {
         Trade trade;
         try {
@@ -53,6 +47,7 @@ public class TradeDataAccess {
                 String scdMeeting = lst[8];
                 HashMap<UUID, Boolean> idToC = new HashMap<>();
                 HashMap<UUID, MeetingEditor> idToE = new HashMap<>();
+                HashMap<UUID, Boolean> idToA = new HashMap<>();
 
                 if (lst[1].equals("oneway")){
                     trade = new OnewayTrade(user1Id,user2Id,item1,duration,tradeTime);
@@ -79,9 +74,14 @@ public class TradeDataAccess {
                     me2.setTimeOfEdition(Integer.parseInt(editTime[1]));
                     idToE.put(user1Id,new MeetingEditor(user1Id));
                     idToE.put(user2Id,new MeetingEditor(user2Id));
+                    //set agree status
+                    String[] agreeMap = fm[5].split(";");
+                    idToA.put(user1Id,Boolean.parseBoolean(agreeMap[0]));
+                    idToA.put(user2Id,Boolean.parseBoolean(agreeMap[1]));
+                    trade.getMeeting().setAgreedStatusFull(idToA);
                     trade.getMeeting().setIdToEditor(idToE);
                     trade.getMeeting().setStatus(MeetingStatus.valueOf(fm[2]));
-
+                    trade.getMeeting().changeLastEditUser(UUID.fromString(fm[6]));
                 }
                 if (!scdMeeting.equals("null")){
                     String[] sm = scdMeeting.split("/");
@@ -131,8 +131,10 @@ public class TradeDataAccess {
                 String idToCoStr = conStatus.get(user1) + ";" + conStatus.get(user2);
                 HashMap<UUID, Boolean> agreeStatus = fm.getAgreedStatusFull();
                 String idToAgreeStr = agreeStatus.get(user1) + ";" + agreeStatus.get(user2);
+                String lastEditor = fm.getLastEditUser().toString();
+                //2020-06-30 11:49/home/incomplete/0;0/false;false
                 fmStr = fm.getDateTime().format(formatter)+"/"+fm.getPlace()+"/"+fm.getStatus()
-                        +"/"+idToEdStr+"/"+ idToCoStr+"/"+idToAgreeStr;
+                        +"/"+idToEdStr+"/"+ idToCoStr+"/"+idToAgreeStr+"/"+lastEditor;
 
             }
             Meeting sm = trade.getSecondMeeting();
@@ -156,9 +158,6 @@ public class TradeDataAccess {
         }
     }
 
-    /**
-     * update the file
-     */
     public void updateFile(){
         File file = new File("phase1/src/trade.txt");
         try {
