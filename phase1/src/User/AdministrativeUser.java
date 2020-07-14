@@ -10,8 +10,8 @@ import java.util.*;
  * The basic functionality of administrative users
  */
 public class AdministrativeUser extends User {
-    TradeManager tm;
-    UserManager um;
+    private final TradeManager tm;
+    private final UserManager um;
 
     /**
      * @param username the username of the user account
@@ -24,6 +24,7 @@ public class AdministrativeUser extends User {
         this.tm = tm;
         this.um = um;
     }
+
 
     /**
      * @param a the user that the administrative user wants to set frozen
