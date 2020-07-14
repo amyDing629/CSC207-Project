@@ -3,11 +3,6 @@ package Trade.MeetingSystem;
 import java.time.LocalDateTime;
 
 class SetUpSessionPresenter extends MeetingSessionPresenter {
-//    @Override
-//    void printIntro() {
-//        System.out.println("<Set-Up-Meeting Session> \n " +
-//                "Enter \"ok\" to continue, or anything else to quit this session.");
-//    }
 
     @Override
     void printIntro(LocalDateTime dateTime, String place) {

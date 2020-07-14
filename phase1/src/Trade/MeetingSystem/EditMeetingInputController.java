@@ -43,7 +43,6 @@ class EditMeetingInputController {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         boolean isInputValid = true;
-//        label:
         do {
             try {
                 editMeetingInputControllerPresenter.printEditMenu();
@@ -80,35 +79,6 @@ class EditMeetingInputController {
             }
         } while (!isInputValid);
     }
-
-//        boolean isInputValid = true;
-//        label:
-//        do {
-//            try {
-//                editMeetingInputControllerPresenter.printEditMenu();
-//
-//                String input = br.readLine();
-//                // instruction 1: edits time only
-//                // instruction 2: edits place only
-//                // instruction 3: edits time and place
-//                // instruction "..": quit
-//                // other instructions: informs invalid and asks input again
-//                switch (input) {
-//                    case "1": editTimeInputController();
-//                    case "2": editPlaceInputController();
-//                    case "3":
-//                        editTimeInputController();
-//                        editPlaceInputController();
-//                    case "..": {
-//                        break label;
-//                    }
-//                    default: throw new InvalidInstructionException();
-//                }
-//            } catch (InvalidInstructionException e) {
-//                isInputValid = false;
-//            }
-//        } while (!isInputValid);
-//    }
 
 
     private void editTimeInputController() {
