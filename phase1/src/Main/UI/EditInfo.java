@@ -88,7 +88,7 @@ public class EditInfo {
                 case 4:
 
                     System.out.println("add new item into the system");
-                    System.out.println("Menu:\n1.Add item your self.\n2.Approve request from users");
+                    System.out.println("Menu:\n1.Add item for yourself.\n2.Approve request from users");
                     String inputa=sc.nextLine();
                     if(inputa.equals("1")) {
                         int exit1 = 0;
