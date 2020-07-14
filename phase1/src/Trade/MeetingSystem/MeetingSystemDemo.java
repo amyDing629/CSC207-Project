@@ -30,6 +30,8 @@ public class MeetingSystemDemo {
     private static Meeting meeting = null;
     private static Meeting meeting2 = null;
 
+    private static UUID lastEditedUser = null;
+
     public static void main(String[] args) throws IOException {
         System.out.println("Welcome to meeting system!");
 
@@ -44,11 +46,12 @@ public class MeetingSystemDemo {
                 System.out.println("===========================");
                 System.out.println("user.Login id:" + tradeIds.get(0));
 
-                mt1.run(tradeIds.get(0));
+                mt1.run(tradeIds.get(0), lastEditedUser);
 
-                // new change: check null -> TODO: trade modification
+                // new change: check null
                 if (meeting != null) {
-                    mt1.runResult();
+                    ArrayList<Object> result = mt1.runResult();
+                    lastEditedUser = (UUID) result.get(3);
                 }
                 meeting = mt1.getMeeting();
 
@@ -58,11 +61,12 @@ public class MeetingSystemDemo {
                 System.out.println("===========================");
                 System.out.println("user.Login id:" + tradeIds.get(1));
 
-                mt1.run(tradeIds.get(1));
+                mt1.run(tradeIds.get(1), lastEditedUser);
 
-                // new change: check null -> TODO: trade modification
+                // new change: check null
                 if (meeting != null) {
-                    mt1.runResult();
+                    ArrayList<Object> result = mt1.runResult();
+                    lastEditedUser = (UUID) result.get(3);
                 }
                 meeting = mt1.getMeeting();
 
@@ -88,7 +92,7 @@ public class MeetingSystemDemo {
 
                 if (turnIsUser1_m2) {
                     System.out.println("===========================");
-                    mt2.run(tradeIds.get(0));
+                    mt2.run(tradeIds.get(0), lastEditedUser);
                     mt2.runResult();
                     meeting2 = mt2.getMeeting();
 
@@ -96,7 +100,7 @@ public class MeetingSystemDemo {
                     System.out.println("===========================");
                 } else {
                     System.out.println("===========================");
-                    mt2.run(tradeIds.get(1));
+                    mt2.run(tradeIds.get(1), lastEditedUser);
                     mt2.runResult();
                     meeting2 = mt2.getMeeting();
 

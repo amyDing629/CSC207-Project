@@ -23,12 +23,15 @@ class EditAgreeSession {
     private String place;
     private boolean isCancel = false;
 
-    void runEditAgreeSession(UUID currLogInUser, Meeting meeting) throws IOException {
+    private boolean edited = false;
+
+    void runEditAgreeSession(UUID currLogInUser, Meeting meeting, UUID lastEditUser) throws IOException {
         // pre-set
         this.meeting = meeting;
         dateTime = meeting.getDateTime();
         place = meeting.getPlace();
         meetingLog = null;
+        edited = false;
 
         // show session intro
         editAgreeSessionPresenter.printIntro(dateTime, place);
@@ -39,6 +42,10 @@ class EditAgreeSession {
         try {
             switch (input) {
                 case "ee":
+                    if (lastEditUser != null && lastEditUser.equals(currLogInUser)) {
+                        editAgreeSessionPresenter.printNoEditionAllowed(dateTime, place);
+                        break;
+                    }
                     if (isEditable(currLogInUser)) { // meeting can be edited
 
                         EditMeetingInputController editMeeting = new EditMeetingInputController(dateTime, place);
@@ -48,18 +55,22 @@ class EditAgreeSession {
 
                         if (backToPrevMenu) {
                             EditAgreeSession editAgreeSession = new EditAgreeSession();
-                            editAgreeSession.runEditAgreeSession(currLogInUser, meeting);
+                            editAgreeSession.runEditAgreeSession(currLogInUser, meeting, lastEditUser);
                             ArrayList<Object> result = editAgreeSession.getEditAgreeSessionResult();
                             this.meeting = (Meeting) result.get(0);
                             dateTime = (LocalDateTime) result.get(1);
                             place = (String) result.get(2);
                             isCancel = (boolean) result.get(3);
                             meetingLog = editAgreeSession.getSessionLog();
+                            edited = (boolean) result.get(4);
                         } else if (isEdited(enteredDateTime, enteredPlace)) {
                             // update meeting, datetime, place
                             dateTime = enteredDateTime;
                             place = enteredPlace;
                             this.meeting = meetingActivities.editMeeting(this.meeting, currLogInUser, dateTime, place);
+
+                            // update if edited
+                            edited = true;
 
                             // print successful edition
                             editAgreeSessionPresenter.printSuccessInfo(dateTime, place);
@@ -118,7 +129,7 @@ class EditAgreeSession {
     }
 
     ArrayList<Object> getEditAgreeSessionResult() {
-        return new ArrayList<>(Arrays.asList(this.meeting, dateTime, place, isCancel));
+        return new ArrayList<>(Arrays.asList(this.meeting, dateTime, place, isCancel, edited));
     }
 
     MeetingLogInfo getSessionLog() {
