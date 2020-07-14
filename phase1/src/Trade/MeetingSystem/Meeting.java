@@ -141,14 +141,6 @@ public class Meeting {
         return idToAgreedStatus;
     }
 
-//    /**
-//     * Replaces the the hashmap of agree statuses with a new one
-//     * @param agreedStatus the new hashmap of agree statuses
-//     */
-//    public void setAgreedStatusFull(HashMap<UUID, Boolean> agreedStatus) {
-//        idToAgreedStatus = agreedStatus;
-//    }
-
     /**
      * Returns the confirmed statuses with userIds. (Getter for idToConfirmedStatus)
      *

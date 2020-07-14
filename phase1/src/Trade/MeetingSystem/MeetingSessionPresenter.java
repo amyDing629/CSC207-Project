@@ -3,7 +3,7 @@ package Trade.MeetingSystem;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-public abstract class MeetingSessionPresenter {
+abstract class MeetingSessionPresenter {
 
     abstract void printIntro(LocalDateTime dateTime, String place);
 

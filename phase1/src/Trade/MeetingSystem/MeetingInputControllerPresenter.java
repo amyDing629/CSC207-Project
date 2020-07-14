@@ -15,12 +15,10 @@ abstract class MeetingInputControllerPresenter {
         System.out.print("Proposed place: " + place + "\n");
     }
 
-    // TODO: Error Exception handling!
     void printInvalidFormatError() {
         System.out.println("Error: Invalid input format!");
     }
 
-    // TODO: Error Exception handling!
     void printInvalidDateTimeError() {
         System.out.println("Error: Invalid input date-time! Only future time accepted");
     }

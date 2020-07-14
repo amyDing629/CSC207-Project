@@ -18,7 +18,7 @@ import java.util.UUID;
  * (setup meeting, edit meeting, confirm meeting) per entry.
  *
  *
- * Allow each user a max of 3 times of edition;
+ * Allow each user a max of 3 times of successful edition;
  * cancels the meeting when one of the user edits at its fourth time of edition
  */
 public class MeetingSystemDemo {

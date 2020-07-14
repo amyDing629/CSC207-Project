@@ -130,9 +130,9 @@ class EditMeetingInputController {
     }
 
     /**
-     * Returns the results, including time and place, of this input port
+     * Returns the results, including time and place, and whether back to previous menu, from this input controller menu
      *
-     * @return an arraylist of the date-time, place
+     * @return an arraylist of the date-time, place, if back to previous menu
      */
     ArrayList<Object> editMeetingInputControllerResult() {
         return new ArrayList<>(Arrays.asList(dateTime, place, backToPreviousMenu));
