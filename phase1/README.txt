@@ -6,6 +6,7 @@ This is a program that allows users to trade different items with each other.
 Prerequisites: intellij.
 Before running the program, please make sure that the txt files (4 altogether) are empty and with no blank space.
 All files should be in a package named phase1 in the original location relative phase1.
+Please do NOT quit the whole program or stop the execution of program when running tests, follow the menu to exit instead.
 
 Running the tests:
 For running the program, open class Main in package Main, and click the "run" button.
@@ -22,7 +23,7 @@ quit(0): stop 'main' execution
 
 register(2): register an account.
          --> enter username and password(only numbers and letters are allowed, else might cause errors.)
-NonAdmin login(1): all user functions in the program. (Enter correct user name and password to login)
+NonAdmin login(1): contains all user functions in the program. (Enter correct user name and password to login)
          [login menu]
          --> Edit information(1)
              --> change password (change password or exit)(1)
@@ -31,10 +32,10 @@ NonAdmin login(1): all user functions in the program. (Enter correct user name a
              --> exit: exit to main menu(0)
          --> Trade(2): testable after setting up at least one trade.
              [trade menu]
-             --> confirm trade(1): choose an unconfirmed trade to make edition.
-                 --> show all unconfirmed trade and enter trade system(input the number before trade).
+             --> confirm trades(1): choose an unconfirmed trade to make edition.
+                 --> show all unconfirmed trade and enter trade system(input the number before trade id).
              --> complete trade(2): choose an incomplete trade to make edition.
-                 --> show all incomplete trade and enter trade system(input the number before trade).
+                 --> show all incomplete trade and enter trade system(input the number before trade id).
              --> Trade History(3)
                  --> show all complete trade.
              --> quit(0)
@@ -56,7 +57,8 @@ NonAdmin login(1): all user functions in the program. (Enter correct user name a
          --> quit to menu: quit to main menu
 
 
-Admin login(1): admin has all functions as normal users plus its own functions (Enter correct user name and password to login)
+Admin login(1): admin has all functions as normal users plus its own functions
+                (Enter correct username and password to login)
          [login menu]
          --> Edit information(1)
              [Edit information menu]
@@ -76,16 +78,23 @@ Admin login(1): admin has all functions as normal users plus its own functions (
 
 -----------------------------------------------------------------------------------------------------------------------
 Trade System:
-[trade system menu]
-present the input trade's information(can exit to trade menu)
+set up a new trade with another user (can be ordinary/admin): right after [Inventory menu] Borrow wishes.
+--> one way(temporary) (1)
+--> one way(permanent) (1)
+--> two way(temporary) (1)
+--> two way(permanent) (1)
+--> exit (0)
+[trade menu]
 --> if the input trade's status is unconfirmed:
          [confirm menu]
-         --> type 1 to confirm trade: change the status of trade from "unconfirmed" to "confirmed"
-         --> type 2 to not confirm trade: change the status of trade from "unconfirmed" to "incomplete"
+         All unconfirmed trades will appear in sequence.
+         --> type 1 to confirm trade: change the status of trade from "unconfirmed" to "incomplete"
+         --> type 2 to not confirm trade: change the status of trade from "unconfirmed" to "cancelled"
          return to trade system menu
 --> if the input trade's status is incomplete and the first meeting status is incomplete:
-         --> enter first meeting system
-         return to trade system menu each time one action is performed
+         [complete trade]
+         --> enter first meeting system <Set-Up-Meeting Session>
+         return to trade system menu when action is performed
 --> if the input trade's status is incomplete, but the first meeting status is complete:
          --> enter second meeting system
          return to trade system menu each time one action is performed
@@ -102,31 +111,38 @@ Trade status can be:
 
 ----------------------------------------------------------------------------------------------------------------------
 Meeting System:
-For each trading (or transaction), only if the trading proposal is proposed by one user and later is accepted by the other user, both users can then get into the Meeting System, where it is allowed for one of the two users (the meeting attendees) to set up meeting proposal. As long as the meeting has been officially scheduled, the meeting attendees can then edit meeting info (including date and time) up to three times, agree meeting proposal before the offline transaction in the real life taken place.
-Meeting System has three service sessions, which are <Set Up Session>, <Edit and Agree Session>, <Confirm Session> respectively. These sessions would be provided to the users in sequence, according to the current meeting status the Meeting object (which is stored in the trade system). For each session, the attendee users can choose to quit the session or complete the session in accordance to the instructions on the UI.
+For each trade (or transaction), only if the trading proposal is proposed by one user and is accepted by the other user,
+both users can then get into the Meeting System, where it is allowed for one of the two users (the meeting attendees)
+to set up meeting proposal. As long as the meeting has been officially scheduled, the meeting attendees can then edit
+meeting info (including date and time) up to three times, agree meeting proposal before offline transaction take place.
+Meeting System has three service sessions: <Set Up Session>, <Edit and Agree Session> and <Confirm Session>.
+These sessions would be provided to the users in sequence, according to the current status of the Meeting object (which is stored in the trade system).
+For each session, the attendee users can choose to quit the session or complete the session in accordance to the instructions on the UI.
 Alternatively, the meeting system can be run and tested individually through ```MeetingSystemDemo.java```.
 
 --> first meeting system will run all the sessions.
 --> second meeting system will only run confirm session.
 
 <Set Up Session>
+To enter the <Set-Up-Meeting Session>:
+    --> login --> Trade --> complete trade --> select the trade
 Precondition:
-To be able to enter the meeting system (or this session):
-	- first enter from the <trade> that the user designates, then being able to access the <meeting> belonging to this trade
-	- the trading proposal must be proposed by one user, and later be accepted by the other user
+    - there must be "incomplete" trades. That is, a new trade is proposed by one user, and accepted by another user.
 	- the meeting is not cancelled
 Sample Entry:
 <entered the set up session>
 	--> enter ‘ok’
-		--> enter date-time until correct format and is a future time
+		--> enter date-time (requires correct format and a future time)
 		--> enter place (can not include "," or ";")
 		--> enter (should then see the success info)
-	--> enter anything other than ‘ok’ (should quit the current meeting session, be back to the UI of trade system)
+	--> enter 1 to quit the current meeting session and back to the UI of trade system
+	    or anything else to enter <Edit-Agree-Meeting Session>
 
 <Edit and Agree Session>
-Precondition
-To be able to enter this session:
-	- meeting must be set up successfully already
+To be able to enter <Edit-Agree-Meeting Session>:
+    --> login --> Trade --> complete trade --> select the trade
+Precondition:
+	- meeting must be set up successfully already,
 	- meeting is not cancelled, or agreed by both users, or confirmed
 Usage Notes:
 Allow the fourth time of entering the <Edit-Agree Session> after three editions for this user.
@@ -135,26 +151,26 @@ Sample Entry
 <entered Edit-Agree Session>
 	—> enter ‘ee’: to edit the date-time-place proposal
 		— > enter ‘1’: to change time only
-			--> enter new date-time until correct format, future time, not the same as the old
-			--> (should then see the success info)
+			--> enter a new date-time (requires correct format and a future time)
+			    (should then see the success info)
 		—> enter ‘2’: to change place only
 			--> enter place (not the same as the old)
-			--> (should then see the success info)
+			    (should then see the success info)
 		—> enter ‘3’: to change both time and place
 			--> enter new date-time until correct format, future time, not the same as the old
 			--> enter place (not the same as the old)
-			--> (should then see the success info)
+                (should then see the success info)
 		—> enter ‘..’: to quit the edition, back to previous menu
 		—> enter anything else other above-mentioned instruction:
 	—> enter ‘aa’: to agree the date-time-place proposal
-	—> enter anything else other than ‘ee’,  ‘aa’: to quit this session
+	—> enter anything else other than ‘ee’,  ‘aa’ to quit this session
 
 <Confirm Session>
 Precondition
 To be able to enter this session:
 	- meeting must be set up successfully already, and be agreed by both users
 	- meeting is not cancelled
-Sample ENtry
+Sample Entry
 <entered Confirm Session>
 	—> enter ‘cc’: to confirm the date-time-place proposal
 	—> enter anything else other than ‘cc’: to quit this session
