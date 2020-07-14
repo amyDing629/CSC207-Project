@@ -82,10 +82,12 @@ public class TradeController {
         item.setIsInTrade(true);
         switch (line) {
             case "1":
-                tm.createOnewayTrade(currUser.getId(), tarUser.getId(), item, 30, time);
+                Trade trade1 = tm.createOnewayTrade(currUser.getId(), tarUser.getId(), item, 30, time);
+                trade1.setCreator(currUser.getId());
                 return true;
             case "2":
-                tm.createOnewayTrade(currUser.getId(), tarUser.getId(), item, -1, time);
+                Trade trade2 = tm.createOnewayTrade(currUser.getId(), tarUser.getId(), item, -1, time);
+                trade2.setCreator(currUser.getId());
                 return true;
             default: {
                 return false;
@@ -105,9 +107,12 @@ public class TradeController {
         item2.setIsInTrade(true);
         LocalDateTime time = LocalDateTime.now();
         if (line.equals("3")){
-            tm.createTwowayTrade(currUser.getId(), tarUser.getId(), item1, item2, 30, time);
+            Trade trade3 = tm.createTwowayTrade(currUser.getId(), tarUser.getId(), item1, item2, 30, time);
+            trade3.setCreator(currUser.getId());
         }else{
-            tm.createTwowayTrade(currUser.getId(), tarUser.getId(), item1, item2, -1, time);
+            Trade trade4 = tm.createTwowayTrade(currUser.getId(), tarUser.getId(), item1, item2, -1, time);
+            trade4.setCreator(currUser.getId());
+
         }
     }
 

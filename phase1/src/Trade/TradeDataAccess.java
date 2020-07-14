@@ -86,6 +86,7 @@ public class TradeDataAccess {
 
                 trade.setStatus(TradeStatus.valueOf(lst[9]));
                 trade.setId(tradeId);
+                trade.setCreator(UUID.fromString(lst[10]));
                 gw.getTrades().add(trade);
                 line = reader.readLine();
             }
@@ -140,9 +141,10 @@ public class TradeDataAccess {
             }
             String status = trade.getStatus().toString();
             String time = trade.getCreateTime().format(formatter);
+            String creator = trade.getCreator().toString();
 
             fos.write((id+","+type+","+duration+","+user1+","+user2+","+item1+","+item2+","+fmStr+","
-                    +smStr+","+status+","+time+"\n").getBytes());
+                    +smStr+","+status+","+time+","+creator+"\n").getBytes());
             fos.close();
         }catch(IOException e){
             System.out.println("cannot edit file");

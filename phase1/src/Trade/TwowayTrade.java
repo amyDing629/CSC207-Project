@@ -49,8 +49,8 @@ public class TwowayTrade extends Trade {
      * @return trade information in a string format
      */
     public String toString(){
-        return "trade.Trade" + getId() + ": trader1 " + trader1Id +" makes two way trade with trader" + trader2Id +
-                " for item " + item1to2 + "and" + item2to1 +  " at " + getCreateTime().format(formatter);
+        return "trade id: " + getId() + "\ntrade type: " + getType()+ "\ntrader: " + getUsers() + "\nitems: "
+                + getItemList() + "\ncreate time: " + getCreateTime().format(formatter);
     }
 
     /**
