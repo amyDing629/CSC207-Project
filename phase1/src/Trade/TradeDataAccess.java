@@ -26,6 +26,9 @@ public class TradeDataAccess {
         this.gw = gw;
     }
 
+    /**
+     * read info from trade.txt to trade list in gateway
+     */
     public void readFile() {
         Trade trade;
         try {
@@ -103,6 +106,10 @@ public class TradeDataAccess {
 
     }
 
+    /**
+     * add trade in trade list of gateway to trade.txt
+     * @param trade the trade wants to be added
+     */
     private void addTradeToFile(Trade trade) {
         try {
             FileOutputStream fos = new FileOutputStream("phase1/src/trade.txt", true);
@@ -158,6 +165,9 @@ public class TradeDataAccess {
         }
     }
 
+    /**
+     * update trade.txt with information in trade list of gateway.
+     */
     public void updateFile(){
         File file = new File("phase1/src/trade.txt");
         try {
