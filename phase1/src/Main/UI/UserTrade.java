@@ -45,7 +45,6 @@ public class UserTrade {
                     if ((input2 < iU.size()) && (input2 >= 0)) {
                         TradeUI tu=new TradeUI(user,iU.get(input2).getId(),tm,um);
                         tu.run();
-                        System.out.println("Success");
                     }
                     break;
                 case 2:
