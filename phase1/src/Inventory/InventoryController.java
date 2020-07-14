@@ -48,10 +48,7 @@ public class InventoryController {
      * @return whether the input item is the user's own item.
      */
     boolean isOwnItem(Item it){
-        if (it.getOwnerName().equals(currUser.getUsername())){
-            return true;
-        }
-        return false;
+        return it.getOwnerName().equals(currUser.getUsername());
     }
 
     /**
@@ -60,5 +57,9 @@ public class InventoryController {
      */
     void moveToWishList(Item it){
         currUser.addWishBorrow(it.getName());
+    }
+
+    boolean isInOwnWishList(Item it){
+        return currUser.getWishBorrow().contains(it.getName());
     }
 }

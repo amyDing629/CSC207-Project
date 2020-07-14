@@ -69,7 +69,7 @@ public class TradePresenter {
     }
 
     void selectConfirm(){
-        System.out.println("type 1 to confirm meeting, type 2 to not confirm");
+        System.out.println("type 1 to confirm trade, type 2 to not confirm");
     }
 
     void completeTrade(){

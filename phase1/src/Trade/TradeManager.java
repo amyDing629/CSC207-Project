@@ -133,7 +133,7 @@ public class TradeManager {
      * @throws IOException if the item is not deleted from user's wishlist and inventory
      */
     void completeTrade(Trade currTrade) throws IOException {
-        currTrade.setStatus(TradeStatus.incomplete);
+        currTrade.setStatus(TradeStatus.complete);
         makeTrade(currTrade);
     }
 
