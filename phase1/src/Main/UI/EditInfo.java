@@ -35,9 +35,9 @@ public class EditInfo {
             System.out.println("Admin:"+user.getIsAdmin());
             System.out.println("Actions:\n1.Change password\n2.User Freeze System");
             if (user.getIsAdmin()) {
-                System.out.print("3.Change user's limit\n4.add new item into the system\n");
+                System.out.print("3.Change user's limit\n4.add new item into the system\n5.");
                 if(user.getUsername().equals("admin")){
-                    System.out.print("5.Set user into admin\n");
+                    System.out.print("5.create new admin\n");
                 }
             }
             System.out.println("0.exit");
@@ -171,17 +171,14 @@ public class EditInfo {
                     }
                     break;
                 case 5:
-                    System.out.println("Set a user into admin");
-                    System.out.println("Type in the user you want to set to admin, type 0 to quit.");
+                    System.out.println("Create new admin");
+                    System.out.println("Enter the username of new admin type 0 to quit.");
                     String input4=sc.nextLine();
                     if (!input4.equals("0")){
-                        User ha=a.getUser(input4);
-                        if (ha==null){
-                            System.out.println("Sorry there is no such user, returning to main menu.");
-                        }
-                        else{
-                            ((AdministrativeUser)user).addNewUser(ha.getUsername(),ha.getPassword());
-                        }
+                        System.out.println("Now enter the password of new admin");
+                        String input5555=sc.nextLine();
+                        ((AdministrativeUser)user).addNewUser(input4,input5555);
+                        System.out.println("New admin created successfully! Returning to menu");
                     }
                     break;
                 case 4:
