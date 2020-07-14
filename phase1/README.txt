@@ -63,7 +63,8 @@ Admin login(1): admin has all functions as normal users plus its own functions (
              --> add new item into the system(4)
                  --> Add item your self
                  --> Approve request from users: choose an item to approve(input the number before item)
-             --> add new admin(?)
+             --> add new admin(5)
+                 --> create new admin: create the name and password of the new administrative user
              --> exit(0)
          --> Other functions are same with normal users.
 
