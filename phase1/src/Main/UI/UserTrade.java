@@ -62,7 +62,7 @@ public class UserTrade {
                     }
                 case 3:
                     System.out.println("Hi user: " + user.getUsername());
-                    System.out.println("Compeleted past trades:");
+                    System.out.println("Completed past trades:");
                     List<Trade> tHis = tm.getTradeHistoryTop(user);
                     System.out.println("****************");
                     for (int i = 0; i < tHis.size(); i++) {
