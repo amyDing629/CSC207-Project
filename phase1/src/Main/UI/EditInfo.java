@@ -125,9 +125,6 @@ public class EditInfo {
                                 if(line.charAt(0)=='1') {
                                     String[] parts = line.split("/");
                                     ArrayList<String> hi = new ArrayList<>(Arrays.asList(parts));
-                                    for(String k:hi){
-                                        System.out.println(k);
-                                    }
                                     hii.add(hi);
                                 }
                                 line = reader.readLine();
@@ -139,6 +136,9 @@ public class EditInfo {
                                 System.out.println("Description: " + hii.get(i).get(2));
                                 System.out.println("Owner: " + hii.get(i).get(3));
                                 System.out.println("**************************");
+                            }
+                            if(hii.size()==0){
+                                System.out.println("There is no item currently");
                             }
                             while(x==0) {
                                 System.out.println("Enter the item number to approve,enter -1 to quit.");
