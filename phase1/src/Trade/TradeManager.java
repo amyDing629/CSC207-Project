@@ -247,7 +247,7 @@ public class TradeManager {
         Trade s = getTrade(user.getTradeHistory().get(user.getTradeHistory().size() - 1));
         LocalDateTime x  = s.getCreateTime();
         LocalDateTime y = x.minusDays(7);
-        int number = 0;
+        int number = 1;
         for (UUID i : user.getTradeHistory()){
             if(getTrade(i).getCreateTime().isAfter(y) && getTrade(i).getCreateTime().isBefore(x)){
                 number ++;
