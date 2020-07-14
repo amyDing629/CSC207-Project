@@ -13,13 +13,17 @@ import java.util.UUID;
 
 public class Meeting {
 
-    /** This is Meeting's date-time. */
+    /**
+     * This is Meeting's date-time.
+     */
     private LocalDateTime dateTime;
 
     /**
      * This is Meeting's place.
      */
     private String place;
+
+    private UUID lastEditUser;
 
     /**
      * This is Meeting's two editors.
@@ -196,12 +200,25 @@ public class Meeting {
 
 
     boolean isMeetingCancelled() {
-        for (MeetingEditor t: idToEditor.values()){
+        for (MeetingEditor t : idToEditor.values()) {
             if (t.editsOverThreshold()) {
                 return true;
             }
         }
         return false;
+    }
+
+    void changeLastEditUser(UUID currLogInUser) {
+        lastEditUser = currLogInUser;
+    }
+
+    /**
+     * Returns the last edit user id
+     *
+     * @return the last edit user id
+     */
+    public UUID getLastEditUser() {
+        return lastEditUser;
     }
 
     /**

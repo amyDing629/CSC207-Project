@@ -83,6 +83,7 @@ public class EditInfo {
                     String input2=sc.nextLine();
                     if (!input2.equals("0")){
                         user.setPassword(input2);
+                        System.out.println("Changed password succesfully!");
                     }
                     break;
                 case 2:
@@ -240,6 +241,8 @@ public class EditInfo {
                         Item i = new Item(name, user.getUsername());
                         i.setDescription(des);
                         v.addItem(i);
+                        user.addWishes("inputA");
+                        System.out.println("Added successfully!");
                     }
                     else if(inputA.equals("2")){
                         try {
