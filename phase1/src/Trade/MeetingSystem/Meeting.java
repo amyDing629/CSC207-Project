@@ -13,13 +13,17 @@ import java.util.UUID;
 
 public class Meeting {
 
-    /** This is Meeting's date-time. */
+    /**
+     * This is Meeting's date-time.
+     */
     private LocalDateTime dateTime;
 
     /**
      * This is Meeting's place.
      */
     private String place;
+
+    private UUID lastEditUser;
 
     /**
      * This is Meeting's two editors.

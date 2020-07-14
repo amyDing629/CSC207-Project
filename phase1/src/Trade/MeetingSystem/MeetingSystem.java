@@ -39,6 +39,8 @@ public class MeetingSystem implements IMeetingSystem {
     private boolean isSetUp;
     private boolean isCancel;
 
+    private UUID lastEditUser; // new
+
 
     /**
      * Construct a Trade.MeetingSystem.Trade.MeetingSystem object with two client users (ids)
@@ -61,37 +63,62 @@ public class MeetingSystem implements IMeetingSystem {
 
     /**
      * Run the Meeting system, which interacts with the user and makes decisions upon meeting progress.
-     *
+     * <p>
      * 1. allows setting up a meeting, only when there is no meeting stored in trade.Trade (i.e. first meeting)
      * 2. allows editing the meeting / confirming the meeting, only when
      * - the meeting has been set up already;
      * - the meeting has not been cancelled (i.e edit time of each ClientUser < threshold of edition time)
+     *
      * @param currLogInUser the user that is currently logging in and use the meeting system
      */
     @Override
-    public void run(UUID currLogInUser) throws IOException {
-
+    public void run(UUID currLogInUser, UUID lastEditUser) throws IOException {
         // first meeting
         if (isFirst) {
             if (meeting == null) {
                 setupSession.runSetupSession(currLogInUser, users);
-                updateSessionInfo(MeetingSessionName.SETUP);
+                updateSessionInfo(MeetingSessionName.SETUP, currLogInUser);
             } else if (meeting.getStatus().equals(MeetingStatus.incomplete)) {
-                editAgreeSession.runEditAgreeSession(currLogInUser, meeting);
-                updateSessionInfo(MeetingSessionName.EDIT_AGREE);
+                System.out.println("LAST EDIT USER: " + this.lastEditUser);
+
+                editAgreeSession.runEditAgreeSession(currLogInUser, meeting, lastEditUser);
+                updateSessionInfo(MeetingSessionName.EDIT_AGREE, currLogInUser);
+
+                System.out.println("LAST EDIT USER: " + this.lastEditUser);
+
             } else if (meeting.getStatus().equals(MeetingStatus.agreed)) {
                 confirmSession.runConfirmSession(currLogInUser, meeting);
-                updateSessionInfo(MeetingSessionName.CONFIRM);
+                updateSessionInfo(MeetingSessionName.CONFIRM, currLogInUser);
             }
         } else { // only second (temporary) meeting
             confirmSession.runConfirmSession(currLogInUser, meeting);
-            updateSessionInfo(MeetingSessionName.CONFIRM);
+            updateSessionInfo(MeetingSessionName.CONFIRM, currLogInUser);
+        }
+
+    }
+
+    public void run(UUID currLogInUser) throws IOException {
+        // first meeting
+        if (isFirst) {
+            if (meeting == null) {
+                setupSession.runSetupSession(currLogInUser, users);
+                updateSessionInfo(MeetingSessionName.SETUP, lastEditUser);
+            } else if (meeting.getStatus().equals(MeetingStatus.incomplete)) {
+                editAgreeSession.runEditAgreeSession(currLogInUser, meeting, lastEditUser);
+                updateSessionInfo(MeetingSessionName.EDIT_AGREE, lastEditUser);
+            } else if (meeting.getStatus().equals(MeetingStatus.agreed)) {
+                confirmSession.runConfirmSession(currLogInUser, meeting);
+                updateSessionInfo(MeetingSessionName.CONFIRM, lastEditUser);
+            }
+        } else { // only second (temporary) meeting
+            confirmSession.runConfirmSession(currLogInUser, meeting);
+            updateSessionInfo(MeetingSessionName.CONFIRM, lastEditUser);
         }
 
     }
 
 
-    private void updateSessionInfo(MeetingSessionName sessionName) {
+    private void updateSessionInfo(MeetingSessionName sessionName, UUID currLogInUser) {
         if (sessionName.equals(MeetingSessionName.SETUP)) {
             ArrayList<Object> result = setupSession.getSetupSessionResult();
             meeting = (Meeting) result.get(0);
@@ -101,6 +128,10 @@ public class MeetingSystem implements IMeetingSystem {
             MeetingLogInfo log = setupSession.getSessionLog();
             if (log != null) {
                 meetingLog.add(setupSession.getSessionLog());
+            }
+
+            if (isSetUp) {
+                this.lastEditUser = currLogInUser;
             }
 
 
@@ -113,6 +144,11 @@ public class MeetingSystem implements IMeetingSystem {
             MeetingLogInfo log = editAgreeSession.getSessionLog();
             if (log != null) {
                 meetingLog.add(editAgreeSession.getSessionLog());
+            }
+
+            boolean isEdited = (boolean) result.get(4);
+            if (isEdited && !isCancel) {
+                this.lastEditUser = currLogInUser;
             }
 
         } else { // sessionName.equals(MeetingSessionName.CONFIRM)
@@ -131,6 +167,7 @@ public class MeetingSystem implements IMeetingSystem {
      *      - date-time object
      *      - place string
      *      - status string: "completed", "setUp", "cancel", "incomplete"
+     *      - last edit user id
      *
      * @return an arraylist containing date-time object, place string, status string.
      */
@@ -138,16 +175,18 @@ public class MeetingSystem implements IMeetingSystem {
         // return time, place, status
         ArrayList<Object> result = new ArrayList<>(Arrays.asList(dateTime, place));
         String status;
-        if (meeting.getStatus().equals(MeetingStatus.completed)){
+        if (meeting.getStatus().equals(MeetingStatus.completed)) {
             status = "completed";
-        }else if (isSetUp){
+        } else if (isSetUp) {
             status = "setUp";
-        }else if (isCancel){
+        } else if (isCancel) {
             status = "cancelled";
-        }else{
+        } else {
             status = "incomplete";
         }
         result.add(status);
+
+        result.add(this.lastEditUser);
 
         return result;
 
