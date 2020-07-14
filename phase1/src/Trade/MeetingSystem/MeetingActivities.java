@@ -134,5 +134,9 @@ class MeetingActivities {
             meeting.setStatus(MeetingStatus.cancelled);
         }
     }
+
+    void updateLastEditUser(UUID currLogInUser, Meeting meeting) {
+        meeting.changeLastEditUser(currLogInUser);
+    }
 }
 

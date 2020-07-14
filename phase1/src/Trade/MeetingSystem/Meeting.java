@@ -200,12 +200,25 @@ public class Meeting {
 
 
     boolean isMeetingCancelled() {
-        for (MeetingEditor t: idToEditor.values()){
+        for (MeetingEditor t : idToEditor.values()) {
             if (t.editsOverThreshold()) {
                 return true;
             }
         }
         return false;
+    }
+
+    void changeLastEditUser(UUID currLogInUser) {
+        lastEditUser = currLogInUser;
+    }
+
+    /**
+     * Returns the last edit user id
+     *
+     * @return the last edit user id
+     */
+    public UUID getLastEditUser() {
+        return lastEditUser;
     }
 
     /**
