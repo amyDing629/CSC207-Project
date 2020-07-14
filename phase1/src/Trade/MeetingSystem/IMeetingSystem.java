@@ -8,6 +8,4 @@ import java.util.UUID;
  */
 interface IMeetingSystem {
     void run(UUID currLogInUser) throws IOException;
-
-//    void run(UUID currLogInUser, UUID lastEditUser) throws IOException;
 }

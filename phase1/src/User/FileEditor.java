@@ -1,11 +1,12 @@
 package User;
 
+import Main.GateWay;
+import Trade.TradeManager;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.UUID;
-import Main.GateWay;
-import Trade.TradeManager;
 
 public class FileEditor {
     /**
@@ -58,7 +59,8 @@ public class FileEditor {
                 String[] c = b.get(6).split("; ");
                 ArrayList<String> lineList = new ArrayList<>(Arrays.asList(c));
 
-                AdministrativeUser d = new AdministrativeUser(b.get(1), b.get(2), true, new TradeManager(gw), new UserManager(gw));
+                AdministrativeUser d = new AdministrativeUser(b.get(1), b.get(2), true, new TradeManager(gw),
+                        new UserManager(gw));
                 d.setId(UUID.fromString(b.get(0)));
                 d.setNotification(lineList);
 

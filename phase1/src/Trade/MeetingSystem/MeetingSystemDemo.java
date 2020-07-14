@@ -30,8 +30,6 @@ public class MeetingSystemDemo {
     private static Meeting meeting = null;
     private static Meeting meeting2 = null;
 
-//    private static UUID lastEditedUser = null;
-
     public static void main(String[] args) throws IOException {
         System.out.println("Welcome to meeting system!");
 
@@ -51,7 +49,6 @@ public class MeetingSystemDemo {
                 // new change: check null
                 if (meeting != null) {
                     ArrayList<Object> result = mt1.runResult();
-//                    lastEditedUser = (UUID) result.get(3);
                 }
                 meeting = mt1.getMeeting();
 
@@ -66,7 +63,6 @@ public class MeetingSystemDemo {
                 // new change: check null
                 if (meeting != null) {
                     ArrayList<Object> result = mt1.runResult();
-//                    lastEditedUser = (UUID) result.get(3);
                 }
                 meeting = mt1.getMeeting();
 

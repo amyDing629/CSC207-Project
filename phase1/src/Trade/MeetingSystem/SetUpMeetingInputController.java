@@ -14,7 +14,8 @@ class SetUpMeetingInputController {
 
     DateTime dt = new DateTime();
 
-    SetUpMeetingInputControllerPresenter setUpMeetingInputControllerPresenter = new SetUpMeetingInputControllerPresenter();
+    SetUpMeetingInputControllerPresenter setUpMeetingInputControllerPresenter =
+            new SetUpMeetingInputControllerPresenter();
 
     /**
      * Feeds the prompts of the Meeting info, including dateTime, place
