@@ -51,7 +51,7 @@ class EditMeetingInputController {
                 // instruction 1: edits time only
                 // instruction 2: edits place only
                 // instruction 3: edits time and place
-                // instruction "..": quit
+                // instruction "..": back to prev menu
                 // other instructions: informs invalid and asks input again
                 switch (input) {
                     case "1": {

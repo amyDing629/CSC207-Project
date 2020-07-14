@@ -1,10 +1,11 @@
 package Main.UI;
 
+import Main.GateWay;
 import Trade.TradeManager;
 import User.UserManager;
+
 import java.io.IOException;
 import java.util.Scanner;
-import Main.GateWay;
 
 /**
  * [User Interface]
@@ -55,24 +56,26 @@ public class Login {
             if (a.verifyUser(username, password)) {
                 while (true) {
                     System.out.println("------------------------------------------------------------");
-                    System.out.println("Hello,"+username);
+                    System.out.println("Hello," + username);
                     System.out.println(username);
                     System.out.println(a.getUser(username));
                     (a.getAdmin(a.getUser("admin"))).incompleteTransaction(a.getUser(username));
                     (a.getAdmin(a.getUser("admin"))).tradeLimit(a.getUser(username));
-                    System.out.println("Freeze Status: "+a.getUser(username).getIsFrozen());
-                    System.out.println("Trade limit: " + tm.getTradeNumber(a.getUser(username)) + "/" + a.getUser(username).getWeekTransactionLimit());
-                    System.out.println("Incomplete trade limit: " + (tm.getIncomplete(a.getUser(username)).size() + "/" + a.getUser(username).getIncompleteTransactionLimit()));
+                    System.out.println("Freeze Status: " + a.getUser(username).getIsFrozen());
+                    System.out.println("Trade limit: " + tm.getTradeNumber(a.getUser(username)) + "/"
+                            + a.getUser(username).getWeekTransactionLimit());
+                    System.out.println("Incomplete trade limit: " + (tm.getIncomplete(a.getUser(username)).size()
+                            + "/" + a.getUser(username).getIncompleteTransactionLimit()));
                     System.out.println("**************************************************************");
                     System.out.println("Actions:\n1.Edit information\n2.Trade\n3.Inventory\n4.Market\n0.quit to menu");
                     System.out.print(">");
                     int op = sc.nextInt();
                     sc.nextLine();
                     if (op == 1) {
-                        EditInfo ei=new EditInfo(a.getUser(username), gw);
+                        EditInfo ei = new EditInfo(a.getUser(username), gw);
                         ei.run();
                     } else if (op == 2) {
-                        UserTrade ut=new UserTrade(a.getUser(username), gw);
+                        UserTrade ut = new UserTrade(a.getUser(username), gw);
                         ut.run();
                     } else if (op == 3) {
                         UserInventory ui=new UserInventory(a.getUser(username), gw);
@@ -88,8 +91,9 @@ public class Login {
                     }
                 }
             } else {
-                System.out.println("You have incorrect username or password, please try to login again, enter any number to continue. enter 1 to exit.");
-                input=sc.nextInt();
+                System.out.println("You have incorrect username or password, please try to login again, " +
+                        "enter any number to continue. enter 1 to exit.");
+                input = sc.nextInt();
                 sc.nextLine();
             }
         }
