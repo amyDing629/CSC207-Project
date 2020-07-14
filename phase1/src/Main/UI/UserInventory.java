@@ -21,12 +21,14 @@ public class UserInventory {
     public User user;
     public Inventory iv;
     public TradeManager tm;
+    public GateWay gw;
 
     public UserInventory(User u, GateWay gw) {
         user = u;
         sc = new Scanner(System.in);
         um=new UserManager(gw);
         iv=new Inventory(gw);
+        this.gw=gw;
         tm = new TradeManager(gw);
     }
 

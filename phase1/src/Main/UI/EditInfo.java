@@ -130,6 +130,7 @@ public class EditInfo {
                     break;
                 case 4:
                     ApprovalDataAccess aa=new ApprovalDataAccess(gw);
+                    aa.readItem();
                     System.out.println("add new item into the system");
                     System.out.println("Menu:\n1.Add item for yourself.\n2.Approve request from users");
                     String inputA=sc.nextLine();
