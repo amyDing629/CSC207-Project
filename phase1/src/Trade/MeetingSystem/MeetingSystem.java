@@ -92,27 +92,6 @@ public class MeetingSystem implements IMeetingSystem {
 
     }
 
-//    public void run(UUID currLogInUser) throws IOException {
-//        // first meeting
-//        if (isFirst) {
-//            if (meeting == null) {
-//                setupSession.runSetupSession(currLogInUser, users);
-//                updateSessionInfo(MeetingSessionName.SETUP, lastEditUser);
-//            } else if (meeting.getStatus().equals(MeetingStatus.incomplete)) {
-//                editAgreeSession.runEditAgreeSession(currLogInUser, meeting, lastEditUser);
-//                updateSessionInfo(MeetingSessionName.EDIT_AGREE, lastEditUser);
-//            } else if (meeting.getStatus().equals(MeetingStatus.agreed)) {
-//                confirmSession.runConfirmSession(currLogInUser, meeting);
-//                updateSessionInfo(MeetingSessionName.CONFIRM, lastEditUser);
-//            }
-//        } else { // only second (temporary) meeting
-//            confirmSession.runConfirmSession(currLogInUser, meeting);
-//            updateSessionInfo(MeetingSessionName.CONFIRM, lastEditUser);
-//        }
-//
-//    }
-
-
     private void updateSessionInfo(MeetingSessionName sessionName, UUID currLogInUser) {
         if (sessionName.equals(MeetingSessionName.SETUP)) {
             ArrayList<Object> result = setupSession.getSetupSessionResult();
