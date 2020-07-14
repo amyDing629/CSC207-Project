@@ -35,7 +35,7 @@ NonAdmin login(1): all user functions in the program. (Enter correct user name a
              [Inventory menu]
              --> Lend wishes: view a list of items that the user wants to lend
              --> Borrow wishes: view a list of items that the user wants to borrow.
-             user can also select an item by typing the item name(?) to request a trade with the owner of the item.
+                 --> enter trade system
              --> Edit lend wishes:
                  [edit lend wishes menu]
                  --> add wish: input item name and description to request to add the item the user wants to lend.

@@ -50,20 +50,26 @@ public class RequestTradeUI{
      */
     public void run() throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        trc.checkInput();
+        trc.checkInput(item);
         while (true) {
             tp.requestTradeMenu();
             try {
                 String line = br.readLine();
                 if (!line.equals("1") && !line.equals("2")
-                        && !line.equals("3") && !line.equals("4")) {
+                        && !line.equals("3") && !line.equals("4") && !line.equals("0")) {
                     tp.wrongInput();
                 } else {
-                    if (!trc.createTrade(line, item)) {
-                        String item2 = getSecondItem();
-                        trc.createTrade(line, item, iv.getItem(item2));
+                    if (line.equals("0")){
+                        break;
                     }
-
+                    if (!trc.createTrade(line, item)) {
+                        String result = getSecondItem();
+                        if (result.equals("exit")){
+                            break;
+                        }
+                        Item it = iv.getItem(result);
+                        trc.createTrade(line, item, it);
+                    }
                     tp.requestTrade();
                     break;
                 }
@@ -84,8 +90,16 @@ public class RequestTradeUI{
             tp.selectSecondItem();
             try {
                 String line2 = br.readLine();
+                if (line2.equals("0")){
+                    return "exit";
+                }
                 if (currUser.getWishLend().contains(line2)){
-                    return line2;
+                    Item it = iv.getItem(line2);
+                    if (it.getIsInTrade()){
+                        System.out.println("the trade is already in the trade, please choose again");
+                    }else{
+                        return it.getName();
+                    }
                 }else{
                     tp.wrongInput();
                     throw new IOException();

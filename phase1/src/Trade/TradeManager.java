@@ -39,6 +39,7 @@ public class TradeManager {
     Trade createOnewayTrade(UUID currUserId, UUID otherUserId, Item item, int duration, LocalDateTime time)
             throws IOException {
         OnewayTrade newTrade = new OnewayTrade(currUserId, otherUserId, item, duration, time);
+        item.setIsInTrade(true);
         gw.getTrades().add(newTrade);
         // Record this new trade.Trade in system
 
@@ -59,6 +60,8 @@ public class TradeManager {
                            LocalDateTime time) throws IOException {
         TwowayTrade newTrade = new TwowayTrade(currUserId, otherUserId, item1to2, item2to1, duration, time);
         gw.getTrades().add(newTrade);
+        item1to2.setIsInTrade(true);
+        item2to1.setIsInTrade(true);
         // Update trade history for both users
         updateTradeHistory(currUserId, otherUserId, newTrade);
         return newTrade;

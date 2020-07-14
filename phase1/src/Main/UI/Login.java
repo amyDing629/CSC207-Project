@@ -37,8 +37,10 @@ public class Login {
                 while (true) {
                     System.out.println("------------------------------------------------------------");
                     System.out.println("Hello,"+username);
-                    ((AdministrativeUser)a.getUser("admin")).incompleteTransaction(a.getUser(username));
-                    ((AdministrativeUser)a.getUser("admin")).tradeLimit(a.getUser(username));
+                    System.out.println(username);
+                    System.out.println(a.getUser(username));
+                    (a.getAdmin(a.getUser("admin"))).incompleteTransaction(a.getUser(username));
+                    (a.getAdmin(a.getUser("admin"))).tradeLimit(a.getUser(username));
                     System.out.println("Freeze Status: "+a.getUser(username).getIsFrozen());
                     System.out.println("Trade limit: " + tm.getTradeNumber(a.getUser(username)) + "/" + a.getUser(username).getWeekTransactionLimit());
                     System.out.println("Incomplete trade limit: " + (tm.getIncomplete(a.getUser(username)).size() + "/" + a.getUser(username).getIncompleteTransactionLimit()));

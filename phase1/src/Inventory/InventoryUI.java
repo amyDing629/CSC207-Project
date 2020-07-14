@@ -73,8 +73,11 @@ public class InventoryUI {
                 if (line2.equals("1")){
                     if (ic.isOwnItem(currItem)){
                         ip.addToWishBorrow(false);
-                    }if(ic.isInOwnWishList(currItem)){
+                        break;
+                    }
+                    if (ic.isInOwnWishList(currItem)){
                         ip.isInWishBorrow();
+                        break;
                     }
                     else{
                         ic.moveToWishList(currItem);

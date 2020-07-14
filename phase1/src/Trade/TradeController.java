@@ -55,7 +55,10 @@ public class TradeController {
      * check the frozen status of two users.
      * @throws IOException one of the users's account is frozen
      */
-    void checkInput() throws IOException {
+    void checkInput(Item item) throws IOException {
+        if (item.getIsInTrade()){
+            throw new IOException("the item is already in the trade");
+        }
         if (currUser.getIsFrozen()) {
             throw new IOException("your account is frozen!");
         }
