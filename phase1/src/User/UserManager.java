@@ -43,16 +43,11 @@ public class UserManager {
      * find the user by the user ID
      */
     public User getUser(UUID userId) throws IOException {
-        try{
-            FileEditor f = new FileEditor(gw);
-            if(f.readFile().size() == 0){return null;}
-            //ArrayList<User> userList = splitUser(readFile());
-            for(User u : gw.getUsers()){
-                if(u.getId().equals(userId))
-                    return u;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        FileEditor f = new FileEditor(gw);
+        //ArrayList<User> userList = splitUser(readFile());
+        for(User u : gw.getUsers()){
+            if(u.getId().equals(userId))
+                return u;
         }
         return null;
     }
