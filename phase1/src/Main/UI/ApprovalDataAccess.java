@@ -32,7 +32,6 @@ public class ApprovalDataAccess {
         }
     }
     public void readUser(){
-
         try {
             BufferedReader reader = new BufferedReader(new FileReader(
                     "phase1/src/ItemApproval.txt"));

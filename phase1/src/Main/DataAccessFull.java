@@ -11,18 +11,20 @@ public class DataAccessFull {
     private final InvDataAccess ida;
     private final TradeDataAccess tda;
     private final FileEditor fe;
-    private  final ApprovalDataAccess aa;
+    private final ApprovalDataAccess aa;
     public DataAccessFull(GateWay gw){
         ida = new InvDataAccess(gw);
         tda = new TradeDataAccess(gw);
         fe = new FileEditor(gw);
-        aa= new ApprovalDataAccess(gw);
+        aa=new ApprovalDataAccess(gw);
+
     }
 
     public void updateFile() throws IOException {
         ida.updateFile();
         tda.updateFile();
         fe.updateFile();
+        aa.updateFile();
     }
 
     public void readFile() throws IOException {
