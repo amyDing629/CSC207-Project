@@ -81,43 +81,39 @@ public class EditInfo {
                         }
                     }
                     else if(inputF==3){
-                       ApprovalDataAccess aa=new ApprovalDataAccess(gw);
                        ArrayList<ArrayList<String>> usa=gw.getApprovalUser();
                         for (int i=0;i<usa.size();i++) {
                             System.out.println("User" + i + ": " + usa.get(i).get(1));
                             System.out.println("Reason: " + usa.get(i).get(2));
                             System.out.println("**************************");
-                            System.out.println("Enter the item number to approve,enter -1 to quit.");
-                            String inputU = sc.nextLine();
-                            int k = Integer.parseInt(inputU);
-                            if(k<usa.size()&&k>-1){
-                                a.getUser(usa.get(k).get(1)).setFrozen(false);
-                            }
+                        }
+                        if(usa.size()==0){
+                            System.out.println("Currently there is no user freeze request");
+                        }
+                        System.out.println("Enter the item number to approve,enter -1 to quit.");
+                        String inputU = sc.nextLine();
+                        int k = Integer.parseInt(inputU);
+                        if(k<usa.size()&&k>-1){
+                            a.getUser(usa.get(k).get(1)).setFrozen(false);
                         }
                     }
                     else if(inputF==1){
                         System.out.println("Please enter the reason why you should unfreeze...enter -1 to quit");
                         String des=sc.nextLine();
                         if(!des.equals("-1")){
-                            try {
-                                String data="2"+"/"+user.getUsername()+"/"+des+"\n";
-                                File file = new File("phase1/src/ItemApproval.txt");
-                                FileWriter fr = new FileWriter(file, true);
-                                BufferedWriter br = new BufferedWriter(fr);
-                                br.write(data);
-                                br.close();
-                                fr.close();
+                            ArrayList<String> b=new ArrayList<>();
+                            b.add("2");
+                            b.add(user.getUsername());
+                            b.add(des);
+                            gw.getApprovalUser().add(b);
                                 System.out.println("Request successfully");
                                 System.out.println("Please wait for the administrator to approve");
-                            } catch (IOException e) {
-                                System.out.println("An error occurred.");
-                                e.printStackTrace();
-                            }
                         }
                     }
                     break;
                 case 3:
                     System.out.println("Change user's limit");
+
                     break;
                 case 5:
                     System.out.println("Set a user into admin");
