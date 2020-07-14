@@ -24,6 +24,7 @@ public class DataAccessFull {
         ida.updateFile();
         tda.updateFile();
         fe.updateFile();
+        aa.updateFile();
     }
 
     public void readFile() throws IOException {

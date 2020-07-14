@@ -40,7 +40,6 @@ public class Main {
                 String line = reader.readLine();
                 while (line != null) {
                     System.out.println(line);
-                    // read next line
                     line = reader.readLine();
                 }
                 reader.close();

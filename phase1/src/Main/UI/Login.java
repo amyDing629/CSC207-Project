@@ -18,11 +18,10 @@ public class Login {
     public GateWay gw;
 
     public Login(GateWay gw){
+        this.gw = gw;
         sc = new Scanner(System.in);
         a = new UserManager(gw);
         tm = new TradeManager(gw);
-        this.gw = gw;
-        //System.out.println(gw.getUsers().get(3).getIsFrozen());
     }
 
     public void run() throws IOException {
@@ -39,9 +38,7 @@ public class Login {
                     System.out.println("------------------------------------------------------------");
                     System.out.println("Hello,"+username);
                     ((AdministrativeUser)a.getUser("admin")).incompleteTransaction(a.getUser(username));
-                    System.out.println(gw.getUsers().get(3).getIsFrozen());
-                    (a.getAdmin(a.getUser("admin"))).tradeLimit(a.getUser(username));
-                    System.out.println(gw.getUsers().get(3).getIsFrozen());
+                    ((AdministrativeUser)a.getUser("admin")).tradeLimit(a.getUser(username));
                     System.out.println("Freeze Status: "+a.getUser(username).getIsFrozen());
                     System.out.println("Trade limit: " + tm.getTradeNumber(a.getUser(username)) + "/" + a.getUser(username).getWeekTransactionLimit());
                     System.out.println("Incomplete trade limit: " + (tm.getIncomplete(a.getUser(username)).size() + "/" + a.getUser(username).getIncompleteTransactionLimit()));
