@@ -70,8 +70,8 @@ public class UserTrade {
                     }
                     System.out.println("****************");
                     System.out.println("Most frequent user:");
-                    for (User a : um.getFrequentUser(tm, user)) {
-                        System.out.println(a.getUsername());
+                    for (String a : um.getFrequentUser(tm, user)) {
+                        System.out.println(a);
                     }
                 case 0:
                     escape = 1;
