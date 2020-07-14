@@ -57,7 +57,7 @@ public class EditInfo {
     /**
      * run the system
      */
-    public void run() throws IOException {
+    public void run(){
         Scanner sc=new Scanner(System.in);
         int exit=-1;
         while(exit!=0) {
@@ -242,6 +242,7 @@ public class EditInfo {
                         i.setDescription(des);
                         v.addItem(i);
                         user.addWishes(name);
+
                         System.out.println("Added successfully!");
                     }
                     else if(inputA.equals("2")){
