@@ -87,6 +87,7 @@ public class User {
         id = UUID.randomUUID();
     }
 
+
     public int getDiff() {
         return diff;
     }

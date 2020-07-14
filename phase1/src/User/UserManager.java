@@ -1,5 +1,5 @@
 package User;
-
+import Inventory.Inventory;
 import Main.GateWay;
 import Trade.Trade;
 import Trade.TradeManager;
@@ -60,6 +60,11 @@ public class UserManager {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public AdministrativeUser getAdmin(User user){
+        return new AdministrativeUser(user.getUsername(), user.getPassword(),
+                true, new TradeManager(gw), new UserManager(gw));
     }
 
     /**
