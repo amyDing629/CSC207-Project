@@ -35,7 +35,7 @@ public class EditInfo {
             System.out.println("Admin:"+user.getIsAdmin());
             System.out.println("Actions:\n1.Change password\n2.User Freeze System");
             if (user.getIsAdmin()) {
-                System.out.print("3.Change user's limit\n4.add new item into the system\n5.");
+                System.out.print("3.Change user's limit\n4.add new item into the system\n");
                 if(user.getUsername().equals("admin")){
                     System.out.print("5.create new admin\n");
                 }
