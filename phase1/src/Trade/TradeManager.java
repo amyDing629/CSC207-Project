@@ -4,7 +4,7 @@ import Inventory.Inventory;
 import Inventory.Item;
 import Main.GateWay;
 import Trade.MeetingSystem.MeetingStatus;
-import User.User;
+import User.ClientUser;
 import User.UserManager;
 
 import java.io.IOException;
@@ -31,7 +31,7 @@ public class TradeManager {
     /**
      * Allow the currentUser to create a one-way trade with input otherUserId, item, and trade duration.
      * Update the trade history for both users
-     * @param otherUserId the userId of another user.User in the particular trade.Trade.
+     * @param otherUserId the userId of another user.ClientUser in the particular trade.Trade.
      * @param item the only one Inventory.Item to be trade in this created trade.Trade.
      * @param duration the duration of this trade.Trade, unit (days). -1 means the trade.Trade is permanent.
      */
@@ -49,8 +49,8 @@ public class TradeManager {
     }
 
     /**
-     * if the user.User wants to make a two way trade, tradeManager will create a two way trade.
-     * @param otherUserId the userId of another user.User in the particular trade.Trade
+     * if the user.ClientUser wants to make a two way trade, tradeManager will create a two way trade.
+     * @param otherUserId the userId of another user.ClientUser in the particular trade.Trade
      * @param item1to2 the Inventory.Item to be trade in this created trade.Trade.
      * @param item2to1 the other Inventory.Item to be trade in this created trade.Trade.
      * @param duration the duration of this trade.Trade, unit (days). -1 means the trade.Trade is permanent.
@@ -71,8 +71,8 @@ public class TradeManager {
     void updateTradeHistory(UUID currUserId, UUID tarUserId, Trade newTrade) throws IOException {
         // System.out.println("userList:"+userManager.getUserList());
         UserManager userManager = new UserManager(gw);
-        User currentUser = userManager.getUser(currUserId);
-        User tarUser = userManager.getUser(tarUserId);
+        ClientUser currentUser = userManager.getUser(currUserId);
+        ClientUser tarUser = userManager.getUser(tarUserId);
         currentUser.getTradeHistory().add(newTrade.getId());
         tarUser.getTradeHistory().add(newTrade.getId());
     }
@@ -149,13 +149,13 @@ public class TradeManager {
         UserManager um = new UserManager(gw);
         Inventory iv = new Inventory(gw);
         if (currTrade.getType().equals("oneway")){
-            User bor = um.getUser(currTrade.getUsers().get(0));
-            User lend = um.getUser(currTrade.getUsers().get(1));
+            ClientUser bor = um.getUser(currTrade.getUsers().get(0));
+            ClientUser lend = um.getUser(currTrade.getUsers().get(1));
             bor.getWishBorrow().remove(currTrade.getItemList().get(0).getName());
             lend.getWishLend().remove(currTrade.getItemList().get(0).getName());
         }else{
-            User u1 = um.getUser(currTrade.getUsers().get(0));
-            User u2 = um.getUser(currTrade.getUsers().get(1));
+            ClientUser u1 = um.getUser(currTrade.getUsers().get(0));
+            ClientUser u2 = um.getUser(currTrade.getUsers().get(1));
             u1.getWishBorrow().remove(currTrade.getItemList().get(1).getName());
             u1.getWishLend().remove(currTrade.getItemList().get(0).getName());
             u2.getWishBorrow().remove(currTrade.getItemList().get(0).getName());
@@ -167,7 +167,7 @@ public class TradeManager {
     /**
      * return the list of all trades that the user has
      */
-    public List<Trade> getAllTrade(User user) throws IOException {
+    public List<Trade> getAllTrade(ClientUser user) throws IOException {
         ArrayList<Trade> b = new ArrayList<>();
         for(UUID i: user.getTradeHistory()){
             b.add(getTrade(i));
@@ -178,7 +178,7 @@ public class TradeManager {
     /**
      * return the list of all unconfirmed trades that the user has
      */
-    public List<Trade> getUnconfirmed(User user) throws IOException {
+    public List<Trade> getUnconfirmed(ClientUser user) throws IOException {
         List<Trade> trade=new ArrayList<>();
         for(Trade t: getAllTrade(user)){
             if(t.getStatus().equals(TradeStatus.unconfirmed)){
@@ -192,7 +192,7 @@ public class TradeManager {
     /**
      * return the list of all incomplete trades that the user has
      */
-    public List<Trade> getIncomplete(User user) throws IOException {
+    public List<Trade> getIncomplete(ClientUser user) throws IOException {
         List<Trade> trade=new ArrayList<>();
         for(Trade t: getAllTrade(user)){
             if(t.getStatus().equals(TradeStatus.incomplete)){
@@ -206,7 +206,7 @@ public class TradeManager {
      * return the list of most recent three trades that the user has
      * if the user has less than three trades, return all the trades the user has
      */
-    public List<Trade> getTradeHistoryTop(User user) throws IOException {
+    public List<Trade> getTradeHistoryTop(ClientUser user) throws IOException {
         List<Trade> trade=new ArrayList<>();
         int y = 0;
         if(getAllTrade(user).size() < 3){
@@ -226,7 +226,7 @@ public class TradeManager {
     /**
      * return the number of incomplete transactions that the user has
      */
-    public int getIncompleteTransaction(User user) throws IOException {
+    public int getIncompleteTransaction(ClientUser user) throws IOException {
         int number=0;
         for (UUID i : user.getTradeHistory()) {
             if (getTrade(i).getStatus().equals(TradeStatus.incomplete)) {
@@ -239,7 +239,7 @@ public class TradeManager {
     /**
      * return the number of transactions of the user has in seven days from the most recent trade
      */
-    public int getTradeNumber(User user) throws IOException {
+    public int getTradeNumber(ClientUser user) throws IOException {
         if(user.getTradeHistory().size() == 0){return 0;}
         Trade s = getTrade(user.getTradeHistory().get(user.getTradeHistory().size() - 1));
         LocalDateTime x  = s.getCreateTime();

@@ -3,14 +3,14 @@ package Main.UI;
 import Inventory.InventoryUI;
 import Inventory.Item;
 import Main.GateWay;
-import User.User;
+import User.ClientUser;
 import User.UserManager;
 import Trade.*;
 import Inventory.*;
 import java.io.IOException;
 import java.util.*;
 /**
- * [User Interface]
+ * [ClientUser Interface]
  * shows the interface that the user uses
  */
 public class UserInventory {
@@ -25,7 +25,7 @@ public class UserInventory {
     /**
      * user in user system
      */
-    public User user;
+    public ClientUser user;
     /**
      * the object in the Item list of input gateway
      */
@@ -44,7 +44,7 @@ public class UserInventory {
      * @param u  the input user
      * @param gw the place we store information
      */
-    public UserInventory(User u, GateWay gw) {
+    public UserInventory(ClientUser u, GateWay gw) {
         user = u;
         sc = new Scanner(System.in);
         um=new UserManager(gw);

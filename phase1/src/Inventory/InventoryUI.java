@@ -1,12 +1,13 @@
 package Inventory;
 
-import User.User;
+import User.ClientUser;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
- * [user.User Interface-Inventory]
+ * [user.ClientUser Interface-Inventory]
  * show available items on the market.
  * select item.
  * show selected item information.
@@ -24,7 +25,7 @@ public class InventoryUI {
      * @param currUser the user that is using the system.
      * call inventory presenter and controller
      */
-    public InventoryUI(User currUser, Inventory iv){
+    public InventoryUI(ClientUser currUser, Inventory iv){
         ip = new InventoryPresenter(currUser, iv);
         ic = new InventoryController(currUser, iv);
         this.iv = iv;

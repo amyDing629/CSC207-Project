@@ -4,14 +4,14 @@ import Inventory.Inventory;
 import Inventory.Item;
 import Main.GateWay;
 import User.AdministrativeUser;
-import User.User;
+import User.ClientUser;
 import User.UserManager;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * [User Interface]
+ * [ClientUser Interface]
  * shows the interface that the user uses
  */
 public class EditInfo {
@@ -28,7 +28,7 @@ public class EditInfo {
     /**
      * user in user system
      */
-    public User user;
+    public ClientUser user;
 
     /**
      * the object in the Item list of input gateway
@@ -45,7 +45,7 @@ public class EditInfo {
      * @param u the input user
      * @param gw the input gateway
      */
-    public EditInfo(User u, GateWay gw){
+    public EditInfo(ClientUser u, GateWay gw){
         user=u;
         sc = new Scanner(System.in);
         a=new UserManager(gw);
@@ -63,7 +63,7 @@ public class EditInfo {
             System.out.println("--------------------\nEdit user information");
             System.out.println("Hello,user," + user.getUsername());
             System.out.println("Admin:"+user.getIsAdmin());
-            System.out.println("Actions:\n1.Change password\n2.User Freeze System");
+            System.out.println("Actions:\n1.Change password\n2.ClientUser Freeze System");
             if (user.getIsAdmin()) {
                 System.out.print("3.Change user's limit\n4.add new item into the system\n");
                 if(user.getUsername().equals("admin")){
@@ -104,12 +104,12 @@ public class EditInfo {
                         System.out.println("Type in the username of user you want to freeze, type 0 to quit.");
                         String input3 = sc.nextLine();
                         if (!input3.equals("0")) {
-                            User ha = a.getUser(input3);
+                            ClientUser ha = a.getUser(input3);
                             if (ha == null) {
                                 System.out.println("Sorry there is no such user, returning to main menu.");
                             } else {
                                 ((AdministrativeUser)a.getUser("admin")).freeze(ha);
-                                System.out.println("user.User:" + ha.getUsername() + " account has been frozen");
+                                System.out.println("user.ClientUser:" + ha.getUsername() + " account has been frozen");
                                 System.out.println("Username: " + ha.getUsername());
                                 System.out.println("Username: " + ha.getPassword());
                             }
@@ -125,7 +125,7 @@ public class EditInfo {
                         if(usa.size()==0){
                             System.out.println("Currently there is no user freeze request");
                         }
-                        System.out.println("Enter the User number to approve,enter -1 to quit.");
+                        System.out.println("Enter the ClientUser number to approve,enter -1 to quit.");
                         String inputU = sc.nextLine();
                         int k = Integer.parseInt(inputU);
                         if(k<usa.size()&&k>-1){
@@ -163,7 +163,7 @@ public class EditInfo {
                             System.out.println("You entered wrong username");
                             break;
                         }
-                        User b = a.getUser(input31);
+                        ClientUser b = a.getUser(input31);
                         System.out.println("Enter a number to change");
                         int input33 = sc.nextInt();
                         sc.nextLine();
@@ -179,7 +179,7 @@ public class EditInfo {
                             System.out.println("You entered wrong username");
                             break;
                         }
-                        User b=a.getUser(input31);
+                        ClientUser b=a.getUser(input31);
                         System.out.println("Enter a number to change");
                         int input33=sc.nextInt();
                         sc.nextLine();
@@ -195,7 +195,7 @@ public class EditInfo {
                             System.out.println("You entered wrong username");
                             break;
                         }
-                        User b=a.getUser(input31);
+                        ClientUser b=a.getUser(input31);
                         System.out.println("Enter a number to change");
                         int input33=sc.nextInt();
                         sc.nextLine();
@@ -261,7 +261,6 @@ public class EditInfo {
                                 System.out.println("Enter the item number to approve,enter -1 to quit.");
                                 String inputs = sc.nextLine();
                                 int k = Integer.parseInt(inputs);
-                                System.out.println(k);
                                 if (k > -1 && k < (hii.size())) {
                                     Item i = new Item(hii.get(k).get(1), hii.get(k).get(3));
                                     i.setDescription(hii.get(k).get(2));

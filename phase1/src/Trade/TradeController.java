@@ -2,7 +2,7 @@ package Trade;
 
 import Inventory.Inventory;
 import Inventory.Item;
-import User.User;
+import User.ClientUser;
 import User.*;
 
 import java.io.IOException;
@@ -13,8 +13,8 @@ import java.time.LocalDateTime;
  * the action of trade depend on the input of user
  */
 public class TradeController {
-    private final User currUser;
-    private User tarUser;
+    private final ClientUser currUser;
+    private ClientUser tarUser;
     private final TradeManager tm;
     private Trade currTrade;
     private UserManager um;
@@ -27,14 +27,14 @@ public class TradeController {
      * @param um the object that edits the user list of input gateway
      * @param iv the object in the Item list of input gateway
      */
-    TradeController(User currUser, TradeManager tm, UserManager um, Inventory iv){
+    TradeController(ClientUser currUser, TradeManager tm, UserManager um, Inventory iv){
         this.currUser = currUser;
         this.tm = tm;
         this.um = um;
         this.iv = iv;
     }
 
-    TradeController(User currUser, Trade currTrade, TradeManager tm, UserManager um){
+    TradeController(ClientUser currUser, Trade currTrade, TradeManager tm, UserManager um){
         this.currUser = currUser;
         this.currTrade = currTrade;
         this.tm = tm;

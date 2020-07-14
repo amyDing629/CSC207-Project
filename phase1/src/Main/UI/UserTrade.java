@@ -4,7 +4,7 @@ import Main.GateWay;
 import Trade.Trade;
 import Trade.TradeManager;
 import Trade.TradeUI;
-import User.User;
+import User.ClientUser;
 import User.UserManager;
 
 import java.io.IOException;
@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * [User Interface]
+ * [ClientUser Interface]
  * shows the interface that the user uses
  */
 public class UserTrade {
@@ -31,14 +31,14 @@ public class UserTrade {
     /**
      * user in user system
      */
-    public User user;
+    public ClientUser user;
 
     /**
      * [constructor]
      * @param u  the input user
      * @param gw the place we store information
      */
-    public UserTrade(User u, GateWay gw) {
+    public UserTrade(ClientUser u, GateWay gw) {
         user = u;
         sc = new Scanner(System.in);
         um = new UserManager(gw);
