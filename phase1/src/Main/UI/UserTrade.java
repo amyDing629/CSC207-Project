@@ -37,12 +37,12 @@ public class UserTrade {
             switch (input1) {
                 case 1:
                     for (int i = 0; i < iU.size(); i++) {
-                        System.out.println((i + 1) + ". " + iU.get(i).toString());
+                        System.out.println(i+". " + iU.get(i).toString());
                     }
-                    System.out.println("Which trade do you want to confirm? select trade ID to confirm");
+                    System.out.println("Which trade do you want to confirm? select trade number to confirm");
                     int input2 = sc.nextInt();
                     sc.nextLine();
-                    if ((input2 < (iU.size() + 1)) && (input2 > 0)) {
+                    if ((input2 < iU.size()) && (input2 >= 0)) {
                         iU.get(input2 - 1).setStatus(TradeStatus.incomplete);
                     } else {
                         System.out.println("Wrong Number, returning to UserTrade menu....");
