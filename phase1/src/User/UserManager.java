@@ -1,5 +1,5 @@
 package User;
-import Inventory.Inventory;
+
 import Main.GateWay;
 import Trade.Trade;
 import Trade.TradeManager;
