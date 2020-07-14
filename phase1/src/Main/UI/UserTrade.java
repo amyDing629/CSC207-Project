@@ -26,9 +26,9 @@ public class UserTrade {
     public void run() throws IOException {
         Scanner sc = new Scanner(System.in);
         int escape = 0;
-        List<Trade> iL = tm.getIncomplete(user);
-        List<Trade> iU = tm.getUnconfirmed(user);
         while (escape == 0) {
+            List<Trade> iL = tm.getIncomplete(user);
+            List<Trade> iU = tm.getUnconfirmed(user);
             System.out.println("--------------------\nTrade");
             System.out.println("Hello,user" + user.getUsername());
             System.out.println("Menu:\n1.confirm trades\n2.complete trade\n3.Trade History\n0.quit");
@@ -44,6 +44,7 @@ public class UserTrade {
                     sc.nextLine();
                     if ((input2 < iU.size()) && (input2 >= 0)) {
                         iU.get(input2).setStatus(TradeStatus.incomplete);
+                        System.out.println("Success");
                     } else {
                         System.out.println("Wrong Number, returning to UserTrade menu....");
                     }
