@@ -39,7 +39,7 @@ public class UserTrade {
                     for (int i = 0; i < iU.size(); i++) {
                         System.out.println(i+". " + iU.get(i).toString());
                     }
-                    System.out.println("Which trade do you want to confirm? select trade number to confirm, enter anything else to exit");
+                    System.out.println("Which trade do you want to confirm? select trade number to confirm, enter anything else integers to exit");
                     int input2 = sc.nextInt();
                     sc.nextLine();
                     if ((input2 < iU.size()) && (input2 >= 0)) {
