@@ -106,7 +106,7 @@ public class EditInfo {
                                 }
                             }
                             if (t) {
-                                System.out.println("The item is already exist,please enter the name again");
+                                System.out.println("The item already exists, please enter the name again");
                             } else {
                                 exit1 = 1;
                             }
@@ -138,7 +138,7 @@ public class EditInfo {
                                 System.out.println("**************************");
                             }
                             while(x==0) {
-                                System.out.println("Enter the item number to approval,enter -1 to quit.");
+                                System.out.println("Enter the item number to approve,enter -1 to quit.");
                                 String inputs = sc.nextLine();
                                 int k = Integer.parseInt(inputs);
                                 System.out.println(k);
