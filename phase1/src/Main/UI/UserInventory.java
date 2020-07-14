@@ -59,7 +59,7 @@ public class UserInventory {
     public void run() throws IOException {
         int exit=-1;
         while(exit!=0) {
-            System.out.println("--------------------\nInventory.Inventory");
+            System.out.println("--------------------\nInventory");
             System.out.println("Hello," + user.getUsername());
             System.out.println("Actions:\n1.Lend wishes\n2.Borrow wishes\n3.Edit lend wishes\n4.Edit borrow wishes\n0.exit");
             int input = sc.nextInt();
