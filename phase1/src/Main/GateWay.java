@@ -10,12 +10,15 @@ public class GateWay {
     private final ArrayList<User> users;
     private final ArrayList<Trade> trades;
     private final ArrayList<Item> inventory;
-
+    private final ArrayList<ArrayList<String>> ApprovalItem;
+    private final ArrayList<ArrayList<String>> ApprovalUser;
 
     public GateWay(){
         users = new ArrayList<User>();
         trades = new ArrayList<Trade>();
         inventory = new ArrayList<>();
+        ApprovalItem=new ArrayList<>();
+        ApprovalUser=new ArrayList<>();
     }
 
     public ArrayList<User> getUsers(){
@@ -28,5 +31,13 @@ public class GateWay {
 
     public ArrayList<Item> getInv(){
         return inventory;
+    }
+
+    public ArrayList<ArrayList<String>> getApprovalItem() {
+        return ApprovalItem;
+    }
+
+    public ArrayList<ArrayList<String>> getApprovalUser() {
+        return ApprovalUser;
     }
 }

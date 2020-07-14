@@ -17,13 +17,15 @@ public class EditInfo {
     public UserManager a;
     public User user;
     public Inventory v;
+    public GateWay gw;
+
     public EditInfo(User u, GateWay gw){
         user=u;
         sc = new Scanner(System.in);
         a=new UserManager(gw);
         v = new Inventory(gw);
+        this.gw=gw;
     }
-
     public void run() throws IOException {
         Scanner sc=new Scanner(System.in);
         int exit=-1;
@@ -55,18 +57,59 @@ public class EditInfo {
                 case 2:
                     System.out.println("Freeze user ");
                     System.out.println("Menu\n1.Freeze user\n2.unfreeze user");
+                    if(user.getIsFrozen()){
+                        System.out.println("3.request to remove freeze");
+                    }
+                    int inputF=sc.nextInt();
+                    sc.nextLine();
                     System.out.println("Type in the username of user you want to freeze, type 0 to quit.");
-                    String input3=sc.nextLine();
-                    if (!input3.equals("0")){
-                        User ha=a.getUser(input3);
-                        if (ha==null){
-                            System.out.println("Sorry there is no such user, returning to main menu.");
+                    if(inputF==1) {
+                        String input3 = sc.nextLine();
+                        if (!input3.equals("0")) {
+                            User ha = a.getUser(input3);
+                            if (ha == null) {
+                                System.out.println("Sorry there is no such user, returning to main menu.");
+                            } else {
+                                ((AdministrativeUser)a.getUser("admin")).freeze(ha);
+                                System.out.println("user.User:" + ha.getUsername() + " account has been frozen");
+                                System.out.println("Username: " + ha.getUsername());
+                                System.out.println("Username: " + ha.getPassword());
+                            }
                         }
-                        else{
-                            ((AdministrativeUser)user).freeze(ha);
-                            System.out.println("user.User:"+ha.getUsername()+" account has been frozen");
-                            System.out.println("Username: "+ha.getUsername());
-                            System.out.println("Username: "+ha.getPassword());
+                    }
+                    else if(inputF==2){
+                       ApprovalDataAccess aa=new ApprovalDataAccess(gw);
+                       ArrayList<ArrayList<String>> usa=gw.getApprovalUser();
+                        for (int i=0;i<usa.size();i++) {
+                            System.out.println("User" + i + ": " + usa.get(i).get(1));
+                            System.out.println("Reason: " + usa.get(i).get(2));
+                            System.out.println("**************************");
+                            System.out.println("Enter the item number to approve,enter -1 to quit.");
+                            String inputU = sc.nextLine();
+                            int k = Integer.parseInt(inputU);
+                            if(k<usa.size()&&k>-1){
+                                a.getUser(usa.get(k).get(1)).setFrozen(false);
+                            }
+                        }
+                    }
+                    else if(inputF==3){
+                        System.out.println("Please enter the reason why you should unfreeze...enter -1 to quit");
+                        String des=sc.nextLine();
+                        if(!des.equals("-1")){
+                            try {
+                                String data="2"+"/"+user.getUsername()+"/"+des+"\n";
+                                File file = new File("phase1/src/ItemApproval.txt");
+                                FileWriter fr = new FileWriter(file, true);
+                                BufferedWriter br = new BufferedWriter(fr);
+                                br.write(data);
+                                br.close();
+                                fr.close();
+                                System.out.println("Request successfully");
+                                System.out.println("Please wait for the administrator to approve");
+                            } catch (IOException e) {
+                                System.out.println("An error occurred.");
+                                e.printStackTrace();
+                            }
                         }
                     }
                     break;
@@ -86,11 +129,11 @@ public class EditInfo {
                     }
                     break;
                 case 4:
-
+                    ApprovalDataAccess aa=new ApprovalDataAccess(gw);
                     System.out.println("add new item into the system");
                     System.out.println("Menu:\n1.Add item for yourself.\n2.Approve request from users");
-                    String inputa=sc.nextLine();
-                    if(inputa.equals("1")) {
+                    String inputA=sc.nextLine();
+                    if(inputA.equals("1")) {
                         int exit1 = 0;
                         String name = "";
                         while (exit1 == 0) {
@@ -115,32 +158,20 @@ public class EditInfo {
                         i.setDescription(des);
                         v.addItem(i);
                     }
-                    else if(inputa.equals("2")){
+                    else if(inputA.equals("2")){
                         try {
-                            BufferedReader reader = new BufferedReader(new FileReader(
-                                    "phase1/src/ItemApproval.txt"));
-                            String line = reader.readLine();
-                            ArrayList<ArrayList<String>> hii=new ArrayList<>();
-                            while (line != null) {
-                                if(line.charAt(0)=='1') {
-                                    String[] parts = line.split("/");
-                                    ArrayList<String> hi = new ArrayList<>(Arrays.asList(parts));
-                                    hii.add(hi);
-                                }
-                                line = reader.readLine();
-                            }
-                            reader.close();
                             int x=0;
-                            for (int i=0;i<hii.size();i++) {
-                                System.out.println("Item " + i + ": " + hii.get(i).get(1));
-                                System.out.println("Description: " + hii.get(i).get(2));
-                                System.out.println("Owner: " + hii.get(i).get(3));
-                                System.out.println("**************************");
-                            }
-                            if(hii.size()==0){
-                                System.out.println("There is no item currently");
-                            }
                             while(x==0) {
+                                ArrayList<ArrayList<String>> hii=gw.getApprovalItem();
+                                for (int i=0;i<hii.size();i++) {
+                                    System.out.println("Item " + i + ": " + hii.get(i).get(1));
+                                    System.out.println("Description: " + hii.get(i).get(2));
+                                    System.out.println("Owner: " + hii.get(i).get(3));
+                                    System.out.println("**************************");
+                                }
+                                if(hii.size()==0){
+                                    System.out.println("There is no item currently");
+                                }
                                 System.out.println("Enter the item number to approve,enter -1 to quit.");
                                 String inputs = sc.nextLine();
                                 int k = Integer.parseInt(inputs);
@@ -150,7 +181,8 @@ public class EditInfo {
                                     i.setDescription(hii.get(k).get(2));
                                     a.getUser(hii.get(k).get(3)).addWishes(hii.get(k).get(1));
                                     v.addItem(i);
-                                    hii.remove(k);
+                                    gw.getApprovalItem().remove(k);
+                                    aa.updateFile();
                                     System.out.println("Approve successfully");
                                 }else if(k==-1){
                                     x=1;
@@ -158,18 +190,6 @@ public class EditInfo {
                                 else {
                                     System.out.println("You enter the wrong number!");
                                 }
-                            }
-                            PrintWriter writer = new PrintWriter("phase1/src/ItemApproval.txt");
-                            writer.print("");
-                            writer.close();
-                            for (ArrayList<String> strings : hii) {
-                                String data =strings.get(0)+"/"+strings.get(1)+"/"+strings.get(2)+"/"+strings.get(3)+"\n";
-                                File file = new File("phase1/src/ItemApproval.txt");
-                                FileWriter fr = new FileWriter(file, true);
-                                BufferedWriter br = new BufferedWriter(fr);
-                                br.write(data);
-                                br.close();
-                                fr.close();
                             }
                         } catch (IOException e) {
                             e.printStackTrace();
