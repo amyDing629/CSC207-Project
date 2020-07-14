@@ -51,8 +51,8 @@ public class OnewayTrade extends Trade {
     }
 
     public String toString(){
-        return "trade.Trade" + getId() + ": Trader " + borrowerId +  " makes a one way trade with trader " + lenderId +
-                " to borrow " + item + " at " + getCreateTime().format(formatter);
+        return "trade id: " + getId() + "\ntrade type: " + getType()+ "\ntrader: " + getUsers() + "\nitems: "
+                + getItemList() + "\ncreate time: " + getCreateTime().format(formatter);
     }
 
     /**

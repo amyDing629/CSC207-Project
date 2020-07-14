@@ -51,7 +51,7 @@ public class UserInventory {
                     for (int i=0;i<lb.size();i++){
                         System.out.println("wish borrow item:"+i+" "+lb.get(i));
                     }
-                    System.out.println("Select a item to start the trade! enter -1 to quit to menu");
+                    System.out.println("Type an item name to start the trade! enter -1 to quit to menu");
                     String input22=sc.nextLine();
                     if(input22.equals("-1")){
                         break;
