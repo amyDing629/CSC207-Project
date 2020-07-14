@@ -7,10 +7,7 @@ import User.AdministrativeUser;
 import User.User;
 import User.UserManager;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -56,7 +53,8 @@ public class EditInfo {
                     }
                     break;
                 case 2:
-                    System.out.println("Freeze a user");
+                    System.out.println("Freeze user ");
+                    System.out.println("Menu\n1.Freeze user\n2.unfreeze user");
                     System.out.println("Type in the username of user you want to freeze, type 0 to quit.");
                     String input3=sc.nextLine();
                     if (!input3.equals("0")){
@@ -124,9 +122,14 @@ public class EditInfo {
                             String line = reader.readLine();
                             ArrayList<ArrayList<String>> hii=new ArrayList<>();
                             while (line != null) {
-                                String[] parts = line.split("/");
-                                ArrayList<String> hi= new ArrayList<>(Arrays.asList(parts));
-                                hii.add(hi);
+                                if(line.charAt(0)=='1') {
+                                    String[] parts = line.split("/");
+                                    ArrayList<String> hi = new ArrayList<>(Arrays.asList(parts));
+                                    for(String k:hi){
+                                        System.out.println(k);
+                                    }
+                                    hii.add(hi);
+                                }
                                 line = reader.readLine();
                             }
                             reader.close();
@@ -158,10 +161,16 @@ public class EditInfo {
                             }
                             PrintWriter writer = new PrintWriter("phase1/src/ItemApproval.txt");
                             writer.print("");
-                            for (ArrayList<String> strings : hii) {
-                                writer.write(strings.get(0)+","+strings.get(1)+","+strings.get(2));
-                            }
                             writer.close();
+                            for (ArrayList<String> strings : hii) {
+                                String data =strings.get(0)+"/"+strings.get(1)+"/"+strings.get(2)+"/"+strings.get(3)+"\n";
+                                File file = new File("phase1/src/ItemApproval.txt");
+                                FileWriter fr = new FileWriter(file, true);
+                                BufferedWriter br = new BufferedWriter(fr);
+                                br.write(data);
+                                br.close();
+                                fr.close();
+                            }
                         } catch (IOException e) {
                             e.printStackTrace();
                         }

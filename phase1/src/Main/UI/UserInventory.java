@@ -123,6 +123,7 @@ public class UserInventory {
                         String input54=sc.nextLine();
                         if (user.getWishBorrow().contains(input54)) {
                             user.removeBWishes(input54);
+                            iv.deleteItem(iv.getItem(input54));
                         }
                         else{
                             System.out.println("The item does not exist in your wish borrow list");
