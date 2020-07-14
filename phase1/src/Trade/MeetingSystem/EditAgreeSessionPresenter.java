@@ -29,6 +29,10 @@ class EditAgreeSessionPresenter extends MeetingSessionPresenter {
         System.out.println("Warn: You are not allowed to edit until the other edit or agree!");
     }
 
+    void printNoEditionAllowed() {
+        System.out.println("Warn: You are not allowed to edit!");
+    }
+
     @Override
     void printSuccessInfo(LocalDateTime dateTime, String place) {
         System.out.println("Success: Meeting has been edited!");
