@@ -43,7 +43,8 @@ public class UserTrade {
                     int input2 = sc.nextInt();
                     sc.nextLine();
                     if ((input2 < iU.size()) && (input2 >= 0)) {
-                        iU.get(input2).setStatus(TradeStatus.incomplete);
+                        TradeUI tu=new TradeUI(user,iU.get(input2).getId(),tm,um);
+                        tu.run();
                         System.out.println("Success");
                     } else {
                         System.out.println("Wrong Number, returning to UserTrade menu....");
