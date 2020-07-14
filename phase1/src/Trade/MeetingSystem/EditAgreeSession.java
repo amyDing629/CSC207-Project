@@ -94,6 +94,11 @@ class EditAgreeSession {
 
 
                 case "aa":
+                    if (lastEditUser != null && lastEditUser.equals(currLogInUser)) {
+                        editAgreeSessionPresenter.printNoAgreeAllowed(dateTime, place);
+                        break;
+                    }
+
                     if (meetingActivities.agreeMeeting(meeting, currLogInUser)) {
                         // print successful agreement
                         editAgreeSessionPresenter.printSuccessInfo(currLogInUser, meeting);
