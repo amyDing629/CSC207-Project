@@ -50,6 +50,13 @@ class EditAgreeSessionPresenter extends MeetingSessionPresenter {
     }
 
     // for agree session
+    void printNoAgreeAllowed(LocalDateTime dateTime, String place) {
+        System.out.println("The current proposed date-time, place info: \n"
+                + "   - " + dateTime.toString() + "\n"
+                + "   - " + place + "\n");
+        System.out.println("Warn: You are not allowed to agree until the other edit or agree!");
+    }
+
     @Override
     void printSuccessInfo(UUID currLogInUser, Meeting meeting) {
         System.out.println("Success: Meeting has been agreed by " + currLogInUser);
