@@ -20,6 +20,7 @@ public class InvDataAccess {
                 String[] lst = line.split(",");
                 Item newItem = new Item(lst[0], lst[2]);
                 newItem.setDescription(lst[1]);
+                newItem.setIsInTrade(Boolean.parseBoolean(lst[3]));
                 gw.getInv().add(newItem);
                 line = reader.readLine();
             }
@@ -63,7 +64,7 @@ public class InvDataAccess {
     private void addItemToFile(Item item) throws IOException {
         try {
             FileOutputStream fos = new FileOutputStream("phase1/src/ItemList.txt", true);
-            fos.write((item.getName()+","+item.getDescription()+","+item.getOwnerName()+"\n").getBytes());
+            fos.write((item.getName()+","+item.getDescription()+","+item.getOwnerName()+","+item.getIsInTrade()+"\n").getBytes());
         }catch(IOException e){
             throw new IOException("cannot add item to file");
 

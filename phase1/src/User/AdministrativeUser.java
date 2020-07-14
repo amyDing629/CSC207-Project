@@ -10,8 +10,8 @@ import java.util.*;
  * The basic functionality of administrative users
  */
 public class AdministrativeUser extends User {
-    TradeManager tm;
-    UserManager um;
+    private final TradeManager tm;
+    private final UserManager um;
 
     /**
      * @param username the username of the user account
@@ -24,6 +24,7 @@ public class AdministrativeUser extends User {
         this.tm = tm;
         this.um = um;
     }
+
 
     /**
      * @param a the user that the administrative user wants to set frozen
@@ -59,7 +60,9 @@ public class AdministrativeUser extends User {
      * set the user.User a account frozen a has exceeded the week transaction limit
      */
     public void tradeLimit(User a) throws IOException {
-        a.setFrozen(tm.getTradeNumber(a) > a.getWeekTransactionLimit());
+        if(!a.getIsFrozen()){
+            a.setFrozen(tm.getTradeNumber(a) > a.getWeekTransactionLimit());
+        }
     }
 
     /**
@@ -67,7 +70,9 @@ public class AdministrativeUser extends User {
      * set the user.User a account frozen if a has exceeded the incomplete transaction limit
      */
     public void incompleteTransaction(User a) throws IOException {
-        a.setFrozen(tm.getIncompleteTransaction(a) <= a.getIncompleteTransactionLimit());
+        if(!a.getIsFrozen()){
+            a.setFrozen(tm.getIncompleteTransaction(a) > a.getIncompleteTransactionLimit());
+        }
     }
 
     /**

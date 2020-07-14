@@ -18,10 +18,10 @@ public class Login {
     public GateWay gw;
 
     public Login(GateWay gw){
+        this.gw = gw;
         sc = new Scanner(System.in);
         a = new UserManager(gw);
         tm = new TradeManager(gw);
-        this.gw = gw;
     }
 
     public void run() throws IOException {
@@ -37,8 +37,10 @@ public class Login {
                 while (true) {
                     System.out.println("------------------------------------------------------------");
                     System.out.println("Hello,"+username);
-                    ((AdministrativeUser)a.getUser("admin")).incompleteTransaction(a.getUser(username));
-                    ((AdministrativeUser)a.getUser("admin")).tradeLimit(a.getUser(username));
+                    System.out.println(username);
+                    System.out.println(a.getUser(username));
+                    (a.getAdmin(a.getUser("admin"))).incompleteTransaction(a.getUser(username));
+                    (a.getAdmin(a.getUser("admin"))).tradeLimit(a.getUser(username));
                     System.out.println("Freeze Status: "+a.getUser(username).getIsFrozen());
                     System.out.println("Trade limit: " + tm.getTradeNumber(a.getUser(username)) + "/" + a.getUser(username).getWeekTransactionLimit());
                     System.out.println("Incomplete trade limit: " + (tm.getIncomplete(a.getUser(username)).size() + "/" + a.getUser(username).getIncompleteTransactionLimit()));
@@ -57,7 +59,7 @@ public class Login {
                         UserInventory ui=new UserInventory(a.getUser(username), gw);
                         ui.run();
                     } else if (op == 4) {
-                        Market m=new Market(a.getUser(username));
+                        Market m=new Market(a.getUser(username), gw);
                         m.run();
                     } else if (op == 0) {
                         input=1;

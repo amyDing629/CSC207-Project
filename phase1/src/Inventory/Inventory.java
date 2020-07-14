@@ -40,7 +40,7 @@ public class Inventory {
      * get a list of items that is not in the trade
      * @return available item list
      */
-    ArrayList<Item> getAvailableList() {
+    public ArrayList<Item> getAvailableList() {
         ArrayList<Item> result = new ArrayList<Item>();
         for (Item item : gw.getInv()) {
             if (!item.getIsInTrade()) {

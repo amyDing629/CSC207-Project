@@ -1,5 +1,5 @@
 package User;
-
+import Inventory.Inventory;
 import Main.GateWay;
 import Trade.Trade;
 import Trade.TradeManager;
@@ -29,16 +29,11 @@ public class UserManager {
      * find the user by the user name
      */
     public User getUser(String name) throws IOException {
-        try{
-            FileEditor f = new FileEditor(gw);
-            if(f.readFile().size() == 0){return null;}
-            //ArrayList<User> userList = splitUser(readFile());
-            for(User u : gw.getUsers()){
-                if(u.getUsername().equals(name))
-                    return u;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        FileEditor f = new FileEditor(gw);
+        //ArrayList<User> userList = splitUser(readFile());
+        for(User u : gw.getUsers()){
+            if(u.getUsername().equals(name))
+                return u;
         }
         return null;
     }
@@ -48,18 +43,18 @@ public class UserManager {
      * find the user by the user ID
      */
     public User getUser(UUID userId) throws IOException {
-        try{
-            FileEditor f = new FileEditor(gw);
-            if(f.readFile().size() == 0){return null;}
-            //ArrayList<User> userList = splitUser(readFile());
-            for(User u : gw.getUsers()){
-                if(u.getId().equals(userId))
-                    return u;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        FileEditor f = new FileEditor(gw);
+        //ArrayList<User> userList = splitUser(readFile());
+        for(User u : gw.getUsers()){
+            if(u.getId().equals(userId))
+                return u;
         }
         return null;
+    }
+
+    public AdministrativeUser getAdmin(User user){
+        return new AdministrativeUser(user.getUsername(), user.getPassword(),
+                true, new TradeManager(gw), new UserManager(gw));
     }
 
     /**

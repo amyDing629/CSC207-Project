@@ -74,6 +74,9 @@ public class TradeUI {
                                 MeetingSystem mt = new MeetingSystem(trade.getUsers(), true, trade.getMeeting());
                                 mt.run(currUser.getId());
                                 trade.changeMeeting(mt.getMeeting());
+                                if (trade.getMeeting() == null){
+                                    break;
+                                }
                                 ArrayList<Object> result = mt.runResult();
                                 if (result.get(2).equals("completed")){
                                     if(trade.getDuration() == -1) {

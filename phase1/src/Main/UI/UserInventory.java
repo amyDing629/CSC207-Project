@@ -79,20 +79,14 @@ public class UserInventory {
                         String input25=sc.nextLine();
                         System.out.println("Please enter the description of the item");
                         String input1=sc.nextLine();
-                        try {
-                            String data="1"+"/"+input25+"/"+input1+"/"+user.getUsername()+"\n";
-                            File file = new File("phase1/src/ItemApproval.txt");
-                            FileWriter fr = new FileWriter(file, true);
-                            BufferedWriter br = new BufferedWriter(fr);
-                            br.write(data);
-                            br.close();
-                            fr.close();
+                            ArrayList<String> b= new ArrayList<>();
+                            b.add("1");
+                            b.add(input25);
+                            b.add(input1);
+                            b.add(user.getUsername());
+                            gw.getApprovalItem().add(b);
                             System.out.println("Request successfully");
                             System.out.println("Please wait for the administrator to approve");
-                        } catch (IOException e) {
-                            System.out.println("An error occurred.");
-                            e.printStackTrace();
-                        }
                     }else if(input44.equals("2")){
                         List<String> lw1=user.getWishLend();
                         for (String s : lw1) {

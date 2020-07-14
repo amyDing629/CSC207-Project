@@ -32,7 +32,6 @@ public class ApprovalDataAccess {
         }
     }
     public void readUser(){
-
         try {
             BufferedReader reader = new BufferedReader(new FileReader(
                     "phase1/src/ItemApproval.txt"));
@@ -66,7 +65,7 @@ public class ApprovalDataAccess {
             fr.close();
         }
         for (ArrayList<String> strings : user) {
-            String data =strings.get(0)+"/"+strings.get(1)+"/"+strings.get(2)+"/"+strings.get(3)+"\n";
+            String data =strings.get(0)+"/"+strings.get(1)+"/"+strings.get(2)+"\n";
             File file = new File("phase1/src/ItemApproval.txt");
             FileWriter fr = new FileWriter(file, true);
             BufferedWriter br = new BufferedWriter(fr);

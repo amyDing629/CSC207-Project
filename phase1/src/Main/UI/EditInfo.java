@@ -33,11 +33,11 @@ public class EditInfo {
             System.out.println("--------------------\nEdit user information");
             System.out.println("Hello,user," + user.getUsername());
             System.out.println("Admin:"+user.getIsAdmin());
-            System.out.println("Actions:\n1.Change password");
+            System.out.println("Actions:\n1.Change password\n2.User Freeze System");
             if (user.getIsAdmin()) {
-                System.out.print("2.Freeze a user\n3.Change user's limit\n4.add new item into the system\n");
-                if(user.getId()==null){
-                    System.out.print("5.Set user into admin\n");
+                System.out.print("3.Change user's limit\n4.add new item into the system\n");
+                if(user.getUsername().equals("admin")){
+                    System.out.print("5.create new admin\n");
                 }
             }
             System.out.println("0.exit");
@@ -52,18 +52,26 @@ public class EditInfo {
                     String input2=sc.nextLine();
                     if (!input2.equals("0")){
                         user.setPassword(input2);
+                        System.out.println("Changed password succesfully!");
                     }
                     break;
                 case 2:
                     System.out.println("Freeze user ");
-                    System.out.println("Menu\n1.Freeze user\n2.unfreeze user");
+                    System.out.println("Menu");
                     if(user.getIsFrozen()){
-                        System.out.println("3.request to remove freeze");
+                        System.out.println("1.request to remove freeze");
+                    }
+                    if(user.getIsAdmin()){
+                        System.out.println("2.Freeze user\n3.unfreeze user");
+                    }
+                    if(!user.getIsFrozen()&&!user.getIsAdmin()){
+                        System.out.println("Returning to menu.....");
+                        break;
                     }
                     int inputF=sc.nextInt();
                     sc.nextLine();
-                    System.out.println("Type in the username of user you want to freeze, type 0 to quit.");
-                    if(inputF==1) {
+                    if(inputF==2) {
+                        System.out.println("Type in the username of user you want to freeze, type 0 to quit.");
                         String input3 = sc.nextLine();
                         if (!input3.equals("0")) {
                             User ha = a.getUser(input3);
@@ -77,60 +85,104 @@ public class EditInfo {
                             }
                         }
                     }
-                    else if(inputF==2){
-                       ApprovalDataAccess aa=new ApprovalDataAccess(gw);
+                    else if(inputF==3){
                        ArrayList<ArrayList<String>> usa=gw.getApprovalUser();
                         for (int i=0;i<usa.size();i++) {
                             System.out.println("User" + i + ": " + usa.get(i).get(1));
                             System.out.println("Reason: " + usa.get(i).get(2));
                             System.out.println("**************************");
-                            System.out.println("Enter the item number to approve,enter -1 to quit.");
-                            String inputU = sc.nextLine();
-                            int k = Integer.parseInt(inputU);
-                            if(k<usa.size()&&k>-1){
-                                a.getUser(usa.get(k).get(1)).setFrozen(false);
-                            }
+                        }
+                        if(usa.size()==0){
+                            System.out.println("Currently there is no user freeze request");
+                        }
+                        System.out.println("Enter the User number to approve,enter -1 to quit.");
+                        String inputU = sc.nextLine();
+                        int k = Integer.parseInt(inputU);
+                        if(k<usa.size()&&k>-1){
+                            a.getUser(usa.get(k).get(1)).setFrozen(false);
+                            usa.remove(k);
                         }
                     }
-                    else if(inputF==3){
+                    else if(inputF==1){
                         System.out.println("Please enter the reason why you should unfreeze...enter -1 to quit");
                         String des=sc.nextLine();
                         if(!des.equals("-1")){
-                            try {
-                                String data="2"+"/"+user.getUsername()+"/"+des+"\n";
-                                File file = new File("phase1/src/ItemApproval.txt");
-                                FileWriter fr = new FileWriter(file, true);
-                                BufferedWriter br = new BufferedWriter(fr);
-                                br.write(data);
-                                br.close();
-                                fr.close();
+                            ArrayList<String> b=new ArrayList<>();
+                            b.add("2");
+                            b.add(user.getUsername());
+                            b.add(des);
+                            gw.getApprovalUser().add(b);
                                 System.out.println("Request successfully");
                                 System.out.println("Please wait for the administrator to approve");
-                            } catch (IOException e) {
-                                System.out.println("An error occurred.");
-                                e.printStackTrace();
-                            }
                         }
                     }
                     break;
                 case 3:
                     System.out.println("Change user's limit");
+                    System.out.println("Menu\n1.Change trade limit\n2.Change Incomplete Transaction limit\n3.Change the difference between borrowed and lend");
+                    int input30=sc.nextInt();
+                    sc.nextLine();
+                    if(input30==1){
+                        System.out.println("Which user do you want to change?");
+                        String input31=sc.nextLine();
+                        if(input31.equals("-1")){
+                            break;
+                        }
+                        if(a.getUser(input31)==null){
+                            System.out.println("You entered wrong username");
+                            break;
+                        }
+                        User b=a.getUser(input31);
+                        System.out.println("Enter a number to change");
+                        int input33=sc.nextInt();
+                        sc.nextLine();
+                        b.setWeekTransactionLimit(input33);
+                    }
+                    else if(input30==2){
+                        System.out.println("Which user do you want to change?enter -1 to break");
+                        String input31=sc.nextLine();
+                        if(input31.equals("-1")){
+                            break;
+                        }
+                        if(a.getUser(input31)==null){
+                            System.out.println("You entered wrong username");
+                            break;
+                        }
+                        User b=a.getUser(input31);
+                        System.out.println("Enter a number to change");
+                        int input33=sc.nextInt();
+                        sc.nextLine();
+                        b.setIncompleteTransaction(input33);
+                    }
+                    else if(input30==3){
+                        System.out.println("Which user do you want to change? enter -1 to break");
+                        String input31=sc.nextLine();
+                        if(input31.equals("-1")){
+                            break;
+                        }
+                        if(a.getUser(input31)==null){
+                            System.out.println("You entered wrong username");
+                            break;
+                        }
+                        User b=a.getUser(input31);
+                        System.out.println("Enter a number to change");
+                        int input33=sc.nextInt();
+                        sc.nextLine();
+                        b.setDiff(input33);
+                    }
                     break;
                 case 5:
-                    System.out.println("Set a user into admin");
-                    System.out.println("Type in the user you want to set to admin, type 0 to quit.");
+                    System.out.println("Create new admin");
+                    System.out.println("Enter the username of new admin type 0 to quit.");
                     String input4=sc.nextLine();
                     if (!input4.equals("0")){
-                        User ha=a.getUser(input4);
-                        if (ha==null){
-                            System.out.println("Sorry there is no such user, returning to main menu.");
-                        }
-                        else{((AdministrativeUser)user).addNewUser(ha.getUsername(),ha.getPassword());}
+                        System.out.println("Now enter the password of new admin");
+                        String input5555=sc.nextLine();
+                        ((AdministrativeUser)user).addNewUser(input4,input5555);
+                        System.out.println("New admin created successfully! Returning to menu");
                     }
                     break;
                 case 4:
-                    ApprovalDataAccess aa=new ApprovalDataAccess(gw);
-                    aa.readItem();
                     System.out.println("add new item into the system");
                     System.out.println("Menu:\n1.Add item for yourself.\n2.Approve request from users");
                     String inputA=sc.nextLine();
@@ -183,7 +235,6 @@ public class EditInfo {
                                     a.getUser(hii.get(k).get(3)).addWishes(hii.get(k).get(1));
                                     v.addItem(i);
                                     gw.getApprovalItem().remove(k);
-                                    aa.updateFile();
                                     System.out.println("Approve successfully");
                                 }else if(k==-1){
                                     x=1;
