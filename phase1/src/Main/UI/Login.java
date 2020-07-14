@@ -59,7 +59,7 @@ public class Login {
                         UserInventory ui=new UserInventory(a.getUser(username), gw);
                         ui.run();
                     } else if (op == 4) {
-                        Market m=new Market(a.getUser(username));
+                        Market m=new Market(a.getUser(username), gw);
                         m.run();
                     } else if (op == 0) {
                         input=1;

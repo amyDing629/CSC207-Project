@@ -1,5 +1,7 @@
 package Main.UI;
 
+import Inventory.Inventory;
+import Inventory.Item;
 import Main.GateWay;
 import User.*;
 import java.util.Scanner;
@@ -7,25 +9,20 @@ import java.util.Scanner;
 public class Market {
 
     public Scanner sc;
-    public UserManager um;
     public User user;
-    public GateWay gw;
+    public Inventory iv;
 
-    public Market(User u) {
+    public Market(User u, GateWay gw) {
+        this.iv = new Inventory(gw);
         user = u;
         sc = new Scanner(System.in);
-        gw =new GateWay();
-        um = new UserManager(gw);
     }
 
     public void run(){
         System.out.println("Hello "+ user.getUsername());
-        for (User b: um.getUserList()){
-            System.out.println(b.getUsername());
-            for(String c:b.getWishLend()){
-                System.out.println("Item:"+c);
-            }
-            System.out.println("--------------------------");
+        for(Item item:iv.getAvailableList()){
+            System.out.println("Item:"+item);
         }
+        System.out.println("--------------------------");
     }
 }
