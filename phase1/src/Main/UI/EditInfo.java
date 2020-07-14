@@ -36,7 +36,7 @@ public class EditInfo {
             System.out.println("Actions:\n1.Change password\n2.User Freeze System");
             if (user.getIsAdmin()) {
                 System.out.print("3.Change user's limit\n4.add new item into the system\n");
-                if(user.getId()==null){
+                if(user.getUsername().equals("admin")){
                     System.out.print("5.Set user into admin\n");
                 }
             }
@@ -179,7 +179,9 @@ public class EditInfo {
                         if (ha==null){
                             System.out.println("Sorry there is no such user, returning to main menu.");
                         }
-                        else{((AdministrativeUser)user).addNewUser(ha.getUsername(),ha.getPassword());}
+                        else{
+                            ((AdministrativeUser)user).addNewUser(ha.getUsername(),ha.getPassword());
+                        }
                     }
                     break;
                 case 4:
