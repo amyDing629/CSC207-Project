@@ -12,6 +12,7 @@ public class DataAccessFull {
     private final TradeDataAccess tda;
     private final FileEditor fe;
     private  final ApprovalDataAccess aa;
+
     public DataAccessFull(GateWay gw){
         ida = new InvDataAccess(gw);
         tda = new TradeDataAccess(gw);

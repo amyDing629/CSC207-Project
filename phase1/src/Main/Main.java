@@ -29,6 +29,10 @@ public class Main {
         w.readFile();
         while (a!=0) {
             //print out the list of current users-------------------------------
+            gw = new GateWay();
+            w = new DataAccessFull(gw);
+            w.readFile();
+            //System.out.println(gw.getUsers().get(3).getIsFrozen());
             System.out.println("Users:");
             try {
                 BufferedReader reader = new BufferedReader(new FileReader(
@@ -51,6 +55,7 @@ public class Main {
             a = sc.nextInt();
             sc.nextLine();
             if (a==1){
+                //System.out.println(gw.getUsers().get(3).getIsFrozen());
                 Login login=new Login(gw);
                 login.run();
             }
