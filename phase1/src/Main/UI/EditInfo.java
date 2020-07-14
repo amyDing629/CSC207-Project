@@ -52,6 +52,7 @@ public class EditInfo {
                     String input2=sc.nextLine();
                     if (!input2.equals("0")){
                         user.setPassword(input2);
+                        System.out.println("Changed password succesfully!");
                     }
                     break;
                 case 2:
