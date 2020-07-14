@@ -86,7 +86,7 @@ public class EditInfo {
                     }
                     break;
                 case 2:
-                    System.out.println("Freeze user ");
+                    System.out.println("User Freeze System");
                     System.out.println("Menu");
                     if(user.getIsFrozen()){
                         System.out.println("1.request to remove freeze");
