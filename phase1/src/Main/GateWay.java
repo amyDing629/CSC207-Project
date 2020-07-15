@@ -14,7 +14,7 @@ public class GateWay {
     private final ArrayList<ArrayList<String>> ApprovalUser;
 
     public GateWay(){
-        users = new ArrayList<ClientUser>();
+        users = new ArrayList<>();
         trades = new ArrayList<Trade>();
         inventory = new ArrayList<>();
         ApprovalItem=new ArrayList<>();

@@ -4,6 +4,7 @@ import Inventory.InventoryUI;
 import Inventory.Item;
 import Main.GateWay;
 import User.ClientUser;
+import User.ItemApprovalManager;
 import User.UserManager;
 import Trade.*;
 import Inventory.*;
@@ -37,7 +38,7 @@ public class UserInventory {
     /**
      * the place we store information
      */
-    public GateWay gw;
+    public ItemApprovalManager iam;
 
     /**
      * [constructor]
@@ -49,7 +50,7 @@ public class UserInventory {
         sc = new Scanner(System.in);
         um=new UserManager(gw);
         iv=new Inventory(gw);
-        this.gw=gw;
+        iam = new ItemApprovalManager(gw);
         tm = new TradeManager(gw);
     }
 
@@ -109,7 +110,7 @@ public class UserInventory {
                             b.add(input25);
                             b.add(input1);
                             b.add(user.getUsername());
-                            gw.getApprovalItem().add(b);
+                            iam.getItemApproval().add(b);
                             System.out.println("Request successfully");
                             System.out.println("Please wait for the administrator to approve");
                     }else if(input44.equals("2")){

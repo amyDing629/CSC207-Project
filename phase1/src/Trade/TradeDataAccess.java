@@ -173,6 +173,9 @@ public class TradeDataAccess {
         try {
             if(!file.exists()) {
                 boolean result = file.createNewFile();
+                if (!result){
+                    System.out.println("the trade file is not updated successfully");
+                }
             }
             FileWriter fileWriter =new FileWriter(file);
             fileWriter.write("");

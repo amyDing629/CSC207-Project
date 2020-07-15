@@ -1,13 +1,11 @@
 package Trade;
 
-import Inventory.Inventory;
 import Inventory.Item;
 import Main.GateWay;
 import Trade.MeetingSystem.MeetingStatus;
 import User.ClientUser;
 import User.UserManager;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,8 +33,7 @@ public class TradeManager {
      * @param item the only one Inventory.Item to be trade in this created trade.Trade.
      * @param duration the duration of this trade.Trade, unit (days). -1 means the trade.Trade is permanent.
      */
-    Trade createOnewayTrade(UUID currUserId, UUID otherUserId, Item item, int duration, LocalDateTime time)
-            throws IOException {
+    Trade createOnewayTrade(UUID currUserId, UUID otherUserId, Item item, int duration, LocalDateTime time) {
         OnewayTrade newTrade = new OnewayTrade(currUserId, otherUserId, item, duration, time);
         item.setIsInTrade(true);
         gw.getTrades().add(newTrade);
@@ -56,7 +53,7 @@ public class TradeManager {
      * @param duration the duration of this trade.Trade, unit (days). -1 means the trade.Trade is permanent.
      */
     Trade createTwowayTrade(UUID currUserId, UUID otherUserId, Item item1to2, Item item2to1, int duration,
-                           LocalDateTime time) throws IOException {
+                           LocalDateTime time){
         TwowayTrade newTrade = new TwowayTrade(currUserId, otherUserId, item1to2, item2to1, duration, time);
         gw.getTrades().add(newTrade);
         item1to2.setIsInTrade(true);
@@ -130,7 +127,6 @@ public class TradeManager {
     /**
      * set the status of trade to complete and make trade
      * @param currTrade current trade
-     * @throws IOException if the item is not deleted from user's wishlist and inventory
      */
     void completeTrade(Trade currTrade){
         currTrade.setStatus(TradeStatus.complete);
@@ -147,7 +143,6 @@ public class TradeManager {
 
     void makeTrade(Trade currTrade) {
         UserManager um = new UserManager(gw);
-        Inventory iv = new Inventory(gw);
         if (currTrade.getType().equals("oneway")){
             ClientUser bor = um.getUser(currTrade.getUsers().get(0));
             ClientUser lend = um.getUser(currTrade.getUsers().get(1));

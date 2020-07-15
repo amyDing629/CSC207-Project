@@ -74,15 +74,15 @@ public class InventoryUI {
                         ip.addToWishBorrow(false);
                         break;
                     }
+                    //move back to see inventory
                     if (ic.isInOwnWishList(currItem)){
                         ip.isInWishBorrow();
-                        break;
                     }
                     else{
                         ic.moveToWishList(currItem);
                         ip.addToWishBorrow(true);
-                        break;//move back to see inventory
                     }
+                    break;
                 }else if (line2.equals("2")){
                     break;
                 }else{

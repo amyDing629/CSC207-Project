@@ -41,7 +41,7 @@ public class TradeUI {
      * run the system
      * @throws IOException can not update edition to file
      */
-    public void run() throws IOException {
+    public void run(){
         boolean becomeComplete = false;
 
         int exit = 0;

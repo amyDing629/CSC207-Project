@@ -136,7 +136,6 @@ public class TradeController {
 
     /**
      * set the status of trade to complete and make trade
-     * @throws IOException if the item is not deleted from user's wishlist and inventory
      */
     void completeTrade(){
         tm.completeTrade(currTrade);

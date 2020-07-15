@@ -30,9 +30,8 @@ public class RequestTradeUI{
      * [constructor]
      * @param currUser current user
      * @param item item selected by the current user
-     * @throws IOException tarUser is not found
      */
-    public RequestTradeUI(ClientUser currUser, Item item, TradeManager tm, UserManager um, Inventory iv) throws IOException {
+    public RequestTradeUI(ClientUser currUser, Item item, TradeManager tm, UserManager um, Inventory iv){
         trc = new TradeController(currUser, tm, um, iv);
         this.currUser = currUser;
         this.item = item;

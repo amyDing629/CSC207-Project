@@ -56,7 +56,7 @@ public class TwowayTrade extends Trade {
      */
     @Override
     public ArrayList<Item> getItemList() {
-        ArrayList<Item> rst = new ArrayList<Item>();
+        ArrayList<Item> rst = new ArrayList<>();
         rst.add(item1to2);
         rst.add(item2to1);
         return rst;

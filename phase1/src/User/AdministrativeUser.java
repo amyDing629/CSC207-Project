@@ -1,8 +1,6 @@
 package User;
 
 import Trade.TradeManager;
-
-import java.io.IOException;
 import java.util.*;
 /**
  * [Entity class]
@@ -51,7 +49,7 @@ public class AdministrativeUser extends ClientUser {
      * @param a the user that the administrative user wants to check the transaction limit
      * set the user.ClientUser a account frozen a has exceeded the week transaction limit
      */
-    public void tradeLimit(ClientUser a) throws IOException {
+    public void tradeLimit(ClientUser a){
         if(!a.getIsFrozen()){
             a.setFrozen(tm.getTradeNumber(a) > a.getWeekTransactionLimit());
         }
@@ -61,7 +59,7 @@ public class AdministrativeUser extends ClientUser {
      * @param a the user that the administrative user wants to check the incomplete transaction limit
      * set the user.ClientUser a account frozen if a has exceeded the incomplete transaction limit
      */
-    public void incompleteTransaction(ClientUser a) throws IOException {
+    public void incompleteTransaction(ClientUser a){
         if(!a.getIsFrozen()){
             a.setFrozen(tm.getIncompleteTransaction(a) > a.getIncompleteTransactionLimit());
         }

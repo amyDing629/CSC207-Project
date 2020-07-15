@@ -5,6 +5,7 @@ import Inventory.Item;
 import Main.GateWay;
 import User.AdministrativeUser;
 import User.ClientUser;
+import User.ItemApprovalManager;
 import User.UserManager;
 
 import java.util.ArrayList;
@@ -38,7 +39,7 @@ public class EditInfo {
     /**
      * the place we store information
      */
-    public GateWay gw;
+    public ItemApprovalManager iam ;
 
     /**
      * [constructor]
@@ -50,7 +51,7 @@ public class EditInfo {
         sc = new Scanner(System.in);
         a=new UserManager(gw);
         v = new Inventory(gw);
-        this.gw=gw;
+        iam = new ItemApprovalManager(gw);
     }
 
     /**
@@ -116,7 +117,7 @@ public class EditInfo {
                         }
                     }
                     else if(inputF==3){
-                       ArrayList<ArrayList<String>> usa=gw.getApprovalUser();
+                       ArrayList<ArrayList<String>> usa=iam.getUserApproval();
                         for (int i=0;i<usa.size();i++) {
                             System.out.println("User" + i + ": " + usa.get(i).get(1));
                             System.out.println("Reason: " + usa.get(i).get(2));
@@ -141,7 +142,7 @@ public class EditInfo {
                             b.add("2");
                             b.add(user.getUsername());
                             b.add(des);
-                            gw.getApprovalUser().add(b);
+                            iam.getUserApproval().add(b);
                             System.out.println("Request successfully");
                             System.out.println("Please wait for the administrator to approve");
                         }
@@ -248,7 +249,7 @@ public class EditInfo {
                     else if(inputA.equals("2")){
                             int x=0;
                             while(x==0) {
-                                ArrayList<ArrayList<String>> hii=gw.getApprovalItem();
+                                ArrayList<ArrayList<String>> hii=iam.getItemApproval();
                                 for (int i=0;i<hii.size();i++) {
                                     System.out.println("Item " + i + ": " + hii.get(i).get(1));
                                     System.out.println("Description: " + hii.get(i).get(2));
@@ -266,7 +267,7 @@ public class EditInfo {
                                     i.setDescription(hii.get(k).get(2));
                                     a.getUser(hii.get(k).get(3)).addWishes(hii.get(k).get(1));
                                     v.addItem(i);
-                                    gw.getApprovalItem().remove(k);
+                                    iam.getItemApproval().remove(k);
                                     System.out.println("Approve successfully");
                                 }else if(k==-1){
                                     x=1;
