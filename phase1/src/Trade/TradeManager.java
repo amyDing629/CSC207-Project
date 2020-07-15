@@ -229,6 +229,7 @@ public class TradeManager {
     public int getIncompleteTransaction(ClientUser user) {
         int number=0;
         for (UUID i : user.getTradeHistory()) {
+            //System.out.println(getTrade(i));
             if (getTrade(i).getStatus().equals(TradeStatus.incomplete)) {
                 number++;
             }

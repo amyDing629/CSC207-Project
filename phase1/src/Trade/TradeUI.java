@@ -89,6 +89,7 @@ public class TradeUI {
                                     System.out.println(result);
                                     trade.setMeeting((LocalDateTime) result.get(0),
                                             (String) result.get(1), trade.getUsers());
+                                    trade.changeMeeting(mt.getMeeting());
                                 }
 
                                 if (result.get(2).equals("cancelled")) {
@@ -122,6 +123,7 @@ public class TradeUI {
         while (true) {
             if (trade.getCreator().equals(currUser.getId())){
                 System.out.println("you can not confirm the trade, please wait for another user to confirm");
+                break;
             }
             tp.selectConfirm();
             try {
