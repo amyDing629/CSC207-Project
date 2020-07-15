@@ -56,10 +56,18 @@ public class InventoryController {
         currUser.addWishBorrow(it.getName());
     }
 
+    /**
+     * @param it: current item
+     * @return whether the item is the currUser's wish list
+     */
     boolean isInOwnWishList(Item it){
         return currUser.getWishBorrow().contains(it.getName());
     }
 
+    /**
+     * @param line item name
+     * @return item
+     */
     Item getItem(String line){
         return iv.getItem(line);
     }
