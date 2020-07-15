@@ -83,6 +83,8 @@ public class ClientUser {
         this.tradeHistory=new ArrayList<>();
         this.isAdmin = isAdmin;
         id = UUID.randomUUID();
+        lendCounter = 0;
+        borrowCounter = 0;
     }
 
     /**
