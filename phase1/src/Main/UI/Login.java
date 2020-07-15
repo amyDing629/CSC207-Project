@@ -47,12 +47,14 @@ public class Login {
     public void run() throws IOException {
         int input=0;
         while (input==0) {
+            String username;
+            String password;
             System.out.println("Please enter your account username!");
             System.out.print(">");
-            String username = sc.nextLine();
-            System.out.println("Please enter your password!");
-            System.out.print(">");
-            String password = sc.nextLine();
+            username = sc.nextLine();
+                System.out.println("Please enter your password!");System.out.print(">");
+                password = sc.nextLine();
+
             if (a.verifyUser(username, password)) {
                 while (true) {
                     System.out.println("------------------------------------------------------------");
@@ -61,11 +63,15 @@ public class Login {
                     System.out.println(a.getUser(username));
                     (a.getAdmin(a.getUser("admin"))).incompleteTransaction(a.getUser(username));
                     (a.getAdmin(a.getUser("admin"))).tradeLimit(a.getUser(username));
+                    if(a.getUser(username).readDiff()<=a.getUser(username).getDiff()){
+                        (a.getAdmin(a.getUser("admin"))).freeze(a.getUser(username));
+                    }
                     System.out.println("Freeze Status: " + a.getUser(username).getIsFrozen());
                     System.out.println("Trade limit: " + tm.getTradeNumber(a.getUser(username)) + "/"
                             + a.getUser(username).getWeekTransactionLimit());
                     System.out.println("Incomplete trade limit: " + (tm.getIncomplete(a.getUser(username)).size()
                             + "/" + a.getUser(username).getIncompleteTransactionLimit()));
+                    System.out.println("Difference between borrow and lend:"+a.getUser(username).readDiff()+"/"+a.getUser(username).getDiff());
                     System.out.println("**************************************************************");
                     System.out.println("Actions:\n1.Edit information\n2.Trade\n3.Inventory\n4.Market\n0.quit to menu");
                     System.out.print(">");
@@ -92,7 +98,7 @@ public class Login {
                 }
             } else {
                 System.out.println("You have incorrect username or password, please try to login again, " +
-                        "enter any number to continue. enter 1 to exit.");
+                        "enter 0 to continue,any other number to quit ot menu.");
                 input = sc.nextInt();
                 sc.nextLine();
             }
