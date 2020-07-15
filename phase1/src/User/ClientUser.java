@@ -80,7 +80,9 @@ public class ClientUser {
         id = UUID.randomUUID();
     }
 
-
+    /**
+     * return the diff of the user between the borrow amount and lend amount
+     */
     public int getDiff() {
         return diff;
     }
