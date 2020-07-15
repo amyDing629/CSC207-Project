@@ -64,11 +64,15 @@ Login: this is the entry point of trying all other functionalities in the system
 
 5. ====ADDITIONAL FUNCTIONALITIES FOR ADMIN====
 Administrative users can perform the same functions as ordinary users, plus a few more admin functionalities.
+** Freeze/unfreeze user account:
+    --> Edit information --> Freeze a user --> Freeze user/unfreeze user
+** Change threshold values (weekly trade limit, incomplete trade limit, lent-borrowed difference):
+    --> Edit information --> Change user's limit
 ** Add new items to user's lists:
     --> Edit information --> add new item into the system --> Approve request from users
    The admin can approve only one item at a time.
 ** Add items directly to own lend wish list:
     --> Edit information --> add new item into the system --> Add item for yourself
    The admin has option to add his/her item directly
-** Freeze/unfreeze user account:
-    --> Edit information --> Freeze a user --> Freeze user/unfreeze user
+** Add subsequent administrative users to the system:
+    --> Edit information --> create new admin

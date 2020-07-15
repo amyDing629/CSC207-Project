@@ -22,7 +22,8 @@ To test all the available functionality, you need to:
 quit(0): stop 'main' execution
 
 register(2): register an account.
-         --> enter username and password(only numbers and letters are allowed, else might cause errors.)
+         --> enter username (comma, period, and semicolon are not allowed for username)
+             and password (only numbers and letters are allowed for password, else might cause errors.)
 NonAdmin login(1): contains all user functions in the program. (Enter correct user name and password to login)
          [login menu]
          --> Edit information(1)
