@@ -80,9 +80,9 @@ Admin login(1): admin has all functions as normal users plus its own functions
 Trade System:
 set up a new trade with another user (can be ordinary/admin): right after [Inventory menu] Borrow wishes.
 --> one way(temporary) (1)
---> one way(permanent) (1)
---> two way(temporary) (1)
---> two way(permanent) (1)
+--> one way(permanent) (2)
+--> two way(temporary) (3)
+--> two way(permanent) (4)
 --> exit (0)
 [trade menu]
 --> if the input trade's status is unconfirmed:
