@@ -33,6 +33,7 @@ public class UserTrade {
      */
     public ClientUser user;
 
+
     /**
      * [constructor]
      * @param u  the input user
@@ -48,7 +49,7 @@ public class UserTrade {
     /**
      * run the system
      */
-    public void run() throws IOException {
+    public void run(){
         Scanner sc = new Scanner(System.in);
         int escape = 0;
         while (escape == 0) {
