@@ -59,4 +59,8 @@ public class InventoryController {
     boolean isInOwnWishList(Item it){
         return currUser.getWishBorrow().contains(it.getName());
     }
+
+    Item getItem(String line){
+        return iv.getItem(line);
+    }
 }

@@ -14,7 +14,6 @@ import java.io.InputStreamReader;
  * add item to user's wishBorrow list
  */
 public class InventoryUI {
-    private final Inventory iv;
     private final InventoryPresenter ip;
     private final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     private Item currItem;
@@ -28,7 +27,6 @@ public class InventoryUI {
     public InventoryUI(ClientUser currUser, Inventory iv){
         ip = new InventoryPresenter(currUser, iv);
         ic = new InventoryController(currUser, iv);
-        this.iv = iv;
     }
 
     /**
@@ -50,7 +48,7 @@ public class InventoryUI {
                             ip.wrongInput();
                             throw new IOException();
                         } else{
-                            currItem = iv.getItem(line);
+                            currItem = ic.getItem(line);
                             itemAction();
                             break;
                         }

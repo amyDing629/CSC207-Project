@@ -18,6 +18,7 @@ public class TradeController {
     private final TradeManager tm;
     private Trade currTrade;
     private final UserManager um;
+    private Inventory iv;
 
     /**
      * [constructor]
@@ -25,10 +26,11 @@ public class TradeController {
      * @param tm the object that edits the trade list of input gateway
      * @param um the object that edits the user list of input gateway
      */
-    TradeController(ClientUser currUser, TradeManager tm, UserManager um){
+    TradeController(ClientUser currUser, TradeManager tm, UserManager um, Inventory iv){
         this.currUser = currUser;
         this.tm = tm;
         this.um = um;
+        this.iv = iv;
     }
 
     TradeController(ClientUser currUser, Trade currTrade, TradeManager tm, UserManager um){
@@ -145,6 +147,11 @@ public class TradeController {
      */
     void cancelTrade(){
         tm.cancelTrade(currTrade);
+    }
+
+    Item getItem(String line){
+        return iv.getItem(line);
+
     }
 
 

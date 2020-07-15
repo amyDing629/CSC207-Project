@@ -17,7 +17,7 @@ public class Item {
     /**
      * The owner of the item. The person who put the item in the wishLend list.
      */
-    private String ownerName;
+    private final String ownerName;
     /**
      * Whether the item is in an incomplete/unconfirmed trade.
      */

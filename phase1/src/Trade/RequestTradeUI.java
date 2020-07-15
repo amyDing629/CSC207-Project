@@ -25,7 +25,6 @@ public class RequestTradeUI{
      */
     private final TradeController trc;
     private final TradePresenter tp;
-    private final Inventory iv;
 
     /**
      * [constructor]
@@ -34,12 +33,11 @@ public class RequestTradeUI{
      * @throws IOException tarUser is not found
      */
     public RequestTradeUI(ClientUser currUser, Item item, TradeManager tm, UserManager um, Inventory iv) throws IOException {
-        trc = new TradeController(currUser, tm, um);
+        trc = new TradeController(currUser, tm, um, iv);
         this.currUser = currUser;
         this.item = item;
         tp = new TradePresenter(currUser);
         trc.getTarUser(item);
-        this.iv = iv;
     }
 
     /**
@@ -67,7 +65,7 @@ public class RequestTradeUI{
                         if (result.equals("exit")){
                             break;
                         }
-                        Item it = iv.getItem(result);
+                        Item it = trc.getItem(result);
                         trc.createTrade(line, item, it);
                     }
                     tp.requestTrade();
@@ -94,7 +92,7 @@ public class RequestTradeUI{
                     return "exit";
                 }
                 if (currUser.getWishLend().contains(line2)){
-                    Item it = iv.getItem(line2);
+                    Item it = trc.getItem(line2);
                     if (it.getIsInTrade()){
                         System.out.println("the trade is already in the trade, please choose again");
                     }else{
