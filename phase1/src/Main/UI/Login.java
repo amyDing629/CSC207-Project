@@ -63,7 +63,7 @@ public class Login {
                     System.out.println(a.getUser(username));
                     (a.getAdmin(a.getUser("admin"))).incompleteTransaction(a.getUser(username));
                     (a.getAdmin(a.getUser("admin"))).tradeLimit(a.getUser(username));
-                    if(a.getUser(username).readDiff()<=a.getUser(username).getDiff()){
+                    if(a.getUser(username).readDiff()>=a.getUser(username).getDiff()){
                         (a.getAdmin(a.getUser("admin"))).freeze(a.getUser(username));
                     }
                     System.out.println("Freeze Status: " + a.getUser(username).getIsFrozen());
