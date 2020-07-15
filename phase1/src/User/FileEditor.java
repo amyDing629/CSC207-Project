@@ -196,9 +196,9 @@ public class FileEditor {
             }
             s = s + l + ", ";
             s = s+ u.getWeekTransactionLimit() + ", ";
-            s = s+ u.getIncompleteTransactionLimit();
+            s = s+ u.getIncompleteTransactionLimit() + ", ";
 
-            s = s + u.getLendCounter() + ",";
+            s = s + u.getLendCounter() + ", ";
             s = s+ u.getBorrowCounter();
             s = s + "\n";
             output.write(s.getBytes());

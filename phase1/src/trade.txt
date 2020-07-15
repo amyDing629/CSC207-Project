@@ -1,0 +1,1 @@
+9d98fb8f-1370-42d2-b279-c09533370dff,oneway,-1,39e865ed-a743-4eaf-b6f3-8aa6ea1eff39,dc727cc9-674d-4fb7-b65d-2ace08978f04,iphone,null,2021-12-30 12:12/paris/completed/0;0/true;true/true;true/39e865ed-a743-4eaf-b6f3-8aa6ea1eff39,null,complete,2020-07-14 22:12,39e865ed-a743-4eaf-b6f3-8aa6ea1eff39
