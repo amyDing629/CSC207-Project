@@ -28,7 +28,7 @@ NonAdmin login(1): contains all user functions in the program. (Enter correct us
          --> Edit information(1)
              --> change password (change password or exit)(1)
              --> user freeze system:
-***                 -->request to remove freeze: request to unfreeze with reasons; option appears only when the account is frozen.
+                 -->request to remove freeze: request to unfreeze with reasons; option appears only when the account is frozen.
              --> exit: exit to main menu(0)
          --> Trade(2): testable after setting up at least one trade.
              [trade menu]
@@ -53,7 +53,8 @@ NonAdmin login(1): contains all user functions in the program. (Enter correct us
                  --> add wish: present all the item name; input item name to add wish.
                  --> delete wish: delete wishes from the user's borrow wishes.
              --> Exit: exit to login menu
-         --> Market(4): view all the items that can make trade
+         --> Market(4): view all the items that can make trade.
+                        The items which are included in a trade will not appear in the market.
          --> quit to menu: quit to main menu
 
 
@@ -145,10 +146,12 @@ Precondition:
 	- meeting must be set up successfully already,
 	- meeting is not cancelled, or agreed by both users, or confirmed
 Usage Notes:
-Allow the fourth time of entering the <Edit-Agree Session> after three editions for this user.
-If the user edits its fourth time, the meeting will cancels; if the user enters the edition section, but quits and agrees before edition, meeting will not be cancelled
-Sample Entry
-<entered Edit-Agree Session>
+The user cannot edit the meeting consecutively, one must wait for another user to edit/agree before editing the 2nd time/agreeing.
+The users are allowed to enter the <Edit-Agree-Meeting Session> for the forth time.
+However, if the user edits its in the fourth time, the meeting will be cancelled;
+if the user enters the <Edit-Agree-Meeting Session>, but quits or agrees before edition, meeting will not be cancelled
+Sample Entry:
+<entered Edit-Agree-Meeting Session>
 	—> enter ‘ee’: to edit the date-time-place proposal
 		— > enter ‘1’: to change time only
 			--> enter a new date-time (requires correct format and a future time)
@@ -168,7 +171,7 @@ Sample Entry
 <Confirm Session>
 Precondition
 To be able to enter this session:
-	- meeting must be set up successfully already, and be agreed by both users
+	- meeting must be set up successfully already, and be agreed by BOTH users
 	- meeting is not cancelled
 Sample Entry
 <entered Confirm Session>

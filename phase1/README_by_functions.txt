@@ -18,7 +18,8 @@ The system will automatically create the first Admin with name "admin" and passw
 3. =======LOGIN=======
 Login: this is the entry point of trying all other functionalities in the system.
 
-4. ====FUNCTIONALITIES FOR CLIENT USERS===
+4. ====FUNCTIONALITIES FOR CLIENT USERS====
+** View weekly trade limit & incomplete trade limit: these two limits can be found above the main menu once login.
 ** Change password: --> Edit information
 ** Request unfreeze:
     --> Edit information --> ClientUser Freeze System --> Request unfreeze
