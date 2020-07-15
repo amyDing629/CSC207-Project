@@ -85,24 +85,38 @@ public class ClientUser {
         id = UUID.randomUUID();
     }
 
+    /**
+     * @param borrowCounter the input integer
+     * set the borrowCounter as the input integer
+     */
     public void setBorrowCounter(int borrowCounter) {
         this.borrowCounter = borrowCounter;
     }
 
+    /**
+     * @param lendCounter the input integer
+     * set the lendCounter as the input integer
+     */
     public void setLendCounter(int lendCounter) {
         this.lendCounter = lendCounter;
     }
 
+    /**
+     * return borrowCounter
+     */
     public int getBorrowCounter() {
         return borrowCounter;
     }
 
+    /**
+     * return the lendCounter
+     */
     public int getLendCounter() {
         return lendCounter;
     }
 
     /**
-     * the read difference between borrow amount and lend amount
+     * the real difference between borrow amount and lend amount
      */
     public int readDiff(){
         return lendCounter - borrowCounter;
