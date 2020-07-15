@@ -19,7 +19,8 @@ The system will automatically create the first Admin with name "admin" and passw
 Login: this is the entry point of trying all other functionalities in the system.
 
 4. ====FUNCTIONALITIES FOR CLIENT USERS====
-** View weekly trade limit & incomplete trade limit: these two limits can be found above the main menu once login.
+** View weekly trade limit & incomplete trade limit:
+    these two limits can be found above the main menu once login.
 ** Change password: --> Edit information
 ** Request unfreeze:
     --> Edit information --> ClientUser Freeze System --> Request unfreeze
@@ -66,6 +67,7 @@ Login: this is the entry point of trying all other functionalities in the system
 Administrative users can perform the same functions as ordinary users, plus a few more admin functionalities.
 ** Freeze/unfreeze user account:
     --> Edit information --> Freeze a user --> Freeze user/unfreeze user
+    only when the users send unfreeze request, the admin can view and unfreeze the users.
 ** Change threshold values (weekly trade limit, incomplete trade limit, lent-borrowed difference):
     --> Edit information --> Change user's limit
 ** Add new items to user's lists:
