@@ -58,6 +58,11 @@ public class ClientUser {
      * the difference amount between the amount of
      */
     private int diff = 2;
+    /**
+     * the counters counts the lend amount and borrow amount
+     */
+    private int lendCounter;
+    private int borrowCounter;
 
 
     /**
@@ -78,6 +83,29 @@ public class ClientUser {
         this.tradeHistory=new ArrayList<>();
         this.isAdmin = isAdmin;
         id = UUID.randomUUID();
+    }
+
+    public void setBorrowCounter(int borrowCounter) {
+        this.borrowCounter = borrowCounter;
+    }
+
+    public void setLendCounter(int lendCounter) {
+        this.lendCounter = lendCounter;
+    }
+
+    public int getBorrowCounter() {
+        return borrowCounter;
+    }
+
+    public int getLendCounter() {
+        return lendCounter;
+    }
+
+    /**
+     * the read difference between borrow amount and lend amount
+     */
+    public int readDiff(){
+        return lendCounter - borrowCounter;
     }
 
     /**

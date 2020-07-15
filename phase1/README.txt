@@ -69,7 +69,10 @@ Admin login(1): admin has all functions as normal users plus its own functions
                  -->freeze a user: freeze a user by entering username.
                  -->unfreeze a user: unfreeze user after user have unfreeze request.
                  -->request to remove freeze:request to unfreeze with reasons.
-             --> Change user's limit(3)
+             --> Change user's limit(3): input user name to change limit of users.
+                 --> change trade limit
+                 --> change transaction limit
+                 --> change the difference between borrowed and lend
              --> add new item into the system(4)
                  --> Add item for yourself: directly add item to the admin's lend wishes list.
                  --> Approve request from users: choose an item to approve(input the number before item)

@@ -148,6 +148,8 @@ public class TradeManager {
             ClientUser lend = um.getUser(currTrade.getUsers().get(1));
             bor.getWishBorrow().remove(currTrade.getItemList().get(0).getName());
             lend.getWishLend().remove(currTrade.getItemList().get(0).getName());
+            bor.getBorrowCounter() ++;
+            lend.getLendCounter() ++;
         }else{
             ClientUser u1 = um.getUser(currTrade.getUsers().get(0));
             ClientUser u2 = um.getUser(currTrade.getUsers().get(1));
@@ -155,6 +157,10 @@ public class TradeManager {
             u1.getWishLend().remove(currTrade.getItemList().get(0).getName());
             u2.getWishBorrow().remove(currTrade.getItemList().get(0).getName());
             u2.getWishLend().remove(currTrade.getItemList().get(1).getName());
+            u1.getBorrowCounter() ++;
+            u1.getLendCounter() ++;
+            u2.getBorrowCounter() ++;
+            u2.getLendCounter() ++;
         }
 
     }

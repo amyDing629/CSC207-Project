@@ -101,6 +101,8 @@ public class FileEditor {
                 d.setTradeHistory(lineList5);
                 d.setWeekTransactionLimit(Integer.parseInt(b.get(10)));
                 d.setIncompleteTransaction(Integer.parseInt(b.get(11)));
+                d.setLendCounter(Integer.parseInt(b.get(12)));
+                d.setBorrowCounter(Integer.parseInt(b.get(13)));
 
                 gw.getUsers().add(d);
             }
@@ -150,6 +152,8 @@ public class FileEditor {
                 d.setTradeHistory(lineList5);
                 d.setWeekTransactionLimit(Integer.parseInt(b.get(10)));
                 d.setIncompleteTransaction(Integer.parseInt(b.get(11)));
+                d.setLendCounter(Integer.parseInt(b.get(12)));
+                d.setBorrowCounter(Integer.parseInt(b.get(13)));
 
                 gw.getUsers().add(d);
             }
@@ -193,6 +197,9 @@ public class FileEditor {
             s = s + l + ", ";
             s = s+ u.getWeekTransactionLimit() + ", ";
             s = s+ u.getIncompleteTransactionLimit();
+
+            s = s + u.getLendCounter() + ",";
+            s = s+ u.getBorrowCounter();
             s = s + "\n";
             output.write(s.getBytes());
             output.close();
