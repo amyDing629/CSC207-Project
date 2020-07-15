@@ -1,4 +1,0 @@
-apple,red,amy
-banana,yellow,daniel
-iphone,,admin
-ipad,good,amy

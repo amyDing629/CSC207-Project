@@ -1,3 +1,0 @@
-90989432-5a55-4d87-bf24-85ce9db75fbe, admin, 123, true, false, false, , iphone; , , , 5, 2
-9adb24b6-9212-4946-9af2-dfbc62f2d1b5, amy, 123, false, false, false, , ipad; , , , 5, 2
-570ecf52-e829-41f9-a7f0-5e6897378acf, daniel, 123, false, false, false, , , , , 5, 2
