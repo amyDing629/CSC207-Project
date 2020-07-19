@@ -149,8 +149,7 @@ public class TradeManager {
             bor.getWishBorrow().remove(currTrade.getItemList().get(0).getName());
             lend.getWishLend().remove(currTrade.getItemList().get(0).getName());
             bor.setBorrowCounter(bor.getBorrowCounter()+1);
-            bor.setLendCounter(bor.getLendCounter()+1);
-
+            lend.setLendCounter(bor.getLendCounter()+1);
 
         }else{
             ClientUser u1 = um.getUser(currTrade.getUsers().get(0));
