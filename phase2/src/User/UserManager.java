@@ -169,6 +169,10 @@ public class UserManager {
 
     public void set(ClientUser a, String password){a.setPassword(password);}
 
+    public void createClientUser(String name, String password, boolean isAdmin){
+        userList.add(new ClientUser(name, password, isAdmin));
+    }
+
 
 
 }
