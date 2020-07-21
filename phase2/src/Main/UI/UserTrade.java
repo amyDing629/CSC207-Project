@@ -1,13 +1,11 @@
 package Main.UI;
 
-import Main.GateWay;
 import Trade.Trade;
 import Trade.TradeManager;
 import Trade.TradeUI;
 import User.ClientUser;
 import User.UserManager;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 

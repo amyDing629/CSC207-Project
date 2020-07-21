@@ -1,7 +1,6 @@
 package Trade;
 
 import Inventory.Item;
-import Main.GateWay;
 import Trade.MeetingSystem.MeetingStatus;
 import User.ClientUser;
 import User.UserManager;

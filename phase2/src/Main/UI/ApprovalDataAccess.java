@@ -1,5 +1,4 @@
 package Main.UI;
-import Main.GateWay;
 import User.ItemApprovalManager;
 
 import java.io.*;

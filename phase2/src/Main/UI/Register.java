@@ -1,6 +1,5 @@
 package Main.UI;
 
-import Main.GateWay;
 import User.ClientUser;
 import User.UserManager;
 

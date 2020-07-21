@@ -1,7 +1,6 @@
 package Main.UI;
 
 import Inventory.Inventory;
-import Main.GateWay;
 import Trade.TradeManager;
 import User.ItemApprovalManager;
 import User.UserManager;

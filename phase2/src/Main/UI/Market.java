@@ -2,7 +2,6 @@ package Main.UI;
 
 import Inventory.Inventory;
 import Inventory.Item;
-import Main.GateWay;
 import User.*;
 import java.util.Scanner;
 

@@ -2,7 +2,6 @@ package Trade;
 
 import Inventory.Inventory;
 import Inventory.Item;
-import Main.GateWay;
 import Trade.MeetingSystem.DateTime;
 import Trade.MeetingSystem.Meeting;
 import Trade.MeetingSystem.MeetingEditor;

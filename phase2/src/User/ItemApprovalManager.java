@@ -1,13 +1,15 @@
 package User;
 
-import Inventory.Item;
-import Main.GateWay;
-
 import java.util.ArrayList;
 
 public class ItemApprovalManager {
-    private ArrayList<ArrayList<String>> itemApproval;
-    private ArrayList<ArrayList<String>> userApproval;
+    private final ArrayList<ArrayList<String>> itemApproval;
+    private final ArrayList<ArrayList<String>> userApproval;
+
+    public ItemApprovalManager(){
+        itemApproval = new ArrayList<ArrayList<String>>();
+        userApproval = new ArrayList<ArrayList<String>>();
+    }
 
 
     public ArrayList<ArrayList<String>> getItemApproval(){

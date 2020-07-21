@@ -1,7 +1,5 @@
 package Inventory;
 
-import Main.GateWay;
-
 import java.io.*;
 /**
  * [gateway class]

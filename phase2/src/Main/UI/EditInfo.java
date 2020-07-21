@@ -2,7 +2,6 @@ package Main.UI;
 
 import Inventory.Inventory;
 import Inventory.Item;
-import Main.GateWay;
 import User.AdministrativeUser;
 import User.ClientUser;
 import User.ItemApprovalManager;

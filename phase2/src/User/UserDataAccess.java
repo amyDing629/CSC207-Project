@@ -1,6 +1,5 @@
 package User;
 
-import Main.GateWay;
 import Trade.TradeManager;
 
 import java.io.*;

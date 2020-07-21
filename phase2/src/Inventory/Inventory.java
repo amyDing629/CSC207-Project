@@ -2,7 +2,6 @@ package Inventory;
 
 import java.io.*;
 import java.util.ArrayList;
-import Main.GateWay;
 
 /**
  * [use case class]
