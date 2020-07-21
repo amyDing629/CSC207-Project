@@ -61,15 +61,16 @@ public class UserManager {
     }
 
     /**
-     * @param user the input user
-     *get the administrative user by id
+     * @param userId The ID of the administrative user.
+     * get the administrative user by the user ID
      */
-    public AdministrativeUser getAdmin(ClientUser user, TradeManager tm){
-        return new AdministrativeUser(user.getUsername(), user.getPassword(),
-                true, tm, this);
+    public ClientUser getAdmin(UUID userId){
+        for(ClientUser u : userList) {
+            if(u.getId().equals(userId) && u.getIsAdmin()) {
+                return u;
+            }
+        } return null;
     }
-
-
 
 
     /**

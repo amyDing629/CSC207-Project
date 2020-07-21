@@ -37,7 +37,7 @@ public class AdministrativeUser extends ClientUser {
      * @param password the password of the administrative user that wants to add
      * the initial administrative user can add the new administrative user
      */
-    public void addNewUser(String username, String password) {
+    public void addNewAdmin(String username, String password) {
         List<ClientUser> x = um.getUserList();
         if (id.equals(x.get(0).getId())){
         AdministrativeUser a = new AdministrativeUser(username, password, true, tm, um);
@@ -57,7 +57,7 @@ public class AdministrativeUser extends ClientUser {
 
     /**
      * @param a the user that the administrative user wants to check the incomplete transaction limit
-     * set the user.ClientUser a account frozen if a has exceeded the incomplete transaction limit
+     * set the account of user a frozen if a has exceeded the incomplete transaction limit
      */
     public void incompleteTransaction(ClientUser a){
         if(!a.getIsFrozen()){

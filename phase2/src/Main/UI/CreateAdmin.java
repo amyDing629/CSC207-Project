@@ -28,7 +28,7 @@ public class CreateAdmin {
         if (!input4.equals("0")){
             System.out.println("Now enter the password of new admin");
             String input5555=sc.nextLine();
-            ((AdministrativeUser)user).addNewUser(input4,input5555);
+            ((AdministrativeUser)user).addNewAdmin(input4,input5555);
             System.out.println("New admin created successfully! Returning to menu");
         }
     }
