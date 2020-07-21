@@ -7,6 +7,7 @@ import User.*;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 /**
  * [controller]
@@ -151,6 +152,16 @@ public class TradeController {
     Item getItem(String line){
         return iv.getItem(line);
 
+    }
+
+    ArrayList<String> getSuggestedItemName(){
+        ArrayList<String> result = new ArrayList<>();
+        for (String i: currUser.getWishLend()){
+            if (tarUser.getWishBorrow().contains(i)){
+                result.add(i);
+            }
+        }
+        return result;
     }
 
 

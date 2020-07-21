@@ -85,6 +85,7 @@ public class RequestTradeUI{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         while (true){
             tp.selectSecondItem();
+            tp.printSuggestedItemList(trc.getSuggestedItemName());
             try {
                 String line2 = br.readLine();
                 if (line2.equals("0")){

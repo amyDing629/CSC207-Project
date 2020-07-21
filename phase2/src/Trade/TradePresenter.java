@@ -2,6 +2,8 @@ package Trade;
 
 import User.ClientUser;
 
+import java.util.ArrayList;
+
 /**
  * [presenter]
  * present the information of trade
@@ -97,5 +99,10 @@ public class TradePresenter {
     void selectSecondItem(){
         System.out.println(currUser.getWishLend());
         System.out.println("choose the item you want to lend, type '0' to quit");
+    }
+
+    void printSuggestedItemList(ArrayList<String> sItemList){
+        System.out.println("Suggested items: " + sItemList);
+
     }
 }
