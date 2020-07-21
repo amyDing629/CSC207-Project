@@ -1,6 +1,5 @@
 package Main.UI;
 
-import Main.GateWay;
 import User.AdministrativeUser;
 import User.ClientUser;
 import User.ItemApprovalManager;
@@ -12,14 +11,13 @@ import java.util.Scanner;
 public class UserFreezeSystem {
     ClientUser user;
     Scanner sc;
-    GateWay gw;
     UserManager um;
     ItemApprovalManager iam;
-    public UserFreezeSystem(ClientUser user,GateWay gw){
+    public UserFreezeSystem(ClientUser user,UserManager um, ItemApprovalManager iam){
         this.user=user;
         sc=new Scanner(System.in);
-        um=new UserManager(gw);
-        iam = new ItemApprovalManager(gw);
+        this.um=um;
+        this.iam = iam;
     }
 
     public void run() {

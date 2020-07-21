@@ -2,7 +2,6 @@ package Main.UI;
 
 import Inventory.Inventory;
 import Inventory.Item;
-import Main.GateWay;
 import User.ClientUser;
 import User.ItemApprovalManager;
 import User.UserManager;
@@ -13,16 +12,14 @@ import java.util.Scanner;
 public class AddNewItem {
     ClientUser user;
     Scanner sc;
-    GateWay gw;
     UserManager um;
     ItemApprovalManager iam;
     Inventory iv;
-    public AddNewItem(ClientUser user, GateWay gw, Inventory iv){
-        this.gw=gw;
+    public AddNewItem(ClientUser user,UserManager um, Inventory iv, ItemApprovalManager iam){
         this.user=user;
         sc=new Scanner(System.in);
-        um=new UserManager(gw);
-        iam = new ItemApprovalManager(gw);
+        this.um=um;
+        this.iam = iam;
         this.iv=iv;
     }
 

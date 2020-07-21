@@ -80,19 +80,19 @@ public class EditInfo {
                     cp.run();
                     break;
                 case 2:
-                    UserFreezeSystem ufs=new UserFreezeSystem(user,gw);
+                    UserFreezeSystem ufs=new UserFreezeSystem(user,a, iam);
                     ufs.run();
                     break;
                 case 3:
-                    UserLimit ul=new UserLimit(user,gw);
+                    UserLimit ul=new UserLimit(user,a,iam);
                     ul.run();
                     break;
                 case 5:
-                    CreateAdmin ca=new CreateAdmin(user,gw);
+                    CreateAdmin ca=new CreateAdmin(user,a,iam);
                     ca.run();
                     break;
                 case 4:
-                    AddNewItem ani=new AddNewItem(user,gw,v);
+                    AddNewItem ani=new AddNewItem(user,a,v,iam);
                     ani.run();
                     break;
                 case 0:

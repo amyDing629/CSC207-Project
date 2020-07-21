@@ -9,7 +9,7 @@ public class InvDataAccess {
     /**
      * the place we store information
      */
-    private Inventory iv;
+    private final Inventory iv;
 
     /**
      * [constructor]
