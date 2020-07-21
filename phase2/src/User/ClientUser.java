@@ -5,7 +5,7 @@ import java.util.*;
 import java.util.UUID;
 /**
  * [Entity class]
- * The basic functionality of users
+ * The basic functionality of users (including ordinary users and administrative users)
  */
 public class ClientUser {
     /**
@@ -51,7 +51,7 @@ public class ClientUser {
      */
     private int incompleteTransactionLimit;
     /**
-     * the difference amount between the amount of
+     * the difference amount between the amount of TODO: COMPLETE DESCRIPTION
      */
     private int diff = 2;
     /**

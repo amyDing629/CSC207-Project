@@ -50,7 +50,7 @@ public class MeetingEditor implements IMeetingAttendee {
     /**
      * Update this MeetingEditor's number of time for editing time and/or place of meeting by 1.
      */
-    void updateTimeOfEdition() {
+    public void updateTimeOfEdition() {
         this.timeOfEdition += 1;
     }
 
