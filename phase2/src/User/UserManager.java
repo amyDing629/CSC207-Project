@@ -122,5 +122,54 @@ public class UserManager {
         }
         return g;
     }
+
+    public List<UUID> getTradeHistory(ClientUser a){
+        return a.getTradeHistory();
+    }
+
+    public boolean getIsAdmin(ClientUser a){return a.getIsAdmin();}
+
+    public List<String> getWishLend(ClientUser a) {
+        return a.getWishLend();
+    }
+
+    public List<String> getWishBorrow(ClientUser a) {
+        return a.getWishBorrow();
+    }
+
+    public int getWeekTransactionLimit(ClientUser a) {
+        return a.getWeekTransactionLimit();
+    }
+
+    public int getIncompleteTransactionLimit(ClientUser a) {
+        return a.getIncompleteTransactionLimit();
+    }
+
+    public boolean getIsBorrow(ClientUser a) {
+        return a.getIsBorrow();
+    }
+
+    public int getDiff(ClientUser a) {
+        return a.getDiff();
+    }
+    public String getPassword(ClientUser a) {
+        return a.getPassword();
+    }
+
+    public String getUsername(ClientUser a){return a.getUsername();}
+
+    public UUID getId(ClientUser a) {
+        return a.getId();
+    }
+    public boolean getIsFrozen(ClientUser a){
+        return a.getIsFrozen();
+    }
+
+    public List<String> getNotification(ClientUser a){return a.getNotification();}
+
+    public void set(ClientUser a, String password){a.setPassword(password);}
+
+
+
 }
 

@@ -1,5 +1,6 @@
 package User;
 
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.UUID;
 /**
@@ -50,11 +51,6 @@ public class ClientUser {
      */
     private int incompleteTransactionLimit;
     /**
-     * the list of names of items that the user has lent and borrowed
-     */
-    private List<String> lend;
-    private List<String> borrowed;
-    /**
      * the difference amount between the amount of
      */
     private int diff = 2;
@@ -63,6 +59,7 @@ public class ClientUser {
      */
     private int lendCounter;
     private int borrowCounter;
+
 
 
     /**
@@ -74,7 +71,6 @@ public class ClientUser {
     public ClientUser(String username, String password, boolean isAdmin){
         this.username = username;
         this.password = password;
-        //this.id = id;
         this.weekTransactionLimit=5;
         this.incompleteTransactionLimit=2;
         this.notification=new ArrayList<>();
@@ -323,18 +319,6 @@ public class ClientUser {
         return isBorrow;
     }
 
-    /**
-     * return the lst of names of items that the user lends
-     */
-    public List<String> getLend() {
-        return lend;
-    }
 
-    /**
-     * return the lst of names of items that the user borrows
-     */
-    public List<String> getBorrowed() {
-        return borrowed;
-    }
 
 }
