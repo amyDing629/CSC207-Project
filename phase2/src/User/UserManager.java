@@ -20,7 +20,7 @@ public class UserManager {
      * [constructor]
      */
     public UserManager(){
-        userList = new ArrayList<ClientUser>();
+        userList = new ArrayList<>();
     }
 
     /**
@@ -123,53 +123,59 @@ public class UserManager {
         }
         return g;
     }
-
+    //no use
     public List<UUID> getTradeHistory(ClientUser a){
         return a.getTradeHistory();
     }
 
+    //FINISHED
     public boolean getIsAdmin(ClientUser a){return a.getIsAdmin();}
-
+    //FINISHED
     public List<String> getWishLend(ClientUser a) {
         return a.getWishLend();
     }
-
+    //FINISHED
     public List<String> getWishBorrow(ClientUser a) {
         return a.getWishBorrow();
     }
-
+    //finished
     public int getWeekTransactionLimit(ClientUser a) {
         return a.getWeekTransactionLimit();
     }
-
+    //finished
     public int getIncompleteTransactionLimit(ClientUser a) {
         return a.getIncompleteTransactionLimit();
     }
-
+    //no use
     public boolean getIsBorrow(ClientUser a) {
         return a.getIsBorrow();
     }
-
+    //finished
     public int getDiff(ClientUser a) {
         return a.getDiff();
     }
+    //finished
     public String getPassword(ClientUser a) {
         return a.getPassword();
     }
 
+    //finished
     public String getUsername(ClientUser a){return a.getUsername();}
 
+    //finished
     public UUID getId(ClientUser a) {
         return a.getId();
     }
+
+    //finished
     public boolean getIsFrozen(ClientUser a){
         return a.getIsFrozen();
     }
-
+    //no use
     public List<String> getNotification(ClientUser a){return a.getNotification();}
-
+    //finished
     public void set(ClientUser a, String password){a.setPassword(password);}
-
+    //finished
     public void createClientUser(String name, String password, boolean isAdmin){
         userList.add(new ClientUser(name, password, isAdmin));
     }

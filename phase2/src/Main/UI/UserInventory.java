@@ -59,7 +59,7 @@ public class UserInventory {
         int exit=-1;
         while(exit!=0) {
             System.out.println("--------------------\nInventory");
-            System.out.println("Hello," + user.getUsername());
+            System.out.println("Hello," + um.getUsername(user));
             System.out.println("Actions:\n1.Lend wishes\n2.Borrow wishes\n3.Edit lend wishes\n4.Edit borrow wishes\n0.exit");
             int input = sc.nextInt();
             sc.nextLine();
@@ -67,15 +67,15 @@ public class UserInventory {
             switch (input) {
                 case 1:
                     System.out.println("Lend wishes");
-                    List<String> lw=user.getWishLend();
-                    System.out.println(user.getWishLend());
+                    List<String> lw=um.getWishLend(user);
+                    System.out.println(um.getWishLend(user));
                     for (String s : lw) {
                         System.out.println("item:" + s);
                     }
                     break;
                 case 2:
                     System.out.println("Borrow wishes");
-                    List<String> lb=user.getWishBorrow();
+                    List<String> lb=um.getWishBorrow(user);
                     for (String value : lb) {
                         System.out.println("wish borrow item: " + value);
                     }
@@ -107,18 +107,18 @@ public class UserInventory {
                             b.add("1");
                             b.add(input25);
                             b.add(input1);
-                            b.add(user.getUsername());
+                            b.add(um.getUsername(user));
                             iam.getItemApproval().add(b);
                             System.out.println("Request successfully");
                             System.out.println("Please wait for the administrator to approve");
                     }else if(input44.equals("2")){
-                        List<String> lw1=user.getWishLend();
+                        List<String> lw1=um.getWishLend(user);
                         for (String s : lw1) {
                             System.out.println("item:" + s);
                         }
                         System.out.println("Input the item you wanted to delete");
                         String input43=sc.nextLine();
-                        if (user.getWishLend().contains(input43)) {
+                        if (um.getWishLend(user).contains(input43)) {
                             user.removeLWishes(input43);
                             iv.deleteItem(iv.getItem(input43));
                         }
@@ -135,13 +135,13 @@ public class UserInventory {
                         InventoryUI iui = new InventoryUI(user, iv);
                         iui.run();
                     }else if(input55.equals("2")){
-                        List<String> bw1=user.getWishBorrow();
+                        List<String> bw1=um.getWishBorrow(user);
                         for (String s : bw1) {
                             System.out.println("item:" + s);
                         }
                         System.out.println("Input the item you wanted to delete");
                         String input54=sc.nextLine();
-                        if (user.getWishBorrow().contains(input54)) {
+                        if (um.getWishBorrow(user).contains(input54)) {
                             user.removeBWishes(input54);
                             iv.deleteItem(iv.getItem(input54));
                         }

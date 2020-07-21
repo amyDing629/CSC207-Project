@@ -18,9 +18,6 @@ public class Register {
      * the object that edits the user list of input gateway
      */
     public UserManager a;
-    /**
-     * the object that edit the information from username.txt
-     */
 
     /**
      * [constructor]
@@ -45,12 +42,11 @@ public class Register {
             System.out.print(">");
             String password = sc.nextLine();
             if (a.getUser(username) == null) {
-                ClientUser user1 = new ClientUser(username, password, false);
-                a.addUser(user1);
+                a.createClientUser(username,password,false);
                 System.out.println("Your account has been successfully created!");
-                System.out.println("Your id: " + user1.getId());
-                System.out.println("Your username: " + user1.getUsername());
-                System.out.println("Your password: " + user1.getPassword());
+                System.out.println("Your id: " +a.getId(a.getUser(username)));
+                System.out.println("Your username: " + a.getUsername(a.getUser(username)));
+                System.out.println("Your password: " + a.getPassword(a.getUser(username)));
                 input=1;
             }
             else {

@@ -23,13 +23,13 @@ public class UserFreezeSystem {
     public void run() {
         System.out.println("User Freeze System");
         System.out.println("Menu");
-        if (user.getIsFrozen()) {
+        if (um.getIsFrozen(user)) {
             System.out.println("1.request to remove freeze");
         }
-        if (user.getIsAdmin()) {
+        if (um.getIsAdmin(user)) {
             System.out.println("2.Freeze user\n3.unfreeze user");
         }
-        if (!user.getIsFrozen() && !user.getIsAdmin()) {
+        if (!um.getIsFrozen(user) && !um.getIsAdmin(user)) {
             System.out.println("Returning to menu.....");
         } else {
             int inputF = sc.nextInt();
@@ -43,9 +43,9 @@ public class UserFreezeSystem {
                         System.out.println("Sorry there is no such user, returning to main menu.");
                     } else {
                         ((AdministrativeUser) um.getUser("admin")).freeze(ha);
-                        System.out.println("user.ClientUser:" + ha.getUsername() + " account has been frozen");
-                        System.out.println("Username: " + ha.getUsername());
-                        System.out.println("Username: " + ha.getPassword());
+                        System.out.println("user.ClientUser:" + um.getUsername(ha) + " account has been frozen");
+                        System.out.println("Username: " + um.getUsername(ha));
+                        System.out.println("Username: " + um.getPassword(ha));
                     }
                 }
             } else if (inputF == 3) {
@@ -71,7 +71,7 @@ public class UserFreezeSystem {
                 if (!des.equals("-1")) {
                     ArrayList<String> b = new ArrayList<>();
                     b.add("2");
-                    b.add(user.getUsername());
+                    b.add(um.getUsername(user));
                     b.add(des);
                     iam.getUserApproval().add(b);
                     System.out.println("Request successfully");

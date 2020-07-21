@@ -52,26 +52,25 @@ public class Login {
             System.out.println("Please enter your account username!");
             System.out.print(">");
             username = sc.nextLine();
-                System.out.println("Please enter your password!");System.out.print(">");
-                password = sc.nextLine();
+            System.out.println("Please enter your password!");System.out.print(">");
+            password = sc.nextLine();
 
             if (a.verifyUser(username, password)) {
                 while (true) {
                     System.out.println("------------------------------------------------------------");
                     System.out.println("Hello," + username);
                     System.out.println(username);
-                    System.out.println(a.getUser(username));
                     //(a.getAdmin(a.getUser("admin"))).incompleteTransaction(a.getUser(username));
                     //(a.getAdmin(a.getUser("admin"))).tradeLimit(a.getUser(username));
-                    if(a.getUser(username).readDiff()>=a.getUser(username).getDiff()){
+                    if(a.getUser(username).readDiff()>=a.getDiff(a.getUser(username))){
                         //(a.getAdmin(a.getUser("admin"))).freeze(a.getUser(username));
                     }
-                    System.out.println("Freeze Status: " + a.getUser(username).getIsFrozen());
+                    System.out.println("Freeze Status: " + a.getIsFrozen(a.getUser(username)));
                     System.out.println("Trade limit: " + tm.getTradeNumber(a.getUser(username)) + "/"
-                            + a.getUser(username).getWeekTransactionLimit());
+                            + a.getWeekTransactionLimit(a.getUser(username)));
                     System.out.println("Incomplete trade limit: " + (tm.getIncomplete(a.getUser(username)).size()
-                            + "/" + a.getUser(username).getIncompleteTransactionLimit()));
-                    System.out.println("Difference between borrow and lend:"+a.getUser(username).readDiff()+"/"+a.getUser(username).getDiff());
+                            + "/" + a.getIncompleteTransactionLimit(a.getUser(username))));
+                    System.out.println("Difference between borrow and lend:"+a.getUser(username).readDiff()+"/"+a.getDiff(a.getUser(username)));
                     System.out.println("**************************************************************");
                     System.out.println("Actions:\n1.Edit information\n2.Trade\n3.Inventory\n4.Market\n0.quit to menu");
                     System.out.print(">");
@@ -87,7 +86,7 @@ public class Login {
                         UserInventory ui=new UserInventory(a.getUser(username), a, tm, iv, iam);
                         ui.run();
                     } else if (op == 4) {
-                        Market m=new Market(a.getUser(username), iv);
+                        Market m=new Market(a.getUser(username), iv,a);
                         m.run();
                     } else if (op == 0) {
                         input=1;

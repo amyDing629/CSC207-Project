@@ -60,12 +60,12 @@ public class EditInfo {
         int exit=-1;
         while(exit!=0) {
             System.out.println("--------------------\nEdit user information");
-            System.out.println("Hello,user," + user.getUsername());
-            System.out.println("Admin:"+user.getIsAdmin());
+            System.out.println("Hello,user," + a.getUsername(user));
+            System.out.println("Admin:"+a.getIsAdmin(user));
             System.out.println("Actions:\n1.Change password\n2.ClientUser Freeze System");
-            if (user.getIsAdmin()) {
+            if (a.getIsAdmin(user)) {
                 System.out.print("3.Change user's limit\n4.add new item into the system\n");
-                if(user.getUsername().equals("admin")){
+                if(a.getUsername(user).equals("admin")){
                     System.out.print("5.create new admin\n");
                 }
             }
@@ -76,7 +76,7 @@ public class EditInfo {
             System.out.println("-----------------------------");
             switch (input) {
                 case 1:
-                    ChangePass cp=new ChangePass(user);
+                    ChangePass cp=new ChangePass(user,a);
                     cp.run();
                     break;
                 case 2:

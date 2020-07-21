@@ -1,11 +1,13 @@
 package Main.UI;
 
+import Inventory.Inventory;
 import Main.DataAccessFull;
-import Main.GateWay;
 import Trade.TradeManager;
 import User.AdministrativeUser;
-import User.FileEditor;
+import User.ItemApprovalManager;
+import User.UserDataAccess;
 import User.UserManager;
+import com.sun.deploy.ui.DialogTemplate;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -14,27 +16,30 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class MainUI {
-    GateWay gw;
     UserManager um;
     TradeManager tm;
     DataAccessFull w;
+    ItemApprovalManager iam;
 
-    public MainUI(GateWay gw, UserManager um, TradeManager tm, DataAccessFull w) {
-        this.gw = gw;
+    public MainUI(UserManager um, TradeManager tm, DataAccessFull w,ItemApprovalManager iam) {
         this.um = um;
         this.tm = tm;
         this.w = w;
+        this.iam=iam;
     }
 
     public void run() throws IOException {
         int a = -1;
+        Inventory iv = new Inventory();
+        ItemApprovalManager iam = new ItemApprovalManager();
         File file = new File("phase1/src/username.txt");
-        FileEditor fe = new FileEditor(gw);
+
         if (file.length() == 0) {
             AdministrativeUser b = new AdministrativeUser("admin", "123", true, tm, um);
-            fe.addToUsers(b);
+            um.addUser(b);
+            new UserDataAccess(um).updateFile();
         }
-        w.readFile();
+        w.readFile(tm, iv, um);
         while (a != 0) {
             //print out the list of current users-------------------------------
             //gw = new GateWay();
@@ -62,10 +67,10 @@ public class MainUI {
             sc.nextLine();
             if (a == 1) {
                 //System.out.println(gw.getUsers().get(3).getIsFrozen());
-                Login login = new Login(gw);
+                Login login = new Login(um, tm, iv, iam);
                 login.run();
             } else if (a == 2) {
-                Register reg = new Register(gw);
+                Register reg = new Register(um);
                 reg.run();
             }
             System.out.println("------------------------------");

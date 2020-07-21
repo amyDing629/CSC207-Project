@@ -24,13 +24,15 @@ public class Market {
      */
     public Inventory iv;
 
+    public UserManager um;
     /**
      * [constructor]
      * @param u the input user
      */
-    public Market(ClientUser u, Inventory iv) {
+    public Market(ClientUser u, Inventory iv,UserManager um) {
         this.iv = iv;
         user = u;
+        this.um=um;
         sc = new Scanner(System.in);
     }
 
@@ -38,7 +40,7 @@ public class Market {
      * run the system
      */
     public void run(){
-        System.out.println("Hello "+ user.getUsername());
+        System.out.println("Hello "+ um.getUsername(user));
         for(Item item:iv.getAvailableList()){
             System.out.println("Item:"+item);
         }

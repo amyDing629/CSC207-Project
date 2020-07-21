@@ -54,7 +54,7 @@ public class UserTrade {
             List<Trade> iL = tm.getIncomplete(user);
             List<Trade> iU = tm.getUnconfirmed(user);
             System.out.println("--------------------\nTrade");
-            System.out.println("Hello,user "+ user.getUsername());
+            System.out.println("Hello,user "+ um.getUsername(user));
             System.out.println("Menu:\n1.confirm trades\n2.complete trade\n3.Trade History\n0.quit");
             int input1 = sc.nextInt();
             sc.nextLine();
@@ -87,7 +87,7 @@ public class UserTrade {
                         System.out.println("Wrong Number, returning to UserTrade menu....");
                     }
                 case 3:
-                    System.out.println("Hi user: " + user.getUsername());
+                    System.out.println("Hi user: " + um.getUsername(user));
                     System.out.println("Your trades:");
                     List<Trade> tHis = tm.getTradeHistoryTop(user);
                     System.out.println("****************");

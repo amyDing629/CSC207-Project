@@ -48,7 +48,7 @@ public class AddNewItem {
             }
             System.out.println("Type the description of the item");
             String des = sc.nextLine();
-            Item i = new Item(name, user.getUsername());
+            Item i = new Item(name, um.getUsername(user));
             i.setDescription(des);
             iv.addItem(i);
             user.addWishes(name);
