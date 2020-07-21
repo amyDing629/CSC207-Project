@@ -1,30 +1,30 @@
 package Main;
 
 import Inventory.InvDataAccess;
+import Inventory.Inventory;
 import Main.UI.ApprovalDataAccess;
 import Trade.TradeDataAccess;
-import User.FileEditor;
+import Trade.TradeManager;
+import User.ItemApprovalManager;
+import User.UserDataAccess;
+import User.UserManager;
 
 import java.io.IOException;
-/**
- * [gateway]
- * read and update all the files that store the information
- */
+
 public class DataAccessFull {
     private final InvDataAccess ida;
     private final TradeDataAccess tda;
-    private final FileEditor fe;
+    private final UserDataAccess fe;
     private  final ApprovalDataAccess aa;
 
     /**
      * [constructor]
-     * @param gw the place we store information
      */
-    public DataAccessFull(GateWay gw){
-        ida = new InvDataAccess(gw);
-        tda = new TradeDataAccess(gw);
-        fe = new FileEditor(gw);
-        aa= new ApprovalDataAccess(gw);
+    public DataAccessFull(UserManager um, TradeManager tm, Inventory iv, ItemApprovalManager iam){
+        ida = new InvDataAccess(iv);
+        tda = new TradeDataAccess(tm);
+        fe = new UserDataAccess(um);
+        aa= new ApprovalDataAccess(iam);
     }
 
     /**
@@ -40,14 +40,13 @@ public class DataAccessFull {
     /**
      * read all the files
      */
-    public void readFile() {
+    public void readFile(TradeManager tm, Inventory iv, UserManager um) {
         ida.readFile();
-        tda.readFile();
-        fe.splitUser(fe.readFile());
+        tda.readFile(iv);
+        fe.splitUser(fe.readFile(), tm, um);
         aa.readItem();
         aa.readUser();
     }
 
 
 }
-

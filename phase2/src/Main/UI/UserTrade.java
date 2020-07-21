@@ -37,13 +37,13 @@ public class UserTrade {
     /**
      * [constructor]
      * @param u  the input user
-     * @param gw the place we store information
+
      */
-    public UserTrade(ClientUser u, GateWay gw) {
+    public UserTrade(ClientUser u, UserManager um, TradeManager tm) {
         user = u;
         sc = new Scanner(System.in);
-        um = new UserManager(gw);
-        tm = new TradeManager(gw);
+        this.um = um;
+        this.tm = tm;
     }
 
     /**

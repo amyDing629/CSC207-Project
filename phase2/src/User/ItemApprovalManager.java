@@ -6,17 +6,15 @@ import Main.GateWay;
 import java.util.ArrayList;
 
 public class ItemApprovalManager {
-    private GateWay gw;
+    private ArrayList<ArrayList<String>> itemApproval;
+    private ArrayList<ArrayList<String>> userApproval;
 
-    public ItemApprovalManager(GateWay gw){
-        this.gw = gw;
-    }
 
     public ArrayList<ArrayList<String>> getItemApproval(){
-        return gw.getApprovalItem();
+        return itemApproval;
     }
 
     public ArrayList<ArrayList<String>> getUserApproval(){
-        return gw.getApprovalUser();
+        return userApproval;
     }
 }

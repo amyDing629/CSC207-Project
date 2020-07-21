@@ -1,5 +1,6 @@
 package Trade;
 
+import Inventory.Inventory;
 import Inventory.Item;
 import Main.GateWay;
 import Trade.MeetingSystem.DateTime;
@@ -20,19 +21,18 @@ import java.util.UUID;
 public class TradeDataAccess {
     DateTime dt = new DateTime();
     DateTimeFormatter formatter = dt.getFormat(); // yyyy-MM-dd HH:mm
-    GateWay gw;
+    TradeManager tm;
 
-    public TradeDataAccess(GateWay gw){
-        this.gw = gw;
+    public TradeDataAccess(TradeManager tm){
+        this.tm = tm;
     }
 
     /**
      * read info from trade.txt to trade list in gateway
      */
-    public void readFile() {
+    public void readFile(Inventory iv) {
         Trade trade;
         try {
-            Inventory.Inventory iv = new Inventory.Inventory(gw);
             BufferedReader reader = new BufferedReader(new FileReader("phase1/src/trade.txt"));
             String line = reader.readLine();
             while (line != null) {
@@ -45,7 +45,7 @@ public class TradeDataAccess {
                 users.add(user1Id);
                 users.add(user2Id);
                 LocalDateTime tradeTime = LocalDateTime.parse(lst[10],formatter);
-                Inventory.Item item1 = iv.getItem(lst[5]);
+                Item item1 = iv.getItem(lst[5]);
                 String fstMeeting = lst[7];
                 String scdMeeting = lst[8];
                 HashMap<UUID, Boolean> idToC = new HashMap<>();
@@ -57,7 +57,7 @@ public class TradeDataAccess {
 
 
                 }else{
-                    Inventory.Item item2 = iv.getItem(lst[6]);
+                    Item item2 = iv.getItem(lst[6]);
                     trade = new TwowayTrade(user1Id,user2Id,item1,item2,duration,tradeTime);
                 }
                 if (!fstMeeting.equals("null")) {
@@ -96,7 +96,7 @@ public class TradeDataAccess {
                 trade.setStatus(TradeStatus.valueOf(lst[9]));
                 trade.setId(tradeId);
                 trade.setCreator(UUID.fromString(lst[11]));
-                gw.getTrades().add(trade);
+                tm.getTradeList().add(trade);
                 line = reader.readLine();
             }
             reader.close();
@@ -184,8 +184,8 @@ public class TradeDataAccess {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        if (gw.getTrades().size()>0){
-            for (Trade trade: gw.getTrades()){
+        if (tm.getTradeList().size()>0){
+            for (Trade trade: tm.getTradeList()){
                 addTradeToFile(trade);
             }
         }

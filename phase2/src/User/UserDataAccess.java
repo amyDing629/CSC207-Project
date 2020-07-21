@@ -8,18 +8,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.UUID;
 
-public class FileEditor {
+public class UserDataAccess {
     /**
      * the place we store information
      */
-    GateWay gw;
+    UserManager um;
 
     /**
      * [constructor]
-     * @param gw the place we store information
      */
-    public FileEditor(GateWay gw){
-        this.gw= gw;
+    public UserDataAccess(UserManager um){
+        this.um = um;
     }
 
     /**
@@ -53,14 +52,14 @@ public class FileEditor {
      * @param a the  list of list that contains all the information of the user
      * return list of all users , set the attribute information of all the users
      */
-    public void splitUser(ArrayList<ArrayList<String>> a) {
+    public void splitUser(ArrayList<ArrayList<String>> a, TradeManager tm, UserManager um) {
         for (ArrayList<String> b : a) {
             if (b.get(3).equals("true")) {
                 String[] c = b.get(6).split("; ");
                 ArrayList<String> lineList = new ArrayList<>(Arrays.asList(c));
+                AdministrativeUser d = new AdministrativeUser(b.get(1), b.get(2), true, tm,
+                        um);
 
-                AdministrativeUser d = new AdministrativeUser(b.get(1), b.get(2), true, new TradeManager(gw),
-                        new UserManager(gw));
                 d.setId(UUID.fromString(b.get(0)));
                 d.setNotification(lineList);
 
@@ -104,7 +103,7 @@ public class FileEditor {
                 d.setLendCounter(Integer.parseInt(b.get(12)));
                 d.setBorrowCounter(Integer.parseInt(b.get(13)));
 
-                gw.getUsers().add(d);
+                um.getUserList().add(d);
             }
             if (b.get(3).equals("false")) {
                 String[] c = b.get(6).split("; ");
@@ -155,13 +154,13 @@ public class FileEditor {
                 d.setLendCounter(Integer.parseInt(b.get(12)));
                 d.setBorrowCounter(Integer.parseInt(b.get(13)));
 
-                gw.getUsers().add(d);
+                um.getUserList().add(d);
             }
         }
     }
 
     public void addToUsers(ClientUser u){
-        gw.getUsers().add(u);
+        um.getUserList().add(u);
     }
 
 
@@ -217,7 +216,7 @@ public class FileEditor {
             PrintWriter writer = new PrintWriter("phase1/src/username.txt");
             writer.print("");
             writer.close();
-            for (ClientUser u : gw.getUsers()) {
+            for (ClientUser u : um.getUserList()) {
                 addUser(u);
             }
         }catch (IOException e) {

@@ -3,6 +3,7 @@ package User;
 import Main.GateWay;
 import Trade.Trade;
 import Trade.TradeManager;
+import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion;
 
 import java.util.*;
 
@@ -11,10 +12,7 @@ import java.util.*;
  * The renew and modification of users
  */
 public class UserManager {
-    /**
-     * the place we store information
-     */
-    GateWay gw;
+
     /**
      * the list of users
      */
@@ -22,11 +20,9 @@ public class UserManager {
 
     /**
      * [constructor]
-     * @param gw the place we store information
      */
-    public UserManager(GateWay gw){
-        this.gw = gw;
-        userList = gw.getUsers();
+    public UserManager(){
+        userList = new ArrayList<ClientUser>();
     }
 
     /**
@@ -41,13 +37,16 @@ public class UserManager {
      * find the user by the user name
      */
     public ClientUser getUser(String name) {
-        FileEditor f = new FileEditor(gw);
         //ArrayList<ClientUser> userList = splitUser(readFile());
-        for(ClientUser u : gw.getUsers()){
+        for(ClientUser u : userList){
             if(u.getUsername().equals(name))
                 return u;
         }
         return null;
+    }
+
+    public void addUser(ClientUser user){
+        userList.add(user);
     }
 
     /**
@@ -55,9 +54,8 @@ public class UserManager {
      * find the user by the user ID
      */
     public ClientUser getUser(UUID userId) {
-        FileEditor f = new FileEditor(gw);
         //ArrayList<ClientUser> userList = splitUser(readFile());
-        for(ClientUser u : gw.getUsers()){
+        for(ClientUser u : userList){
             if(u.getId().equals(userId))
                 return u;
         }
@@ -68,10 +66,12 @@ public class UserManager {
      * @param user the input user
      *get the administrative user by id
      */
-    public AdministrativeUser getAdmin(ClientUser user){
+    public AdministrativeUser getAdmin(ClientUser user, TradeManager tm){
         return new AdministrativeUser(user.getUsername(), user.getPassword(),
-                true, new TradeManager(gw), new UserManager(gw));
+                true, tm, this);
     }
+
+
 
 
     /**
@@ -81,7 +81,7 @@ public class UserManager {
      */
     public boolean verifyUser(String name, String password) {
         //ArrayList<ClientUser> userList = splitUser(readFile());
-        for(ClientUser u : gw.getUsers()){
+        for(ClientUser u : userList){
             if(u.getUsername().equals(name) && u.getPassword().equals(password)) {
                 return true;}
         }

@@ -1,5 +1,6 @@
 package Main.UI;
 import Main.GateWay;
+import User.ItemApprovalManager;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -11,18 +12,14 @@ import java.util.Arrays;
  * in gateway
  */
 public class ApprovalDataAccess {
+    private final ItemApprovalManager iam;
 
-    /**
-     * the place we store information
-     */
-    public GateWay gw;
 
     /**
      * [constructor]
-     * @param gw the place we store information
      */
-    public ApprovalDataAccess(GateWay gw) {
-        this.gw = gw;
+    public ApprovalDataAccess(ItemApprovalManager iam) {
+        this.iam = iam;
     }
 
     /**
@@ -37,7 +34,7 @@ public class ApprovalDataAccess {
                 if (line.charAt(0) == '1') {
                     String[] parts = line.split("/");
                     ArrayList<String> hi = new ArrayList<>(Arrays.asList(parts));
-                    gw.getApprovalItem().add(hi);
+                    iam.getItemApproval().add(hi);
                 }
                 line = reader.readLine();
             }
@@ -59,7 +56,7 @@ public class ApprovalDataAccess {
                 if (line.charAt(0) == '2') {
                     String[] parts = line.split("/");
                     ArrayList<String> hi = new ArrayList<>(Arrays.asList(parts));
-                    gw.getApprovalUser().add(hi);
+                    iam.getUserApproval().add(hi);
                 }
                 line = reader.readLine();
             }
@@ -73,8 +70,8 @@ public class ApprovalDataAccess {
      * update all the information from ApprovalItem and ApprovalUser list of gateway into ItemApproval.txt
      */
     public void updateFile() throws IOException {
-        ArrayList<ArrayList<String>> item=gw.getApprovalItem();
-        ArrayList<ArrayList<String>> user=gw.getApprovalUser();
+        ArrayList<ArrayList<String>> item=iam.getItemApproval();
+        ArrayList<ArrayList<String>> user=iam.getUserApproval();
         PrintWriter writer = new PrintWriter("phase1/src/ItemApproval.txt");
         writer.print("");
         writer.close();

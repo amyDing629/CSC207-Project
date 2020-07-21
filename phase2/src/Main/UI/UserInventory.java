@@ -43,15 +43,14 @@ public class UserInventory {
     /**
      * [constructor]
      * @param u  the input user
-     * @param gw the place we store information
      */
-    public UserInventory(ClientUser u, GateWay gw) {
+    public UserInventory(ClientUser u, UserManager um, TradeManager tm, Inventory iv, ItemApprovalManager iam) {
         user = u;
         sc = new Scanner(System.in);
-        um=new UserManager(gw);
-        iv=new Inventory(gw);
-        iam = new ItemApprovalManager(gw);
-        tm = new TradeManager(gw);
+        this.um=um;
+        this.tm = tm;
+        this.iv = iv;
+        this.iam = iam;
     }
 
     /**

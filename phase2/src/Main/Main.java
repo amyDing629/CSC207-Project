@@ -1,9 +1,11 @@
 package Main;
 
+import Inventory.Inventory;
 import Main.UI.Register;
 import Trade.TradeManager;
 import User.AdministrativeUser;
-import User.FileEditor;
+import User.ItemApprovalManager;
+import User.UserDataAccess;
 import User.UserManager;
 import Main.UI.Login;
 import java.io.BufferedReader;
@@ -19,17 +21,19 @@ public class Main {
      */
     public static void main(String[] args) throws IOException {
         int a=-1;
-        GateWay gw = new GateWay();
-        UserManager um = new UserManager(gw);
-        TradeManager tm = new TradeManager(gw);
-        DataAccessFull w=new DataAccessFull(gw);
+        Inventory iv = new Inventory();
+        UserManager um = new UserManager();
+        TradeManager tm = new TradeManager();
+        ItemApprovalManager iam = new ItemApprovalManager();
+        DataAccessFull uaf = new DataAccessFull(um, tm, iv, iam);
         File file = new File("phase1/src/username.txt");
-        FileEditor fe=new FileEditor(gw);
+
         if(file.length() == 0){
             AdministrativeUser b = new AdministrativeUser("admin", "123", true, tm, um);
-            fe.addToUsers(b);
+            um.addUser(b);
+            new UserDataAccess(um).updateFile();
         }
-        w.readFile();
+        uaf.readFile(tm, iv, um);
         while (a!=0) {
             //print out the list of current users-------------------------------
             //gw = new GateWay();
@@ -57,15 +61,15 @@ public class Main {
             sc.nextLine();
             if (a==1){
                 //System.out.println(gw.getUsers().get(3).getIsFrozen());
-                Login login=new Login(gw);
+                Login login=new Login(um, tm, iv, iam);
                 login.run();
             }
             else if (a == 2){
-                Register reg=new Register(gw);
+                Register reg=new Register(um);
                 reg.run();
             }
             System.out.println("------------------------------");
-            w.updateFile();
+            uaf.updateFile();
         }
     }
 }

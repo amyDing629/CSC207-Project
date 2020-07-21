@@ -11,14 +11,13 @@ public class InvDataAccess {
     /**
      * the place we store information
      */
-    private final GateWay gw;
+    private Inventory iv;
 
     /**
      * [constructor]
-     * @param gw the place we store information
      */
-    public InvDataAccess(GateWay gw){
-        this.gw = gw;
+    public InvDataAccess(Inventory iv){
+        this.iv = iv;
     }
 
     /**
@@ -33,7 +32,7 @@ public class InvDataAccess {
                 Item newItem = new Item(lst[0], lst[2]);
                 newItem.setDescription(lst[1]);
                 newItem.setIsInTrade(Boolean.parseBoolean(lst[3]));
-                gw.getInv().add(newItem);
+                iv.getLendingList().add(newItem);
                 line = reader.readLine();
             }
             reader.close();
@@ -62,7 +61,7 @@ public class InvDataAccess {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        for (Item item: gw.getInv()){
+        for (Item item: iv.getLendingList()){
             addItemToFile(item);
         }
     }

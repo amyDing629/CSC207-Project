@@ -28,10 +28,9 @@ public class Market {
     /**
      * [constructor]
      * @param u the input user
-     * @param gw the place we store information
      */
-    public Market(ClientUser u, GateWay gw) {
-        this.iv = new Inventory(gw);
+    public Market(ClientUser u, Inventory iv) {
+        this.iv = iv;
         user = u;
         sc = new Scanner(System.in);
     }

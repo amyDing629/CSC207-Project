@@ -18,13 +18,16 @@ import java.util.UUID;
  * Automatically update the trade history for both users in the trade.
  */
 public class TradeManager {
-    public GateWay gw;
+    public ArrayList<Trade> tradeList;
 
-    public TradeManager(GateWay gw){
-        this.gw = gw;
+    public TradeManager(){
+        this.tradeList = new ArrayList<Trade>();
 
     }
 
+    public ArrayList<Trade> getTradeList() {
+        return tradeList;
+    }
 
     /**
      * Allow the currentUser to create a one-way trade with input otherUserId, item, and trade duration.
@@ -36,11 +39,11 @@ public class TradeManager {
     Trade createOnewayTrade(UUID currUserId, UUID otherUserId, Item item, int duration, LocalDateTime time) {
         OnewayTrade newTrade = new OnewayTrade(currUserId, otherUserId, item, duration, time);
         item.setIsInTrade(true);
-        gw.getTrades().add(newTrade);
+        tradeList.add(newTrade);
         // Record this new trade.Trade in system
 
         //Update trade history for both users
-        updateTradeHistory(currUserId, otherUserId, newTrade);
+        //updateTradeHistory(currUserId, otherUserId, newTrade);
         return newTrade;
 
     }
@@ -55,28 +58,27 @@ public class TradeManager {
     Trade createTwowayTrade(UUID currUserId, UUID otherUserId, Item item1to2, Item item2to1, int duration,
                            LocalDateTime time){
         TwowayTrade newTrade = new TwowayTrade(currUserId, otherUserId, item1to2, item2to1, duration, time);
-        gw.getTrades().add(newTrade);
+        getTradeList().add(newTrade);
         item1to2.setIsInTrade(true);
         item2to1.setIsInTrade(true);
         // Update trade history for both users
-        updateTradeHistory(currUserId, otherUserId, newTrade);
+        //updateTradeHistory(currUserId, otherUserId, newTrade);
         return newTrade;
     }
 
 
-
-    void updateTradeHistory(UUID currUserId, UUID tarUserId, Trade newTrade) {
-        // System.out.println("userList:"+userManager.getUserList());
-        UserManager userManager = new UserManager(gw);
-        ClientUser currentUser = userManager.getUser(currUserId);
-        ClientUser tarUser = userManager.getUser(tarUserId);
+    // move to userManager*
+    void updateTradeHistory(UUID currUserId, UUID tarUserId, Trade newTrade, UserManager um) {
+        // System.out.println("userList:"+userManager.getUser UserManager userManager = new UserManager(gw);
+        ClientUser currentUser = um.getUser(currUserId);
+        ClientUser tarUser = um.getUser(tarUserId);
         currentUser.getTradeHistory().add(newTrade.getId());
         tarUser.getTradeHistory().add(newTrade.getId());
     }
 
 
     public Trade getTrade(UUID id) {
-        for (Trade trade : gw.getTrades()) {
+        for (Trade trade : tradeList) {
             if (trade.getId().equals(id)) {
                 return trade;
             }
@@ -130,7 +132,7 @@ public class TradeManager {
      */
     void completeTrade(Trade currTrade){
         currTrade.setStatus(TradeStatus.complete);
-        makeTrade(currTrade);
+        //makeTrade(currTrade);
     }
 
     /**
@@ -140,7 +142,8 @@ public class TradeManager {
     void cancelTrade(Trade currTrade){
         currTrade.setStatus(TradeStatus.cancelled);
     }
-
+    //move to userManager
+    /*
     void makeTrade(Trade currTrade) {
         UserManager um = new UserManager(gw);
         if (currTrade.getType().equals("oneway")){
@@ -165,7 +168,10 @@ public class TradeManager {
             u2.setLendCounter(u2.getLendCounter()+1);
         }
 
+
     }
+
+     */
 
     /**
      * return the list of all trades that the user has

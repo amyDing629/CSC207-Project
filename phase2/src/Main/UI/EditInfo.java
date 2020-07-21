@@ -44,14 +44,13 @@ public class EditInfo {
     /**
      * [constructor]
      * @param u the input user
-     * @param gw the input gateway
      */
-    public EditInfo(ClientUser u, GateWay gw){
+    public EditInfo(ClientUser u, UserManager um, Inventory iv, ItemApprovalManager iam){
         user=u;
         sc = new Scanner(System.in);
-        a=new UserManager(gw);
-        v = new Inventory(gw);
-        iam = new ItemApprovalManager(gw);
+        a= um;
+        v = iv;
+        this.iam = iam;
     }
 
     /**

@@ -2,7 +2,6 @@ package Main.UI;
 
 import Main.GateWay;
 import User.ClientUser;
-import User.FileEditor;
 import User.UserManager;
 
 import java.util.Scanner;
@@ -23,16 +22,13 @@ public class Register {
     /**
      * the object that edit the information from username.txt
      */
-    public FileEditor fe;
 
     /**
      * [constructor]
-     * @param gw the place we store information
      */
-    public Register(GateWay gw){
+    public Register(UserManager um){
         sc = new Scanner(System.in);
-        a=new UserManager(gw);
-        fe=new FileEditor(gw);
+        a= um;
     }
 
     /**
@@ -51,7 +47,7 @@ public class Register {
             String password = sc.nextLine();
             if (a.getUser(username) == null) {
                 ClientUser user1 = new ClientUser(username, password, false);
-                fe.addToUsers(user1);
+                a.addUser(user1);
                 System.out.println("Your account has been successfully created!");
                 System.out.println("Your id: " + user1.getId());
                 System.out.println("Your username: " + user1.getUsername());

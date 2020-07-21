@@ -1,7 +1,9 @@
 package Main.UI;
 
+import Inventory.Inventory;
 import Main.GateWay;
 import Trade.TradeManager;
+import User.ItemApprovalManager;
 import User.UserManager;
 
 import java.io.IOException;
@@ -25,20 +27,19 @@ public class Login {
      */
     public TradeManager tm;
 
-    /**
-     * the place we store information
-     */
-    public GateWay gw;
+    public Inventory iv;
+
+    public ItemApprovalManager iam;
 
     /**
      * [constructor]
-     * @param gw the place we store information
      */
-    public Login(GateWay gw){
-        this.gw = gw;
+    public Login(UserManager um, TradeManager tm, Inventory iv, ItemApprovalManager iam){
         sc = new Scanner(System.in);
-        a = new UserManager(gw);
-        tm = new TradeManager(gw);
+        a = um;
+        this.tm = tm;
+        this.iv = iv;
+        this.iam = iam;
     }
 
     /**
@@ -61,10 +62,10 @@ public class Login {
                     System.out.println("Hello," + username);
                     System.out.println(username);
                     System.out.println(a.getUser(username));
-                    (a.getAdmin(a.getUser("admin"))).incompleteTransaction(a.getUser(username));
-                    (a.getAdmin(a.getUser("admin"))).tradeLimit(a.getUser(username));
+                    //(a.getAdmin(a.getUser("admin"))).incompleteTransaction(a.getUser(username));
+                    //(a.getAdmin(a.getUser("admin"))).tradeLimit(a.getUser(username));
                     if(a.getUser(username).readDiff()>=a.getUser(username).getDiff()){
-                        (a.getAdmin(a.getUser("admin"))).freeze(a.getUser(username));
+                        //(a.getAdmin(a.getUser("admin"))).freeze(a.getUser(username));
                     }
                     System.out.println("Freeze Status: " + a.getUser(username).getIsFrozen());
                     System.out.println("Trade limit: " + tm.getTradeNumber(a.getUser(username)) + "/"
@@ -78,16 +79,16 @@ public class Login {
                     int op = sc.nextInt();
                     sc.nextLine();
                     if (op == 1) {
-                        EditInfo ei = new EditInfo(a.getUser(username), gw);
+                        EditInfo ei = new EditInfo(a.getUser(username), a, iv, iam);
                         ei.run();
                     } else if (op == 2) {
-                        UserTrade ut = new UserTrade(a.getUser(username), gw);
+                        UserTrade ut = new UserTrade(a.getUser(username), a, tm);
                         ut.run();
                     } else if (op == 3) {
-                        UserInventory ui=new UserInventory(a.getUser(username), gw);
+                        UserInventory ui=new UserInventory(a.getUser(username), a, tm, iv, iam);
                         ui.run();
                     } else if (op == 4) {
-                        Market m=new Market(a.getUser(username), gw);
+                        Market m=new Market(a.getUser(username), iv);
                         m.run();
                     } else if (op == 0) {
                         input=1;

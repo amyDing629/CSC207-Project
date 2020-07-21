@@ -12,16 +12,15 @@ public class Inventory {
     /**
      * the place we store information
      */
-    GateWay gw;
+    ArrayList<Item> lendingList;
 
 
     /**
      * [Constructor]
-     * @param gw the place we store information
      * get lendingList from file (read file will move to another class).
      */
-    public Inventory(GateWay gw){
-        this.gw = gw;
+    public Inventory(){
+        lendingList = new ArrayList<Item>();
     }
 
     /**
@@ -29,7 +28,7 @@ public class Inventory {
      * @return lendingList
      */
     public ArrayList<Item> getLendingList() {
-        return gw.getInv();
+        return lendingList;
     }
 
     /**
@@ -38,7 +37,7 @@ public class Inventory {
      */
     public ArrayList<Item> getAvailableList() {
         ArrayList<Item> result = new ArrayList<Item>();
-        for (Item item : gw.getInv()) {
+        for (Item item : lendingList) {
             if (!item.getIsInTrade()) {
                 result.add(item);
             }
@@ -52,7 +51,7 @@ public class Inventory {
      * @param item the item added
      */
     public void addItem(Item item){
-        gw.getInv().add(item);
+        lendingList.add(item);
     }
 
 
@@ -62,8 +61,8 @@ public class Inventory {
      * @throws IOException when the item is not found in the inventory
      */
     public void deleteItem(Item item) throws IOException {
-        if (gw.getInv().contains(item)) {
-            gw.getInv().remove(item);
+        if (lendingList.contains(item)) {
+            lendingList.remove(item);
         } else {
             throw new IOException("the item is not in the inventory");
         }
@@ -76,7 +75,7 @@ public class Inventory {
      * @return item
      */
     public Item getItem(String name){
-        for (Item item: gw.getInv()){
+        for (Item item: lendingList){
             if (item.getName().equals(name)){
                 return item;
             }
