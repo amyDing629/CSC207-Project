@@ -32,7 +32,7 @@ public class InventoryController {
     boolean selectItem(String line){
         for (Item it: iv.getLendingList()){
             if (it.getName().equals(line)){
-                System.out.println(it + " has been selected");
+                //System.out.println(it + " has been selected");
                 return true;
             }
         }

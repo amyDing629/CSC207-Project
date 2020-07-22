@@ -32,7 +32,7 @@ public class TradeDataAccess {
     public void readFile(Inventory iv) {
         Trade trade;
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("phase1/src/trade.txt"));
+            BufferedReader reader = new BufferedReader(new FileReader("phase2/src/trade.txt"));
             String line = reader.readLine();
             while (line != null) {
                 String[] lst = line.split(",");
@@ -111,7 +111,7 @@ public class TradeDataAccess {
      */
     private void addTradeToFile(Trade trade) {
         try {
-            FileOutputStream fos = new FileOutputStream("phase1/src/trade.txt", true);
+            FileOutputStream fos = new FileOutputStream("phase2/src/trade.txt", true);
             UUID id = trade.getId();
             String type;
             type = trade.getType();
@@ -168,7 +168,7 @@ public class TradeDataAccess {
      * update trade.txt with information in trade list of gateway.
      */
     public void updateFile(){
-        File file = new File("phase1/src/trade.txt");
+        File file = new File("phase2/src/trade.txt");
         try {
             if(!file.exists()) {
                 boolean result = file.createNewFile();

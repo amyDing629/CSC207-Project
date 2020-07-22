@@ -27,7 +27,7 @@ public class ApprovalDataAccess {
     public void readItem() {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(
-                    "phase1/src/ItemApproval.txt"));
+                    "phase2/src/ItemApproval.txt"));
             String line = reader.readLine();
             while (line != null) {
                 if (line.charAt(0) == '1') {
@@ -49,7 +49,7 @@ public class ApprovalDataAccess {
     public void readUser(){
         try {
             BufferedReader reader = new BufferedReader(new FileReader(
-                    "phase1/src/ItemApproval.txt"));
+                    "phase2/src/ItemApproval.txt"));
             String line = reader.readLine();
             while (line != null) {
                 if (line.charAt(0) == '2') {
@@ -71,12 +71,12 @@ public class ApprovalDataAccess {
     public void updateFile() throws IOException {
         ArrayList<ArrayList<String>> item=iam.getItemApproval();
         ArrayList<ArrayList<String>> user=iam.getUserApproval();
-        PrintWriter writer = new PrintWriter("phase1/src/ItemApproval.txt");
+        PrintWriter writer = new PrintWriter("phase2/src/ItemApproval.txt");
         writer.print("");
         writer.close();
         for (ArrayList<String> strings : item) {
             String data =strings.get(0)+"/"+strings.get(1)+"/"+strings.get(2)+"/"+strings.get(3)+"\n";
-            File file = new File("phase1/src/ItemApproval.txt");
+            File file = new File("phase2/src/ItemApproval.txt");
             FileWriter fr = new FileWriter(file, true);
             BufferedWriter br = new BufferedWriter(fr);
             br.write(data);
@@ -85,7 +85,7 @@ public class ApprovalDataAccess {
         }
         for (ArrayList<String> strings : user) {
             String data =strings.get(0)+"/"+strings.get(1)+"/"+strings.get(2)+"\n";
-            File file = new File("phase1/src/ItemApproval.txt");
+            File file = new File("phase2/src/ItemApproval.txt");
             FileWriter fr = new FileWriter(file, true);
             BufferedWriter br = new BufferedWriter(fr);
             br.write(data);

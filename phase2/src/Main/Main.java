@@ -27,7 +27,7 @@ public class Main {
         TradeManager tm = new TradeManager();
         ItemApprovalManager iam = new ItemApprovalManager();
         DataAccessFull uaf = new DataAccessFull(um, tm, iv, iam);
-        MainUI mui=new MainUI(um,tm,uaf,iam);
+        MainUI mui=new MainUI(um,tm,iv,iam);
         mui.run();
     }
 }

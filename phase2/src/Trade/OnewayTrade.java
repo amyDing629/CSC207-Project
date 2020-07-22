@@ -14,7 +14,6 @@ public class OnewayTrade extends Trade {
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     /**
-     *
      * @param lender Trader who wants to lend item to others
      * @param borrower Trader who wants to borrow item from others
      * @param item the two item traders what to trade

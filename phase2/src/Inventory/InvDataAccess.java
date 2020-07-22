@@ -23,14 +23,14 @@ public class InvDataAccess {
      */
     public void readFile(){
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("phase1/src/ItemList.txt"));
+            BufferedReader reader = new BufferedReader(new FileReader("phase2/src/ItemList.txt"));
             String line = reader.readLine();
             while (line != null) {
                 String[] lst = line.split(",");
                 Item newItem = new Item(lst[0], lst[2]);
                 newItem.setDescription(lst[1]);
                 newItem.setIsInTrade(Boolean.parseBoolean(lst[3]));
-                iv.getLendingList().add(newItem);
+                iv.addItem(newItem);
                 line = reader.readLine();
             }
             reader.close();
@@ -44,7 +44,7 @@ public class InvDataAccess {
      * @throws IOException when the update is failed
      */
     public void updateFile() throws IOException {
-        File file = new File("phase1/src/ItemList.txt");
+        File file = new File("phase2/src/ItemList.txt");
         try {
             if(!file.exists()) {
                 boolean result = file.createNewFile();
@@ -72,7 +72,7 @@ public class InvDataAccess {
      */
     private void addItemToFile(Item item) throws IOException {
         try {
-            FileOutputStream fos = new FileOutputStream("phase1/src/ItemList.txt", true);
+            FileOutputStream fos = new FileOutputStream("phase2/src/ItemList.txt", true);
             fos.write((item.getName()+","+item.getDescription()+","+item.getOwnerName()+","+item.getIsInTrade()+"\n").getBytes());
         }catch(IOException e){
             throw new IOException("cannot add item to file");

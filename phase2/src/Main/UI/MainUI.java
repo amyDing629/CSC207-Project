@@ -18,13 +18,13 @@ import java.util.Scanner;
 public class MainUI {
     UserManager um;
     TradeManager tm;
-    DataAccessFull w;
+    Inventory iv;
     ItemApprovalManager iam;
 
-    public MainUI(UserManager um, TradeManager tm, DataAccessFull w,ItemApprovalManager iam) {
+    public MainUI(UserManager um, TradeManager tm, Inventory iv,ItemApprovalManager iam) {
         this.um = um;
         this.tm = tm;
-        this.w = w;
+        this.iv = iv;
         this.iam=iam;
     }
 
@@ -32,13 +32,14 @@ public class MainUI {
         int a = -1;
         Inventory iv = new Inventory();
         ItemApprovalManager iam = new ItemApprovalManager();
-        File file = new File("phase1/src/username.txt");
+        File file = new File("phase2/src/username.txt");
 
         if (file.length() == 0) {
             AdministrativeUser b = new AdministrativeUser("admin", "123", true, tm, um);
             um.addUser(b);
             new UserDataAccess(um).updateFile();
         }
+        DataAccessFull w = new DataAccessFull(um,tm,iv,iam);
         w.readFile(tm, iv, um);
         while (a != 0) {
             //print out the list of current users-------------------------------
@@ -48,7 +49,7 @@ public class MainUI {
             System.out.println("Users:");
             try {
                 BufferedReader reader = new BufferedReader(new FileReader(
-                        "phase1/src/username.txt"));
+                        "phase2/src/username.txt"));
                 String line = reader.readLine();
                 while (line != null) {
                     System.out.println(line);
@@ -74,6 +75,7 @@ public class MainUI {
                 reg.run();
             }
             System.out.println("------------------------------");
+            w = new DataAccessFull(um,tm,iv,iam);
             w.updateFile();
         }
     }
