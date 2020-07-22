@@ -9,13 +9,11 @@ import java.util.Scanner;
  * Input port of Meeting System, functioned for setting up a meeting only
  */
 class SetUpMeetingInputController {
-    private LocalDateTime dateTime;
     private final String place;
-
     DateTime dt = new DateTime();
-
     SetUpMeetingInputControllerPresenter setUpMeetingInputControllerPresenter =
             new SetUpMeetingInputControllerPresenter();
+    private LocalDateTime dateTime;
 
     /**
      * Feeds the prompts of the Meeting info, including dateTime, place

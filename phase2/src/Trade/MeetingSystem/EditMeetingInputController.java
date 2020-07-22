@@ -21,14 +21,11 @@ import java.util.Scanner;
  */
 class EditMeetingInputController {
 
+    DateTime dt = new DateTime();
+    EditMeetingInputControllerPresenter editMeetingInputControllerPresenter = new EditMeetingInputControllerPresenter();
     private LocalDateTime dateTime;
     private String place;
-
     private boolean backToPreviousMenu = false;
-
-    DateTime dt = new DateTime();
-
-    EditMeetingInputControllerPresenter editMeetingInputControllerPresenter = new EditMeetingInputControllerPresenter();
 
 
     /**
