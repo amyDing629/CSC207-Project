@@ -7,30 +7,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.UUID;
 
-/**
- * [Controller class]
- * This is a meeting's main controller (facade controller).
- * <p>
- * The meeting system controller that interacts with the user, makes decisions based on user input instructions, and
- * calls corresponding use case method.
- * <p>
- * Main.Main functions of this controller class:
- * 1. allows setup meeting, once the trade.Trade is set up
- * 2. apply use case method of setting up meeting
- * 3. allows edit meeting, once the
- * 4. allows confirming the meeting
- * 5. update timeOfEdition in MeetingEditor
- */
-public class MeetingSystem implements IMeetingSystem {
-
+public class MyMeetingSystem implements LogInUser {
     private final ArrayList<UUID> users;
     private final boolean isFirst;
     private final ArrayList<MeetingLogInfo> meetingLog = new ArrayList<>();
 
     MeetingActivities meetingActivities = new MeetingActivities();
-    SetUpSession setupSession = new SetUpSession();
-    EditAgreeSession editAgreeSession = new EditAgreeSession();
-    ConfirmSession confirmSession = new ConfirmSession();
 
     private LocalDateTime dateTime;
     private String place;
@@ -39,17 +21,9 @@ public class MeetingSystem implements IMeetingSystem {
     private boolean isSetUp;
     private boolean isCancel;
 
-    private UUID lastEditUser;
+    private IMeetingSessionService service;
 
-
-    /**
-     * Construct a Trade.MeetingSystem.Trade.MeetingSystem object with two client users (ids)
-     *
-     * @param users   the users involved in this meeting
-     * @param isFirst if the input meeting is the first meeting
-     * @param meeting the meeting object
-     */
-    public MeetingSystem(ArrayList<UUID> users, boolean isFirst, Meeting meeting) {
+    MyMeetingSystem(ArrayList<UUID> users, boolean isFirst, Meeting meeting) {
         this.users = users;
         this.isFirst = isFirst;
         this.meeting = meeting;
@@ -61,80 +35,90 @@ public class MeetingSystem implements IMeetingSystem {
         isCancel = false;
     }
 
-    /**
-     * Run the Meeting system, which interacts with the user and makes decisions upon meeting progress.
-     * <p>
-     * 1. allows setting up a meeting, only when there is no meeting stored in trade.Trade (i.e. first meeting)
-     * 2. allows editing the meeting / confirming the meeting, only when
-     * - the meeting has been set up already;
-     * - the meeting has not been cancelled (i.e edit time of each ClientUser < threshold of edition time)
-     *
-     * @param currLogInUser the user that is currently logging in and use the meeting system
-     */
     @Override
+    public void processServiceSession(UUID currLogInUser) throws IOException {
+        if (meeting == null) {
+            this.service.run(currLogInUser, meeting, null, users);
+        } else {
+            this.service.run(currLogInUser, meeting, meeting.getLastEditUser(), users);
+        }
+
+
+    }
+
+    // setter injector
+    private void setService(IMeetingSessionService service) {
+        this.service = service;
+    }
+
+    // automatically choose service
     public void run(UUID currLogInUser) throws IOException {
         // first meeting
         if (isFirst) {
             if (meeting == null) {
-                setupSession.runSetupSession(currLogInUser, users);
-                updateSessionInfo(MeetingSessionName.SETUP, currLogInUser);
+                setService(new SetUpSession());
             } else if (meeting.getStatus().equals(MeetingStatus.incomplete)) {
-                editAgreeSession.runEditAgreeSession(currLogInUser, meeting, meeting.getLastEditUser());
-                updateSessionInfo(MeetingSessionName.EDIT_AGREE, currLogInUser);
+                setService(new EditAgreeSession());
+//                this.service = new EditAgreeSession();
             } else if (meeting.getStatus().equals(MeetingStatus.agreed)) {
-                confirmSession.runConfirmSession(currLogInUser, meeting);
-                updateSessionInfo(MeetingSessionName.CONFIRM, currLogInUser);
+                setService(new ConfirmSession());
+//                this.service = new ConfirmSession();
             }
         } else { // only second (temporary) meeting
-            confirmSession.runConfirmSession(currLogInUser, meeting);
-            updateSessionInfo(MeetingSessionName.CONFIRM, currLogInUser);
+            setService(new ConfirmSession());
         }
+
+        processServiceSession(currLogInUser);
+        updateSessionInfo(this.service.getSessionName(), currLogInUser);
 
     }
 
+
     private void updateSessionInfo(MeetingSessionName sessionName, UUID currLogInUser) {
+        ArrayList<Object> result = this.service.getResults();
         if (sessionName.equals(MeetingSessionName.SETUP)) {
-            ArrayList<Object> result = setupSession.getSetupSessionResult();
             meeting = (Meeting) result.get(0);
             dateTime = (LocalDateTime) result.get(1);
             place = (String) result.get(2);
             isSetUp = (boolean) result.get(3);
-            MeetingLogInfo log = setupSession.getSessionLog();
-            if (log != null) {
-                meetingLog.add(setupSession.getSessionLog());
-            }
+//            MeetingLogInfo log = this.service.getLog();
+//            if (log != null) {
+//                meetingLog.add(log);
+//            }
 
             if (isSetUp) {
-                this.lastEditUser = currLogInUser;
                 meetingActivities.updateLastEditUser(currLogInUser, meeting);
             }
 
 
         } else if (sessionName.equals(MeetingSessionName.EDIT_AGREE)) {
-            ArrayList<Object> result = editAgreeSession.getEditAgreeSessionResult();
             meeting = (Meeting) result.get(0);
             dateTime = (LocalDateTime) result.get(1);
             place = (String) result.get(2);
             isCancel = (boolean) result.get(3);
-            MeetingLogInfo log = editAgreeSession.getSessionLog();
-            if (log != null) {
-                meetingLog.add(editAgreeSession.getSessionLog());
-            }
+//            MeetingLogInfo log = editAgreeSession.getSessionLog();
+//            if (log != null) {
+//                meetingLog.add(editAgreeSession.getSessionLog());
+//            }
 
             boolean isEdited = (boolean) result.get(4);
             if (isEdited && !isCancel) {
-                this.lastEditUser = currLogInUser;
+//                this.lastEditUser = currLogInUser;
                 meetingActivities.updateLastEditUser(currLogInUser, meeting);
             }
 
         } else { // sessionName.equals(MeetingSessionName.CONFIRM)
-            meeting = confirmSession.getConfirmSessionResult();
-            MeetingLogInfo log = confirmSession.getSessionLog();
-            if (log != null) {
-                meetingLog.add(confirmSession.getSessionLog());
-            }
+            meeting = (Meeting) result.get(0);
+//            MeetingLogInfo log = confirmSession.getSessionLog();
+//            if (log != null) {
+//                meetingLog.add(confirmSession.getSessionLog());
         }
 
+
+        MeetingLogInfo log = this.service.getLog();
+        if (log != null) {
+            meetingLog.add(log);
+        }
     }
 
     /**
@@ -162,7 +146,7 @@ public class MeetingSystem implements IMeetingSystem {
         }
         result.add(status);
 
-        result.add(this.lastEditUser);
+        result.add(meeting.getLastEditUser());
 
         return result;
 
@@ -197,5 +181,4 @@ public class MeetingSystem implements IMeetingSystem {
         meeting = m;
         return m;
     }
-
 }

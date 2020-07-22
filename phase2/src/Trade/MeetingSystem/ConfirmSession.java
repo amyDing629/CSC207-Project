@@ -3,9 +3,11 @@ package Trade.MeetingSystem;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.UUID;
 
-class ConfirmSession {
+class ConfirmSession implements IMeetingSessionService {
 
     MeetingLogInfo meetingLog;
 
@@ -53,5 +55,26 @@ class ConfirmSession {
 
     MeetingLogInfo getSessionLog() {
         return meetingLog;
+    }
+
+
+    @Override
+    public void run(UUID currLogInUser, Meeting meeting, UUID lastEditUser, ArrayList<UUID> users) throws IOException {
+        runConfirmSession(currLogInUser, meeting);
+    }
+
+    @Override
+    public ArrayList<Object> getResults() {
+        return new ArrayList<>(Collections.singletonList(getConfirmSessionResult()));
+    }
+
+    @Override
+    public MeetingSessionName getSessionName() {
+        return MeetingSessionName.CONFIRM;
+    }
+
+    @Override
+    public MeetingLogInfo getLog() {
+        return getSessionLog();
     }
 }

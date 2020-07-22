@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.UUID;
 
-class SetUpSession {
+class SetUpSession implements IMeetingSessionService {
 
     MeetingLogInfo meetingLog = null;
 
@@ -63,5 +63,25 @@ class SetUpSession {
 
     MeetingLogInfo getSessionLog() {
         return meetingLog;
+    }
+
+    @Override
+    public void run(UUID currLogInUser, Meeting meeting, UUID lastEditUser, ArrayList<UUID> users) throws IOException {
+        runSetupSession(currLogInUser, users);
+    }
+
+    @Override
+    public ArrayList<Object> getResults() {
+        return getSetupSessionResult();
+    }
+
+    @Override
+    public MeetingSessionName getSessionName() {
+        return MeetingSessionName.SETUP;
+    }
+
+    @Override
+    public MeetingLogInfo getLog() {
+        return getSessionLog();
     }
 }
