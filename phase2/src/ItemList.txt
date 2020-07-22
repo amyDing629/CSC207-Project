@@ -1,1 +1,1 @@
-ipad,123,amy,false
+ipad,good,amy,true

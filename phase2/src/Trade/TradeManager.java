@@ -66,7 +66,6 @@ public class TradeManager {
     }
 
 
-    // move to userManager*
     void updateTradeHistory(UUID currUserId, UUID tarUserId, Trade newTrade, UserManager um) {
         // System.out.println("userList:"+userManager.getUser UserManager userManager = new UserManager(gw);
         ClientUser currentUser = um.getUser(currUserId);

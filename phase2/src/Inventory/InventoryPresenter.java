@@ -2,6 +2,9 @@ package Inventory;
 
 import User.ClientUser;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+
 /**
  * present information of the inventory system to user.
  */
@@ -22,14 +25,12 @@ public class InventoryPresenter {
      * print the item that is not in the trade.
      * @return the item name in 'item1,item2' format
      */
-    String printAvailable(){
-        System.out.println(iv.getAvailableList());
-        String result = "";
-        for (Item it:iv.getAvailableList()){
-            result = result + it.getName() + ",";
-        }
-        return result;
+    ArrayList<Item> printAvailable(){
+        return iv.getAvailableList();
+
     }
+
+
 
     /**
      * print name, description and owner of the item

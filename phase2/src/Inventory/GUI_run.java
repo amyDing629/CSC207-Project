@@ -9,10 +9,11 @@ public class GUI_run {
         ClientUser daniel = new ClientUser("daniel", "123", false);
         ClientUser amy = new ClientUser("amy", "123", false);
         Item apple = new Item("apple", "amy");
+        Item pear = new Item("pear", "amy");
         Inventory iv = new Inventory();
-        iv.getLendingList().add(apple);
+        iv.addItem(apple);
+        iv.addItem(pear);
         InvGUI invG = new InvGUI(daniel, iv);
         invG.run();
-        System.out.println(daniel.getWishBorrow());
     }
 }

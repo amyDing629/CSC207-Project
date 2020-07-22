@@ -85,12 +85,8 @@ public class UserInventory {
                     }
                     Item k=iv.getItem(input22);
                     if (k!=null){
-                        try {
-                            RequestTradeUI ru = new RequestTradeUI(user, k, tm, um, iv);
-                            ru.run();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+                        RTradeGUI ru = new RTradeGUI(user, k, tm, um, iv);
+                        ru.run();
                     }
                     break;
                 case 3:

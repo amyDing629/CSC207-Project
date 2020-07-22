@@ -22,12 +22,12 @@ public class InvGUI {
         //Creating the Frame
         JFrame frame = new JFrame("Select Item Session");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setSize(600, 600);
+        frame.setSize(400, 400);
 
 
         JPanel panel = new JPanel();
         JTextArea jtz = new JTextArea();
-        jtz.setText(ip.printAvailable());
+        jtz.setText("available item list: "+ip.printAvailable());
         //JLabel label = new JLabel("choose an item from the following items: \n"+ip.printAvailable());
         JTextArea ta = new JTextArea("type item name here");
         panel.add(ta);
@@ -56,7 +56,7 @@ public class InvGUI {
     private void itemAction() {
         JFrame item = new JFrame(currItem.getName());
         item.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        item.setSize(400, 400);
+        item.setSize(400, 200);
         JTextArea jtz = new JTextArea();
         jtz.setText(ip.printItemInfo(currItem));
         JButton awl = new JButton("Add to your wish list");
