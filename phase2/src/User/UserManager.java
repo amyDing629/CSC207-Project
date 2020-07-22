@@ -14,14 +14,8 @@ public class UserManager {
     /**
      * the list of users
      */
-    ArrayList<ClientUser> userList;
+    static ArrayList<ClientUser> userList  = new ArrayList<>();
 
-    /**
-     * [constructor]
-     */
-    public UserManager(){
-        userList = new ArrayList<>();
-    }
 
     /**
      * return list of users
