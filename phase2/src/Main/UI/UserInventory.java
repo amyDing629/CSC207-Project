@@ -1,6 +1,5 @@
 package Main.UI;
 
-import Inventory.InventoryUI;
 import Inventory.Item;
 import User.ClientUser;
 import User.ItemApprovalManager;
