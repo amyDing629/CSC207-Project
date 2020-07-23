@@ -5,10 +5,7 @@ import Main.UI.ApprovalDataAccess;
 import Main.UI.MainUI;
 import Main.UI.Register;
 import Trade.TradeManager;
-import User.AdministrativeUser;
-import User.ItemApprovalManager;
-import User.UserDataAccess;
-import User.UserManager;
+import User.*;
 import Main.UI.Login;
 import java.io.BufferedReader;
 import java.io.File;
@@ -29,5 +26,7 @@ public class Main {
         DataAccessFull uaf = new DataAccessFull(um, tm, iv, iam);
         MainUI mui=new MainUI(um,tm,iv,iam);
         mui.run();
+        LoginInterface li = new LoginInterface();
+        li.run();
     }
 }

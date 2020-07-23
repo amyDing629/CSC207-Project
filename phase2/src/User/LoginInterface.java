@@ -5,7 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class LoginInterface {
-    public static void main(String[] args){
+    public void run(){
         JFrame frame = new JFrame("Login/Register");
         frame.setSize(330, 200);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

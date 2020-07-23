@@ -4,6 +4,8 @@ import Trade.TradeManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class ClientUserInterface {
     UserManager a = new UserManager();
@@ -63,5 +65,14 @@ public class ClientUserInterface {
         JButton exitButton = new JButton("quit to menu");
         exitButton.setPreferredSize(new Dimension(300, 30));
         panel.add(exitButton);
+
+        exitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                LoginInterface a =new LoginInterface();
+                a.run();
+            }
+        });
     }
 }
