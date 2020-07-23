@@ -25,8 +25,8 @@ public class InventoryPresenter {
      * print the item that is not in the trade.
      * @return the item name in 'item1,item2' format
      */
-    ArrayList<Item> printAvailable(){
-        return iv.getAvailableList();
+    String printAvailable(){
+        return "Available item list: " + iv.getAvailableList();
 
     }
 
@@ -43,8 +43,9 @@ public class InventoryPresenter {
         System.out.println("item owner: " + item.getOwnerName());
 
          */
-        return "item name: " + item.getName() + "\n" + "item description: " + item.getDescription()
-                + "\n" + "item owner: " + item.getOwnerName();
+        return "Item Info:\nitem name: " + item.getName() + "\n" +
+                "item description: " + item.getDescription()
+                + "\n" + "item owner: " + item.getOwnerName() ;
     }
 
     /**

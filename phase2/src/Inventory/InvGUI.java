@@ -20,22 +20,42 @@ public class InvGUI {
 
     public void run() {
         //Creating the Frame
-        JFrame frame = new JFrame("Select Item Session");
+        JFrame frame = new JFrame("Add to WishBorrow Session");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setSize(400, 400);
+        frame.setSize(400, 200);
 
 
-        JPanel panel = new JPanel();
+        JPanel panelNorth = new JPanel();
+        JLabel ail = new JLabel("MESSAGE   ");
         JTextArea jtz = new JTextArea();
-        jtz.setText("available item list: "+ip.printAvailable());
+        jtz.setText(ip.printAvailable());
+        panelNorth.add(ail);
+        panelNorth.add(jtz);
         //JLabel label = new JLabel("choose an item from the following items: \n"+ip.printAvailable());
+        //panel
+        JPanel panel = new JPanel();
         JTextArea ta = new JTextArea("type item name here");
-        panel.add(ta);
         JButton send = new JButton("Send");
+        JButton awl = new JButton("add to wish list");
+        panel.add(ta);
         panel.add(send);
+        panel.add(awl);
+        //itemPanel
+        JPanel itemPanel = new JPanel();
+        JButton seeInventory = new JButton("see available item list");
+        itemPanel.add(seeInventory, SwingConstants.CENTER);
+
+
+        JTextArea currItemInfo = new JTextArea();
+
+        currItemInfo.setText("Current item info:\nno selected item ");
+        frame.getContentPane().add(BorderLayout.CENTER, currItemInfo);
+        frame.getContentPane().add(BorderLayout.EAST, itemPanel);
         frame.getContentPane().add(BorderLayout.SOUTH, panel);
-        frame.getContentPane().add(BorderLayout.CENTER, jtz);
+        frame.getContentPane().add(BorderLayout.NORTH, panelNorth);
         frame.setVisible(true);
+
+
         send.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -45,14 +65,36 @@ public class InvGUI {
                     jtz.setText(ip.wrongInput());
                 } else {
                     currItem = ic.getItem(itemName);
-                    itemAction();
+                    currItemInfo.setText(ip.printItemInfo(currItem));
                 }
 
             }
         });
 
-    }
+        awl.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (ic.isOwnItem(currItem)) {
+                    jtz.setText(ip.addToWishBorrow(false));
+                } else if (ic.isInOwnWishList(currItem)) {
+                    jtz.setText(ip.isInWishBorrow());
+                } else {
+                    ic.moveToWishList(currItem);
+                    jtz.setText(ip.addToWishBorrow(true));
+                }
+            }
+        });
 
+        seeInventory.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                jtz.setText(ip.printAvailable());
+            }
+        });
+
+    }
+}
+    /*
     private void itemAction() {
         JFrame item = new JFrame(currItem.getName());
         item.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

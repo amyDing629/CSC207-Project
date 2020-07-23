@@ -41,59 +41,117 @@ public class RTradeGUI {
     public void run(){
         JFrame frame = new JFrame("Request Trade Session");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setSize(600, 600);
+        frame.setSize(800, 200);
+        JPanel msg = new JPanel();
+        JLabel msgl = new JLabel("message:", SwingConstants.LEFT);
+        msg.add(msgl);
         JTextArea jtz = new JTextArea();
-        frame.getContentPane().add(BorderLayout.CENTER, jtz);
+        msg.add(jtz);
+        frame.getContentPane().add(BorderLayout.NORTH, msg);
+        JTextArea tradeInfo = new JTextArea();
+        JPanel panel = new JPanel();
+        tradeInfo.setText("Current User: " + currUser.getUsername() + "\n" + "Item to request the trade: " + item.getName()
+                + "\n" + tp.selectSecondItem()
+                + "\n" + "Suggest item to lend if make a two way trade: " + trc.getSuggestedItemName());
+        frame.getContentPane().add(BorderLayout.CENTER, tradeInfo);
+        JButton onewayTemp = new JButton("One way-Temporary");
+        JButton onewayPer = new JButton("One way-Permanent");
+        JButton twowayTemp = new JButton("Two way-Temporary");
+        JButton twowayPer = new JButton("Two way-Permanent");
+        panel.add(onewayTemp);
+        panel.add(onewayPer);
+        panel.add(twowayTemp);
+        panel.add(twowayPer);
+        frame.getContentPane().add(BorderLayout.SOUTH, panel);
+
+        JPanel panelRight = new JPanel();
+        panelRight.setLayout(new BoxLayout(panelRight, BoxLayout.Y_AXIS));
+        JLabel label = new JLabel("input second item name here " +
+                "for a two way trade", SwingConstants.LEFT);
+        JTextArea ta = new JTextArea("type item name here");
+        panelRight.add(label);
+        panelRight.add(ta);
+        frame.getContentPane().add(BorderLayout.EAST, panelRight);
         frame.setVisible(true);
-        if (!trc.checkInput(item).equals("true")){
-            jtz.setText(trc.checkInput(item));
-        }else{
-            JPanel panel = new JPanel();
-            jtz.setText("Current User: " + currUser.getUsername() + "\n" + "Item to request the trade: " + item.getName()
-                    + "\n" + "Suggest item to lend if make a two way trade: " + trc.getSuggestedItemName());
-            JButton onewayTemp = new JButton("One way-Temporary");
-            JButton onewayPer = new JButton("One way-Permanent");
-            JButton twoway = new JButton("Two way");
-            panel.add(onewayTemp);
-            panel.add(onewayPer);
-            panel.add(twoway);
-            frame.getContentPane().add(BorderLayout.SOUTH, panel);
-            onewayTemp.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    if (item.getIsInTrade()){
-                        jtz.setText("the item is already in trade");
+
+
+        onewayTemp.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (item.getIsInTrade()){
+                    jtz.setText("the item is already in trade");
+                }else if (!trc.checkInput(item).equals("true")){
+                    jtz.setText(trc.checkInput(item));
+                }
+                else{
+                    trc.createTrade("1", item);
+                    jtz.setText("the trade(One way-Temporary) has been created, please wait for another user to confirm");
+                }
+            }
+        });
+        onewayPer.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (item.getIsInTrade()){
+                    jtz.setText("the item is already in trade");
+                }else if (!trc.checkInput(item).equals("true")){
+                    jtz.setText(trc.checkInput(item));
+                }
+                else{
+                    trc.createTrade("2", item);
+                    jtz.setText("the trade(One way-Permanent) has been created, please wait for another user to confirm");
+                }
+            }
+        });
+
+        twowayTemp.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String itemName = ta.getText();
+                ta.setText("type item name here");
+                if (!currUser.getWishLend().contains(itemName)){
+                    jtz.setText("wrong input");
+                }else if (!trc.checkInput(item).equals("true")){
+                    jtz.setText(trc.checkInput(item));
+                }
+                else{
+                    Item it = trc.getItem(itemName);
+                    if (it.getIsInTrade()){
+                        jtz.setText("the item is already in the trade");
                     }else{
-                        trc.createTrade("1", item);
-                        jtz.setText("the trade(One way-Temporary) has been created");
+                        trc.createTrade("3", item, it);
+                        jtz.setText("the trade(two way-temporary) has been created, please wait for another user to confirm");
                     }
                 }
-            });
-            onewayPer.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    if (item.getIsInTrade()){
-                        jtz.setText("the item is already in trade");
+            }
+        });
+        twowayPer.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String itemName = ta.getText();
+                ta.setText("type item name here");
+                if (!currUser.getWishLend().contains(itemName)){
+                    jtz.setText("wrong input");
+                }else if (!trc.checkInput(item).equals("true")){
+                    jtz.setText(trc.checkInput(item));
+                }
+                else{
+                    Item it = trc.getItem(itemName);
+                    if (it.getIsInTrade()){
+                        jtz.setText("the item is already in the trade");
                     }else{
-                        trc.createTrade("2", item);
-                        jtz.setText("the trade(One way-Temporary) has been created");
+                        trc.createTrade("4", item, it);
+                        jtz.setText("the trade(two way-permanent) has been created, please wait for another user to confirm");
                     }
                 }
-            });
-            twoway.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    if (item.getIsInTrade()){
-                        jtz.setText("the item is already in trade");
-                    }else{
-                        getItem();
-                    }
-                }
-            });
+            }
+        });
+
+
+
 
         }
 
-    }
 
     private void getItem(){
         JFrame frame = new JFrame("Select Second Item for two way Trade");
@@ -152,9 +210,5 @@ public class RTradeGUI {
                 }
             }
         });
-
     }
-
-
-
 }

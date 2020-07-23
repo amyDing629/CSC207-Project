@@ -99,7 +99,7 @@ public class TradePresenter {
 
 
     String selectSecondItem(){
-        return "your wish lend list" + currUser.getWishLend();
+        return "Your wish lend list: " + currUser.getWishLend();
     }
 
     void printSuggestedItemList(ArrayList<String> sItemList){
