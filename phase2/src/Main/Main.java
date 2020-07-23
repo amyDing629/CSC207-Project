@@ -13,13 +13,13 @@ public class Main {
      * run the system
      */
     public static void main(String[] args) throws IOException {
-//        Inventory iv = new Inventory();
-//        UserManager um = new UserManager();
-//        TradeManager tm = new TradeManager();
-//        ItemApprovalManager iam = new ItemApprovalManager();
-//        DataAccessFull uaf = new DataAccessFull(um, tm, iv, iam);
-//        MainUI mui=new MainUI(um,tm,iv,iam);
-//        mui.run();
+        Inventory iv = new Inventory();
+        UserManager um = new UserManager();
+        TradeManager tm = new TradeManager();
+        ItemApprovalManager iam = new ItemApprovalManager();
+        DataAccessFull uaf = new DataAccessFull(um, tm, iv, iam);
+        MainUI mui=new MainUI(um,tm,iv,iam);
+        mui.run();
         LoginIGUI li = new LoginIGUI();
         li.run();
     }
