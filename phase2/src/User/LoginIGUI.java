@@ -1,10 +1,8 @@
 package User;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class LoginInterface {
+public class LoginIGUI {
     public void run(){
         JFrame frame = new JFrame("Login/Register");
         frame.setSize(330, 200);
@@ -50,7 +48,7 @@ public class LoginInterface {
                 JOptionPane.showMessageDialog(null, "invalid user");
             else{
                 frame.setVisible(false);
-            ClientUserInterface a = new ClientUserInterface();
+            ClientUserGUI a = new ClientUserGUI();
             a.run(name);
             }
         });

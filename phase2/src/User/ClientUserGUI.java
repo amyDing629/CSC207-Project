@@ -7,7 +7,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ClientUserInterface {
+public class ClientUserGUI {
     UserManager a = new UserManager();
     TradeManager c = new TradeManager();
     public void run(String name){
@@ -66,13 +66,16 @@ public class ClientUserInterface {
         exitButton.setPreferredSize(new Dimension(300, 30));
         panel.add(exitButton);
 
-        exitButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
-                LoginInterface a =new LoginInterface();
-                a.run();
-            }
+        editButton.addActionListener(e -> {
+            frame.setVisible(false);
+            editInfoGUI d = new editInfoGUI();
+            d.run(a.getUsername(b));
+        });
+
+        exitButton.addActionListener(e -> {
+            frame.setVisible(false);
+            LoginIGUI a =new LoginIGUI();
+            a.run();
         });
     }
 }

@@ -1,17 +1,11 @@
 package Main;
 
 import Inventory.Inventory;
-import Main.UI.ApprovalDataAccess;
 import Main.UI.MainUI;
-import Main.UI.Register;
 import Trade.TradeManager;
 import User.*;
-import Main.UI.Login;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+
 import java.io.IOException;
-import java.util.Scanner;
 
 public class Main {
     /**
@@ -19,14 +13,14 @@ public class Main {
      * run the system
      */
     public static void main(String[] args) throws IOException {
-        Inventory iv = new Inventory();
-        UserManager um = new UserManager();
-        TradeManager tm = new TradeManager();
-        ItemApprovalManager iam = new ItemApprovalManager();
-        DataAccessFull uaf = new DataAccessFull(um, tm, iv, iam);
-        MainUI mui=new MainUI(um,tm,iv,iam);
-        mui.run();
-        LoginInterface li = new LoginInterface();
+//        Inventory iv = new Inventory();
+//        UserManager um = new UserManager();
+//        TradeManager tm = new TradeManager();
+//        ItemApprovalManager iam = new ItemApprovalManager();
+//        DataAccessFull uaf = new DataAccessFull(um, tm, iv, iam);
+//        MainUI mui=new MainUI(um,tm,iv,iam);
+//        mui.run();
+        LoginIGUI li = new LoginIGUI();
         li.run();
     }
 }
