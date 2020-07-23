@@ -15,16 +15,6 @@ public class LoginInterface {
         placeComponents(frame, panel);
         frame.setVisible(true);
     }
-    private static void changeFrame(String name){
-        JFrame frame = new JFrame("Login Success");
-        frame.setSize(500, 300);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        JPanel panel= new JPanel();
-        frame.add(panel);
-        JLabel welcomeLabel = new JLabel("Welcome: " + name);
-        panel.add(welcomeLabel);
-        frame.setVisible(true);
-    }
 
 
 
@@ -62,7 +52,9 @@ public class LoginInterface {
                 JOptionPane.showMessageDialog(null, "invalid user");
             else{
                 frame.setVisible(false);
-            changeFrame(id);}
+            ClientUserInterface a = new ClientUserInterface();
+            a.run();
+            }
         });
 
         registerButton.addActionListener(e -> {
