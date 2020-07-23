@@ -16,8 +16,6 @@ public class LoginInterface {
         frame.setVisible(true);
     }
 
-
-
     private static void placeComponents(JFrame frame, JPanel panel){
         JLabel userLabel = new JLabel("User:");
         userLabel.setBounds(10,20,80,25);
@@ -44,16 +42,16 @@ public class LoginInterface {
         panel.add(logInButton);
 
         logInButton.addActionListener(e -> {
-            String id = nameInput.getText();
+            String name = nameInput.getText();
             String password = passwordInput.getText();
             ILoginSystemBoundary presenter = new LoginSystemPresenter();
-            boolean response = presenter.login(id, password);
+            boolean response = presenter.login(name, password);
             if(!response)
                 JOptionPane.showMessageDialog(null, "invalid user");
             else{
                 frame.setVisible(false);
             ClientUserInterface a = new ClientUserInterface();
-            a.run();
+            a.run(name);
             }
         });
 
