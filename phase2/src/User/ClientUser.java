@@ -51,7 +51,7 @@ public class ClientUser {
      */
     private int incompleteTransactionLimit;
     /**
-     * the difference amount between the amount of TODO: COMPLETE DESCRIPTION
+     * the difference amount between the amount of borrow and lend
      */
     private int diff = 2;
     /**

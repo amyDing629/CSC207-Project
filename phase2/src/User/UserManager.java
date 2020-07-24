@@ -14,14 +14,8 @@ public class UserManager {
     /**
      * the list of users
      */
-    ArrayList<ClientUser> userList;
+    static ArrayList<ClientUser> userList  = new ArrayList<>();
 
-    /**
-     * [constructor]
-     */
-    public UserManager(){
-        userList = new ArrayList<>();
-    }
 
     /**
      * return list of users
@@ -183,6 +177,8 @@ public class UserManager {
     public void createClientUser(String name, String password, boolean isAdmin){
         userList.add(new ClientUser(name, password, isAdmin));
     }
+
+    public int readDiff(ClientUser a){return a.readDiff();}
 
 
 

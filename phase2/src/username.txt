@@ -1,1 +1,3 @@
 8d12af9a-606f-45d5-a53f-9f154845cb3a, admin, 123, true, true, false, ; , , , , 5, 2, 0, 0
+0c6754db-b8dc-46d9-9a98-3e97bfb5920a, amy, 123, false, false, false, ; , ipad; , , 1ffe8b93-f75c-4a01-8c19-dd6809549cb5; , 5, 2, 0, 0
+fe679542-de86-4778-8e05-f398542461a4, damiel, 123, false, false, false, ; , , ipad; , 1ffe8b93-f75c-4a01-8c19-dd6809549cb5; , 5, 2, 0, 0

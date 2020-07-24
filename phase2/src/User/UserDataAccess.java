@@ -26,7 +26,7 @@ public class UserDataAccess {
     public ArrayList<ArrayList<String>> readFile() {
         ArrayList<ArrayList<String>> myList = new ArrayList<>();
         try {
-            BufferedReader in = new BufferedReader(new FileReader("phase1/src/username.txt"));
+            BufferedReader in = new BufferedReader(new FileReader("phase2/src/username.txt"));
             while(in.ready()) {
                 String line = in.readLine();
                 String[] parts = line.split(", ");
@@ -169,7 +169,7 @@ public class UserDataAccess {
      */
     private void addUser(ClientUser u) {
         try{
-            FileOutputStream output = new FileOutputStream("phase1/src/username.txt", true);
+            FileOutputStream output = new FileOutputStream("phase2/src/username.txt", true);
             String name = u.getUsername();
             String s = u.getId().toString() + ", " + name + ", "  + u.getPassword()+ ", "  + u.getIsAdmin()+ ", "
                     + u.getIsFrozen()+ ", "  + u.getIsBorrow()+ ", ";
@@ -212,7 +212,7 @@ public class UserDataAccess {
      */
     public void updateFile() {
         try {
-            PrintWriter writer = new PrintWriter("phase1/src/username.txt");
+            PrintWriter writer = new PrintWriter("phase2/src/username.txt");
             writer.print("");
             writer.close();
             for (ClientUser u : um.getUserList()) {

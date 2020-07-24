@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.UUID;
 
 
-class EditAgreeSession {
+class EditAgreeSession implements IMeetingSessionService {
 
     MeetingLogInfo meetingLog;
 
@@ -150,5 +150,25 @@ class EditAgreeSession {
 
     MeetingLogInfo getSessionLog() {
         return meetingLog;
+    }
+
+    @Override
+    public void run(UUID currLogInUser, Meeting meeting, UUID lastEditUser, ArrayList<UUID> users) throws IOException {
+        runEditAgreeSession(currLogInUser, meeting, lastEditUser);
+    }
+
+    @Override
+    public ArrayList<Object> getResults() {
+        return getEditAgreeSessionResult();
+    }
+
+    @Override
+    public MeetingSessionName getSessionName() {
+        return MeetingSessionName.EDIT_AGREE;
+    }
+
+    @Override
+    public MeetingLogInfo getLog() {
+        return getSessionLog();
     }
 }

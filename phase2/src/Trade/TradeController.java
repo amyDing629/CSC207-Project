@@ -8,6 +8,7 @@ import User.*;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  * [controller]
@@ -57,22 +58,23 @@ public class TradeController {
      * check the frozen status of two users.
      * @throws IOException one of the users's account is frozen
      */
-    void checkInput(Item item) throws IOException {
+    String checkInput(Item item){
         if (item.getIsInTrade()){
-            throw new IOException("the item is already in the trade");
+            return "the item is already in the trade";
         }
         if (currUser.getIsFrozen()) {
-            throw new IOException("your account is frozen!");
+            return "your account is frozen!";
         }
         if (tarUser == null){
-            System.out.println("tarUser not found");
+            return "tarUser not found";
         }
         if (tarUser.getIsFrozen()) {
-            throw new IOException("the account of the item owner is frozen!");
+            return "the account of the item owner is frozen!";
         }
         if (tarUser == currUser){
-            throw new IOException("you cannot make trade with yourself");
+            return "you cannot make trade with yourself";
         }
+        return "true";
     }
 
     /**
@@ -82,17 +84,19 @@ public class TradeController {
      * @return whether or not the trade is a oneway trade
      * @throws IOException the trade is not created
      */
-    boolean createTrade(String line, Item item) throws IOException {
+    boolean createTrade(String line, Item item){
         LocalDateTime time = LocalDateTime.now();
         item.setIsInTrade(true);
         switch (line) {
             case "1":
-                Trade trade1 = tm.createOnewayTrade(currUser.getId(), tarUser.getId(), item, 30, time);
-                trade1.setCreator(currUser.getId());
+                currTrade = tm.createOnewayTrade(currUser.getId(), tarUser.getId(), item, 30, time);
+                currTrade.setCreator(currUser.getId());
+                updateTradeHistory();
                 return true;
             case "2":
-                Trade trade2 = tm.createOnewayTrade(currUser.getId(), tarUser.getId(), item, -1, time);
-                trade2.setCreator(currUser.getId());
+                currTrade = tm.createOnewayTrade(currUser.getId(), tarUser.getId(), item, -1, time);
+                currTrade.setCreator(currUser.getId());
+                updateTradeHistory();
                 return true;
             default: {
                 return false;
@@ -107,20 +111,27 @@ public class TradeController {
      * @param item2 the second item
      * @throws IOException if the trade is not created
      */
-    void createTrade(String line, Item item1, Item item2) throws IOException {
+    void createTrade(String line, Item item1, Item item2){
         item1.setIsInTrade(true);
         item2.setIsInTrade(true);
         LocalDateTime time = LocalDateTime.now();
         if (line.equals("3")){
-            Trade trade3 = tm.createTwowayTrade(currUser.getId(), tarUser.getId(), item1, item2, 30, time);
-            trade3.setCreator(currUser.getId());
+            currTrade = tm.createTwowayTrade(currUser.getId(), tarUser.getId(), item1, item2, 30, time);
+            currTrade.setCreator(currUser.getId());
+            updateTradeHistory();
         }else{
-            Trade trade4 = tm.createTwowayTrade(currUser.getId(), tarUser.getId(), item1, item2, -1, time);
-            trade4.setCreator(currUser.getId());
+            currTrade = tm.createTwowayTrade(currUser.getId(), tarUser.getId(), item1, item2, -1, time);
+            currTrade.setCreator(currUser.getId());
+            updateTradeHistory();
 
         }
     }
 
+    void updateTradeHistory() {
+        // System.out.println("userList:"+userManager.getUser UserManager userManager = new UserManager(gw);
+        currUser.getTradeHistory().add(currTrade.getId());
+        tarUser.getTradeHistory().add(currTrade.getId());
+    }
     /**
      * check the status of the current trade
      * @return the status

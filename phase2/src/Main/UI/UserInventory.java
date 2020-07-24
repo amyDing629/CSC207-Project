@@ -1,6 +1,5 @@
 package Main.UI;
 
-import Inventory.InventoryUI;
 import Inventory.Item;
 import User.ClientUser;
 import User.ItemApprovalManager;
@@ -87,12 +86,8 @@ public class UserInventory {
                     }
                     Item k=iv.getItem(input22);
                     if (k!=null){
-                        try {
-                            RequestTradeUI ru = new RequestTradeUI(user, k, tm, um, iv);
-                            ru.run();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+                        RTradeGUI ru = new RTradeGUI(user, k, tm, um, iv);
+                        ru.run();
                     }
                     break;
                 case 3:
@@ -131,7 +126,7 @@ public class UserInventory {
                     System.out.println("Menu:\n1.add wish\n2.delete wish");
                     String input55=uc.getString("Please enter a number!");
                     if (input55.equals("1")) {
-                        InventoryUI iui = new InventoryUI(user, iv);
+                        InvGUI iui = new InvGUI(user, iv);
                         iui.run();
                     }else if(input55.equals("2")){
                         List<String> bw1=um.getWishBorrow(user);

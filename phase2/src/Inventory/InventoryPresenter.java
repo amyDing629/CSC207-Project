@@ -2,6 +2,9 @@ package Inventory;
 
 import User.ClientUser;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+
 /**
  * present information of the inventory system to user.
  */
@@ -20,26 +23,36 @@ public class InventoryPresenter {
 
     /**
      * print the item that is not in the trade.
+     * @return the item name in 'item1,item2' format
      */
-    void printAvailable(){
-        System.out.println(iv.getAvailableList());
+    String printAvailable(){
+        return "Available item list: " + iv.getAvailableList();
+
     }
+
+
 
     /**
      * print name, description and owner of the item
      * @param item selected item
      */
-    void printItemInfo(Item item) {
+    String printItemInfo(Item item) {
+        /*
         System.out.println("item name: " + item.getName());
         System.out.println("item description: " + item.getDescription());
         System.out.println("item owner: " + item.getOwnerName());
+
+         */
+        return "Item Info:\nitem name: " + item.getName() + "\n" +
+                "item description: " + item.getDescription()
+                + "\n" + "item owner: " + item.getOwnerName() ;
     }
 
     /**
      * print the message
      */
-    void wrongInput(){
-        System.out.println("wrong input, please type again");
+    String wrongInput(){
+        return "wrong input, please type again";
     }
 
     /**
@@ -60,19 +73,19 @@ public class InventoryPresenter {
     /**
      * print the notification
      */
-    void addToWishBorrow(boolean isAdded){
+    String addToWishBorrow(boolean isAdded){
         if (isAdded){
-            System.out.println("the item has been moved to the wish list");
+            return "the item has been moved to the wish list";
         }else{
-            System.out.println("you can not add your own item to wish borrow list");
+            return "you can not add your own item to wish borrow list";
         }
     }
 
     /**
      * print the message
      */
-    void isInWishBorrow(){
-        System.out.println("the item has already been in your wish list");
+    String isInWishBorrow(){
+        return "the item has already been in your wish list";
     }
 
 

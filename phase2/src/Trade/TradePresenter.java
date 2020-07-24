@@ -29,25 +29,27 @@ public class TradePresenter {
     /**
      * present trade information (might delete some information)
      */
-    void presentTradeUIInfo(){
-        System.out.println("===========================");
-        System.out.println(currUser.getUsername());
-        System.out.println("tradeId: " + trade.getId());
-        System.out.println("tradeUsers: " + trade.getUsers());
-        System.out.println("tradeStatus: " + trade.getStatus());
-        System.out.println("tradeItem: " + trade.getItemList());
-        System.out.println("first meeting: " + trade.getMeeting());
+    String presentTradeUIInfo(){
+        String result = "===========================" + "\n" +
+        currUser.getUsername() + "\n" +
+        "tradeId: " + trade.getId() + "\n" +
+        "tradeUsers: " + trade.getUsers() + "\n" +
+        "tradeStatus: " + trade.getStatus() + "\n" +
+        "tradeItem: " + trade.getItemList() + "\n" +
+        "first meeting: " + trade.getMeeting();
         if (trade.getMeeting()!= null){
-            System.out.println("first meeting status: " + trade.getMeeting().getStatus());
-            System.out.println("id to confirm: " + trade.getMeeting().getConfirmedStatusFull());
-            System.out.println("id to agree: " + trade.getMeeting().getAgreedStatusFull());
-            System.out.println("id to edition: " + trade.getMeeting().getIdToEditor());
+            result = result + "\n" +
+            "first meeting status: " + trade.getMeeting().getStatus() + "\n" +
+            "id to confirm: " + trade.getMeeting().getConfirmedStatusFull() + "\n" +
+            "id to agree: " + trade.getMeeting().getAgreedStatusFull() + "\n" +
+            "id to edition: " + trade.getMeeting().getIdToEditor();
         }
-        System.out.println("second meeting: " + trade.getSecondMeeting());
+        result = result + "second meeting: " + trade.getSecondMeeting();
         if (trade.getSecondMeeting()!=null){
-            System.out.println("second meeting status: "+trade.getSecondMeeting().getStatus());
+            result = result + "\n"+ "second meeting status: "+trade.getSecondMeeting().getStatus();
         }
-        System.out.println("============================");
+        result = result + "============================";
+        return result;
     }
 
     void enterTrade(){
@@ -96,9 +98,8 @@ public class TradePresenter {
     }
 
 
-    void selectSecondItem(){
-        System.out.println(currUser.getWishLend());
-        System.out.println("choose the item you want to lend, type '0' to quit");
+    String selectSecondItem(){
+        return "Your wish lend list: " + currUser.getWishLend();
     }
 
     void printSuggestedItemList(ArrayList<String> sItemList){
