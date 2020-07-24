@@ -2,10 +2,7 @@ package Main.UI;
 
 import Inventory.Inventory;
 import Inventory.Item;
-import User.AdministrativeUser;
-import User.ClientUser;
-import User.ItemApprovalManager;
-import User.UserManager;
+import User.*;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -39,17 +36,21 @@ public class EditInfo {
      * the place we store information
      */
     public ItemApprovalManager iam ;
-
+    public AdminActivityManager aam;
+    public UIcontoller uc;
     /**
      * [constructor]
      * @param u the input user
+     * @param aam
+     * @param uc
      */
-    public EditInfo(ClientUser u, UserManager um, Inventory iv, ItemApprovalManager iam){
+    public EditInfo(ClientUser u, UserManager um, Inventory iv, ItemApprovalManager iam, AdminActivityManager aam, UIcontoller uc){
         user=u;
-        sc = new Scanner(System.in);
         a= um;
         v = iv;
         this.iam = iam;
+        this.aam=aam;
+        this.uc=uc;
     }
 
     /**
@@ -60,8 +61,7 @@ public class EditInfo {
         int exit=-1;
         while(exit!=0) {
             System.out.println("--------------------\nEdit user information");
-            System.out.println("Hello,user," + a.getUsername(user));
-            System.out.println("Admin:"+a.getIsAdmin(user));
+            uc.UserDisplayStatus(user);
             System.out.println("Actions:\n1.Change password\n2.ClientUser Freeze System");
             if (a.getIsAdmin(user)) {
                 System.out.print("3.Change user's limit\n4.add new item into the system\n");
@@ -70,25 +70,23 @@ public class EditInfo {
                 }
             }
             System.out.println("0.exit");
-            System.out.print(">");
-            int input = sc.nextInt();
-            sc.nextLine();
+            int input = uc.getNumber("Please enter a number");
             System.out.println("-----------------------------");
             switch (input) {
                 case 1:
-                    ChangePass cp=new ChangePass(user,a);
+                    ChangePass cp=new ChangePass(user,a,uc);
                     cp.run();
                     break;
                 case 2:
-                    UserFreezeSystem ufs=new UserFreezeSystem(user,a, iam);
+                    UserFreezeSystem ufs=new UserFreezeSystem(user,a, iam,aam,uc);
                     ufs.run();
                     break;
                 case 3:
-                    UserLimit ul=new UserLimit(user,a,iam);
+                    UserLimit ul=new UserLimit(user,a,iam,uc,aam);
                     ul.run();
                     break;
                 case 5:
-                    CreateAdmin ca=new CreateAdmin(user,a,iam);
+                    CreateAdmin ca=new CreateAdmin(user,a,iam,aam,uc);
                     ca.run();
                     break;
                 case 4:

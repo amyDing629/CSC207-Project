@@ -3,10 +3,7 @@ package Main.UI;
 import Inventory.Inventory;
 import Main.DataAccessFull;
 import Trade.TradeManager;
-import User.AdministrativeUser;
-import User.ItemApprovalManager;
-import User.UserDataAccess;
-import User.UserManager;
+import User.*;
 import com.sun.deploy.ui.DialogTemplate;
 
 import java.io.BufferedReader;
@@ -20,57 +17,33 @@ public class MainUI {
     TradeManager tm;
     DataAccessFull w;
     ItemApprovalManager iam;
-
-    public MainUI(UserManager um, TradeManager tm, DataAccessFull w,ItemApprovalManager iam) {
+    UIcontoller uc;
+    Inventory iv;
+    AdminActivityManager aam;
+    public MainUI(UserManager um, TradeManager tm, DataAccessFull w, Inventory iv, ItemApprovalManager iam, UIcontoller uc, AdminActivityManager aam) {
         this.um = um;
         this.tm = tm;
         this.w = w;
         this.iam=iam;
+        this.uc=uc;
+        this.iv=iv;
+        this.aam=aam;
     }
 
     public void run() throws IOException {
+        Scanner sc = new Scanner(System.in);
         int a = -1;
-        Inventory iv = new Inventory();
-        ItemApprovalManager iam = new ItemApprovalManager();
-        File file = new File("phase1/src/username.txt");
-
-        if (file.length() == 0) {
-            AdministrativeUser b = new AdministrativeUser("admin", "123", true, tm, um);
-            um.addUser(b);
-            new UserDataAccess(um).updateFile();
-        }
+        uc.checkFileEmpty(new File("phase1/src/username.txt"));
         w.readFile(tm, iv, um);
         while (a != 0) {
-            //print out the list of current users-------------------------------
-            //gw = new GateWay();
-            //w = new DataAccessFull(gw);
-            //w.readFile();
-            System.out.println("Users:");
-            try {
-                BufferedReader reader = new BufferedReader(new FileReader(
-                        "phase1/src/username.txt"));
-                String line = reader.readLine();
-                while (line != null) {
-                    System.out.println(line);
-                    line = reader.readLine();
-                }
-                reader.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            //------------------------------------------------------------------
+            uc.printAllUserInfo();
             System.out.println("\nMenu:\n1.login\n2.register\n0.quit");
-            System.out.println("Please enter the number only.");
-            Scanner sc = new Scanner(System.in);
-            System.out.print(">");
-            a = sc.nextInt();
-            sc.nextLine();
+            a=uc.getNumber("Please enter the number only.");
             if (a == 1) {
-                //System.out.println(gw.getUsers().get(3).getIsFrozen());
-                Login login = new Login(um, tm, iv, iam);
+                Login login = new Login(um, tm, iv, iam,aam,uc);
                 login.run();
             } else if (a == 2) {
-                Register reg = new Register(um);
+                Register reg = new Register(um,uc);
                 reg.run();
             }
             System.out.println("------------------------------");

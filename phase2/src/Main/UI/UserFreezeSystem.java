@@ -1,23 +1,22 @@
 package Main.UI;
 
-import User.AdministrativeUser;
-import User.ClientUser;
-import User.ItemApprovalManager;
-import User.UserManager;
+import User.*;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class UserFreezeSystem {
     ClientUser user;
-    Scanner sc;
     UserManager um;
     ItemApprovalManager iam;
-    public UserFreezeSystem(ClientUser user,UserManager um, ItemApprovalManager iam){
+    public AdminActivityManager aam;
+    UIcontoller uc;
+    public UserFreezeSystem(ClientUser user, UserManager um, ItemApprovalManager iam, AdminActivityManager aam,UIcontoller uc){
         this.user=user;
-        sc=new Scanner(System.in);
         this.um=um;
         this.iam = iam;
+        this.aam=aam;
+        this.uc=uc;
     }
 
     public void run() {
@@ -32,18 +31,16 @@ public class UserFreezeSystem {
         if (!um.getIsFrozen(user) && !um.getIsAdmin(user)) {
             System.out.println("Returning to menu.....");
         } else {
-            int inputF = sc.nextInt();
-            sc.nextLine();
+            int inputF = uc.getNumber("Please enter a number!");
             if (inputF == 2) {
-                System.out.println("Type in the username of user you want to freeze, type 0 to quit.");
-                String input3 = sc.nextLine();
+                String input3 = uc.getString("Type in the username of user you want to freeze, type 0 to quit.");
                 if (!input3.equals("0")) {
                     ClientUser ha = um.getUser(input3);
                     if (ha == null) {
                         System.out.println("Sorry there is no such user, returning to main menu.");
                     } else {
-                        ((AdministrativeUser) um.getUser("admin")).freeze(ha);
-                        System.out.println("user.ClientUser:" + um.getUsername(ha) + " account has been frozen");
+                        aam.setFreeze(user,true);
+                        System.out.println("ClientUser:" + um.getUsername(ha) + " account has been frozen");
                         System.out.println("Username: " + um.getUsername(ha));
                         System.out.println("Username: " + um.getPassword(ha));
                     }
@@ -58,24 +55,20 @@ public class UserFreezeSystem {
                 if (usa.size() == 0) {
                     System.out.println("Currently there is no user freeze request");
                 }
-                System.out.println("Enter the ClientUser number to approve,enter -1 to quit.");
-                String inputU = sc.nextLine();
+                String inputU = uc.getString("Enter the ClientUser number to approve,enter -1 to quit.");
                 int k = Integer.parseInt(inputU);
                 if (k < usa.size() && k > -1) {
-                    um.getUser(usa.get(k).get(1)).setFrozen(false);
+                    aam.setFreeze(um.getUser(usa.get(k).get(1)),false);
                     usa.remove(k);
                 }
             } else if (inputF == 1) {
-                System.out.println("Please enter the reason why you should unfreeze...enter -1 to quit");
-                String des = sc.nextLine();
+                String des = uc.getString("Please enter the reason why you should unfreeze...enter -1 to quit");
                 if (!des.equals("-1")) {
-                    ArrayList<String> b = new ArrayList<>();
-                    b.add("2");
-                    b.add(um.getUsername(user));
-                    b.add(des);
-                    iam.getUserApproval().add(b);
+                    uc.addApproval("2",user.getUsername(),des);
                     System.out.println("Request successfully");
                     System.out.println("Please wait for the administrator to approve");
+                }else{
+                    System.out.println("returning....");
                 }
             }
         }

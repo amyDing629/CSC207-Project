@@ -29,11 +29,13 @@ public class Market {
      * [constructor]
      * @param u the input user
      */
-    public Market(ClientUser u, Inventory iv,UserManager um) {
+    public UIcontoller uc;
+    public Market(ClientUser u, Inventory iv,UserManager um,UIcontoller uc) {
         this.iv = iv;
         user = u;
         this.um=um;
         sc = new Scanner(System.in);
+        this.uc=uc;
     }
 
     /**
@@ -41,6 +43,7 @@ public class Market {
      */
     public void run(){
         System.out.println("Hello "+ um.getUsername(user));
+        uc.UserDisplayStatus(user);
         for(Item item:iv.getAvailableList()){
             System.out.println("Item:"+item);
         }

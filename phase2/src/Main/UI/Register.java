@@ -11,36 +11,27 @@ import java.util.Scanner;
  */
 public class Register {
     /**
-     * read input
-     */
-    public Scanner sc;
-    /**
      * the object that edits the user list of input gateway
      */
     public UserManager a;
-
+    UIcontoller uc;
     /**
      * [constructor]
      */
-    public Register(UserManager um){
-        sc = new Scanner(System.in);
+    public Register(UserManager um,UIcontoller uc){
         a= um;
+        this.uc=uc;
     }
 
     /**
      * run the system
      */
     public void run() {
-        Scanner sc = new Scanner(System.in);
         int input = 0;
         while (input != 1) {
             System.out.println("--------------------\nRegister");
-            System.out.println("Please enter your username!");
-            System.out.print(">");
-            String username = sc.nextLine();
-            System.out.println("Please enter your password!");
-            System.out.print(">");
-            String password = sc.nextLine();
+            String username = uc.getString("Please enter your username!");
+            String password =uc.getString("Please enter your password!");
             if (a.getUser(username) == null) {
                 a.createClientUser(username,password,false);
                 System.out.println("Your account has been successfully created!");
@@ -50,10 +41,8 @@ public class Register {
                 input=1;
             }
             else {
-                System.out.println("The username already exists, please try to register again, " +
+                input=uc.getNumber("The username already exists, please try to register again, " +
                         "enter any number to continue. Enter 1 to exit.");
-                input = sc.nextInt();
-                sc.nextLine();
             }
         }
     }

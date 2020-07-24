@@ -15,6 +15,7 @@ public class AddNewItem {
     UserManager um;
     ItemApprovalManager iam;
     Inventory iv;
+    UIcontoller uc;
     public AddNewItem(ClientUser user,UserManager um, Inventory iv, ItemApprovalManager iam){
         this.user=user;
         sc=new Scanner(System.in);
@@ -26,28 +27,21 @@ public class AddNewItem {
     public void run(){
         System.out.println("add new item into the system");
         System.out.println("Menu:\n1.Add item for yourself.\n2.Approve request from users");
-        String inputA=sc.nextLine();
+        String inputA=uc.getString("Please enter a number!");
         if(inputA.equals("1")) {
             int exit1 = 0;
             String name = "";
             while (exit1 == 0) {
                 System.out.println("Type the name of the item");
                 name = sc.nextLine();
-                boolean t = false;
-                for (Item n : iv.getLendingList()) {
-                    if (n.getName().equals(name)) {
-                        t = true;
-                        break;
-                    }
-                }
+                boolean t = uc.checkItemExist(name);
                 if (t) {
                     System.out.println("The item already exists, please enter the name again");
                 } else {
                     exit1 = 1;
                 }
             }
-            System.out.println("Type the description of the item");
-            String des = sc.nextLine();
+            String des = uc.getString("Type the description of the item");
             Item i = new Item(name, um.getUsername(user));
             i.setDescription(des);
             iv.addItem(i);
@@ -68,8 +62,7 @@ public class AddNewItem {
                 if(hii.size()==0){
                     System.out.println("There is no item currently");
                 }
-                System.out.println("Enter the item number to approve,enter -1 to quit.");
-                String inputs = sc.nextLine();
+                String inputs = uc.getString("Enter the item number to approve,enter -1 to quit.");
                 int k = Integer.parseInt(inputs);
                 if (k > -1 && k < (hii.size())) {
                     Item i = new Item(hii.get(k).get(1), hii.get(k).get(3));

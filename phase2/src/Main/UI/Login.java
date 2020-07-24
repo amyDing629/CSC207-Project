@@ -1,7 +1,9 @@
 package Main.UI;
-
+//check
 import Inventory.Inventory;
 import Trade.TradeManager;
+import User.AdminActivityManager;
+import User.ClientUser;
 import User.ItemApprovalManager;
 import User.UserManager;
 
@@ -27,18 +29,20 @@ public class Login {
     public TradeManager tm;
 
     public Inventory iv;
-
+    public UIcontoller uc;
     public ItemApprovalManager iam;
-
+    public AdminActivityManager aam;
     /**
      * [constructor]
      */
-    public Login(UserManager um, TradeManager tm, Inventory iv, ItemApprovalManager iam){
+    public Login(UserManager um, TradeManager tm, Inventory iv, ItemApprovalManager iam, AdminActivityManager aam,UIcontoller uc){
         sc = new Scanner(System.in);
         a = um;
         this.tm = tm;
         this.iv = iv;
         this.iam = iam;
+        this.aam=aam;
+        this.uc=uc;
     }
 
     /**
@@ -47,46 +51,28 @@ public class Login {
     public void run() throws IOException {
         int input=0;
         while (input==0) {
-            String username;
-            String password;
-            System.out.println("Please enter your account username!");
-            System.out.print(">");
-            username = sc.nextLine();
-            System.out.println("Please enter your password!");System.out.print(">");
-            password = sc.nextLine();
-
+            String username = uc.getString("Please enter your account username!");
+            String password = uc.getString("Please enter your password!");
             if (a.verifyUser(username, password)) {
                 while (true) {
+                    ClientUser user=a.getUser(username);
                     System.out.println("------------------------------------------------------------");
-                    System.out.println("Hello," + username);
-                    System.out.println(username);
-                    //(a.getAdmin(a.getUser("admin"))).incompleteTransaction(a.getUser(username));
-                    //(a.getAdmin(a.getUser("admin"))).tradeLimit(a.getUser(username));
-                    if(a.getUser(username).readDiff()>=a.getDiff(a.getUser(username))){
-                        //(a.getAdmin(a.getUser("admin"))).freeze(a.getUser(username));
-                    }
-                    System.out.println("Freeze Status: " + a.getIsFrozen(a.getUser(username)));
-                    System.out.println("Trade limit: " + tm.getTradeNumber(a.getUser(username)) + "/"
-                            + a.getWeekTransactionLimit(a.getUser(username)));
-                    System.out.println("Incomplete trade limit: " + (tm.getIncomplete(a.getUser(username)).size()
-                            + "/" + a.getIncompleteTransactionLimit(a.getUser(username))));
-                    System.out.println("Difference between borrow and lend:"+a.getUser(username).readDiff()+"/"+a.getDiff(a.getUser(username)));
-                    System.out.println("**************************************************************");
+                    uc.UserDisplayStatus(user);
                     System.out.println("Actions:\n1.Edit information\n2.Trade\n3.Inventory\n4.Market\n0.quit to menu");
                     System.out.print(">");
-                    int op = sc.nextInt();
-                    sc.nextLine();
+
+                    int op = uc.getNumber("Please enter a number");
                     if (op == 1) {
-                        EditInfo ei = new EditInfo(a.getUser(username), a, iv, iam);
+                        EditInfo ei = new EditInfo(user, a, iv, iam,aam,uc);
                         ei.run();
                     } else if (op == 2) {
-                        UserTrade ut = new UserTrade(a.getUser(username), a, tm);
+                        UserTrade ut = new UserTrade(user, a, tm,uc);
                         ut.run();
                     } else if (op == 3) {
-                        UserInventory ui=new UserInventory(a.getUser(username), a, tm, iv, iam);
+                        UserInventory ui=new UserInventory(user, a, tm, iv, iam,uc);
                         ui.run();
                     } else if (op == 4) {
-                        Market m=new Market(a.getUser(username), iv,a);
+                        Market m=new Market(user, iv,a,uc);
                         m.run();
                     } else if (op == 0) {
                         input=1;
@@ -96,10 +82,8 @@ public class Login {
                     }
                 }
             } else {
-                System.out.println("You have incorrect username or password, please try to login again, " +
+                input = uc.getNumber("You have incorrect username or password, please try to login again, " +
                         "enter 0 to continue,any other number to quit ot menu.");
-                input = sc.nextInt();
-                sc.nextLine();
             }
         }
     }

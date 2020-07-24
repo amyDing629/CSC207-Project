@@ -23,8 +23,8 @@ public class AdminActivityManager {
      * @param a the user that the administrative user wants to set frozen
      * set the user.ClientUser a account frozen
      */
-    public void freeze(ClientUser a) {
-        a.setFrozen(true);
+    public void setFreeze(ClientUser a,boolean s) {
+        a.setFrozen(s);
     }
 
     /**
@@ -32,10 +32,12 @@ public class AdminActivityManager {
      * @param password the password of the administrative user that wants to add
      * the initial administrative user can add the new administrative user
      */
-    public void addNewAdmin(String username, String password) {
+    public void addNewAdmin(ClientUser user,String username, String password) {
         List<ClientUser> userList = um.getUserList();
-        ClientUser admin = new ClientUser(username, password, true);
-        userList.add(admin);
+        if(user.getUsername().equals("admin")) {
+            ClientUser admin = new ClientUser(username, password, true);
+            userList.add(admin);
+        }
     }
 
     /**
@@ -109,5 +111,41 @@ public class AdminActivityManager {
             }
         }
     }
+
+    /**
+     * @param a the user that the administrative user wants to check the incomplete transaction limit
+     * set the account of user a frozen if a has exceeded the incomplete transaction limit
+     */
+    public boolean incompleteTransaction(ClientUser a){
+        if(!a.getIsFrozen()){
+            a.setFrozen(tm.getIncompleteTransaction(a) > a.getIncompleteTransactionLimit());
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * @param a the user that the administrative user wants to check the transaction limit
+     * set the user.ClientUser a account frozen a has exceeded the week transaction limit
+     */
+    public boolean tradeLimit(ClientUser a){
+        if(!a.getIsFrozen()){
+            a.setFrozen(tm.getTradeNumber(a) > a.getWeekTransactionLimit());
+            return true;
+        }
+        return false;
+    }
+    public void setDiff(ClientUser user,int diff) {
+        user.setDiff(diff);
+    }
+
+    public void setWeekTransactionLimit(ClientUser user,int weekTransaction){
+        user.setWeekTransactionLimit(weekTransaction);
+    }
+    public void setIncompleteTransaction(ClientUser user,int incompleteTransaction) {
+       user.setIncompleteTransaction(incompleteTransaction);
+    }
+
+
 
 }

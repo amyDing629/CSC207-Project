@@ -86,6 +86,10 @@ public class UserManager {
         }
         return false;
     }
+    public int readDiff(ClientUser user){
+
+        return user.getLendCounter()- user.getBorrowCounter();
+    }
 
     /**
      * @param tm the object that edits the Item list of input gateway

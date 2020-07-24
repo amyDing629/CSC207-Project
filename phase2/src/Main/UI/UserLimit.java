@@ -1,5 +1,6 @@
 package Main.UI;
 
+import User.AdminActivityManager;
 import User.ClientUser;
 import User.ItemApprovalManager;
 import User.UserManager;
@@ -9,54 +10,48 @@ import java.util.Scanner;
 public class UserLimit {
 
     ClientUser user;
-    Scanner sc;
     UserManager um;
     ItemApprovalManager iam;
-    public UserLimit(ClientUser user,UserManager um, ItemApprovalManager iam){
+    UIcontoller uc;
+    AdminActivityManager aam;
+    public UserLimit(ClientUser user, UserManager um, ItemApprovalManager iam, UIcontoller uc, AdminActivityManager aam){
         this.user=user;
-        sc=new Scanner(System.in);
         this.um=um;
         this.iam = iam;
+        this.uc=uc;
+        this.aam=aam;
     }
     public void run(){
         System.out.println("Change user's limit");
         System.out.println("Menu\n1.Change trade limit\n2.Change Incomplete Transaction limit\n" +
                 "3.Change the difference between borrowed and lend");
-        int input30 = sc.nextInt();
-        sc.nextLine();
+        int input30 = uc.getNumber("Enter a number!");
         if (input30 == 1) {
-            System.out.println("Which user do you want to change?");
-            String input31 = sc.nextLine();
+            String input31 = uc.getString("Which user do you want to change?");
             if (input31.equals("-1")||um.getUser(input31) == null) {
                 if(um.getUser(input31) == null){
                     System.out.println("You entered wrong username");
                 }
             }else {
                 ClientUser b = um.getUser(input31);
-                System.out.println("Enter a number to change");
-                int input33 = sc.nextInt();
-                sc.nextLine();
-                b.setWeekTransactionLimit(input33);
+                int input33 = uc.getNumber("Enter a number to change");
+                aam.setWeekTransactionLimit(b,input33);
             }
         }
         else if(input30==2){
-            System.out.println("Which user do you want to change?enter -1 to break");
-            String input31=sc.nextLine();
+            String input31=uc.getString("Which user do you want to change?enter -1 to break");
             if (input31.equals("-1")||um.getUser(input31) == null) {
                 if (um.getUser(input31) == null) {
                     System.out.println("You entered wrong username");
                 }
             }else {
                 ClientUser b = um.getUser(input31);
-                System.out.println("Enter a number to change");
-                int input33 = sc.nextInt();
-                sc.nextLine();
-                b.setIncompleteTransaction(input33);
+                int input33 = uc.getNumber("Enter a number to change");
+               aam.setIncompleteTransaction(b,input33);
             }
         }
         else if(input30==3){
-            System.out.println("Which user do you want to change? enter -1 to break");
-            String input31=sc.nextLine();
+            String input31=uc.getString("Which user do you want to change? enter -1 to break");
             if (input31.equals("-1")||um.getUser(input31) == null) {
                 if (um.getUser(input31) == null) {
                     System.out.println("You entered wrong username");
@@ -64,9 +59,8 @@ public class UserLimit {
             }else {
                 ClientUser b = um.getUser(input31);
                 System.out.println("Enter a number to change");
-                int input33 = sc.nextInt();
-                sc.nextLine();
-                b.setDiff(input33);
+                int input33 = uc.getNumber("Enter a number to change");
+                aam.setDiff(b,input33);
             }
         }
     }

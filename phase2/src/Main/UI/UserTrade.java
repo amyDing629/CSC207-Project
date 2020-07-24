@@ -30,25 +30,27 @@ public class UserTrade {
      * user in user system
      */
     public ClientUser user;
-
+    UIcontoller uc;
 
     /**
      * [constructor]
      * @param u  the input user
+     * @param uc
 
      */
-    public UserTrade(ClientUser u, UserManager um, TradeManager tm) {
+    public UserTrade(ClientUser u, UserManager um, TradeManager tm, UIcontoller uc) {
         user = u;
         sc = new Scanner(System.in);
         this.um = um;
         this.tm = tm;
+        this.uc=uc;
     }
 
     /**
      * run the system
      */
     public void run(){
-        Scanner sc = new Scanner(System.in);
+        uc.UserDisplayStatus(user);
         int escape = 0;
         while (escape == 0) {
             List<Trade> iL = tm.getIncomplete(user);
@@ -56,17 +58,14 @@ public class UserTrade {
             System.out.println("--------------------\nTrade");
             System.out.println("Hello,user "+ um.getUsername(user));
             System.out.println("Menu:\n1.confirm trades\n2.complete trade\n3.Trade History\n0.quit");
-            int input1 = sc.nextInt();
-            sc.nextLine();
+            int input1 =uc.getNumber("Please enter a number");
             switch (input1) {
                 case 1:
                     for (int i = 0; i < iU.size(); i++) {
                         System.out.println(i + ". " + iU.get(i).toString());
                     }
-                    System.out.println("Which trade do you want to confirm? select the number before trade id or " +
-                            "enter any integers else to exit");
-                    int input2 = sc.nextInt();
-                    sc.nextLine();
+                    int input2 = uc.getNumber("Which trade do you want to confirm? select the number before trade id or " +
+                            "enter any integers else to exit");;
                     if ((input2 < iU.size()) && (input2 >= 0)) {
                         TradeUI tu = new TradeUI(user, iU.get(input2).getId(), tm, um);
                         tu.run();
@@ -76,10 +75,8 @@ public class UserTrade {
                     for (int i = 0; i < iL.size(); i++) {
                         System.out.println((i + 1) + ". " + iL.get(i).toString());
                     }
-                    System.out.println("Which trade do you want to complete? select the number before trade id " +
+                    int input3 =  uc.getNumber("Which trade do you want to complete? select the number before trade id " +
                             "or enter any integers else to exit ");
-                    int input3 = sc.nextInt();
-                    sc.nextLine();
                     if ((input3 < (iL.size() + 1)) && (input3 > 0)) {
                         TradeUI tu = new TradeUI(user, iL.get(input3 - 1).getId(), tm, um);
                         tu.run();
