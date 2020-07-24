@@ -178,8 +178,6 @@ public class UserManager {
         userList.add(new ClientUser(name, password, isAdmin));
     }
 
-    public int readDiff(ClientUser a){return a.readDiff();}
-
 
 
 }

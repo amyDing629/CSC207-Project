@@ -152,7 +152,7 @@ public class RTradeGUI {
 
         }
 
-
+/*
     private void getItem(){
         JFrame frame = new JFrame("Select Second Item for two way Trade");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -211,4 +211,6 @@ public class RTradeGUI {
             }
         });
     }
+
+ */
 }
