@@ -26,6 +26,8 @@ public class ClientUserController {
         this.tm = tm;
     }
 
+    public boolean getIsAdmin(){return user.getIsAdmin();}
+
     public boolean checkItemExist(String item, Inventory iv){
         for (Item n : iv.getLendingList()) {
             if (n.getName().equals(item)) {

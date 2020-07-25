@@ -17,7 +17,6 @@ public class AdminController extends ClientUserController{
         return am;
     }
 
-    public boolean getIsAdmin(){return user.getIsAdmin();}
 
     public void checkFrozen(ClientUser user){
         if(um.readDiff(user)>=um.getDiff(user)){
