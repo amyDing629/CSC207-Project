@@ -53,113 +53,57 @@ public class UserDataAccess {
      */
     public void splitUser(ArrayList<ArrayList<String>> a, TradeManager tm, UserManager um) {
         for (ArrayList<String> b : a) {
-            if (b.get(3).equals("true")) {
-                String[] c = b.get(6).split("; ");
-                ArrayList<String> lineList = new ArrayList<>(Arrays.asList(c));
-                AdministrativeUser d = new AdministrativeUser(b.get(1), b.get(2), true, tm,
-                        um);
+            String[] c = b.get(6).split("; ");
+            ArrayList<String> lineList = new ArrayList<>(Arrays.asList(c));
 
-                d.setId(UUID.fromString(b.get(0)));
-                d.setNotification(lineList);
+            ClientUser d = new ClientUser(b.get(1), b.get(2), Boolean.parseBoolean(b.get(3)));
+            d.setId(UUID.fromString(b.get(0)));
+            d.setNotification(lineList);
 
-                UUID uid = UUID.fromString(b.get(0));
-                d.setId(uid);
 
-                d.setFrozen(b.get(4).equals("true"));
+            UUID uid = UUID.fromString(b.get(0));
+            d.setId(uid);
 
-                d.setBorrow(b.get(5).equals("true"));
+            d.setFrozen(b.get(4).equals("true"));
 
-                ArrayList<String> lineList2 = new ArrayList<>();
-                if (!b.get(7).equals("")) {
-                    String[] f = b.get(7).split("; ");
-                    lineList2.addAll(Arrays.asList(f));
-                    d.setWishLend(lineList2);
-                }
+            d.setBorrow(b.get(5).equals("true"));
+
+            ArrayList<String> lineList2 = new ArrayList<>();
+            if (!b.get(7).equals("")) {
+                String[] f = b.get(7).split("; ");
+                lineList2.addAll(Arrays.asList(f));
                 d.setWishLend(lineList2);
-
-                ArrayList<String> lineList3 = new ArrayList<>();
-                if (!b.get(7).equals("")) {
-                    String[] g = b.get(8).split("; ");
-                    lineList3.addAll(Arrays.asList(g));
-                    d.setWishBorrow(lineList3);
-                }
-                d.setWishBorrow(lineList3);
-
-                ArrayList<String> lineList4 = new ArrayList<>();
-                if (!b.get(9).equals("")) {
-                    String[] h = b.get(9).split("; ");
-                    lineList4.addAll(Arrays.asList(h));
-                }
-                ArrayList<UUID> lineList5 = new ArrayList<>();
-
-                for (String p : lineList4) {
-                    lineList5.add(UUID.fromString(p));
-                }
-
-                d.setTradeHistory(lineList5);
-                d.setWeekTransactionLimit(Integer.parseInt(b.get(10)));
-                d.setIncompleteTransaction(Integer.parseInt(b.get(11)));
-                d.setLendCounter(Integer.parseInt(b.get(12)));
-                d.setBorrowCounter(Integer.parseInt(b.get(13)));
-
-                um.getUserList().add(d);
             }
-            if (b.get(3).equals("false")) {
-                String[] c = b.get(6).split("; ");
-                ArrayList<String> lineList = new ArrayList<>(Arrays.asList(c));
+            d.setWishLend(lineList2);
 
-                ClientUser d = new ClientUser(b.get(1), b.get(2), false);
-                d.setId(UUID.fromString(b.get(0)));
-                d.setNotification(lineList);
-
-
-                UUID uid = UUID.fromString(b.get(0));
-                d.setId(uid);
-
-                d.setFrozen(b.get(4).equals("true"));
-
-                d.setBorrow(b.get(5).equals("true"));
-
-                ArrayList<String> lineList2 = new ArrayList<>();
-                if (!b.get(7).equals("")) {
-                    String[] f = b.get(7).split("; ");
-                    lineList2.addAll(Arrays.asList(f));
-                    d.setWishLend(lineList2);
-                }
-                d.setWishLend(lineList2);
-
-                ArrayList<String> lineList3 = new ArrayList<>();
-                if (!b.get(7).equals("")) {
-                    String[] g = b.get(8).split("; ");
-                    lineList3.addAll(Arrays.asList(g));
-                    d.setWishBorrow(lineList3);
-                }
+            ArrayList<String> lineList3 = new ArrayList<>();
+            if (!b.get(7).equals("")) {
+                String[] g = b.get(8).split("; ");
+                lineList3.addAll(Arrays.asList(g));
                 d.setWishBorrow(lineList3);
-
-                ArrayList<String> lineList4 = new ArrayList<>();
-                if (!b.get(9).equals("")) {
-                    String[] h = b.get(9).split("; ");
-                    lineList4.addAll(Arrays.asList(h));
-                }
-                ArrayList<UUID> lineList5 = new ArrayList<>();
-
-                for (String p : lineList4) {
-                    lineList5.add(UUID.fromString(p));
-                }
-
-                d.setTradeHistory(lineList5);
-                d.setWeekTransactionLimit(Integer.parseInt(b.get(10)));
-                d.setIncompleteTransaction(Integer.parseInt(b.get(11)));
-                d.setLendCounter(Integer.parseInt(b.get(12)));
-                d.setBorrowCounter(Integer.parseInt(b.get(13)));
-
-                um.getUserList().add(d);
             }
+            d.setWishBorrow(lineList3);
+
+            ArrayList<String> lineList4 = new ArrayList<>();
+            if (!b.get(9).equals("")) {
+                String[] h = b.get(9).split("; ");
+                lineList4.addAll(Arrays.asList(h));
+            }
+            ArrayList<UUID> lineList5 = new ArrayList<>();
+
+            for (String p : lineList4) {
+                lineList5.add(UUID.fromString(p));
+            }
+
+            d.setTradeHistory(lineList5);
+            d.setWeekTransactionLimit(Integer.parseInt(b.get(10)));
+            d.setIncompleteTransaction(Integer.parseInt(b.get(11)));
+            d.setLendCounter(Integer.parseInt(b.get(12)));
+            d.setBorrowCounter(Integer.parseInt(b.get(13)));
+
+            um.getUserList().add(d);
+
         }
-    }
-
-    public void addToUsers(ClientUser u){
-        um.getUserList().add(u);
     }
 
 
@@ -223,3 +167,4 @@ public class UserDataAccess {
         }
     }
 }
+

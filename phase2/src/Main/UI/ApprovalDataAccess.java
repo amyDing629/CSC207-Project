@@ -1,4 +1,6 @@
 package Main.UI;
+import User.ClientUser;
+import User.ClientUserController;
 import User.ItemApprovalManager;
 
 import java.io.*;
@@ -12,7 +14,6 @@ import java.util.Arrays;
  */
 public class ApprovalDataAccess {
     private final ItemApprovalManager iam;
-
 
     /**
      * [constructor]

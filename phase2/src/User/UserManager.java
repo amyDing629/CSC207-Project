@@ -14,7 +14,7 @@ public class UserManager {
     /**
      * the list of users
      */
-    static ArrayList<ClientUser> userList  = new ArrayList<>();
+    ArrayList<ClientUser> userList  = new ArrayList<>();
 
 
     /**
@@ -52,18 +52,6 @@ public class UserManager {
                 return u;
         }
         return null;
-    }
-
-    /**
-     * @param userId The ID of the administrative user.
-     * get the administrative user by the user ID
-     */
-    public ClientUser getAdmin(UUID userId){
-        for(ClientUser u : userList) {
-            if(u.getId().equals(userId) && u.getIsAdmin()) {
-                return u;
-            }
-        } return null;
     }
 
 

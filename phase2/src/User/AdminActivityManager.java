@@ -2,6 +2,7 @@ package User;
 
 import Trade.TradeManager;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -11,8 +12,8 @@ import java.util.UUID;
  */
 
 public class AdminActivityManager {
-    private TradeManager tm;
-    private UserManager um;
+    private final TradeManager tm;
+    private final UserManager um;
 
     public AdminActivityManager(TradeManager tm, UserManager um) {
         this.tm = tm;
@@ -144,6 +145,19 @@ public class AdminActivityManager {
     }
     public void setIncompleteTransaction(ClientUser user,int incompleteTransaction) {
        user.setIncompleteTransaction(incompleteTransaction);
+    }
+
+
+    /**
+     * @param userId The ID of the administrative user.
+     * get the administrative user by the user ID
+     */
+    public ClientUser getAdmin(UUID userId){
+        for(ClientUser u : um.userList) {
+            if(u.getId().equals(userId) && u.getIsAdmin()) {
+                return u;
+            }
+        } return null;
     }
 
 
