@@ -58,10 +58,6 @@ public class ClientUserGUI {
         inventoryButton.setPreferredSize(new Dimension(300, 30));
         panel.add(inventoryButton);
 
-        JButton marketButton = new JButton("Market");
-        marketButton.setPreferredSize(new Dimension(300, 30));
-        panel.add(marketButton);
-
         JButton exitButton = new JButton("quit to menu");
         exitButton.setPreferredSize(new Dimension(300, 30));
         panel.add(exitButton);

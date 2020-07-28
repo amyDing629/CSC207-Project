@@ -35,15 +35,15 @@ public class editInfoGUI {
         panel.add(isAdmin);
 
         JLabel action = new JLabel("Actions: ");
-        action.setPreferredSize(new Dimension(300, 30));
+        action.setPreferredSize(new Dimension(100, 30));
         panel.add(action);
 
         JButton changePass = new JButton("Change Password");
-        changePass.setPreferredSize(new Dimension(300, 30));
+        changePass.setPreferredSize(new Dimension(100, 30));
         panel.add(changePass);
 
         JButton freezeSystem = new JButton("ClientUser Freeze System");
-        freezeSystem.setPreferredSize(new Dimension(300, 30));
+        freezeSystem.setPreferredSize(new Dimension(100, 30));
         panel.add(freezeSystem);
 
         JButton exit = new JButton("exit");

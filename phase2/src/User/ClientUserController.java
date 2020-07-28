@@ -4,7 +4,6 @@ import Inventory.Inventory;
 import Inventory.Item;
 import Trade.TradeManager;
 
-import java.io.File;
 import java.util.UUID;
 
 public class ClientUserController {

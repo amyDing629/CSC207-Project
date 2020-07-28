@@ -3,6 +3,7 @@ package User;
 import Trade.Trade;
 import Trade.TradeManager;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 /**
@@ -14,7 +15,7 @@ public class UserManager {
     /**
      * the list of users
      */
-    ArrayList<ClientUser> userList  = new ArrayList<>();
+    static ArrayList<ClientUser> userList  = new ArrayList<>();
 
 
     /**
@@ -164,6 +165,10 @@ public class UserManager {
     //finished
     public void createClientUser(String name, String password, boolean isAdmin){
         userList.add(new ClientUser(name, password, isAdmin));
+    }
+    
+    public void setStatus(ClientUser a, LocalDateTime start, LocalDateTime end){
+        a.setStatus(start, end);
     }
 
 

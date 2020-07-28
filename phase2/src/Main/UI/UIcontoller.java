@@ -42,7 +42,7 @@ public class UIcontoller {
 
     public void checkFileEmpty(File file){
         if (file.length() == 0) {
-            AdministrativeUser b = new AdministrativeUser("admin", "123", true, tm, um);
+            ClientUser b = new ClientUser("admin", "123", true);
             um.addUser(b);
             new UserDataAccess(um).updateFile();
         }
@@ -63,6 +63,7 @@ public class UIcontoller {
             e.printStackTrace();
         }
     }
+
     public int getNumber(String words){
         Scanner sc=new Scanner(System.in);
         System.out.println(words);
@@ -84,14 +85,14 @@ public class UIcontoller {
         b.add(d);
         iam.getUserApproval().add(b);
     }
-    public boolean checkItemExist(String item){
-        for (Item n : iv.getLendingList()) {
-            if (n.getName().equals(item)) {
-                return true;
-            }
-        }
-        return false;
-    }
+//    public boolean checkItemExist(String item){
+//        for (Item n : iv.getLendingList()) {
+//            if (n.getName().equals(item)) {
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
     public void UserDisplayStatus(ClientUser user){
         System.out.println("Hello," + user.getUsername());
         System.out.println("Admin:"+um.getIsAdmin(user));

@@ -59,7 +59,7 @@ public class ClientUser {
      */
     private int lendCounter;
     private int borrowCounter;
-
+    private boolean isLeft;
 
 
     /**
@@ -78,8 +78,17 @@ public class ClientUser {
         this.wishBorrow= new ArrayList<>();
         this.tradeHistory=new ArrayList<>();
         this.isAdmin = isAdmin;
+        isLeft = false;
         id = UUID.randomUUID();
     }
+
+    public void setStatus(LocalDateTime start, LocalDateTime end){
+        LocalDateTime now = LocalDateTime.now();
+        if(now.isAfter(start) && now.isBefore(end)){
+            isLeft = true;
+        }
+    }
+
 
     /**
      * @param borrowCounter the input integer

@@ -3,6 +3,7 @@ package Main.UI;
 import Inventory.Inventory;
 import Inventory.Item;
 import User.ClientUser;
+import User.ClientUserController;
 import User.ItemApprovalManager;
 import User.UserManager;
 
@@ -13,14 +14,13 @@ public class AddNewItem {
     ClientUser user;
     Scanner sc;
     UserManager um;
-    ItemApprovalManager iam;
     Inventory iv;
     UIcontoller uc;
+    ClientUserController cuc;
     public AddNewItem(ClientUser user,UserManager um, Inventory iv, ItemApprovalManager iam){
         this.user=user;
         sc=new Scanner(System.in);
         this.um=um;
-        this.iam = iam;
         this.iv=iv;
     }
 
@@ -34,7 +34,8 @@ public class AddNewItem {
             while (exit1 == 0) {
                 System.out.println("Type the name of the item");
                 name = sc.nextLine();
-                boolean t = uc.checkItemExist(name);
+                // cuc 1
+                boolean t = cuc.checkItemExist(name, iv);
                 if (t) {
                     System.out.println("The item already exists, please enter the name again");
                 } else {
@@ -49,10 +50,11 @@ public class AddNewItem {
 
             System.out.println("Added successfully!");
         }
+        // delete iam, put into clientUser controller
         else if(inputA.equals("2")){
             int x=0;
             while(x==0) {
-                ArrayList<ArrayList<String>> hii=iam.getItemApproval();
+                ArrayList<ArrayList<String>> hii=cuc.getIam().getItemApproval();
                 for (int i=0;i<hii.size();i++) {
                     System.out.println("Item " + i + ": " + hii.get(i).get(1));
                     System.out.println("Description: " + hii.get(i).get(2));
@@ -69,7 +71,7 @@ public class AddNewItem {
                     i.setDescription(hii.get(k).get(2));
                     um.getUser(hii.get(k).get(3)).addWishes(hii.get(k).get(1));
                     iv.addItem(i);
-                    iam.getItemApproval().remove(k);
+                    cuc.getIam().getItemApproval().remove(k);
                     System.out.println("Approve successfully");
                 }else if(k==-1){
                     x=1;
