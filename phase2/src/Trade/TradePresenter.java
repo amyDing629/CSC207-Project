@@ -106,4 +106,6 @@ public class TradePresenter {
         System.out.println("Suggested items: " + sItemList);
 
     }
+
+
 }

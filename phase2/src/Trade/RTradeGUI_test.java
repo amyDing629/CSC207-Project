@@ -6,6 +6,7 @@ import User.ClientUser;
 import User.UserManager;
 
 import java.io.IOException;
+import java.util.regex.Pattern;
 
 public class RTradeGUI_test {
     public static void main(String[] args) throws IOException {
@@ -15,6 +16,7 @@ public class RTradeGUI_test {
         Item pear = new Item("pear", "daniel");
         amy.addWishBorrow("pear");
         daniel.addWishes("pear");
+        daniel.addWishBorrow("apple");
         Inventory iv = new Inventory();
         iv.addItem(apple);
         iv.addItem(pear);
@@ -22,9 +24,11 @@ public class RTradeGUI_test {
         TradeManager tm = new TradeManager();
         um.addUser(daniel);
         um.addUser(amy);
-        RTradeGUI rtg = new RTradeGUI(daniel, apple, tm, um, iv );
+        SelectItemToTradeGUI rtg = new SelectItemToTradeGUI(daniel, tm, um, iv );
         rtg.run();
-        System.out.println(tm.getTradeList());
-        System.out.println(tm.getUnconfirmed(amy));
+        AcceptTradeGUI atg = new AcceptTradeGUI(amy, tm, um);
+        atg.run();
+
+
     }
 }

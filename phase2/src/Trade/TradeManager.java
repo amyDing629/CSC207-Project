@@ -84,6 +84,10 @@ public class TradeManager {
         return null;
     }
 
+    public void setStatus(Trade trade, TradeStatus status){
+        trade.setStatus(status);
+    }
+
     /**
      * check the status of the current trade
      * @param currTrade the current trade
@@ -188,7 +192,7 @@ public class TradeManager {
     public List<Trade> getUnconfirmed(ClientUser user) {
         List<Trade> trade=new ArrayList<>();
         for(Trade t: getAllTrade(user)){
-            if(t.getStatus().equals(TradeStatus.unconfirmed)){
+            if(t.getStatus().equals(TradeStatus.unconfirmed) && t.getCreator()!=user.getId()){
                 trade.add(t);
             }
         }

@@ -29,8 +29,9 @@ public class InvGUI {
         JLabel ail = new JLabel("MESSAGE   ");
         JTextArea jtz = new JTextArea();
         jtz.setText(ip.printAvailable());
+        JScrollPane sp = new JScrollPane(jtz);
         panelNorth.add(ail);
-        panelNorth.add(jtz);
+        panelNorth.add(sp);
         //JLabel label = new JLabel("choose an item from the following items: \n"+ip.printAvailable());
         //panel
         JPanel panel = new JPanel();

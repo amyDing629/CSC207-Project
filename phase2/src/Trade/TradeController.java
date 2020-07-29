@@ -8,6 +8,7 @@ import User.*;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -174,6 +175,16 @@ public class TradeController {
         }
         return result;
     }
+
+    String printUnConfirmed(){
+        String result = "";
+        List<Trade> iU = tm.getUnconfirmed(currUser);
+        for (int i = 0; i < iU.size(); i++) {
+            result = result + i + ". " + iU.get(i).toString() + "\n";
+        }
+        return result;
+    }
+
 
 
 
