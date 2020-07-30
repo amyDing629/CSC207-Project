@@ -18,16 +18,18 @@ public class RTradeGUI_test {
         daniel.addWishes("pear");
         daniel.addWishBorrow("apple");
         Inventory iv = new Inventory();
-        iv.addItem(apple);
-        iv.addItem(pear);
         UserManager um = new UserManager();
         TradeManager tm = new TradeManager();
+        iv.addItem(apple);
+        iv.addItem(pear);
         um.addUser(daniel);
         um.addUser(amy);
-        SelectItemToTradeGUI rtg = new SelectItemToTradeGUI(daniel, tm, um, iv );
-        rtg.run();
-        AcceptTradeGUI atg = new AcceptTradeGUI(amy, tm, um);
-        atg.run();
+
+        TradeGUI_Main trmD = new TradeGUI_Main(daniel, tm, um, iv);
+        trmD.run();
+        TradeGUI_Main trmA = new TradeGUI_Main(amy, tm, um, iv);
+        trmA.run();
+
 
 
     }

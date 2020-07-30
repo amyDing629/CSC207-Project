@@ -12,10 +12,12 @@ public class AcceptTradeGUI {
     Trade currTrade;
     ClientUser currUser;
     AcceptTradeController atc;
+    Frame tf;
 
-    public AcceptTradeGUI(ClientUser currUser, TradeManager tm, UserManager um){
+    public AcceptTradeGUI(ClientUser currUser, TradeManager tm, UserManager um, Frame tf){
         this.currUser = currUser;
         atc = new AcceptTradeController(currUser, tm, um);
+        this.tf = tf;
     }
 
     public void run(){
@@ -125,6 +127,7 @@ public class AcceptTradeGUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
+                tf.setVisible(true);
             }
         });
 

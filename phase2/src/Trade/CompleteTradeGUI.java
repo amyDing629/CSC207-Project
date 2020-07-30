@@ -1,7 +1,5 @@
 package Trade;
 
-import Inventory.Inventory;
-import Inventory.Item;
 import User.ClientUser;
 import User.UserManager;
 
@@ -10,110 +8,108 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class SelectItemToTradeGUI {
+public class CompleteTradeGUI {
+    Trade currTrade;
     ClientUser currUser;
-    SelectController sc;
-    Item currItem;
-    TradeManager tm;
-    UserManager um;
-    Inventory iv;
+    CTradeController ctc;
     Frame tf;
 
-    public SelectItemToTradeGUI(ClientUser currUser, TradeManager tm, UserManager um, Inventory iv, Frame tFrame){
+    public CompleteTradeGUI(ClientUser currUser, TradeManager tm, UserManager um, Frame tf) {
         this.currUser = currUser;
-        sc = new SelectController(currUser, um, iv);
-        this.tm = tm;
-        this.um = um;
-        this.iv = iv;
-        tf = tFrame;
-
+        ctc = new CTradeController(currUser, tm, um);
+        this.tf = tf;
     }
 
-    public void run(){
-        JFrame frame = new JFrame("Select Item to Trade Session");
+    public void run() {
+        JFrame frame = new JFrame("Complete Trade Session");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setSize(600, 200);
+        frame.setSize(800, 400);
 
         JPanel panelW = new JPanel();
         JPanel panelC = new JPanel();
         JPanel panelN = new JPanel();
         JPanel panelE = new JPanel();
         JPanel panelS = new JPanel();
-
         frame.getContentPane().add(BorderLayout.EAST, panelE);
         frame.getContentPane().add(BorderLayout.WEST, panelW);
         frame.getContentPane().add(BorderLayout.CENTER, panelC);
         frame.getContentPane().add(BorderLayout.SOUTH, panelS);
         frame.getContentPane().add(BorderLayout.NORTH, panelN);
 
-        panelW.setPreferredSize(new Dimension(200,370));
+        panelW.setPreferredSize(new Dimension(380, 370));
 
         JLabel msg = new JLabel("message:", SwingConstants.LEFT);
         JTextArea msgArea = new JTextArea();
         panelN.add(msg);
         panelN.add(msgArea);
 
-        JLabel wishList = new JLabel("Wish List to Borrow");
-        JTextArea wishArea = new JTextArea();
-        wishArea.setText(sc.getWishList());
-        JScrollPane jsp= new JScrollPane(wishArea);
+        JLabel tradeList = new JLabel("Available Trades");
+        JTextArea tradeArea = new JTextArea();
+        tradeArea.setText(ctc.printIncomplete());
+        JScrollPane jsp = new JScrollPane(tradeArea);
         panelW.setLayout(new BoxLayout(panelW, BoxLayout.Y_AXIS));
-        panelW.add(wishList);
+        panelW.add(tradeList);
         panelW.add(jsp);
 
-        JLabel currTradeL = new JLabel("item selected");
+        JLabel currTradeL = new JLabel("Trade selected");
         JTextArea currArea = new JTextArea();
         panelC.setLayout(new BoxLayout(panelC, BoxLayout.Y_AXIS));
         panelC.add(currTradeL);
         panelC.add(currArea);
-        currArea.setText("no item selected");
+        currArea.setText("no trade selected");
 
-        JButton request = new JButton("request trade");
-        panelE.add(request);
+        JButton action = new JButton("action");
+        panelE.setLayout(new BoxLayout(panelE, BoxLayout.Y_AXIS));
+        panelE.add(action);
 
-        JLabel input = new JLabel("input item name");
-        JTextArea inputArea = new JTextArea("item name");
+        JLabel input = new JLabel("input trade number");
+        JTextArea inputArea = new JTextArea("trade number");
         JButton submit = new JButton("submit");
         JButton back = new JButton("return to trade menu");
+        JButton update = new JButton("update");
         panelS.add(input);
         panelS.add(inputArea);
         panelS.add(submit);
         panelS.add(back);
+        panelS.add(update);
 
         frame.setVisible(true);
 
         submit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String itemName = inputArea.getText();
-                inputArea.setText("item name");
-                if (!sc.checkInput(itemName)){
-                    msgArea.setText("wrong input");
-                }else{
-                    currItem = sc.getItem(itemName);
-                    currArea.setText(sc.getItemInfo(itemName));
-                    msgArea.setText("current item has been updated");
+                String tradeNum = inputArea.getText();
+                inputArea.setText("trade number");
+                if (!ctc.checkInput(tradeNum)) {
+                    msg.setText("wrong input");
+                } else {
+                    currTrade = ctc.getCurrTrade(tradeNum);
+                    currArea.setText(currTrade.toString());
+                    msgArea.setText("Current trade has been updated");
                 }
-
             }
         });
 
-        request.addActionListener(new ActionListener() {
+        action.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                RTradeGUI rtg = new RTradeGUI(currUser, currItem, tm, um, iv);
-                rtg.run();
             }
         });
 
         back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                tf.setVisible(true);
                 frame.setVisible(false);
+                tf.setVisible(true);
             }
         });
+
+        update.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                tradeArea.setText(ctc.printIncomplete());
+            }
+        });
+
     }
-
-
 }
