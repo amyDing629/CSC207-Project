@@ -1,5 +1,6 @@
 package Inventory;
 import User.ClientUser;
+import User.UserManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -7,13 +8,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
-public class InvGUI {
+public class WishBorrowAddGUI {
     InventoryController ic;
     InventoryPresenter ip;
     Item currItem;
+    Frame itf;
 
-    public InvGUI(ClientUser currUser, Inventory iv) {
-        ic = new InventoryController(currUser, iv);
+    public WishBorrowAddGUI(ClientUser currUser, Inventory iv, UserManager um, Frame itf) {
+        ic = new InventoryController(currUser, iv, um);
         ip = new InventoryPresenter(currUser, iv);
 
     }
@@ -38,9 +40,11 @@ public class InvGUI {
         JTextArea ta = new JTextArea("type item name here");
         JButton send = new JButton("Send");
         JButton awl = new JButton("add to wish list");
+        JButton back  = new JButton("return");
         panel.add(ta);
         panel.add(send);
         panel.add(awl);
+        panel.add(back);
         //itemPanel
         JPanel itemPanel = new JPanel();
         JButton seeInventory = new JButton("see available item list");
@@ -90,6 +94,14 @@ public class InvGUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 jtz.setText(ip.printAvailable());
+            }
+        });
+
+        back.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                itf.setVisible(true);
             }
         });
 

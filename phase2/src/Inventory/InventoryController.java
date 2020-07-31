@@ -1,5 +1,9 @@
 package Inventory;
 import User.ClientUser;
+import User.UserManager;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * [controller]
@@ -15,13 +19,16 @@ public class InventoryController {
      */
     private final ClientUser currUser;
 
+    UserManager um;
+
     /**
      * [constructor]
      * @param currUser current user
      */
-    InventoryController(ClientUser currUser, Inventory iv){
+    InventoryController(ClientUser currUser, Inventory iv, UserManager um){
         this.currUser = currUser;
         this.iv = iv;
+        this.um = um;
     }
 
     /**
@@ -70,5 +77,36 @@ public class InventoryController {
      */
     Item getItem(String line){
         return iv.getItem(line);
+    }
+
+    String printWishLend(){
+        String result = "";
+        for (String it: um.getWishLend(currUser)){
+            result = result + it + "\n";
+        }
+        if (result.equals("")){
+            return "no item";
+        }
+        return result;
+    }
+
+    List<String> getWishLend(){
+        return um.getWishLend(currUser);
+    }
+
+    void deleteItem(Item it){
+        um.getWishLend(currUser).remove(it.getName());
+    }
+
+    void addItem(Item it){
+        um.getWishLend(currUser).add(it.getName());
+    }
+
+    Item createItem(String name){
+        return iv.createItem(name, um.getUsername(currUser));
+    }
+
+    public void setDescription(String des, Item item){
+        iv.setDescription(des, item);
     }
 }

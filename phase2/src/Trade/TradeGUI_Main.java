@@ -2,33 +2,30 @@ package Trade;
 
 import Inventory.Inventory;
 import User.ClientUser;
-import User.ClientUserGUI;
-import User.LoginIGUI;
 import User.UserManager;
-
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.UUID;
 
 public class TradeGUI_Main {
     ClientUser currUser;
     UserManager um;
     TradeManager tm;
     Inventory iv;
+    JFrame cf;
 
 
     /**
      * constructor
      * @param currUser the user that is using the system
      */
-    public TradeGUI_Main(ClientUser currUser, TradeManager tm, UserManager um, Inventory iv){
+    public TradeGUI_Main(ClientUser currUser, TradeManager tm, UserManager um, Inventory iv, JFrame cf){
         this.currUser = currUser;
         this.tm = tm;
         this.um = um;
         this.iv = iv;
+        this.cf = cf;
     }
 
     public void run(){
@@ -45,12 +42,12 @@ public class TradeGUI_Main {
         JButton re = new JButton("return to login menu");
 
         menu.setLayout(new BoxLayout(menu, BoxLayout.Y_AXIS));
-        menu.add(lb, Component.CENTER_ALIGNMENT);
-        menu.add(rt, Component.CENTER_ALIGNMENT);
-        menu.add(at, Component.CENTER_ALIGNMENT);
-        menu.add(ct, Component.CENTER_ALIGNMENT);
-        menu.add(th, Component.CENTER_ALIGNMENT);
-        menu.add(re, Component.CENTER_ALIGNMENT);
+        menu.add(lb);
+        menu.add(rt);
+        menu.add(at);
+        menu.add(ct);
+        menu.add(th);
+        menu.add(re);
 
         frame.getContentPane().add(menu);
         frame.setVisible(true);
@@ -92,7 +89,7 @@ public class TradeGUI_Main {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
-                //need to connect back to ClientGUI
+                cf.setVisible(true);
             }
         });
 

@@ -81,4 +81,12 @@ public class Inventory {
         }
         return null;
     }
+
+    public Item createItem(String name, String owner){
+        return new Item(name, owner);
+    }
+
+    public void setDescription(String des, Item item){
+        item.setDescription(des);
+    }
 }

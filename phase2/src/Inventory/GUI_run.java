@@ -13,7 +13,7 @@ public class GUI_run {
         Inventory iv = new Inventory();
         iv.addItem(apple);
         iv.addItem(pear);
-        InvGUI invG = new InvGUI(daniel, iv);
+        WishBorrowAddGUI invG = new WishBorrowAddGUI(daniel, iv);
         invG.run();
     }
 }
