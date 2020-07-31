@@ -9,7 +9,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class WishBorrowGUI {
+public class AgreeRequestsGUI {
     InventoryController ic;
     Item currItem;
     InventoryPresenter ip;
@@ -19,7 +19,7 @@ public class WishBorrowGUI {
     ClientUser currUser;
     ItemApprovalManager iam;
 
-    public WishBorrowGUI(ClientUser currUser, Inventory iv, UserManager um, ItemApprovalManager iam, Frame tf){
+    public AgreeRequestsGUI(ClientUser currUser, Inventory iv, UserManager um, ItemApprovalManager iam, Frame tf){
         ic = new InventoryController(currUser, iv, um, iam);
         ip = new InventoryPresenter(currUser, iv);
         this.iv = iv;
@@ -32,7 +32,7 @@ public class WishBorrowGUI {
     }
 
     public void run(){
-        JFrame frame = new JFrame("Edit WishBorrow Session");
+        JFrame frame = new JFrame("Agree Requests Session");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(600, 200);
 
@@ -53,26 +53,26 @@ public class WishBorrowGUI {
         panelN.add(msg);
         panelN.add(msgArea);
 
-        JLabel wishList = new JLabel("WishBorrow List");
-        JTextArea wishArea = new JTextArea();
-        wishArea.setText(ic.printWishBorrow());
-        JScrollPane jsp= new JScrollPane(wishArea);
+        JLabel requestList = new JLabel("Request List");
+        JTextArea requestArea = new JTextArea();
+        requestArea.setText(ic.printRequest());
+        JScrollPane jsp= new JScrollPane(requestArea);
         panelW.setLayout(new BoxLayout(panelW, BoxLayout.Y_AXIS));
-        panelW.add(wishList);
+        panelW.add(requestList);
         panelW.add(jsp);
 
-        JLabel currTradeL = new JLabel("item selected");
+        JLabel currIt = new JLabel("item selected");
         JTextArea currArea = new JTextArea();
         panelC.setLayout(new BoxLayout(panelC, BoxLayout.Y_AXIS));
-        panelC.add(currTradeL);
+        panelC.add(currIt);
         panelC.add(currArea);
         currArea.setText("no item selected");
 
-        JButton add = new JButton("Add");
-        JButton delete = new JButton("delete");
+        JButton agree = new JButton("agree");
+        JButton disagree = new JButton("disagree");
         panelE.setLayout(new BoxLayout(panelE, BoxLayout.Y_AXIS));
-        panelE.add(add);
-        panelE.add(delete);
+        panelE.add(agree);
+        panelE.add(disagree);
 
         JLabel input = new JLabel("input item name");
         JTextArea inputArea = new JTextArea("item name");
@@ -92,39 +92,43 @@ public class WishBorrowGUI {
             public void actionPerformed(ActionEvent e) {
                 String itemName = inputArea.getText();
                 inputArea.setText("item name");
-                if (!ic.getWishBorrow().contains(itemName)) {
+                if (!ic.iamCheckInput(itemName)) {
                     msgArea.setText("wrong input");
                 } else {
-                    currItem = ic.getItem(itemName);
+                    currItem = ic.getItemFromIam(itemName);
                     currArea.setText(ip.printItemInfo(currItem));
                     msgArea.setText("the item has been selected");
                 }
             }
         });
 
-        delete.addActionListener(new ActionListener() {
+        agree.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (currItem == null){
-                    msgArea.setText("Fail deleting the item since no item is selected");
+                    msgArea.setText("no item is selected");
                 }else{
-                    ic.deleteItemB(currItem);
+                    ic.addToWishLend(currItem);
                     currArea.setText("no item selected");
-                    msgArea.setText(currItem.getName()+" has been deleted from the wish borrow list");
+                    msgArea.setText(currItem.getName()+" has been added to user's wishLend list");
                     currItem = null;
-                    wishArea.setText(ic.printWishBorrow());
+                    requestArea.setText(ic.printRequest());
                 }
             }
         });
 
 
-        add.addActionListener(new ActionListener() {
+        disagree.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new WishBorrowAddGUI(currUser, iv, um, iam, frame).run();
-                currItem = null;
-                wishArea.setText(ic.printWishBorrow());
-                frame.setVisible(false);
+                if (currItem == null) {
+                    msgArea.setText("no item is selected");
+                }else{
+                    ic.removeItemFromIam(currItem);
+                    currArea.setText("no item selected");
+                    currItem = null;
+                    requestArea.setText(ic.printRequest());
+                }
             }
         });
 
@@ -140,7 +144,7 @@ public class WishBorrowGUI {
         update.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                wishArea.setText(ic.printWishBorrow());
+                requestArea.setText(ic.printRequest());
                 currItem = null;
                 currArea.setText("no item selected");
 
@@ -148,5 +152,5 @@ public class WishBorrowGUI {
         });
 
     }
-}
 
+}

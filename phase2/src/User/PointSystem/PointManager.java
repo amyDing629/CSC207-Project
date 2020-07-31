@@ -33,8 +33,8 @@ public class PointManager {
     }
 
     //TODO: Complete
-    public HashMap<UUID, Integer> sortListByPoints() {}
+    public void sortListByPoints() {}
 
     //TODO: Complete
-    public UUID getMostFreq() {}
+    public void getMostFreq() {}
 }

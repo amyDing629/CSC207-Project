@@ -19,4 +19,8 @@ public class ItemApprovalManager {
     public ArrayList<ArrayList<String>> getUserApproval(){
         return userApproval;
     }
+
+    public void removeItem(String name){
+        itemApproval.removeIf(strings -> strings.get(1).equals(name));
+    }
 }

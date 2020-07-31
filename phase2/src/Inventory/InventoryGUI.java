@@ -1,34 +1,34 @@
 package Inventory;
 
-import Trade.AcceptTradeGUI;
-import Trade.SelectItemToTradeGUI;
 import User.ClientUser;
+import User.ItemApprovalManager;
 import User.UserManager;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class InventoryGUI {
-    private ClientUser currUser;
-    private UserManager um;
-    private Inventory iv;
-    private JFrame ivf;
+    private final ClientUser currUser;
+    private final UserManager um;
+    private final Inventory iv;
+    private final JFrame ivf;
+    private final ItemApprovalManager iam;
 
 
-    public InventoryGUI(ClientUser currUser, Inventory iv, UserManager um, JFrame frame){
+    public InventoryGUI(ClientUser currUser, Inventory iv, UserManager um, ItemApprovalManager iam, JFrame frame){
         this.currUser = currUser;
         this.um = um;
         this.iv = iv;
         this.ivf = frame;
+        this.iam = iam;
 
     };
 
     public void run(){
         JFrame frame = new JFrame("Inventory Session");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setSize(400, 250);
+        frame.setSize(200, 200);
 
         JPanel menu = new JPanel();
         JLabel label = new JLabel("    Hello, "+um.getUsername(currUser));
@@ -37,8 +37,10 @@ public class InventoryGUI {
         JButton back = new JButton("return");
 
         menu.setLayout(new BoxLayout(menu, BoxLayout.Y_AXIS));
+        menu.add(label);
         menu.add(wb);
         menu.add(wl);
+        menu.add(back);
 
         frame.getContentPane().add(menu);
         frame.setVisible(true);
@@ -47,7 +49,7 @@ public class InventoryGUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
-                new WishBorrowGUI(currUser, iv, um, frame).run();
+                new WishBorrowGUI(currUser, iv, um, iam, frame).run();
             }
         });
 
@@ -55,7 +57,7 @@ public class InventoryGUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
-                new WishLendGUI(currUser, iv, um, frame).run();
+                new WishLendGUI(currUser, iv, um, iam, frame).run();
 
             }
         });

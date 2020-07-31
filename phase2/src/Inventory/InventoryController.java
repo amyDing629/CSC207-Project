@@ -1,5 +1,6 @@
 package Inventory;
 import User.ClientUser;
+import User.ItemApprovalManager;
 import User.UserManager;
 
 import java.util.ArrayList;
@@ -21,14 +22,17 @@ public class InventoryController {
 
     UserManager um;
 
+    ItemApprovalManager iam;
+
     /**
      * [constructor]
      * @param currUser current user
      */
-    InventoryController(ClientUser currUser, Inventory iv, UserManager um){
+    InventoryController(ClientUser currUser, Inventory iv, UserManager um, ItemApprovalManager iam){
         this.currUser = currUser;
         this.iv = iv;
         this.um = um;
+        this.iam = iam;
     }
 
     /**
@@ -63,6 +67,16 @@ public class InventoryController {
         currUser.addWishBorrow(it.getName());
     }
 
+    void addToWishLend(Item it){
+        um.getWishLend(um.getUser(it.getOwnerName())).add(it.getName());
+        iv.getLendingList().add(it);
+        iam.removeItem(it.getName());
+    }
+
+    void removeItemFromIam(Item it){
+        iam.removeItem(it.getName());
+    }
+
     /**
      * @param it: current item
      * @return whether the item is the currUser's wish list
@@ -90,16 +104,81 @@ public class InventoryController {
         return result;
     }
 
+    String printWishBorrow(){
+        String result = "";
+        for (String it: um.getWishBorrow(currUser)){
+            result = result + it + "\n";
+        }
+        if (result.equals("")){
+            return "no item";
+        }
+        return result;
+
+    }
+
+
+    String printRequest() {
+        ArrayList<ArrayList<String>> ia = iam.getItemApproval();
+        String result = "";
+        for (int i = 0; i < ia.size(); i++) {
+            String str = "";
+            str = str + "\n" + "name: " + ia.get(i).get(1) + "\n" + "Description: " + ia.get(i).get(2)
+                    + "\n" + "Owner: " + ia.get(i).get(3) + "\n";
+            result = result + str;
+        }
+        if (result.equals("")) {
+            return "no requested items";
+        }
+        return result;
+
+    }
+
+    boolean iamCheckInput(String name){
+        ArrayList<ArrayList<String>> ia = iam.getItemApproval();
+        for (ArrayList<String> strings : ia) {
+            if (strings.get(1).equals(name)) {
+                return true;
+            }
+        }
+        return false;
+
+    }
+
+    Item getItemFromIam(String name){
+        Item result;
+        ArrayList<ArrayList<String>> ia = iam.getItemApproval();
+        for (ArrayList<String> strings : ia) {
+            if (strings.get(1).equals(name)) {
+                result = new Item(strings.get(1), strings.get(3));
+                iv.setDescription(strings.get(2), result);
+                return result;
+            }
+        }
+        return null;
+
+    }
+
     List<String> getWishLend(){
         return um.getWishLend(currUser);
     }
 
-    void deleteItem(Item it){
+    List<String> getWishBorrow(){
+        return um.getWishBorrow(currUser);
+    }
+
+    void deleteItemL(Item it){
         um.getWishLend(currUser).remove(it.getName());
     }
 
-    void addItem(Item it){
-        um.getWishLend(currUser).add(it.getName());
+    void deleteItemB(Item it){um.getWishBorrow(currUser).remove(it.getName());}
+
+    void addItem(String name, String des){
+        ArrayList<String> b= new ArrayList<>();
+        b.add("1");
+        b.add(name);
+        b.add(des);
+        b.add(um.getUsername(currUser));
+        iam.getItemApproval().add(b);
     }
 
     Item createItem(String name){
@@ -109,4 +188,16 @@ public class InventoryController {
     public void setDescription(String des, Item item){
         iv.setDescription(des, item);
     }
+
+    boolean itemExist(String name){
+        for (Item it: iv.getLendingList()){
+            if (it.getName().equals(name)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+
 }

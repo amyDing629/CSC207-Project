@@ -1,6 +1,7 @@
 package Inventory;
 
 import User.ClientUser;
+import User.ItemApprovalManager;
 import User.UserManager;
 
 import javax.swing.*;
@@ -14,8 +15,8 @@ public class WishLendGUI {
     InventoryPresenter ip;
     Frame tf;
 
-    public WishLendGUI(ClientUser currUser, Inventory iv, UserManager um, Frame tf){
-        ic = new InventoryController(currUser, iv, um);
+    public WishLendGUI(ClientUser currUser, Inventory iv, UserManager um, ItemApprovalManager iam, Frame tf){
+        ic = new InventoryController(currUser, iv, um, iam);
         ip = new InventoryPresenter(currUser, iv);
         this.tf = tf;
 
@@ -25,7 +26,7 @@ public class WishLendGUI {
     public void run(){
         JFrame frame = new JFrame("Edit WishLend Session");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setSize(800, 200);
+        frame.setSize(600, 500);
 
         JPanel panelW = new JPanel();
         JPanel panelC = new JPanel();
@@ -61,17 +62,18 @@ public class WishLendGUI {
 
         JLabel itemName = new JLabel("item name");
         JTextArea name = new JTextArea("name");
+        JScrollPane  jspN = new JScrollPane(name);
         JLabel itemDes = new JLabel("item description");
         JTextArea des = new JTextArea("description");
-        des.setSize(100, 150);
+        des.setPreferredSize(new Dimension(100, 100));
         JScrollPane jspD = new JScrollPane(des);
-        JButton add = new JButton("Add");
+        JButton add = new JButton("request");
         JButton delete = new JButton("delete");
-        JButton create = new JButton("create item");
-        JButton editDes = new JButton("edit description");
+        JButton create = new JButton("Create item");
+        JButton editDes = new JButton("Edit description");
         panelE.setLayout(new BoxLayout(panelE, BoxLayout.Y_AXIS));
         panelE.add(itemName);
-        panelE.add(name);
+        panelE.add(jspN);
         panelE.add(itemDes);
         panelE.add(jspD);
         panelE.add(create);
@@ -83,10 +85,12 @@ public class WishLendGUI {
         JTextArea inputArea = new JTextArea("item name");
         JButton submit = new JButton("submit");
         JButton back = new JButton("return");
+        JButton update = new JButton("update");
         panelS.add(input);
         panelS.add(inputArea);
         panelS.add(submit);
         panelS.add(back);
+        panelS.add(update);
 
         frame.setVisible(true);
 
@@ -108,11 +112,15 @@ public class WishLendGUI {
         delete.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ic.deleteItem(currItem);
-                currArea.setText("no item selected");
-                msg.setText(currItem.getName()+" has been deleted from the wish borrow list");
-                currItem = null;
-                wishArea.setText(ic.printWishLend());
+                if (currItem == null) {
+                    msg.setText("no item is selected");
+                } else {
+                    ic.deleteItemL(currItem);
+                    currArea.setText("no item selected");
+                    msg.setText(currItem.getName() + " has been deleted from the wish borrow list");
+                    currItem = null;
+                    wishArea.setText(ic.printWishLend());
+                }
             }
         });
 
@@ -123,7 +131,10 @@ public class WishLendGUI {
                 String description = des.getText();
                 if (itemName.equals("")) {
                     msg.setText("please enter item name");
-                }else {
+                }else if(ic.itemExist(itemName)){
+                    msg.setText("the item has already been used");
+                }
+                else {
                     currItem = ic.createItem(itemName);
                     ic.setDescription(description, currItem);
                     currArea.setText(ip.printItemInfo(currItem));
@@ -135,21 +146,24 @@ public class WishLendGUI {
         add.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ic.addItem(currItem);
+                ic.addItem(currItem.getName(), currItem.getDescription());
                 currArea.setText("no item selected");
-                msg.setText(currItem.getName()+" has been added to the wish borrow list");
+                msg.setText(currItem.getName()+" has been requested, please wait for adminUser to agree");
                 currItem = null;
-                wishArea.setText(ic.printWishLend());
             }
         });
 
         editDes.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String description = des.getText();
-                ic.setDescription(description, currItem);
-                msg.setText("Description of "+ currItem.getName()+" has been changed");
-                currArea.setText(ip.printItemInfo(currItem));
+                if (currItem == null){
+                    msg.setText("no item is selected");
+                }else{
+                    String description = des.getText();
+                    ic.setDescription(description, currItem);
+                    msg.setText("Description of "+ currItem.getName()+" has been changed");
+                    currArea.setText(ip.printItemInfo(currItem));
+                }
             }
         });
 
@@ -158,6 +172,16 @@ public class WishLendGUI {
             public void actionPerformed(ActionEvent e) {
                 tf.setVisible(true);
                 frame.setVisible(false);
+            }
+        });
+
+        update.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                wishArea.setText(ic.printWishLend());
+                currItem = null;
+                currArea.setText("no item selected");
+
             }
         });
 

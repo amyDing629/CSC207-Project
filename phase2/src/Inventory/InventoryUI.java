@@ -1,6 +1,8 @@
 package Inventory;
 
 import User.ClientUser;
+import User.ItemApprovalManager;
+import User.UserManager;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,6 +15,7 @@ import java.io.InputStreamReader;
  * show selected item information.
  * add item to user's wishBorrow list
  */
+
 public class InventoryUI {
     private final InventoryPresenter ip;
     private final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -24,9 +27,9 @@ public class InventoryUI {
      * @param currUser the user that is using the system.
      * call inventory presenter and controller
      */
-    public InventoryUI(ClientUser currUser, Inventory iv){
+    public InventoryUI(ClientUser currUser, Inventory iv, UserManager um, ItemApprovalManager iam){
         ip = new InventoryPresenter(currUser, iv);
-        ic = new InventoryController(currUser, iv);
+        ic = new InventoryController(currUser, iv, um, iam);
     }
 
     /**

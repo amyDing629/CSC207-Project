@@ -26,7 +26,14 @@ public class InventoryPresenter {
      * @return the item name in 'item1,item2' format
      */
     String printAvailable(){
-        return "Available item list: " + iv.getAvailableList();
+        String result = "";
+        for (Item it: iv.getAvailableList()){
+            result = result + it.getName() + "\n";
+        }
+        if (result.equals("")){
+            return "no available item";
+        }
+        return result;
 
     }
 

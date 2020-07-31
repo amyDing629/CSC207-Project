@@ -1,5 +1,6 @@
 package Inventory;
 import User.ClientUser;
+import User.ItemApprovalManager;
 import User.UserManager;
 
 import javax.swing.*;
@@ -7,6 +8,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class WishBorrowAddGUI {
     InventoryController ic;
@@ -14,9 +16,10 @@ public class WishBorrowAddGUI {
     Item currItem;
     Frame itf;
 
-    public WishBorrowAddGUI(ClientUser currUser, Inventory iv, UserManager um, Frame itf) {
-        ic = new InventoryController(currUser, iv, um);
+    public WishBorrowAddGUI(ClientUser currUser, Inventory iv, UserManager um, ItemApprovalManager iam, Frame itf) {
+        ic = new InventoryController(currUser, iv, um, iam);
         ip = new InventoryPresenter(currUser, iv);
+        this.itf = itf;
 
     }
 
@@ -24,16 +27,22 @@ public class WishBorrowAddGUI {
         //Creating the Frame
         JFrame frame = new JFrame("Add to WishBorrow Session");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setSize(400, 200);
+        frame.setSize(600, 200);
 
 
         JPanel panelNorth = new JPanel();
         JLabel ail = new JLabel("MESSAGE   ");
         JTextArea jtz = new JTextArea();
-        jtz.setText(ip.printAvailable());
-        JScrollPane sp = new JScrollPane(jtz);
+        JPanel panelW = new JPanel();
+        JLabel il = new JLabel("available item list");
+        JTextArea itemList = new JTextArea();
+        itemList.setText(ip.printAvailable());
+        JScrollPane sp = new JScrollPane(itemList);
         panelNorth.add(ail);
-        panelNorth.add(sp);
+        panelNorth.add(jtz);
+        panelW.setLayout(new BoxLayout(panelW, BoxLayout.Y_AXIS));
+        panelW.add(il);
+        panelW.add(sp);
         //JLabel label = new JLabel("choose an item from the following items: \n"+ip.printAvailable());
         //panel
         JPanel panel = new JPanel();
@@ -46,16 +55,13 @@ public class WishBorrowAddGUI {
         panel.add(awl);
         panel.add(back);
         //itemPanel
-        JPanel itemPanel = new JPanel();
-        JButton seeInventory = new JButton("see available item list");
-        itemPanel.add(seeInventory, SwingConstants.CENTER);
 
 
         JTextArea currItemInfo = new JTextArea();
 
         currItemInfo.setText("Current item info:\nno selected item ");
+        frame.getContentPane().add(BorderLayout.WEST, panelW);
         frame.getContentPane().add(BorderLayout.CENTER, currItemInfo);
-        frame.getContentPane().add(BorderLayout.EAST, itemPanel);
         frame.getContentPane().add(BorderLayout.SOUTH, panel);
         frame.getContentPane().add(BorderLayout.NORTH, panelNorth);
         frame.setVisible(true);
@@ -85,15 +91,9 @@ public class WishBorrowAddGUI {
                     jtz.setText(ip.isInWishBorrow());
                 } else {
                     ic.moveToWishList(currItem);
+                    itemList.setText(ip.printAvailable());
                     jtz.setText(ip.addToWishBorrow(true));
                 }
-            }
-        });
-
-        seeInventory.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                jtz.setText(ip.printAvailable());
             }
         });
 
@@ -102,6 +102,7 @@ public class WishBorrowAddGUI {
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
                 itf.setVisible(true);
+
             }
         });
 

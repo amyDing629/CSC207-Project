@@ -5,6 +5,7 @@ import Inventory.Item;
 import User.ClientUser;
 import User.UserManager;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.util.regex.Pattern;
 
@@ -24,10 +25,11 @@ public class RTradeGUI_test {
         iv.addItem(pear);
         um.addUser(daniel);
         um.addUser(amy);
+        JFrame f = new JFrame();
 
-        TradeGUI_Main trmD = new TradeGUI_Main(daniel, tm, um, iv);
+        TradeGUI_Main trmD = new TradeGUI_Main(daniel, tm, um, iv, f);
         trmD.run();
-        TradeGUI_Main trmA = new TradeGUI_Main(amy, tm, um, iv);
+        TradeGUI_Main trmA = new TradeGUI_Main(amy, tm, um, iv, f);
         trmA.run();
 
 

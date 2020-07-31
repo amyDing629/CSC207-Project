@@ -126,8 +126,8 @@ public class UserInventory {
                     System.out.println("Menu:\n1.add wish\n2.delete wish");
                     String input55=uc.getString("Please enter a number!");
                     if (input55.equals("1")) {
-                        WishBorrowAddGUI iui = new WishBorrowAddGUI(user, iv);
-                        iui.run();
+                        //WishBorrowAddGUI iui = new WishBorrowAddGUI(user, iv);
+                        //iui.run();
                     }else if(input55.equals("2")){
                         List<String> bw1=um.getWishBorrow(user);
                         for (String s : bw1) {
