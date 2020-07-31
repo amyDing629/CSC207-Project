@@ -3,8 +3,10 @@ package User;
 import Trade.TradeManager;
 
 import java.io.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 
 public class UserDataAccess {
@@ -100,11 +102,48 @@ public class UserDataAccess {
             d.setIncompleteTransaction(Integer.parseInt(b.get(11)));
             d.setLendCounter(Integer.parseInt(b.get(12)));
             d.setBorrowCounter(Integer.parseInt(b.get(13)));
+            d.setEnd(LocalDateTime.parse(b.get(14)));
 
             um.getUserList().add(d);
 
         }
     }
+
+    public void serialize(List<ClientUser> a){
+        try {
+            FileOutputStream fileOut =
+                    new FileOutputStream("phase2/src/user.ser");
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            for(ClientUser b: a){
+                out.writeObject(b);
+            }
+            out.close();
+            fileOut.close();
+        } catch (IOException i) {
+            i.printStackTrace();
+        }
+    }
+
+    public List<ClientUser> deSerializable(){
+        try {
+            List<ClientUser> res = new ArrayList<>();
+            FileInputStream fileIn = new FileInputStream("phase2/src/user.ser");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            for(ClientUser a: um.getUserList()){
+                ClientUser e = (ClientUser) in.readObject();
+                res.add(e);
+            }
+            in.close();
+            fileIn.close();
+            return res;
+        } catch (IOException | ClassNotFoundException i) {
+            List<ClientUser> res = new ArrayList<>();
+            i.printStackTrace();
+            return res;
+        }
+    }
+
+
 
 
     /**
@@ -141,7 +180,8 @@ public class UserDataAccess {
             s = s+ u.getIncompleteTransactionLimit() + ", ";
 
             s = s + u.getLendCounter() + ", ";
-            s = s+ u.getBorrowCounter();
+            s = s+ u.getBorrowCounter() + ", ";
+            s =  s+ u.getEnd();
             s = s + "\n";
             output.write(s.getBytes());
             output.close();

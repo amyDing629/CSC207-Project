@@ -2,6 +2,7 @@ package User;
 
 import Trade.TradeManager;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -120,6 +121,15 @@ public class AdminActivityManager {
     public boolean incompleteTransaction(ClientUser a){
         if(!a.getIsFrozen()){
             a.setFrozen(tm.getIncompleteTransaction(a) > a.getIncompleteTransactionLimit());
+            return true;
+        }
+        return false;
+    }
+
+    public boolean checkLeft(ClientUser a){
+        LocalDateTime now = LocalDateTime.now();
+        if(!a.getIsLeft()){
+            a.setLeft(now.isBefore(a.getEnd()));
             return true;
         }
         return false;

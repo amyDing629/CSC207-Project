@@ -167,8 +167,8 @@ public class UserManager {
         userList.add(new ClientUser(name, password, isAdmin));
     }
     
-    public void setStatus(ClientUser a, LocalDateTime start, LocalDateTime end){
-        a.setStatus(start, end);
+    public void setEnd(ClientUser a, LocalDateTime end){
+        a.setEnd(end);
     }
 
 
