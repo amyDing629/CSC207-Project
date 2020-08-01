@@ -191,7 +191,7 @@ public class UserDataAccess {
         }
     }
 
-    public void updateSer() throws FileNotFoundException {
+    public void updateSer() {
         File writer = new File("phase2/src/user.ser");
         writer.deleteOnExit();
         serialize(um.getUserList());
