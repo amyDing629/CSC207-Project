@@ -1,20 +1,41 @@
 package User;
 
+import Inventory.Inventory;
+import Main.DataAccessFull;
+import Main.UI.UIcontoller;
+import Trade.TradeManager;
+
 import javax.swing.*;
+import java.awt.*;
+import java.io.IOException;
 
 public class LoginIGUI {
+    UserManager um;
+    TradeManager tm;
+    ItemApprovalManager iam;
+    UIcontoller uc;
+    Inventory iv;
+    AdminActivityManager aam;
+    JFrame frame;
+    public LoginIGUI(UserManager um, TradeManager tm, Inventory iv, ItemApprovalManager iam, UIcontoller uc, AdminActivityManager aam) {
+        this.um = um;
+        this.tm = tm;
+        this.iam=iam;
+        this.uc=uc;
+        this.iv=iv;
+        this.aam=aam;
+    }
     public void run(){
-        JFrame frame = new JFrame("Login/Register");
+        frame = new JFrame("Login/Register");
         frame.setSize(330, 200);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JPanel panel = new JPanel();
         frame.add(panel);
-
         placeComponents(frame, panel);
         frame.setVisible(true);
     }
 
-    private static void placeComponents(JFrame frame, JPanel panel){
+    private void placeComponents(JFrame frame, JPanel panel){
         JLabel userLabel = new JLabel("User:");
         userLabel.setBounds(10,20,80,25);
         panel.add(userLabel);
@@ -39,6 +60,10 @@ public class LoginIGUI {
         logInButton.setBounds(100,80,80,25);
         panel.add(logInButton);
 
+        JButton exitButton = new JButton("quit");
+        exitButton.setPreferredSize(new Dimension(300, 30));
+        panel.add(exitButton);
+
         logInButton.addActionListener(e -> {
             String name = nameInput.getText();
             String password = passwordInput.getText();
@@ -48,7 +73,7 @@ public class LoginIGUI {
                 JOptionPane.showMessageDialog(null, "invalid user");
             else{
                 frame.setVisible(false);
-            ClientUserGUI a = new ClientUserGUI();
+            ClientUserGUI a = new ClientUserGUI(um,tm,iv,iam,aam,uc,frame);
             a.run(name);
             }
         });
@@ -59,6 +84,16 @@ public class LoginIGUI {
             ILoginSystemBoundary presenter = new LoginSystemPresenter();
             presenter.register(name, password);
             JOptionPane.showMessageDialog(null, "success");
+        });
+
+        exitButton.addActionListener(e -> {
+            DataAccessFull adf=new DataAccessFull(um,tm,iv,iam);
+            try {
+                adf.updateFile();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+            frame.setVisible(false);
         });
     }
 }

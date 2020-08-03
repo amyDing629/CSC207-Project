@@ -1,5 +1,9 @@
 package User;
 
+import Inventory.Inventory;
+import Main.DataAccessFull;
+import Main.UI.ChangePass;
+import Main.UI.UIcontoller;
 import Trade.TradeManager;
 
 import javax.swing.*;
@@ -8,20 +12,35 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class editInfoGUI {
-    UserManager a = new UserManager();
-    TradeManager c = new TradeManager();
+    UserManager um;
+    TradeManager tm;
+    ItemApprovalManager iam;
+    UIcontoller uc;
+    Inventory iv;
+    AdminActivityManager aam;
+    JFrame frame;
+    JFrame PFrame;
+    public editInfoGUI(UserManager um, TradeManager tm, Inventory iv, ItemApprovalManager iam, UIcontoller uc, AdminActivityManager aam ,JFrame pFrame) {
+        this.um = um;
+        this.tm = tm;
+        this.iam=iam;
+        this.uc=uc;
+        this.iv=iv;
+        this.aam=aam;
+        this.PFrame=pFrame;
+    }
     public void run(String name){
-        JFrame frame = new JFrame("Edit User Information");
-        frame.setSize(300, 500);
+        frame = new JFrame("Edit User Information");
+        frame.setSize(500, 700);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JPanel panel = new JPanel();
         panel.setLayout(new FlowLayout(FlowLayout.CENTER));
         JLabel welcomeLabel = new JLabel("Hello, user, " + name);
-        welcomeLabel.setPreferredSize(new Dimension(200, 30));
+        welcomeLabel.setPreferredSize(new Dimension(300, 30));
         panel.add(welcomeLabel);
         frame.add(panel);
 
-        ClientUser b = a.getUser(name);
+        ClientUser b = um.getUser(name);
 
         placeComponents(frame, panel, b);
         frame.setVisible(true);
@@ -30,32 +49,68 @@ public class editInfoGUI {
 
     private void placeComponents(JFrame frame, JPanel panel, ClientUser b){
 
-        JLabel isAdmin = new JLabel("Admin: "+ a.getIsAdmin(b));
+        JLabel isAdmin = new JLabel("Admin: "+ um.getIsAdmin(b));
         isAdmin.setPreferredSize(new Dimension(300, 30));
         panel.add(isAdmin);
 
         JLabel action = new JLabel("Actions: ");
-        action.setPreferredSize(new Dimension(100, 30));
+        action.setPreferredSize(new Dimension(300, 30));
         panel.add(action);
 
         JButton changePass = new JButton("Change Password");
-        changePass.setPreferredSize(new Dimension(100, 30));
+        changePass.setPreferredSize(new Dimension(300, 30));
         panel.add(changePass);
 
         JButton freezeSystem = new JButton("ClientUser Freeze System");
-        freezeSystem.setPreferredSize(new Dimension(100, 30));
+        freezeSystem.setPreferredSize(new Dimension(300, 30));
         panel.add(freezeSystem);
+
+        JButton limitSystem = new JButton("ClientUser Limit System");
+        limitSystem.setPreferredSize(new Dimension(300, 30));
+        panel.add(limitSystem);
+
+        JButton CreateAdminGUI = new JButton("Create new Admin");
+        CreateAdminGUI.setPreferredSize(new Dimension(300, 30));
+        panel.add(CreateAdminGUI);
+        JButton AddItemSystem = new JButton("Add Item System");
+        AddItemSystem.setPreferredSize(new Dimension(300, 30));
+        panel.add(AddItemSystem);
 
         JButton exit = new JButton("exit");
         exit.setPreferredSize(new Dimension(300, 30));
         panel.add(exit);
-
+        if(!um.getIsAdmin(b)){
+            limitSystem.setEnabled(false);
+        }
         exit.addActionListener(e -> {
             frame.setVisible(false);
-            ClientUserGUI d = new ClientUserGUI();
-            d.run(a.getUsername(b));
+            PFrame.setVisible(true);
         });
-
+        AddItemSystem.addActionListener(e -> {
+            frame.setVisible(false);
+            AddItemSystemGUI d = new AddItemSystemGUI(um,tm,iv,iam,aam,uc,frame);
+            d.run(um.getUsername(b));
+        });
+        limitSystem.addActionListener(e -> {
+            frame.setVisible(false);
+            UserLimitGUI d = new UserLimitGUI(um,tm,iv,iam,aam,uc,frame);
+            d.run(um.getUsername(b));
+        });
+        CreateAdminGUI.addActionListener(e -> {
+            frame.setVisible(false);
+         CreateAdminGUI d = new CreateAdminGUI(um,tm,iv,iam,aam,uc,frame);
+            d.run(um.getUsername(b));
+        });
+       changePass.addActionListener(e -> {
+            frame.setVisible(false);
+            ChangePassGUI d = new ChangePassGUI(um,tm,iv,iam,aam,uc,frame);
+            d.run(um.getUsername(b));
+        });
+        freezeSystem.addActionListener(e -> {
+            frame.setVisible(false);
+            UserFreezeSystem d = new UserFreezeSystem(um,tm,iv,iam,aam,uc,frame);
+            d.run(um.getUsername(b));
+        });
 
 
     }

@@ -78,13 +78,6 @@ public class UIcontoller {
         return sc.nextLine();
     }
 
-    public void addApproval(String id,String s,String d){
-        ArrayList<String> b = new ArrayList<>();
-        b.add(id);
-        b.add(s);
-        b.add(d);
-        iam.getUserApproval().add(b);
-    }
 //    public boolean checkItemExist(String item){
 //        for (Item n : iv.getLendingList()) {
 //            if (n.getName().equals(item)) {

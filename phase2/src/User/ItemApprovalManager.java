@@ -15,11 +15,19 @@ public class ItemApprovalManager {
     public ArrayList<ArrayList<String>> getItemApproval(){
         return itemApproval;
     }
-
+    public void addApproval(String id,String s,String d){
+        ArrayList<String> b = new ArrayList<>();
+        b.add(id);
+        b.add(s);
+        b.add(d);
+        userApproval.add(b);
+    }
     public ArrayList<ArrayList<String>> getUserApproval(){
         return userApproval;
     }
-
+    public void removeUser(String name){
+        userApproval.removeIf(strings -> strings.get(1).equals(name));
+    }
     public void removeItem(String name){
         itemApproval.removeIf(strings -> strings.get(1).equals(name));
     }

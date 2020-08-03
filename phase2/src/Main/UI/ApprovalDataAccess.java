@@ -43,7 +43,6 @@ public class ApprovalDataAccess {
             e.printStackTrace();
         }
     }
-
     /**
      * read all the information from ItemApproval.txt into gateway ApprovalUser list
      */

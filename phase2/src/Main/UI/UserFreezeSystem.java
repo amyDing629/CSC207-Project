@@ -51,8 +51,6 @@ public class UserFreezeSystem {
                     System.out.println("User" + i + ": " + usa.get(i).get(1));
                     System.out.println("Reason: " + usa.get(i).get(2));
                     System.out.println("**************************");
-                }
-                if (usa.size() == 0) {
                     System.out.println("Currently there is no user freeze request");
                 }
                 String inputU = uc.getString("Enter the ClientUser number to approve,enter -1 to quit.");
@@ -64,7 +62,6 @@ public class UserFreezeSystem {
             } else if (inputF == 1) {
                 String des = uc.getString("Please enter the reason why you should unfreeze...enter -1 to quit");
                 if (!des.equals("-1")) {
-                    uc.addApproval("2",user.getUsername(),des);
                     System.out.println("Request successfully");
                     System.out.println("Please wait for the administrator to approve");
                 }else{

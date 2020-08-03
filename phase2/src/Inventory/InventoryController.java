@@ -28,7 +28,7 @@ public class InventoryController {
      * [constructor]
      * @param currUser current user
      */
-    InventoryController(ClientUser currUser, Inventory iv, UserManager um, ItemApprovalManager iam){
+    public InventoryController(ClientUser currUser, Inventory iv, UserManager um, ItemApprovalManager iam){
         this.currUser = currUser;
         this.iv = iv;
         this.um = um;
@@ -93,31 +93,31 @@ public class InventoryController {
         return iv.getItem(line);
     }
 
-    String printWishLend(){
-        String result = "";
+    public String printWishLend(){
+        StringBuilder result = new StringBuilder();
         for (String it: um.getWishLend(currUser)){
-            result = result + it + "\n";
+            result.append(it).append("\n");
         }
-        if (result.equals("")){
+        if (result.toString().equals("")){
             return "no item";
         }
-        return result;
+        return result.toString();
     }
 
-    String printWishBorrow(){
-        String result = "";
+    public String printWishBorrow(){
+        StringBuilder result = new StringBuilder();
         for (String it: um.getWishBorrow(currUser)){
-            result = result + it + "\n";
+            result.append(it).append("\n");
         }
-        if (result.equals("")){
+        if (result.toString().equals("")){
             return "no item";
         }
-        return result;
+        return result.toString();
 
     }
 
 
-    String printRequest() {
+    public String printRequest() {
         ArrayList<ArrayList<String>> ia = iam.getItemApproval();
         String result = "";
         for (int i = 0; i < ia.size(); i++) {
@@ -133,7 +133,7 @@ public class InventoryController {
 
     }
 
-    boolean iamCheckInput(String name){
+    public boolean iamCheckInput(String name){
         ArrayList<ArrayList<String>> ia = iam.getItemApproval();
         for (ArrayList<String> strings : ia) {
             if (strings.get(1).equals(name)) {
@@ -144,7 +144,7 @@ public class InventoryController {
 
     }
 
-    Item getItemFromIam(String name){
+    public Item getItemFromIam(String name){
         Item result;
         ArrayList<ArrayList<String>> ia = iam.getItemApproval();
         for (ArrayList<String> strings : ia) {
@@ -158,21 +158,21 @@ public class InventoryController {
 
     }
 
-    List<String> getWishLend(){
+    public List<String> getWishLend(){
         return um.getWishLend(currUser);
     }
 
-    List<String> getWishBorrow(){
+    public List<String> getWishBorrow(){
         return um.getWishBorrow(currUser);
     }
 
-    void deleteItemL(Item it){
+    public void deleteItemL(Item it){
         um.getWishLend(currUser).remove(it.getName());
     }
 
-    void deleteItemB(Item it){um.getWishBorrow(currUser).remove(it.getName());}
+    public void deleteItemB(Item it){um.getWishBorrow(currUser).remove(it.getName());}
 
-    void addItem(String name, String des){
+    public void addItem(String name, String des){
         ArrayList<String> b= new ArrayList<>();
         b.add("1");
         b.add(name);

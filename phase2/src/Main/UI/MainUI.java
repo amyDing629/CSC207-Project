@@ -31,7 +31,6 @@ public class MainUI {
     }
 
     public void run() throws IOException {
-        Scanner sc = new Scanner(System.in);
         int a = -1;
         uc.checkFileEmpty(new File("phase1/src/username.txt"));
         w.readFile(tm, iv, um);
