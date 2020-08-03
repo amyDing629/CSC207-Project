@@ -1,5 +1,6 @@
 package User;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.UUID;
@@ -7,7 +8,7 @@ import java.util.UUID;
  * [Entity class]
  * The basic functionality of users (including ordinary users and administrative users)
  */
-public class ClientUser {
+public class ClientUser implements Serializable {
     /**
      * the id of user, evey user has unique id.
      */
