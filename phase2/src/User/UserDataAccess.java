@@ -191,6 +191,12 @@ public class UserDataAccess {
         }
     }
 
+    public void updateSer() {
+        File writer = new File("phase2/src/user.ser");
+        writer.deleteOnExit();
+        serialize(um.getUserList());
+    }
+
     /**
      * update all the information in the username.txt
      */
