@@ -134,7 +134,7 @@ public class TradeManager {
      */
     void completeTrade(Trade currTrade){
         currTrade.setStatus(TradeStatus.complete);
-        //makeTrade(currTrade);
+        makeTrade(currTrade);
     }
 
     /**
@@ -145,9 +145,9 @@ public class TradeManager {
         currTrade.setStatus(TradeStatus.cancelled);
     }
     //move to userManager
-    /*
+
     void makeTrade(Trade currTrade) {
-        UserManager um = new UserManager(gw);
+        UserManager um = new UserManager();
         if (currTrade.getType().equals("oneway")){
             ClientUser bor = um.getUser(currTrade.getUsers().get(0));
             ClientUser lend = um.getUser(currTrade.getUsers().get(1));
@@ -173,7 +173,6 @@ public class TradeManager {
 
     }
 
-     */
 
     /**
      * return the list of all trades that the user has
