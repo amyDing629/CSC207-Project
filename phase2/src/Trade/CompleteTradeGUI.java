@@ -1,5 +1,6 @@
 package Trade;
 
+import Trade.MeetingSystem.Gui.MainController;
 import User.ClientUser;
 import User.UserManager;
 
@@ -93,6 +94,17 @@ public class CompleteTradeGUI {
         action.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if (ctc.enterFirst()){
+                    MainController mainController = new MainController(currTrade.getUsers(),
+                            true, currTrade.getMeeting());
+                    mainController.run(currUser.getId(), frame, ctc);
+                }else{
+                    MainController mainController = new MainController(currTrade.getUsers(),
+                            false, currTrade.getSecondMeeting());
+                    mainController.run(currUser.getId(), frame, ctc);
+                }
+                frame.setVisible(false);
+                //TODO
             }
         });
 
@@ -112,4 +124,5 @@ public class CompleteTradeGUI {
         });
 
     }
+
 }

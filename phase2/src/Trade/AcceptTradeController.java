@@ -12,11 +12,13 @@ public class AcceptTradeController {
     UserManager um;
     List<Trade> tradeList;
     Trade currTrade;
+    AcceptTradePresenter tp;
 
-    public AcceptTradeController(ClientUser currUser, TradeManager tm, UserManager um){
+    public AcceptTradeController(ClientUser currUser, TradeManager tm, UserManager um, TradeGUI tg){
         this.currUser = currUser;
         this.tm = tm;
         this.um = um;
+        tp = new AcceptTradePresenter(tg);
     }
 
     String printUnconfirmed(){
@@ -58,5 +60,17 @@ public class AcceptTradeController {
         TradeEditor te = new TradeEditor();
         te.setStatus(currTrade, TradeStatus.cancelled);
     }
+
+    void agreeBut(){
+        if (currTrade == null){
+            tp.notTradeSelected();
+        } else{
+            TradeEditor te = new TradeEditor();
+            te.setStatus(currTrade, TradeStatus.incomplete);
+            currTrade = null;
+            tp.agreeTrade(tm.getUnconfirmed(currUser));
+        }
+    }
+
 
 }

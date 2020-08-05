@@ -16,7 +16,7 @@ public class AcceptTradeGUI {
 
     public AcceptTradeGUI(ClientUser currUser, TradeManager tm, UserManager um, Frame tf){
         this.currUser = currUser;
-        atc = new AcceptTradeController(currUser, tm, um);
+        atc = new AcceptTradeController(currUser, tm, um, new TradeGUI());
         this.tf = tf;
     }
 
@@ -138,4 +138,5 @@ public class AcceptTradeGUI {
             }
         });
     }
+
 }
