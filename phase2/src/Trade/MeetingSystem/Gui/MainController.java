@@ -1,5 +1,6 @@
 package Trade.MeetingSystem.Gui;
 
+import Trade.CTradeController;
 import Trade.MeetingSystem.IDataAccess;
 import Trade.MeetingSystem.MeetingManager;
 import Trade.MeetingSystem.MeetingStatus;
@@ -31,17 +32,17 @@ public class MainController implements Observer {
     }
 
     // automatically choose service
-    public void run(UUID currLogInUser, JFrame frame) {
+    public void run(UUID currLogInUser, JFrame frame, CTradeController ctc) {
         // first meeting
         if (isFirst) {
             if (meetingID == null) {
-                mainPresenter = new MainViewPresenter(null, currLogInUser, users, frame);
+                mainPresenter = new MainViewPresenter(null, currLogInUser, users, frame, ctc);
             } else {
-                mainPresenter = new MainViewPresenter(meetingID, currLogInUser, users, frame);
+                mainPresenter = new MainViewPresenter(meetingID, currLogInUser, users, frame, ctc);
             }
 
         } else { // only second (temporary) meeting
-            mainPresenter = new MainViewPresenter(meetingID, currLogInUser, users, frame);
+            mainPresenter = new MainViewPresenter(meetingID, currLogInUser, users, frame, ctc);
         }
 
         // run the service once

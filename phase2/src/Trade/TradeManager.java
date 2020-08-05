@@ -16,7 +16,7 @@ import java.util.*;
  * Allow users to set up trade, cancel trade
  * Automatically update the trade history for both users in the trade.
  */
-public class TradeManager implements Observer {
+public class TradeManager{
     public ArrayList<Trade> tradeList;
 
     public TradeManager(){
@@ -253,14 +253,7 @@ public class TradeManager implements Observer {
     }
 
 
-    @Override
-    public void update(Observable o, Object arg) {
-        Meeting mt = (Meeting)o;
-        MeetingStatus ms = (MeetingStatus)arg;
-        MeetingManager mg = new MeetingManager();
-        Trade tr = getTrade(mt.);
 
-    }
 }
 
 

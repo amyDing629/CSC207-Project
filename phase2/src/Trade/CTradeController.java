@@ -1,17 +1,24 @@
 package Trade;
 
+import Trade.MeetingSystem.Meeting;
+import Trade.MeetingSystem.MeetingManager;
+import Trade.MeetingSystem.MeetingStatus;
 import User.ClientUser;
 import User.UserManager;
 
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
+import java.util.UUID;
 import java.util.regex.Pattern;
 
-public class CTradeController {
+public class CTradeController implements Observer {
     ClientUser currUser;
     TradeManager tm;
     UserManager um;
     List<Trade> tradeList;
     Trade currTrade;
+    Boolean isFirst;
 
     public CTradeController(ClientUser currUser, TradeManager tm, UserManager um){
         this.currUser = currUser;
@@ -49,4 +56,40 @@ public class CTradeController {
     }
 
 
+
+    public boolean enterFirst() {
+        isFirst =  currTrade.getSecondMeeting() == null;
+        return isFirst;
+    }
+
+
+
+    @Override
+    public void update(Observable o, Object arg) {
+        UUID mtID = (UUID)arg;
+        Meeting mt = new MeetingManager().getMeetingWithId(mtID);
+        if (isFirst){
+            if (mt.getStatus().equals(MeetingStatus.INCOMPLETE)){
+                currTrade.setMeeting(mtID);
+            }
+            if (mt.getStatus().equals(MeetingStatus.CANCELLED)){
+                tm.cancelTrade(currTrade);
+            }
+            if (mt.getStatus().equals(MeetingStatus.COMPLETED)){
+                if (currTrade.getDuration() == -1){
+                    tm.completeTrade(currTrade);
+                }
+                else{
+                    currTrade.setSecondMeeting(new MeetingManager().setUpSecondMeeting(mtID));
+                }
+            }
+
+        }else{
+            Meeting smt = new MeetingManager().getMeetingWithId(currTrade.getSecondMeeting());
+            if (smt.getStatus().equals(MeetingStatus.COMPLETED)){
+                tm.completeTrade(currTrade);
+            }
+        }
+
+    }
 }

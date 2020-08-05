@@ -1,5 +1,6 @@
 package Trade.MeetingSystem.Gui;
 
+import Trade.CTradeController;
 import Trade.MeetingSystem.MeetingStatus;
 
 import javax.swing.*;
@@ -24,7 +25,7 @@ public class MainViewPresenter extends Observable implements Observer, MPresente
     JFrame frame;
 
 
-    public MainViewPresenter(UUID meetingID, UUID currLogInUser, List<UUID> users, JFrame frame) {
+    public MainViewPresenter(UUID meetingID, UUID currLogInUser, List<UUID> users, JFrame frame, CTradeController ctc) {
         this.meetingID = meetingID;
         this.currLogInUser = currLogInUser;
         this.users = users;
@@ -44,6 +45,7 @@ public class MainViewPresenter extends Observable implements Observer, MPresente
     @Override
     public void back() {
         frame.setVisible(true);
+
     }
 
     @Override
