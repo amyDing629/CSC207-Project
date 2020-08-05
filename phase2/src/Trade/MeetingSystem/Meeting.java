@@ -1,17 +1,22 @@
 package Trade.MeetingSystem;
 
+import Trade.MeetingSystem.TradeDemo.MeetingSystemCommandLineDemo;
+import Trade.MeetingSystem.TradeDemo.TradeEntity;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * [Entity class]
  * A meeting as a part of the Transaction process.
  */
 
-public class Meeting {
+public class Meeting extends Observable {
+
+    private final UUID uuid;
+
+    private final List<Observer> observers = new ArrayList<>();
 
     /**
      * This is Meeting's date-time.
@@ -44,7 +49,7 @@ public class Meeting {
      * 3. as long as one of the MeetingEditor exceed their own threshold of timeOfEdition, the meeting status should then be
      * set to "cancelled";
      */
-    private MeetingStatus status = MeetingStatus.incomplete;
+    private MeetingStatus status = MeetingStatus.INCOMPLETE;
 
     /**
      * This is Meeting's confirm status from both MeetingEditors respectively:
@@ -54,25 +59,37 @@ public class Meeting {
     private HashMap<UUID, Boolean> idToConfirmedStatus = new HashMap<>();
 
     private final DateTime dt = new DateTime();
+
     /**
      * Constructs a new Meeting with proposed date-time to meet dateTime, proposed place to meet place, info of both
      * MeetingEditors traderIds.
-     * @param dateTime the date-time proposed to the meeting
-     * @param place the place proposed to the meeting
+     *
+     * @param dateTime  the date-time proposed to the meeting
+     * @param place     the place proposed to the meeting
      * @param traderIds the ids of two MeetingEditors attend to this meeting
      */
-    public Meeting (LocalDateTime dateTime, String place, ArrayList<UUID> traderIds) {
+    public Meeting(UUID uuid, LocalDateTime dateTime, String place, ArrayList<UUID> traderIds) {
+        this.uuid = uuid;
         this.dateTime = dateTime;
         this.place = place;
-        for (UUID i: traderIds) {
+        for (UUID i : traderIds) {
             this.idToEditor.put(i, new MeetingEditor(i));
             this.idToAgreedStatus.put(i, false);
             this.idToConfirmedStatus.put(i, false);
         }
+
+        addObserver(new MeetingSystemCommandLineDemo());
+        addObserver(new TradeEntity(1));
+        updateStatus(this.getStatus());
+    }
+
+    public UUID getID() {
+        return uuid;
     }
 
     /**
      * Returns this Meeting's date-time. (Getter for dateTime)
+     *
      * @return the date-time
      */
     public LocalDateTime getDateTime() {
@@ -201,16 +218,7 @@ public class Meeting {
      */
     public void setStatus(MeetingStatus status) {
         this.status = status;
-    }
-
-
-    boolean isMeetingCancelled() {
-        for (MeetingEditor t : idToEditor.values()) {
-            if (t.editsOverThreshold()) {
-                return true;
-            }
-        }
-        return false;
+        updateStatus(status);
     }
 
     /**
@@ -218,7 +226,7 @@ public class Meeting {
      *
      * @param currLogInUser the last user that setup or edit or agree the meeting
      */
-    public void changeLastEditUser(UUID currLogInUser) {
+    public void setLastEditUser(UUID currLogInUser) {
         lastEditUser = currLogInUser;
     }
 
@@ -256,4 +264,35 @@ public class Meeting {
         return res;
     }
 
+    @Override
+    public void addObserver(Observer o) {
+        this.observers.add(o);
+    }
+
+//    @Override
+//    public void deleteObserver(Observer o) {
+//        if (!observers.isEmpty()) {
+//            observers.remove(o);
+//        }
+//    }
+//
+//    @Override
+//    public void notifyObservers() {
+//        for (Observer o : observers) {
+//            o.update(this, o);
+//        }
+//    }
+
+    public void updateStatus(MeetingStatus meetingStatus) {
+        status = meetingStatus;
+        setChanged();
+        notifyObservers(meetingStatus);
+    }
+
+
+    public void setIdToEditor(UUID user, MeetingEditor meetingEditor) {
+        if (!idToEditor.containsKey(user)) {
+            idToEditor.put(user, meetingEditor);
+        }
+    }
 }

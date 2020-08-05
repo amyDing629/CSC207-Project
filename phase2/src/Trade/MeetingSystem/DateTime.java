@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
+ * [Use Case]
  * This class provides basic usage of date-time.
  */
 
@@ -49,7 +50,7 @@ public class DateTime {
      * @param inputDateTimeString String of input datetime
      * @return true if date-time is of valid format
      */
-    boolean isValidFormat(String inputDateTimeString) throws DateTimeParseException {
+    public boolean isValidFormat(String inputDateTimeString) throws DateTimeParseException {
         boolean valid = true;
         try {
             formatter.parse(inputDateTimeString);
@@ -59,6 +60,17 @@ public class DateTime {
         return valid;
     }
 
+    /**
+     * Return if the input date-time string is in the future than the current time
+     *
+     * @param inputDateTimeString String of input datetime
+     * @return true if date-time is in the future
+     */
+    public boolean isFutureTime(String inputDateTimeString) {
+        LocalDateTime now = getCurrentTime();
+        LocalDateTime thisDatetime = convertToLocalDateTime(inputDateTimeString);
+        return thisDatetime.isAfter(now);
+    }
 
     /**
      * Convert the date-time string to LocalDateTime object
@@ -68,8 +80,12 @@ public class DateTime {
      * @return LocalDateTime object
      * https://www.java67.com/2016/04/how-to-convert-string-to-localdatetime-in-java8-example.html#ixzz6PvuyR5EV
      */
-    LocalDateTime convertToLocalDateTime(String inputDateTimeString) {
+    public LocalDateTime convertToLocalDateTime(String inputDateTimeString) {
         return LocalDateTime.parse(inputDateTimeString, formatter);
+    }
+
+    public String convertLDTtoString(LocalDateTime localDateTime) {
+        return localDateTime.toString().replace("T", " ");
     }
 
 }
