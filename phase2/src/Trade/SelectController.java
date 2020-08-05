@@ -37,8 +37,8 @@ public class SelectController {
     String getItemInfo(String str){
         Item item = iv.getItem(str);
         currItem = item;
-        return "Item Info:\nitem name: " + item.getName() + "\n" +
-                "item description: " + item.getDescription()
+        return "Item Info:\nitem name: " + iv.getName(item) + "\n" +
+                "item description: " + iv.getDescription(item)
                 + "\n" + "item owner: " + item.getOwnerName() ;
 
     }

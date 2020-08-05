@@ -1,6 +1,7 @@
 package Trade;
 
 import Inventory.Inventory;
+import Inventory.InventoryController;
 import Inventory.Item;
 import User.ClientUser;
 import User.UserManager;
@@ -78,7 +79,7 @@ public class RTradeGUI {
         onewayTemp.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (item.getIsInTrade()){
+                if (trc.getIsInTrade(item)){
                     jtz.setText("the item is already in trade");
                 }else if (!trc.checkInput(item).equals("true")){
                     jtz.setText(trc.checkInput(item));
@@ -92,7 +93,7 @@ public class RTradeGUI {
         onewayPer.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (item.getIsInTrade()){
+                if (trc.getIsInTrade(item)){
                     jtz.setText("the item is already in trade");
                 }else if (!trc.checkInput(item).equals("true")){
                     jtz.setText(trc.checkInput(item));
@@ -116,7 +117,7 @@ public class RTradeGUI {
                 }
                 else{
                     Item it = trc.getItem(itemName);
-                    if (it.getIsInTrade()){
+                    if (trc.getIsInTrade(it)){
                         jtz.setText("the item is already in the trade");
                     }else{
                         trc.createTrade("3", item, it);
@@ -137,7 +138,7 @@ public class RTradeGUI {
                 }
                 else{
                     Item it = trc.getItem(itemName);
-                    if (it.getIsInTrade()){
+                    if (trc.getIsInTrade(it)){
                         jtz.setText("the item is already in the trade");
                     }else{
                         trc.createTrade("4", item, it);

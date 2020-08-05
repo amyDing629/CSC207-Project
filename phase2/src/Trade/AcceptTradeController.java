@@ -50,11 +50,13 @@ public class AcceptTradeController {
     }
 
     void agreeTrade(){
-        tm.setStatus(currTrade, TradeStatus.incomplete);
+        TradeEditor te = new TradeEditor();
+        te.setStatus(currTrade, TradeStatus.incomplete);
     }
 
     void refuseTrade(){
-        tm.setStatus(currTrade, TradeStatus.cancelled);
+        TradeEditor te = new TradeEditor();
+        te.setStatus(currTrade, TradeStatus.cancelled);
     }
 
 }

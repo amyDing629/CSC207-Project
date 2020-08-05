@@ -42,7 +42,7 @@ public class InventoryController {
      */
     boolean selectItem(String line){
         for (Item it: iv.getLendingList()){
-            if (it.getName().equals(line)){
+            if (iv.getName(it).equals(line)){
                 //System.out.println(it + " has been selected");
                 return true;
             }
@@ -56,7 +56,7 @@ public class InventoryController {
      * @return whether the input item is the user's own item.
      */
     boolean isOwnItem(Item it){
-        return it.getOwnerName().equals(currUser.getUsername());
+        return iv.getOwnerName(it).equals(currUser.getUsername());
     }
 
     /**
@@ -64,17 +64,17 @@ public class InventoryController {
      * @param it the selected item.
      */
     void moveToWishList(Item it){
-        currUser.addWishBorrow(it.getName());
+        currUser.addWishBorrow(iv.getName(it));
     }
 
     void addToWishLend(Item it){
-        um.getWishLend(um.getUser(it.getOwnerName())).add(it.getName());
+        um.getWishLend(um.getUser(iv.getOwnerName(it))).add(iv.getName(it));
         iv.getLendingList().add(it);
-        iam.removeItem(it.getName());
+        iam.removeItem(iv.getName(it));
     }
 
     void removeItemFromIam(Item it){
-        iam.removeItem(it.getName());
+        iam.removeItem(iv.getName(it));
     }
 
     /**
@@ -82,7 +82,7 @@ public class InventoryController {
      * @return whether the item is the currUser's wish list
      */
     boolean isInOwnWishList(Item it){
-        return currUser.getWishBorrow().contains(it.getName());
+        return currUser.getWishBorrow().contains(iv.getName(it));
     }
 
     /**
@@ -167,10 +167,10 @@ public class InventoryController {
     }
 
     public void deleteItemL(Item it){
-        um.getWishLend(currUser).remove(it.getName());
+        um.getWishLend(currUser).remove(iv.getName(it));
     }
 
-    public void deleteItemB(Item it){um.getWishBorrow(currUser).remove(it.getName());}
+    public void deleteItemB(Item it){um.getWishBorrow(currUser).remove(iv.getName(it));}
 
     public void addItem(String name, String des){
         ArrayList<String> b= new ArrayList<>();
@@ -191,12 +191,14 @@ public class InventoryController {
 
     boolean itemExist(String name){
         for (Item it: iv.getLendingList()){
-            if (it.getName().equals(name)){
+            if (iv.getName(it).equals(name)){
                 return true;
             }
         }
         return false;
     }
+
+
 
 
 

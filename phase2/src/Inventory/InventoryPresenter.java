@@ -28,7 +28,7 @@ public class InventoryPresenter {
     String printAvailable(){
         String result = "";
         for (Item it: iv.getAvailableList()){
-            result = result + it.getName() + "\n";
+            result = result + iv.getName(it) + "\n";
         }
         if (result.equals("")){
             return "no available item";
@@ -50,9 +50,9 @@ public class InventoryPresenter {
         System.out.println("item owner: " + item.getOwnerName());
 
          */
-        return "Item Info:\nitem name: " + item.getName() + "\n" +
-                "item description: " + item.getDescription()
-                + "\n" + "item owner: " + item.getOwnerName() ;
+        return "Item Info:\nitem name: " + iv.getName(item) + "\n" +
+                "item description: " + iv.getDescription(item)
+                + "\n" + "item owner: " + iv.getOwnerName(item) ;
     }
 
     /**

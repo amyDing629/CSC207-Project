@@ -46,6 +46,8 @@ public abstract class Trade {
 
     public static int temp = 30;
 
+    private boolean isBonus;
+
 
     /**
      * [constructor]
@@ -199,6 +201,16 @@ public abstract class Trade {
      * @return onewayTrade or twowayTrade
      */
     public abstract String getType();
+
+    public boolean getIsBonus(){
+        return isBonus;
+    }
+
+    public void setIsBonus(boolean newIsBonus){
+        isBonus = newIsBonus;
+
+    }
+
 
 
 

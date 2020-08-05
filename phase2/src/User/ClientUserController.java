@@ -29,7 +29,7 @@ public class ClientUserController {
 
     public boolean checkItemExist(String item, Inventory iv){
         for (Item n : iv.getLendingList()) {
-            if (n.getName().equals(item)) {
+            if (iv.getName(n).equals(item)) {
                 return true;
             }
         }

@@ -44,7 +44,7 @@ public class AddNewItem {
             }
             String des = uc.getString("Type the description of the item");
             Item i = new Item(name, um.getUsername(user));
-            i.setDescription(des);
+            iv.setDescription(i,des);
             iv.addItem(i);
             user.addWishes(name);
 
@@ -68,7 +68,7 @@ public class AddNewItem {
                 int k = Integer.parseInt(inputs);
                 if (k > -1 && k < (hii.size())) {
                     Item i = new Item(hii.get(k).get(1), hii.get(k).get(3));
-                    i.setDescription(hii.get(k).get(2));
+                    iv.setDescription(i, hii.get(k).get(2));
                     um.getUser(hii.get(k).get(3)).addWishes(hii.get(k).get(1));
                     iv.addItem(i);
                     cuc.getIam().getItemApproval().remove(k);

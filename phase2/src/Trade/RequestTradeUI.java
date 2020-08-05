@@ -93,7 +93,7 @@ public class RequestTradeUI{
                 }
                 if (currUser.getWishLend().contains(line2)){
                     Item it = trc.getItem(line2);
-                    if (it.getIsInTrade()){
+                    if (trc.getIsInTrade(it)){
                         System.out.println("the trade is already in the trade, please choose again");
                     }else{
                         return it.getName();

@@ -93,4 +93,30 @@ public class Inventory {
     public void setDescription(String des, Item item){
         item.setDescription(des);
     }
+
+    public boolean getIsInTrade(Item it){
+        return it.getIsInTrade();
+
+    }
+
+    public void setIsInTrade(Item it, boolean inTrade){
+        it.setIsInTrade(inTrade);
+    }
+
+    public String getName(Item it){
+        return it.getName();
+    }
+
+    public String getDescription(Item it){
+        return it.getDescription();
+    }
+
+    public void setDescription(Item it, String des){
+        it.setDescription(des);
+    }
+
+    public String getOwnerName(Item it){
+        return it.getOwnerName();
+    }
+
 }

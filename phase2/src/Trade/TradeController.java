@@ -60,16 +60,16 @@ public class TradeController {
      * @throws IOException one of the users's account is frozen
      */
     String checkInput(Item item){
-        if (item.getIsInTrade()){
+        if (getIsInTrade(item)){
             return "the item is already in the trade";
         }
-        if (currUser.getIsFrozen()) {
+        if (um.getIsFrozen(currUser)) {
             return "your account is frozen!";
         }
         if (tarUser == null){
             return "tarUser not found";
         }
-        if (tarUser.getIsFrozen()) {
+        if (um.getIsFrozen(tarUser)) {
             return "the account of the item owner is frozen!";
         }
         if (tarUser == currUser){
@@ -86,17 +86,18 @@ public class TradeController {
      * @throws IOException the trade is not created
      */
     boolean createTrade(String line, Item item){
+        TradeEditor te = new TradeEditor();
         LocalDateTime time = LocalDateTime.now();
-        item.setIsInTrade(true);
+        iv.setIsInTrade(item,true);
         switch (line) {
             case "1":
                 currTrade = tm.createOnewayTrade(currUser.getId(), tarUser.getId(), item, 30, time);
-                currTrade.setCreator(currUser.getId());
+                te.setCreator(currTrade, currUser.getId());
                 updateTradeHistory();
                 return true;
             case "2":
                 currTrade = tm.createOnewayTrade(currUser.getId(), tarUser.getId(), item, -1, time);
-                currTrade.setCreator(currUser.getId());
+                te.setCreator(currTrade, currUser.getId());
                 updateTradeHistory();
                 return true;
             default: {
@@ -113,25 +114,25 @@ public class TradeController {
      * @throws IOException if the trade is not created
      */
     void createTrade(String line, Item item1, Item item2){
-        item1.setIsInTrade(true);
-        item2.setIsInTrade(true);
+        TradeEditor te = new TradeEditor();
+        iv.setIsInTrade(item1,true);
+        iv.setIsInTrade(item2,true);
         LocalDateTime time = LocalDateTime.now();
         if (line.equals("3")){
             currTrade = tm.createTwowayTrade(currUser.getId(), tarUser.getId(), item1, item2, 30, time);
-            currTrade.setCreator(currUser.getId());
-            updateTradeHistory();
         }else{
             currTrade = tm.createTwowayTrade(currUser.getId(), tarUser.getId(), item1, item2, -1, time);
-            currTrade.setCreator(currUser.getId());
-            updateTradeHistory();
 
         }
+        te.setCreator(currTrade, currUser.getId());
+        updateTradeHistory();
     }
 
     void updateTradeHistory() {
+        TradeEditor te = new TradeEditor();
         // System.out.println("userList:"+userManager.getUser UserManager userManager = new UserManager(gw);
-        currUser.getTradeHistory().add(currTrade.getId());
-        tarUser.getTradeHistory().add(currTrade.getId());
+        currUser.getTradeHistory().add(te.getId(currTrade));
+        tarUser.getTradeHistory().add(te.getId(currTrade));
     }
     /**
      * check the status of the current trade
@@ -184,6 +185,13 @@ public class TradeController {
         }
         return result;
     }
+
+    boolean getIsInTrade(Item it){
+        return iv.getIsInTrade(it);
+
+    }
+
+
 
 
 
