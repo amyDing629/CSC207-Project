@@ -1,5 +1,6 @@
 package Trade.MeetingSystem;
 
+import Trade.MeetingSystem.TradeDemo.MeetingSystemCommandLineDemo;
 import Trade.MeetingSystem.TradeDemo.TradeEntity;
 
 import java.time.LocalDateTime;
@@ -77,7 +78,7 @@ public class Meeting extends Observable {
             this.idToConfirmedStatus.put(i, false);
         }
 
-//        addObserver(new MeetingSystemCommandLineDemo());
+        addObserver(new MeetingSystemCommandLineDemo());
         addObserver(new TradeEntity(1));
         updateStatus(this.getStatus());
     }

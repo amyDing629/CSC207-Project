@@ -4,7 +4,7 @@ import Trade.MeetingSystem.TradeDemo.TradeEntity;
 
 import java.util.List;
 import java.util.UUID;
-
+/*
 public class test {
 
     public static void main(String[] args) {
@@ -52,3 +52,5 @@ public class test {
 //                });
 //                loginPresenter.run();
 }
+
+ */

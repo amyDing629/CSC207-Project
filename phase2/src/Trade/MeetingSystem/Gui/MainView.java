@@ -31,6 +31,7 @@ public class MainView {
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {
         getPresenter().back();
+        frame.setVisible(false);
     }
 
     public void updateViewFromModel(boolean isFirst) {

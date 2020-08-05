@@ -2,6 +2,7 @@ package Trade;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class TradeGUI implements TradeGUIPlan {
     private JFrame fr;
@@ -9,8 +10,16 @@ public class TradeGUI implements TradeGUIPlan {
     private JTextArea list;
     private JTextArea msg;
 
-    public void setSize(int width, int height){
-        fr.setSize(width, height);
+    public JFrame getFrame(){
+        return fr;
+    }
+
+    @Override
+    public void setFrame(int width, int height, String name){
+        JFrame frame = new JFrame(name);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setSize(width, height);
+        fr = frame;
 
     }
 
@@ -55,5 +64,22 @@ public class TradeGUI implements TradeGUIPlan {
     public void setCenter(JPanel c)
     {
         fr.getContentPane().add(BorderLayout.CENTER, c);
+    }
+
+    @Override
+    public void initializeList(JTextArea ta) {
+        list = ta;
+    }
+
+    @Override
+    public void initializeCurr(JTextArea ta) {
+        curr = ta;
+
+    }
+
+    @Override
+    public void initializeMsg(JTextArea ta) {
+        msg = ta;
+
     }
 }
