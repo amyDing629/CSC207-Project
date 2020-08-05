@@ -114,9 +114,8 @@ public class UserDataAccess {
             FileOutputStream fileOut =
                     new FileOutputStream("phase2/src/user.ser");
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
-            for(ClientUser b: a){
-                out.writeObject(b);
-            }
+            out.writeObject(a);
+
             out.close();
             fileOut.close();
         } catch (IOException i) {
@@ -124,22 +123,18 @@ public class UserDataAccess {
         }
     }
 
-    public List<ClientUser> deSerializable(){
+    public void deSerializable(){
         try {
-            List<ClientUser> res = new ArrayList<>();
+            List<ClientUser> res = new ArrayList<ClientUser>();
             FileInputStream fileIn = new FileInputStream("phase2/src/user.ser");
             ObjectInputStream in = new ObjectInputStream(fileIn);
-            for(ClientUser a: um.getUserList()){
-                ClientUser e = (ClientUser) in.readObject();
-                res.add(e);
-            }
+            res = (List<ClientUser>) in.readObject();
+            for(ClientUser b: res){um.getUserList().add(b);}
             in.close();
             fileIn.close();
-            return res;
         } catch (IOException | ClassNotFoundException i) {
             List<ClientUser> res = new ArrayList<>();
             i.printStackTrace();
-            return res;
         }
     }
 
