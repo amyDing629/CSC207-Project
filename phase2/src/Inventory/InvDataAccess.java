@@ -1,6 +1,10 @@
 package Inventory;
 
+import Trade.Trade;
+
 import java.io.*;
+import java.util.ArrayList;
+
 /**
  * [gateway class]
  * the class that read and write all the item information from ItemList.txt into ItemList in gateway
@@ -39,30 +43,7 @@ public class InvDataAccess {
         }
     }
 
-    /**
-     * update the new lendingList to file
-     * @throws IOException when the update is failed
-     */
-    public void updateFile() throws IOException {
-        File file = new File("phase2/src/ItemList.txt");
-        try {
-            if(!file.exists()) {
-                boolean result = file.createNewFile();
-                if (!result){
-                    System.out.println("the new file is not created");
-                }
-            }
-            FileWriter fileWriter =new FileWriter(file);
-            fileWriter.write("");
-            fileWriter.flush();
-            fileWriter.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        for (Item item: iv.getLendingList()){
-            addItemToFile(item);
-        }
-    }
+
 
 
     /**
@@ -79,4 +60,56 @@ public class InvDataAccess {
 
         }
     }
+
+
+    /**
+     * update trade.txt with information in trade list of gateway.
+     */
+    public void updateFile(){
+        File file = new File("phase2/src/itemList.txt");
+        try {
+            if(!file.exists()) {
+                boolean result = file.createNewFile();
+                if (!result){
+                    System.out.println("the trade file is not updated successfully");
+                }
+            }
+            FileWriter fileWriter =new FileWriter(file);
+            fileWriter.write("");
+            fileWriter.flush();
+            fileWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        serialize();
+    }
+
+    public void serialize(){
+        try {
+            FileOutputStream fileOut =
+                    new FileOutputStream("phase2/src/itemList.ser");
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(iv.getLendingList());
+            out.close();
+            fileOut.close();
+        } catch (IOException i) {
+            i.printStackTrace();
+        }
+    }
+
+    public void deSerialize(){
+        try {
+
+            FileInputStream fileIn = new FileInputStream("phase2/src/trade.ser");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            iv.setLendingList((ArrayList<Item>)in.readObject());
+            in.close();
+            fileIn.close();
+        } catch (IOException | ClassNotFoundException i) {
+            iv.setLendingList(new ArrayList<Item>());
+            i.printStackTrace();
+        }
+
+    }
+
 }

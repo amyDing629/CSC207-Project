@@ -3,6 +3,7 @@ package Trade;
 import Inventory.Item;
 import Trade.MeetingSystem.Meeting;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.UUID;
@@ -11,7 +12,7 @@ import java.util.UUID;
  * [entity class]
  * abstract class, a trade for users to change items
  */
-public abstract class Trade {
+public abstract class Trade implements Serializable {
     /**
      * first meeting of the trade
      */

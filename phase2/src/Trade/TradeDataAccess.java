@@ -183,11 +183,38 @@ public class TradeDataAccess {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        if (tm.getTradeList().size()>0){
-            for (Trade trade: tm.getTradeList()){
-                addTradeToFile(trade);
-            }
+        serialize();
+    }
+
+    public void serialize(){
+        try {
+            FileOutputStream fileOut =
+                    new FileOutputStream("phase2/src/trade.ser");
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(tm.getTradeList());
+            out.close();
+            fileOut.close();
+        } catch (IOException i) {
+            i.printStackTrace();
         }
     }
+
+    public ArrayList<Trade> deSerialize(){
+        try {
+
+            FileInputStream fileIn = new FileInputStream("phase2/src/trade.ser");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            ArrayList<Trade> res = (ArrayList<Trade>)in.readObject();
+            in.close();
+            fileIn.close();
+            return res;
+        } catch (IOException | ClassNotFoundException i) {
+            ArrayList<Trade> res = new ArrayList<>();
+            i.printStackTrace();
+            return res;
+        }
+
+    }
+
 
 }

@@ -1,11 +1,13 @@
 package Inventory;
 
 
+import java.io.Serializable;
+
 /**
  * [entity class]
  * Basic attributes of items.
  */
-public class Item {
+public class Item implements Serializable {
     /**
      * The name of the item. Each item has a unique name.
      */

@@ -2,16 +2,17 @@ package Trade;
 
 import Inventory.*;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class OnewayTrade extends Trade {
+public class OnewayTrade extends Trade implements Serializable {
     private final UUID lenderId;
     private final UUID borrowerId;
     private final Item item;
-    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     /**
      * @param lender Trader who wants to lend item to others

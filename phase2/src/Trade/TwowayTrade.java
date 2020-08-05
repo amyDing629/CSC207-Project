@@ -2,17 +2,18 @@ package Trade;
 
 import Inventory.Item;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class TwowayTrade extends Trade {
+public class TwowayTrade extends Trade implements Serializable {
     private final UUID trader1Id;
     private final UUID trader2Id;
     private final Item item1to2;
     private final Item item2to1;
-    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     /**
      *

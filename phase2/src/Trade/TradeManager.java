@@ -66,15 +66,6 @@ public class TradeManager {
     }
 
 
-    void updateTradeHistory(UUID currUserId, UUID tarUserId, Trade newTrade, UserManager um) {
-        // System.out.println("userList:"+userManager.getUser UserManager userManager = new UserManager(gw);
-        ClientUser currentUser = um.getUser(currUserId);
-        ClientUser tarUser = um.getUser(tarUserId);
-        currentUser.getTradeHistory().add(newTrade.getId());
-        tarUser.getTradeHistory().add(newTrade.getId());
-    }
-
-
     public Trade getTrade(UUID id) {
         for (Trade trade : tradeList) {
             if (trade.getId().equals(id)) {
@@ -84,9 +75,6 @@ public class TradeManager {
         return null;
     }
 
-    public void setStatus(Trade trade, TradeStatus status){
-        trade.setStatus(status);
-    }
 
     /**
      * check the status of the current trade
@@ -263,6 +251,7 @@ public class TradeManager {
         }
         return number;
     }
+
 
 
 

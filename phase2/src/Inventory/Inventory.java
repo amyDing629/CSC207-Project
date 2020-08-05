@@ -30,6 +30,10 @@ public class Inventory {
         return lendingList;
     }
 
+    public void setLendingList(ArrayList<Item> itemList){
+        lendingList = itemList;
+    }
+
     /**
      * get a list of items that is not in the trade
      * @return available item list
