@@ -22,6 +22,9 @@ public class MainView {
     private JTextArea welcomeTextArea;
 
 
+    private boolean isFirst; // is first meeting
+
+
     public MainView() {
         initComponents();
     }
@@ -30,7 +33,8 @@ public class MainView {
         getPresenter().back();
     }
 
-    public void updateViewFromModel() {
+    public void updateViewFromModel(boolean isFirst) {
+        this.isFirst = isFirst;
         Model model = getPresenter().getModel();
         UUID meetingID = getPresenter().getMeetingID();
         MeetingStatus meetingStatus = model.getMeetingStatus(meetingID);
@@ -39,45 +43,65 @@ public class MainView {
         welcomeTextArea.setText(model.getCurrUser());
         meetingInfoTextArea.setText(model.getMeetingInfo(meetingID));
 
-        // update Button view
-        if (meetingStatus.equals(MeetingStatus.DNE)) {
-            // set up session
-            setUpButton.setVisible(true);
-            editButton.setVisible(false);
-            agreeButton.setVisible(false);
-            confirmButton.setVisible(false);
-        } else if (meetingStatus.equals(MeetingStatus.INCOMPLETE)) {
-            setUpButton.setVisible(false);
-            editButton.setVisible(!model.otherUserAgreed(meetingID) && !model.isLastUserCurrUser());
-            agreeButton.setVisible(!model.isLastUserCurrUser());
-            confirmButton.setVisible(false);
-        } else if (meetingStatus.equals(MeetingStatus.AGREED)) {
-            welcomeTextArea.setText("Meeting Agreed by both users!");
-            setUpButton.setVisible(false);
-            editButton.setVisible(false);
-            agreeButton.setVisible(false);
-            confirmButton.setVisible(!model.isLastUserCurrUser());
-        } else {
-            // cancelled or completed
-            setUpButton.setVisible(false);
-            editButton.setVisible(false);
-            agreeButton.setVisible(false);
-            confirmButton.setVisible(false);
+        // TODO: strategy pattern
+        if (isFirst) { // first meeting view
+
+            // update Button view
+            if (meetingStatus.equals(MeetingStatus.DNE)) {
+                // set up session
+                setUpButton.setVisible(true);
+                editButton.setVisible(false);
+                agreeButton.setVisible(false);
+                confirmButton.setVisible(false);
+            } else if (meetingStatus.equals(MeetingStatus.INCOMPLETE)) {
+                setUpButton.setVisible(false);
+                editButton.setVisible(!model.otherUserAgreed(meetingID) && !model.isLastUserCurrUser());
+                agreeButton.setVisible(!model.isLastUserCurrUser());
+                confirmButton.setVisible(false);
+            } else if (meetingStatus.equals(MeetingStatus.AGREED)) {
+                welcomeTextArea.setText("Meeting Agreed by both users!");
+                setUpButton.setVisible(false);
+                editButton.setVisible(false);
+                agreeButton.setVisible(false);
+                confirmButton.setVisible(!model.isLastUserCurrUser());
+            } else {
+                // cancelled or completed
+                setUpButton.setVisible(false);
+                editButton.setVisible(false);
+                agreeButton.setVisible(false);
+                confirmButton.setVisible(false);
+            }
+
+            if (model.isLastUserCurrUser()) {
+                setUpButton.setVisible(false);
+                editButton.setVisible(false);
+                agreeButton.setVisible(false);
+                confirmButton.setVisible(false);
+                welcomeTextArea.setText("Please wait the other user to edit/agree/confirm!");
+            }
+
+            if (meetingStatus.equals(MeetingStatus.CANCELLED)) {
+                welcomeTextArea.setText("Meeting Cancelled!");
+            } else if (meetingStatus.equals(MeetingStatus.COMPLETED)) {
+                welcomeTextArea.setText("Meeting Confirmed by both users!");
+            }
+        } else { // second meeting view
+
+            confirmButton.setVisible(true);
+
+            if (model.isLastUserCurrUser()) {
+                setUpButton.setVisible(false);
+                editButton.setVisible(false);
+                agreeButton.setVisible(false);
+                confirmButton.setVisible(false);
+                welcomeTextArea.setText("Please wait the other user to confirm!");
+            }
+
+            if (meetingStatus.equals(MeetingStatus.COMPLETED)) {
+                welcomeTextArea.setText("Meeting Confirmed by both users!");
+            }
         }
 
-        if (model.isLastUserCurrUser()) {
-            setUpButton.setVisible(false);
-            editButton.setVisible(false);
-            agreeButton.setVisible(false);
-            confirmButton.setVisible(false);
-            welcomeTextArea.setText("Please wait the other user to edit/agree/confirm!");
-        }
-
-        if (meetingStatus.equals(MeetingStatus.CANCELLED)) {
-            welcomeTextArea.setText("Meeting Cancelled!");
-        } else if (meetingStatus.equals(MeetingStatus.COMPLETED)) {
-            welcomeTextArea.setText("Meeting Confirmed by both users!");
-        }
 
     }
 
@@ -118,7 +142,7 @@ public class MainView {
                 setupViewPresenter.run();
                 setupViewPresenter.addObserver(getPresenter());
                 getPresenter().setMeetingID(setupViewPresenter.getMeetingID()); // TODO: Observer Pattern ?????
-                updateViewFromModel();
+                updateViewFromModel(isFirst);
             }
         });
         editButton.addActionListener(new ActionListener() {
@@ -128,7 +152,7 @@ public class MainView {
                 EditionViewPresenter editionViewPresenter =
                         new EditionViewPresenter(getPresenter().getMeetingID(), getPresenter().getCurrLogInUser());
                 editionViewPresenter.run();
-                updateViewFromModel();
+                updateViewFromModel(isFirst);
             }
         });
         agreeButton.addActionListener(new ActionListener() {
@@ -138,7 +162,7 @@ public class MainView {
                 AgreeViewPresenter agreeViewPresenter =
                         new AgreeViewPresenter(getPresenter().getMeetingID(), getPresenter().getCurrLogInUser());
                 agreeViewPresenter.run();
-                updateViewFromModel();
+                updateViewFromModel(isFirst);
             }
         });
         confirmButton.addActionListener(new ActionListener() {
@@ -148,7 +172,7 @@ public class MainView {
                 ConfirmViewPresenter confirmViewPresenter =
                         new ConfirmViewPresenter(getPresenter().getMeetingID(), getPresenter().getCurrLogInUser());
                 confirmViewPresenter.run();
-                updateViewFromModel();
+                updateViewFromModel(isFirst);
             }
         });
         helpButton.addActionListener(new ActionListener() {
