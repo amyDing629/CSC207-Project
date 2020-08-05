@@ -29,28 +29,28 @@ public class TradePresenter {
     /**
      * present trade information (might delete some information)
      */
-    String presentTradeUIInfo(){
-        String result = "===========================" + "\n" +
-        currUser.getUsername() + "\n" +
-        "tradeId: " + trade.getId() + "\n" +
-        "tradeUsers: " + trade.getUsers() + "\n" +
-        "tradeStatus: " + trade.getStatus() + "\n" +
-        "tradeItem: " + trade.getItemList() + "\n" +
-        "first meeting: " + trade.getMeeting();
-        if (trade.getMeeting()!= null){
-            result = result + "\n" +
-            "first meeting status: " + trade.getMeeting().getStatus() + "\n" +
-            "id to confirm: " + trade.getMeeting().getConfirmedStatusFull() + "\n" +
-            "id to agree: " + trade.getMeeting().getAgreedStatusFull() + "\n" +
-            "id to edition: " + trade.getMeeting().getIdToEditor();
-        }
-        result = result + "second meeting: " + trade.getSecondMeeting();
-        if (trade.getSecondMeeting()!=null){
-            result = result + "\n"+ "second meeting status: "+trade.getSecondMeeting().getStatus();
-        }
-        result = result + "============================";
-        return result;
-    }
+//    String presentTradeUIInfo(){
+//        String result = "===========================" + "\n" +
+//        currUser.getUsername() + "\n" +
+//        "tradeId: " + trade.getId() + "\n" +
+//        "tradeUsers: " + trade.getUsers() + "\n" +
+//        "tradeStatus: " + trade.getStatus() + "\n" +
+//        "tradeItem: " + trade.getItemList() + "\n" +
+//        "first meeting: " + trade.getMeeting();
+//        if (trade.getMeeting()!= null){
+//            result = result + "\n" +
+//            "first meeting status: " + trade.getMeeting().getStatus() + "\n" +
+//            "id to confirm: " + trade.getMeeting().getConfirmedStatusFull() + "\n" +
+//            "id to agree: " + trade.getMeeting().getAgreedStatusFull() + "\n" +
+//            "id to edition: " + trade.getMeeting().getIdToEditor();
+//        }
+//        result = result + "second meeting: " + trade.getSecondMeeting();
+//        if (trade.getSecondMeeting()!=null){
+//            result = result + "\n"+ "second meeting status: "+trade.getSecondMeeting().getStatus();
+//        }
+//        result = result + "============================";
+//        return result;
+//    }
 
     void enterTrade(){
         System.out.println("type 1 to exit, type anything to continue with current trade");

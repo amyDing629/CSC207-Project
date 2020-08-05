@@ -1,5 +1,5 @@
 package Trade;
-
+/*
 import Trade.MeetingSystem.MeetingSystem;
 import User.ClientUser;
 import User.UserManager;
@@ -16,6 +16,7 @@ import java.util.UUID;
  * trade system
  * allow users to confirm and edit trade
  */
+/*
 public class TradeUI {
     ClientUser currUser;
     Trade trade;
@@ -29,6 +30,7 @@ public class TradeUI {
      * @param currUser the user that is using the system
      * @param tradeId the trade id of the current trade
      */
+/*
     public TradeUI(ClientUser currUser, UUID tradeId, TradeManager tm, UserManager um){
         this.currUser = currUser;
         trade = tm.getTrade(tradeId);
@@ -41,6 +43,7 @@ public class TradeUI {
      * run the system
      * @throws IOException can not update edition to file
      */
+/*
     public void run(){
         boolean becomeComplete = false;
 
@@ -119,6 +122,7 @@ public class TradeUI {
     /**
      * allow users to confirm unconfirmed trade
      */
+/*
     private void confirmTrade(){
         while (true) {
             if (trade.getCreator().equals(currUser.getId())){
@@ -148,4 +152,6 @@ public class TradeUI {
     }
 
 }
+
+ */
 

@@ -5,6 +5,7 @@ import Trade.MeetingSystem.MeetingManager;
 import Trade.MeetingSystem.MeetingStatus;
 import Trade.MeetingSystem.ReadWriteMeeting;
 
+import javax.swing.*;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -30,17 +31,17 @@ public class MainController implements Observer {
     }
 
     // automatically choose service
-    public void run(UUID currLogInUser, UUID meetingID) {
+    public void run(UUID currLogInUser, JFrame frame) {
         // first meeting
         if (isFirst) {
             if (meetingID == null) {
-                mainPresenter = new MainViewPresenter(null, currLogInUser, users);
+                mainPresenter = new MainViewPresenter(null, currLogInUser, users, frame);
             } else {
-                mainPresenter = new MainViewPresenter(meetingID, currLogInUser, users);
+                mainPresenter = new MainViewPresenter(meetingID, currLogInUser, users, frame);
             }
 
         } else { // only second (temporary) meeting
-            mainPresenter = new MainViewPresenter(meetingID, currLogInUser, users);
+            mainPresenter = new MainViewPresenter(meetingID, currLogInUser, users, frame);
         }
 
         // run the service once

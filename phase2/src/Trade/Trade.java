@@ -2,6 +2,7 @@ package Trade;
 
 import Inventory.Item;
 import Trade.MeetingSystem.Meeting;
+import Trade.MeetingSystem.MeetingStatus;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -16,7 +17,7 @@ public abstract class Trade implements Serializable {
     /**
      * first meeting of the trade
      */
-    private Meeting meeting;
+    private UUID meeting;
     /**
      * status of the trade
      * unconfirmed: the trade has been requested, but not yet confirmed
@@ -32,7 +33,7 @@ public abstract class Trade implements Serializable {
     /**
      * second meeting for the trade.
      */
-    private Meeting secondMeeting;
+    private UUID secondMeeting;
     /**
      * the number of days for borrower to keep the item.
      * -1 means permanent trade.
@@ -120,15 +121,10 @@ public abstract class Trade implements Serializable {
         return duration;
     }
 
-    /**
-     *
-     * @param dateTime time of the meeting
-     * @param place place of the meeting
-     * @param traderIds the id of the two traders
-     */
+
     // can input time and place and create new Meeting object based on Meeting constructor
-    public void setMeeting(LocalDateTime dateTime, String place, ArrayList<UUID> traderIds){
-        this.meeting = new Meeting(dateTime, place, traderIds);
+    public void setMeeting(UUID meetingID){
+        this.meeting = meetingID;
 
     }
 
@@ -136,7 +132,7 @@ public abstract class Trade implements Serializable {
      * edit meeting
      * @param mt the new meeting edited
      */
-    public void changeMeeting(Meeting mt){
+    public void changeMeeting(UUID mt){
         meeting = mt;
 
     }
@@ -145,25 +141,20 @@ public abstract class Trade implements Serializable {
      * edit second meeting
      * @param mt the new meeting edited
      */
-    public void changeSecondMeeting(Meeting mt){
+    public void changeSecondMeeting(UUID mt){
         secondMeeting = mt;
     }
 
-    /**
-     *
-     * @param dateTime time of the meeting
-     * @param place place of the meeting
-     * @param traderIds the id of the two traders
-     */
-    public void setSecondMeeting(LocalDateTime dateTime, String place, ArrayList<UUID> traderIds){
-        this.secondMeeting = new Meeting(dateTime, place, traderIds);
+
+    public void setSecondMeeting(UUID meetingID){
+        this.secondMeeting = meetingID;
     }
 
     /**
      * getter for second meeting
      * @return second meeting
      */
-    public Meeting getSecondMeeting(){
+    public UUID getSecondMeeting(){
         return secondMeeting;
     }
 
@@ -171,7 +162,7 @@ public abstract class Trade implements Serializable {
      * getter for first meeting
      * @return first meeting
      */
-    public Meeting getMeeting(){
+    public UUID getMeeting(){
         return meeting;
     }
 

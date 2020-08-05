@@ -1,14 +1,14 @@
 package Trade;
 
 import Inventory.Item;
+import Trade.MeetingSystem.Meeting;
+import Trade.MeetingSystem.MeetingManager;
 import Trade.MeetingSystem.MeetingStatus;
 import User.ClientUser;
 import User.UserManager;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * This is a use case class trade.TradeManager
@@ -16,7 +16,7 @@ import java.util.UUID;
  * Allow users to set up trade, cancel trade
  * Automatically update the trade history for both users in the trade.
  */
-public class TradeManager {
+public class TradeManager implements Observer {
     public ArrayList<Trade> tradeList;
 
     public TradeManager(){
@@ -81,32 +81,32 @@ public class TradeManager {
      * @param currTrade the current trade
      * @return the status
      */
-    String checkTradeMeeting(Trade currTrade) {
-        if (currTrade.getStatus().equals(TradeStatus.unconfirmed)) {
-            return "confirm trade";
-        }else if (currTrade.getStatus().equals(TradeStatus.cancelled)) {
-            return "cancelled";
-        }else if (currTrade.getStatus().equals(TradeStatus.complete)) {
-            return "complete";
-
-        }else if (currTrade.getMeeting() == null ||
-                currTrade.getMeeting().getStatus().equals(MeetingStatus.incomplete) ||
-                currTrade.getMeeting().getStatus().equals(MeetingStatus.agreed)){
-            return "first meeting";
-        }else if (currTrade.getMeeting().getStatus().equals(MeetingStatus.cancelled)){
-            currTrade.setStatus(TradeStatus.cancelled);
-            return "cancelled";
-        }else if (currTrade.getDuration()==Trade.temp){
-            if (currTrade.getSecondMeeting().getStatus().equals(MeetingStatus.incomplete)){
-                return "second meeting";
-            }else{
-                currTrade.setStatus(TradeStatus.complete);
-                return "complete";
-            }
-        }else{
-            return "complete";
-        }
-    }
+//    String checkTradeMeeting(Trade currTrade) {
+//        if (currTrade.getStatus().equals(TradeStatus.unconfirmed)) {
+//            return "confirm trade";
+//        }else if (currTrade.getStatus().equals(TradeStatus.cancelled)) {
+//            return "cancelled";
+//        }else if (currTrade.getStatus().equals(TradeStatus.complete)) {
+//            return "complete";
+//
+//        }else if (currTrade.getMeeting() == null ||
+//                currTrade.getMeeting().getStatus().equals(MeetingStatus.INCOMPLETE) ||
+//                currTrade.getMeeting().getStatus().equals(MeetingStatus.AGREED)){
+//            return "first meeting";
+//        }else if (currTrade.getMeeting().getStatus().equals(MeetingStatus.CANCELLED)){
+//            currTrade.setStatus(TradeStatus.cancelled);
+//            return "cancelled";
+//        }else if (currTrade.getDuration()==Trade.temp){
+//            if (currTrade.getSecondMeeting().getStatus().equals(MeetingStatus.INCOMPLETE)){
+//                return "second meeting";
+//            }else{
+//                currTrade.setStatus(TradeStatus.complete);
+//                return "complete";
+//            }
+//        }else{
+//            return "complete";
+//        }
+//    }
 
     /**
      * confirm trade(agree with the trade)
@@ -253,13 +253,14 @@ public class TradeManager {
     }
 
 
+    @Override
+    public void update(Observable o, Object arg) {
+        Meeting mt = (Meeting)o;
+        MeetingStatus ms = (MeetingStatus)arg;
+        MeetingManager mg = new MeetingManager();
+        Trade tr = getTrade(mt.);
 
-
-
-
-
-
-
+    }
 }
 
 

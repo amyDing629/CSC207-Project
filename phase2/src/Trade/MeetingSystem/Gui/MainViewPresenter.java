@@ -2,6 +2,7 @@ package Trade.MeetingSystem.Gui;
 
 import Trade.MeetingSystem.MeetingStatus;
 
+import javax.swing.*;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -20,12 +21,14 @@ public class MainViewPresenter extends Observable implements Observer, MPresente
 
     // View
     MainView mainView;
+    JFrame frame;
 
 
-    public MainViewPresenter(UUID meetingID, UUID currLogInUser, List<UUID> users) {
+    public MainViewPresenter(UUID meetingID, UUID currLogInUser, List<UUID> users, JFrame frame) {
         this.meetingID = meetingID;
         this.currLogInUser = currLogInUser;
         this.users = users;
+        this.frame = frame;
 
         // set Model
         meetingModel = new MeetingModel(meetingID, currLogInUser);
@@ -40,7 +43,7 @@ public class MainViewPresenter extends Observable implements Observer, MPresente
 
     @Override
     public void back() {
-        // TODO: back to Trade System View!
+        frame.setVisible(true);
     }
 
     @Override

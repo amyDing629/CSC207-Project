@@ -138,9 +138,9 @@ public class TradeController {
      * check the status of the current trade
      * @return the status
      */
-    String checkTradeMeeting() {
-        return tm.checkTradeMeeting(currTrade);
-    }
+//    String checkTradeMeeting() {
+//        return tm.checkTradeMeeting(currTrade);
+//    }
     /**
      * confirm trade(agree with the trade)
      */
