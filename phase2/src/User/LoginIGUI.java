@@ -1,7 +1,6 @@
 package User;
 
 import Inventory.Inventory;
-import Main.DataAccessFull;
 import Main.UI.UIcontoller;
 import Trade.TradeManager;
 
@@ -86,14 +85,14 @@ public class LoginIGUI {
             JOptionPane.showMessageDialog(null, "success");
         });
 
-        exitButton.addActionListener(e -> {
-            DataAccessFull adf=new DataAccessFull(um,tm,iv,iam);
-            try {
-                adf.updateFile();
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
-            frame.setVisible(false);
-        });
+//        exitButton.addActionListener(e -> {
+//            DataAccessFull adf=new DataAccessFull(um,tm,iv,iam);
+//            try {
+//                adf.updateFile();
+//            } catch (IOException ioException) {
+//                ioException.printStackTrace();
+//            }
+//            frame.setVisible(false);
+//        });
     }
 }

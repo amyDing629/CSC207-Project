@@ -1,7 +1,6 @@
 package User;
 
 import Inventory.Inventory;
-import Main.DataAccessFull;
 import Main.UI.ChangePass;
 import Main.UI.UIcontoller;
 import Trade.TradeManager;

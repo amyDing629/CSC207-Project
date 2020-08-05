@@ -9,7 +9,9 @@ public class AcceptTradeGUIBuilder implements TradeGUIBuilder {
         tg = new TradeGUI();
     }
 
-    public void buildSize(){
+
+    @Override
+    public void buildFrame() {
 
     }
 
