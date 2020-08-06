@@ -18,6 +18,7 @@ public class RTradeGUI_test {
         amy.addWishBorrow("pear");
         daniel.addWishes("pear");
         daniel.addWishBorrow("apple");
+        amy.addWishes("apple");
         Inventory iv = new Inventory();
         UserManager um = new UserManager();
         TradeManager tm = new TradeManager();

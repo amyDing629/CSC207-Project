@@ -15,6 +15,8 @@ public class GUI_run {
         ClientUser admin = new ClientUser("admin", "123", true);
         Item apple = new Item("apple", "amy");
         Item pear = new Item("pear", "daniel");
+        amy.addWishes("apple");
+        daniel.addWishes("pear");
         Inventory iv = new Inventory();
         iv.addItem(apple);
         iv.addItem(pear);

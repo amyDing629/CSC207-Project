@@ -2,13 +2,14 @@ package Trade;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 
 public class TradeGUI implements TradeGUIPlan {
     private JFrame fr;
     private JTextArea curr;
     private JTextArea list;
     private JTextArea msg;
+    private JTextArea input;
+    private String inputStr;
 
     public JFrame getFrame(){
         return fr;
@@ -41,6 +42,25 @@ public class TradeGUI implements TradeGUIPlan {
 
     }
 
+    @Override
+    public void initializeInput(JTextArea input) {
+        this.input = input;
+
+    }
+
+
+    @Override
+    public void setInputStr(String str) {
+        inputStr = str;
+
+    }
+
+    @Override
+    public void resetInput() {
+        input.setText(inputStr);
+
+    }
+
     public void setEast(JPanel e)
     {
         fr.getContentPane().add(BorderLayout.EAST, e);
@@ -59,6 +79,7 @@ public class TradeGUI implements TradeGUIPlan {
     public void setWest(JPanel w)
     {
         fr.getContentPane().add(BorderLayout.WEST, w);
+        w.setPreferredSize(new Dimension(380,370));
     }
 
     public void setCenter(JPanel c)
@@ -74,12 +95,19 @@ public class TradeGUI implements TradeGUIPlan {
     @Override
     public void initializeCurr(JTextArea ta) {
         curr = ta;
-
     }
 
     @Override
     public void initializeMsg(JTextArea ta) {
         msg = ta;
+    }
+
+    public void run(){
+        fr.setVisible(true);
+    }
+
+    public String getInput(){
+        return input.getText();
 
     }
 }

@@ -13,9 +13,9 @@ public class AcceptTradeGUIBuilder implements TradeGUIBuilder {
     Trade currTrade;
     ClientUser currUser;
     AcceptTradeController atc;
-    Frame tf;
+    JFrame tf;
 
-    public AcceptTradeGUIBuilder(ClientUser currUser, TradeManager tm, UserManager um, Frame tf){
+    public AcceptTradeGUIBuilder(ClientUser currUser, TradeManager tm, UserManager um, JFrame tf){
         this.currUser = currUser;
         tg = new TradeGUI();
         atc = new AcceptTradeController(currUser, tm, um, tg);
@@ -52,11 +52,15 @@ public class AcceptTradeGUIBuilder implements TradeGUIBuilder {
         agree.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                atc.agreeBut();
+                atc.agreeBut(true);
             }
         });
-
-
+        refuse.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                atc.agreeBut(false);
+            }
+        });
     }
 
     @Override
@@ -64,14 +68,13 @@ public class AcceptTradeGUIBuilder implements TradeGUIBuilder {
         JPanel panelW =  new JPanel();
         JLabel tradeList = new JLabel("Available Trades");
         JTextArea tradeArea = new JTextArea();
+        tg.initializeList(tradeArea);
+        atc.updateBut();
         JScrollPane jsp= new JScrollPane(tradeArea);
         panelW.setLayout(new BoxLayout(panelW, BoxLayout.Y_AXIS));
         panelW.add(tradeList);
         panelW.add(jsp);
-        tg.initializeList(tradeArea);
         tg.setWest(panelW);
-
-
     }
 
     @Override
@@ -87,7 +90,29 @@ public class AcceptTradeGUIBuilder implements TradeGUIBuilder {
         panelS.add(submit);
         panelS.add(back);
         panelS.add(update);
+        tg.setInputStr("trade number");
+        tg.initializeInput(inputArea);
         tg.setSouth(panelS);
+        submit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String tradeNum = tg.getInput();
+                System.out.println(tradeNum);
+                atc.submitBut(tradeNum);
+            }
+        });
+        back.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                atc.backBut(tf);
+            }
+        });
+        update.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                atc.updateBut();
+            }
+        });
     }
 
     @Override
@@ -100,6 +125,7 @@ public class AcceptTradeGUIBuilder implements TradeGUIBuilder {
         panelC.add(currArea);
         tg.setCenter(panelC);
         tg.initializeCurr(currArea);
+        atc.noTradeSelected();
 
     }
 
