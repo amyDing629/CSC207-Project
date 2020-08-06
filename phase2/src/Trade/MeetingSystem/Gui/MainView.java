@@ -139,8 +139,12 @@ public class MainView {
             public void actionPerformed(ActionEvent e) {
                 // go to setup view
                 SetupViewPresenter setupViewPresenter =
-                        new SetupViewPresenter(getPresenter().getMeetingID(), getPresenter().getCurrLogInUser(), getPresenter().getUsers());
-                setupViewPresenter.addObserver(getPresenter().getObserver());
+                        new SetupViewPresenter(getPresenter().getMeetingID(), getPresenter().getCurrLogInUser(),
+                                getPresenter().getUsers(), getPresenter().getObserver());
+//                for(Observer observer: getPresenter().getObservers()){
+//                    setupViewPresenter.addObserver(observer);
+//                }
+
                 setupViewPresenter.run();
                 getPresenter().setMeetingID(setupViewPresenter.getMeetingID()); // TODO: Observer Pattern ?????
                 updateViewFromModel(isFirst);
@@ -151,8 +155,12 @@ public class MainView {
             public void actionPerformed(ActionEvent e) {
                 // go to edit view
                 EditionViewPresenter editionViewPresenter =
-                        new EditionViewPresenter(getPresenter().getMeetingID(), getPresenter().getCurrLogInUser());
-                editionViewPresenter.addObserver(getPresenter().getObserver());
+                        new EditionViewPresenter(getPresenter().getMeetingID(), getPresenter().getCurrLogInUser(),
+                                getPresenter().getObserver());
+//                for(Observer observer: getPresenter().getObservers()){
+//                    editionViewPresenter.addObserver(observer);
+//                }
+//                editionViewPresenter.addObserver(getPresenter().getObserver());
                 editionViewPresenter.run();
                 updateViewFromModel(isFirst);
             }
@@ -172,8 +180,12 @@ public class MainView {
             public void actionPerformed(ActionEvent e) {
                 // go to confirm view
                 ConfirmViewPresenter confirmViewPresenter =
-                        new ConfirmViewPresenter(getPresenter().getMeetingID(), getPresenter().getCurrLogInUser());
-                confirmViewPresenter.addObserver(getPresenter().getObserver());
+                        new ConfirmViewPresenter(getPresenter().getMeetingID(), getPresenter().getCurrLogInUser(),
+                                getPresenter().getObserver());
+//                for(Observer observer: getPresenter().getObservers()){
+//                    confirmViewPresenter.addObserver(observer);
+//                }
+//                confirmViewPresenter.addObserver(getPresenter().getObserver());
                 confirmViewPresenter.run();
                 updateViewFromModel(isFirst);
             }

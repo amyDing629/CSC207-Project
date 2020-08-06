@@ -5,7 +5,6 @@ import Trade.MeetingSystem.MeetingManager;
 import Trade.MeetingSystem.MeetingStatus;
 
 import java.util.List;
-import java.util.Observer;
 import java.util.UUID;
 
 public class AgreeViewPresenter implements IPresenter {
@@ -76,10 +75,10 @@ public class AgreeViewPresenter implements IPresenter {
         return null;
     }
 
-    @Override
-    public void addObserver(Observer observer) {
-
-    }
+//    @Override
+//    public void addObserver(Observer observer) {
+//
+//    }
 
     @Override
     public void run() {

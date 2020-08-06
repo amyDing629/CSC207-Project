@@ -58,7 +58,7 @@ public class CTradeController implements Observer {
 
 
     public boolean enterFirst() {
-        isFirst =  currTrade.getSecondMeeting() == null;
+        isFirst = (currTrade.getSecondMeeting() == null);
         return isFirst;
     }
 
@@ -66,6 +66,7 @@ public class CTradeController implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
+        System.out.println("has updated!" + arg);
         UUID mtID = (UUID)arg;
         Meeting mt = new MeetingManager().getMeetingWithId(mtID);
         System.out.println("firstMeetingID: " + mt.getID());

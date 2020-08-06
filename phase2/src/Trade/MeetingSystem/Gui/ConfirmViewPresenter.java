@@ -22,10 +22,10 @@ public class ConfirmViewPresenter extends Observable implements IPresenter {
     AgreeConfirmView view;
 
     // Observer
-    Observer observer;
+//    List<Observer> observers;
 
 
-    public ConfirmViewPresenter(UUID meetingID, UUID currLogInUser) {
+    public ConfirmViewPresenter(UUID meetingID, UUID currLogInUser, Observer observer) {
         this.meetingID = meetingID;
         this.currLogInUser = currLogInUser;
 
@@ -38,6 +38,9 @@ public class ConfirmViewPresenter extends Observable implements IPresenter {
         // get meeting status
         meetingStatus = meetingModel.getMeetingStatus(meetingID);
 
+        // set observers
+//        observers = new ArrayList<>();
+        addObserver(observer);
     }
 
     @Override
@@ -88,8 +91,9 @@ public class ConfirmViewPresenter extends Observable implements IPresenter {
         view.open();
     }
 
-    @Override
-    public void addObserver(Observer observer) {
-        this.observer = observer;
-    }
+//    @Override
+//    public void addObserver(Observer observer) {
+//        addObserver(observer);
+////        this.observers.add(observer);
+//    }
 }

@@ -25,5 +25,4 @@ public interface MPresenter extends Observer {
     void addObserver(Observer observer);
 
     Observer getObserver();
-
 }
