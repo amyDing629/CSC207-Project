@@ -100,7 +100,7 @@ public class CompleteTradeGUI {
                     mPresenter.addObserver(ctc);
                     mPresenter.run();
                 }else {
-                    MPresenter mPresenter = new MainViewPresenter(currTrade.getMeeting(), currUser.getId(), currTrade.getUsers(), false, frame);
+                    MPresenter mPresenter = new MainViewPresenter(currTrade.getSecondMeeting(), currUser.getId(), currTrade.getUsers(), false, frame);
                     mPresenter.addObserver(ctc);
                     mPresenter.run();
                 }
