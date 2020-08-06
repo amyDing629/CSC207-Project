@@ -15,4 +15,10 @@ interface TradeGUIPlan {
     void setListText(String str);
     void setCurrText(String str);
     void setMsgText(String str);
+    void initializeInput(JTextArea input);
+    void resetInput();
+    void setInputStr(String str);
+    void run();
+    String getInput();
+
 }

@@ -3,6 +3,7 @@ import User.ClientUser;
 import User.ItemApprovalManager;
 import User.UserManager;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -167,7 +168,13 @@ public class InventoryController {
     }
 
     public void deleteItemL(Item it){
-        um.getWishLend(currUser).remove(iv.getName(it));
+        if (iv.deleteItem(it)){
+            um.getWishLend(currUser).remove(iv.getName(it));
+        }else{
+            System.out.println("cannot deleteItemL");
+        }
+
+
     }
 
     public void deleteItemB(Item it){um.getWishBorrow(currUser).remove(iv.getName(it));}

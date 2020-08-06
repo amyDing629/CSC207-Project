@@ -3,6 +3,7 @@ package Trade;
 import User.ClientUser;
 import User.UserManager;
 
+import javax.swing.*;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -21,16 +22,9 @@ public class AcceptTradeController {
         tp = new AcceptTradePresenter(tg);
     }
 
-    String printUnconfirmed(){
+    List<Trade> getUnconfirmed(){
         tradeList = tm.getUnconfirmed(currUser);
-        String result = "";
-        for (int i = 0; i < tradeList.size(); i++) {
-            result = result + i + ". " + tradeList.get(i).toString() + "\n";
-        }
-        if (result.equals("")){
-            return "no available trade";
-        }
-        return result;
+        return tradeList;
     }
 
     boolean checkInput(String num){
@@ -61,15 +55,45 @@ public class AcceptTradeController {
         te.setStatus(currTrade, TradeStatus.cancelled);
     }
 
-    void agreeBut(){
+    void agreeBut(Boolean agree){
         if (currTrade == null){
             tp.notTradeSelected();
         } else{
-            TradeEditor te = new TradeEditor();
-            te.setStatus(currTrade, TradeStatus.incomplete);
+            if (agree){
+                agreeTrade();
+                tp.agreeTrade(tm.getUnconfirmed(currUser), true);
+            }else{
+                refuseTrade();
+                tp.agreeTrade(tm.getUnconfirmed(currUser), false);
+            }
             currTrade = null;
-            tp.agreeTrade(tm.getUnconfirmed(currUser));
+
         }
+    }
+
+    void submitBut(String tradeNum){
+        tp.resetInputArea();
+        if (!checkInput(tradeNum)){
+            tp.wrongInput();;
+        }else{
+            currTrade = getCurrTrade(tradeNum);
+            tp.presentTradeInfo(currTrade);
+            tp.updateSuccess();
+        }
+    }
+
+    void backBut(JFrame frame){
+        frame.setVisible(true);
+        tp.closeFrame();
+    }
+
+    public void updateBut(){
+        tp.updateFrame(getUnconfirmed());
+
+    }
+
+    public void noTradeSelected(){
+        tp.noTradeCurr();
     }
 
 

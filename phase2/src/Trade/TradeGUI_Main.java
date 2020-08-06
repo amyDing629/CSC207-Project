@@ -64,7 +64,15 @@ public class TradeGUI_Main {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
-                new AcceptTradeGUI(currUser, tm, um, frame).run();
+                TradeGUIBuilder builder = new AcceptTradeGUIBuilder(currUser, tm, um, frame);
+                TradeGUIEngineer engineer = new TradeGUIEngineer(builder);
+
+                engineer.constructHouse();
+
+                TradeGUI tg = engineer.getGUI();
+                tg.run();
+
+                //new AcceptTradeGUI(currUser, tm, um, frame).run();
             }
         });
 

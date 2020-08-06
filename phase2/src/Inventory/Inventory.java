@@ -13,7 +13,6 @@ public class Inventory {
      */
     ArrayList<Item> lendingList;
 
-
     /**
      * [Constructor]
      * get lendingList from file (read file will move to another class).
@@ -63,11 +62,12 @@ public class Inventory {
      * @param item the deleted item
      * @throws IOException when the item is not found in the inventory
      */
-    public void deleteItem(Item item) throws IOException {
+    public boolean deleteItem(Item item){
         if (lendingList.contains(item)) {
             lendingList.remove(item);
+            return true;
         } else {
-            throw new IOException("the item is not in the inventory");
+            return false;
         }
     }
 

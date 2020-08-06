@@ -88,6 +88,7 @@ public class RTradeGUI {
                     trc.createTrade("1", item);
                     jtz.setText("the trade(One way-Temporary) has been created, please wait for another user to confirm");
                 }
+                frame.setVisible(false);
             }
         });
         onewayPer.addActionListener(new ActionListener() {
@@ -102,6 +103,7 @@ public class RTradeGUI {
                     trc.createTrade("2", item);
                     jtz.setText("the trade(One way-Permanent) has been created, please wait for another user to confirm");
                 }
+                frame.setVisible(false);
             }
         });
 
@@ -124,6 +126,7 @@ public class RTradeGUI {
                         jtz.setText("the trade(two way-temporary) has been created, please wait for another user to confirm");
                     }
                 }
+                frame.setVisible(false);
             }
         });
         twowayPer.addActionListener(new ActionListener() {
@@ -145,6 +148,7 @@ public class RTradeGUI {
                         jtz.setText("the trade(two way-permanent) has been created, please wait for another user to confirm");
                     }
                 }
+                frame.setVisible(false);
             }
         });
 

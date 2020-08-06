@@ -25,7 +25,7 @@ public class TradeHistoryGUI {
         frame.setSize(800, 400);
 
         JPanel panel = new JPanel();
-        JLabel tradeList = new JLabel("Completed Trade History");
+        JLabel tradeList = new JLabel("Top Three Trade");
         JTextArea trade = new JTextArea();
         trade.setText(thc.getTradeHistory());
         JScrollPane jsp= new JScrollPane(trade);
