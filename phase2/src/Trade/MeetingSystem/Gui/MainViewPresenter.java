@@ -68,9 +68,9 @@ public class MainViewPresenter extends Observable implements MPresenter {
         getModel().setMeetingID(meetingID);
         System.out.println("Main View Presenter: " + meetingID);
 
-        //notify trade controller - meetingID
-        setChanged();
-        notifyObservers(meetingID);
+//        // notify trade controller - meetingID
+//        setChanged();
+//        notifyObservers(meetingID);
 
     }
 
