@@ -92,4 +92,5 @@ public class CTradeController implements Observer {
         }
 
     }
+
 }

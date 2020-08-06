@@ -55,7 +55,7 @@ public class TradeManager{
      * @param duration the duration of this trade.Trade, unit (days). -1 means the trade.Trade is permanent.
      */
     Trade createTwowayTrade(UUID currUserId, UUID otherUserId, Item item1to2, Item item2to1, int duration,
-                           LocalDateTime time){
+                            LocalDateTime time){
         TwowayTrade newTrade = new TwowayTrade(currUserId, otherUserId, item1to2, item2to1, duration, time);
         getTradeList().add(newTrade);
         item1to2.setIsInTrade(true);
@@ -254,6 +254,9 @@ public class TradeManager{
 
 
 
+
 }
+
+
 
 

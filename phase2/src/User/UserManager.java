@@ -15,7 +15,7 @@ public class UserManager {
     /**
      * the list of users
      */
-    static ArrayList<ClientUser> userList  = new ArrayList<>();
+    ArrayList<ClientUser> userList  = new ArrayList<>();
 
 
     /**
