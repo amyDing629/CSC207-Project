@@ -1,6 +1,7 @@
 package Trade;
 
-import Trade.MeetingSystem.Gui.MainController;
+import Trade.MeetingSystem.Gui.MPresenter;
+import Trade.MeetingSystem.Gui.MainViewPresenter;
 import User.ClientUser;
 import User.UserManager;
 
@@ -94,14 +95,18 @@ public class CompleteTradeGUI {
         action.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (ctc.enterFirst()){
-                    MainController mainController = new MainController(currTrade.getUsers(),
-                            true, currTrade.getMeeting());
-                    mainController.run(currUser.getId(), frame, ctc);
-                }else{
-                    MainController mainController = new MainController(currTrade.getUsers(),
-                            false, currTrade.getSecondMeeting());
-                    mainController.run(currUser.getId(), frame, ctc);
+                if (ctc.enterFirst()) {
+//                    MainController mainController = new MainController(currTrade.getUsers(),
+//                            true, currTrade.getMeeting());
+//                    mainController.run(currUser.getId(), frame, ctc);
+                    MPresenter mPresenter = new MainViewPresenter(currTrade.getMeeting(), currUser.getId(), currTrade.getUsers(), true, frame, ctc);
+                    mPresenter.run();
+                }else {
+//                    MainController mainController = new MainController(currTrade.getUsers(),
+//                            false, currTrade.getSecondMeeting());
+//                    mainController.run(currUser.getId(), frame, ctc);
+                    MPresenter mPresenter = new MainViewPresenter(currTrade.getMeeting(), currUser.getId(), currTrade.getUsers(), false, frame, ctc);
+                    mPresenter.run();
                 }
                 frame.setVisible(false);
                 //TODO

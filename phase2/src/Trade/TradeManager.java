@@ -1,14 +1,13 @@
 package Trade;
 
 import Inventory.Item;
-import Trade.MeetingSystem.Meeting;
-import Trade.MeetingSystem.MeetingManager;
-import Trade.MeetingSystem.MeetingStatus;
 import User.ClientUser;
 import User.UserManager;
 
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * This is a use case class trade.TradeManager
@@ -254,9 +253,6 @@ public class TradeManager{
 
 
 
-
 }
-
-
 
 
