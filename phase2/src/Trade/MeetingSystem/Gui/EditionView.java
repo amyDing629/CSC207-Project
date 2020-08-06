@@ -26,9 +26,6 @@ public class EditionView extends EditView {
             // check if both input fields has change
             if (getPresenter().getModel().isTimePlaceChanged(meetingID, timeFieldText, placeFieldText)) {
 
-                // perform set up with inner app
-                getPresenter().performAction(timeFieldText, placeFieldText);
-
                 // check if going to over edit threshold
                 if (getPresenter().getModel().isEditable(meetingID, getPresenter().getCurrLogInUser())) {
 
@@ -42,6 +39,9 @@ public class EditionView extends EditView {
                     JOptionPane.showMessageDialog(null, "Warn: Meeting Cancelled!\n ",
                             "Warn", JOptionPane.WARNING_MESSAGE);
                 }
+
+                // perform set up with inner app
+                getPresenter().performAction(timeFieldText, placeFieldText);
 
                 // set fields no longer editable
                 timeFormattedTextField.setEnabled(false);
