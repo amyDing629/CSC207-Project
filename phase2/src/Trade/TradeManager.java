@@ -121,9 +121,7 @@ public class TradeManager{
      */
     void completeTrade(Trade currTrade){
         currTrade.setStatus(TradeStatus.complete);
-        makeTrade(currTrade);
     }
-
     /**
      * set the status of trade to cancelled
      * @param currTrade current trade
@@ -138,11 +136,14 @@ public class TradeManager{
         if (currTrade.getType().equals("oneway")){
             ClientUser bor = um.getUser(currTrade.getUsers().get(0));
             ClientUser lend = um.getUser(currTrade.getUsers().get(1));
+            System.out.println(bor);
+            System.out.println(bor.getWishBorrow());
+            System.out.println(currTrade.getItemList());
+            System.out.println(currTrade.getItemList().get(0).getName());
             bor.getWishBorrow().remove(currTrade.getItemList().get(0).getName());
             lend.getWishLend().remove(currTrade.getItemList().get(0).getName());
             bor.setBorrowCounter(bor.getBorrowCounter()+1);
             bor.setLendCounter(bor.getLendCounter()+1);
-
 
         }else{
             ClientUser u1 = um.getUser(currTrade.getUsers().get(0));

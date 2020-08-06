@@ -100,7 +100,9 @@ public class MeetingModel implements Model {
     public boolean isLastUserCurrUser() {
         if (getMeeting(meetingID) == null) {
             return false;
-        } else {
+        } else if (getMeeting(meetingID).getLastEditUser() == null) {
+            return false;
+        }else {
             return getMeeting(meetingID).getLastEditUser().equals(currLogInUser);
         }
     }
@@ -109,4 +111,6 @@ public class MeetingModel implements Model {
     public void setMeetingID(UUID meetingID) {
         this.meetingID = meetingID;
     }
+
+
 }

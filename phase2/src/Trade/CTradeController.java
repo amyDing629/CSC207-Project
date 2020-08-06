@@ -20,41 +20,40 @@ public class CTradeController implements Observer {
     Trade currTrade;
     Boolean isFirst;
 
-    public CTradeController(ClientUser currUser, TradeManager tm, UserManager um){
+    public CTradeController(ClientUser currUser, TradeManager tm, UserManager um) {
         this.currUser = currUser;
         this.tm = tm;
         this.um = um;
     }
 
-    String printIncomplete(){
+    String printIncomplete() {
         tradeList = tm.getIncomplete(currUser);
         String result = "";
         for (int i = 0; i < tradeList.size(); i++) {
             result = result + i + ". " + tradeList.get(i).toString() + "\n";
         }
-        if (result.equals("")){
+        if (result.equals("")) {
             return "no available trade";
         }
         return result;
     }
 
-    boolean checkInput(String num){
-        if (!isNum(num)){
+    boolean checkInput(String num) {
+        if (!isNum(num)) {
             return false;
-        }else return !(Integer.parseInt(num) < 0 | Integer.parseInt(num) >= tradeList.size());
+        } else return !(Integer.parseInt(num) < 0 | Integer.parseInt(num) >= tradeList.size());
     }
 
-    private boolean isNum(String str){
+    private boolean isNum(String str) {
         Pattern pattern = Pattern.compile("^[0-9]*$");
         return pattern.matcher(str).matches();
     }
 
-    Trade getCurrTrade(String num){
+    Trade getCurrTrade(String num) {
         int tradeNum = Integer.parseInt(num.trim());
         currTrade = tradeList.get(tradeNum);
         return currTrade;
     }
-
 
 
     public boolean enterFirst() {
@@ -63,38 +62,69 @@ public class CTradeController implements Observer {
     }
 
 
-
     @Override
     public void update(Observable o, Object arg) {
         System.out.println("has updated!" + arg);
-        UUID mtID = (UUID)arg;
+        UUID mtID = (UUID) arg;
         Meeting mt = new MeetingManager().getMeetingWithId(mtID);
         System.out.println("firstMeetingID: " + mt.getID());
-        if (isFirst){
-            if (mt.getStatus().equals(MeetingStatus.INCOMPLETE)){
+        if (isFirst) {
+            if (mt.getStatus().equals(MeetingStatus.INCOMPLETE)) {
                 currTrade.setMeeting(mtID);
             }
-            if (mt.getStatus().equals(MeetingStatus.CANCELLED)){
+            if (mt.getStatus().equals(MeetingStatus.CANCELLED)) {
                 tm.cancelTrade(currTrade);
             }
-            if (mt.getStatus().equals(MeetingStatus.COMPLETED)){
-                if (currTrade.getDuration() == -1){
+            if (mt.getStatus().equals(MeetingStatus.COMPLETED)) {
+                if (currTrade.getDuration() == -1) {
                     tm.completeTrade(currTrade);
-                }
-                else{
+                } else {
                     currTrade.setSecondMeeting(new MeetingManager().setUpSecondMeeting(mtID));
                     System.out.println("secondMeetingID: " + currTrade.getSecondMeeting());
                 }
             }
 
-        }else{
+        } else {
             Meeting smt = new MeetingManager().getMeetingWithId(currTrade.getSecondMeeting());
-            System.out.println("secondMeetingID: "+smt.getID());
-            if (smt.getStatus().equals(MeetingStatus.COMPLETED)){
+            System.out.println("secondMeetingID: " + smt.getID());
+            if (smt.getStatus().equals(MeetingStatus.COMPLETED)) {
                 tm.completeTrade(currTrade);
             }
         }
 
     }
+    void completeTrade(){
+        makeTrade();
+        tm.completeTrade(currTrade);
+    }
 
+    void makeTrade() {
+        if (currTrade.getType().equals("oneway")) {
+            ClientUser bor = um.getUser(currTrade.getUsers().get(0));
+            ClientUser lend = um.getUser(currTrade.getUsers().get(1));
+            System.out.println(bor);
+            System.out.println(bor.getWishBorrow());
+            System.out.println(currTrade.getItemList());
+            System.out.println(currTrade.getItemList().get(0).getName());
+            bor.getWishBorrow().remove(currTrade.getItemList().get(0).getName());
+            lend.getWishLend().remove(currTrade.getItemList().get(0).getName());
+            bor.setBorrowCounter(bor.getBorrowCounter() + 1);
+            bor.setLendCounter(bor.getLendCounter() + 1);
+
+
+        } else {
+            ClientUser u1 = um.getUser(currTrade.getUsers().get(0));
+            ClientUser u2 = um.getUser(currTrade.getUsers().get(1));
+            u1.getWishBorrow().remove(currTrade.getItemList().get(1).getName());
+            u1.getWishLend().remove(currTrade.getItemList().get(0).getName());
+            u2.getWishBorrow().remove(currTrade.getItemList().get(0).getName());
+            u2.getWishLend().remove(currTrade.getItemList().get(1).getName());
+            u1.setBorrowCounter(u1.getBorrowCounter() + 1);
+            u1.setLendCounter(u1.getLendCounter() + 1);
+            u2.setBorrowCounter(u2.getBorrowCounter() + 1);
+            u2.setLendCounter(u2.getLendCounter() + 1);
+        }
+
+
+    }
 }
