@@ -1,22 +1,21 @@
 package Trade.MeetingSystem;
 
 
-import Trade.MeetingSystem.TradeDemo.TradeEntity;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.UUID;
 
 /**
  * [Entity class]
  * A meeting as a part of the Transaction process.
  */
 
-public class Meeting extends Observable {
+public class Meeting {
 
     private final UUID uuid;
 
-    private final List<Observer> observers = new ArrayList<>();
 
     /**
      * This is Meeting's date-time.
@@ -77,9 +76,6 @@ public class Meeting extends Observable {
             this.idToAgreedStatus.put(i, false);
             this.idToConfirmedStatus.put(i, false);
         }
-
-        addObserver(new TradeEntity(1));
-        updateStatus(this.getStatus());
     }
 
     public UUID getID() {
@@ -217,7 +213,6 @@ public class Meeting extends Observable {
      */
     public void setStatus(MeetingStatus status) {
         this.status = status;
-        updateStatus(status);
     }
 
     /**
@@ -262,32 +257,6 @@ public class Meeting extends Observable {
 
         return res;
     }
-
-    @Override
-    public void addObserver(Observer o) {
-        this.observers.add(o);
-    }
-
-//    @Override
-//    public void deleteObserver(Observer o) {
-//        if (!observers.isEmpty()) {
-//            observers.remove(o);
-//        }
-//    }
-//
-//    @Override
-//    public void notifyObservers() {
-//        for (Observer o : observers) {
-//            o.update(this, o);
-//        }
-//    }
-
-    public void updateStatus(MeetingStatus meetingStatus) {
-        status = meetingStatus;
-        setChanged();
-        notifyObservers(meetingStatus);
-    }
-
 
     public void setIdToEditor(UUID user, MeetingEditor meetingEditor) {
         if (!idToEditor.containsKey(user)) {

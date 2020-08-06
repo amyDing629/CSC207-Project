@@ -45,8 +45,6 @@ public class MainViewPresenter extends Observable implements MPresenter {
         // get meeting status
         meetingStatus = meetingModel.getMeetingStatus(meetingID);
 
-        // set observers
-//        observers = new ArrayList<>();
     }
 
     @Override
@@ -69,7 +67,6 @@ public class MainViewPresenter extends Observable implements MPresenter {
     public void setMeetingID(UUID meetingID) {
         this.meetingID = meetingID;
         getModel().setMeetingID(meetingID);
-        System.out.println("Main View Presenter: " + meetingID);
 
         // notify trade controller - meetingID
         setChanged();
@@ -104,14 +101,9 @@ public class MainViewPresenter extends Observable implements MPresenter {
 
     @Override
     public void addObserver(Observer observer) {
-//        this.observers.add(observer);
         this.observer = observer;
     }
 
-//    @Override
-//    public List<Observer> getObservers() {
-//        return observers;
-//    }
 
     @Override
     public Observer getObserver() {

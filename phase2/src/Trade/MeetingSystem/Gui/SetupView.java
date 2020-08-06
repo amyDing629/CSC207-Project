@@ -19,13 +19,6 @@ public class SetupView extends EditView {
 
             // perform set up with inner app
             presenter.performAction(timeFieldText, placeFieldText);
-//            UUID meetingID = presenter.getMeetingID();
-//
-//            // update meeting info view in MainView
-//            ArrayList<Object> msg = new ArrayList<>(Arrays.asList(meetingID, timeFieldText, placeFieldText));
-//            addObserver(mainView);
-//            setChanged();
-//            notifyObservers(msg);
 
             // set fields no longer editable
             timeFormattedTextField.setEnabled(false);
