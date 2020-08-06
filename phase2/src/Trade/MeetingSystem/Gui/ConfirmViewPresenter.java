@@ -5,9 +5,11 @@ import Trade.MeetingSystem.MeetingManager;
 import Trade.MeetingSystem.MeetingStatus;
 
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.UUID;
 
-public class ConfirmViewPresenter implements IPresenter {
+public class ConfirmViewPresenter extends Observable implements IPresenter {
     UUID currLogInUser;
     UUID meetingID;
     MeetingStatus meetingStatus;
@@ -18,6 +20,9 @@ public class ConfirmViewPresenter implements IPresenter {
 
     // View
     AgreeConfirmView view;
+
+    // Observer
+    Observer observer;
 
 
     public ConfirmViewPresenter(UUID meetingID, UUID currLogInUser) {
@@ -51,6 +56,10 @@ public class ConfirmViewPresenter implements IPresenter {
         Meeting m = meetingManager.getMeetingWithId(meetingID);
 
         meetingManager.confirmMeeting(m, currLogInUser);
+
+        // notify observers
+        setChanged();
+        notifyObservers(meetingID);
     }
 
     @Override
@@ -77,5 +86,10 @@ public class ConfirmViewPresenter implements IPresenter {
     public void run() {
         view.setPresenter(this);
         view.open();
+    }
+
+    @Override
+    public void addObserver(Observer observer) {
+        this.observer = observer;
     }
 }

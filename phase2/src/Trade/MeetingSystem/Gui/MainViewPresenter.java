@@ -1,11 +1,11 @@
 package Trade.MeetingSystem.Gui;
 
-import Trade.CTradeController;
 import Trade.MeetingSystem.MeetingStatus;
 
 import javax.swing.*;
 import java.util.List;
 import java.util.Observable;
+import java.util.Observer;
 import java.util.UUID;
 
 // presenter
@@ -24,9 +24,12 @@ public class MainViewPresenter extends Observable implements MPresenter {
     MainView mainView; // meeting main view
     JFrame frame; // trade view
 
+    // Observer
+    Observer observer;
+
 
     public MainViewPresenter(UUID meetingID, UUID currLogInUser, List<UUID> users, boolean isFirst,
-                             JFrame frame, CTradeController cTradeController) {
+                             JFrame frame) {
         this.meetingID = meetingID;
         this.currLogInUser = currLogInUser;
         this.users = users;
@@ -41,15 +44,11 @@ public class MainViewPresenter extends Observable implements MPresenter {
 
         // get meeting status
         meetingStatus = meetingModel.getMeetingStatus(meetingID);
-
-        // add Observer
-        addObserver(cTradeController);
-
     }
 
     @Override
     public void back() {
-        // TODO: back to Trade System View!
+        // back to Trade System View
         frame.setVisible(true);
     }
 
@@ -69,9 +68,9 @@ public class MainViewPresenter extends Observable implements MPresenter {
         getModel().setMeetingID(meetingID);
         System.out.println("Main View Presenter: " + meetingID);
 
-        // notify trade controller - meetingID
-        setChanged();
-        notifyObservers(meetingID);
+//        // notify trade controller - meetingID
+//        setChanged();
+//        notifyObservers(meetingID);
 
     }
 
@@ -98,6 +97,16 @@ public class MainViewPresenter extends Observable implements MPresenter {
             setMeetingID((UUID) arg);
             mainView.updateViewFromModel(isFirst);
         }
+    }
+
+    @Override
+    public void addObserver(Observer observer) {
+        this.observer = observer;
+    }
+
+    @Override
+    public Observer getObserver() {
+        return observer;
     }
 
 }

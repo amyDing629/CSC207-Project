@@ -22,7 +22,8 @@ public interface MPresenter extends Observer {
 
     void update(Observable o, Object arg);
 
-    void addObserver(Observer mainController);
+    void addObserver(Observer observer);
 
-//    void addObserver(MainController mainController);
+    Observer getObserver();
+
 }

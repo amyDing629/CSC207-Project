@@ -96,16 +96,12 @@ public class CompleteTradeGUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (ctc.enterFirst()) {
-//                    MainController mainController = new MainController(currTrade.getUsers(),
-//                            true, currTrade.getMeeting());
-//                    mainController.run(currUser.getId(), frame, ctc);
-                    MPresenter mPresenter = new MainViewPresenter(currTrade.getMeeting(), currUser.getId(), currTrade.getUsers(), true, frame, ctc);
+                    MPresenter mPresenter = new MainViewPresenter(currTrade.getMeeting(), currUser.getId(), currTrade.getUsers(), true, frame);
+                    mPresenter.addObserver(ctc);
                     mPresenter.run();
                 }else {
-//                    MainController mainController = new MainController(currTrade.getUsers(),
-//                            false, currTrade.getSecondMeeting());
-//                    mainController.run(currUser.getId(), frame, ctc);
-                    MPresenter mPresenter = new MainViewPresenter(currTrade.getMeeting(), currUser.getId(), currTrade.getUsers(), false, frame, ctc);
+                    MPresenter mPresenter = new MainViewPresenter(currTrade.getMeeting(), currUser.getId(), currTrade.getUsers(), false, frame);
+                    mPresenter.addObserver(ctc);
                     mPresenter.run();
                 }
                 frame.setVisible(false);

@@ -1,6 +1,7 @@
 package Trade.MeetingSystem.Gui;
 
 import java.util.List;
+import java.util.Observer;
 import java.util.UUID;
 
 public interface IPresenter {
@@ -20,4 +21,6 @@ public interface IPresenter {
     void run();
 
     List<UUID> getUsers();
+
+    void addObserver(Observer observer);
 }

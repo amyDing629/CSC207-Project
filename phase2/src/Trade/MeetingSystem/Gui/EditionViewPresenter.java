@@ -7,9 +7,11 @@ import Trade.MeetingSystem.MeetingStatus;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.UUID;
 
-public class EditionViewPresenter implements IPresenter {
+public class EditionViewPresenter extends Observable implements IPresenter {
     UUID currLogInUser;
     UUID meetingID;
     MeetingStatus meetingStatus;
@@ -21,6 +23,9 @@ public class EditionViewPresenter implements IPresenter {
 
     // View
     EditView view;
+
+    // Observer
+    Observer observer;
 
 
     public EditionViewPresenter(UUID meetingID, UUID currLogInUser) {
@@ -56,6 +61,10 @@ public class EditionViewPresenter implements IPresenter {
         Meeting m = meetingManager.getMeetingWithId(meetingID);
 
         meetingManager.editMeeting(m, currLogInUser, setDateTime, setPlace);
+
+        // notify observers
+        setChanged();
+        notifyObservers(meetingID);
     }
 
     @Override
@@ -82,6 +91,11 @@ public class EditionViewPresenter implements IPresenter {
     public void run() {
         view.setPresenter(this);
         view.open();
+    }
+
+    @Override
+    public void addObserver(Observer observer) {
+        this.observer = observer;
     }
 }
 

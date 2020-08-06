@@ -141,7 +141,7 @@ public class MainView {
                 SetupViewPresenter setupViewPresenter =
                         new SetupViewPresenter(getPresenter().getMeetingID(), getPresenter().getCurrLogInUser(), getPresenter().getUsers());
                 setupViewPresenter.run();
-                setupViewPresenter.addObserver(getPresenter());
+                setupViewPresenter.addObserver(getPresenter().getObserver());
                 getPresenter().setMeetingID(setupViewPresenter.getMeetingID()); // TODO: Observer Pattern ?????
                 updateViewFromModel(isFirst);
             }
@@ -153,6 +153,7 @@ public class MainView {
                 EditionViewPresenter editionViewPresenter =
                         new EditionViewPresenter(getPresenter().getMeetingID(), getPresenter().getCurrLogInUser());
                 editionViewPresenter.run();
+                editionViewPresenter.addObserver(getPresenter().getObserver());
                 updateViewFromModel(isFirst);
             }
         });
@@ -173,6 +174,7 @@ public class MainView {
                 ConfirmViewPresenter confirmViewPresenter =
                         new ConfirmViewPresenter(getPresenter().getMeetingID(), getPresenter().getCurrLogInUser());
                 confirmViewPresenter.run();
+                confirmViewPresenter.addObserver(getPresenter().getObserver());
                 updateViewFromModel(isFirst);
             }
         });
