@@ -10,7 +10,7 @@ import java.util.*;
  */
 public class ReadWriteMeeting implements IDataAccess {
 
-    private final String meetingDataFile = "src/Trade/MeetingSystem/MeetingData.csv";
+    private final String meetingDataFile = "phase2/src/Trade/MeetingSystem/MeetingData.csv";
 
     /**
      * A mapping of meeting ids to Meetings.

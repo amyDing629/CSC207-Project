@@ -68,6 +68,7 @@ public class CTradeController implements Observer {
     public void update(Observable o, Object arg) {
         UUID mtID = (UUID)arg;
         Meeting mt = new MeetingManager().getMeetingWithId(mtID);
+        System.out.println("firstMeetingID: " + mt.getID());
         if (isFirst){
             if (mt.getStatus().equals(MeetingStatus.INCOMPLETE)){
                 currTrade.setMeeting(mtID);
@@ -81,11 +82,13 @@ public class CTradeController implements Observer {
                 }
                 else{
                     currTrade.setSecondMeeting(new MeetingManager().setUpSecondMeeting(mtID));
+                    System.out.println("secondMeetingID: " + currTrade.getSecondMeeting());
                 }
             }
 
         }else{
             Meeting smt = new MeetingManager().getMeetingWithId(currTrade.getSecondMeeting());
+            System.out.println("secondMeetingID: "+smt.getID());
             if (smt.getStatus().equals(MeetingStatus.COMPLETED)){
                 tm.completeTrade(currTrade);
             }

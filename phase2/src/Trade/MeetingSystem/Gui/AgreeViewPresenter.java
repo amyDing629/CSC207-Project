@@ -5,6 +5,7 @@ import Trade.MeetingSystem.MeetingManager;
 import Trade.MeetingSystem.MeetingStatus;
 
 import java.util.List;
+import java.util.Observer;
 import java.util.UUID;
 
 public class AgreeViewPresenter implements IPresenter {
@@ -73,6 +74,11 @@ public class AgreeViewPresenter implements IPresenter {
     @Override
     public List<UUID> getUsers() {
         return null;
+    }
+
+    @Override
+    public void addObserver(Observer observer) {
+
     }
 
     @Override
