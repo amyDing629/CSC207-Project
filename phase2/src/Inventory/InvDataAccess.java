@@ -97,17 +97,21 @@ public class InvDataAccess {
         }
     }
 
-    public void deSerialize(){
+    public ArrayList<Item> deSerialize(){
         try {
 
-            FileInputStream fileIn = new FileInputStream("phase2/src/trade.ser");
+            FileInputStream fileIn = new FileInputStream("phase2/src/itemList.ser");
             ObjectInputStream in = new ObjectInputStream(fileIn);
-            iv.setLendingList((ArrayList<Item>)in.readObject());
+            ArrayList<Item> res = (ArrayList<Item>)in.readObject();
             in.close();
             fileIn.close();
+            iv.setLendingList(res);
+            return res;
         } catch (IOException | ClassNotFoundException i) {
-            iv.setLendingList(new ArrayList<Item>());
+            ArrayList<Item> res = new ArrayList<>();
             i.printStackTrace();
+            iv.setLendingList(res);
+            return res;
         }
 
     }
