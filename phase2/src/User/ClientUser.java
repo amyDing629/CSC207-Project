@@ -63,6 +63,9 @@ public class ClientUser implements Serializable {
     private boolean isLeft;
     private LocalDateTime end;
 
+    private List<UUID> bonusTradeList;
+    private int bonusPoints;
+
 
     /**
      * @param username the username of the user account
@@ -330,8 +333,6 @@ public class ClientUser implements Serializable {
         this.password=password;
     }
 
-
-
     /**
      * return the status that whether the user can borrow or not
      */
@@ -339,6 +340,20 @@ public class ClientUser implements Serializable {
         return isBorrow;
     }
 
+    /**
+     * return the list of trades that the user set to bonus.
+     * Once a trade is set to bonus, the bonusPoints reduce by 1.
+     */
+    public List<UUID> getBonusTradeList(){ return this.bonusTradeList;}
 
+    /**
+     * return the bonus points the client user
+     */
+    public int getBonusPoints(){return this.bonusPoints;}
+
+    /**
+     * Set new bonusPoints
+     */
+    public void setBonusPoints(int newPoints) {this.bonusPoints = newPoints;}
 
 }
