@@ -23,7 +23,7 @@ public class PointSysMain {
         TradeManager tm = new TradeManager();
 
         PointManager pm = new PointManager(um, tm);
-        pm.setPointList();
+        pm.setAllPoints();
 
         pm.addPoints("admin", 7);
         pm.addPoints("daniel", 3);

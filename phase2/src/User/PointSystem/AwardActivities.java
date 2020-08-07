@@ -14,6 +14,7 @@ import java.util.regex.Pattern;
  */
 public class AwardActivities {
     TradeManager tm;
+    PointManager pm;
     Trade currTrade;
     ArrayList<Trade> tradeList;
 
@@ -35,31 +36,41 @@ public class AwardActivities {
         return pattern.matcher(str).matches();
     }
 
-    //TODO:get available trade list
     /**
-     * Provide a list of user's incomplete recent trades for user to select as a bonus trade by exchanging bonus points
+     * Provide a list of trades for user to select as bonus trades to avoid counting towards being frozen.
+     * The trades in list are incomplete trades within the most recent 7 days.
+     * Once the trade is selected as bonus, a fixed amount of bonus points will be deducted.
+     * @param user the current user who makes actions
      */
     public List<Trade> getTradesForExchange(ClientUser user){
         List<Trade> result = new ArrayList<Trade>();
         List<Trade> list = this.tm.getWeekTradeList(user); // get all trades within the most recent seven days
         for (Trade t: list) {
-            if (t.getStatus().equals(TradeStatus.incomplete)) {
+            if (t.getStatus().equals(TradeStatus.incomplete) && !user.getSelectedBonusTrades().contains(t.getId())) {
                 result.add(t); // get incomplete trade from the recent trades
             }
         }return result;
     }
 
-    //TODO: The action when user click getBonus button
     /**
-     * Note: when the user click on getBonus button,
-     * 1. the tradeId is added into user's bonusTradeList (this Trade should not be removed from tradeHistory)
-     * 2. the bonus point is reduced by one exStandard ***
+     * Based on the ClientUser's available points, indicate the max number of trades that can be selected as bonus
+     */
+    public int canSelectUpTo(ClientUser user) {
+        return user.getBonusPoints() / this.pm.getExStandard();
+    }
+
+    /**
+     * When the user click on getBonus button,
+     * 1. the tradeId is added into user's bonusTradeList (this Trade will not be removed from tradeHistory)
+     * 2. the bonus point is reduced by a fixed amount
      * 3. update the PointManager.pointList
      * 4. update the ClientUser.bonusPoints
-     * 2, 3, 4 should all be done by PointManager.updatePoints
      */
-    public void getBonus(){
-
+    public void getBonus(ClientUser user, List<Trade> selected){
+        for (Trade t: selected) {
+            user.addBonusTrade(t.getId());
+        }
+        this.pm.setUserPoints(user);
     }
 
 }

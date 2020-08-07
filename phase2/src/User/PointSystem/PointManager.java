@@ -42,19 +42,26 @@ public class PointManager {
     }
 
     /**
+     * Set (update) the bonus points for particular user and update the pointList.
+     */
+    public void setUserPoints(ClientUser user) {
+        int newPoint = this.tm.getComplete(user).size() - user.getSelectedBonusTrades().size() * this.exStandard;
+        user.setBonusPoints(newPoint);
+        this.pointList.put(user.getId(), newPoint);
+    }
+
+    /**
      * Return the list of user id and corresponding points.
      * @return pointList
      */
     public Map<UUID, Integer> getPointList() {return this.pointList;}
 
     /**
-     * Set the list of user id and the bonus points the use has.
+     * Set the list of user id and the bonus points the use has. (setter for pointList)
      */
-    public void setPointList() {
+    public void setAllPoints() {
         for (ClientUser user: this.um.getUserList()) {
-            if (!this.pointList.containsKey(user.getId())) {
-                this.pointList.put(user.getId(), user.getBonusPoints());
-            }
+            this.setUserPoints(user);
         }
     }
 
@@ -62,7 +69,7 @@ public class PointManager {
      * Return the number of bonus points for user
      * @param user the specific user
      */
-    public int getPointOfUser(ClientUser user) {
+    public int getUserPoints(ClientUser user) {
         return this.pointList.get(user.getId());
     }
 
@@ -78,37 +85,10 @@ public class PointManager {
     public void setExStandard(int newStandard) {
         this.exStandard = newStandard;
     }
-/*----------------------------------------GETTERS & SETTERS------------------------------------------------------
-    ///**
-     //* Set the point of all users to zero.
-     //*/
-    //public void setZero(){
-        //for (UUID userId: this.pointList.keySet()){
-            //this.pointList.replace(userId, 0);
-        //}
-    //}
 
-    /**
-     * Update the bonus point for all users.
-     */
-    public void updatePointsForAll(){
-        for (UUID userId: this.pointList.keySet()) {
-            ClientUser user = um.getUser(userId);
-            List<Trade> allTrades = tm.getAllTrade(user);
-            int newPoint = allTrades.size() - user.getBonusTradeList().size();
-            this.pointList.put(userId, newPoint); //update the pointList in the manager
-            user.setBonusPoints(newPoint); //update the bonus point number within ClientUser entity
-        }
-    }
 
-    /**
-     * TODO: updatePoints for particular user
-     */
-    public void updatePoints(ClientUser user) {
 
-    }
-
-    /** TODO: Note that the dateTime must be in the past
+    /** TODO: May be deleted
      * Update the number of trades that each user create since date dateTime.
      * @param dateTime Count the number of trades (not cancelled) after this dateTime.
      */

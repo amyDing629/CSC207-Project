@@ -58,7 +58,7 @@ public class PointGUI {
         panelC.setLayout(new BoxLayout(panelC, BoxLayout.Y_AXIS));
         panelC.add(currTradeL);
         panelC.add(currArea);
-        currArea.setText("no trade selected");
+        currArea.setText("no trade selected"); // Only one trade is selected each time?
 
         JLabel points = new JLabel(String.valueOf(currUser.getBonusPoints()));
         JButton eb = new JButton("Get Bonus");
