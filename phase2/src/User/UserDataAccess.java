@@ -1,5 +1,7 @@
 package User;
 
+import Inventory.Item;
+import Trade.Trade;
 import Trade.TradeManager;
 
 import java.io.*;
@@ -109,13 +111,12 @@ public class UserDataAccess {
         }
     }
 
-    public void serialize(List<ClientUser> a){
+    public void serialize(){
         try {
             FileOutputStream fileOut =
                     new FileOutputStream("phase2/src/user.ser");
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
-            out.writeObject(a);
-
+            out.writeObject(um.getUserList());
             out.close();
             fileOut.close();
         } catch (IOException i) {
@@ -123,19 +124,22 @@ public class UserDataAccess {
         }
     }
 
-    public void deSerializable(){
+
+    public ArrayList<ClientUser> deSerialize(){
         try {
-            List<ClientUser> res = new ArrayList<ClientUser>();
             FileInputStream fileIn = new FileInputStream("phase2/src/user.ser");
             ObjectInputStream in = new ObjectInputStream(fileIn);
-            res = (List<ClientUser>) in.readObject();
-            for(ClientUser b: res){um.getUserList().add(b);}
+            ArrayList<ClientUser> res = (ArrayList<ClientUser>)in.readObject();
             in.close();
             fileIn.close();
+            um.setUserList(res);
+            return res;
         } catch (IOException | ClassNotFoundException i) {
-            List<ClientUser> res = new ArrayList<>();
+            ArrayList<ClientUser> res = new ArrayList<>();
             i.printStackTrace();
+            return res;
         }
+
     }
 
 
@@ -189,7 +193,7 @@ public class UserDataAccess {
     public void updateSer() {
         File writer = new File("phase2/src/user.ser");
         writer.deleteOnExit();
-        serialize(um.getUserList());
+        serialize();
     }
 
     /**

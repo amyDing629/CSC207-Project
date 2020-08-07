@@ -25,6 +25,9 @@ public class UserManager {
         return userList;
     }
 
+    public void setUserList(ArrayList<ClientUser> ul){
+        userList = ul;
+    }
     /**
      * @param name the name of the user that the manager wants to get
      * find the user by the user name
