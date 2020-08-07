@@ -32,18 +32,28 @@ public class InventoryGUI {
 
         JPanel menu = new JPanel();
         JLabel label = new JLabel("    Hello, "+um.getUsername(currUser));
+        JButton mk = new JButton("market");
         JButton wb = new JButton("WishBorrow");
         JButton wl = new JButton("WishLend");
         JButton back = new JButton("return");
 
         menu.setLayout(new BoxLayout(menu, BoxLayout.Y_AXIS));
         menu.add(label);
+        menu.add(mk);
         menu.add(wb);
         menu.add(wl);
         menu.add(back);
 
         frame.getContentPane().add(menu);
         frame.setVisible(true);
+
+        mk.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                new MarketGUI(iv, frame).run();
+            }
+        });
 
         wb.addActionListener(new ActionListener() {
             @Override
