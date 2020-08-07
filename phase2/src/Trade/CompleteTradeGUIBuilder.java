@@ -1,5 +1,7 @@
 package Trade;
 
+import Trade.MeetingSystem.Gui.MPresenter;
+import Trade.MeetingSystem.Gui.MainViewPresenter;
 import User.ClientUser;
 import User.UserManager;
 
@@ -7,59 +9,52 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
-public class AcceptTradeGUIBuilder implements TradeGUIBuilder {
-    private final TradeGUI tg;
+public class CompleteTradeGUIBuilder implements TradeGUIBuilder {
+    Trade currTrade;
     ClientUser currUser;
-    AcceptTradeController atc;
+    CTradeController ctc;
     JFrame tf;
+    TradeGUI tg;
 
-    public AcceptTradeGUIBuilder(ClientUser currUser, TradeManager tm, UserManager um, JFrame tf){
+    public CompleteTradeGUIBuilder(ClientUser currUser, TradeManager tm, UserManager um, JFrame tf) {
         this.currUser = currUser;
         tg = new TradeGUI();
-        atc = new AcceptTradeController(currUser, tm, um, tg);
+        ctc = new CTradeController(currUser, tm, um, tg);
         this.tf = tf;
+
     }
 
     @Override
     public void buildFrame(){
-        tg.setFrame(800, 400, "Accept Trade Session");
+        tg.setFrame(800, 400, "Complete Trade Session");
 
     }
 
     @Override
     public void buildPanelN() {
-        JPanel panelN = new JPanel();
-        JLabel msg = new JLabel("message:", SwingConstants.LEFT);
-        JTextArea msgArea = new JTextArea();
-        panelN.add(msg);
-        panelN.add(msgArea);
-        tg.initializeMsg(msgArea);
-        tg.setNorth(panelN);
+        ArrayList<Object> rst = new TradeGUIHelper().createMessagePanel();
+        tg.initializeMsg((JTextArea)rst.get(1));
+        tg.setNorth((JPanel)rst.get(0));
 
     }
 
     @Override
     public void buildPanelE() {
         JPanel panelE = new JPanel();
-        JButton agree = new JButton("agree");
-        JButton refuse = new JButton("refuse");
+        JButton action = new JButton("action");
         panelE.setLayout(new BoxLayout(panelE, BoxLayout.Y_AXIS));
-        panelE.add(agree);
-        panelE.add(refuse);
+        panelE.add(action);
+        action.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ctc.action();
+                ctc.closeFrame();
+            }
+        });
         tg.setEast(panelE);
-        agree.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                atc.agreeBut(true);
-            }
-        });
-        refuse.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                atc.agreeBut(false);
-            }
-        });
+
     }
 
     @Override
@@ -68,7 +63,7 @@ public class AcceptTradeGUIBuilder implements TradeGUIBuilder {
         JLabel tradeList = new JLabel("Available Trades");
         JTextArea tradeArea = new JTextArea();
         tg.initializeList(tradeArea);
-        atc.updateBut();
+        ctc.updateBut();
         JScrollPane jsp= new JScrollPane(tradeArea);
         panelW.setLayout(new BoxLayout(panelW, BoxLayout.Y_AXIS));
         panelW.add(tradeList);
@@ -97,19 +92,19 @@ public class AcceptTradeGUIBuilder implements TradeGUIBuilder {
             public void actionPerformed(ActionEvent e) {
                 String tradeNum = tg.getInput();
                 System.out.println(tradeNum);
-                atc.submitBut(tradeNum);
+                ctc.submitBut(tradeNum);
             }
         });
         back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                atc.backBut(tf);
+                ctc.backBut(tf);
             }
         });
         update.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                atc.updateBut();
+                ctc.updateBut();
             }
         });
     }
@@ -124,7 +119,7 @@ public class AcceptTradeGUIBuilder implements TradeGUIBuilder {
         panelC.add(currArea);
         tg.setCenter(panelC);
         tg.initializeCurr(currArea);
-        atc.noTradeSelected();
+        ctc.noTradeSelected();
 
     }
 
@@ -132,3 +127,5 @@ public class AcceptTradeGUIBuilder implements TradeGUIBuilder {
         return tg;
     }
 }
+
+

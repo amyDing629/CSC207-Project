@@ -81,7 +81,13 @@ public class TradeGUI_Main {
             //to do
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
-                new CompleteTradeGUI(currUser, tm, um, frame).run();
+                TradeGUIBuilder builder = new CompleteTradeGUIBuilder(currUser, tm, um, frame);
+                TradeGUIEngineer engineer = new TradeGUIEngineer(builder);
+
+                engineer.constructHouse();
+
+                TradeGUI tg = engineer.getGUI();
+                tg.run();
             }
         });
 
@@ -89,7 +95,9 @@ public class TradeGUI_Main {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
-                new TradeHistoryGUI(currUser, tm, um, frame).run();
+                TradeHistoryController thc = new TradeHistoryController(currUser, tm, um);
+
+                new TradeHistoryGUI(currUser, thc, frame).run();
             }
         });
 

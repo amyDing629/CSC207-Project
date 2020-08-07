@@ -1,13 +1,13 @@
-package Trade;
-
-import User.ClientUser;
-import User.UserManager;
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
+//package Trade;
+//
+//import User.ClientUser;
+//import User.UserManager;
+//
+//import javax.swing.*;
+//import java.awt.*;
+//import java.awt.event.ActionEvent;
+//import java.awt.event.ActionListener;
+//
 //public class AcceptTradeGUI {
 //    Trade currTrade;
 //    ClientUser currUser;

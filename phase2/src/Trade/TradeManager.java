@@ -27,6 +27,10 @@ public class TradeManager{
         return tradeList;
     }
 
+    void setTradeList(ArrayList<Trade> tl){
+        tradeList = tl;
+    }
+
     /**
      * Allow the currentUser to create a one-way trade with input otherUserId, item, and trade duration.
      * Update the trade history for both users

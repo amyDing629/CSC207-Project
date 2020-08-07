@@ -13,9 +13,9 @@ public class TradeHistoryGUI {
     TradeHistoryController thc;
     Frame tf;
 
-    public TradeHistoryGUI(ClientUser currUser, TradeManager tm, UserManager um, Frame tf){
+    public TradeHistoryGUI(ClientUser currUser, TradeHistoryController tc, Frame tf){
         this.currUser = currUser;
-        thc = new TradeHistoryController(currUser, tm, um);
+        this.thc =tc;
         this.tf = tf;
     }
 

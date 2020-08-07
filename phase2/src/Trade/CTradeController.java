@@ -1,15 +1,15 @@
 package Trade;
 
+import Trade.MeetingSystem.Gui.MPresenter;
+import Trade.MeetingSystem.Gui.MainViewPresenter;
 import Trade.MeetingSystem.Meeting;
 import Trade.MeetingSystem.MeetingManager;
 import Trade.MeetingSystem.MeetingStatus;
 import User.ClientUser;
 import User.UserManager;
 
-import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
-import java.util.UUID;
+import javax.swing.*;
+import java.util.*;
 import java.util.regex.Pattern;
 
 public class CTradeController implements Observer {
@@ -19,23 +19,20 @@ public class CTradeController implements Observer {
     List<Trade> tradeList;
     Trade currTrade;
     Boolean isFirst;
+    CTradePresenter tp;
+    TradeGUI tg;
 
-    public CTradeController(ClientUser currUser, TradeManager tm, UserManager um) {
+    public CTradeController(ClientUser currUser, TradeManager tm, UserManager um, TradeGUI tg) {
         this.currUser = currUser;
         this.tm = tm;
         this.um = um;
+        tp = new CTradePresenter(tg);
+        this.tg = tg;
     }
 
-    String printIncomplete() {
+    List<Trade> getIncomplete() {
         tradeList = tm.getIncomplete(currUser);
-        String result = "";
-        for (int i = 0; i < tradeList.size(); i++) {
-            result = result + i + ". " + tradeList.get(i).toString() + "\n";
-        }
-        if (result.equals("")) {
-            return "no available trade";
-        }
-        return result;
+        return tradeList;
     }
 
     boolean checkInput(String num) {
@@ -124,7 +121,54 @@ public class CTradeController implements Observer {
             u2.setBorrowCounter(u2.getBorrowCounter() + 1);
             u2.setLendCounter(u2.getLendCounter() + 1);
         }
+    }
 
+    void closeFrame(){
+        tp.closeFrame();
+    }
 
+    public void updateBut(){
+        tp.updateFrame(getIncomplete());
+
+    }
+
+    void submitBut(String tradeNum){
+        tp.resetInputArea();
+        if (!checkInput(tradeNum)){
+            tp.wrongInput();;
+        }else{
+            currTrade = getCurrTrade(tradeNum);
+            tp.presentTradeInfo(currTrade);
+            tp.updateSuccess();
+        }
+    }
+
+    void backBut(JFrame frame){
+        frame.setVisible(true);
+        tp.closeFrame();
+    }
+
+    public void noTradeSelected(){
+        tp.noTradeCurr();
+    }
+
+    public void checkCurrTrade(Trade trade){
+        if (trade == null){
+            tp.notTradeSelected();
+        }
+    }
+
+    public void action(){
+        if (enterFirst()) {
+            MPresenter mPresenter = new MainViewPresenter(currTrade.getMeeting(), currUser.getId(),
+                    currTrade.getUsers(), true, tg.getFrame());
+            mPresenter.run();
+            mPresenter.addObserver(this);
+        }else {
+            MPresenter mPresenter = new MainViewPresenter(currTrade.getSecondMeeting(),
+                    currUser.getId(), currTrade.getUsers(), false, tg.getFrame());
+            mPresenter.run();
+            mPresenter.addObserver(this);
+        }
     }
 }

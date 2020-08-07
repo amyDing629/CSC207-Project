@@ -3,6 +3,7 @@ package Trade;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class TradeGUIHelper {
 
@@ -16,6 +17,19 @@ public class TradeGUIHelper {
             }
         });
         return back;
+    }
+
+    ArrayList<Object> createMessagePanel(){
+        JPanel panelN = new JPanel();
+        JLabel msg = new JLabel("message:", SwingConstants.LEFT);
+        JTextArea msgArea = new JTextArea();
+        panelN.add(msg);
+        panelN.add(msgArea);
+        ArrayList<Object> rst = new ArrayList<Object>();
+        rst.add(panelN);
+        rst.add(msgArea);
+
+        return rst;
     }
 
 

@@ -86,7 +86,7 @@ public class PointGUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //TODO
-                points.setText(currUser.getBonusPoints());
+                points.setText(String.valueOf(currUser.getBonusPoints()));
             }
         });
 
@@ -101,7 +101,7 @@ public class PointGUI {
         update.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                points.setText(currUser.getBonusPoints());
+                points.setText(String.valueOf(currUser.getBonusPoints()));
             }
         });
 
