@@ -1,11 +1,13 @@
 package User;
 
 import Inventory.Inventory;
+import Main.DataAccessFull;
 import Main.UI.UIcontoller;
 import Trade.TradeManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 import java.util.Arrays;
 
 public class LoginIGUI {
@@ -69,7 +71,7 @@ public class LoginIGUI {
         logInButton.addActionListener(e -> {
             String name = nameInput.getText();
             String password = Arrays.toString(passwordInput.getPassword());
-            ILoginSystemBoundary presenter = new LoginSystemPresenter();
+            ILoginSystemBoundary presenter = new LoginSystemPresenter(um);
             boolean response = presenter.login(name, password);
             if (!response)
                 JOptionPane.showMessageDialog(null, "invalid user");
@@ -83,26 +85,26 @@ public class LoginIGUI {
         registerButton.addActionListener(e -> {
             String name = nameInput.getText();
             String password = Arrays.toString(passwordInput.getPassword());
-            ILoginSystemBoundary presenter = new LoginSystemPresenter();
+            ILoginSystemBoundary presenter = new LoginSystemPresenter(um);
             presenter.register(name, password);
             JOptionPane.showMessageDialog(null, "success");
         });
 
 
         exploreButton.addActionListener(e -> {
-            ILoginSystemBoundary presenter = new LoginSystemPresenter();
+            ILoginSystemBoundary presenter = new LoginSystemPresenter(um);
             presenter.explore();
         });
 
-//        exitButton.addActionListener(e -> {
-//            DataAccessFull adf=new DataAccessFull(um,tm,iv,iam);
-//            try {
-//                adf.updateFile();
-//            } catch (IOException ioException) {
-//                ioException.printStackTrace();
-//            }
-//            frame.setVisible(false);
-//        });
+        exitButton.addActionListener(e -> {
+            DataAccessFull adf=new DataAccessFull(um,tm,iv,iam);
+            try {
+                adf.updateFile();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+            frame.setVisible(false);
+        });
 
     }
 }

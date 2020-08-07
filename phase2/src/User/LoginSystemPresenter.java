@@ -1,8 +1,11 @@
 package User;
 
 public class LoginSystemPresenter implements ILoginSystemBoundary {
+    UserManager um;
 
-    UserManager um = new UserManager();
+   public LoginSystemPresenter(UserManager um){
+       this.um = um;
+   }
 
     public void register(String name, String password) {
         ClientUser user = new ClientUser(name, password, false);
