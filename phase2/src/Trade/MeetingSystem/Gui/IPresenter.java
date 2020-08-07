@@ -9,8 +9,6 @@ public interface IPresenter {
 
     void performAction();
 
-//    void back();
-
     Model getModel();
 
     UUID getMeetingID();
@@ -21,5 +19,4 @@ public interface IPresenter {
 
     List<UUID> getUsers();
 
-//    void addObserver(Observer observer);
 }

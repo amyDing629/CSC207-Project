@@ -14,10 +14,6 @@ public interface IDataAccess {
 
     void readFromCSVFile();
 
-//    void writeHeaderToCSV(String filePath);
-
-//    void writeMeetingToCSV(Meeting meeting, String filePath);
-
     void writeAllMeetingsToCSV();
 
     Map<UUID, Meeting> getMap();

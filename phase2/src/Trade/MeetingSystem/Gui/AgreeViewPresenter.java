@@ -75,11 +75,6 @@ public class AgreeViewPresenter implements IPresenter {
         return null;
     }
 
-//    @Override
-//    public void addObserver(Observer observer) {
-//
-//    }
-
     @Override
     public void run() {
         view.setPresenter(this);

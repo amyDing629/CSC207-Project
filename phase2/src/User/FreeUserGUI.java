@@ -66,8 +66,8 @@ public class FreeUserGUI {
         });
         submitButton.addActionListener(e -> {
             frame.setVisible(false);
-            aam.setFreeze(um.getUser(userInput.getText()),true);
-            JOptionPane.showMessageDialog(null, "success freeeze");
+            aam.setFreeze(um.getUser(userInput.getText()), true);
+            JOptionPane.showMessageDialog(null, "success freeze");
             UserFreezeSystem d = new UserFreezeSystem(um,tm,iv,iam,aam,uc,frame);
             d.run(um.getUsername(b));
         });

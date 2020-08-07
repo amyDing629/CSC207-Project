@@ -24,9 +24,6 @@ public class EditionViewPresenter extends Observable implements IPresenter {
     // View
     EditView view;
 
-    // Observer
-//    List<Observer> observers;
-
 
     public EditionViewPresenter(UUID meetingID, UUID currLogInUser, Observer observer) {
         this.meetingID = meetingID;
@@ -42,7 +39,6 @@ public class EditionViewPresenter extends Observable implements IPresenter {
         meetingStatus = meetingModel.getMeetingStatus(meetingID);
 
         // set observers
-//        observers = new ArrayList<>();
         addObserver(observer);
     }
 
@@ -95,11 +91,5 @@ public class EditionViewPresenter extends Observable implements IPresenter {
         view.setPresenter(this);
         view.open();
     }
-
-//    @Override
-//    public void addObserver(Observer observer) {
-//        addObserver(observer);
-////        this.observers.add(observer);
-//    }
 }
 

@@ -1,4 +1,5 @@
 package Inventory;
+
 import User.ClientUser;
 import User.ItemApprovalManager;
 import User.UserManager;
@@ -7,8 +8,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.util.ArrayList;
 
 public class WishBorrowAddGUI {
     InventoryController ic;
@@ -20,7 +19,6 @@ public class WishBorrowAddGUI {
         ic = new InventoryController(currUser, iv, um, iam);
         ip = new InventoryPresenter(currUser, iv);
         this.itf = itf;
-
     }
 
     public void run() {

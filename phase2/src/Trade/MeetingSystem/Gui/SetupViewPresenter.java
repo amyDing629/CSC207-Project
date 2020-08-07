@@ -23,9 +23,6 @@ public class SetupViewPresenter extends Observable implements IPresenter {
     // View
     EditView view;
 
-    // Observer
-//    List<Observer> observers;
-
 
     public SetupViewPresenter(UUID meetingID, UUID currLogInUser, List<UUID> users, Observer observer) {
         this.meetingID = meetingID;
@@ -42,7 +39,6 @@ public class SetupViewPresenter extends Observable implements IPresenter {
         meetingStatus = meetingModel.getMeetingStatus(meetingID);
 
         // set observers
-//        observers = new ArrayList<>();
         addObserver(observer);
         System.out.println("SetupPresenter - add observer: " + observer.toString());
     }
@@ -64,9 +60,7 @@ public class SetupViewPresenter extends Observable implements IPresenter {
 
         // notify observers
         setChanged();
-        System.out.println("changed:" + hasChanged());
         notifyObservers(meetingID);
-        System.out.println("SetupPresenter - notify observer with meetingID : " + meetingID.toString());
 
         return meetingID;
     }
@@ -96,12 +90,5 @@ public class SetupViewPresenter extends Observable implements IPresenter {
         view.setPresenter(this);
         view.open();
     }
-
-//    @Override
-//    public void addObserver(Observer observer) {
-//        addObserver(observer);
-////        this.observers.add(observer);
-//        System.out.println("SetupPresenter - add observer: " + observer.toString());
-//    }
 
 }

@@ -121,10 +121,8 @@ public class ReadWriteMeeting implements IDataAccess {
         }
 
         // construct meeting object
-        Meeting meeting = generateMeeting.constructMeeting(meetingID, dateTime, place, status, lastEditUser, userIDs,
+        return generateMeeting.constructMeeting(meetingID, dateTime, place, status, lastEditUser, userIDs,
                 idToEditTime, idToAgreedStatus, idToConfirmedStatus);
-
-        return meeting;
     }
 
     public void writeAllMeetingsToCSV() {
@@ -271,61 +269,5 @@ public class ReadWriteMeeting implements IDataAccess {
         return meetingMap;
     }
 
-
-//    /**
-//     * source: logging.zip
-//     * Populates the records map from the file at path filePath.
-//     *
-//     * @param filePath the path of the data file
-//     * @throws FileNotFoundException if filePath is not a valid path
-//     */
-//    public void readFromCSVFile(String filePath) throws FileNotFoundException {
-//
-//        // FileInputStream can be used for reading raw bytes, like an image.
-//        Scanner scanner = new Scanner(new FileInputStream(filePath));
-//        String[] record;
-//        Student student;
-//
-//        while (scanner.hasNextLine()) {
-//            record = scanner.nextLine().split(",");
-//            student = new Student(record[0].split(" "), record[1], record[2]);
-//            students.put(student.getID(), student);
-//        }
-//        scanner.close();
-//    }
-
 }
-
-
-//public static void writeDataForCustomSeperatorCSV(String filePath) {
-//
-//        // first create file object for file placed at location
-//        // specified by filepath
-//        File file = new File(filePath);
-//
-//        try {
-//            // create FileWriter object with file as parameter
-//            FileWriter outputfile = new FileWriter(file);
-//
-//            // create CSVWriter with '|' as separator
-//            CSVWriter writer = new CSVWriter(outputfile, '|',
-//                    CSVWriter.NO_QUOTE_CHARACTER,
-//                    CSVWriter.DEFAULT_ESCAPE_CHARACTER,
-//                    CSVWriter.DEFAULT_LINE_END);
-//
-//            // create a List which contains String array
-//            List<String[]> data = new ArrayList<String[]>();
-//            data.add(new String[] { "Name", "Class", "Marks" });
-//            data.add(new String[] { "Aman", "10", "620" });
-//            data.add(new String[] { "Suraj", "10", "630" });
-//            writer.writeAll(data);
-//
-//            // closing writer connection
-//            writer.close();
-//        }
-//        catch (IOException | IOException e) {
-//            // TODO Auto-generated catch block
-//            e.printStackTrace();
-//        }
-//    } }
 
