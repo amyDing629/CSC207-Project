@@ -59,10 +59,11 @@ public class LoginIGUI {
         logInButton.setBounds(100,80,80,25);
         panel.add(logInButton);
 
+        JButton exploreButton=new JButton("explore");
         JButton exitButton = new JButton("quit");
         exitButton.setPreferredSize(new Dimension(300, 30));
+        panel.add(exploreButton);
         panel.add(exitButton);
-
         logInButton.addActionListener(e -> {
             String name = nameInput.getText();
             String password = passwordInput.getText();
@@ -84,7 +85,9 @@ public class LoginIGUI {
             presenter.register(name, password);
             JOptionPane.showMessageDialog(null, "success");
         });
-
+            exploreButton.addActionListener(e -> {
+                ILoginSystemBoundary presenter = new LoginSystemPresenter();
+            });
 //        exitButton.addActionListener(e -> {
 //            DataAccessFull adf=new DataAccessFull(um,tm,iv,iam);
 //            try {
@@ -94,5 +97,6 @@ public class LoginIGUI {
 //            }
 //            frame.setVisible(false);
 //        });
+
     }
 }
