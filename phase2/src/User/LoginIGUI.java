@@ -6,7 +6,7 @@ import Trade.TradeManager;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
+import java.util.Arrays;
 
 public class LoginIGUI {
     UserManager um;
@@ -64,30 +64,36 @@ public class LoginIGUI {
         exitButton.setPreferredSize(new Dimension(300, 30));
         panel.add(exploreButton);
         panel.add(exitButton);
+
+
         logInButton.addActionListener(e -> {
             String name = nameInput.getText();
-            String password = passwordInput.getText();
+            String password = Arrays.toString(passwordInput.getPassword());
             ILoginSystemBoundary presenter = new LoginSystemPresenter();
             boolean response = presenter.login(name, password);
-            if(!response)
+            if (!response)
                 JOptionPane.showMessageDialog(null, "invalid user");
-            else{
+            else {
                 frame.setVisible(false);
-            ClientUserGUI a = new ClientUserGUI(um,tm,iv,iam,aam,uc,frame);
-            a.run(name);
+                ClientUserGUI a = new ClientUserGUI(um, tm, iv, iam, aam, uc, frame);
+                a.run(name);
             }
         });
 
         registerButton.addActionListener(e -> {
             String name = nameInput.getText();
-            String password = passwordInput.getText();
+            String password = Arrays.toString(passwordInput.getPassword());
             ILoginSystemBoundary presenter = new LoginSystemPresenter();
             presenter.register(name, password);
             JOptionPane.showMessageDialog(null, "success");
         });
-            exploreButton.addActionListener(e -> {
-                ILoginSystemBoundary presenter = new LoginSystemPresenter();
-            });
+
+
+        exploreButton.addActionListener(e -> {
+            ILoginSystemBoundary presenter = new LoginSystemPresenter();
+            presenter.explore();
+        });
+
 //        exitButton.addActionListener(e -> {
 //            DataAccessFull adf=new DataAccessFull(um,tm,iv,iam);
 //            try {
