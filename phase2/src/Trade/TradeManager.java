@@ -205,6 +205,19 @@ public class TradeManager{
     }
 
     /**
+     * return the list of all complete trades that the user has
+     */
+    public List<Trade> getComplete(ClientUser user) {
+        List<Trade> trade=new ArrayList<>();
+        for(Trade t: getAllTrade(user)){
+            if(t.getStatus().equals(TradeStatus.complete)){
+                trade.add(t);
+            }
+        }
+        return trade;
+    }
+
+    /**
      * return the list of most recent three trades that the user has
      * if the user has less than three trades, return all the trades the user has
      */
