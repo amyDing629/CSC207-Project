@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.UUID;
 
+// TODO: May delete
 public class PointSysMain {
 
     public static void main(String[] args) {
@@ -22,15 +23,15 @@ public class PointSysMain {
         TradeManager tm = new TradeManager();
 
         PointManager pm = new PointManager(um, tm);
-        pm.addUsersToPointList();
+        pm.setPointList();
 
         pm.addPoints("admin", 7);
-        pm.addPoints("daniel", 7);
+        pm.addPoints("daniel", 3);
         pm.addPoints("amy", 2);
-        HashMap<UUID, Integer> unsorted = pm.getPointList();
+        Map<UUID, Integer> unsorted = pm.getPointList();
         System.out.println(unsorted);
 
-        HashMap<UUID, Integer>  most = pm.getMostFreq();
+        Map<UUID, Integer>  most = pm.getMostFreq();
         System.out.println(most);
     }
 }

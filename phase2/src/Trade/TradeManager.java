@@ -252,7 +252,20 @@ public class TradeManager{
         return number;
     }
 
-
+    /**
+     * return a list of transactions of the user has in the most recent seven days
+     * @param user the client user that is querying the list of trades in the most recent seven days
+     */
+    public List<Trade> getWeekTradeList(ClientUser user) {
+        List<Trade> result = new ArrayList<Trade>();
+        LocalDateTime x  = LocalDateTime.now();
+        LocalDateTime y = x.minusDays(7);
+        for (UUID id: user.getTradeHistory()) {
+            if (getTrade(id).getCreateTime().isAfter(y) && getTrade(id).getCreateTime().isBefore(x)) {
+                result.add(getTrade(id));
+            }
+        }return result;
+    }
 
 }
 

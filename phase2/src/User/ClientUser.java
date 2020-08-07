@@ -63,7 +63,14 @@ public class ClientUser implements Serializable {
     private boolean isLeft;
     private LocalDateTime end;
 
+    /**
+     * the list of trades that is set to bonus, so that it's not counting towards being frozen
+     */
     private List<UUID> bonusTradeList;
+
+    /**
+     * the bonus points that the client user has.
+     */
     private int bonusPoints;
 
 
@@ -86,6 +93,8 @@ public class ClientUser implements Serializable {
         end = null;
         isLeft = false;
         id = UUID.randomUUID();
+        this.bonusTradeList = new ArrayList<>();
+        this.bonusPoints = 0;
     }
 
     public void setEnd(LocalDateTime end){
@@ -347,7 +356,7 @@ public class ClientUser implements Serializable {
     public List<UUID> getBonusTradeList(){ return this.bonusTradeList;}
 
     /**
-     * return the bonus points the client user
+     * return the bonus points the client user currently has
      */
     public int getBonusPoints(){return this.bonusPoints;}
 
