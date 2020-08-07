@@ -1,14 +1,13 @@
 package Trade;
 
-import Trade.MeetingSystem.Gui.MPresenter;
-import Trade.MeetingSystem.Gui.MainViewPresenter;
+import User.ClientUser;
 
 import java.util.List;
 
 public class CTradePresenter {
-    TradeGUI tg;
+    BorderGUIWithThreeTextArea tg;
 
-    public CTradePresenter(TradeGUI tg) {
+    public CTradePresenter(BorderGUIWithThreeTextArea tg) {
         this.tg = tg;
     }
 
@@ -23,11 +22,15 @@ public class CTradePresenter {
             result = result + i + ". " + tradeList.get(i).toString() + "\n";
         }
         if (result.equals("")){
-            tg.setMsgText("no available trade");
+            tg.setListText("no available trade");
         }else{
             tg.setListText(result);
         }
     }
+
+
+
+
 
     public void resetInputArea(){
         tg.resetInput();

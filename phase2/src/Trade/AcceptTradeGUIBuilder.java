@@ -8,15 +8,15 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class AcceptTradeGUIBuilder implements TradeGUIBuilder {
-    private final TradeGUI tg;
+public class AcceptTradeGUIBuilder implements BorderGUIBuilder {
+    private final BorderGUIWithThreeTextArea tg;
     ClientUser currUser;
     AcceptTradeController atc;
     JFrame tf;
 
     public AcceptTradeGUIBuilder(ClientUser currUser, TradeManager tm, UserManager um, JFrame tf){
         this.currUser = currUser;
-        tg = new TradeGUI();
+        tg = new BorderGUIWithThreeTextArea();
         atc = new AcceptTradeController(currUser, tm, um, tg);
         this.tf = tf;
     }
@@ -73,6 +73,7 @@ public class AcceptTradeGUIBuilder implements TradeGUIBuilder {
         panelW.setLayout(new BoxLayout(panelW, BoxLayout.Y_AXIS));
         panelW.add(tradeList);
         panelW.add(jsp);
+        panelW.setPreferredSize(new Dimension(380,370));
         tg.setWest(panelW);
     }
 
@@ -128,7 +129,7 @@ public class AcceptTradeGUIBuilder implements TradeGUIBuilder {
 
     }
 
-    public TradeGUI getTradeGUI(){
+    public BorderGUIWithThreeTextArea getTradeGUI(){
         return tg;
     }
 }

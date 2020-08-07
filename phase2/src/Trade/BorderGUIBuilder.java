@@ -1,11 +1,11 @@
 package Trade;
 
-interface TradeGUIBuilder {
+interface BorderGUIBuilder {
     void buildFrame();
     void buildPanelN();
     void buildPanelE();
     void buildPanelW();
     void buildPanelS();
     void buildPanelC();
-    TradeGUI getTradeGUI();
+    BorderGUINoTextArea getTradeGUI();
 }

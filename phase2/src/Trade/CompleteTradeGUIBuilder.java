@@ -1,7 +1,5 @@
 package Trade;
 
-import Trade.MeetingSystem.Gui.MPresenter;
-import Trade.MeetingSystem.Gui.MainViewPresenter;
 import User.ClientUser;
 import User.UserManager;
 
@@ -11,16 +9,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class CompleteTradeGUIBuilder implements TradeGUIBuilder {
+public class CompleteTradeGUIBuilder implements BorderGUIBuilder {
     Trade currTrade;
     ClientUser currUser;
     CTradeController ctc;
     JFrame tf;
-    TradeGUI tg;
+    BorderGUIWithThreeTextArea tg;
 
     public CompleteTradeGUIBuilder(ClientUser currUser, TradeManager tm, UserManager um, JFrame tf) {
         this.currUser = currUser;
-        tg = new TradeGUI();
+        tg = new BorderGUIWithThreeTextArea();
         ctc = new CTradeController(currUser, tm, um, tg);
         this.tf = tf;
 
@@ -68,6 +66,7 @@ public class CompleteTradeGUIBuilder implements TradeGUIBuilder {
         panelW.setLayout(new BoxLayout(panelW, BoxLayout.Y_AXIS));
         panelW.add(tradeList);
         panelW.add(jsp);
+        panelW.setPreferredSize(new Dimension(380,370));
         tg.setWest(panelW);
     }
 
@@ -123,7 +122,7 @@ public class CompleteTradeGUIBuilder implements TradeGUIBuilder {
 
     }
 
-    public TradeGUI getTradeGUI(){
+    public BorderGUIWithThreeTextArea getTradeGUI(){
         return tg;
     }
 }

@@ -3,29 +3,26 @@ package Trade;
 import User.ClientUser;
 import User.UserManager;
 
+import javax.swing.*;
 import java.util.List;
 
 public class TradeHistoryController {
     ClientUser currUser;
     TradeManager tm;
     UserManager um;
+    TradeHistoryPresenter tp;
+    List<Trade> tradeList;
+    List<String> userList;
 
-    public TradeHistoryController(ClientUser currUser, TradeManager tm, UserManager um){
+    public TradeHistoryController(ClientUser currUser, TradeManager tm, UserManager um, BorderGUIWithThreeTextArea tgp){
         this.currUser = currUser;
         this.tm = tm;
         this.um = um;
+        tp = new TradeHistoryPresenter(tgp);
+
     }
 
-    public String getFreUser(){
-        String result = "";
-        for (String a : um.getFrequentUser(tm, currUser)) {
-            result = result + a + "\n";
-        }
-        if (result.equals("")){
-            return "no user";
-        }
-        return result;
-    }
+
 
     public String getTradeHistory(){
         String result = "";
@@ -37,5 +34,32 @@ public class TradeHistoryController {
             return "no trade";
         }
         return result;
+    }
+
+    void backBut(JFrame frame){
+        frame.setVisible(true);
+        tp.closeFrame();
+    }
+
+    List<Trade> getComplete() {
+        tradeList = tm.getComplete(currUser);
+        return tradeList;
+    }
+
+    List<String> getFreUser() {
+        userList = um.getFrequentUser(tm, currUser);
+        return userList;
+    }
+
+
+
+    public void updateTrade(){
+        tp.updateTrade(getComplete());
+
+    }
+
+    public void updateUser(){
+        tp.updateFreUser(getFreUser());
+
     }
 }

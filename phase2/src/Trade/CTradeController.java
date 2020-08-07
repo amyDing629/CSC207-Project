@@ -20,9 +20,9 @@ public class CTradeController implements Observer {
     Trade currTrade;
     Boolean isFirst;
     CTradePresenter tp;
-    TradeGUI tg;
+    BorderGUIWithThreeTextArea tg;
 
-    public CTradeController(ClientUser currUser, TradeManager tm, UserManager um, TradeGUI tg) {
+    public CTradeController(ClientUser currUser, TradeManager tm, UserManager um, BorderGUIWithThreeTextArea tg) {
         this.currUser = currUser;
         this.tm = tm;
         this.um = um;

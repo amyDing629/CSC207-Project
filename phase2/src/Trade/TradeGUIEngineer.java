@@ -1,19 +1,19 @@
 package Trade;
 
 public class TradeGUIEngineer {
-    private TradeGUIBuilder tgBuilder;
+    private final BorderGUIBuilder tgBuilder;
 
-    public TradeGUIEngineer(TradeGUIBuilder tgb){
+    public TradeGUIEngineer(BorderGUIBuilder tgb){
         tgBuilder = tgb;
     }
 
 
-    public TradeGUI getGUI()
+    public TradeGUIPlan getGUI()
     {
         return tgBuilder.getTradeGUI();
     }
 
-    public void constructHouse()
+    public void constructGUI()
     {
         tgBuilder.buildFrame();
         tgBuilder.buildPanelN();

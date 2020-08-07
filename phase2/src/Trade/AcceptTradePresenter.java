@@ -4,9 +4,9 @@ package Trade;
 import java.util.List;
 
 public class AcceptTradePresenter {
-    TradeGUI tg;
+    BorderGUIWithThreeTextArea tg;
 
-    public AcceptTradePresenter(TradeGUI tg) {
+    public AcceptTradePresenter(BorderGUIWithThreeTextArea tg) {
         this.tg = tg;
     }
 

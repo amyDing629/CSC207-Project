@@ -15,7 +15,7 @@ public class AcceptTradeController {
     Trade currTrade;
     AcceptTradePresenter tp;
 
-    public AcceptTradeController(ClientUser currUser, TradeManager tm, UserManager um, TradeGUI tg){
+    public AcceptTradeController(ClientUser currUser, TradeManager tm, UserManager um, BorderGUIWithThreeTextArea tg){
         this.currUser = currUser;
         this.tm = tm;
         this.um = um;

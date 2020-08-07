@@ -1,4 +1,5 @@
 package Main.UI;
+import Inventory.Item;
 import User.ClientUser;
 import User.ClientUserController;
 import User.ItemApprovalManager;
@@ -93,4 +94,6 @@ public class ApprovalDataAccess {
             fr.close();
         }
     }
+
+
 }
