@@ -9,7 +9,7 @@ import java.util.UUID;
 
 /**
  * [gateway class]
- * the class that read and write all the item information from ItemList.txt into ItemList in gateway
+ * This class reads and writes all the item information from ItemList.ser into lendingList
  */
 public class InvDataAccess implements DataAccess {
 
