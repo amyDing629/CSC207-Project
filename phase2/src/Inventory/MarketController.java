@@ -21,7 +21,6 @@ public class MarketController {
     boolean selectItem(String line){
         for (Item it: iv.getLendingList()){
             if (iv.getName(it).equals(line)){
-                //System.out.println(it + " has been selected");
                 return true;
             }
         }
@@ -36,12 +35,6 @@ public class MarketController {
     }
 
     String printItemInfo(Item item) {
-        /*
-        System.out.println("item name: " + item.getName());
-        System.out.println("item description: " + item.getDescription());
-        System.out.println("item owner: " + item.getOwnerName());
-
-         */
         return "Item Info:\nitem name: " + iv.getName(item) + "\n" +
                 "item description: " + iv.getDescription(item)
                 + "\n" + "item owner: " + iv.getOwnerName(item) ;

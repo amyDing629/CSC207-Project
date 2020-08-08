@@ -2,10 +2,10 @@ package User;
 
 import Trade.TradeManager;
 
-import java.io.File;
-
 public class AdminController extends ClientUserController{
     private final AdminActivityManager am;
+
+
     public AdminController(ClientUser clientUser, UserManager um, ItemApprovalManager iam,
                            AdminActivityManager am, TradeManager tm) {
         super(clientUser, um, iam, tm);

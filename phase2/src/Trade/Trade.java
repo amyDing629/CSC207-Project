@@ -1,8 +1,6 @@
 package Trade;
 
 import Inventory.Item;
-import Trade.MeetingSystem.Meeting;
-import Trade.MeetingSystem.MeetingStatus;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;

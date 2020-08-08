@@ -1,15 +1,18 @@
 package Trade;
 
-import Trade.MeetingSystem.Gui.MPresenter;
-import Trade.MeetingSystem.Gui.MainViewPresenter;
-import Trade.MeetingSystem.Meeting;
-import Trade.MeetingSystem.MeetingManager;
+import Trade.MeetingSystem.Adapter.MPresenter;
+import Trade.MeetingSystem.Adapter.MainViewPresenter;
+import Trade.MeetingSystem.Entity.Meeting;
 import Trade.MeetingSystem.MeetingStatus;
+import Trade.MeetingSystem.UseCase.MeetingActionManager;
 import User.ClientUser;
 import User.UserManager;
 
 import javax.swing.*;
-import java.util.*;
+import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
+import java.util.UUID;
 import java.util.regex.Pattern;
 
 public class CTradeController implements Observer {
@@ -63,7 +66,7 @@ public class CTradeController implements Observer {
     public void update(Observable o, Object arg) {
         System.out.println("has updated!" + arg);
         UUID mtID = (UUID) arg;
-        Meeting mt = new MeetingManager().getMeetingWithId(mtID);
+        Meeting mt = new MeetingActionManager().getMeetingWithId(mtID);
         System.out.println("firstMeetingID: " + mt.getID());
         if (isFirst) {
             if (mt.getStatus().equals(MeetingStatus.INCOMPLETE)) {
@@ -76,13 +79,13 @@ public class CTradeController implements Observer {
                 if (currTrade.getDuration() == -1) {
                     tm.completeTrade(currTrade);
                 } else {
-                    currTrade.setSecondMeeting(new MeetingManager().setUpSecondMeeting(mtID));
+                    currTrade.setSecondMeeting(new MeetingActionManager().setUpSecondMeeting(mtID));
                     System.out.println("secondMeetingID: " + currTrade.getSecondMeeting());
                 }
             }
 
         } else {
-            Meeting smt = new MeetingManager().getMeetingWithId(currTrade.getSecondMeeting());
+            Meeting smt = new MeetingActionManager().getMeetingWithId(currTrade.getSecondMeeting());
             System.out.println("secondMeetingID: " + smt.getID());
             if (smt.getStatus().equals(MeetingStatus.COMPLETED)) {
                 tm.completeTrade(currTrade);
@@ -135,7 +138,7 @@ public class CTradeController implements Observer {
     void submitBut(String tradeNum){
         tp.resetInputArea();
         if (!checkInput(tradeNum)){
-            tp.wrongInput();;
+            tp.wrongInput();
         }else{
             currTrade = getCurrTrade(tradeNum);
             tp.presentTradeInfo(currTrade);

@@ -10,22 +10,33 @@ import java.awt.*;
 import java.io.IOException;
 import java.util.Arrays;
 
-public class LoginIGUI {
+public class LoginIGUI implements View {
     UserManager um;
     TradeManager tm;
     ItemApprovalManager iam;
     UIcontoller uc;
     Inventory iv;
     AdminActivityManager aam;
+
     JFrame frame;
+
+
+    // presenter
+    ILoginSystemBoundary presenter;
+
+    public LoginIGUI() {
+        run();
+    }
+
     public LoginIGUI(UserManager um, TradeManager tm, Inventory iv, ItemApprovalManager iam, UIcontoller uc, AdminActivityManager aam) {
         this.um = um;
         this.tm = tm;
-        this.iam=iam;
-        this.uc=uc;
-        this.iv=iv;
-        this.aam=aam;
+        this.iam = iam;
+        this.uc = uc;
+        this.iv = iv;
+        this.aam = aam;
     }
+
     public void run(){
         frame = new JFrame("Login/Register");
         frame.setSize(330, 200);
@@ -71,8 +82,7 @@ public class LoginIGUI {
         logInButton.addActionListener(e -> {
             String name = nameInput.getText();
             String password = Arrays.toString(passwordInput.getPassword());
-            ILoginSystemBoundary presenter = new LoginSystemPresenter(um);
-            boolean response = presenter.login(name, password);
+            boolean response = getPresenter().login(name, password);
             if (!response)
                 JOptionPane.showMessageDialog(null, "invalid user");
             else {
@@ -85,19 +95,19 @@ public class LoginIGUI {
         registerButton.addActionListener(e -> {
             String name = nameInput.getText();
             String password = Arrays.toString(passwordInput.getPassword());
-            ILoginSystemBoundary presenter = new LoginSystemPresenter(um);
-            presenter.register(name, password);
+            getPresenter().register(name, password);
             JOptionPane.showMessageDialog(null, "success");
         });
 
 
         exploreButton.addActionListener(e -> {
-            ILoginSystemBoundary presenter = new LoginSystemPresenter(um);
-            presenter.explore();
+            getPresenter().explore();
         });
 
         exitButton.addActionListener(e -> {
-            DataAccessFull adf=new DataAccessFull(um,tm,iv,iam);
+
+            // TODO: only access controller or presenter, allow use case to use gateway
+            DataAccessFull adf = new DataAccessFull(um, tm, iv, iam);
             try {
                 adf.updateFile();
             } catch (IOException ioException) {
@@ -105,6 +115,19 @@ public class LoginIGUI {
             }
             frame.setVisible(false);
         });
+
+    }
+
+    public ILoginSystemBoundary getPresenter() {
+        return presenter;
+    }
+
+    public void setPresenter(ILoginSystemBoundary presenter) {
+        this.presenter = presenter;
+    }
+
+    @Override
+    public void updateUIComponent() {
 
     }
 }

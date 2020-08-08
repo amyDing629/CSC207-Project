@@ -1,9 +1,5 @@
 package Inventory;
 
-import User.ClientUser;
-import User.ItemApprovalManager;
-import User.UserManager;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
