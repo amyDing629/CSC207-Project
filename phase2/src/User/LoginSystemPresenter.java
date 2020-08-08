@@ -1,11 +1,27 @@
 package User;
 
 public class LoginSystemPresenter implements ILoginSystemBoundary {
+
+    // model
     UserManager um;
 
-   public LoginSystemPresenter(UserManager um){
-       this.um = um;
-   }
+    // view
+    View view;
+
+    public LoginSystemPresenter(View view, UserManager um) {
+        this.um = um;
+        this.view = view;
+
+    }
+
+    public UserManager getModel() {
+        return um;
+    }
+
+    public void run() {
+        view.setPresenter(this);
+//        view.run();
+    }
 
     public void register(String name, String password) {
         ClientUser user = new ClientUser(name, password, false);

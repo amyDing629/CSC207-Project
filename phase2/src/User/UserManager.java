@@ -12,69 +12,63 @@ import java.util.*;
  */
 public class UserManager {
 
-    /**
-     * the list of users
-     */
-    ArrayList<ClientUser> userList  = new ArrayList<>();
 
+    DataAccess dataAccess = new UserDataAccess();
 
     /**
-     * return list of users
-     */
-    public ArrayList<ClientUser> getUserList(){
-        return userList;
-    }
-
-    public void setUserList(ArrayList<ClientUser> ul){
-        userList = ul;
-    }
-    /**
+     * Return the ClientUser with such name, or return null if there no such user.
+     *
      * @param name the name of the user that the manager wants to get
-     * find the user by the user name
+     *             find the user by the user name
      */
     public ClientUser getUser(String name) {
-        //ArrayList<ClientUser> userList = splitUser(readFile());
-        for(ClientUser u : userList){
-            if(u.getUsername().equals(name))
-                return u;
-        }
-        return null;
-    }
-
-    public void addUser(ClientUser user){
-        userList.add(user);
+        return dataAccess.getUser(name);
     }
 
     /**
      * @param userId the ID of the user that the manager wants to get
-     * find the user by the user ID
+     *               find the user by the user ID
      */
     public ClientUser getUser(UUID userId) {
-        //ArrayList<ClientUser> userList = splitUser(readFile());
-        for(ClientUser u : userList){
-            if(u.getId().equals(userId))
-                return u;
-        }
-        return null;
+        return dataAccess.getUser(userId);
+    }
+
+    /**
+     * Add a ClientUser
+     *
+     * @param user the clientUser we want to add
+     */
+    public void addUser(ClientUser user) {
+        dataAccess.addUser(user);
     }
 
 
     /**
-     * @param name the name of the user that the manager check
+     * @param name     the name of the user that the manager check
      * @param password the password of the user that the manager check
-     * Check if the name matches with the password
+     *                 Check if the name matches with the password
      */
     public boolean verifyUser(String name, String password) {
-        //ArrayList<ClientUser> userList = splitUser(readFile());
-        for(ClientUser u : userList){
-            if(u.getUsername().equals(name) && u.getPassword().equals(password)) {
-                return true;}
-        }
-        return false;
+        ClientUser user = getUser(name);
+        return user.getPassword().equals(password);
     }
-    public int readDiff(ClientUser user){
 
-        return user.getLendCounter()- user.getBorrowCounter();
+
+    /**
+     * Create a ClientUser with name, password, isAdmin; and save it to .ser file
+     *
+     * @param name
+     * @param password
+     * @param isAdmin
+     */
+    public void createClientUser(String name, String password, boolean isAdmin) {
+        dataAccess.addUser(new ClientUser(name, password, isAdmin));
+    }
+
+
+    public int readDiff(ClientUser user) {
+
+        return user.getLendCounter() - user.getBorrowCounter();
     }
 
     /**
@@ -120,6 +114,7 @@ public class UserManager {
 
     //FINISHED
     public boolean getIsAdmin(ClientUser a){return a.getIsAdmin();}
+
     //FINISHED
     public List<String> getWishLend(ClientUser a) {
         return a.getWishLend();
@@ -161,15 +156,14 @@ public class UserManager {
     public boolean getIsFrozen(ClientUser a){
         return a.getIsFrozen();
     }
+
     //no use
     public List<String> getNotification(ClientUser a){return a.getNotification();}
+
     //finished
     public void set(ClientUser a, String password){a.setPassword(password);}
+
     //finished
-    public void createClientUser(String name, String password, boolean isAdmin){
-        userList.add(new ClientUser(name, password, isAdmin));
-    }
-    
     public void setEnd(ClientUser a, LocalDateTime end){
         a.setEnd(end);
     }
