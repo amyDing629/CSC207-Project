@@ -8,7 +8,7 @@ public interface DataAccess {
 
     Object getObject(UUID uuid);
 
-    boolean hasObject(String name);
+//    boolean hasObject(String name);
 
     void addObject(Object o);
 

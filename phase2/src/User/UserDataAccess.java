@@ -14,6 +14,8 @@ public class UserDataAccess implements DataAccess {
     /**
      * [constructor]
      */
+    // https://stackoverflow.com/questions/1205995/what-is-the-list-of-valid-suppresswarnings-warning-names-in-java
+    @SuppressWarnings("all")
     public UserDataAccess() {
         userList = new ArrayList<>();
 
@@ -52,15 +54,6 @@ public class UserDataAccess implements DataAccess {
     }
 
     @Override
-    public boolean hasObject(String name) {
-        deSerialize();
-        for (ClientUser u : userList) {
-            if (u.getUsername().equals(name))
-                return true;
-        }
-        return false;
-    }
-
     public void updateSer() {
         File writer = new File(serFilePath);
         writer.deleteOnExit();
@@ -113,6 +106,16 @@ public class UserDataAccess implements DataAccess {
 
     }
 
+
+//    @Override
+//    public boolean hasObject(String name) {
+//        deSerialize();
+//        for (ClientUser u : userList) {
+//            if (u.getUsername().equals(name))
+//                return true;
+//        }
+//        return false;
+//    }
 //    @Override
 //    public ClientUser getUser(String name) {
 //        deSerialize();
