@@ -22,7 +22,7 @@ public class UserManager {
      *             find the user by the user name
      */
     public ClientUser getUser(String name) {
-        return dataAccess.getUser(name);
+        return (ClientUser) dataAccess.getObject(name);
     }
 
     /**
@@ -30,7 +30,7 @@ public class UserManager {
      *               find the user by the user ID
      */
     public ClientUser getUser(UUID userId) {
-        return dataAccess.getUser(userId);
+        return (ClientUser) dataAccess.getObject(userId);
     }
 
     /**
@@ -39,7 +39,7 @@ public class UserManager {
      * @param user the clientUser we want to add
      */
     public void addUser(ClientUser user) {
-        dataAccess.addUser(user);
+        dataAccess.addObject(user);
     }
 
 
@@ -57,12 +57,12 @@ public class UserManager {
     /**
      * Create a ClientUser with name, password, isAdmin; and save it to .ser file
      *
-     * @param name
-     * @param password
-     * @param isAdmin
+     * @param name     the name of the clientUser
+     * @param password the password of the clientUser
+     * @param isAdmin  if the clientUser is admin
      */
     public void createClientUser(String name, String password, boolean isAdmin) {
-        dataAccess.addUser(new ClientUser(name, password, isAdmin));
+        dataAccess.addObject(new ClientUser(name, password, isAdmin));
     }
 
 
@@ -168,10 +168,10 @@ public class UserManager {
         a.setEnd(end);
     }
 
-
     public ArrayList<ArrayList<String>> getActions(ClientUser a) {
         return a.getActions();
     }
+
     public void removeBWishes(String hi,ClientUser b){
         b.removeBWishes(hi);
     }

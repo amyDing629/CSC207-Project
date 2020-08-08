@@ -31,12 +31,8 @@ public class UserDataAccess implements DataAccess {
 
     }
 
-//    public List<ClientUser> getUserList() {
-//        return userList;
-//    }
-
     @Override
-    public ClientUser getUser(String name) {
+    public Object getObject(String name) {
         deSerialize();
         for (ClientUser u : userList) {
             if (u.getUsername().equals(name))
@@ -46,7 +42,7 @@ public class UserDataAccess implements DataAccess {
     }
 
     @Override
-    public ClientUser getUser(UUID uuid) {
+    public Object getObject(UUID uuid) {
         deSerialize();
         for (ClientUser u : userList) {
             if (u.getId().equals(uuid))
@@ -56,7 +52,7 @@ public class UserDataAccess implements DataAccess {
     }
 
     @Override
-    public boolean hasUser(String name) {
+    public boolean hasObject(String name) {
         deSerialize();
         for (ClientUser u : userList) {
             if (u.getUsername().equals(name))
@@ -72,9 +68,9 @@ public class UserDataAccess implements DataAccess {
     }
 
     @Override
-    public void addUser(ClientUser clientUser) {
+    public void addObject(Object o) {
         deSerialize();
-        userList.add(clientUser);
+        userList.add((ClientUser) o);
         updateSer();
     }
 
@@ -116,6 +112,41 @@ public class UserDataAccess implements DataAccess {
         }
 
     }
+
+//    @Override
+//    public ClientUser getUser(String name) {
+//        deSerialize();
+//        for (ClientUser u : userList) {
+//            if (u.getUsername().equals(name))
+//                return u;
+//        }
+//        return null;
+//    }
+//
+//    @Override
+//    public ClientUser getUser(UUID uuid) {
+//        deSerialize();
+//        for (ClientUser u : userList) {
+//            if (u.getId().equals(uuid))
+//                return u;
+//        }
+//        return null;
+//    }
+//    @Override
+//    public boolean hasUser(String name) {
+//        deSerialize();
+//        for (ClientUser u : userList) {
+//            if (u.getUsername().equals(name))
+//                return true;
+//        }
+//        return false;
+//    }
+//    @Override
+//    public void addUser(ClientUser clientUser) {
+//        deSerialize();
+//        userList.add(clientUser);
+//        updateSer();
+//    }
 
 
 //    /**
