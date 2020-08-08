@@ -56,7 +56,6 @@ public abstract class InputTimePlaceView extends JDialog {
     }
 
     private void createUIComponents() {
-        // TODO: place custom component creation code here
         instructionTextArea = new JTextArea("Please propose a time and place to meet!");
         instructionTextArea.setEditable(false);
 

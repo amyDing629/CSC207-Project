@@ -51,25 +51,29 @@ public class EditView extends InputTimePlaceView {
                 dispose();
             } else {
                 // fail window
-                JOptionPane.showMessageDialog(null, "Fail: Repeated Inputs.", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Fail: Repeated Inputs.", "Error",
+                        JOptionPane.ERROR_MESSAGE);
                 timeFormattedTextField.selectAll();
             }
 
         } else if (!inputController.assessDateTimeInput(timeFieldText)
                 && inputController.assessPlaceInput(placeFieldText)) {
             // fail window
-            JOptionPane.showMessageDialog(null, "Fail: DateTime Input failed.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Fail: DateTime Input failed.", "Error",
+                    JOptionPane.ERROR_MESSAGE);
             timeFormattedTextField.selectAll();
 
         } else if (inputController.assessDateTimeInput(timeFieldText)
                 && !inputController.assessPlaceInput(placeFieldText)) {
             // fail window
-            JOptionPane.showMessageDialog(null, "Fail: Address Input failed.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Fail: Address Input failed.", "Error",
+                    JOptionPane.ERROR_MESSAGE);
             timeFormattedTextField.selectAll();
 
         } else {
             // fail window
-            JOptionPane.showMessageDialog(null, "Fail: Both Input failed.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Fail: Both Input failed.", "Error",
+                    JOptionPane.ERROR_MESSAGE);
             timeFormattedTextField.selectAll();
         }
     }
