@@ -74,10 +74,20 @@ public class AwardActivities {
     }
 
     /**
-     * Return the string representation of pointList in PointManager
+     * Return the string representation of trades to exchange
      */
-    public String toString() {
-        return this.pm.getPointList().toString();
+    public String toString(List<Trade> tradeList) {
+        StringBuilder results = new StringBuilder();
+        for (Trade t: tradeList) {
+            String trade = "Trade{" +
+                    "tradeId=" + t.getId() +
+                    ", user1=" + t.getUsers().get(0) +
+                    ", user2=" + t.getUsers().get(1) +
+                    ", create at=" + t.getCreateTime() +
+                    "} ";
+            results.append(trade);
+        }
+        return results.toString();
     }
 
 }
