@@ -72,7 +72,7 @@ public class ClientUser implements Serializable {
      * the bonus points that the client user has.
      */
     private int bonusPoints;
-
+    private ArrayList<ArrayList<String>> actions;
 
     /**
      * @param username the username of the user account
@@ -95,6 +95,7 @@ public class ClientUser implements Serializable {
         id = UUID.randomUUID();
         this.selectedBonusTrades = new ArrayList<>();
         this.bonusPoints = 0;
+        this.actions= new ArrayList<>();
     }
 
     public void setEnd(LocalDateTime end){
@@ -368,4 +369,7 @@ public class ClientUser implements Serializable {
      */
     public void setBonusPoints(int newPoints) {this.bonusPoints = newPoints;}
 
+    public ArrayList<ArrayList<String>> getActions() {
+        return this.actions;
+    }
 }

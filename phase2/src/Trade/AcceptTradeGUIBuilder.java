@@ -10,12 +10,10 @@ import java.awt.event.ActionListener;
 
 public class AcceptTradeGUIBuilder implements BorderGUIBuilder {
     private final BorderGUIWithThreeTextArea tg;
-    ClientUser currUser;
     AcceptTradeController atc;
     JFrame tf;
 
     public AcceptTradeGUIBuilder(ClientUser currUser, TradeManager tm, UserManager um, JFrame tf){
-        this.currUser = currUser;
         tg = new BorderGUIWithThreeTextArea();
         atc = new AcceptTradeController(currUser, tm, um, tg);
         this.tf = tf;

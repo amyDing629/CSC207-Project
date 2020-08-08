@@ -65,12 +65,29 @@ public class AwardActivities {
      * 2. the bonus point is reduced by a fixed amount
      * 3. update the PointManager.pointList
      * 4. update the ClientUser.bonusPoints
+     * @param user the current user who is making actions
+     * @param selected the trade user selected to be bonus
      */
-    public void getBonus(ClientUser user, List<Trade> selected){
-        for (Trade t: selected) {
-            user.addBonusTrade(t.getId());
-        }
+    public void getBonus(ClientUser user, Trade selected){
+            user.addBonusTrade(selected.getId());
         this.pm.setUserPoints(user);
+    }
+
+    /**
+     * Return the string representation of trades to exchange
+     */
+    public String toString(List<Trade> tradeList) {
+        StringBuilder results = new StringBuilder();
+        for (Trade t: tradeList) {
+            String trade = "Trade{" +
+                    "tradeId=" + t.getId() +
+                    ", user1=" + t.getUsers().get(0) +
+                    ", user2=" + t.getUsers().get(1) +
+                    ", create at=" + t.getCreateTime() +
+                    "} ";
+            results.append(trade);
+        }
+        return results.toString();
     }
 
 }

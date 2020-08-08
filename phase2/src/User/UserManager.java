@@ -169,6 +169,11 @@ public class UserManager {
     }
 
 
-
+    public ArrayList<ArrayList<String>> getActions(ClientUser a) {
+        return a.getActions();
+    }
+    public void removeBWishes(String hi,ClientUser b){
+        b.removeBWishes(hi);
+    }
 }
 

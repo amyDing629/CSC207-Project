@@ -56,6 +56,7 @@ public class PointManager {
      */
     public Map<UUID, Integer> getPointList() {return this.pointList;}
 
+
     /**
      * Set the list of user id and the bonus points the use has. (setter for pointList)
      */

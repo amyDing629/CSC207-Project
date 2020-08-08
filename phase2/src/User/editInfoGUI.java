@@ -75,6 +75,10 @@ public class editInfoGUI {
         AddItemSystem.setPreferredSize(new Dimension(300, 30));
         panel.add(AddItemSystem);
 
+        JButton ReverseSystem = new JButton("Add Item System");
+        ReverseSystem.setPreferredSize(new Dimension(300, 30));
+        panel.add(ReverseSystem);
+
         JButton exit = new JButton("exit");
         exit.setPreferredSize(new Dimension(300, 30));
         panel.add(exit);
@@ -111,6 +115,11 @@ public class editInfoGUI {
             d.run(um.getUsername(b));
         });
 
+        ReverseSystem.addActionListener(e -> {
+            frame.setVisible(false);
+            ReverseSystemGUI d = new ReverseSystemGUI(um,tm,iv,iam,aam,uc,frame);
+            d.run(um.getUsername(b));
+        });
 
     }
 }

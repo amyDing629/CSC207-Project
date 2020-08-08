@@ -13,8 +13,10 @@ public class TradeHistoryController {
     TradeHistoryPresenter tp;
     List<Trade> tradeList;
     List<String> userList;
+    JFrame fr;
 
-    public TradeHistoryController(ClientUser currUser, TradeManager tm, UserManager um, BorderGUIWithThreeTextArea tgp){
+    public TradeHistoryController(ClientUser currUser, TradeManager tm, UserManager um, BorderGUIWithThreeTextArea tgp,
+                                  JFrame fr){
         this.currUser = currUser;
         this.tm = tm;
         this.um = um;
@@ -36,8 +38,8 @@ public class TradeHistoryController {
         return result;
     }
 
-    void backBut(JFrame frame){
-        frame.setVisible(true);
+    void backBut(){
+        fr.setVisible(true);
         tp.closeFrame();
     }
 

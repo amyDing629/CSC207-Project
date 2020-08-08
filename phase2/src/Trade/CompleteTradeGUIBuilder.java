@@ -10,24 +10,19 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class CompleteTradeGUIBuilder implements BorderGUIBuilder {
-    Trade currTrade;
-    ClientUser currUser;
     CTradeController ctc;
     JFrame tf;
     BorderGUIWithThreeTextArea tg;
 
     public CompleteTradeGUIBuilder(ClientUser currUser, TradeManager tm, UserManager um, JFrame tf) {
-        this.currUser = currUser;
         tg = new BorderGUIWithThreeTextArea();
         ctc = new CTradeController(currUser, tm, um, tg);
         this.tf = tf;
-
     }
 
     @Override
     public void buildFrame(){
         tg.setFrame(800, 400, "Complete Trade Session");
-
     }
 
     @Override

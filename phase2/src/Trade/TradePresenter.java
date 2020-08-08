@@ -1,30 +1,23 @@
 package Trade;
 
+import Inventory.Item;
 import User.ClientUser;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * [presenter]
  * present the information of trade
  */
 public class TradePresenter {
-    private final ClientUser currUser;
-    private Trade trade;
+    private BorderGUIWithThreeTextArea bta;
 
-    /**
-     * [constructor]
-     * @param currUser current user
-     * @param trade current trade
-     */
-    TradePresenter(ClientUser currUser, Trade trade){
-        this.currUser = currUser;
-        this.trade = trade;
+
+    TradePresenter(BorderGUIWithThreeTextArea bta){
+        this.bta = bta;
     }
 
-    TradePresenter(ClientUser currUser){
-        this.currUser = currUser;
-    }
 
     /**
      * present trade information (might delete some information)
@@ -69,7 +62,7 @@ public class TradePresenter {
     }
 
     void wrongInput(){
-        System.out.println("wrong input, please type again");
+        bta.setMsgText("wrong input");
     }
 
     void selectConfirm(){
@@ -98,14 +91,51 @@ public class TradePresenter {
     }
 
 
-    String selectSecondItem(){
-        return "Your wish lend list: " + currUser.getWishLend();
-    }
 
     void printSuggestedItemList(ArrayList<String> sItemList){
         System.out.println("Suggested items: " + sItemList);
 
     }
+
+    void presentTradeInfo(ClientUser currUser, Item item, List<String> secondList, ArrayList<String> suggestList){
+        bta.setCurrText("Current User: " + currUser.getUsername() + "\n" + "Item to request the trade: " + item.getName()
+                + "\n" + secondList
+                + "\n" + "Suggest item to lend if make a two way trade: " + suggestList);
+    }
+
+    void inTradeError(){
+        bta.setMsgText("The item is already in the trade");
+    }
+
+    void currAccountFrozen(){
+        bta.setMsgText("your account is frozen");
+    }
+
+    void tarAccountFrozen(){
+        bta.setMsgText("target user's account is Frozen");
+    }
+
+    void tarUserNotFound(){
+        bta.setMsgText("target user is not found");
+    }
+
+    void selfItem(){
+        bta.setMsgText("you can not make trade with yourself");
+    }
+
+    void createSuccess(String dur){
+        bta.setMsgText("the trade" + dur + "has been created, please wait for another user to confirm");
+    }
+
+    void updateInputArea(){
+        bta.setInputStr("type item name here");
+    }
+
+    public void closeFrame(){
+        bta.getFrame().setVisible(false);
+    }
+
+
 
 
 }
