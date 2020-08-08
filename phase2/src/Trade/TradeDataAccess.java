@@ -1,32 +1,103 @@
 package Trade;
 
-import Inventory.Inventory;
-import Inventory.Item;
-import Trade.MeetingSystem.DateTime;
-import Trade.MeetingSystem.Meeting;
-import Trade.MeetingSystem.MeetingEditor;
-import Trade.MeetingSystem.MeetingStatus;
+import User.DataAccess;
 
 import java.io.*;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
 
-public class TradeDataAccess {
-    DateTime dt = new DateTime();
-    DateTimeFormatter formatter = dt.getFormat(); // yyyy-MM-dd HH:mm
-    TradeManager tm;
+public class TradeDataAccess implements DataAccess {
 
-    public TradeDataAccess(TradeManager tm){
-        this.tm = tm;
+    private final String serFilePath = "phase2/src/trade.ser";
+    private List<Trade> tradeList;
+
+
+    // https://stackoverflow.com/questions/1205995/what-is-the-list-of-valid-suppresswarnings-warning-names-in-java
+    @SuppressWarnings("all")
+    public TradeDataAccess() {
+        tradeList = new ArrayList<>();
+
+        try {
+            File serFile = new File(serFilePath);
+            if (serFile.exists()) {
+                deSerialize();
+            } else {
+                serFile.createNewFile();
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    /**
-     * read info from trade.txt to trade list in gateway
-     */
+    public void serialize() {
+        try {
+            FileOutputStream fileOut =
+                    new FileOutputStream(serFilePath);
+            OutputStream buffer = new BufferedOutputStream(fileOut);
+            ObjectOutputStream out = new ObjectOutputStream(buffer);
+
+            out.writeObject(tradeList);
+            out.close();
+            fileOut.close();
+        } catch (IOException i) {
+            i.printStackTrace();
+        }
+    }
+
+    @Override
+    public Object getObject(String name) {
+        return null;
+    }
+
+    @Override
+    public Object getObject(UUID uuid) {
+        deSerialize();
+        for (Trade trade : tradeList) {
+            if (trade.getId().equals(uuid))
+                return trade;
+        }
+        return null;
+    }
+
+
+    @Override
+    public void addObject(Object o) {
+        deSerialize();
+        tradeList.add((Trade) o);
+        updateSer();
+    }
+
+    @Override
+    public void updateSer() {
+        File writer = new File(serFilePath);
+        writer.deleteOnExit();
+        serialize();
+    }
+
+    // source: https://stackoverflow.com/questions/31540556/casting-object-to-list-results-in-unchecked-cast-warning
+    @SuppressWarnings("unchecked")
+    public void deSerialize() {
+        try {
+            FileInputStream fileIn = new FileInputStream(serFilePath);
+            InputStream buffer = new BufferedInputStream(fileIn);
+            ObjectInputStream in = new ObjectInputStream(buffer);
+
+            tradeList = (List<Trade>) in.readObject();
+            in.close();
+            fileIn.close();
+        } catch (IOException | ClassNotFoundException i) {
+            i.printStackTrace();
+        }
+
+    }
+
+
+//    /**
+//     * read info from trade.txt to trade list in gateway
+//     */
     /*
     public void readFile(Inventory iv) {
         Trade trade;
@@ -164,58 +235,26 @@ public class TradeDataAccess {
 //            System.out.println("cannot edit file");
 //        }
 //    }
-
-    /**
-     * update trade.txt with information in trade list of gateway.
-     */
-    public void updateFile(){
-        File file = new File("phase2/src/trade.txt");
-        try {
-            if(!file.exists()) {
-                boolean result = file.createNewFile();
-                if (!result){
-                    System.out.println("the trade file is not updated successfully");
-                }
-            }
-            FileWriter fileWriter =new FileWriter(file);
-            fileWriter.write("");
-            fileWriter.flush();
-            fileWriter.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        serialize();
-    }
-
-    public void serialize(){
-        try {
-            FileOutputStream fileOut =
-                    new FileOutputStream("phase2/src/trade.ser");
-            ObjectOutputStream out = new ObjectOutputStream(fileOut);
-            out.writeObject(tm.getTradeList());
-            out.close();
-            fileOut.close();
-        } catch (IOException i) {
-            i.printStackTrace();
-        }
-    }
-
-    public ArrayList<Trade> deSerialize(){
-        try {
-
-            FileInputStream fileIn = new FileInputStream("phase2/src/trade.ser");
-            ObjectInputStream in = new ObjectInputStream(fileIn);
-            ArrayList<Trade> res = (ArrayList<Trade>)in.readObject();
-            in.close();
-            fileIn.close();
-            return res;
-        } catch (IOException | ClassNotFoundException i) {
-            ArrayList<Trade> res = new ArrayList<>();
-            i.printStackTrace();
-            return res;
-        }
-
-    }
-
-
+//
+//    /**
+//     * update trade.txt with information in trade list of gateway.
+//     */
+//    public void updateFile(){
+//        File file = new File("phase2/src/trade.txt");
+//        try {
+//            if(!file.exists()) {
+//                boolean result = file.createNewFile();
+//                if (!result){
+//                    System.out.println("the trade file is not updated successfully");
+//                }
+//            }
+//            FileWriter fileWriter =new FileWriter(file);
+//            fileWriter.write("");
+//            fileWriter.flush();
+//            fileWriter.close();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        serialize();
+//    }
 }

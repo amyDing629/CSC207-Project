@@ -2,6 +2,7 @@ package Trade;
 
 import Inventory.Item;
 import User.ClientUser;
+import User.DataAccess;
 import User.UserManager;
 
 import java.time.LocalDateTime;
@@ -16,20 +17,7 @@ import java.util.UUID;
  * Automatically update the trade history for both users in the trade.
  */
 public class TradeManager{
-    public ArrayList<Trade> tradeList;
-
-    public TradeManager(){
-        this.tradeList = new ArrayList<Trade>();
-
-    }
-
-    public ArrayList<Trade> getTradeList() {
-        return tradeList;
-    }
-
-    void setTradeList(ArrayList<Trade> tl){
-        tradeList = tl;
-    }
+    DataAccess dataAccess = new TradeDataAccess();
 
     /**
      * Allow the currentUser to create a one-way trade with input otherUserId, item, and trade duration.
@@ -41,7 +29,7 @@ public class TradeManager{
     Trade createOnewayTrade(UUID currUserId, UUID otherUserId, Item item, int duration, LocalDateTime time) {
         OnewayTrade newTrade = new OnewayTrade(currUserId, otherUserId, item, duration, time);
         item.setIsInTrade(true);
-        tradeList.add(newTrade);
+        dataAccess.addObject(newTrade);
         // Record this new trade.Trade in system
 
         //Update trade history for both users
@@ -60,7 +48,7 @@ public class TradeManager{
     Trade createTwowayTrade(UUID currUserId, UUID otherUserId, Item item1to2, Item item2to1, int duration,
                             LocalDateTime time){
         TwowayTrade newTrade = new TwowayTrade(currUserId, otherUserId, item1to2, item2to1, duration, time);
-        getTradeList().add(newTrade);
+        dataAccess.addObject(newTrade);
         item1to2.setIsInTrade(true);
         item2to1.setIsInTrade(true);
         // Update trade history for both users
@@ -70,12 +58,7 @@ public class TradeManager{
 
 
     public Trade getTrade(UUID id) {
-        for (Trade trade : tradeList) {
-            if (trade.getId().equals(id)) {
-                return trade;
-            }
-        }
-        return null;
+        return (Trade) dataAccess.getObject(id);
     }
 
 
