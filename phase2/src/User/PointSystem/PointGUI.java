@@ -47,7 +47,7 @@ public class PointGUI {
 
         JLabel tradeList = new JLabel("Available Trades");
         JTextArea tradeArea = new JTextArea();
-        //tradeArea.setText(aa.printAvailable());//TODO
+        //tradeArea.setText(aa.printAvailable());
         JScrollPane jsp= new JScrollPane(tradeArea);
         panelW.setLayout(new BoxLayout(panelW, BoxLayout.Y_AXIS));
         panelW.add(tradeList);
@@ -85,7 +85,7 @@ public class PointGUI {
         eb.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //TODO
+                aa.getBonus(currUser, currTrade);
                 points.setText(String.valueOf(currUser.getBonusPoints()));
             }
         });
