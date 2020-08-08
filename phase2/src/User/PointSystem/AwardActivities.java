@@ -65,12 +65,19 @@ public class AwardActivities {
      * 2. the bonus point is reduced by a fixed amount
      * 3. update the PointManager.pointList
      * 4. update the ClientUser.bonusPoints
+     * @param user the current user who is making actions
+     * @param selected the trade user selected to be bonus
      */
-    public void getBonus(ClientUser user, List<Trade> selected){
-        for (Trade t: selected) {
-            user.addBonusTrade(t.getId());
-        }
+    public void getBonus(ClientUser user, Trade selected){
+            user.addBonusTrade(selected.getId());
         this.pm.setUserPoints(user);
+    }
+
+    /**
+     * Return the string representation of pointList in PointManager
+     */
+    public String toString() {
+        return this.pm.getPointList().toString();
     }
 
 }
