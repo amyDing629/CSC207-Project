@@ -19,7 +19,7 @@ public class ConfirmViewPresenter extends Observable implements IPresenter {
     Model meetingModel;
 
     // View
-    AgreeConfirmView view;
+    OKCancelView view;
 
 
     public ConfirmViewPresenter(UUID meetingID, UUID currLogInUser, Observer observer) {

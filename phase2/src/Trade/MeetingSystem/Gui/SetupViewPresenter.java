@@ -21,7 +21,7 @@ public class SetupViewPresenter extends Observable implements IPresenter {
     DateTime dt = new DateTime();
 
     // View
-    EditView view;
+    InputTimePlaceView view;
 
 
     public SetupViewPresenter(UUID meetingID, UUID currLogInUser, List<UUID> users, Observer observer) {

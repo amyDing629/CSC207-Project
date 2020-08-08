@@ -2,7 +2,7 @@ package Trade.MeetingSystem.Gui;
 
 import javax.swing.*;
 
-public class SetupView extends EditView {
+public class SetupView extends InputTimePlaceView {
 
     // controller: validate time and address input
     TimePlaceInputController inputController = new TimePlaceInputController();

@@ -11,7 +11,7 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.UUID;
 
-public class EditionViewPresenter extends Observable implements IPresenter {
+public class EditViewPresenter extends Observable implements IPresenter {
     UUID currLogInUser;
     UUID meetingID;
     MeetingStatus meetingStatus;
@@ -22,10 +22,10 @@ public class EditionViewPresenter extends Observable implements IPresenter {
     DateTime dt = new DateTime();
 
     // View
-    EditView view;
+    InputTimePlaceView view;
 
 
-    public EditionViewPresenter(UUID meetingID, UUID currLogInUser, Observer observer) {
+    public EditViewPresenter(UUID meetingID, UUID currLogInUser, Observer observer) {
         this.meetingID = meetingID;
         this.currLogInUser = currLogInUser;
 
@@ -33,7 +33,7 @@ public class EditionViewPresenter extends Observable implements IPresenter {
         meetingModel = new MeetingModel(meetingID, currLogInUser);
 
         // set View
-        view = new EditionView();
+        view = new EditView();
 
         // get meeting status
         meetingStatus = meetingModel.getMeetingStatus(meetingID);

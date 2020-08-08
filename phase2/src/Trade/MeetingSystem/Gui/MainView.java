@@ -3,8 +3,6 @@ package Trade.MeetingSystem.Gui;
 import Trade.MeetingSystem.MeetingStatus;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.UUID;
 
 public class MainView {
@@ -126,63 +124,45 @@ public class MainView {
         frame.getContentPane().add(panel1);
         frame.setVisible(true);
 
-        backButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // TODO: back to Trade System
-                frame.setVisible(false);
-                backActionPerformed(e);
-            }
+        backButton.addActionListener(e -> {
+            // back to Trade System
+            frame.setVisible(false);
+            backActionPerformed(e);
         });
-        setUpButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // go to setup view
-                SetupViewPresenter setupViewPresenter =
-                        new SetupViewPresenter(getPresenter().getMeetingID(), getPresenter().getCurrLogInUser(),
-                                getPresenter().getUsers(), getPresenter().getObserver());
-                setupViewPresenter.run();
-                getPresenter().setMeetingID(setupViewPresenter.getMeetingID()); // TODO: Observer Pattern ?????
-                updateViewFromModel(isFirst);
-            }
+        setUpButton.addActionListener(e -> {
+            // go to setup view
+            SetupViewPresenter setupViewPresenter =
+                    new SetupViewPresenter(getPresenter().getMeetingID(), getPresenter().getCurrLogInUser(),
+                            getPresenter().getUsers(), getPresenter().getObserver());
+            setupViewPresenter.run();
+            getPresenter().setMeetingID(setupViewPresenter.getMeetingID()); // TODO: Observer Pattern ?????
+            updateViewFromModel(isFirst);
         });
-        editButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // go to edit view
-                EditionViewPresenter editionViewPresenter =
-                        new EditionViewPresenter(getPresenter().getMeetingID(), getPresenter().getCurrLogInUser(),
-                                getPresenter().getObserver());
-                editionViewPresenter.run();
-                updateViewFromModel(isFirst);
-            }
+        editButton.addActionListener(e -> {
+            // go to edit view
+            EditViewPresenter editViewPresenter =
+                    new EditViewPresenter(getPresenter().getMeetingID(), getPresenter().getCurrLogInUser(),
+                            getPresenter().getObserver());
+            editViewPresenter.run();
+            updateViewFromModel(isFirst);
         });
-        agreeButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // go to agree view
-                AgreeViewPresenter agreeViewPresenter =
-                        new AgreeViewPresenter(getPresenter().getMeetingID(), getPresenter().getCurrLogInUser());
-                agreeViewPresenter.run();
-                updateViewFromModel(isFirst);
-            }
+        agreeButton.addActionListener(e -> {
+            // go to agree view
+            AgreeViewPresenter agreeViewPresenter =
+                    new AgreeViewPresenter(getPresenter().getMeetingID(), getPresenter().getCurrLogInUser());
+            agreeViewPresenter.run();
+            updateViewFromModel(isFirst);
         });
-        confirmButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // go to confirm view
-                ConfirmViewPresenter confirmViewPresenter =
-                        new ConfirmViewPresenter(getPresenter().getMeetingID(), getPresenter().getCurrLogInUser(),
-                                getPresenter().getObserver());
-                confirmViewPresenter.run();
-                updateViewFromModel(isFirst);
-            }
+        confirmButton.addActionListener(e -> {
+            // go to confirm view
+            ConfirmViewPresenter confirmViewPresenter =
+                    new ConfirmViewPresenter(getPresenter().getMeetingID(), getPresenter().getCurrLogInUser(),
+                            getPresenter().getObserver());
+            confirmViewPresenter.run();
+            updateViewFromModel(isFirst);
         });
-        helpButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // TODO: go to help view
-            }
+        helpButton.addActionListener(e -> {
+            // TODO: go to help view
         });
     }
 

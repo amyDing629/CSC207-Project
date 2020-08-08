@@ -18,7 +18,7 @@ public class AgreeViewPresenter implements IPresenter {
     Model meetingModel;
 
     // View
-    AgreeConfirmView view;
+    OKCancelView view;
 
 
     public AgreeViewPresenter(UUID meetingID, UUID currLogInUser) {

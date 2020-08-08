@@ -2,7 +2,7 @@ package Trade.MeetingSystem.Gui;
 
 import javax.swing.*;
 
-public class ConfirmView extends AgreeConfirmView {
+public class ConfirmView extends OKCancelView {
     @Override
     void setTextArea(JTextArea questionTextArea) {
         questionTextArea.setText("Do you confirm the current proposal? \n " +
