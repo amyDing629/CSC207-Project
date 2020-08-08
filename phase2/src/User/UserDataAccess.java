@@ -34,6 +34,12 @@ public class UserDataAccess implements DataAccess {
     }
 
     @Override
+    public List<Object> getList() {
+        deSerialize();
+        return new ArrayList<>(userList);
+    }
+
+    @Override
     public Object getObject(String name) {
         deSerialize();
         for (ClientUser u : userList) {
@@ -104,6 +110,17 @@ public class UserDataAccess implements DataAccess {
             i.printStackTrace();
         }
 
+    }
+
+    @Override
+    public boolean hasObject(Object o) {
+        // TODO
+        return false;
+    }
+
+    @Override
+    public void removeObject(Object o) {
+        // TODO
     }
 
 

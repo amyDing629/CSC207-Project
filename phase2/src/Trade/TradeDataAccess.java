@@ -32,23 +32,15 @@ public class TradeDataAccess implements DataAccess {
         }
     }
 
-    public void serialize() {
-        try {
-            FileOutputStream fileOut =
-                    new FileOutputStream(serFilePath);
-            OutputStream buffer = new BufferedOutputStream(fileOut);
-            ObjectOutputStream out = new ObjectOutputStream(buffer);
-
-            out.writeObject(tradeList);
-            out.close();
-            fileOut.close();
-        } catch (IOException i) {
-            i.printStackTrace();
-        }
+    @Override
+    public List<Object> getList() {
+        deSerialize();
+        return new ArrayList<>(tradeList);
     }
 
     @Override
     public Object getObject(String name) {
+        // not used!
         return null;
     }
 
@@ -77,6 +69,21 @@ public class TradeDataAccess implements DataAccess {
         serialize();
     }
 
+    public void serialize() {
+        try {
+            FileOutputStream fileOut =
+                    new FileOutputStream(serFilePath);
+            OutputStream buffer = new BufferedOutputStream(fileOut);
+            ObjectOutputStream out = new ObjectOutputStream(buffer);
+
+            out.writeObject(tradeList);
+            out.close();
+            fileOut.close();
+        } catch (IOException i) {
+            i.printStackTrace();
+        }
+    }
+
     // source: https://stackoverflow.com/questions/31540556/casting-object-to-list-results-in-unchecked-cast-warning
     @SuppressWarnings("unchecked")
     public void deSerialize() {
@@ -92,6 +99,17 @@ public class TradeDataAccess implements DataAccess {
             i.printStackTrace();
         }
 
+    }
+
+    @Override
+    public boolean hasObject(Object o) {
+        // TODO
+        return false;
+    }
+
+    @Override
+    public void removeObject(Object o) {
+        // TODO
     }
 
 

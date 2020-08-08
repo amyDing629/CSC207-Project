@@ -1,6 +1,7 @@
 package Inventory;
 
-import java.io.*;
+import User.DataAccess;
+
 import java.util.ArrayList;
 
 /**
@@ -8,69 +9,45 @@ import java.util.ArrayList;
  * the object that edits Item list in gateway
  */
 public class Inventory {
-    /**
-     * the place we store information
-     */
-    ArrayList<Item> lendingList;
 
-    /**
-     * [Constructor]
-     * get lendingList from file (read file will move to another class).
-     */
-    public Inventory(){
-        lendingList = new ArrayList<Item>();
-    }
-
-    /**
-     * getter for the lending list
-     * @return lendingList
-     */
-    public ArrayList<Item> getLendingList() {
-        return lendingList;
-    }
-
-    public void setLendingList(ArrayList<Item> itemList){
-        lendingList = itemList;
-    }
+    DataAccess dataAccess = new InvDataAccess();
 
     /**
      * get a list of items that is not in the trade
      * @return available item list
      */
     public ArrayList<Item> getAvailableList() {
-        ArrayList<Item> result = new ArrayList<Item>();
-        for (Item item : lendingList) {
-            if (!item.getIsInTrade()) {
-                result.add(item);
+        ArrayList<Item> result = new ArrayList<>();
+        for (Object item : dataAccess.getList()) {
+            Item i = (Item) item;
+            if (!i.getIsInTrade()) {
+                result.add(i);
             }
         }
         return result;
     }
-
 
     /**
      * add the item into the inventory
      * @param item the item added
      */
     public void addItem(Item item){
-        lendingList.add(item);
+        dataAccess.addObject(item);
     }
 
-
     /**
+     * Removes the item from .ser file and return true, if it exists; or return false.
      *
      * @param item the deleted item
-     * @throws IOException when the item is not found in the inventory
      */
-    public boolean deleteItem(Item item){
-        if (lendingList.contains(item)) {
-            lendingList.remove(item);
+    public boolean deleteItem(Item item) {
+        if (dataAccess.hasObject(item)) {
+            dataAccess.removeObject(item);
             return true;
         } else {
             return false;
         }
     }
-
 
     /**
      * get item through its name
@@ -78,13 +55,9 @@ public class Inventory {
      * @return item
      */
     public Item getItem(String name){
-        for (Item item: lendingList){
-            if (item.getName().equals(name)){
-                return item;
-            }
-        }
-        return null;
+        return (Item) dataAccess.getObject(name);
     }
+
 
     public Item createItem(String name, String owner){
         return new Item(name, owner);

@@ -1,20 +1,28 @@
 package User;
 
+
+import java.util.List;
 import java.util.UUID;
 
 public interface DataAccess {
+
+    List<Object> getList();
 
     Object getObject(String name);
 
     Object getObject(UUID uuid);
 
-//    boolean hasObject(String name);
-
     void addObject(Object o);
+
+    boolean hasObject(Object o);
+
+    void removeObject(Object o);
 
     void updateSer(); // write list to ser
 
     void deSerialize(); // write ser to list
+
+//    boolean hasObject(String name);
 
 //    ClientUser getUser(String name);
 //
