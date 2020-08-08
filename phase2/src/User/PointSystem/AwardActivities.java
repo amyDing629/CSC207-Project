@@ -53,13 +53,6 @@ public class AwardActivities {
     }
 
     /**
-     * Based on the ClientUser's available points, indicate the max number of trades that can be selected as bonus
-     */
-    public int canSelectUpTo(ClientUser user) {
-        return user.getBonusPoints() / this.pm.getExStandard();
-    }
-
-    /**
      * When the user click on getBonus button,
      * 1. the tradeId is added into user's bonusTradeList (this Trade will not be removed from tradeHistory)
      * 2. the bonus point is reduced by a fixed amount
