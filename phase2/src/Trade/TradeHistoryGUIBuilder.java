@@ -9,16 +9,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class TradeHistoryGUIBuilder implements BorderGUIBuilder {
-    ClientUser currUser;
     TradeHistoryController thc;
-    JFrame tf;
     BorderGUIWithThreeTextArea bgUI;
 
     public TradeHistoryGUIBuilder(ClientUser currUser, TradeManager tm, UserManager um, JFrame tf){
-        this.currUser = currUser;
-        this.tf = tf;
         bgUI = new BorderGUIWithThreeTextArea();
-        this.thc = new TradeHistoryController(currUser, tm, um, bgUI);
+        this.thc = new TradeHistoryController(currUser, tm, um, bgUI, tf);
     }
 
 
@@ -46,7 +42,7 @@ public class TradeHistoryGUIBuilder implements BorderGUIBuilder {
         back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                thc.backBut(tf);
+                thc.backBut();
             }
         });
 

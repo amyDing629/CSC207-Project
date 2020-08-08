@@ -55,7 +55,11 @@ public class TradeGUI_Main {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
-                new SelectItemToTradeGUI(currUser, tm, um, iv, frame).run();
+                BorderGUIBuilder builder = new SelectItemToTradeBuilder(currUser, tm, um, iv, frame);
+                TradeGUIEngineer engineer = new TradeGUIEngineer(builder);
+                engineer.constructGUI();
+                TradeGUIPlan tg = engineer.getGUI();
+                tg.run();
             }
         });
 

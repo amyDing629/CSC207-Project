@@ -5,6 +5,7 @@ import Inventory.Item;
 import User.ClientUser;
 import User.*;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -22,6 +23,9 @@ public class TradeController {
     private Trade currTrade;
     private final UserManager um;
     private Inventory iv;
+    TradePresenter tp;
+    BorderGUIWithThreeTextArea bta;
+    Item it;
 
     /**
      * [constructor]
@@ -29,11 +33,16 @@ public class TradeController {
      * @param tm the object that edits the trade list of input gateway
      * @param um the object that edits the user list of input gateway
      */
-    TradeController(ClientUser currUser, TradeManager tm, UserManager um, Inventory iv){
+    TradeController(ClientUser currUser, TradeManager tm, UserManager um, Inventory iv,
+                    BorderGUIWithThreeTextArea bta, Item item){
         this.currUser = currUser;
         this.tm = tm;
         this.um = um;
         this.iv = iv;
+        tp = new TradePresenter(bta);
+        this.bta = bta;
+        it = item;
+
     }
 
     TradeController(ClientUser currUser, Trade currTrade, TradeManager tm, UserManager um){
@@ -59,23 +68,28 @@ public class TradeController {
      * check the frozen status of two users.
      * @throws IOException one of the users's account is frozen
      */
-    String checkInput(Item item){
+    boolean checkInput(Item item){
         if (getIsInTrade(item)){
-            return "the item is already in the trade";
+            tp.inTradeError();
+            return false;
         }
         if (um.getIsFrozen(currUser)) {
-            return "your account is frozen!";
+            tp.currAccountFrozen();
+            return false;
         }
         if (tarUser == null){
-            return "tarUser not found";
+            tp.tarUserNotFound();;
+            return false;
         }
         if (um.getIsFrozen(tarUser)) {
-            return "the account of the item owner is frozen!";
+            tp.tarAccountFrozen();
+            return false;
         }
         if (tarUser == currUser){
-            return "you cannot make trade with yourself";
+            tp.selfItem();
+            return false;
         }
-        return "true";
+        return true;
     }
 
     /**
@@ -190,6 +204,53 @@ public class TradeController {
         return iv.getIsInTrade(it);
 
     }
+
+    void presentTradeInfo(){
+        tp.presentTradeInfo(currUser, it, currUser.getWishLend(), getSuggestedItemName() );
+    }
+
+    void onewayBut(String duration){
+        if (it == null){
+            tp.wrongInput();
+        }else if (checkInput(it)){
+            if (duration.equals("temp")){
+                createTrade("1", it);
+                tp.createSuccess("(one way temporary");
+            }else{
+                createTrade("2", it);
+                tp.createSuccess("(one way permanent");
+            }
+
+        }
+    }
+
+    void twowayBut(String duration){
+
+        Item item = iv.getItem(bta.getInput());
+        tp.updateInputArea();
+        if (!currUser.getWishLend().contains(item.getName())){
+            tp.wrongInput();
+        }else if (checkInput(item)){
+            if (duration.equals("temp")){
+                createTrade("4", it, item);
+                tp.createSuccess("(two way-permanent)");
+            }else{
+                createTrade("3", it, item);
+                tp.createSuccess("two way-temporary");
+            }
+        }
+    }
+
+    void backBut(JFrame frame){
+        frame.setVisible(true);
+        tp.closeFrame();
+    }
+
+
+
+
+
+
 
 
 
