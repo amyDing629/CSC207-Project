@@ -73,7 +73,7 @@ public class ApprovalItemDataAccess implements DataAccess {
 
     @Override
     public void removeObject(String o) {
-
+        ItemApprovalsList.remove(getObject(o));
     }
 
     @Override
@@ -81,14 +81,6 @@ public class ApprovalItemDataAccess implements DataAccess {
 
     }
 
-    @Override
-    public void removeObject(Object o) {
-        ItemApprovals check=(ItemApprovals) o;
-        if(hasObject(check)){
-            ItemApprovalsList.remove(check);
-        }
-        updateSer();
-    }
 
     @Override
     public void updateSer() {
