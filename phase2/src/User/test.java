@@ -1,7 +1,6 @@
 package User;
 
 import User.Entity.ClientUser;
-import User.Gateway.UserDataAccess;
 import User.UseCase.UserManager;
 
 import java.io.IOException;
@@ -15,8 +14,8 @@ public class test {
         a.getUserList().add(b);
         a.getUserList().add(c);
         a.getUserList().add(d);
-        UserDataAccess uda = new UserDataAccess(a);
-        uda.serialize();
-        System.out.println(uda.deSerialize());
+//        UserDataAccess uda = new UserDataAccess(a);
+//        uda.serialize();
+//        System.out.println(uda.deSerialize());
     }
 }

@@ -1,12 +1,14 @@
 package User.GUI;
 
-import User.Adapter.ILoginSystemBoundary;
+import User.Adapter.IUserPresenter;
 
 public interface View {
 
-    ILoginSystemBoundary getPresenter();
+    IUserPresenter getPresenter();
 
-    void setPresenter(ILoginSystemBoundary presenter);
+    void setPresenter(IUserPresenter presenter);
+
+    void run();
 
     void updateUIComponent(); //TODO
 }

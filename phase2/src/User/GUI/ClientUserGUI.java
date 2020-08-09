@@ -1,23 +1,20 @@
 package User.GUI;
 
-import Inventory.InventoryGUI;
-import Trade.TradeGUI_Main;
-import User.Adapter.ILoginSystemBoundary;
+import User.Adapter.ClientUserController;
+import User.Adapter.IUserPresenter;
 import User.Entity.ClientUser;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.UUID;
 
 public class ClientUserGUI implements View {
-    //    UserManager um;
+//    UserManager um;
 //    TradeManager tm;
 //    ItemApprovalManager iam;
 //    UIcontoller uc;
 //    Inventory iv;
 //    AdminActivityManager aam;
-    JFrame pFrame;
-    JFrame frame;
-
 //    public ClientUserGUI(UserManager um, TradeManager tm, Inventory iv, ItemApprovalManager iam, AdminActivityManager aam,UIcontoller uc ,JFrame pFrame) {
 //        this.um = um;
 //        this.tm = tm;
@@ -28,34 +25,47 @@ public class ClientUserGUI implements View {
 //        this.pFrame=pFrame;
 //    }
 
-    public void run(String name) {
+    JFrame pFrame; // previous frame
+    JFrame frame; // this frame
+
+    IUserPresenter presenter;
+    ClientUserController controller;
+
+    public ClientUserGUI(JFrame pFrame) {
+        this.pFrame = pFrame;
+    }
+
+    public void run() {
         frame = new JFrame("Login Success");
         frame.setSize(500, 700);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JPanel panel = new JPanel();
         panel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        JLabel welcomeLabel = new JLabel("Welcome: " + name);
+        JLabel welcomeLabel = new JLabel("Welcome: " + controller.getNameByID(getPresenter().getCurrUser()));
         welcomeLabel.setPreferredSize(new Dimension(300, 30));
         panel.add(welcomeLabel);
         frame.add(panel);
 
-        ClientUser b = um.getUser(name);
-
-        placeComponents(frame, panel, b);
+        placeComponents(frame, panel);
         frame.setVisible(true);
     }
 
-    private void placeComponents(JFrame frame, JPanel panel, ClientUser b){
+    private void placeComponents(JFrame frame, JPanel panel) {
 
-        JLabel freezeStatus = new JLabel("Freeze Status: "+ um.getIsFrozen(b));
+        UUID userid = getPresenter().getCurrUser();
+        ClientUser clientUser = getPresenter().getUserModel().getUser(userid);
+        boolean isFrozen = getPresenter().getUserModel().getIsFrozen(clientUser);
+
+
+        JLabel freezeStatus = new JLabel("Freeze Status: " + isFrozen);
         freezeStatus.setPreferredSize(new Dimension(300, 30));
         panel.add(freezeStatus);
 
-        JLabel tradeLimit = new JLabel("Trade limit: "+ tm.getTradeNumber(b) + "/" + um.getWeekTransactionLimit(b));
+        JLabel tradeLimit = new JLabel("Trade limit: " + tm.getTradeNumber(b) + "/" + um.getWeekTransactionLimit(b));
         tradeLimit.setPreferredSize(new Dimension(300, 30));
         panel.add(tradeLimit);
 
-        JLabel inCompLimit = new JLabel("Incomplete trade limit: "+ tm.getIncompleteTransaction(b) +
+        JLabel inCompLimit = new JLabel("Incomplete trade limit: " + tm.getIncompleteTransaction(b) +
                 "/" + um.getIncompleteTransactionLimit(b));
         inCompLimit.setPreferredSize(new Dimension(300, 30));
         panel.add(inCompLimit);
@@ -63,6 +73,7 @@ public class ClientUserGUI implements View {
         JLabel diff = new JLabel("Difference between borrow and lend: "+ um.readDiff(b) + "/" +um.getDiff(b));
         diff.setPreferredSize(new Dimension(300, 30));
         panel.add(diff);
+
 
         JButton editButton = new JButton("Edit Information");
         editButton.setPreferredSize(new Dimension(300, 30));
@@ -83,14 +94,14 @@ public class ClientUserGUI implements View {
 
         editButton.addActionListener(e -> {
             frame.setVisible(false);
-            editInfoGUI d = new editInfoGUI(um,tm,iv,iam,uc,aam,frame);
-            d.run(um.getUsername(b));
+//            editInfoGUI d = new editInfoGUI(um,tm,iv,iam,uc,aam,frame);
+//            d.run(um.getUsername(b));
         });
 
         inventoryButton.addActionListener(e -> {
             frame.setVisible(false);
-            InventoryGUI d = new InventoryGUI(b,iv,um,iam,frame);
-            d.run();
+//            InventoryGUI d = new InventoryGUI(b,iv,um,iam,frame);
+//            d.run();
         });
 
         exitButton.addActionListener(e -> {
@@ -100,19 +111,19 @@ public class ClientUserGUI implements View {
 
         tradeButton.addActionListener(e -> {
             frame.setVisible(false);
-            TradeGUI_Main d = new TradeGUI_Main(b, tm, um, iv, frame);
-            d.run();
+//            TradeGUI_Main d = new TradeGUI_Main(b, tm, um, iv, frame);
+//            d.run();
         });
     }
 
     @Override
-    public ILoginSystemBoundary getPresenter() {
+    public IUserPresenter getPresenter() {
         return null;
     }
 
     @Override
-    public void setPresenter(ILoginSystemBoundary presenter) {
-
+    public void setPresenter(IUserPresenter presenter) {
+        this.presenter = presenter;
     }
 
     @Override

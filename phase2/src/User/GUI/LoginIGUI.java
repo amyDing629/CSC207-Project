@@ -1,12 +1,13 @@
 package User.GUI;
 
-import Main.DataAccessFull;
-import User.Adapter.ILoginSystemBoundary;
+import User.Adapter.ClientUserController;
+import User.Adapter.ClientUserPresenter;
+import User.Adapter.IUserPresenter;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
 import java.util.Arrays;
+import java.util.UUID;
 
 public class LoginIGUI implements View {
 //    UserManager um;
@@ -15,12 +16,6 @@ public class LoginIGUI implements View {
 //    UIcontoller uc;
 //    Inventory iv;
 //    AdminActivityManager aam;
-
-    JFrame frame;
-
-    // presenter
-    ILoginSystemBoundary presenter;
-
 //    public LoginIGUI(UserManager um, TradeManager tm, Inventory iv, ItemApprovalManager iam, UIcontoller uc, AdminActivityManager aam) {
 //        this.um = um;
 //        this.tm = tm;
@@ -29,6 +24,11 @@ public class LoginIGUI implements View {
 //        this.iv = iv;
 //        this.aam = aam;
 //    }
+
+    JFrame frame;
+
+    // presenter
+    IUserPresenter presenter;
 
     public void run() {
         frame = new JFrame("Login/Register");
@@ -75,47 +75,55 @@ public class LoginIGUI implements View {
         logInButton.addActionListener(e -> {
             String name = nameInput.getText();
             String password = Arrays.toString(passwordInput.getPassword());
-            boolean response = getPresenter().login(name, password);
+//            boolean response = getPresenter().login(name, password);
+            boolean response = getPresenter().getUserModel().verifyUser(name, password);
             if (!response)
                 JOptionPane.showMessageDialog(null, "invalid user");
             else {
                 frame.setVisible(false);
-                ClientUserGUI a = new ClientUserGUI(um, tm, iv, iam, aam, uc, frame);
-                a.run(name);
+
+                ClientUserController controller = new ClientUserController();
+                UUID uuid = controller.getIDbyName(name);
+                ClientUserPresenter clientUserPresenter = new ClientUserPresenter(uuid, this);
+                clientUserPresenter.run();
+
+//                ClientUserGUI a = new ClientUserGUI(frame);
+//                a.run();
             }
         });
 
         registerButton.addActionListener(e -> {
             String name = nameInput.getText();
             String password = Arrays.toString(passwordInput.getPassword());
-            getPresenter().register(name, password);
+//            getPresenter().register(name, password);
+            getPresenter().getUserModel().createClientUser(name, password, false);
             JOptionPane.showMessageDialog(null, "success");
         });
 
 
         exploreButton.addActionListener(e -> {
-            getPresenter().explore();
+//            getPresenter().explore();
         });
 
         exitButton.addActionListener(e -> {
 
             // TODO: only access controller or presenter, allow use case to use gateway
-            DataAccessFull adf = new DataAccessFull(um, tm, iv, iam);
-            try {
-                adf.updateFile();
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
+//            DataAccessFull adf = new DataAccessFull(um, tm, iv, iam);
+//            try {
+//                adf.updateFile();
+//            } catch (IOException ioException) {
+//                ioException.printStackTrace();
+//            }
             frame.setVisible(false);
         });
 
     }
 
-    public ILoginSystemBoundary getPresenter() {
+    public IUserPresenter getPresenter() {
         return presenter;
     }
 
-    public void setPresenter(ILoginSystemBoundary presenter) {
+    public void setPresenter(IUserPresenter presenter) {
         this.presenter = presenter;
     }
 

@@ -105,6 +105,11 @@ public class InvDataAccess implements DataAccess {
     }
 
     @Override
+    public void setList(List<Object> userList) {
+        // no use!
+    }
+
+    @Override
     public boolean hasObject(Object o) {
         deSerialize();
         Item item = (Item) o;

@@ -19,11 +19,13 @@ public class mainRun {
         TradeManager tm = new TradeManager();
         ItemApprovalManager iam = new ItemApprovalManager();
         DataAccessFull uaf = new DataAccessFull(um, tm, iv, iam);
-        AdminActivityManager aam = new AdminActivityManager(tm, um);
+
+        AdminActivityManager aam = new AdminActivityManager();
         UIcontoller uc = new UIcontoller(um, aam, tm, iam, iv);
         uc.checkFileEmpty(new File("phase2/src/username.txt"));
         uaf.readFile(tm, iv, um);
-        LoginIGUI lo = new LoginIGUI(um, tm, iv, iam, uc, aam);
+
+        LoginIGUI lo = new LoginIGUI();
         lo.run();
     }
 }
