@@ -67,12 +67,10 @@ public class InventoryController {
         um.getUser(currUser).addWishBorrow(it);
     }
 
-    void addToWishLend(String name, String des){
-        um.getWishLend(iv.getOwnerUUID(it)).add(it);
-        Item item = new Item(name, currUser);
-        iv.add(item);
-        iam.removeItem(it);
-        setDescription(des, name);
+    void addToWishLend(Item it){
+        um.getWishLend(iv.getOwnerUUID(it.getName())).add(it.getName());
+        iv.add(it);
+        iam.removeItem(it.getName());
     }
 
     void removeItemFromIam(Item it){
@@ -120,6 +118,17 @@ public class InventoryController {
         }
         return result;
 
+    }
+
+    public Item getItemByRequestList(String itemName){
+        for (ArrayList<String> strings: iam.getItemApproval()){
+            if (strings.get(1).equals(itemName)){
+                Item it = iv.createItem(strings.get(1), um.nameToUUID(strings.get(3)));
+                it.setDescription(strings.get(2));
+                return it;
+            }
+        }
+        return null;
     }
 
     public boolean iamCheckInput(String name){
@@ -299,19 +308,11 @@ public class InventoryController {
     }
 
     String getItemInfo() {
-        /*
-        System.out.println("item name: " + item.getName());
-        System.out.println("item description: " + item.getDescription());
-        System.out.println("item owner: " + item.getOwnerName());
-
-         */
         Item item = iv.getItem(it);
         return "Item Info:\nitem name: " + iv.getName(item) + "\n" +
                 "item description: " + iv.getDescription(item)
                 + "\n" + "item owner: " + um.UUIDToName(item.getOwnerUUID());
     }
-
-
 
     void editDes(){
         if (it == null){
@@ -349,6 +350,29 @@ public class InventoryController {
             moveToWishList();
             ip.updateListM(printAvailable());
             ip.addToWishBorrow(true);
+        }
+    }
+
+    void agreeBut(){
+        if (it == null){
+            ip.noItemSelected();
+        }else{
+            addToWishLend(getItemByRequestList(it));
+            ip.resetCurr();
+            ip.addLSuccess();
+            it = null;
+            ip.updateListM(printRequest());
+        }
+    }
+
+    void disagreeBut(){
+        if (it == null) {
+            ip.noItemSelected();
+        }else{
+            removeItemFromIam(getItem(it));
+            ip.resetCurr();
+            it = null;
+            ip.updateListM(printRequest());
         }
     }
 

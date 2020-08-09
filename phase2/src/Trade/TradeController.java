@@ -17,12 +17,12 @@ import java.util.UUID;
  * the action of trade depend on the input of user
  */
 public class TradeController {
-    private UUID currUser;
+    private final UUID currUser;
     private UUID tarUser;
     private TradeManager tm;
     private UUID currTrade;
-    private UserManager um;
-    private Inventory iv;
+    private final UserManager um;
+    private final Inventory iv;
     TradePresenter tp;
     BorderGUIWithThreeTextArea bta;
     String it;
@@ -33,7 +33,7 @@ public class TradeController {
      * @param tm the object that edits the trade list of input gateway
      * @param um the object that edits the user list of input gateway
      */
-    TradeController(UUID currUser, TradeManager tm, UserManager um, Inventory iv,
+    TradeController(UUID currUser,
                     BorderGUIWithThreeTextArea bta, String item){
         this.currUser = currUser;
         this.tm = new TradeManager();

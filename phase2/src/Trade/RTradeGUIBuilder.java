@@ -28,7 +28,7 @@ public class RTradeGUIBuilder implements BorderGUIBuilder {
 
 
         tg = new BorderGUIWithThreeTextArea();
-        trc = new TradeController(currUser, tm, um, iv, tg, item);
+        trc = new TradeController(currUser, tg, item);
         trc.getTarUser(item);
         this.fr = fr;
     }

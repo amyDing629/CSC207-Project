@@ -143,6 +143,10 @@ public class InventoryPresenter {
         bta.setListText(availableList);
     }
 
+    void addLSuccess(){
+        bta.setMsgText("the item has been added to lend list successfully");
+    }
+
 
 
 

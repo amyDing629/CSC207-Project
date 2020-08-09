@@ -35,6 +35,7 @@ public class InventoryGUI {
         JButton mk = new JButton("market");
         JButton wb = new JButton("WishBorrow");
         JButton wl = new JButton("WishLend");
+        JButton ar = new JButton("AgreeRequest");
         JButton back = new JButton("return");
 
         menu.setLayout(new BoxLayout(menu, BoxLayout.Y_AXIS));
@@ -42,6 +43,9 @@ public class InventoryGUI {
         menu.add(mk);
         menu.add(wb);
         menu.add(wl);
+        if (!um.getUser(currUser).getIsAdmin()){
+            menu.add(ar);
+        }
         menu.add(back);
 
         frame.getContentPane().add(menu);
@@ -84,6 +88,18 @@ public class InventoryGUI {
             }
         });
 
+        ar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                BorderGUIBuilder builder = new AgreeReqGUIBuilder(currUser, frame);
+                TradeGUIEngineer engineer = new TradeGUIEngineer(builder);
+                engineer.constructGUI();
+                TradeGUIPlan tg = engineer.getGUI();
+                tg.run();
+            }
+        });
+
         back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -91,5 +107,7 @@ public class InventoryGUI {
                 ivf.setVisible(true);
             }
         });
+
+
     }
 }

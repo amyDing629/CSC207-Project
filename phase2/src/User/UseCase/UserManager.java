@@ -200,5 +200,9 @@ public class UserManager {
     public String UUIDToName(UUID userID){
         return getUser(userID).getUsername();
     }
+
+    public UUID nameToUUID(String name){
+        return getUser(name).getId();
+    }
 }
 
