@@ -6,6 +6,7 @@ import User.Entity.ClientUser;
 import User.Gateway.DataAccess;
 import User.Gateway.UserDataAccess;
 
+import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +31,7 @@ public class AdminActivityManager {
 //        a.setFrozen(s);
 //    }
 
-    public void setFreeze(String a,boolean s) {
+    public void setFreeze(String a,boolean s) throws FileNotFoundException {
         ClientUser ca = (ClientUser)userAccess.getObject(a);
         if(ca != null){ca.setFrozen(s);}
         userAccess.updateSer();
@@ -48,7 +49,7 @@ public class AdminActivityManager {
 //        }
 //    }
 
-    public void addNewAdmin(String username, String password) {
+    public void addNewAdmin(String username, String password) throws FileNotFoundException {
         if(userAccess.getObject("admin")!= null) {
             ClientUser admin = new ClientUser(username, password, true);
             userAccess.addObject(admin);
