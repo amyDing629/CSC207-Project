@@ -1,9 +1,6 @@
 package User.Entity;
 
-
-import User.Entity.ClientUser;
-
-public abstract class UserApprovals {
+public class UserApprovals {
     ClientUser user;
     String fstString;
     public UserApprovals(ClientUser user, String fstString){

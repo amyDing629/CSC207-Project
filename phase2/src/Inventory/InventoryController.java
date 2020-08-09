@@ -4,6 +4,7 @@ import Trade.BorderGUIWithThreeTextArea;
 import Trade.TradeGUIEngineer;
 import Trade.TradeGUIPlan;
 import User.Entity.ClientUser;
+import User.Entity.ItemApprovals;
 import User.Gateway.DataAccess;
 import User.Gateway.UserDataAccess;
 import User.UseCase.ApprovalManager;
@@ -74,11 +75,11 @@ public class InventoryController {
     void addToWishLend(Item it) throws FileNotFoundException {
         um.getWishLend(iv.getOwnerUUID(it.getName())).add(it.getName());
         iv.add(it);
-        iam.removeItem(it.getName());
+        iam.removeItemApproval(it.getName());
     }
 
     void removeItemFromIam(Item it){
-        iam.removeItem(iv.getName(it));
+        iam.removeItemApproval(iv.getName(it));
     }
 
     /**
@@ -109,14 +110,7 @@ public class InventoryController {
 
 
     public String printRequest() {
-        ArrayList<ArrayList<String>> ia = iam.getItemApproval();
-        String result = "";
-        for (int i = 0; i < ia.size(); i++) {
-            String str = "";
-            str = str + "\n" + "name: " + ia.get(i).get(1) + "\n" + "Description: " + ia.get(i).get(2)
-                    + "\n" + "Owner: " + ia.get(i).get(3) + "\n";
-            result = result + str;
-        }
+        String result = iam.AllItemApprovals();
         if (result.equals("")) {
             return "no requested items";
         }
@@ -125,40 +119,14 @@ public class InventoryController {
     }
 
     public Item getItemByRequestList(String itemName){
-        for (ArrayList<String> strings: iam.getItemApproval()){
-            if (strings.get(1).equals(itemName)){
-                Item it = iv.createItem(strings.get(1), um.nameToUUID(strings.get(3)));
-                it.setDescription(strings.get(2));
-                return it;
-            }
-        }
-        return null;
+        ItemApprovals k=iam.getItemApproval(itemName);
+        return iv.createItem(itemName,um.getId(um.getUser(k.getCurUserName())));
     }
 
     public boolean iamCheckInput(String name){
-        ArrayList<ArrayList<String>> ia = iam.getItemApproval();
-        for (ArrayList<String> strings : ia) {
-            if (strings.get(1).equals(name)) {
-                return true;
-            }
-        }
-        return false;
-
+        return iam.hasItemApprovals(name);
     }
 
-    public Item getItemFromIam(String name){
-        Item result;
-        ArrayList<ArrayList<String>> ia = iam.getItemApproval();
-        for (ArrayList<String> strings : ia) {
-            if (strings.get(1).equals(name)) {
-                result = new Item(strings.get(1), UUID.fromString(strings.get(3)));
-                iv.setDescription(strings.get(2), result);
-                return result;
-            }
-        }
-        return null;
-
-    }
 
     public List<String> getWishLend(){
         return um.getWishLend(currUser);
@@ -182,13 +150,8 @@ public class InventoryController {
         um.addUser(user);
     }
 
-    public void addItem(String name, String des){
-        ArrayList<String> b= new ArrayList<>();
-        b.add("1");
-        b.add(name);
-        b.add(des);
-        b.add(um.getUsername(currUser));
-        iam.getItemApproval().add(b);
+    public void addItem(String name, String des) throws FileNotFoundException {
+        iam.addApprovals(um.getUser(currUser),name,des);
     }
 
     Item createItem(String name){
@@ -253,7 +216,7 @@ public class InventoryController {
         tg.run();
     }
 
-    void addButL(){
+    void addButL() throws FileNotFoundException {
         String itemName = bta.getInput("name");
         String description = bta.getInput("des");
         if (itemName.equals("")) {

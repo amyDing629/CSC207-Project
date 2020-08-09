@@ -51,20 +51,8 @@ public class UnfreezeGUI {
         c.weightx = 1.0;
         c.weighty = 1.0;
         panel.add(scrollPane, c);
-        iam.addApproval("2","admin5","hahahaha");
 
-        StringBuilder hi= new StringBuilder();
-        ArrayList<ArrayList<String>> usa = iam.getUserApproval();
-        if(usa.size()==0){
-            hi.append("Currently there is no unfreeze ticket\n");
-        }
-        for (int i = 0; i < usa.size(); i++) {
-            hi.append("User").append(i).append(": ").append(usa.get(i).get(1)).append("\n");
-            hi.append("Reason: ").append(usa.get(i).get(2)).append("\n");
-            hi.append("**************************").append("\n");
-        }
-        System.out.println(hi.toString());
-        textArea.setText(hi.toString());
+        textArea.setText(iam.AllUserApprovals());
         JTextField userInput = new JTextField(30);
         userInput.setPreferredSize(new Dimension(300, 30));
         panel.add(userInput);
@@ -84,7 +72,7 @@ public class UnfreezeGUI {
         submitButton.addActionListener(e -> {
             frame.setVisible(false);
             if(um.getUser(userInput.getText())!=null){
-                iam.removeUser(userInput.getText());
+                iam.removeUserApproval(userInput.getText());
                 try {
                     aam.setFreeze(userInput.getText(),false);
                 } catch (FileNotFoundException fileNotFoundException) {

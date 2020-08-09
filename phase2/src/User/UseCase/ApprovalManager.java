@@ -2,6 +2,7 @@ package User.UseCase;
 
 
 
+import User.Entity.ClientUser;
 import User.Gateway.ApprovalItemDataAccess;
 import User.Gateway.ApprovalUserDataAccess;
 import User.Entity.ItemApprovals;
@@ -44,21 +45,38 @@ public class ApprovalManager {
         return (ItemApprovals) itemDataAccess.getObject(username);
     }
 
+    public String AllItemApprovals(){
+        StringBuilder result= new StringBuilder();
+        ArrayList<ItemApprovals> itemApprovals=getItemApprovals();
+        for (ItemApprovals i : itemApprovals) {
+            result.append(i.toString());
+        }
+        return result.toString();
+    }
+
+    public String AllUserApprovals(){
+        StringBuilder result= new StringBuilder();
+        ArrayList<UserApprovals> userApprovals=getUserApprovals();
+        for (UserApprovals i : userApprovals) {
+            result.append(i.toString());
+        }
+        return result.toString();
+    }
     public UserApprovals getUserApproval(String username){
         return (UserApprovals) userDataAccess.getObject(username);
     }
-    public void addApprovals(ItemApprovals item) throws FileNotFoundException {
-        itemDataAccess.addObject(item);
+    public void addApprovals(ClientUser user,String name,String des) throws FileNotFoundException {
+        itemDataAccess.addObject(new ItemApprovals(user,name,des));
     }
-    public void addApprovals(UserApprovals user) throws FileNotFoundException {
-        userDataAccess.addObject(user);
+    public void addApprovals(ClientUser user,String des) throws FileNotFoundException {
+        userDataAccess.addObject(new UserApprovals(user,des));
     }
 
-    public boolean hasApprovals(ItemApprovals item){
-        return itemDataAccess.hasObject(item);
+    public boolean hasItemApprovals(String itemName){
+        return itemDataAccess.hasObject(itemName);
     }
-    public boolean hasApprovals(UserApprovals user){
-        return itemDataAccess.hasObject(user);
+    public boolean hasUserApprovals(String userName){
+        return itemDataAccess.hasObject(userName);
     }
 
 }

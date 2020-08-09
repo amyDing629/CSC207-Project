@@ -60,9 +60,8 @@ public class ApprovalItemDataAccess implements DataAccess {
 
     @Override
     public boolean hasObject(Object o) {
-        ItemApprovals check=(ItemApprovals) o;
-        for (ItemApprovals s : ItemApprovalsList) {
-            if (s.getCurUserName().equals(check.getCurUserName()) && s.getFstString().equals(check.getFstString()) && s.getSecString().equals(check.getSecString())) {
+        for (ItemApprovals itemApprovals : ItemApprovalsList) {
+            if (o.equals(itemApprovals)) {
                 return true;
             }
         }

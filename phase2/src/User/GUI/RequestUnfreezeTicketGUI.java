@@ -7,6 +7,7 @@ import User.UseCase.UserManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.FileNotFoundException;
 
 public class RequestUnfreezeTicketGUI {
     UserManager um;
@@ -35,7 +36,7 @@ public class RequestUnfreezeTicketGUI {
         frame.setVisible(true);
     }
 
-    private void placeComponents(JFrame frame, JPanel panel, String b){
+    private void placeComponents(JFrame frame, JPanel panel, String name){
 
         JLabel textLabel = new JLabel("Please enter the reasons to unfreeze below");
         textLabel.setPreferredSize(new Dimension(300, 30));
@@ -60,11 +61,15 @@ public class RequestUnfreezeTicketGUI {
         });
         submitButton.addActionListener(e -> {
             frame.setVisible(false);
-            iam.addApproval("2",b,userInput.getText());
+            try {
+                iam.addApprovals(um.getUser(name),textLabel.getText());
+            } catch (FileNotFoundException fileNotFoundException) {
+                fileNotFoundException.printStackTrace();
+            }
             JOptionPane.showMessageDialog(null,"Request successfully");
             JOptionPane.showMessageDialog(null,"Please wait for the administrator to approve");
             UserFreezeSystem d = new UserFreezeSystem(uc,frame);
-            d.run(b);
+            d.run(name);
         });
     }
 }
