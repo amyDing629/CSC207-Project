@@ -72,6 +72,16 @@ public class ApprovalItemDataAccess implements DataAccess {
     }
 
     @Override
+    public void removeObject(String o) {
+
+    }
+
+    @Override
+    public void removeObject(UUID o) {
+
+    }
+
+    @Override
     public void removeObject(Object o) {
         ItemApprovals check=(ItemApprovals) o;
         if(hasObject(check)){

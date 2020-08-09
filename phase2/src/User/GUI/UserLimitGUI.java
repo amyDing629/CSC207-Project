@@ -4,28 +4,18 @@ import Inventory.Inventory;
 import User.Adapter.UIController;
 import Trade.TradeManager;
 import User.UseCase.AdminActivityManager;
-import User.UseCase.ItemApprovalManager;
+import User.UseCase.ApprovalManager;
 import User.UseCase.UserManager;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class UserLimitGUI {
-    UserManager um;
-    TradeManager tm;
-    ItemApprovalManager iam;
     UIController uc;
-    Inventory iv;
-    AdminActivityManager aam;
     JFrame pFrame;
     JFrame frame;
-    public UserLimitGUI(UserManager um, TradeManager tm, Inventory iv, ItemApprovalManager iam, AdminActivityManager aam,UIController uc ,JFrame pFrame) {
-        this.um = um;
-        this.tm = tm;
-        this.iam=iam;
+    public UserLimitGUI(UIController uc ,JFrame pFrame) {
         this.uc=uc;
-        this.iv=iv;
-        this.aam=aam;
         this.pFrame=pFrame;
     }
     public void run(String name){
@@ -68,7 +58,7 @@ public class UserLimitGUI {
         });
         editButton.addActionListener(e -> {
             frame.setVisible(false);
-           TradeLimitGUI d=new TradeLimitGUI(um,tm,iv,iam,aam,uc,frame);
+           TradeLimitGUI d=new TradeLimitGUI(uc,frame);
             d.run(b);
         });
         tradeButton.addActionListener(e -> {

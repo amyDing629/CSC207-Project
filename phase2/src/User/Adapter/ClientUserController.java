@@ -3,7 +3,7 @@ package User.Adapter;
 import Inventory.Inventory;
 import Inventory.Item;
 import Trade.TradeManager;
-import User.UseCase.ItemApprovalManager;
+import User.UseCase.ApprovalManager;
 import User.UseCase.UserManager;
 
 import java.io.FileNotFoundException;
@@ -11,7 +11,7 @@ import java.util.UUID;
 
 public class ClientUserController {
     UserManager um = new UserManager();
-    ItemApprovalManager iam = new ItemApprovalManager();
+    ApprovalManager iam = new ApprovalManager();
     TradeManager tm = new TradeManager();
 
 

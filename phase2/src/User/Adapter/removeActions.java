@@ -2,7 +2,7 @@ package User.Adapter;
 
 
 import User.Entity.ClientUser;
-import User.UseCase.ItemApprovalManager;
+import User.UseCase.ApprovalManager;
 import User.UseCase.UserManager;
 
 import java.util.ArrayList;
@@ -10,9 +10,9 @@ import java.util.ArrayList;
 public class removeActions {
     ClientUser user;
     UserManager um;
-    ItemApprovalManager iam;
+    ApprovalManager iam;
 
-    public removeActions(ClientUser user, UserManager um, ItemApprovalManager iam) {
+    public removeActions(ClientUser user, UserManager um, ApprovalManager iam) {
         this.user = user;
         this.um = um;
         this.iam = iam;

@@ -6,7 +6,7 @@ import User.Adapter.UIController;
 import Trade.TradeManager;
 import User.GUI.LoginIGUI;
 import User.UseCase.AdminActivityManager;
-import User.UseCase.ItemApprovalManager;
+import User.UseCase.ApprovalManager;
 import User.UseCase.UserManager;
 
 import java.io.File;
@@ -18,7 +18,7 @@ public class mainRun {
         Inventory iv = new Inventory();
         UserManager um = new UserManager();
         TradeManager tm = new TradeManager();
-        ItemApprovalManager iam = new ItemApprovalManager();
+        ApprovalManager iam = new ApprovalManager();
         DataAccessFull uaf = new DataAccessFull(iam);
 
         AdminActivityManager aam = new AdminActivityManager();

@@ -2,7 +2,7 @@ package User.GUI;
 
 import User.Adapter.UIController;
 import User.Entity.ClientUser;
-import User.UseCase.ItemApprovalManager;
+import User.UseCase.ApprovalManager;
 import User.UseCase.UserManager;
 
 import javax.swing.*;
@@ -10,7 +10,7 @@ import java.awt.*;
 
 public class RequestUnfreezeTicketGUI {
     UserManager um;
-    ItemApprovalManager iam;
+    ApprovalManager iam;
     UIController uc;
     JFrame pFrame;
     JFrame frame;

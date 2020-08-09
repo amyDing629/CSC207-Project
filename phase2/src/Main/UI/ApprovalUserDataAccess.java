@@ -70,6 +70,16 @@ public class ApprovalUserDataAccess implements DataAccess {
     }
 
     @Override
+    public void removeObject(String o) {
+
+    }
+
+    @Override
+    public void removeObject(UUID o) {
+
+    }
+
+    @Override
     public void removeObject(Object o) {
         UserApprovals check=(UserApprovals) o;
         if(hasObject(check)){

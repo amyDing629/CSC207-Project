@@ -4,7 +4,7 @@ import Inventory.Inventory;
 import User.Adapter.UIController;
 import Trade.TradeManager;
 import User.UseCase.AdminActivityManager;
-import User.UseCase.ItemApprovalManager;
+import User.UseCase.ApprovalManager;
 import User.UseCase.UserManager;
 
 import javax.swing.*;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class UnfreezeGUI {
     UserManager um;
-    ItemApprovalManager iam;
+    ApprovalManager iam;
     UIController uc;
     AdminActivityManager aam;
     JFrame pFrame;

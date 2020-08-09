@@ -4,7 +4,7 @@ import Inventory.Inventory;
 import User.Adapter.UIController;
 import Trade.TradeManager;
 import User.UseCase.AdminActivityManager;
-import User.UseCase.ItemApprovalManager;
+import User.UseCase.ApprovalManager;
 import User.UseCase.UserManager;
 
 import javax.swing.*;
@@ -13,7 +13,7 @@ import java.awt.*;
 public class editInfoGUI {
     UserManager um;
     TradeManager tm;
-    ItemApprovalManager iam;
+    ApprovalManager iam;
     UIController uc;
     Inventory iv;
     AdminActivityManager aam;
@@ -22,7 +22,7 @@ public class editInfoGUI {
     public editInfoGUI(UIController uc , JFrame pFrame) {
         this.um = new UserManager();
         this.tm = new TradeManager();
-        this.iam= new ItemApprovalManager();
+        this.iam= new ApprovalManager();
         this.uc=uc;
         this.iv=new Inventory();
         this.aam=new AdminActivityManager();

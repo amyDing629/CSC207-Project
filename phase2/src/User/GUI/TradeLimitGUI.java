@@ -4,7 +4,7 @@ import Inventory.Inventory;
 import Trade.TradeManager;
 import User.Adapter.UIController;
 import User.UseCase.AdminActivityManager;
-import User.UseCase.ItemApprovalManager;
+import User.UseCase.ApprovalManager;
 import User.UseCase.UserManager;
 
 import javax.swing.*;
@@ -13,19 +13,14 @@ import java.awt.*;
 public class TradeLimitGUI {
     UserManager um;
     TradeManager tm;
-    ItemApprovalManager iam;
+    ApprovalManager iam;
     UIController uc;
     Inventory iv;
     AdminActivityManager aam;
     JFrame pFrame;
     JFrame frame;
-    public TradeLimitGUI(UserManager um, TradeManager tm, Inventory iv, ItemApprovalManager iam, AdminActivityManager aam,UIController uc ,JFrame pFrame) {
-        this.um = um;
-        this.tm = tm;
-        this.iam=iam;
+    public TradeLimitGUI(UIController uc ,JFrame pFrame) {
         this.uc=uc;
-        this.iv=iv;
-        this.aam=aam;
         this.pFrame=pFrame;
     }
     public void run(String name){

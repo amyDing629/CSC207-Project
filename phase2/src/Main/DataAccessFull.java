@@ -6,7 +6,7 @@ import Main.UI.ApprovalDataAccess;
 import Trade.TradeDataAccess;
 import Trade.TradeManager;
 import User.Gateway.UserDataAccess;
-import User.UseCase.ItemApprovalManager;
+import User.UseCase.ApprovalManager;
 import User.UseCase.UserManager;
 
 import java.io.IOException;
@@ -20,11 +20,11 @@ public class DataAccessFull {
     /**
      * [constructor]
      */
-    public DataAccessFull(ItemApprovalManager iam){
+    public DataAccessFull(){
         ida = new InvDataAccess();
         tda = new TradeDataAccess();
         fe = new UserDataAccess();
-        aa = new ApprovalDataAccess(iam);
+        aa = new ApprovalDataAccess();
     }
 
     /**

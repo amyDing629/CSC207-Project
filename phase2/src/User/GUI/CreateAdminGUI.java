@@ -1,33 +1,21 @@
 package User.GUI;
 
-import Inventory.Inventory;
-import Trade.TradeManager;
 import User.Adapter.UIController;
 import User.UseCase.AdminActivityManager;
-import User.UseCase.ItemApprovalManager;
-import User.UseCase.UserManager;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.FileNotFoundException;
 
 public class CreateAdminGUI {
-    UserManager um;
-    TradeManager tm;
-    ItemApprovalManager iam;
     UIController uc;
-    Inventory iv;
     AdminActivityManager aam;
     JFrame pFrame;
     JFrame frame;
     public CreateAdminGUI(UIController uc ,JFrame pFrame) {
-        this.um = new UserManager();
-        this.tm = new TradeManager();
-        this.iam= new ItemApprovalManager();
         this.uc=uc;
-        this.iv= new Inventory();
-        this.aam=new AdminActivityManager();
         this.pFrame=pFrame;
+        aam = new AdminActivityManager();
     }
     public void run(String name){
         frame = new JFrame("Freeze User");

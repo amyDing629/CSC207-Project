@@ -5,7 +5,7 @@ import User.Adapter.UIController;
 import Trade.TradeManager;
 import User.Entity.ClientUser;
 import User.UseCase.AdminActivityManager;
-import User.UseCase.ItemApprovalManager;
+import User.UseCase.ApprovalManager;
 import User.UseCase.UserManager;
 
 import javax.swing.*;
@@ -14,7 +14,7 @@ import java.awt.*;
 public class IncompleteLimitGUI {
     UserManager um;
     TradeManager tm;
-    ItemApprovalManager iam;
+    ApprovalManager iam;
     UIController uc;
     Inventory iv;
     AdminActivityManager aam;

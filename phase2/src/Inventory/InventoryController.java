@@ -6,7 +6,7 @@ import Trade.TradeGUIPlan;
 import User.Entity.ClientUser;
 import User.Gateway.DataAccess;
 import User.Gateway.UserDataAccess;
-import User.UseCase.ItemApprovalManager;
+import User.UseCase.ApprovalManager;
 import User.UseCase.UserManager;
 
 import javax.swing.*;
@@ -31,7 +31,7 @@ public class InventoryController {
 
     UserManager um;
 
-    ItemApprovalManager iam;
+    ApprovalManager iam;
 
     BorderGUIWithThreeTextArea bta;
 
@@ -49,7 +49,7 @@ public class InventoryController {
         this.currUser = currUser;
         iv = new Inventory();
         um = new UserManager();
-        iam = new ItemApprovalManager();
+        iam = new ApprovalManager();
         this.bta = bta;
         ip = new InventoryPresenter(bta);
         this.fr = fr;

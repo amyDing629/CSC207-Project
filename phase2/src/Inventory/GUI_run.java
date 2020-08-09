@@ -1,7 +1,7 @@
 package Inventory;
 
 import User.Entity.ClientUser;
-import User.UseCase.ItemApprovalManager;
+import User.UseCase.ApprovalManager;
 import User.UseCase.UserManager;
 
 import javax.swing.*;

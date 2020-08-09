@@ -4,7 +4,7 @@ import Trade.TradeManager;
 import User.Entity.ClientUser;
 import User.Gateway.UserDataAccess;
 import User.UseCase.AdminActivityManager;
-import User.UseCase.ItemApprovalManager;
+import User.UseCase.ApprovalManager;
 import User.UseCase.UserManager;
 
 import java.io.*;
@@ -14,10 +14,10 @@ public class UIController {
     public UserManager um;
     public AdminActivityManager am;
     public TradeManager tm;
-    public ItemApprovalManager iam;
+    public ApprovalManager iam;
     Inventory iv;
 
-    public UIController(UserManager um, AdminActivityManager am,TradeManager tm,ItemApprovalManager iam,Inventory iv){
+    public UIController(UserManager um, AdminActivityManager am,TradeManager tm,ApprovalManager iam,Inventory iv){
         this.um=um;
         this.am=am;
         this.tm=tm;

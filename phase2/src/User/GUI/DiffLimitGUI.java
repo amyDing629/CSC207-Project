@@ -4,7 +4,7 @@ import Inventory.Inventory;
 import Trade.TradeManager;
 import User.Adapter.UIController;
 import User.UseCase.AdminActivityManager;
-import User.UseCase.ItemApprovalManager;
+import User.UseCase.ApprovalManager;
 import User.UseCase.UserManager;
 
 import javax.swing.*;
@@ -12,19 +12,13 @@ import java.awt.*;
 
 public class DiffLimitGUI {
     UserManager um;
-    TradeManager tm;
-    ItemApprovalManager iam;
     UIController uc;
-    Inventory iv;
     AdminActivityManager aam;
     JFrame pFrame;
     JFrame frame;
     public DiffLimitGUI(UIController uc ,JFrame pFrame) {
         this.um = new UserManager();
-        this.tm = new TradeManager();
-        this.iam= new ItemApprovalManager();
         this.uc=uc;
-        this.iv=new Inventory();
         this.aam=new AdminActivityManager();
         this.pFrame=pFrame;
     }

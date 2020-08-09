@@ -4,7 +4,7 @@ import Trade.TradeManager;
 import User.Adapter.ClientUserController;
 import User.Adapter.IUserPresenter;
 import User.Adapter.UIController;
-import User.UseCase.ItemApprovalManager;
+import User.UseCase.ApprovalManager;
 import User.UseCase.UserManager;
 
 import javax.swing.*;
@@ -14,8 +14,6 @@ import java.util.UUID;
 public class ClientUserGUI implements View {
     UserManager um;
     TradeManager tm;
-    ItemApprovalManager iam;
-    UIController uc;
 //    Inventory iv;
 //    AdminActivityManager aam;
 //    public ClientUserGUI(UserManager um, TradeManager tm, Inventory iv, ItemApprovalManager iam, AdminActivityManager aam,UIController uc ,JFrame pFrame) {
