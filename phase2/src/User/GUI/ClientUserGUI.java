@@ -1,18 +1,21 @@
 package User.GUI;
 
+import User.Adapter.UIcontoller;
+import Trade.TradeManager;
 import User.Adapter.ClientUserController;
 import User.Adapter.IUserPresenter;
-import User.Entity.ClientUser;
+import User.UseCase.ItemApprovalManager;
+import User.UseCase.UserManager;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.UUID;
 
 public class ClientUserGUI implements View {
-//    UserManager um;
-//    TradeManager tm;
-//    ItemApprovalManager iam;
-//    UIcontoller uc;
+    UserManager um;
+    TradeManager tm;
+    ItemApprovalManager iam;
+    UIcontoller uc;
 //    Inventory iv;
 //    AdminActivityManager aam;
 //    public ClientUserGUI(UserManager um, TradeManager tm, Inventory iv, ItemApprovalManager iam, AdminActivityManager aam,UIcontoller uc ,JFrame pFrame) {
@@ -53,24 +56,23 @@ public class ClientUserGUI implements View {
     private void placeComponents(JFrame frame, JPanel panel) {
 
         UUID userid = getPresenter().getCurrUser();
-        ClientUser clientUser = getPresenter().getUserModel().getUser(userid);
-        boolean isFrozen = getPresenter().getUserModel().getIsFrozen(clientUser);
+        boolean isFrozen = getPresenter().getUserModel().getIsFrozen(userid);
 
 
         JLabel freezeStatus = new JLabel("Freeze Status: " + isFrozen);
         freezeStatus.setPreferredSize(new Dimension(300, 30));
         panel.add(freezeStatus);
 
-        JLabel tradeLimit = new JLabel("Trade limit: " + tm.getTradeNumber(b) + "/" + um.getWeekTransactionLimit(b));
+        JLabel tradeLimit = new JLabel("Trade limit: " + tm.getTradeNumber(um.UUIDToName(userid)) + "/" + um.getWeekTransactionLimit(um.UUIDToName(userid)));
         tradeLimit.setPreferredSize(new Dimension(300, 30));
         panel.add(tradeLimit);
 
-        JLabel inCompLimit = new JLabel("Incomplete trade limit: " + tm.getIncompleteTransaction(b) +
-                "/" + um.getIncompleteTransactionLimit(b));
+        JLabel inCompLimit = new JLabel("Incomplete trade limit: " + tm.getIncompleteTransaction(userid) +
+                "/" + um.getIncompleteTransactionLimit(um.UUIDToName(userid)));
         inCompLimit.setPreferredSize(new Dimension(300, 30));
         panel.add(inCompLimit);
 
-        JLabel diff = new JLabel("Difference between borrow and lend: "+ um.readDiff(b) + "/" +um.getDiff(b));
+        JLabel diff = new JLabel("Difference between borrow and lend: "+ um.readDiff(um.UUIDToName(userid)) + "/" +um.getDiff(um.UUIDToName(userid)));
         diff.setPreferredSize(new Dimension(300, 30));
         panel.add(diff);
 

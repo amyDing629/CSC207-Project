@@ -134,7 +134,7 @@ public class UserManager {
     }
 
     //FINISHED
-    public boolean getIsAdmin(ClientUser a){return a.getIsAdmin();}
+    public boolean getIsAdmin(String a){return getUser(a).getIsAdmin();}
 
     //FINISHED
     public List<String> getWishLend(UUID a) {
@@ -145,20 +145,20 @@ public class UserManager {
         return getUser(a).getWishBorrow();
     }
     //finished
-    public int getWeekTransactionLimit(ClientUser a) {
-        return a.getWeekTransactionLimit();
+    public int getWeekTransactionLimit(String a) {
+        return getUser(a).getWeekTransactionLimit();
     }
     //finished
-    public int getIncompleteTransactionLimit(ClientUser a) {
-        return a.getIncompleteTransactionLimit();
+    public int getIncompleteTransactionLimit(String a) {
+        return getUser(a).getIncompleteTransactionLimit();
     }
     //no use
     public boolean getIsBorrow(ClientUser a) {
         return a.getIsBorrow();
     }
     //finished
-    public int getDiff(ClientUser a) {
-        return a.getDiff();
+    public int getDiff(String a) {
+        return getUser(a).getDiff();
     }
     //finished
     public String getPassword(ClientUser a) {
@@ -203,6 +203,10 @@ public class UserManager {
 
     public UUID nameToUUID(String name){
         return getUser(name).getId();
+    }
+
+    public List<UUID> getSelectedBonusTrades(UUID userID){
+        return getUser(userID).getSelectedBonusTrades();
     }
 }
 

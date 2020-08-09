@@ -1,7 +1,7 @@
 package User.GUI;
 
 import Inventory.Inventory;
-import Main.UI.UIcontoller;
+import User.Adapter.UIcontoller;
 import Trade.TradeManager;
 import User.Entity.ClientUser;
 import User.UseCase.AdminActivityManager;
@@ -40,13 +40,12 @@ public class UserLimitGUI {
         panel.add(welcomeLabel);
         frame.add(panel);
 
-        ClientUser b =um.getUser(name);
 
-        placeComponents(frame, panel, b);
+        placeComponents(frame, panel, name);
         frame.setVisible(true);
     }
 
-    private void placeComponents(JFrame frame, JPanel panel, ClientUser b){
+    private void placeComponents(JFrame frame, JPanel panel, String b){
 
         JButton editButton = new JButton("trade limit");
         editButton.setPreferredSize(new Dimension(300, 30));
@@ -71,17 +70,17 @@ public class UserLimitGUI {
         editButton.addActionListener(e -> {
             frame.setVisible(false);
            TradeLimitGUI d=new TradeLimitGUI(um,tm,iv,iam,aam,uc,frame);
-            d.run(um.getUsername(b));
+            d.run(b);
         });
         tradeButton.addActionListener(e -> {
             frame.setVisible(false);
-            IncompleteLimitGUI d=new IncompleteLimitGUI(um,tm,iv,iam,aam,uc,frame);
-            d.run(um.getUsername(b));
+            IncompleteLimitGUI d=new IncompleteLimitGUI(uc,frame);
+            d.run(b);
         });
         inventoryButton.addActionListener(e -> {
             frame.setVisible(false);
-            DiffLimitGUI d=new DiffLimitGUI (um,tm,iv,iam,aam,uc,frame);
-            d.run(um.getUsername(b));
+            DiffLimitGUI d=new DiffLimitGUI (uc,frame);
+            d.run(b);
         });
     }
 }

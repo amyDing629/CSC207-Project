@@ -1,7 +1,7 @@
 package User.GUI;
 
 import Inventory.Inventory;
-import Main.UI.UIcontoller;
+import User.Adapter.UIcontoller;
 import Trade.TradeManager;
 import User.Entity.ClientUser;
 import User.UseCase.AdminActivityManager;
@@ -21,7 +21,7 @@ public class ReverseSystemGUI {
     AdminActivityManager aam;
     JFrame pFrame;
     JFrame frame;
-    public ReverseSystemGUI(UserManager um, TradeManager tm, Inventory iv, ItemApprovalManager iam, AdminActivityManager aam,UIcontoller uc ,JFrame pFrame) {
+    public ReverseSystemGUI(UIcontoller uc ,JFrame pFrame) {
         this.um = um;
         this.tm = tm;
         this.iam=iam;
@@ -43,11 +43,11 @@ public class ReverseSystemGUI {
 
         ClientUser b = um.getUser(name);
 
-        placeComponents(frame, panel, b);
+        placeComponents(frame, panel, name);
         frame.setVisible(true);
     }
 
-    private void placeComponents(JFrame frame, JPanel panel, ClientUser b){
+    private void placeComponents(JFrame frame, JPanel panel, String b){
 
         JTextArea textArea = new JTextArea(5, 20);
         textArea.setEditable(false);
@@ -61,12 +61,12 @@ public class ReverseSystemGUI {
         c.weighty = 1.0;
         panel.add(scrollPane, c);
         StringBuilder hi= new StringBuilder("Username:\n");
-        ArrayList<ClientUser> name=um.getUserList();
+        ArrayList<ClientUser> name= (ArrayList<ClientUser>) um.getUserList();
         if(name.size()==0){
             hi.append("Currently there is no users\n");
         }
         for (ClientUser user : name) {
-            hi.append(um.getUsername(user)).append("\n");
+            hi.append(user.getUsername()).append("\n");
         }
         System.out.println(hi.toString());
         textArea.setText(hi.toString());

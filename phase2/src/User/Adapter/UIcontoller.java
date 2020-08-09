@@ -1,4 +1,4 @@
-package Main.UI;
+package User.Adapter;
 import Inventory.Inventory;
 import Trade.TradeManager;
 import User.Entity.ClientUser;
@@ -27,12 +27,12 @@ public class UIcontoller {
         this.iam=iam;
         this.iv=iv;
     }
-    public void checkFrozen(ClientUser user){
+    public void checkFrozen(String user){
         if(um.readDiff(user)>=um.getDiff(user)){
             System.out.println("You have been freeze due to exceed difference between borrow and lend");
             am.setFreeze(user,true);
         }
-        else if(am.incompleteTransaction(user)){
+        else if(am.incompleteTransaction(um.nameToUUID(user))){
                System.out.println("You have been freeze due to maximum incomplete transaction");
             am.setFreeze(user,true);
         }
@@ -46,7 +46,7 @@ public class UIcontoller {
         if (file.length() == 0) {
             ClientUser b = new ClientUser("admin", "123", true);
             um.addUser(b);
-            new UserDataAccess(um).updateFile();
+            new UserDataAccess().serialize();
         }
     }
 
@@ -88,16 +88,16 @@ public class UIcontoller {
 //        }
 //        return false;
 //    }
-    public void UserDisplayStatus(ClientUser user){
-        System.out.println("Hello," + user.getUsername());
+    public void UserDisplayStatus(String user){
+        System.out.println("Hello," + user);
         System.out.println("Admin:"+um.getIsAdmin(user));
         checkFrozen(user);
-        System.out.println("Freeze Status: " + um.getIsFrozen(user));
+        System.out.println("Freeze Status: " + um.getIsFrozen(um.nameToUUID(user)));
         System.out.println("Trade limit: " + tm.getTradeNumber(user) + "/"
                 + um.getWeekTransactionLimit(user));
-        System.out.println("Incomplete trade limit: " + (tm.getIncomplete(user).size()
+        System.out.println("Incomplete trade limit: " + (tm.getIncomplete(um.nameToUUID(user)).size()
                 + "/" + um.getIncompleteTransactionLimit(user)));
-        System.out.println("Difference between borrow and lend:"+user.readDiff()+"/"+um.getDiff(user));
+        System.out.println("Difference between borrow and lend:"+um.readDiff(user)+"/"+um.getDiff(user));
         System.out.println("**************************************************************");
     }
 }

@@ -64,7 +64,7 @@ public class AwardActivities {
      */
     public void getBonus(ClientUser user, Trade selected){
             user.addBonusTrade(selected.getId());
-        this.pm.setUserPoints(user);
+        this.pm.setUserPoints(user.getId());
     }
 
     /**

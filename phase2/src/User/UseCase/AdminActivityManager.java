@@ -143,7 +143,7 @@ public class AdminActivityManager {
      * @param username the user that the administrative user wants to check the incomplete transaction limit
      * set the account of user a frozen if a has exceeded the incomplete transaction limit
      */
-    public boolean incompleteTransaction(String username){
+    public boolean incompleteTransaction(UUID username){
         ClientUser a = (ClientUser) userAccess.getObject(username);
         if(!a.getIsFrozen()){
             a.setFrozen(tm.getIncompleteTransaction(username) > a.getIncompleteTransactionLimit());

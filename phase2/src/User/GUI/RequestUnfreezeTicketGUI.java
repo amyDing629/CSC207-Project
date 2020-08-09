@@ -1,7 +1,7 @@
 package User.GUI;
 
 import Inventory.Inventory;
-import Main.UI.UIcontoller;
+import User.Adapter.UIcontoller;
 import Trade.TradeManager;
 import User.Entity.ClientUser;
 import User.UseCase.AdminActivityManager;
@@ -20,7 +20,7 @@ public class RequestUnfreezeTicketGUI {
     AdminActivityManager aam;
     JFrame pFrame;
     JFrame frame;
-    public RequestUnfreezeTicketGUI(UserManager um, TradeManager tm, Inventory iv, ItemApprovalManager iam, AdminActivityManager aam,UIcontoller uc ,JFrame pFrame) {
+    public RequestUnfreezeTicketGUI(UIcontoller uc ,JFrame pFrame) {
         this.um = um;
         this.tm = tm;
         this.iam=iam;
@@ -42,11 +42,11 @@ public class RequestUnfreezeTicketGUI {
 
         ClientUser b = um.getUser(name);
 
-        placeComponents(frame, panel, b);
+        placeComponents(frame, panel, name);
         frame.setVisible(true);
     }
 
-    private void placeComponents(JFrame frame, JPanel panel, ClientUser b){
+    private void placeComponents(JFrame frame, JPanel panel, String b){
 
         JLabel textLabel = new JLabel("Please enter the reasons to unfreeze below");
         textLabel.setPreferredSize(new Dimension(300, 30));
@@ -71,11 +71,11 @@ public class RequestUnfreezeTicketGUI {
         });
         submitButton.addActionListener(e -> {
             frame.setVisible(false);
-            iam.addApproval("2",b.getUsername(),userInput.getText());
+            iam.addApproval("2",b,userInput.getText());
             JOptionPane.showMessageDialog(null,"Request successfully");
             JOptionPane.showMessageDialog(null,"Please wait for the administrator to approve");
-            UserFreezeSystem d = new UserFreezeSystem(um,tm,iv,iam,aam,uc,frame);
-            d.run(um.getUsername(b));
+            UserFreezeSystem d = new UserFreezeSystem(uc,frame);
+            d.run(b);
         });
     }
 }

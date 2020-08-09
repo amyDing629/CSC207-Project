@@ -1,7 +1,7 @@
 package User.GUI;
 
 import Inventory.Inventory;
-import Main.UI.UIcontoller;
+import User.Adapter.UIcontoller;
 import Trade.TradeManager;
 import User.Entity.ClientUser;
 import User.UseCase.AdminActivityManager;
@@ -21,7 +21,7 @@ public class UnfreezeGUI {
     AdminActivityManager aam;
     JFrame pFrame;
     JFrame frame;
-    public UnfreezeGUI(UserManager um, TradeManager tm, Inventory iv, ItemApprovalManager iam, AdminActivityManager aam,UIcontoller uc ,JFrame pFrame) {
+    public UnfreezeGUI(UIcontoller uc ,JFrame pFrame) {
         this.um = um;
         this.tm = tm;
         this.iam=iam;
@@ -41,13 +41,11 @@ public class UnfreezeGUI {
         panel.add(welcomeLabel);
         frame.add(panel);
 
-        ClientUser b = um.getUser(name);
-
-        placeComponents(frame, panel, b);
+        placeComponents(frame, panel, name);
         frame.setVisible(true);
     }
 
-    private void placeComponents(JFrame frame, JPanel panel, ClientUser b){
+    private void placeComponents(JFrame frame, JPanel panel, String b){
 
         JTextArea textArea = new JTextArea(5, 20);
         textArea.setEditable(false);
@@ -94,10 +92,10 @@ public class UnfreezeGUI {
             frame.setVisible(false);
             if(um.getUser(userInput.getText())!=null){
                 iam.removeUser(userInput.getText());
-                aam.setFreeze(um.getUser(userInput.getText()),false);
+                aam.setFreeze(userInput.getText(),false);
                 JOptionPane.showMessageDialog(null,"Unfreeze successfully");
-                UserFreezeSystem d = new UserFreezeSystem(um,tm,iv,iam,aam,uc,frame);
-                d.run(um.getUsername(b));
+                UserFreezeSystem d = new UserFreezeSystem(uc,frame);
+                d.run(b);
             }
             else{
                 JOptionPane.showMessageDialog(null, "invalid user");

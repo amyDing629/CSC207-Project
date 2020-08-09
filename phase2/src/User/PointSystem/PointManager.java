@@ -41,10 +41,10 @@ public class PointManager {
     /**
      * Set (update) the bonus points for particular user and update the pointList.
      */
-    public void setUserPoints(ClientUser user) {
-        int newPoint = this.tm.getComplete(user.getUsername()).size() - user.getSelectedBonusTrades().size() * this.exStandard;
-        user.setBonusPoints(newPoint);
-        this.pointList.put(user.getId(), newPoint);
+    public void setUserPoints(UUID user) {
+        int newPoint = this.tm.getComplete(user).size() - um.getSelectedBonusTrades(user).size() * this.exStandard;
+        um.getUser(user).setBonusPoints(newPoint);
+        this.pointList.put(um.getUser(user).getId(), newPoint);
     }
 
     /**
@@ -59,7 +59,7 @@ public class PointManager {
      */
     public void setAllPoints() {
         for (ClientUser user: this.um.getUserList()) {
-            this.setUserPoints(user);
+            this.setUserPoints(user.getId());
         }
     }
 
@@ -92,8 +92,7 @@ public class PointManager {
      */
     public void CountPointsSince(LocalDateTime dateTime) {
         for (UUID userId: this.pointList.keySet()) {
-            ClientUser user = this.um.getUser(userId);
-            List<Trade> trades = this.tm.getAllTrade(user.getUsername());
+            List<Trade> trades = this.tm.getAllTrade(userId);
             int count = 0;
             for (Trade t: trades) {
                 if (t.getCreateTime().isAfter(dateTime) && !t.getStatus().equals(TradeStatus.cancelled)) {

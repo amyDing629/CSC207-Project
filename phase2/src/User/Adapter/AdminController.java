@@ -10,10 +10,9 @@ public class AdminController extends ClientUserController {
     private final AdminActivityManager am;
 
 
-    public AdminController(UserManager um, ItemApprovalManager iam,
-                           AdminActivityManager am, TradeManager tm) {
-        super(um, iam, tm);
-        this.am = am;
+    public AdminController() {
+        super();
+        this.am = new AdminActivityManager();
 
     }
 
@@ -23,12 +22,11 @@ public class AdminController extends ClientUserController {
 
 
     public void checkFrozen(String username){
-        ClientUser user = (ClientUser) am.userAccess.getObject(username);
-        if(um.readDiff(user)>=um.getDiff(user)){
+        if(um.readDiff(username)>=um.getDiff(username)){
             System.out.println("You have been freeze due to exceed difference between borrow and lend");
             am.setFreeze(username,true);
         }
-        else if(am.incompleteTransaction(user)){
+        else if(am.incompleteTransaction(um.nameToUUID(username))){
             System.out.println("You have been freeze due to maximum incomplete transaction");
             am.setFreeze(username,true);
         }

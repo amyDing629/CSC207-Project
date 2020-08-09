@@ -1,7 +1,7 @@
 package User.GUI;
 
 import Inventory.Inventory;
-import Main.UI.UIcontoller;
+import User.Adapter.UIcontoller;
 import Trade.TradeManager;
 import User.Entity.ClientUser;
 import User.UseCase.AdminActivityManager;
@@ -20,13 +20,13 @@ public class editInfoGUI {
     AdminActivityManager aam;
     JFrame frame;
     JFrame PFrame;
-    public editInfoGUI(UserManager um, TradeManager tm, Inventory iv, ItemApprovalManager iam, UIcontoller uc, AdminActivityManager aam ,JFrame pFrame) {
-        this.um = um;
-        this.tm = tm;
-        this.iam=iam;
+    public editInfoGUI(UIcontoller uc ,JFrame pFrame) {
+        this.um = new UserManager();
+        this.tm = new TradeManager();
+        this.iam= new ItemApprovalManager();
         this.uc=uc;
-        this.iv=iv;
-        this.aam=aam;
+        this.iv=new Inventory();
+        this.aam=new AdminActivityManager();
         this.PFrame=pFrame;
     }
     public void run(String name){
@@ -40,14 +40,13 @@ public class editInfoGUI {
         panel.add(welcomeLabel);
         frame.add(panel);
 
-        ClientUser b = um.getUser(name);
 
-        placeComponents(frame, panel, b);
+        placeComponents(frame, panel, name);
         frame.setVisible(true);
     }
 
 
-    private void placeComponents(JFrame frame, JPanel panel, ClientUser b){
+    private void placeComponents(JFrame frame, JPanel panel, String b){
 
         JLabel isAdmin = new JLabel("Admin: "+ um.getIsAdmin(b));
         isAdmin.setPreferredSize(new Dimension(300, 30));
@@ -91,36 +90,36 @@ public class editInfoGUI {
             frame.setVisible(false);
             PFrame.setVisible(true);
         });
-        AddItemSystem.addActionListener(e -> {
-            frame.setVisible(false);
-            AddItemSystemGUI d = new AddItemSystemGUI(um,tm,iv,iam,aam,uc,frame);
-            d.run(um.getUsername(b));
-        });
+//        AddItemSystem.addActionListener(e -> {
+//            frame.setVisible(false);
+//            //AddItemSystemGUI d = new AddItemSystemGUI(uc,frame);
+//            //d.run(b);
+//        });
         limitSystem.addActionListener(e -> {
             frame.setVisible(false);
             UserLimitGUI d = new UserLimitGUI(um,tm,iv,iam,aam,uc,frame);
-            d.run(um.getUsername(b));
+            d.run(b);
         });
         CreateAdminGUI.addActionListener(e -> {
             frame.setVisible(false);
-         CreateAdminGUI d = new CreateAdminGUI(um,tm,iv,iam,aam,uc,frame);
-            d.run(um.getUsername(b));
+         CreateAdminGUI d = new CreateAdminGUI(uc,frame);
+            d.run(b);
         });
        changePass.addActionListener(e -> {
             frame.setVisible(false);
-            ChangePassGUI d = new ChangePassGUI(um,tm,iv,iam,aam,uc,frame);
-            d.run(um.getUsername(b));
+            ChangePassGUI d = new ChangePassGUI(uc,frame);
+            d.run(b);
         });
         freezeSystem.addActionListener(e -> {
             frame.setVisible(false);
-            UserFreezeSystem d = new UserFreezeSystem(um,tm,iv,iam,aam,uc,frame);
-            d.run(um.getUsername(b));
+            UserFreezeSystem d = new UserFreezeSystem(uc,frame);
+            d.run(b);
         });
 
         ReverseSystem.addActionListener(e -> {
             frame.setVisible(false);
-            ReverseSystemGUI d = new ReverseSystemGUI(um,tm,iv,iam,aam,uc,frame);
-            d.run(um.getUsername(b));
+            ReverseSystemGUI d = new ReverseSystemGUI(uc,frame);
+            d.run(b);
         });
 
     }

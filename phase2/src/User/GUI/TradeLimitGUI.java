@@ -1,7 +1,7 @@
 package User.GUI;
 
 import Inventory.Inventory;
-import Main.UI.UIcontoller;
+import User.Adapter.UIcontoller;
 import Trade.TradeManager;
 import User.Entity.ClientUser;
 import User.UseCase.AdminActivityManager;
@@ -40,13 +40,12 @@ public class TradeLimitGUI {
         panel.add(welcomeLabel);
         frame.add(panel);
 
-        ClientUser b =um.getUser(name);
 
-        placeComponents(frame, panel, b);
+        placeComponents(frame, panel, name);
         frame.setVisible(true);
     }
 
-    private void placeComponents(JFrame frame, JPanel panel, ClientUser b){
+    private void placeComponents(JFrame frame, JPanel panel, String b){
 
         JLabel textLabel = new JLabel("Please enter the user's username and the limit below");
         textLabel.setPreferredSize(new Dimension(300, 30));
@@ -76,8 +75,8 @@ public class TradeLimitGUI {
             frame.setVisible(false);
             aam.setWeekTransactionLimit(um.getUser(userInput.getText()),Integer.parseInt(userInput1.getText()));
             JOptionPane.showMessageDialog(null, "success freeeze");
-            UserFreezeSystem d = new UserFreezeSystem(um,tm,iv,iam,aam,uc,frame);
-            d.run(um.getUsername(b));
+            UserFreezeSystem d = new UserFreezeSystem(uc,frame);
+            d.run(b);
         });
     }
 }

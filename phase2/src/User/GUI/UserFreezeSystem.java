@@ -1,7 +1,7 @@
 package User.GUI;
 
 import Inventory.Inventory;
-import Main.UI.UIcontoller;
+import User.Adapter.UIcontoller;
 import Trade.TradeManager;
 import User.Entity.ClientUser;
 import User.UseCase.AdminActivityManager;
@@ -20,7 +20,7 @@ public class UserFreezeSystem {
     AdminActivityManager aam;
     JFrame pFrame;
     JFrame frame;
-    public UserFreezeSystem(UserManager um, TradeManager tm, Inventory iv, ItemApprovalManager iam, AdminActivityManager aam,UIcontoller uc ,JFrame pFrame) {
+    public UserFreezeSystem(UIcontoller uc ,JFrame pFrame) {
         this.um = um;
         this.tm = tm;
         this.iam=iam;
@@ -40,15 +40,14 @@ public class UserFreezeSystem {
         panel.add(welcomeLabel);
         frame.add(panel);
 
-        ClientUser b =um.getUser(name);
 
-        placeComponents(frame, panel, b);
+        placeComponents(frame, panel, name);
         frame.setVisible(true);
     }
 
-    private void placeComponents(JFrame frame, JPanel panel, ClientUser b){
+    private void placeComponents(JFrame frame, JPanel panel, String b){
 
-        JLabel freezeStatus = new JLabel("Freeze Status: "+ um.getIsFrozen(b));
+        JLabel freezeStatus = new JLabel("Freeze Status: "+ um.getIsFrozen(um.nameToUUID(b)));
         freezeStatus.setPreferredSize(new Dimension(300, 30));
         panel.add(freezeStatus);
 
@@ -69,7 +68,7 @@ public class UserFreezeSystem {
             tradeButton.setEnabled(false);
             inventoryButton.setEnabled(false);
         }
-        if(!um.getIsFrozen(b)){
+        if(!um.getIsFrozen(um.nameToUUID(b))){
             editButton.setEnabled(false);
         }
         panel.add(editButton);
@@ -82,18 +81,18 @@ public class UserFreezeSystem {
         });
         editButton.addActionListener(e -> {
             frame.setVisible(false);
-            RequestUnfreezeTicketGUI d=new RequestUnfreezeTicketGUI(um,tm,iv,iam,aam,uc,frame);
-            d.run(um.getUsername(b));
+            RequestUnfreezeTicketGUI d=new RequestUnfreezeTicketGUI(uc,frame);
+            d.run(b);
         });
         tradeButton.addActionListener(e -> {
             frame.setVisible(false);
-            FreeUserGUI d=new FreeUserGUI(um,tm,iv,iam,aam,uc,frame);
-            d.run(um.getUsername(b));
+            FreeUserGUI d=new FreeUserGUI(uc,frame);
+            d.run(b);
         });
         inventoryButton.addActionListener(e -> {
             frame.setVisible(false);
-            UnfreezeGUI d=new UnfreezeGUI(um,tm,iv,iam,aam,uc,frame);
-            d.run(um.getUsername(b));
+            UnfreezeGUI d=new UnfreezeGUI(uc,frame);
+            d.run(b);
         });
     }
 }

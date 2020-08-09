@@ -1,7 +1,7 @@
 package User.GUI;
 
 import Inventory.Inventory;
-import Main.UI.UIcontoller;
+import User.Adapter.UIcontoller;
 import Trade.TradeManager;
 import User.Entity.ClientUser;
 import User.UseCase.AdminActivityManager;
@@ -20,7 +20,7 @@ public class FreeUserGUI {
     AdminActivityManager aam;
     JFrame pFrame;
     JFrame frame;
-    public FreeUserGUI(UserManager um, TradeManager tm, Inventory iv, ItemApprovalManager iam, AdminActivityManager aam,UIcontoller uc ,JFrame pFrame) {
+    public FreeUserGUI(UIcontoller uc ,JFrame pFrame) {
         this.um = um;
         this.tm = tm;
         this.iam=iam;
@@ -40,13 +40,12 @@ public class FreeUserGUI {
         panel.add(welcomeLabel);
         frame.add(panel);
 
-        ClientUser b =um.getUser(name);
 
-        placeComponents(frame, panel, b);
+        placeComponents(frame, panel, name);
         frame.setVisible(true);
     }
 
-    private void placeComponents(JFrame frame, JPanel panel, ClientUser b){
+    private void placeComponents(JFrame frame, JPanel panel, String b){
 
         JLabel textLabel = new JLabel("Please enter the user's username below");
         textLabel.setPreferredSize(new Dimension(300, 30));
@@ -70,10 +69,10 @@ public class FreeUserGUI {
         });
         submitButton.addActionListener(e -> {
             frame.setVisible(false);
-            aam.setFreeze(um.getUser(userInput.getText()), true);
+            aam.setFreeze(userInput.getText(), true);
             JOptionPane.showMessageDialog(null, "success freeze");
-            UserFreezeSystem d = new UserFreezeSystem(um,tm,iv,iam,aam,uc,frame);
-            d.run(um.getUsername(b));
+            UserFreezeSystem d = new UserFreezeSystem(uc,frame);
+            d.run(b);
         });
     }
 }

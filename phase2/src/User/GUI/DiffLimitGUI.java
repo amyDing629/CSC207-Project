@@ -1,7 +1,7 @@
 package User.GUI;
 
 import Inventory.Inventory;
-import Main.UI.UIcontoller;
+import User.Adapter.UIcontoller;
 import Trade.TradeManager;
 import User.Entity.ClientUser;
 import User.UseCase.AdminActivityManager;
@@ -20,13 +20,13 @@ public class DiffLimitGUI {
     AdminActivityManager aam;
     JFrame pFrame;
     JFrame frame;
-    public DiffLimitGUI(UserManager um, TradeManager tm, Inventory iv, ItemApprovalManager iam, AdminActivityManager aam,UIcontoller uc ,JFrame pFrame) {
-        this.um = um;
-        this.tm = tm;
-        this.iam=iam;
+    public DiffLimitGUI(UIcontoller uc ,JFrame pFrame) {
+        this.um = new UserManager();
+        this.tm = new TradeManager();
+        this.iam= new ItemApprovalManager();
         this.uc=uc;
-        this.iv=iv;
-        this.aam=aam;
+        this.iv=new Inventory();
+        this.aam=new AdminActivityManager();
         this.pFrame=pFrame;
     }
     public void run(String name){
@@ -40,13 +40,12 @@ public class DiffLimitGUI {
         panel.add(welcomeLabel);
         frame.add(panel);
 
-        ClientUser b =um.getUser(name);
 
-        placeComponents(frame, panel, b);
+        placeComponents(frame, panel, name);
         frame.setVisible(true);
     }
 
-    private void placeComponents(JFrame frame, JPanel panel, ClientUser b){
+    private void placeComponents(JFrame frame, JPanel panel, String b){
 
         JLabel textLabel = new JLabel("Please enter the user's username and the limit below");
         textLabel.setPreferredSize(new Dimension(300, 30));
@@ -76,8 +75,8 @@ public class DiffLimitGUI {
             frame.setVisible(false);
             aam.setDiff(um.getUser(userInput.getText()),Integer.parseInt(userInput1.getText()));
             JOptionPane.showMessageDialog(null, "success changed limit");
-            UserFreezeSystem d = new UserFreezeSystem(um,tm,iv,iam,aam,uc,frame);
-            d.run(um.getUsername(b));
+            UserFreezeSystem d = new UserFreezeSystem(uc,frame);
+            d.run(b);
         });
     }
 }

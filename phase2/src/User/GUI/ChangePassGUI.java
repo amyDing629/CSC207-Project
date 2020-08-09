@@ -1,7 +1,7 @@
 package User.GUI;
 
 import Inventory.Inventory;
-import Main.UI.UIcontoller;
+import User.Adapter.UIcontoller;
 import Trade.TradeManager;
 import User.Entity.ClientUser;
 import User.UseCase.AdminActivityManager;
@@ -20,13 +20,13 @@ public class ChangePassGUI {
     AdminActivityManager aam;
     JFrame pFrame;
     JFrame frame;
-    public ChangePassGUI(UserManager um, TradeManager tm, Inventory iv, ItemApprovalManager iam, AdminActivityManager aam,UIcontoller uc ,JFrame pFrame) {
-        this.um = um;
-        this.tm = tm;
-        this.iam=iam;
+    public ChangePassGUI(UIcontoller uc ,JFrame pFrame) {
+        this.um = new UserManager();
+        this.tm = new TradeManager();
+        this.iam= new ItemApprovalManager();
         this.uc=uc;
-        this.iv=iv;
-        this.aam=aam;
+        this.iv=new Inventory();
+        this.aam=new AdminActivityManager();
         this.pFrame=pFrame;
     }
     public void run(String name){

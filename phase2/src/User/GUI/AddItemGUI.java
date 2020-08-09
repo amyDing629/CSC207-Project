@@ -2,7 +2,7 @@ package User.GUI;
 
 import Inventory.Inventory;
 import Inventory.Item;
-import Main.UI.UIcontoller;
+import User.Adapter.UIcontoller;
 import Trade.TradeManager;
 import User.Entity.ClientUser;
 import User.UseCase.AdminActivityManager;
@@ -75,7 +75,7 @@ public class AddItemGUI {
         });
         submitButton.addActionListener(e -> {
             frame.setVisible(false);
-            Item item=new Item(userInput.getText(),userInput1.getText());
+            Item item=new Item(userInput.getText(),um.nameToUUID(userInput1.getText()));
             iv.addItem(item);
             JOptionPane.showMessageDialog(null, "success added item");
         });
