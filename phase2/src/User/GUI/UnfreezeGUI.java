@@ -53,7 +53,6 @@ public class UnfreezeGUI {
         c.weightx = 1.0;
         c.weighty = 1.0;
         panel.add(scrollPane, c);
-        iam.addApproval("2","admin5","hahahaha");
 
         StringBuilder hi= new StringBuilder();
         ArrayList<ArrayList<String>> usa = iam.getUserApproval();
@@ -86,7 +85,7 @@ public class UnfreezeGUI {
         submitButton.addActionListener(e -> {
             frame.setVisible(false);
             if(um.getUser(userInput.getText())!=null){
-                iam.removeUser(userInput.getText());
+                iam.removeUserApproval(userInput.getText());
                 ac.setFreeze(userInput.getText(),false);
                 JOptionPane.showMessageDialog(null,"Unfreeze successfully");
                 UserFreezeSystem d = new UserFreezeSystem(uc,frame);
