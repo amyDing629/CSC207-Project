@@ -47,11 +47,15 @@ public class AcceptTradeController {
     }
 
     void agreeTrade(){
-        tm.setStatus(currTrade, TradeStatus.incomplete);
+        Trade trade = tm.popTrade(currTrade.getId());
+        trade.setStatus(TradeStatus.incomplete);
+        tm.addTrade(trade);
     }
 
     void refuseTrade(){
-        tm.setStatus(currTrade, TradeStatus.cancelled);
+        Trade trade = tm.popTrade(currTrade.getId());
+        trade.setStatus(TradeStatus.cancelled);
+        tm.addTrade(trade);
     }
 
     void agreeBut(Boolean agree){

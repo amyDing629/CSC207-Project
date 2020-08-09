@@ -17,30 +17,28 @@ import java.util.UUID;
  * [controller]
  * the action of trade depend on the input of user
  */
-public class TradeController {
+public class RTradeController {
     private final UUID currUser;
     private UUID tarUser;
     private TradeManager tm;
     private UUID currTrade;
     private final UserManager um;
     private final Inventory iv;
-    TradePresenter tp;
+    RTradePresenter tp;
     BorderGUIWithThreeTextArea bta;
     String it;
 
     /**
      * [constructor]
      * @param currUser the user that is using the system
-     * @param tm the object that edits the trade list of input gateway
-     * @param um the object that edits the user list of input gateway
      */
-    TradeController(UUID currUser,
-                    BorderGUIWithThreeTextArea bta, String item){
+    RTradeController(UUID currUser,
+                     BorderGUIWithThreeTextArea bta, String item){
         this.currUser = currUser;
         this.tm = new TradeManager();
         this.um = new UserManager();
         this.iv = new Inventory();
-        tp = new TradePresenter(bta);
+        tp = new RTradePresenter(bta);
         this.bta = bta;
         it = item;
 
@@ -93,20 +91,23 @@ public class TradeController {
      * @return whether or not the trade is a oneway trade
      * @throws IOException the trade is not created
      */
-    boolean createTrade(String line, String item) throws FileNotFoundException {
+    boolean createTrade(String line, String item){
         ClientUser user = um.getUser(currUser);
         LocalDateTime time = LocalDateTime.now();
         iv.setIsInTrade(item,true);
         switch (line) {
             case "1":
-                currTrade = tm.createOnewayTrade(user.getId(), user.getId(), getItem(it), 30, time);
-                tm.setCreator(currTrade, currUser);
+                currTrade = tm.createOnewayTrade(currUser, tarUser, getItem(it), 30, time);
+                Trade trade = tm.popTrade(currTrade);
+                tm.setCreator(trade.getId(), currUser);
+                tm.addTrade(trade);
                 updateTradeHistory();
                 return true;
             case "2":
-                Item it1 = iv.getItem(item);
                 currTrade = tm.createOnewayTrade(currUser, tarUser, getItem(it), -1, time);
-                tm.setCreator(currTrade, currUser);
+                Trade trade1 = tm.popTrade(currTrade);
+                tm.setCreator(trade1.getId(), currUser);
+                tm.addTrade(trade1);
                 updateTradeHistory();
                 return true;
             default: {
@@ -122,24 +123,35 @@ public class TradeController {
      * @param item2 the second item
      * @throws IOException if the trade is not created
      */
-    void createTrade(String line, String item1, String item2) throws FileNotFoundException {
+    void createTrade(String line, String item1, String item2){
         iv.setIsInTrade(item1,true);
         iv.setIsInTrade(item2,true);
         LocalDateTime time = LocalDateTime.now();
         if (line.equals("3")){
             currTrade = tm.createTwowayTrade(currUser, tarUser, getItem(item1), getItem(item2), 30, time);
+            Trade trade = tm.popTrade(currTrade);
+            tm.setCreator(trade.getId(), currUser);
+            tm.addTrade(trade);
+            updateTradeHistory();
+
         }else{
             currTrade = tm.createTwowayTrade(currUser, tarUser, getItem(item1), getItem(item2), -1, time);
+            Trade trade = tm.popTrade(currTrade);
+            tm.setCreator(trade.getId(), currUser);
+            tm.addTrade(trade);
+            updateTradeHistory();
 
         }
-        tm.setCreator(currTrade, currUser);
-        updateTradeHistory();
     }
 
     void updateTradeHistory() {
         // System.out.println("userList:"+userManager.getUser UserManager userManager = new UserManager(gw);
-        um.getTradeHistory(currUser).add(currTrade);
-        um.getTradeHistory(tarUser).add(currTrade);
+        ClientUser curr = um.popUser(currUser);
+        ClientUser tar = um.popUser(tarUser);
+        curr.getTradeHistory().add(currTrade);
+        tar.getTradeHistory().add(currTrade);
+        um.addUser(curr);
+        um.addUser(tar);
     }
     /**
      * check the status of the current trade
