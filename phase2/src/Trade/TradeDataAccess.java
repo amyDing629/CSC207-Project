@@ -113,8 +113,13 @@ public class TradeDataAccess implements DataAccess {
     }
 
     @Override
-    public void removeObject(Object o) {
-        // TODO
+    public void removeObject(String o) {
+
+    }
+
+    @Override
+    public void removeObject(UUID o) {
+
     }
 
 

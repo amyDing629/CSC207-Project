@@ -33,12 +33,12 @@ public class Inventory {
      *
      * @return available item list
      */
-    public List<Item> getAvailableList() {
-        ArrayList<Item> result = new ArrayList<>();
+    public List<String> getAvailableList() {
+        ArrayList<String> result = new ArrayList<>();
         for (Object item : dataAccess.getList()) {
             Item i = (Item) item;
             if (!i.getIsInTrade()) {
-                result.add(i);
+                result.add(i.getName());
             }
         }
         return result;
@@ -58,8 +58,8 @@ public class Inventory {
      * @param item the deleted item
      */
     public boolean deleteItem(String item) {
-        if (dataAccess.hasObject(getItem(item))) {
-            dataAccess.removeObject(getItem(item));
+        if (dataAccess.hasObject(item)) {
+            dataAccess.removeObject(item);
             return true;
         } else {
             return false;

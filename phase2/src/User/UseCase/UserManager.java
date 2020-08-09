@@ -32,6 +32,7 @@ public class UserManager {
         return result;
     }
 
+
     /**
      * Return the ClientUser with such name, or return null if there no such user.
      *
@@ -50,12 +51,35 @@ public class UserManager {
         return (ClientUser) dataAccess.getObject(userId);
     }
 
+
+
+
+    public boolean deleteItem(String item) {
+        if (dataAccess.hasObject(item)) {
+            dataAccess.removeObject(item);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public ClientUser popUser(UUID userId){
+        if (dataAccess.hasObject(userId)) {
+            ClientUser result =  (ClientUser) dataAccess.getObject(userId);
+            dataAccess.removeObject(userId);
+            System.out.println(getUserList());
+            return result;
+        } else {
+            return null;
+        }
+    }
+
     /**
      * Add a ClientUser
      *
      * @param user the clientUser we want to add
      */
-    public void addUser(ClientUser user) throws FileNotFoundException {
+    public void addUser(ClientUser user){
         dataAccess.addObject(user);
     }
 
@@ -209,5 +233,6 @@ public class UserManager {
     public List<UUID> getSelectedBonusTrades(UUID userID){
         return getUser(userID).getSelectedBonusTrades();
     }
+
 }
 

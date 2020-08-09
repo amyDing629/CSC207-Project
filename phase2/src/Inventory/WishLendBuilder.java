@@ -9,6 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 import java.util.UUID;
 
 public class WishLendBuilder extends WishBorrowBuilder implements BorderGUIBuilder {
@@ -48,7 +49,11 @@ public class WishLendBuilder extends WishBorrowBuilder implements BorderGUIBuild
         delete.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ic.delButL();
+                try {
+                    ic.delButL();
+                } catch (FileNotFoundException fileNotFoundException) {
+                    fileNotFoundException.printStackTrace();
+                }
             }
         });
         add.addActionListener(new ActionListener() {

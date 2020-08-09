@@ -15,13 +15,15 @@ public interface DataAccess {
 
     Object getObject(UUID uuid);
 
-    void addObject(Object o) throws FileNotFoundException;
+    void addObject(Object o);
 
     boolean hasObject(Object o);
 
-    void removeObject(Object o);
+    void removeObject(String o);
 
-    void updateSer() throws FileNotFoundException; // write list to ser
+    void removeObject(UUID o);
+
+    void updateSer(); // write list to ser
 
     void deSerialize(); // write ser to list
 

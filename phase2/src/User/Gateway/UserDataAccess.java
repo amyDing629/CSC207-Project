@@ -72,6 +72,7 @@ public class UserDataAccess implements DataAccess {
     @Override
     public void updateSer() {
         File file = new File(serFilePath);
+        file.deleteOnExit();
         try {
             if(!file.exists()) {
                 boolean result = file.createNewFile();
@@ -140,14 +141,28 @@ public class UserDataAccess implements DataAccess {
 
     @Override
     public boolean hasObject(Object o) {
-        // TODO
+        deSerialize();
+        for (ClientUser i: userList){
+            if (i.getId().equals(o)){
+                return true;
+            }
+        }
         return false;
     }
 
     @Override
-    public void removeObject(Object o) {
-        // TODO
+    public void removeObject(String o) {
+
     }
+
+    @Override
+    public void removeObject(UUID o) {
+        deSerialize();
+        userList.removeIf(u -> u.getId().equals(o));
+        updateSer();
+    }
+
+
 
 
 //    @Override

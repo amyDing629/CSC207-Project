@@ -2,7 +2,7 @@ package User;
 
 import Inventory.Inventory;
 import Main.DataAccessFull;
-import User.Adapter.UIcontoller;
+import User.Adapter.UIController;
 import Trade.TradeManager;
 import User.GUI.LoginIGUI;
 import User.UseCase.AdminActivityManager;
@@ -22,7 +22,7 @@ public class mainRun {
         DataAccessFull uaf = new DataAccessFull(iam);
 
         AdminActivityManager aam = new AdminActivityManager();
-        UIcontoller uc = new UIcontoller(um, aam, tm, iam, iv);
+        UIController uc = new UIController(um, aam, tm, iam, iv);
         uc.checkFileEmpty(new File("phase2/src/username.txt"));
         uaf.readFile();
 

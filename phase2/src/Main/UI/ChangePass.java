@@ -1,5 +1,5 @@
 package Main.UI;
-import User.Adapter.UIcontoller;
+import User.Adapter.UIController;
 import User.Entity.ClientUser;
 import User.UseCase.UserManager;
 
@@ -9,8 +9,8 @@ public class ChangePass {
     Scanner sc;
     ClientUser user;
     UserManager um;
-    UIcontoller uc;
-    public ChangePass(ClientUser user, UserManager um,UIcontoller uc){
+    UIController uc;
+    public ChangePass(ClientUser user, UserManager um,UIController uc){
         this.um=um;
         sc=new Scanner(System.in);
         this.user=user;

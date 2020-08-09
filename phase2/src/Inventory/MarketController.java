@@ -37,8 +37,8 @@ public class MarketController {
 
     String printAvailable(){
         String result = "";
-        for (Item it: iv.getAvailableList()){
-            result = result + iv.getName(it) + "\n";
+        for (String it: iv.getAvailableList()){
+            result = result + it + "\n";
         }
         if (result.equals("")){
             return "no available item";
@@ -63,7 +63,9 @@ public class MarketController {
     void submitButM(){
         String input = bta.getInput("input");
         ip.resetInputArea();
-        if (!iv.getAvailableList().contains(iv.getItem(input))){
+        System.out.println("market controller" + iv.getAvailableList() + iv.getItem(input));
+        System.out.println(iv.getAvailableList().contains(input));
+        if (!iv.getAvailableList().contains(input)){
             ip.wrongInput();;
         }else{
             it = iv.getItem(input);

@@ -81,8 +81,9 @@ public class InvDataAccess implements DataAccess {
     }
 
     @Override
-    public void updateSer() {
+    public void updateSer(){
         File file = new File(serFilePath);
+        file.deleteOnExit();
         try {
             if(!file.exists()) {
                 boolean result = file.createNewFile();
@@ -113,6 +114,7 @@ public class InvDataAccess implements DataAccess {
                 lendingList = (List<Item>) in.readObject();
                 in.close();
                 fileIn.close();
+                //System.out.println("deSerialize: "+lendingList);
             }
 
         } catch (IOException | ClassNotFoundException i) {
@@ -129,17 +131,27 @@ public class InvDataAccess implements DataAccess {
     @Override
     public boolean hasObject(Object o) {
         deSerialize();
-        Item item = (Item) o;
-        return lendingList.contains(item);
+        for (Item i: lendingList){
+            if (i.getName().equals(o)){
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
-    public void removeObject(Object o) {
+    public void removeObject(String o) {
         deSerialize();
-        Item item = (Item) o;
-        lendingList.remove(item);
+        lendingList.removeIf(i -> i.getName().equals(o));
         updateSer();
+
     }
+
+    @Override
+    public void removeObject(UUID o) {
+
+    }
+
 
 //    /**
 //     * read all the items from ItemList.txt

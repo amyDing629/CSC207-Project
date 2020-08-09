@@ -80,7 +80,7 @@ public class InventoryPresenter {
     }
 
     void delSuccess(String itemName){
-        bta.setMsgText(itemName + " info has been updated");
+        bta.setMsgText(itemName + " has been deleted");
     }
 
     void updateListB(UUID currUser){

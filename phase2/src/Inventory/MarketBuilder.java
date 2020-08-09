@@ -19,8 +19,6 @@ public class MarketBuilder implements BorderGUIBuilder {
         ic = new MarketController(tg, fr);
     }
 
-
-
     @Override
     public void buildFrame() {
         tg.setFrame(600, 200, "Market Session");

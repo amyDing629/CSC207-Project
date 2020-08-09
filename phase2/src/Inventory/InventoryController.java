@@ -3,6 +3,9 @@ import Trade.BorderGUIBuilder;
 import Trade.BorderGUIWithThreeTextArea;
 import Trade.TradeGUIEngineer;
 import Trade.TradeGUIPlan;
+import User.Entity.ClientUser;
+import User.Gateway.DataAccess;
+import User.Gateway.UserDataAccess;
 import User.UseCase.ItemApprovalManager;
 import User.UseCase.UserManager;
 
@@ -167,13 +170,17 @@ public class InventoryController {
 
     public void deleteItemL(String it){
         if (iv.deleteItem(it)){
-            um.getWishLend(currUser).remove(it);
-        }else{
-            System.out.println("cannot deleteItemL");
+            ClientUser user = um.popUser(currUser);
+            user.getWishLend().remove(it);
+            um.addUser(user);
         }
     }
 
-    public void deleteItemB(String it){um.getWishBorrow(currUser).remove(it);}
+    public void deleteItemB(String it){
+        ClientUser user = um.popUser(currUser);
+        user.getWishBorrow().remove(it);
+        um.addUser(user);
+    }
 
     public void addItem(String name, String des){
         ArrayList<String> b= new ArrayList<>();
@@ -194,26 +201,28 @@ public class InventoryController {
 
 
 
-    void delButB(){
+    void delButB() throws FileNotFoundException {
         if (it == null){
             ip.noItemSelected();
-        }else{
+        }else {
             deleteItemB(it);
             ip.noItemSelected();
             ip.delSuccess(it);
+            ip.resetCurr();
             it = null;
             ip.updateListB(currUser);
         }
     }
 
 
-    void delButL(){
+    void delButL() throws FileNotFoundException {
         if (it == null){
             ip.noItemSelected();
         }else{
             deleteItemL(it);
             ip.noItemSelected();
             ip.delSuccess(it);
+            ip.resetCurr();
             it = null;
             ip.updateListL(currUser);
         }
@@ -295,7 +304,8 @@ public class InventoryController {
     void submitButM(){
         String input = bta.getInput("input");
         ip.resetInputArea();
-        if (!iv.getAvailableList().contains(iv.getItem(input))){
+        System.out.println("submitButM: " + iv.getAvailableList());
+        if (!iv.getAvailableList().contains(input)){
             ip.wrongInput();;
         }else{
             it = input;
@@ -328,8 +338,8 @@ public class InventoryController {
 
     String printAvailable(){
         String result = "";
-        for (Item it: iv.getAvailableList()){
-            result = result + iv.getName(it) + "\n";
+        for (String it: iv.getAvailableList()){
+            result = result + it + "\n";
         }
         if (result.equals("")){
             return "no available item";
