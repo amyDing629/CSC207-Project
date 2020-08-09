@@ -1,15 +1,15 @@
 package User.UseCase;
 
+
+
 import Main.UI.ApprovalItemDataAccess;
 import Main.UI.ApprovalUserDataAccess;
 import Main.UI.ItemApprovals;
 import Main.UI.UserApprovals;
-import User.Entity.ClientUser;
 import User.Gateway.DataAccess;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class ApprovalManager {
     DataAccess itemDataAccess = new ApprovalItemDataAccess();

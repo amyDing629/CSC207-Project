@@ -4,8 +4,6 @@ import Trade.BorderGUIBuilder;
 import Trade.BorderGUINoTextArea;
 import Trade.BorderGUIWithThreeTextArea;
 import User.Entity.ClientUser;
-import User.ItemApprovalManager;
-import User.UserManager;
 
 import javax.swing.*;
 import java.awt.*;

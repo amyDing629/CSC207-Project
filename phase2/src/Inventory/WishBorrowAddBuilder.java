@@ -1,6 +1,5 @@
 package Inventory;
 
-import Main.UI.Market;
 import Trade.BorderGUIBuilder;
 import Trade.BorderGUINoTextArea;
 import Trade.BorderGUIWithThreeTextArea;
