@@ -19,7 +19,7 @@ public class ReverseSystemGUI {
         this.pFrame=pFrame;
     }
     public void run(String name){
-        frame = new JFrame("Freeze User");
+        frame = new JFrame("Reverse System");
         frame.setSize(500, 700);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JPanel panel = new JPanel();

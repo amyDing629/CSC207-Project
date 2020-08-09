@@ -18,7 +18,7 @@ public class CreateAdminGUI {
         aam = new AdminActivityManager();
     }
     public void run(String name){
-        frame = new JFrame("Freeze User");
+        frame = new JFrame("Create Admin Session");
         frame.setSize(500, 700);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JPanel panel = new JPanel();

@@ -23,7 +23,6 @@ public class AcceptTradeGUIBuilder implements BorderGUIBuilder {
     @Override
     public void buildFrame(){
         tg.setFrame(800, 400, "Accept Trade Session");
-
     }
 
     @Override

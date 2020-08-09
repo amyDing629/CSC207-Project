@@ -24,7 +24,7 @@ public class UnfreezeGUI {
         this.pFrame=pFrame;
     }
     public void run(String name){
-        frame = new JFrame("Freeze User");
+        frame = new JFrame("UnFreeze User");
         frame.setSize(500, 700);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JPanel panel = new JPanel();

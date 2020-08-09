@@ -49,7 +49,7 @@ public class TradeManager{
      * @param duration the duration of this trade.Trade, unit (days). -1 means the trade.Trade is permanent.
      */
     UUID createTwowayTrade(UUID currUserId, UUID otherUserId, Item item1to2, Item item2to1, int duration,
-                            LocalDateTime time) throws FileNotFoundException {
+                            LocalDateTime time){
         TwowayTrade newTrade = new TwowayTrade(currUserId, otherUserId, item1to2, item2to1, duration, time);
         dataAccess.addObject(newTrade);
         item1to2.setIsInTrade(true);
@@ -281,6 +281,16 @@ public class TradeManager{
 
     public UUID getId(Trade trade){
         return trade.getId();
+    }
+
+    public Trade popTrade(UUID tradeId){
+        if (dataAccess.hasObject(tradeId)) {
+            Trade result =  (Trade) dataAccess.getObject(tradeId);
+            dataAccess.removeObject(tradeId);
+            return result;
+        } else {
+            return null;
+        }
     }
 
 

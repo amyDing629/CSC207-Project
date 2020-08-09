@@ -1,5 +1,6 @@
 package Trade;
 
+import Inventory.Item;
 import User.Gateway.DataAccess;
 
 import java.io.*;
@@ -108,7 +109,12 @@ public class TradeDataAccess implements DataAccess {
 
     @Override
     public boolean hasObject(Object o) {
-        // TODO
+        deSerialize();
+        for (Trade i: tradeList){
+            if (i.getId().equals(o)){
+                return true;
+            }
+        }
         return false;
     }
 
@@ -119,6 +125,9 @@ public class TradeDataAccess implements DataAccess {
 
     @Override
     public void removeObject(UUID o) {
+        deSerialize();
+        tradeList.removeIf(i -> i.getId().equals(o));
+        updateSer();
 
     }
 
