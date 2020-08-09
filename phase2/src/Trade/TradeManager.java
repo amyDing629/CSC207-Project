@@ -1,10 +1,10 @@
 package Trade;
 
 import Inventory.Item;
-import User.ClientUser;
-import User.DataAccess;
-import User.UserDataAccess;
-import User.UserManager;
+import User.Entity.ClientUser;
+import User.Gateway.DataAccess;
+import User.Gateway.UserDataAccess;
+import User.UseCase.UserManager;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
