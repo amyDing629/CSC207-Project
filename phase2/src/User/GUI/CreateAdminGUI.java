@@ -1,5 +1,6 @@
 package User.GUI;
 
+import User.Adapter.AdminController;
 import User.Adapter.UIController;
 import User.UseCase.AdminActivityManager;
 
@@ -9,13 +10,15 @@ import java.io.FileNotFoundException;
 
 public class CreateAdminGUI {
     UIController uc;
-    AdminActivityManager aam;
+//    AdminActivityManager aam;
+    AdminController ac;
     JFrame pFrame;
     JFrame frame;
     public CreateAdminGUI(UIController uc ,JFrame pFrame) {
         this.uc=uc;
         this.pFrame=pFrame;
-        aam = new AdminActivityManager();
+        ac = new AdminController();
+//        aam = new AdminActivityManager();
     }
     public void run(String name){
         frame = new JFrame("Create Admin Session");
@@ -63,7 +66,7 @@ public class CreateAdminGUI {
         submitButton.addActionListener(e -> {
             frame.setVisible(false);
             try {
-                aam.addNewAdmin(userInput.getText(),userInput1.getText());
+                ac.createAdmin(userInput.getText(),userInput1.getText());
             } catch (FileNotFoundException fileNotFoundException) {
                 fileNotFoundException.printStackTrace();
             }

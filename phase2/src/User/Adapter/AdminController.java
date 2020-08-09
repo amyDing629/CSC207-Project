@@ -38,7 +38,11 @@ public class AdminController extends ClientUserController {
         }
     }
 
-    public void createAdmin(ClientUser user, String name, String password) throws FileNotFoundException {
+    public void setDiff(String username,int diff) {
+        am.setDiff(username, diff);
+    }
+
+    public void createAdmin(String name, String password) throws FileNotFoundException {
         am.addNewAdmin(name, password);
     }
 

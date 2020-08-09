@@ -2,6 +2,7 @@ package User.GUI;
 
 import Inventory.Inventory;
 import Trade.TradeManager;
+import User.Adapter.AdminController;
 import User.Adapter.UIController;
 import User.UseCase.AdminActivityManager;
 import User.UseCase.ApprovalManager;
@@ -13,13 +14,15 @@ import java.awt.*;
 public class DiffLimitGUI {
     UserManager um;
     UIController uc;
-    AdminActivityManager aam;
+//    AdminActivityManager aam;
+    AdminController ac;
     JFrame pFrame;
     JFrame frame;
     public DiffLimitGUI(UIController uc ,JFrame pFrame) {
         this.um = new UserManager();
         this.uc=uc;
-        this.aam=new AdminActivityManager();
+//        this.aam=new AdminActivityManager();
+        ac = new AdminController();
         this.pFrame=pFrame;
     }
     public void run(String name){
@@ -66,7 +69,7 @@ public class DiffLimitGUI {
         });
         submitButton.addActionListener(e -> {
             frame.setVisible(false);
-            aam.setDiff(um.getUser(userInput.getText()),Integer.parseInt(userInput1.getText()));
+            ac.setDiff(userInput.getText(),Integer.parseInt(userInput1.getText()));
             JOptionPane.showMessageDialog(null, "success changed limit");
             UserFreezeSystem d = new UserFreezeSystem(uc,frame);
             d.run(b);

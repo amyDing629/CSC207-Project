@@ -18,6 +18,7 @@ import java.util.UUID;
  */
 
 public class AdminActivityManager {
+    UserManager um = new UserManager();
     TradeManager tm = new TradeManager();
     DataAccess tradeAccess = new TradeDataAccess();
     DataAccess userAccess = new UserDataAccess();
@@ -49,7 +50,7 @@ public class AdminActivityManager {
 //        }
 //    }
 
-    public void addNewAdmin(String username, String password) throws FileNotFoundException {
+    public void addNewAdmin(String username, String password) {
         if(userAccess.getObject("admin")!= null) {
             ClientUser admin = new ClientUser(username, password, true);
             userAccess.addObject(admin);
@@ -175,8 +176,8 @@ public class AdminActivityManager {
         }
         return false;
     }
-    public void setDiff(ClientUser user,int diff) {
-        user.setDiff(diff);
+    public void setDiff(String username, int diff) {
+        um.getUser(username).setDiff(diff);
     }
 
     public void setWeekTransactionLimit(ClientUser user,int weekTransaction){

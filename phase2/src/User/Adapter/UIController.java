@@ -77,6 +77,18 @@ public class UIController {
         return sc.nextLine();
     }
 
+    public void setPassword(String name, String password){
+        um.setPassword(um.getUser(name), password);
+    }
+
+    public ClientUser getUser(String username){
+        return um.getUser(username);
+    }
+
+    public String getPassword(String username){
+        return um.getPassword(um.getUser(username));
+    }
+
 //    public boolean checkItemExist(String item){
 //        for (Item n : iv.getLendingList()) {
 //            if (n.getName().equals(item)) {
