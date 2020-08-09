@@ -46,4 +46,12 @@ public class AdminController extends ClientUserController {
         am.addNewAdmin(name, password);
     }
 
+    public void setFreeze(String a,boolean s){
+        am.setFreeze(a, s);
+    }
+
+    public void setIncompleteTransaction(String username,int incompleteTransaction) {
+        am.setIncompleteTransaction(username, incompleteTransaction);
+    }
+
 }

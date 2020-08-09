@@ -20,7 +20,7 @@ import java.util.UUID;
 public class AdminActivityManager {
     UserManager um = new UserManager();
     TradeManager tm = new TradeManager();
-    DataAccess tradeAccess = new TradeDataAccess();
+//    DataAccess tradeAccess = new TradeDataAccess();
     DataAccess userAccess = new UserDataAccess();
 
 
@@ -32,7 +32,7 @@ public class AdminActivityManager {
 //        a.setFrozen(s);
 //    }
 
-    public void setFreeze(String a,boolean s) throws FileNotFoundException {
+    public void setFreeze(String a,boolean s){
         ClientUser ca = (ClientUser)userAccess.getObject(a);
         if(ca != null){ca.setFrozen(s);}
         userAccess.updateSer();
@@ -183,8 +183,8 @@ public class AdminActivityManager {
     public void setWeekTransactionLimit(ClientUser user,int weekTransaction){
         user.setWeekTransactionLimit(weekTransaction);
     }
-    public void setIncompleteTransaction(ClientUser user,int incompleteTransaction) {
-       user.setIncompleteTransaction(incompleteTransaction);
+    public void setIncompleteTransaction(String username,int incompleteTransaction) {
+       um.getUser(username).setIncompleteTransaction(incompleteTransaction);
     }
 
 

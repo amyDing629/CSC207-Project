@@ -1,23 +1,18 @@
 package User.GUI;
 
-import Inventory.Inventory;
+import User.Adapter.AdminController;
 import User.Adapter.UIController;
-import Trade.TradeManager;
 import User.Entity.ClientUser;
 import User.UseCase.AdminActivityManager;
-import User.UseCase.ApprovalManager;
 import User.UseCase.UserManager;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class IncompleteLimitGUI {
-    UserManager um;
-    TradeManager tm;
-    ApprovalManager iam;
     UIController uc;
-    Inventory iv;
-    AdminActivityManager aam;
+//    AdminActivityManager aam;
+    AdminController ac;
     JFrame pFrame;
     JFrame frame;
     public IncompleteLimitGUI(UIController uc ,JFrame pFrame) {
@@ -35,7 +30,7 @@ public class IncompleteLimitGUI {
         panel.add(welcomeLabel);
         frame.add(panel);
 
-        ClientUser b =um.getUser(name);
+//        ClientUser b =um.getUser(name);
 
         placeComponents(frame, panel, name);
         frame.setVisible(true);
@@ -69,7 +64,7 @@ public class IncompleteLimitGUI {
         });
         submitButton.addActionListener(e -> {
             frame.setVisible(false);
-            aam.setIncompleteTransaction(um.getUser(userInput.getText()),Integer.parseInt(userInput1.getText()));
+            ac.setIncompleteTransaction(userInput.getText(),Integer.parseInt(userInput1.getText()));
             JOptionPane.showMessageDialog(null, "success changed limit");
             UserFreezeSystem d = new UserFreezeSystem(uc,frame);
             d.run(b);
