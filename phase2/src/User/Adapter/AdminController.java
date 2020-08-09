@@ -38,8 +38,24 @@ public class AdminController extends ClientUserController {
         }
     }
 
-    public void createAdmin(ClientUser user, String name, String password) throws FileNotFoundException {
+    public void setDiff(String username,int diff) {
+        am.setDiff(username, diff);
+    }
+
+    public void createAdmin(String name, String password) throws FileNotFoundException {
         am.addNewAdmin(name, password);
+    }
+
+    public void setFreeze(String a,boolean s){
+        am.setFreeze(a, s);
+    }
+
+    public void setIncompleteTransaction(String username,int incompleteTransaction) {
+        am.setIncompleteTransaction(username, incompleteTransaction);
+    }
+
+    public void setWeekTransactionLimit(String username, int weekTransaction){
+        am.setWeekTransactionLimit(username, weekTransaction);
     }
 
 }

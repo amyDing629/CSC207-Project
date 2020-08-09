@@ -10,11 +10,11 @@ import java.util.List;
  * [presenter]
  * present the information of trade
  */
-public class TradePresenter {
+public class RTradePresenter {
     private final InputAndPresent bta;
 
 
-    TradePresenter(InputAndPresent bta){
+    RTradePresenter(InputAndPresent bta){
         this.bta = bta;
     }
 

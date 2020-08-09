@@ -20,13 +20,12 @@ public class SelectController {
     List<String> wishList;
     JFrame fr;
 
-    public SelectController(UUID currUser, TradeManager tm, UserManager um, Inventory iv,
-                            BorderGUIWithThreeTextArea bta, JFrame fr){
+    public SelectController(UUID currUser, BorderGUIWithThreeTextArea bta, JFrame fr){
         this.currUser = currUser;
-        this.um = um;
-        this.iv = iv;
+        this.um = new UserManager();
+        this.iv = new Inventory();
         this.bta = bta;
-        this.tm = tm;
+        this.tm = new TradeManager();
         sp = new SelectPresenter(bta);
         this.fr = fr;
     }
@@ -59,7 +58,7 @@ public class SelectController {
 
     void enterRTradeGUI(){
         bta.getFrame().setVisible(false);
-        BorderGUIBuilder builder = new RTradeGUIBuilder(currUser, currItem, tm, um, iv, bta.getFrame());
+        BorderGUIBuilder builder = new RTradeGUIBuilder(currUser, currItem, bta.getFrame());
         TradeGUIEngineer engineer = new TradeGUIEngineer(builder);
         engineer.constructGUI();
         TradeGUIPlan tg = engineer.getGUI();

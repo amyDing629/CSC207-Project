@@ -29,7 +29,7 @@ public class TradeManager{
      * @param item the only one Inventory.Item to be trade in this created trade.Trade.
      * @param duration the duration of this trade.Trade, unit (days). -1 means the trade.Trade is permanent.
      */
-    UUID createOnewayTrade(UUID currUserId, UUID otherUserId, Item item, int duration, LocalDateTime time) throws FileNotFoundException {
+    UUID createOnewayTrade(UUID currUserId, UUID otherUserId, Item item, int duration, LocalDateTime time){
         OnewayTrade newTrade = new OnewayTrade(currUserId, otherUserId, item, duration, time);
         item.setIsInTrade(true);
         dataAccess.addObject(newTrade);
@@ -39,6 +39,10 @@ public class TradeManager{
         //updateTradeHistory(currUserId, otherUserId, newTrade);
         return newTrade.getId();
 
+    }
+
+    void addTrade(Trade tr){
+        dataAccess.addObject(tr);
     }
 
     /**
@@ -81,7 +85,7 @@ public class TradeManager{
      *
      * @param id the id current trade
      */
-    void completeTrade(UUID id) throws FileNotFoundException {
+    void completeTrade(UUID id) {
         Trade trade = getTrade(id);
         trade.setStatus(TradeStatus.complete);
         dataAccess.updateSer();
@@ -92,7 +96,7 @@ public class TradeManager{
      *
      * @param id the id current trade
      */
-    void cancelTrade(UUID id) throws FileNotFoundException {
+    void cancelTrade(UUID id){
         Trade trade = getTrade(id);
         trade.setStatus(TradeStatus.cancelled);
         dataAccess.updateSer();

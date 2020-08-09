@@ -198,6 +198,10 @@ public class UserManager {
         return a.getId();
     }
 
+    public void setPassword(ClientUser a, String password) {
+       a.setPassword(password);
+    }
+
     //finished
     public boolean getIsFrozen(UUID userID){
         return getUser(userID).getIsFrozen();

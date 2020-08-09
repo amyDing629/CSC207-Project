@@ -18,8 +18,9 @@ import java.util.UUID;
  */
 
 public class AdminActivityManager {
+    UserManager um = new UserManager();
     TradeManager tm = new TradeManager();
-    DataAccess tradeAccess = new TradeDataAccess();
+//    DataAccess tradeAccess = new TradeDataAccess();
     DataAccess userAccess = new UserDataAccess();
 
 
@@ -31,7 +32,7 @@ public class AdminActivityManager {
 //        a.setFrozen(s);
 //    }
 
-    public void setFreeze(String a,boolean s) throws FileNotFoundException {
+    public void setFreeze(String a,boolean s){
         ClientUser ca = (ClientUser)userAccess.getObject(a);
         if(ca != null){ca.setFrozen(s);}
         userAccess.updateSer();
@@ -49,7 +50,7 @@ public class AdminActivityManager {
 //        }
 //    }
 
-    public void addNewAdmin(String username, String password) throws FileNotFoundException {
+    public void addNewAdmin(String username, String password) {
         if(userAccess.getObject("admin")!= null) {
             ClientUser admin = new ClientUser(username, password, true);
             userAccess.addObject(admin);
@@ -175,15 +176,15 @@ public class AdminActivityManager {
         }
         return false;
     }
-    public void setDiff(ClientUser user,int diff) {
-        user.setDiff(diff);
+    public void setDiff(String username, int diff) {
+        um.getUser(username).setDiff(diff);
     }
 
-    public void setWeekTransactionLimit(ClientUser user,int weekTransaction){
-        user.setWeekTransactionLimit(weekTransaction);
+    public void setWeekTransactionLimit(String username,int weekTransaction){
+        um.getUser(username).setWeekTransactionLimit(weekTransaction);
     }
-    public void setIncompleteTransaction(ClientUser user,int incompleteTransaction) {
-       user.setIncompleteTransaction(incompleteTransaction);
+    public void setIncompleteTransaction(String username,int incompleteTransaction) {
+       um.getUser(username).setIncompleteTransaction(incompleteTransaction);
     }
 
 

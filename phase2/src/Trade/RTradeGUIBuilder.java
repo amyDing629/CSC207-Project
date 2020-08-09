@@ -1,8 +1,6 @@
 package Trade;
 
 import Inventory.Inventory;
-import Inventory.Item;
-import User.Entity.ClientUser;
 import User.UseCase.UserManager;
 
 import javax.swing.*;
@@ -15,7 +13,7 @@ import java.util.UUID;
 public class RTradeGUIBuilder implements BorderGUIBuilder {
 
 
-    private final TradeController trc;
+    private final RTradeController trc;
     private final BorderGUIWithThreeTextArea tg;
     private final JFrame fr;
 
@@ -25,11 +23,11 @@ public class RTradeGUIBuilder implements BorderGUIBuilder {
      * @param currUser current user
      * @param item     item selected by the current user
      */
-    public RTradeGUIBuilder(UUID currUser, String item, TradeManager tm, UserManager um, Inventory iv, JFrame fr) {
+    public RTradeGUIBuilder(UUID currUser, String item, JFrame fr) {
 
 
         tg = new BorderGUIWithThreeTextArea();
-        trc = new TradeController(currUser, tg, item);
+        trc = new RTradeController(currUser, tg, item);
         trc.getTarUser(item);
         this.fr = fr;
     }

@@ -15,9 +15,9 @@ public class SelectItemToTradeBuilder implements BorderGUIBuilder {
     SelectController sc;
     BorderGUIWithThreeTextArea bta;
 
-    public SelectItemToTradeBuilder(UUID currUser, TradeManager tm, UserManager um, Inventory iv, JFrame tFrame){
+    public SelectItemToTradeBuilder(UUID currUser, JFrame tFrame){
         bta = new BorderGUIWithThreeTextArea();
-        sc = new SelectController(currUser, tm, um, iv, bta, tFrame);
+        sc = new SelectController(currUser, bta, tFrame);
 
     }
     @Override

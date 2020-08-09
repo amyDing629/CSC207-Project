@@ -2,6 +2,7 @@ package User.GUI;
 
 import Inventory.Inventory;
 import Trade.TradeManager;
+import User.Adapter.AdminController;
 import User.Adapter.UIController;
 import User.UseCase.AdminActivityManager;
 import User.UseCase.ApprovalManager;
@@ -11,12 +12,9 @@ import javax.swing.*;
 import java.awt.*;
 
 public class TradeLimitGUI {
-    UserManager um;
-    TradeManager tm;
-    ApprovalManager iam;
     UIController uc;
-    Inventory iv;
-    AdminActivityManager aam;
+//    AdminActivityManager aam;
+    AdminController ac;
     JFrame pFrame;
     JFrame frame;
     public TradeLimitGUI(UIController uc ,JFrame pFrame) {
@@ -67,7 +65,7 @@ public class TradeLimitGUI {
         });
         submitButton.addActionListener(e -> {
             frame.setVisible(false);
-            aam.setWeekTransactionLimit(um.getUser(userInput.getText()),Integer.parseInt(userInput1.getText()));
+            ac.setWeekTransactionLimit(userInput.getText(),Integer.parseInt(userInput1.getText()));
             JOptionPane.showMessageDialog(null, "success freeeze");
             UserFreezeSystem d = new UserFreezeSystem(uc,frame);
             d.run(b);

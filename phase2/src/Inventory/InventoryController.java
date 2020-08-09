@@ -164,7 +164,7 @@ public class InventoryController {
 
 
 
-    void delButB() throws FileNotFoundException {
+    void delButB() {
         if (it == null){
             ip.noItemSelected();
         }else {
@@ -178,7 +178,7 @@ public class InventoryController {
     }
 
 
-    void delButL() throws FileNotFoundException {
+    void delButL(){
         if (it == null){
             ip.noItemSelected();
         }else{

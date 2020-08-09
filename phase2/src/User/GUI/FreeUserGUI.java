@@ -1,5 +1,6 @@
 package User.GUI;
 
+import User.Adapter.AdminController;
 import User.Adapter.UIController;
 import User.UseCase.AdminActivityManager;
 
@@ -9,12 +10,14 @@ import java.io.FileNotFoundException;
 
 public class FreeUserGUI {
     UIController uc;
-    AdminActivityManager aam;
+//    AdminActivityManager aam;
+    AdminController ac;
     JFrame pFrame;
     JFrame frame;
     public FreeUserGUI(UIController uc ,JFrame pFrame) {
         this.uc=uc;
         this.pFrame=pFrame;
+        ac = new AdminController();
     }
     public void run(String name){
         frame = new JFrame("Freeze User");
@@ -56,11 +59,7 @@ public class FreeUserGUI {
         });
         submitButton.addActionListener(e -> {
             frame.setVisible(false);
-            try {
-                aam.setFreeze(userInput.getText(), true);
-            } catch (FileNotFoundException fileNotFoundException) {
-                fileNotFoundException.printStackTrace();
-            }
+            ac.setFreeze(userInput.getText(), true);
             JOptionPane.showMessageDialog(null, "success freeze");
             UserFreezeSystem d = new UserFreezeSystem(uc,frame);
             d.run(b);

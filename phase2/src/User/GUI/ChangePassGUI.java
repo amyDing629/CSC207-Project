@@ -1,22 +1,20 @@
 package User.GUI;
 
-import Inventory.Inventory;
 import User.Adapter.UIController;
-import Trade.TradeManager;
 import User.Entity.ClientUser;
-import User.UseCase.AdminActivityManager;
-import User.UseCase.ApprovalManager;
 import User.UseCase.UserManager;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class ChangePassGUI {
-    UserManager um;
+//    UserManager um;
+    UIController uc;
     JFrame pFrame;
     JFrame frame;
     public ChangePassGUI(UIController uc ,JFrame pFrame) {
-        this.um = new UserManager();
+//        this.um = new UserManager();
+        this.uc = uc;
         this.pFrame=pFrame;
     }
     public void run(String name){
@@ -30,14 +28,14 @@ public class ChangePassGUI {
         panel.add(welcomeLabel);
         frame.add(panel);
 
-        ClientUser b = um.getUser(name);
+        ClientUser b = uc.getUser(name);
 
         placeComponents(frame, panel, b);
         frame.setVisible(true);
     }
 
     private void placeComponents(JFrame frame, JPanel panel, ClientUser b){
-        JLabel curPass = new JLabel("Current password:"+ um.getPassword(b));
+        JLabel curPass = new JLabel("Current password:"+ uc.getPassword(b.getUsername()));
         curPass.setPreferredSize(new Dimension(300, 30));
         panel.add(curPass);
         JLabel nameLabel = new JLabel("Change your password");
@@ -61,7 +59,7 @@ public class ChangePassGUI {
         });
         submitButton.addActionListener(e -> {
             frame.setVisible(false);
-            um.set(b,passInput.getText());
+            uc.setPassword(b.getUsername(),passInput.getText());
             JOptionPane.showMessageDialog(null, "success changed pass");
         });
     }
