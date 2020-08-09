@@ -1,6 +1,7 @@
 package User.GUI;
 
 import Inventory.Inventory;
+import User.Adapter.AdminController;
 import User.Adapter.UIController;
 import Trade.TradeManager;
 import User.UseCase.AdminActivityManager;
@@ -16,7 +17,8 @@ public class UnfreezeGUI {
     UserManager um;
     ApprovalManager iam;
     UIController uc;
-    AdminActivityManager aam;
+//    AdminActivityManager aam;
+    AdminController ac;
     JFrame pFrame;
     JFrame frame;
     public UnfreezeGUI(UIController uc ,JFrame pFrame) {
@@ -85,11 +87,7 @@ public class UnfreezeGUI {
             frame.setVisible(false);
             if(um.getUser(userInput.getText())!=null){
                 iam.removeUser(userInput.getText());
-                try {
-                    aam.setFreeze(userInput.getText(),false);
-                } catch (FileNotFoundException fileNotFoundException) {
-                    fileNotFoundException.printStackTrace();
-                }
+                ac.setFreeze(userInput.getText(),false);
                 JOptionPane.showMessageDialog(null,"Unfreeze successfully");
                 UserFreezeSystem d = new UserFreezeSystem(uc,frame);
                 d.run(b);

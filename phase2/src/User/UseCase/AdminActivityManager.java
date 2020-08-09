@@ -180,8 +180,8 @@ public class AdminActivityManager {
         um.getUser(username).setDiff(diff);
     }
 
-    public void setWeekTransactionLimit(ClientUser user,int weekTransaction){
-        user.setWeekTransactionLimit(weekTransaction);
+    public void setWeekTransactionLimit(String username,int weekTransaction){
+        um.getUser(username).setWeekTransactionLimit(weekTransaction);
     }
     public void setIncompleteTransaction(String username,int incompleteTransaction) {
        um.getUser(username).setIncompleteTransaction(incompleteTransaction);

@@ -54,4 +54,8 @@ public class AdminController extends ClientUserController {
         am.setIncompleteTransaction(username, incompleteTransaction);
     }
 
+    public void setWeekTransactionLimit(String username, int weekTransaction){
+        am.setWeekTransactionLimit(username, weekTransaction);
+    }
+
 }

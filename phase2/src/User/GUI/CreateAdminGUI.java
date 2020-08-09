@@ -17,7 +17,6 @@ public class CreateAdminGUI {
     public CreateAdminGUI(UIController uc ,JFrame pFrame) {
         this.uc=uc;
         this.pFrame=pFrame;
-        ac = new AdminController();
 //        aam = new AdminActivityManager();
     }
     public void run(String name){
