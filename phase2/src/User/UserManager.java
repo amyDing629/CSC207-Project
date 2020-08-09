@@ -16,6 +16,19 @@ public class UserManager {
     DataAccess dataAccess = new UserDataAccess();
 
     /**
+     * Return the list of ClientUser
+     *
+     * @return list of ClientUser
+     */
+    public List<ClientUser> getUserList() {
+        List<ClientUser> result = new ArrayList<>();
+        for (Object o : dataAccess.getList()) {
+            result.add((ClientUser) o);
+        }
+        return result;
+    }
+
+    /**
      * Return the ClientUser with such name, or return null if there no such user.
      *
      * @param name the name of the user that the manager wants to get

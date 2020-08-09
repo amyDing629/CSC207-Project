@@ -3,15 +3,13 @@ package User;
 public class LoginSystemPresenter implements ILoginSystemBoundary {
 
     // model
-    UserManager um;
+    UserManager um = new UserManager();
 
     // view
     View view;
 
-    public LoginSystemPresenter(View view, UserManager um) {
-        this.um = um;
+    public LoginSystemPresenter(View view) {
         this.view = view;
-
     }
 
     public UserManager getModel() {

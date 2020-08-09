@@ -63,8 +63,12 @@ public class MeetingEditor implements IMeetingAttendee {
         return timeOfEdition > getThreshold();
     }
 
+    /**
+     * Returns if one more edition is still permitted (not over the edition threshold)
+     *
+     * @return if one more edition is still permitted
+     */
     public boolean editable() {
-        // one more edition is still permitted (not over the edition threshold)
         return timeOfEdition + 1 <= getThreshold();
     }
 

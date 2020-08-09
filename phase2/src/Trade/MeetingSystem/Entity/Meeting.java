@@ -17,13 +17,23 @@ import java.util.UUID;
 
 public class Meeting {
 
-    private final UUID uuid;
+    private final UUID meetingID;
 
     private LocalDateTime dateTime;
 
     private String place;
 
     private UUID lastEditUser;
+
+    /*
+     * This is Meeting's status: INCOMPLETE (default), AGREED, COMPLETED, CANCELLED;
+     * 1. only both MeetingEditors are of agreed in agreed status, the meeting status should be then set to "agreed";
+     * 2. only both MeetingEditors are of confirmed in confirmed status, the meeting status should be then set to "completed";
+     * 3. as long as one of the MeetingEditor exceed their own threshold of timeOfEdition, the meeting status should then be
+     * set to "cancelled";
+     */
+    private MeetingStatus status = MeetingStatus.INCOMPLETE;
+
 
     /*
      * This is Meeting's two editors.
@@ -42,15 +52,6 @@ public class Meeting {
      * false stands for not yet confirmed
      */
     private final HashMap<UUID, Boolean> idToConfirmedStatus;
-    /*
-     * This is Meeting's status: INCOMPLETE (default), AGREED, COMPLETED, CANCELLED;
-     * 1. only both MeetingEditors are of agreed in agreed status, the meeting status should be then set to "agreed";
-     * 2. only both MeetingEditors are of confirmed in confirmed status, the meeting status should be then set to "completed";
-     * 3. as long as one of the MeetingEditor exceed their own threshold of timeOfEdition, the meeting status should then be
-     * set to "cancelled";
-     */
-    private MeetingStatus status = MeetingStatus.INCOMPLETE;
-
 
     /**
      * Constructs a new Meeting with proposed date-time to meet dateTime, proposed place to meet place, info of both
@@ -60,8 +61,8 @@ public class Meeting {
      * @param place     the place proposed to the meeting
      * @param traderIds the ids of two MeetingEditors attend to this meeting
      */
-    public Meeting(UUID uuid, LocalDateTime dateTime, String place, ArrayList<UUID> traderIds) {
-        this.uuid = uuid;
+    public Meeting(UUID meetingID, LocalDateTime dateTime, String place, ArrayList<UUID> traderIds) {
+        this.meetingID = meetingID;
         this.dateTime = dateTime;
         this.place = place;
 
@@ -77,7 +78,7 @@ public class Meeting {
     }
 
     public UUID getID() {
-        return uuid;
+        return meetingID;
     }
 
     /**
