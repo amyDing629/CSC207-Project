@@ -32,7 +32,7 @@ public class MarketController {
         UserManager um = new UserManager();
         return "Item Info:\nitem name: " + iv.getName(item) + "\n" +
                 "item description: " + iv.getDescription(item)
-                + "\n" + "item owner: " + um.UUIDToName(iv.getOwnerUUID(item)) ;
+                + "\n" + "item owner: " + um.UUIDToName(item.getOwnerUUID()) ;
     }
 
     String printAvailable(){
@@ -57,7 +57,7 @@ public class MarketController {
         UserManager um = new UserManager();
         return "Item Info:\nitem name: " + iv.getName(it) + "\n" +
                 "item description: " + iv.getDescription(it)
-                + "\n" + "item owner: " + um.UUIDToName(iv.getOwnerUUID(it));
+                + "\n" + "item owner: " + um.UUIDToName(it.getOwnerUUID());
     }
 
     void submitButM(){

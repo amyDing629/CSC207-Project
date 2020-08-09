@@ -9,12 +9,13 @@ import User.Entity.ClientUser;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.UUID;
 
 public class WishBorrowAddBuilder implements BorderGUIBuilder {
     InventoryController ic;
     BorderGUIWithThreeTextArea tg;
 
-    public WishBorrowAddBuilder(ClientUser currUser, JFrame fr) {
+    public WishBorrowAddBuilder(UUID currUser, JFrame fr) {
         tg = new BorderGUIWithThreeTextArea();
         ic = new InventoryController(currUser, tg, fr);
     }

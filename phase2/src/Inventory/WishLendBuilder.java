@@ -9,10 +9,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.UUID;
 
 public class WishLendBuilder extends WishBorrowBuilder implements BorderGUIBuilder {
 
-    public WishLendBuilder(ClientUser currUser, JFrame tf) {
+    public WishLendBuilder(UUID currUser, JFrame tf) {
         super(currUser, tf);
     }
 
@@ -32,14 +33,12 @@ public class WishLendBuilder extends WishBorrowBuilder implements BorderGUIBuild
         JScrollPane jspD = new JScrollPane(des);
         JButton add = new JButton("request");
         JButton delete = new JButton("delete");
-        JButton create = new JButton("Create item");
         JButton editDes = new JButton("Edit description");
         panelE.setLayout(new BoxLayout(panelE, BoxLayout.Y_AXIS));
         panelE.add(itemName);
         panelE.add(jspN);
         panelE.add(itemDes);
         panelE.add(jspD);
-        panelE.add(create);
         panelE.add(delete);
         panelE.add(add);
         panelE.add(editDes);
@@ -50,12 +49,6 @@ public class WishLendBuilder extends WishBorrowBuilder implements BorderGUIBuild
             @Override
             public void actionPerformed(ActionEvent e) {
                 ic.delButL();
-            }
-        });
-        create.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ic.createBut();
             }
         });
         add.addActionListener(new ActionListener() {

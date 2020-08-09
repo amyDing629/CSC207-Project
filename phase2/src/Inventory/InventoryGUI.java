@@ -5,18 +5,23 @@ import Trade.CompleteTradeGUIBuilder;
 import Trade.TradeGUIEngineer;
 import Trade.TradeGUIPlan;
 import User.Entity.ClientUser;
+import User.UseCase.UserManager;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.UUID;
 
 public class InventoryGUI {
-    private final ClientUser currUser;
+    private final UUID currUser;
     private final JFrame ivf;
+    private UserManager um;
 
 
-    public InventoryGUI(ClientUser currUser, JFrame frame){
+    public InventoryGUI(UUID currUser, JFrame frame){
         this.currUser = currUser;
         this.ivf = frame;
+        UserManager um = new UserManager();
 
     };
 
@@ -26,7 +31,7 @@ public class InventoryGUI {
         frame.setSize(200, 200);
 
         JPanel menu = new JPanel();
-        JLabel label = new JLabel("    Hello, "+ currUser.getUsername());
+        JLabel label = new JLabel("    Hello, "+ um.getUsername(currUser));
         JButton mk = new JButton("market");
         JButton wb = new JButton("WishBorrow");
         JButton wl = new JButton("WishLend");

@@ -56,9 +56,9 @@ public class Inventory {
      *
      * @param item the deleted item
      */
-    public boolean deleteItem(Item item) {
-        if (dataAccess.hasObject(item)) {
-            dataAccess.removeObject(item);
+    public boolean deleteItem(String item) {
+        if (dataAccess.hasObject(getItem(item))) {
+            dataAccess.removeObject(getItem(item));
             return true;
         } else {
             return false;
@@ -100,12 +100,12 @@ public class Inventory {
         return it.getDescription();
     }
 
-    public void setDescription(Item it, String des){
-        it.setDescription(des);
+    public void setDescription(String it, String des){
+        getItem(it).setDescription(des);
     }
 
-    public UUID getOwnerUUID(Item it){
-        return it.getOwnerUUID();
+    public UUID getOwnerUUID(String it){
+        return getItem(it).getOwnerUUID();
     }
 
     boolean itemExist(String name){

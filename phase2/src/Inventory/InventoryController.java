@@ -3,12 +3,10 @@ import Trade.BorderGUIBuilder;
 import Trade.BorderGUIWithThreeTextArea;
 import Trade.TradeGUIEngineer;
 import Trade.TradeGUIPlan;
-import User.Entity.ClientUser;
 import User.UseCase.ItemApprovalManager;
 import User.UseCase.UserManager;
 
 import javax.swing.*;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -25,7 +23,7 @@ public class InventoryController {
     /**
      * the user that is using the system.
      */
-    private final ClientUser currUser;
+    private final UUID currUser;
 
     UserManager um;
 
@@ -33,7 +31,7 @@ public class InventoryController {
 
     BorderGUIWithThreeTextArea bta;
 
-    Item it;
+    String it;
 
     InventoryPresenter ip;
 
@@ -43,12 +41,12 @@ public class InventoryController {
      * [constructor]
      * @param currUser current user
      */
-    public InventoryController(ClientUser currUser, BorderGUIWithThreeTextArea bta, JFrame fr){
+    public InventoryController(UUID currUser, BorderGUIWithThreeTextArea bta, JFrame fr){
         this.currUser = currUser;
         iv = new Inventory();
         um = new UserManager();
         iam = new ItemApprovalManager();
-        bta = bta;
+        this.bta = bta;
         ip = new InventoryPresenter(bta);
         this.fr = fr;
     }
@@ -59,20 +57,22 @@ public class InventoryController {
      * @return whether the input item is the user's own item.
      */
     boolean isOwnItem(){
-        return iv.getOwnerUUID(it).equals(currUser.getId());
+        return iv.getOwnerUUID(it).equals(currUser);
     }
 
     /**
      * move the selected item to user's wishBorrow list.
      */
     void moveToWishList(){
-        currUser.addWishBorrow(iv.getName(it));
+        um.getUser(currUser).addWishBorrow(it);
     }
 
-    void addToWishLend(){
-        um.getWishLend(um.getUser(iv.getOwnerUUID(it))).add(iv.getName(it));
-        iv.add(it);
-        iam.removeItem(iv.getName(it));
+    void addToWishLend(String name, String des){
+        um.getWishLend(iv.getOwnerUUID(it)).add(it);
+        Item item = new Item(name, currUser);
+        iv.add(item);
+        iam.removeItem(it);
+        setDescription(des, name);
     }
 
     void removeItemFromIam(Item it){
@@ -83,7 +83,7 @@ public class InventoryController {
      * @return whether the item is the currUser's wish list
      */
     boolean isInOwnWishList(){
-        return currUser.getWishBorrow().contains(iv.getName(it));
+        return um.getWishBorrow(currUser).contains(it);
     }
 
     /**
@@ -155,17 +155,15 @@ public class InventoryController {
         return um.getWishBorrow(currUser);
     }
 
-    public void deleteItemL(Item it){
+    public void deleteItemL(String it){
         if (iv.deleteItem(it)){
-            um.getWishLend(currUser).remove(iv.getName(it));
+            um.getWishLend(currUser).remove(it);
         }else{
             System.out.println("cannot deleteItemL");
         }
-
-
     }
 
-    public void deleteItemB(Item it){um.getWishBorrow(currUser).remove(iv.getName(it));}
+    public void deleteItemB(String it){um.getWishBorrow(currUser).remove(it);}
 
     public void addItem(String name, String des){
         ArrayList<String> b= new ArrayList<>();
@@ -177,11 +175,11 @@ public class InventoryController {
     }
 
     Item createItem(String name){
-        return iv.createItem(name, um.getId(currUser));
+        return iv.createItem(name, currUser);
     }
 
-    public void setDescription(String des, Item item){
-        iv.setDescription(des, item);
+    public void setDescription(String des, String itemName){
+        iv.setDescription(itemName, des);
     }
 
 
@@ -192,7 +190,7 @@ public class InventoryController {
         }else{
             deleteItemB(it);
             ip.noItemSelected();
-            ip.delSuccess(it.getName());
+            ip.delSuccess(it);
             it = null;
             ip.updateListB(currUser);
         }
@@ -205,7 +203,7 @@ public class InventoryController {
         }else{
             deleteItemL(it);
             ip.noItemSelected();
-            ip.delSuccess(it.getName());
+            ip.delSuccess(it);
             it = null;
             ip.updateListL(currUser);
         }
@@ -237,10 +235,19 @@ public class InventoryController {
     }
 
     void addButL(){
-        addItem(it.getName(), it.getDescription());
-        ip.resetCurr();
-        ip.requestSuccess(it.getName());
-        it = null;
+        String itemName = bta.getInput("name");
+        String description = bta.getInput("des");
+        if (itemName.equals("")) {
+            ip.voidItem();
+        }else if(iv.itemExist(itemName)){
+            ip.nameUsed();
+        }
+        else {
+            addItem(itemName, description);
+            ip.resetCurr();
+            ip.requestSuccess(itemName);
+        }
+
     }
 
     public void updateButB(){
@@ -259,7 +266,7 @@ public class InventoryController {
         if (!um.getWishBorrow(currUser).contains(input)){
             ip.wrongInput();;
         }else{
-            it = iv.getItem(input);
+            it = input;
             ip.updateCurr(getItemInfo());
         }
     }
@@ -270,7 +277,7 @@ public class InventoryController {
         if (!um.getWishLend(currUser).contains(input)){
             ip.wrongInput();;
         }else{
-            it = iv.getItem(input);
+            it = input;
             ip.updateCurr(getItemInfo());
         }
     }
@@ -281,7 +288,7 @@ public class InventoryController {
         if (!iv.getAvailableList().contains(iv.getItem(input))){
             ip.wrongInput();;
         }else{
-            it = iv.getItem(input);
+            it = input;
             ip.updateCurr(getItemInfo());
         }
     }
@@ -298,27 +305,13 @@ public class InventoryController {
         System.out.println("item owner: " + item.getOwnerName());
 
          */
-        return "Item Info:\nitem name: " + iv.getName(it) + "\n" +
-                "item description: " + iv.getDescription(it)
-                + "\n" + "item owner: " + um.UUIDToName(iv.getOwnerUUID(it));
+        Item item = iv.getItem(it);
+        return "Item Info:\nitem name: " + iv.getName(item) + "\n" +
+                "item description: " + iv.getDescription(item)
+                + "\n" + "item owner: " + um.UUIDToName(item.getOwnerUUID());
     }
 
 
-    void createBut(){
-        String itemName = bta.getInput("name");
-        String description = bta.getInput("des");
-        if (itemName.equals("")) {
-            ip.voidItem();
-        }else if(iv.itemExist(itemName)){
-            ip.nameUsed();
-        }
-        else {
-            it = createItem(itemName);
-            setDescription(description, it);
-            ip.updateCurr(getItemInfo());
-            ip.createSuccess(it.getName());
-        }
-    }
 
     void editDes(){
         if (it == null){
@@ -326,7 +319,7 @@ public class InventoryController {
         }else{
             String description = bta.getInput("des");
             setDescription(description, it);
-            ip.editDesSuccess(it.getName());
+            ip.editDesSuccess(it);
             ip.updateCurr(getItemInfo());
         }
     }

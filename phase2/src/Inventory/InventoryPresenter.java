@@ -3,6 +3,9 @@ package Inventory;
 import Trade.BorderGUIWithThreeTextArea;
 import Trade.InputAndPresent;
 import User.Entity.ClientUser;
+import User.UseCase.UserManager;
+
+import java.util.UUID;
 
 /**
  * present information of the inventory system to user.
@@ -80,9 +83,10 @@ public class InventoryPresenter {
         bta.setMsgText(itemName + " info has been updated");
     }
 
-    void updateListB(ClientUser currUser){
+    void updateListB(UUID currUser){
+        UserManager um = new UserManager();
         String result = "";
-        for (String it: currUser.getWishBorrow()){
+        for (String it: um.getWishBorrow(currUser)){
             result = result + it + "\n";
         }
         if (result.equals("")){
@@ -93,9 +97,10 @@ public class InventoryPresenter {
 
     }
 
-    void updateListL(ClientUser currUser){
+    void updateListL(UUID currUser){
         String result = "";
-        for (String it: currUser.getWishLend()){
+        UserManager um = new UserManager();
+        for (String it: um.getWishLend(currUser)){
             result = result + it + "\n";
         }
         if (result.equals("")){
