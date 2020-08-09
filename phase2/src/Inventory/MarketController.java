@@ -1,7 +1,8 @@
 package Inventory;
 
 import Trade.BorderGUIWithThreeTextArea;
-import User.ClientUser;
+import User.UseCase.UserManager;
+
 
 import javax.swing.*;
 
@@ -28,9 +29,10 @@ public class MarketController {
     }
 
     String printItemInfo(Item item) {
+        UserManager um = new UserManager();
         return "Item Info:\nitem name: " + iv.getName(item) + "\n" +
                 "item description: " + iv.getDescription(item)
-                + "\n" + "item owner: " + iv.getOwnerName(item) ;
+                + "\n" + "item owner: " + um.UUIDToName(iv.getOwnerUUID(item)) ;
     }
 
     String printAvailable(){
@@ -52,9 +54,10 @@ public class MarketController {
         System.out.println("item owner: " + item.getOwnerName());
 
          */
+        UserManager um = new UserManager();
         return "Item Info:\nitem name: " + iv.getName(it) + "\n" +
                 "item description: " + iv.getDescription(it)
-                + "\n" + "item owner: " + iv.getOwnerName(it) ;
+                + "\n" + "item owner: " + um.UUIDToName(iv.getOwnerUUID(it));
     }
 
     void submitButM(){

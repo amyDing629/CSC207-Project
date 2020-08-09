@@ -10,21 +10,22 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * [controller]
  * the action of trade depend on the input of user
  */
 public class TradeController {
-    private final ClientUser currUser;
-    private ClientUser tarUser;
-    private final TradeManager tm;
-    private Trade currTrade;
-    private final UserManager um;
+    private UUID currUser;
+    private UUID tarUser;
+    private TradeManager tm;
+    private UUID currTrade;
+    private UserManager um;
     private Inventory iv;
     TradePresenter tp;
     BorderGUIWithThreeTextArea bta;
-    Item it;
+    String it;
 
     /**
      * [constructor]
@@ -32,23 +33,16 @@ public class TradeController {
      * @param tm the object that edits the trade list of input gateway
      * @param um the object that edits the user list of input gateway
      */
-    TradeController(ClientUser currUser, TradeManager tm, UserManager um, Inventory iv,
-                    BorderGUIWithThreeTextArea bta, Item item){
+    TradeController(UUID currUser, TradeManager tm, UserManager um, Inventory iv,
+                    BorderGUIWithThreeTextArea bta, String item){
         this.currUser = currUser;
-        this.tm = tm;
-        this.um = um;
-        this.iv = iv;
+        this.tm = new TradeManager();
+        this.um = new UserManager();
+        this.iv = new Inventory();
         tp = new TradePresenter(bta);
         this.bta = bta;
         it = item;
 
-    }
-
-    TradeController(ClientUser currUser, Trade currTrade, TradeManager tm, UserManager um){
-        this.currUser = currUser;
-        this.currTrade = currTrade;
-        this.tm = tm;
-        this.um = um;
     }
 
 
@@ -58,8 +52,8 @@ public class TradeController {
      * get owner of the item
      * @param item current item selected by currUser
      */
-    void getTarUser(Item item){
-        tarUser = um.getUser(item.getOwnerName());
+    void getTarUser(String item){
+        tarUser = iv.getItem(item).getOwnerUUID();
     }
 
 
@@ -67,7 +61,7 @@ public class TradeController {
      * check the frozen status of two users.
      * @throws IOException one of the users's account is frozen
      */
-    boolean checkInput(Item item){
+    boolean checkInput(String item){
         if (getIsInTrade(item)){
             tp.inTradeError();
             return false;
@@ -84,7 +78,7 @@ public class TradeController {
             tp.tarAccountFrozen();
             return false;
         }
-        if (tarUser == currUser){
+        if (tarUser.equals(currUser)){
             tp.selfItem();
             return false;
         }
@@ -98,19 +92,20 @@ public class TradeController {
      * @return whether or not the trade is a oneway trade
      * @throws IOException the trade is not created
      */
-    boolean createTrade(String line, Item item){
-        TradeEditor te = new TradeEditor();
+    boolean createTrade(String line, String item){
+        ClientUser user = um.getUser(currUser);
         LocalDateTime time = LocalDateTime.now();
         iv.setIsInTrade(item,true);
         switch (line) {
             case "1":
-                currTrade = tm.createOnewayTrade(currUser.getId(), tarUser.getId(), item, 30, time);
-                te.setCreator(currTrade, currUser.getId());
+                currTrade = tm.createOnewayTrade(user.getId(), user.getId(), getItem(it), 30, time);
+                tm.setCreator(currTrade, currUser);
                 updateTradeHistory();
                 return true;
             case "2":
-                currTrade = tm.createOnewayTrade(currUser.getId(), tarUser.getId(), item, -1, time);
-                te.setCreator(currTrade, currUser.getId());
+                Item it1 = iv.getItem(item);
+                currTrade = tm.createOnewayTrade(currUser, tarUser, getItem(it), -1, time);
+                tm.setCreator(currTrade, currUser);
                 updateTradeHistory();
                 return true;
             default: {
@@ -126,26 +121,24 @@ public class TradeController {
      * @param item2 the second item
      * @throws IOException if the trade is not created
      */
-    void createTrade(String line, Item item1, Item item2){
-        TradeEditor te = new TradeEditor();
+    void createTrade(String line, String item1, String item2){
         iv.setIsInTrade(item1,true);
         iv.setIsInTrade(item2,true);
         LocalDateTime time = LocalDateTime.now();
         if (line.equals("3")){
-            currTrade = tm.createTwowayTrade(currUser.getId(), tarUser.getId(), item1, item2, 30, time);
+            currTrade = tm.createTwowayTrade(currUser, tarUser, getItem(item1), getItem(item2), 30, time);
         }else{
-            currTrade = tm.createTwowayTrade(currUser.getId(), tarUser.getId(), item1, item2, -1, time);
+            currTrade = tm.createTwowayTrade(currUser, tarUser, getItem(item1), getItem(item2), -1, time);
 
         }
-        te.setCreator(currTrade, currUser.getId());
+        tm.setCreator(currTrade, currUser);
         updateTradeHistory();
     }
 
     void updateTradeHistory() {
-        TradeEditor te = new TradeEditor();
         // System.out.println("userList:"+userManager.getUser UserManager userManager = new UserManager(gw);
-        currUser.getTradeHistory().add(te.getId(currTrade));
-        tarUser.getTradeHistory().add(te.getId(currTrade));
+        um.getTradeHistory(currUser).add(currTrade);
+        um.getTradeHistory(tarUser).add(currTrade);
     }
     /**
      * check the status of the current trade
@@ -182,8 +175,8 @@ public class TradeController {
 
     ArrayList<String> getSuggestedItemName(){
         ArrayList<String> result = new ArrayList<>();
-        for (String i: currUser.getWishLend()){
-            if (tarUser.getWishBorrow().contains(i)){
+        for (String i: um.getWishLend(currUser)){
+            if (um.getWishBorrow(tarUser).contains(i)){
                 result.add(i);
             }
         }
@@ -199,13 +192,15 @@ public class TradeController {
         return result;
     }
 
-    boolean getIsInTrade(Item it){
+    boolean getIsInTrade(String it){
         return iv.getIsInTrade(it);
 
     }
 
     void presentTradeInfo(){
-        tp.presentTradeInfo(currUser, it, currUser.getWishLend(), getSuggestedItemName() );
+        ClientUser user = um.getUser(currUser);
+        Item item = iv.getItem(it);
+        tp.presentTradeInfo(user, item, um.getWishLend(currUser), getSuggestedItemName() );
     }
 
     void onewayBut(String duration){
@@ -225,9 +220,9 @@ public class TradeController {
 
     void twowayBut(String duration){
 
-        Item item = iv.getItem(bta.getInput());
+        String item = bta.getInput("input");
         tp.updateInputArea();
-        if (!currUser.getWishLend().contains(item.getName())){
+        if (!um.getWishLend(currUser).contains(item)){
             tp.wrongInput();
         }else if (checkInput(item)){
             if (duration.equals("temp")){

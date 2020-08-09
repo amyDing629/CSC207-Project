@@ -26,12 +26,8 @@ public class CTradePresenter {
         }
     }
 
-
-
-
-
     public void resetInputArea(){
-        tg.resetInput();
+        tg.setInput("input", "item name");
     }
 
     public void presentTradeInfo(Trade trade){

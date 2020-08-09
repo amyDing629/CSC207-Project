@@ -1,6 +1,8 @@
 package User.Gateway;
 
 
+import User.Entity.ClientUser;
+
 import java.util.List;
 import java.util.UUID;
 
@@ -23,6 +25,7 @@ public interface DataAccess {
     void deSerialize(); // write ser to list
 
     void setList(List<Object> userList);
+
 
 
 //    boolean hasObject(String name);

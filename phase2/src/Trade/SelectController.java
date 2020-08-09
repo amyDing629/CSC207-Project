@@ -7,19 +7,20 @@ import User.UseCase.UserManager;
 
 import javax.swing.*;
 import java.util.List;
+import java.util.UUID;
 
 public class SelectController {
-    ClientUser currUser;
+    UUID currUser;
     UserManager um;
     Inventory iv;
-    Item currItem;
+    String currItem;
     BorderGUIWithThreeTextArea bta;
     TradeManager tm;
     SelectPresenter sp;
     List<String> wishList;
     JFrame fr;
 
-    public SelectController(ClientUser currUser, TradeManager tm, UserManager um, Inventory iv,
+    public SelectController(UUID currUser, TradeManager tm, UserManager um, Inventory iv,
                             BorderGUIWithThreeTextArea bta, JFrame fr){
         this.currUser = currUser;
         this.um = um;
@@ -48,11 +49,11 @@ public class SelectController {
 
 
     String getItemInfo(String str){
-        Item item = iv.getItem(str);
-        currItem = item;
-        return "Item Info:\nitem name: " + iv.getName(item) + "\n" +
-                "item description: " + iv.getDescription(item)
-                + "\n" + "item owner: " + item.getOwnerName() ;
+        currItem = str;
+        Item it = iv.getItem(str);
+        return "Item Info:\nitem name: " + iv.getName(it) + "\n" +
+                "item description: " + iv.getDescription(it)
+                + "\n" + "item owner: " + um.UUIDToName(it.getOwnerUUID()) ;
 
     }
 
@@ -78,12 +79,12 @@ public class SelectController {
 
 
     void submitBut(){
-        String name = bta.getInput();
+        String name = bta.getInput("input");
         sp.resetInputArea();
         if (!checkInput(name)){
             sp.wrongInput();
         }else{
-            currItem = getItem(name);
+            currItem = name;
             sp.selectItemInfo(getItemInfo(name));
             sp.updateSuccess();
         }

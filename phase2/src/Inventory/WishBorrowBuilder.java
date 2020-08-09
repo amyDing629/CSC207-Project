@@ -3,7 +3,7 @@ package Inventory;
 import Trade.BorderGUIBuilder;
 import Trade.BorderGUINoTextArea;
 import Trade.BorderGUIWithThreeTextArea;
-import User.ClientUser;
+import User.Entity.ClientUser;
 import User.ItemApprovalManager;
 import User.UserManager;
 

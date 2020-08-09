@@ -12,8 +12,8 @@ public class RTradeGUI_test {
     public static void main(String[] args) throws IOException {
         ClientUser daniel = new ClientUser("daniel", "123", false);
         ClientUser amy = new ClientUser("amy", "123", false);
-        Item apple = new Item("apple", "amy");
-        Item pear = new Item("pear", "daniel");
+        Item apple = new Item("apple", amy.getId());
+        Item pear = new Item("pear", daniel.getId());
         amy.addWishBorrow("pear");
         daniel.addWishes("pear");
         daniel.addWishBorrow("apple");
@@ -27,9 +27,9 @@ public class RTradeGUI_test {
         um.addUser(amy);
         JFrame f = new JFrame();
 
-        TradeGUI_Main trmD = new TradeGUI_Main(daniel, tm, um, iv, f);
+        TradeGUI_Main trmD = new TradeGUI_Main(daniel.getId(), tm, um, iv, f);
         trmD.run();
-        TradeGUI_Main trmA = new TradeGUI_Main(amy, tm, um, iv, f);
+        TradeGUI_Main trmA = new TradeGUI_Main(amy.getId(), tm, um, iv, f);
         trmA.run();
 
 

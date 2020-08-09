@@ -1,7 +1,7 @@
 package Trade;
 
 import Inventory.Item;
-import User.ClientUser;
+import User.Entity.ClientUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -128,7 +128,7 @@ public class TradePresenter {
     }
 
     void updateInputArea(){
-        bta.setInputStr("type item name here");
+        bta.setInput("input","type item name here");
     }
 
     public void closeFrame(){

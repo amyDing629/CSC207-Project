@@ -4,6 +4,7 @@ import User.Gateway.DataAccess;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * [use case class]
@@ -74,7 +75,7 @@ public class Inventory {
     }
 
 
-    public Item createItem(String name, String owner){
+    public Item createItem(String name, UUID owner){
         return new Item(name, owner);
     }
 
@@ -82,13 +83,13 @@ public class Inventory {
         item.setDescription(des);
     }
 
-    public boolean getIsInTrade(Item it){
-        return it.getIsInTrade();
+    public boolean getIsInTrade(String it){
+        return getItem(it).getIsInTrade();
 
     }
 
-    public void setIsInTrade(Item it, boolean inTrade){
-        it.setIsInTrade(inTrade);
+    public void setIsInTrade(String it, boolean inTrade){
+        getItem(it).setIsInTrade(inTrade);
     }
 
     public String getName(Item it){
@@ -103,8 +104,8 @@ public class Inventory {
         it.setDescription(des);
     }
 
-    public String getOwnerName(Item it){
-        return it.getOwnerName();
+    public UUID getOwnerUUID(Item it){
+        return it.getOwnerUUID();
     }
 
     boolean itemExist(String name){
@@ -134,4 +135,6 @@ public class Inventory {
         }
         return false;
     }
+
+
 }

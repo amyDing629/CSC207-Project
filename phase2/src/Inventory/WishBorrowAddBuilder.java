@@ -4,7 +4,7 @@ import Main.UI.Market;
 import Trade.BorderGUIBuilder;
 import Trade.BorderGUINoTextArea;
 import Trade.BorderGUIWithThreeTextArea;
-import User.ClientUser;
+import User.Entity.ClientUser;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

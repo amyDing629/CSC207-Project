@@ -2,7 +2,7 @@ package Inventory;
 
 import Trade.BorderGUIWithThreeTextArea;
 import Trade.InputAndPresent;
-import User.ClientUser;
+import User.Entity.ClientUser;
 
 /**
  * present information of the inventory system to user.

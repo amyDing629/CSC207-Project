@@ -101,6 +101,10 @@ public class InvDataAccess implements DataAccess {
         } catch (IOException | ClassNotFoundException i) {
             i.printStackTrace();
         }
+    }
+
+    @Override
+    public void setList(List<Object> userList) {
 
     }
 

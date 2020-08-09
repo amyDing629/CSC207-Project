@@ -4,10 +4,7 @@ import Trade.BorderGUIBuilder;
 import Trade.CompleteTradeGUIBuilder;
 import Trade.TradeGUIEngineer;
 import Trade.TradeGUIPlan;
-import User.ClientUser;
-import User.ItemApprovalManager;
-import User.UserManager;
-
+import User.Entity.ClientUser;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

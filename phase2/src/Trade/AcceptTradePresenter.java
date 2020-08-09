@@ -39,7 +39,7 @@ public class AcceptTradePresenter {
     }
 
     public void resetInputArea(){
-        tg.resetInput();
+        tg.setInput("input", "trade number");
     }
 
     public void presentTradeInfo(Trade trade){

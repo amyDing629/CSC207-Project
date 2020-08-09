@@ -25,7 +25,7 @@ public class SelectPresenter {
     }
 
     public void resetInputArea(){
-        bta.setInputStr("item name");
+        bta.setInput("input", "item name");
     }
 
     public void wrongInput(){

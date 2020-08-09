@@ -5,9 +5,10 @@ import User.UseCase.UserManager;
 
 import javax.swing.*;
 import java.util.List;
+import java.util.UUID;
 
 public class TradeHistoryController {
-    ClientUser currUser;
+    UUID currUser;
     TradeManager tm;
     UserManager um;
     TradeHistoryPresenter tp;
@@ -15,15 +16,14 @@ public class TradeHistoryController {
     List<String> userList;
     JFrame fr;
 
-    public TradeHistoryController(ClientUser currUser, TradeManager tm, UserManager um, BorderGUIWithThreeTextArea tgp,
-                                  JFrame fr){
+    public TradeHistoryController(UUID currUser, BorderGUIWithThreeTextArea tgp, JFrame fr){
         this.currUser = currUser;
-        this.tm = tm;
-        this.um = um;
+        this.tm = new TradeManager();
+        this.um = new UserManager();
+        this.fr = fr;
         tp = new TradeHistoryPresenter(tgp);
 
     }
-
 
 
     public String getTradeHistory(){
@@ -49,19 +49,18 @@ public class TradeHistoryController {
     }
 
     List<String> getFreUser() {
-        userList = um.getFrequentUser(tm, currUser);
+        userList = um.getFrequentUser(currUser);
         return userList;
     }
 
 
-
     public void updateTrade(){
         tp.updateTrade(getComplete());
-
     }
 
     public void updateUser(){
         tp.updateFreUser(getFreUser());
 
     }
+
 }

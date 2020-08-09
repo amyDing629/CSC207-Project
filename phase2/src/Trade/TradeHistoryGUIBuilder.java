@@ -7,14 +7,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.UUID;
 
 public class TradeHistoryGUIBuilder implements BorderGUIBuilder {
     TradeHistoryController thc;
     BorderGUIWithThreeTextArea bgUI;
 
-    public TradeHistoryGUIBuilder(ClientUser currUser, TradeManager tm, UserManager um, JFrame tf){
+    public TradeHistoryGUIBuilder(UUID currUser, JFrame tf){
         bgUI = new BorderGUIWithThreeTextArea();
-        this.thc = new TradeHistoryController(currUser, tm, um, bgUI, tf);
+        this.thc = new TradeHistoryController(currUser, bgUI, tf);
     }
 
 

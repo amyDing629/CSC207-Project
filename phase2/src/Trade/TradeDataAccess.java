@@ -102,6 +102,11 @@ public class TradeDataAccess implements DataAccess {
     }
 
     @Override
+    public void setList(List<Object> userList) {
+
+    }
+
+    @Override
     public boolean hasObject(Object o) {
         // TODO
         return false;

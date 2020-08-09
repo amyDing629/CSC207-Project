@@ -3,14 +3,15 @@ import Trade.BorderGUIBuilder;
 import Trade.BorderGUIWithThreeTextArea;
 import Trade.TradeGUIEngineer;
 import Trade.TradeGUIPlan;
-import User.ClientUser;
-import User.ItemApprovalManager;
-import User.UserManager;
+import User.Entity.ClientUser;
+import User.UseCase.ItemApprovalManager;
+import User.UseCase.UserManager;
 
 import javax.swing.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * [controller]
@@ -44,10 +45,10 @@ public class InventoryController {
      */
     public InventoryController(ClientUser currUser, BorderGUIWithThreeTextArea bta, JFrame fr){
         this.currUser = currUser;
-        this.iv = new Inventory();
-        this.um = new UserManager();
-        this.iam = new ItemApprovalManager();
-        this.bta = bta;
+        iv = new Inventory();
+        um = new UserManager();
+        iam = new ItemApprovalManager();
+        bta = bta;
         ip = new InventoryPresenter(bta);
         this.fr = fr;
     }
@@ -58,7 +59,7 @@ public class InventoryController {
      * @return whether the input item is the user's own item.
      */
     boolean isOwnItem(){
-        return iv.getOwnerName(it).equals(currUser.getUsername());
+        return iv.getOwnerUUID(it).equals(currUser.getId());
     }
 
     /**
@@ -69,7 +70,7 @@ public class InventoryController {
     }
 
     void addToWishLend(){
-        um.getWishLend(um.getUser(iv.getOwnerName(it))).add(iv.getName(it));
+        um.getWishLend(um.getUser(iv.getOwnerUUID(it))).add(iv.getName(it));
         iv.add(it);
         iam.removeItem(iv.getName(it));
     }
@@ -137,7 +138,7 @@ public class InventoryController {
         ArrayList<ArrayList<String>> ia = iam.getItemApproval();
         for (ArrayList<String> strings : ia) {
             if (strings.get(1).equals(name)) {
-                result = new Item(strings.get(1), strings.get(3));
+                result = new Item(strings.get(1), UUID.fromString(strings.get(3)));
                 iv.setDescription(strings.get(2), result);
                 return result;
             }
@@ -176,7 +177,7 @@ public class InventoryController {
     }
 
     Item createItem(String name){
-        return iv.createItem(name, um.getUsername(currUser));
+        return iv.createItem(name, um.getId(currUser));
     }
 
     public void setDescription(String des, Item item){
@@ -299,7 +300,7 @@ public class InventoryController {
          */
         return "Item Info:\nitem name: " + iv.getName(it) + "\n" +
                 "item description: " + iv.getDescription(it)
-                + "\n" + "item owner: " + iv.getOwnerName(it) ;
+                + "\n" + "item owner: " + um.UUIDToName(iv.getOwnerUUID(it));
     }
 
 

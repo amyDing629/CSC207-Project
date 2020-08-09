@@ -1,7 +1,7 @@
 package Inventory;
 
 import Trade.BorderGUIBuilder;
-import User.ClientUser;
+import User.Entity.ClientUser;
 import User.ItemApprovalManager;
 import User.UserManager;
 
