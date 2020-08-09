@@ -1,29 +1,24 @@
 package Inventory;
 
+import Trade.BorderGUIBuilder;
+import Trade.CompleteTradeGUIBuilder;
+import Trade.TradeGUIEngineer;
+import Trade.TradeGUIPlan;
 import User.Entity.ClientUser;
-import User.UseCase.ItemApprovalManager;
-import User.UseCase.UserManager;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class InventoryGUI {
     private final ClientUser currUser;
-    private final UserManager um;
-    private final Inventory iv;
     private final JFrame ivf;
-    private final ItemApprovalManager iam;
 
 
-    public InventoryGUI(ClientUser currUser, Inventory iv, UserManager um, ItemApprovalManager iam, JFrame frame){
+    public InventoryGUI(ClientUser currUser, JFrame frame){
         this.currUser = currUser;
-        this.um = um;
-        this.iv = iv;
         this.ivf = frame;
-        this.iam = iam;
 
-    }
+    };
 
     public void run(){
         JFrame frame = new JFrame("Inventory Session");
@@ -31,7 +26,7 @@ public class InventoryGUI {
         frame.setSize(200, 200);
 
         JPanel menu = new JPanel();
-        JLabel label = new JLabel("    Hello, "+um.getUsername(currUser));
+        JLabel label = new JLabel("    Hello, "+ currUser.getUsername());
         JButton mk = new JButton("market");
         JButton wb = new JButton("WishBorrow");
         JButton wl = new JButton("WishLend");
@@ -51,7 +46,11 @@ public class InventoryGUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
-                new MarketGUI(iv, frame).run();
+                BorderGUIBuilder builder = new MarketBuilder(frame);
+                TradeGUIEngineer engineer = new TradeGUIEngineer(builder);
+                engineer.constructGUI();
+                TradeGUIPlan tg = engineer.getGUI();
+                tg.run();
             }
         });
 
@@ -59,7 +58,11 @@ public class InventoryGUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
-                new WishBorrowGUI(currUser, iv, um, iam, frame).run();
+                BorderGUIBuilder builder = new WishBorrowBuilder(currUser, frame);
+                TradeGUIEngineer engineer = new TradeGUIEngineer(builder);
+                engineer.constructGUI();
+                TradeGUIPlan tg = engineer.getGUI();
+                tg.run();
             }
         });
 
@@ -67,7 +70,11 @@ public class InventoryGUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
-                new WishLendGUI(currUser, iv, um, iam, frame).run();
+                BorderGUIBuilder builder = new WishLendBuilder(currUser, frame);
+                TradeGUIEngineer engineer = new TradeGUIEngineer(builder);
+                engineer.constructGUI();
+                TradeGUIPlan tg = engineer.getGUI();
+                tg.run();
 
             }
         });

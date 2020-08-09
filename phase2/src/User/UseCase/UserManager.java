@@ -92,15 +92,14 @@ public class UserManager {
     }
 
     /**
-     * @param username the username of the input user
      *                 return the list of most frequent three traders that the user trades with
      *                 if the user trades with less than three traders, return all the traders the user trades with
      */
-    public List<String> getFrequentUser(String username) {
+    public List<String> getFrequentUser(UUID userID) {
         TradeManager tm = new TradeManager();
-        ClientUser user = getUser(username);
+        ClientUser user = getUser(userID);
 
-        List<Trade> a = tm.getAllTrade(username);
+        List<Trade> a = tm.getAllTrade(userID);
         HashMap<UUID, Integer> b = new HashMap<>();
         for (Trade c : a) {
             for (UUID d : c.getUsers()) {
@@ -130,20 +129,20 @@ public class UserManager {
         return g;
     }
     //no use
-    public List<UUID> getTradeHistory(ClientUser a){
-        return a.getTradeHistory();
+    public List<UUID> getTradeHistory(UUID a){
+        return getUser(a).getTradeHistory();
     }
 
     //FINISHED
     public boolean getIsAdmin(ClientUser a){return a.getIsAdmin();}
 
     //FINISHED
-    public List<String> getWishLend(ClientUser a) {
-        return a.getWishLend();
+    public List<String> getWishLend(UUID a) {
+        return getUser(a).getWishLend();
     }
     //FINISHED
-    public List<String> getWishBorrow(ClientUser a) {
-        return a.getWishBorrow();
+    public List<String> getWishBorrow(UUID a) {
+        return getUser(a).getWishBorrow();
     }
     //finished
     public int getWeekTransactionLimit(ClientUser a) {
@@ -167,7 +166,7 @@ public class UserManager {
     }
 
     //finished
-    public String getUsername(ClientUser a){return a.getUsername();}
+    public String getUsername(UUID a){return getUser(a).getUsername();}
 
     //finished
     public UUID getId(ClientUser a) {
@@ -175,8 +174,8 @@ public class UserManager {
     }
 
     //finished
-    public boolean getIsFrozen(ClientUser a){
-        return a.getIsFrozen();
+    public boolean getIsFrozen(UUID userID){
+        return getUser(userID).getIsFrozen();
     }
 
     //no use
@@ -196,6 +195,10 @@ public class UserManager {
 
     public void removeBWishes(String hi,ClientUser b){
         b.removeBWishes(hi);
+    }
+
+    public String UUIDToName(UUID userID){
+        return getUser(userID).getUsername();
     }
 }
 

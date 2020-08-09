@@ -9,6 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.UUID;
 
 public class RTradeGUIBuilder implements BorderGUIBuilder {
 
@@ -23,7 +24,7 @@ public class RTradeGUIBuilder implements BorderGUIBuilder {
      * @param currUser current user
      * @param item     item selected by the current user
      */
-    public RTradeGUIBuilder(ClientUser currUser, Item item, TradeManager tm, UserManager um, Inventory iv, JFrame fr) {
+    public RTradeGUIBuilder(UUID currUser, String item, TradeManager tm, UserManager um, Inventory iv, JFrame fr) {
 
 
         tg = new BorderGUIWithThreeTextArea();
@@ -60,7 +61,7 @@ public class RTradeGUIBuilder implements BorderGUIBuilder {
         panelRight.add(label);
         panelRight.add(ta);
         tg.setEast(panelRight);
-        tg.initializeInput(ta);
+        tg.addInput("input", ta);
     }
 
     @Override

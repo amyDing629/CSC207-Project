@@ -1,14 +1,14 @@
 package Trade;
 
 import javax.swing.*;
-import java.awt.*;
+import java.util.HashMap;
 
-public class BorderGUIWithThreeTextArea extends BorderGUINoTextArea implements TradeGUIPlan, BorderLayoutGUI, ThreeTextArea {
+public class BorderGUIWithThreeTextArea extends BorderGUINoTextArea
+        implements TradeGUIPlan, BorderLayoutGUI, InputAndPresent {
     private JTextArea curr;
     private JTextArea list;
     private JTextArea msg;
-    private JTextArea input;
-    private String inputStr;
+    private HashMap<String, JTextArea> inputs;
 
     public BorderGUIWithThreeTextArea(){
         super();
@@ -35,24 +35,7 @@ public class BorderGUIWithThreeTextArea extends BorderGUINoTextArea implements T
 
     }
 
-    @Override
-    public void initializeInput(JTextArea input) {
-        this.input = input;
 
-    }
-
-
-    @Override
-    public void setInputStr(String str) {
-        inputStr = str;
-
-    }
-
-    @Override
-    public void resetInput() {
-        input.setText(inputStr);
-
-    }
     @Override
     public void initializeList(JTextArea ta) {
         list = ta;
@@ -69,10 +52,19 @@ public class BorderGUIWithThreeTextArea extends BorderGUINoTextArea implements T
     }
 
 
-    public String getInput(){
-        return input.getText();
-
+    @Override
+    public String getInput(String key) {
+        return inputs.get(key).getText();
     }
 
+    @Override
+    public void setInput(String key, String content) {
+        inputs.get(key).setText(content);
+    }
 
+    @Override
+    public void addInput(String key, JTextArea input) {
+        inputs.put(key, input);
+        ;
+    }
 }

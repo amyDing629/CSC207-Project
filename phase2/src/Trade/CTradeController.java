@@ -16,32 +16,27 @@ import java.util.UUID;
 import java.util.regex.Pattern;
 
 public class CTradeController implements Observer {
-    ClientUser currUser;
+    UUID currUser;
     TradeManager tm;
     UserManager um;
-    List<Trade> tradeList;
-    Trade currTrade;
+    UUID currTrade;
     Boolean isFirst;
     CTradePresenter tp;
     BorderGUIWithThreeTextArea tg;
 
-    public CTradeController(ClientUser currUser, TradeManager tm, UserManager um, BorderGUIWithThreeTextArea tg) {
+    public CTradeController(UUID currUser, BorderGUIWithThreeTextArea tg) {
         this.currUser = currUser;
-        this.tm = tm;
-        this.um = um;
+        tm = new TradeManager();
+        um = new UserManager();
         tp = new CTradePresenter(tg);
         this.tg = tg;
     }
 
-    List<Trade> getIncomplete() {
-        tradeList = tm.getIncomplete(currUser);
-        return tradeList;
-    }
 
     boolean checkInput(String num) {
         if (!isNum(num)) {
             return false;
-        } else return !(Integer.parseInt(num) < 0 | Integer.parseInt(num) >= tradeList.size());
+        } else return !(Integer.parseInt(num) < 0 | Integer.parseInt(num) >= tm.getIncomplete(currUser).size());
     }
 
     private boolean isNum(String str) {
@@ -49,43 +44,45 @@ public class CTradeController implements Observer {
         return pattern.matcher(str).matches();
     }
 
-    Trade getCurrTrade(String num) {
+    UUID getCurrTrade(String num) {
         int tradeNum = Integer.parseInt(num.trim());
-        currTrade = tradeList.get(tradeNum);
+        currTrade = tm.getIncomplete(currUser).get(tradeNum).getId();
         return currTrade;
     }
 
 
     public boolean enterFirst() {
-        isFirst = (currTrade.getSecondMeeting() == null);
+        Trade tr = tm.getTrade(currTrade);
+        isFirst = (tr.getSecondMeeting() == null);
         return isFirst;
     }
 
 
     @Override
     public void update(Observable o, Object arg) {
+        Trade tr = tm.getTrade(currTrade);
         System.out.println("has updated!" + arg);
         UUID mtID = (UUID) arg;
         Meeting mt = new MeetingActionManager().getMeetingWithId(mtID);
         System.out.println("firstMeetingID: " + mt.getID());
         if (isFirst) {
             if (mt.getStatus().equals(MeetingStatus.INCOMPLETE)) {
-                currTrade.setMeeting(mtID);
+                tr.setMeeting(mtID);
             }
             if (mt.getStatus().equals(MeetingStatus.CANCELLED)) {
                 tm.cancelTrade(currTrade);
             }
             if (mt.getStatus().equals(MeetingStatus.COMPLETED)) {
-                if (currTrade.getDuration() == -1) {
+                if (tr.getDuration() == -1) {
                     tm.completeTrade(currTrade);
                 } else {
-                    currTrade.setSecondMeeting(new MeetingActionManager().setUpSecondMeeting(mtID));
-                    System.out.println("secondMeetingID: " + currTrade.getSecondMeeting());
+                    tr.setSecondMeeting(new MeetingActionManager().setUpSecondMeeting(mtID));
+                    System.out.println("secondMeetingID: " + tr.getSecondMeeting());
                 }
             }
 
         } else {
-            Meeting smt = new MeetingActionManager().getMeetingWithId(currTrade.getSecondMeeting());
+            Meeting smt = new MeetingActionManager().getMeetingWithId(tr.getSecondMeeting());
             System.out.println("secondMeetingID: " + smt.getID());
             if (smt.getStatus().equals(MeetingStatus.COMPLETED)) {
                 tm.completeTrade(currTrade);
@@ -99,26 +96,27 @@ public class CTradeController implements Observer {
     }
 
     void makeTrade() {
-        if (currTrade.getType().equals("oneway")) {
-            ClientUser bor = um.getUser(currTrade.getUsers().get(0));
-            ClientUser lend = um.getUser(currTrade.getUsers().get(1));
+        Trade tr = tm.getTrade(currTrade);
+        if (tr.getType().equals("oneway")) {
+            ClientUser bor = um.getUser(tr.getUsers().get(0));
+            ClientUser lend = um.getUser(tr.getUsers().get(1));
             System.out.println(bor);
             System.out.println(bor.getWishBorrow());
-            System.out.println(currTrade.getItemList());
-            System.out.println(currTrade.getItemList().get(0).getName());
-            bor.getWishBorrow().remove(currTrade.getItemList().get(0).getName());
-            lend.getWishLend().remove(currTrade.getItemList().get(0).getName());
+            System.out.println(tr.getItemList());
+            System.out.println(tr.getItemList().get(0).getName());
+            bor.getWishBorrow().remove(tr.getItemList().get(0).getName());
+            lend.getWishLend().remove(tr.getItemList().get(0).getName());
             bor.setBorrowCounter(bor.getBorrowCounter() + 1);
             bor.setLendCounter(bor.getLendCounter() + 1);
 
 
         } else {
-            ClientUser u1 = um.getUser(currTrade.getUsers().get(0));
-            ClientUser u2 = um.getUser(currTrade.getUsers().get(1));
-            u1.getWishBorrow().remove(currTrade.getItemList().get(1).getName());
-            u1.getWishLend().remove(currTrade.getItemList().get(0).getName());
-            u2.getWishBorrow().remove(currTrade.getItemList().get(0).getName());
-            u2.getWishLend().remove(currTrade.getItemList().get(1).getName());
+            ClientUser u1 = um.getUser(tr.getUsers().get(0));
+            ClientUser u2 = um.getUser(tr.getUsers().get(1));
+            u1.getWishBorrow().remove(tr.getItemList().get(1).getName());
+            u1.getWishLend().remove(tr.getItemList().get(0).getName());
+            u2.getWishBorrow().remove(tr.getItemList().get(0).getName());
+            u2.getWishLend().remove(tr.getItemList().get(1).getName());
             u1.setBorrowCounter(u1.getBorrowCounter() + 1);
             u1.setLendCounter(u1.getLendCounter() + 1);
             u2.setBorrowCounter(u2.getBorrowCounter() + 1);
@@ -131,7 +129,7 @@ public class CTradeController implements Observer {
     }
 
     public void updateBut(){
-        tp.updateFrame(getIncomplete());
+        tp.updateFrame(tm.getIncomplete(currUser));
 
     }
 
@@ -141,7 +139,7 @@ public class CTradeController implements Observer {
             tp.wrongInput();
         }else{
             currTrade = getCurrTrade(tradeNum);
-            tp.presentTradeInfo(currTrade);
+            tp.presentTradeInfo(tm.getTrade(currTrade));
             tp.updateSuccess();
         }
     }
@@ -162,14 +160,16 @@ public class CTradeController implements Observer {
     }
 
     public void action(){
+        Trade tr = tm.getTrade(currTrade);
+        ClientUser user = um.getUser(currUser);
         if (enterFirst()) {
-            MPresenter mPresenter = new MainViewPresenter(currTrade.getMeeting(), currUser.getId(),
-                    currTrade.getUsers(), true, tg.getFrame());
+            MPresenter mPresenter = new MainViewPresenter(tr.getMeeting(), user.getId(),
+                    tr.getUsers(), true, tg.getFrame());
             mPresenter.run();
             mPresenter.addObserver(this);
         }else {
-            MPresenter mPresenter = new MainViewPresenter(currTrade.getSecondMeeting(),
-                    currUser.getId(), currTrade.getUsers(), false, tg.getFrame());
+            MPresenter mPresenter = new MainViewPresenter(tr.getSecondMeeting(),
+                    user.getId(), tr.getUsers(), false, tg.getFrame());
             mPresenter.run();
             mPresenter.addObserver(this);
         }

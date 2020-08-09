@@ -2,6 +2,7 @@ package Inventory;
 
 
 import java.io.Serializable;
+import java.util.UUID;
 
 /**
  * [entity class]
@@ -19,7 +20,7 @@ public class Item implements Serializable {
     /**
      * The owner of the item. The person who put the item in the wishLend list.
      */
-    private final String ownerName;
+    private final UUID ownerUUID;
     /**
      * Whether the item is in an incomplete/unconfirmed trade.
      */
@@ -30,9 +31,9 @@ public class Item implements Serializable {
      * @param name: the name of the item
      * @param owner: the owner of the item
      */
-    public Item(String name, String owner) {
+    public Item(String name, UUID owner) {
         this.name = name;
-        this.ownerName = owner;
+        this.ownerUUID = owner;
         this.isInTrade = false;
     }
 
@@ -79,8 +80,8 @@ public class Item implements Serializable {
      * getter for owner name
      * @return owner name
      */
-    public String getOwnerName(){
-        return ownerName;
+    public UUID getOwnerUUID(){
+        return ownerUUID;
     }
 
 

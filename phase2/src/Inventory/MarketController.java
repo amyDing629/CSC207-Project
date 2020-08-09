@@ -1,11 +1,39 @@
 package Inventory;
 
+import Trade.BorderGUIWithThreeTextArea;
+import User.UseCase.UserManager;
+
+
+import javax.swing.*;
+
 public class MarketController {
     Inventory iv;
-    public MarketController(Inventory iv){
-        this.iv = iv;
+    BorderGUIWithThreeTextArea bta;
+    JFrame fr;
+    Item it;
+    MarketPresenter ip;
+    public MarketController(BorderGUIWithThreeTextArea bta, JFrame fr){
+        this.iv = new Inventory();
+        this.bta = bta;
+        ip = new MarketPresenter(bta);
+        this.fr = fr;
     }
 
+
+    Item getItem(String line){
+        return iv.getItem(line);
+    }
+
+    String wrongInput(){
+        return "wrong input, please type again";
+    }
+
+    String printItemInfo(Item item) {
+        UserManager um = new UserManager();
+        return "Item Info:\nitem name: " + iv.getName(item) + "\n" +
+                "item description: " + iv.getDescription(item)
+                + "\n" + "item owner: " + um.UUIDToName(iv.getOwnerUUID(item)) ;
+    }
 
     String printAvailable(){
         String result = "";
@@ -18,26 +46,43 @@ public class MarketController {
         return result;
 
     }
-    boolean selectItem(String line){
-        for (Item it: iv.getLendingList()){
-            if (iv.getName(it).equals(line)){
-                return true;
-            }
+
+    String getItemInfo() {
+        /*
+        System.out.println("item name: " + item.getName());
+        System.out.println("item description: " + item.getDescription());
+        System.out.println("item owner: " + item.getOwnerName());
+
+         */
+        UserManager um = new UserManager();
+        return "Item Info:\nitem name: " + iv.getName(it) + "\n" +
+                "item description: " + iv.getDescription(it)
+                + "\n" + "item owner: " + um.UUIDToName(iv.getOwnerUUID(it));
+    }
+
+    void submitButM(){
+        String input = bta.getInput("input");
+        ip.resetInputArea();
+        if (!iv.getAvailableList().contains(iv.getItem(input))){
+            ip.wrongInput();;
+        }else{
+            it = iv.getItem(input);
+            ip.updateCurr(getItemInfo());
         }
-        return false;
-    }
-    Item getItem(String line){
-        return iv.getItem(line);
     }
 
-    String wrongInput(){
-        return "wrong input, please type again";
+    void updateListM(){
+        ip.updateListM(printAvailable());
     }
 
-    String printItemInfo(Item item) {
-        return "Item Info:\nitem name: " + iv.getName(item) + "\n" +
-                "item description: " + iv.getDescription(item)
-                + "\n" + "item owner: " + iv.getOwnerName(item) ;
+    void backBut(){
+        fr.setVisible(true);
+        ip.closeFrame();
     }
+
+    void updateCurr(){
+        ip.resetCurr();
+    }
+
 
 }

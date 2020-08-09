@@ -78,8 +78,6 @@ public class PointGUI {
 
         frame.setVisible(true);
 
-
-
         eb.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

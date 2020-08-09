@@ -28,7 +28,7 @@ public class TradeManager{
      * @param item the only one Inventory.Item to be trade in this created trade.Trade.
      * @param duration the duration of this trade.Trade, unit (days). -1 means the trade.Trade is permanent.
      */
-    Trade createOnewayTrade(UUID currUserId, UUID otherUserId, Item item, int duration, LocalDateTime time) {
+    UUID createOnewayTrade(UUID currUserId, UUID otherUserId, Item item, int duration, LocalDateTime time) {
         OnewayTrade newTrade = new OnewayTrade(currUserId, otherUserId, item, duration, time);
         item.setIsInTrade(true);
         dataAccess.addObject(newTrade);
@@ -36,7 +36,7 @@ public class TradeManager{
 
         //Update trade history for both users
         //updateTradeHistory(currUserId, otherUserId, newTrade);
-        return newTrade;
+        return newTrade.getId();
 
     }
 
@@ -47,7 +47,7 @@ public class TradeManager{
      * @param item2to1 the other Inventory.Item to be trade in this created trade.Trade.
      * @param duration the duration of this trade.Trade, unit (days). -1 means the trade.Trade is permanent.
      */
-    Trade createTwowayTrade(UUID currUserId, UUID otherUserId, Item item1to2, Item item2to1, int duration,
+    UUID createTwowayTrade(UUID currUserId, UUID otherUserId, Item item1to2, Item item2to1, int duration,
                             LocalDateTime time){
         TwowayTrade newTrade = new TwowayTrade(currUserId, otherUserId, item1to2, item2to1, duration, time);
         dataAccess.addObject(newTrade);
@@ -55,7 +55,7 @@ public class TradeManager{
         item2to1.setIsInTrade(true);
         // Update trade history for both users
         //updateTradeHistory(currUserId, otherUserId, newTrade);
-        return newTrade;
+        return newTrade.getId();
     }
 
 
@@ -137,8 +137,8 @@ public class TradeManager{
     /**
      * return the list of all trades that the user has
      */
-    public List<Trade> getAllTrade(String username) {
-        ClientUser user = (ClientUser) userAccess.getObject(username);
+    public List<Trade> getAllTrade(UUID userID) {
+        ClientUser user = (ClientUser) userAccess.getObject(userID);
 
         ArrayList<Trade> b = new ArrayList<>();
         for (UUID i : user.getTradeHistory()) {
@@ -149,12 +149,13 @@ public class TradeManager{
 
     /**
      * return the list of all unconfirmed trades that the user has
+     * @return
      */
-    public List<Trade> getUnconfirmed(String username) {
-        ClientUser user = (ClientUser) userAccess.getObject(username);
+    public List<Trade> getUnconfirmed(UUID userID) {
+        ClientUser user = (ClientUser) userAccess.getObject(userID);
         List<Trade> trade = new ArrayList<>();
 
-        for (Trade t : getAllTrade(username)) {
+        for (Trade t : getAllTrade(userID)) {
             if (t.getStatus().equals(TradeStatus.unconfirmed) && t.getCreator() != user.getId()) {
                 trade.add(t);
             }
@@ -166,9 +167,9 @@ public class TradeManager{
     /**
      * return the list of all incomplete trades that the user has
      */
-    public List<Trade> getIncomplete(String username) {
+    public List<Trade> getIncomplete(UUID userID) {
         List<Trade> trade = new ArrayList<>();
-        for (Trade t : getAllTrade(username)) {
+        for (Trade t : getAllTrade(userID)) {
             if (t.getStatus().equals(TradeStatus.incomplete)) {
                 trade.add(t);
             }
@@ -179,9 +180,9 @@ public class TradeManager{
     /**
      * return the list of all complete trades that the user has
      */
-    public List<Trade> getComplete(String username) {
+    public List<Trade> getComplete(UUID userID) {
         List<Trade> trade = new ArrayList<>();
-        for (Trade t : getAllTrade(username)) {
+        for (Trade t : getAllTrade(userID)) {
             if (t.getStatus().equals(TradeStatus.complete)) {
                 trade.add(t);
             }
@@ -193,18 +194,18 @@ public class TradeManager{
      * return the list of most recent three trades that the user has
      * if the user has less than three trades, return all the trades the user has
      */
-    public List<Trade> getTradeHistoryTop(String username) {
+    public List<Trade> getTradeHistoryTop(UUID userID) {
 
         List<Trade> trade = new ArrayList<>();
         int y = 0;
-        if (getAllTrade(username).size() < 3) {
-            trade.addAll(getAllTrade(username));
+        if (getAllTrade(userID).size() < 3) {
+            trade.addAll(getAllTrade(userID));
             return trade;
         }
-        for (int i = getAllTrade(username).size(); i > 0; i--) {
-            if (((!(getAllTrade(username).get(i).getStatus().equals(TradeStatus.unconfirmed))) &&
-                    (!(getAllTrade(username).get(i).getStatus().equals(TradeStatus.cancelled)))) && y != 3) {
-                trade.add(getAllTrade(username).get(i));
+        for (int i = getAllTrade(userID).size(); i > 0; i--) {
+            if (((!(getAllTrade(userID).get(i).getStatus().equals(TradeStatus.unconfirmed))) &&
+                    (!(getAllTrade(userID).get(i).getStatus().equals(TradeStatus.cancelled)))) && y != 3) {
+                trade.add(getAllTrade(userID).get(i));
                 y++;
             }
         }
@@ -214,8 +215,8 @@ public class TradeManager{
     /**
      * return the number of incomplete transactions that the user has
      */
-    public int getIncompleteTransaction(String username) {
-        ClientUser user = (ClientUser) userAccess.getObject(username);
+    public int getIncompleteTransaction(UUID userID) {
+        ClientUser user = (ClientUser) userAccess.getObject(userID);
 
         int number = 0;
         for (UUID i : user.getTradeHistory()) {
@@ -263,6 +264,22 @@ public class TradeManager{
             }
         }
         return result;
+    }
+
+    public void setStatus(Trade trade, TradeStatus status){
+        trade.setStatus(status);
+    }
+
+    public TradeStatus getTradeStatus(Trade trade){
+        return trade.getStatus();
+    }
+
+    public void setCreator(UUID tradeID, UUID creatorID){
+        getTrade(tradeID).setCreator(creatorID);
+    }
+
+    public UUID getId(Trade trade){
+        return trade.getId();
     }
 
 

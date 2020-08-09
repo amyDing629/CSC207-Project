@@ -1,28 +1,29 @@
-package Trade;
+package Inventory;
 
+import Trade.BorderGUIBuilder;
+import Trade.BorderGUINoTextArea;
+import Trade.BorderGUIWithThreeTextArea;
 import User.Entity.ClientUser;
-import User.UseCase.UserManager;
+import User.ItemApprovalManager;
+import User.UserManager;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.UUID;
 
-public class AcceptTradeGUIBuilder implements BorderGUIBuilder {
+public class WishBorrowBuilder implements BorderGUIBuilder {
+    InventoryController ic;
     BorderGUIWithThreeTextArea tg;
-    AcceptTradeController atc;
-    JFrame tf;
 
-    public AcceptTradeGUIBuilder(UUID user, TradeManager tm, UserManager um, JFrame tf){
+    public WishBorrowBuilder(ClientUser currUser, JFrame fr){
         tg = new BorderGUIWithThreeTextArea();
-        atc = new AcceptTradeController(user, tm, um, tg);
-        this.tf = tf;
+        ic = new InventoryController(currUser, tg, fr);
     }
 
     @Override
-    public void buildFrame(){
-        tg.setFrame(800, 400, "Accept Trade Session");
+    public void buildFrame() {
+        tg.setFrame(600, 200, "Edit WishBorrow Session");
 
     }
 
@@ -36,53 +37,58 @@ public class AcceptTradeGUIBuilder implements BorderGUIBuilder {
         tg.initializeMsg(msgArea);
         tg.setNorth(panelN);
 
+
+
     }
 
-    @Override
-    public void buildPanelE() {
+    public void buildPanelE(){
         JPanel panelE = new JPanel();
-        JButton agree = new JButton("agree");
-        JButton refuse = new JButton("refuse");
+        JButton add = new JButton("Add");
+        JButton delete = new JButton("delete");
         panelE.setLayout(new BoxLayout(panelE, BoxLayout.Y_AXIS));
-        panelE.add(agree);
-        panelE.add(refuse);
+        panelE.add(add);
+        panelE.add(delete);
         tg.setEast(panelE);
-        agree.addActionListener(new ActionListener() {
+
+        delete.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                atc.agreeBut(true);
+                ic.delButB();
+
             }
         });
-        refuse.addActionListener(new ActionListener() {
+
+        add.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                atc.agreeBut(false);
+                ic.addButB();
             }
         });
-    }
+
+
+    };
 
     @Override
     public void buildPanelW() {
-        JPanel panelW =  new JPanel();
-        JLabel tradeList = new JLabel("Available Trades");
-        JTextArea tradeArea = new JTextArea();
-        tg.initializeList(tradeArea);
-        atc.updateBut();
-        JScrollPane jsp= new JScrollPane(tradeArea);
+        JPanel panelW = new JPanel();
+        JLabel wishList = new JLabel("Wish Borrow List");
+        JTextArea wishArea = new JTextArea();
+        JScrollPane jsp= new JScrollPane(wishArea);
         panelW.setLayout(new BoxLayout(panelW, BoxLayout.Y_AXIS));
-        panelW.add(tradeList);
+        panelW.add(wishList);
         panelW.add(jsp);
-        panelW.setPreferredSize(new Dimension(380,370));
         tg.setWest(panelW);
+        tg.initializeList(wishArea);
+        ic.updateLstB();
     }
 
     @Override
     public void buildPanelS() {
-        JPanel panelS =  new JPanel();
-        JLabel input = new JLabel("input trade number");
-        JTextArea inputArea = new JTextArea("trade number");
+        JPanel panelS = new JPanel();
+        JLabel input = new JLabel("input item name");
+        JTextArea inputArea = new JTextArea("item name");
         JButton submit = new JButton("submit");
-        JButton back = new JButton("return to trade menu");
+        JButton back = new JButton("return");
         JButton update = new JButton("update");
         panelS.add(input);
         panelS.add(inputArea);
@@ -91,44 +97,45 @@ public class AcceptTradeGUIBuilder implements BorderGUIBuilder {
         panelS.add(update);
         tg.setSouth(panelS);
         tg.addInput("input", inputArea);
-        tg.setInput("input", "trade number");
         submit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String tradeNum = tg.getInput("input");
-                System.out.println(tradeNum);
-                atc.submitBut(tradeNum);
+                ic.submitButB();
             }
         });
         back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                atc.backBut(tf);
+                ic.backBut();
             }
         });
         update.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                atc.updateBut();
+                ic.updateButB();
             }
         });
+
+
     }
 
     @Override
     public void buildPanelC() {
-        JPanel panelC =  new JPanel();
-        JLabel currTradeL = new JLabel("Trade selected");
+        JPanel panelC = new JPanel();
+        JLabel currTradeL = new JLabel("item selected");
         JTextArea currArea = new JTextArea();
         panelC.setLayout(new BoxLayout(panelC, BoxLayout.Y_AXIS));
         panelC.add(currTradeL);
         panelC.add(currArea);
+        currArea.setText("no item selected");
         tg.setCenter(panelC);
         tg.initializeCurr(currArea);
-        atc.noTradeSelected();
+        ic.updateCurr();
 
     }
 
-    public BorderGUIWithThreeTextArea getTradeGUI(){
+    @Override
+    public BorderGUINoTextArea getTradeGUI() {
         return tg;
     }
 }

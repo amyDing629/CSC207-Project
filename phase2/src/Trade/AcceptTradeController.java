@@ -2,21 +2,22 @@ package Trade;
 
 import User.Entity.ClientUser;
 import User.UseCase.UserManager;
-
+import Trade.Trade;
 import javax.swing.*;
 import java.util.List;
+import java.util.UUID;
 import java.util.regex.Pattern;
 
 public class AcceptTradeController {
-    ClientUser currUser;
+    UUID currUser;
     TradeManager tm;
     UserManager um;
     List<Trade> tradeList;
     Trade currTrade;
     AcceptTradePresenter tp;
 
-    public AcceptTradeController(ClientUser currUser, TradeManager tm, UserManager um, BorderGUIWithThreeTextArea tg){
-        this.currUser = currUser;
+    public AcceptTradeController(UUID userID, TradeManager tm, UserManager um, BorderGUIWithThreeTextArea tg){
+        currUser = userID;
         this.tm = tm;
         this.um = um;
         tp = new AcceptTradePresenter(tg);
@@ -46,13 +47,11 @@ public class AcceptTradeController {
     }
 
     void agreeTrade(){
-        TradeEditor te = new TradeEditor();
-        te.setStatus(currTrade, TradeStatus.incomplete);
+        tm.setStatus(currTrade, TradeStatus.incomplete);
     }
 
     void refuseTrade(){
-        TradeEditor te = new TradeEditor();
-        te.setStatus(currTrade, TradeStatus.cancelled);
+        tm.setStatus(currTrade, TradeStatus.cancelled);
     }
 
     void agreeBut(Boolean agree){

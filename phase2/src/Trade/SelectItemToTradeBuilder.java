@@ -8,13 +8,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.UUID;
 
 public class SelectItemToTradeBuilder implements BorderGUIBuilder {
 
     SelectController sc;
     BorderGUIWithThreeTextArea bta;
 
-    public SelectItemToTradeBuilder(ClientUser currUser, TradeManager tm, UserManager um, Inventory iv, JFrame tFrame){
+    public SelectItemToTradeBuilder(UUID currUser, TradeManager tm, UserManager um, Inventory iv, JFrame tFrame){
         bta = new BorderGUIWithThreeTextArea();
         sc = new SelectController(currUser, tm, um, iv, bta, tFrame);
 
@@ -82,7 +83,7 @@ public class SelectItemToTradeBuilder implements BorderGUIBuilder {
         panelS.add(submit);
         panelS.add(back);
         bta.setSouth(panelS);
-        bta.initializeInput(inputArea);
+        bta.addInput("input", inputArea);
         submit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

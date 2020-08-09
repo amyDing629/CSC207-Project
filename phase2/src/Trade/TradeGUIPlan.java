@@ -3,7 +3,7 @@ package Trade;
 import javax.swing.*;
 import java.awt.*;
 
-interface TradeGUIPlan {
+public interface TradeGUIPlan {
     void setFrame(int Width, int Height, String name);
 
 

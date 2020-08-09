@@ -7,9 +7,10 @@ import User.UseCase.UserManager;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.UUID;
 
 public class TradeGUI_Main {
-    ClientUser currUser;
+    UUID currUser;
     UserManager um;
     TradeManager tm;
     Inventory iv;
@@ -20,7 +21,7 @@ public class TradeGUI_Main {
      * constructor
      * @param currUser the user that is using the system
      */
-    public TradeGUI_Main(ClientUser currUser, TradeManager tm, UserManager um, Inventory iv, JFrame cf){
+    public TradeGUI_Main(UUID currUser, TradeManager tm, UserManager um, Inventory iv, JFrame cf){
         this.currUser = currUser;
         this.tm = tm;
         this.um = um;
@@ -70,9 +71,7 @@ public class TradeGUI_Main {
                 frame.setVisible(false);
                 BorderGUIBuilder builder = new AcceptTradeGUIBuilder(currUser, tm, um, frame);
                 TradeGUIEngineer engineer = new TradeGUIEngineer(builder);
-
                 engineer.constructGUI();
-
                 TradeGUIPlan tg = engineer.getGUI();
                 tg.run();
 
@@ -85,11 +84,9 @@ public class TradeGUI_Main {
             //to do
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
-                BorderGUIBuilder builder = new CompleteTradeGUIBuilder(currUser, tm, um, frame);
+                BorderGUIBuilder builder = new CompleteTradeGUIBuilder(currUser, frame);
                 TradeGUIEngineer engineer = new TradeGUIEngineer(builder);
-
                 engineer.constructGUI();
-
                 TradeGUIPlan tg = engineer.getGUI();
                 tg.run();
             }
@@ -99,7 +96,7 @@ public class TradeGUI_Main {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
-                BorderGUIBuilder builder = new TradeHistoryGUIBuilder(currUser, tm, um, frame);
+                BorderGUIBuilder builder = new TradeHistoryGUIBuilder(currUser, frame);
                 TradeGUIEngineer engineer = new TradeGUIEngineer(builder);
                 engineer.constructGUI();
                 TradeGUIPlan tg = engineer.getGUI();
