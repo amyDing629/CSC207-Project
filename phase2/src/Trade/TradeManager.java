@@ -1,9 +1,10 @@
 package Trade;
 
 import Inventory.Item;
-import User.ClientUser;
-import User.DataAccess;
-import User.UserManager;
+import User.Entity.ClientUser;
+import User.Gateway.DataAccess;
+import User.Gateway.UserDataAccess;
+import User.UseCase.UserManager;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ import java.util.UUID;
  */
 public class TradeManager{
     DataAccess dataAccess = new TradeDataAccess();
+    DataAccess userAccess = new UserDataAccess();
 
     /**
      * Allow the currentUser to create a one-way trade with input otherUserId, item, and trade duration.
@@ -63,10 +65,212 @@ public class TradeManager{
 
 
     /**
-     * check the status of the current trade
-     * @param currTrade the current trade
-     * @return the status
+     * confirm trade(agree with the trade)
+     *
+     * @param id the id current trade
      */
+    void confirmTrade(UUID id) {
+        Trade trade = getTrade(id);
+        trade.setStatus(TradeStatus.incomplete);
+        dataAccess.updateSer();
+    }
+
+    /**
+     * set the status of trade to complete and make trade
+     *
+     * @param id the id current trade
+     */
+    void completeTrade(UUID id) {
+        Trade trade = getTrade(id);
+        trade.setStatus(TradeStatus.complete);
+        dataAccess.updateSer();
+    }
+
+    /**
+     * set the status of trade to cancelled
+     *
+     * @param id the id current trade
+     */
+    void cancelTrade(UUID id) {
+        Trade trade = getTrade(id);
+        trade.setStatus(TradeStatus.cancelled);
+        dataAccess.updateSer();
+    }
+    //move to userManager
+
+    void makeTrade(UUID id) {
+        UserManager um = new UserManager();
+        Trade currTrade = getTrade(id);
+
+        if (currTrade.getType().equals("oneway")) {
+            ClientUser bor = um.getUser(currTrade.getUsers().get(0));
+            ClientUser lend = um.getUser(currTrade.getUsers().get(1));
+
+            System.out.println(bor);
+            System.out.println(bor.getWishBorrow());
+            System.out.println(currTrade.getItemList());
+            System.out.println(currTrade.getItemList().get(0).getName());
+
+            bor.getWishBorrow().remove(currTrade.getItemList().get(0).getName());
+            lend.getWishLend().remove(currTrade.getItemList().get(0).getName());
+            bor.setBorrowCounter(bor.getBorrowCounter()+1);
+            bor.setLendCounter(bor.getLendCounter()+1);
+
+        }else{
+            ClientUser u1 = um.getUser(currTrade.getUsers().get(0));
+            ClientUser u2 = um.getUser(currTrade.getUsers().get(1));
+
+            u1.getWishBorrow().remove(currTrade.getItemList().get(1).getName());
+            u1.getWishLend().remove(currTrade.getItemList().get(0).getName());
+            u2.getWishBorrow().remove(currTrade.getItemList().get(0).getName());
+            u2.getWishLend().remove(currTrade.getItemList().get(1).getName());
+
+            u1.setBorrowCounter(u1.getBorrowCounter()+1);
+            u1.setLendCounter(u1.getLendCounter()+1);
+            u2.setBorrowCounter(u2.getBorrowCounter()+1);
+            u2.setLendCounter(u2.getLendCounter()+1);
+        }
+
+    }
+
+
+    /**
+     * return the list of all trades that the user has
+     */
+    public List<Trade> getAllTrade(String username) {
+        ClientUser user = (ClientUser) userAccess.getObject(username);
+
+        ArrayList<Trade> b = new ArrayList<>();
+        for (UUID i : user.getTradeHistory()) {
+            b.add(getTrade(i));
+        }
+        return b;
+    }
+
+    /**
+     * return the list of all unconfirmed trades that the user has
+     */
+    public List<Trade> getUnconfirmed(String username) {
+        ClientUser user = (ClientUser) userAccess.getObject(username);
+        List<Trade> trade = new ArrayList<>();
+
+        for (Trade t : getAllTrade(username)) {
+            if (t.getStatus().equals(TradeStatus.unconfirmed) && t.getCreator() != user.getId()) {
+                trade.add(t);
+            }
+        }
+        return trade;
+    }
+
+
+    /**
+     * return the list of all incomplete trades that the user has
+     */
+    public List<Trade> getIncomplete(String username) {
+        List<Trade> trade = new ArrayList<>();
+        for (Trade t : getAllTrade(username)) {
+            if (t.getStatus().equals(TradeStatus.incomplete)) {
+                trade.add(t);
+            }
+        }
+        return trade;
+    }
+
+    /**
+     * return the list of all complete trades that the user has
+     */
+    public List<Trade> getComplete(String username) {
+        List<Trade> trade = new ArrayList<>();
+        for (Trade t : getAllTrade(username)) {
+            if (t.getStatus().equals(TradeStatus.complete)) {
+                trade.add(t);
+            }
+        }
+        return trade;
+    }
+
+    /**
+     * return the list of most recent three trades that the user has
+     * if the user has less than three trades, return all the trades the user has
+     */
+    public List<Trade> getTradeHistoryTop(String username) {
+
+        List<Trade> trade = new ArrayList<>();
+        int y = 0;
+        if (getAllTrade(username).size() < 3) {
+            trade.addAll(getAllTrade(username));
+            return trade;
+        }
+        for (int i = getAllTrade(username).size(); i > 0; i--) {
+            if (((!(getAllTrade(username).get(i).getStatus().equals(TradeStatus.unconfirmed))) &&
+                    (!(getAllTrade(username).get(i).getStatus().equals(TradeStatus.cancelled)))) && y != 3) {
+                trade.add(getAllTrade(username).get(i));
+                y++;
+            }
+        }
+        return trade;
+    }
+
+    /**
+     * return the number of incomplete transactions that the user has
+     */
+    public int getIncompleteTransaction(String username) {
+        ClientUser user = (ClientUser) userAccess.getObject(username);
+
+        int number = 0;
+        for (UUID i : user.getTradeHistory()) {
+
+            if (getTrade(i).getStatus().equals(TradeStatus.incomplete)) {
+                number++;
+            }
+        }
+        return number;
+    }
+
+    /**
+     * return the number of transactions of the user has in seven days from the most recent trade
+     */
+    public int getTradeNumber(String username) {
+        ClientUser user = (ClientUser) userAccess.getObject(username);
+
+        if(user.getTradeHistory().size() == 0){return 0;}
+        Trade s = getTrade(user.getTradeHistory().get(user.getTradeHistory().size() - 1));
+        LocalDateTime x  = s.getCreateTime();
+        LocalDateTime y = x.minusDays(7);
+        int number = 1;
+        for (UUID i : user.getTradeHistory()){
+            if(getTrade(i).getCreateTime().isAfter(y) && getTrade(i).getCreateTime().isBefore(x)){
+                number ++;
+            }
+        }
+        return number;
+    }
+
+    /**
+     * return a list of transactions of the user has in the most recent seven days
+     *
+     * @param username the username of the client user that is querying the list of trades in the most recent seven days
+     */
+    public List<Trade> getWeekTradeList(String username) {
+        ClientUser user = (ClientUser) userAccess.getObject(username);
+
+        List<Trade> result = new ArrayList<>();
+        LocalDateTime x = LocalDateTime.now();
+        LocalDateTime y = x.minusDays(7);
+        for (UUID id : user.getTradeHistory()) {
+            if (getTrade(id).getCreateTime().isAfter(y) && getTrade(id).getCreateTime().isBefore(x)) {
+                result.add(getTrade(id));
+            }
+        }
+        return result;
+    }
+
+
+//    /**
+//     * check the status of the current trade
+//     * @param currTrade the current trade
+//     * @return the status
+//     */
 //    String checkTradeMeeting(Trade currTrade) {
 //        if (currTrade.getStatus().equals(TradeStatus.unconfirmed)) {
 //            return "confirm trade";
@@ -93,180 +297,6 @@ public class TradeManager{
 //            return "complete";
 //        }
 //    }
-
-    /**
-     * confirm trade(agree with the trade)
-     * @param currTrade current trade
-     */
-    void confirmTrade(Trade currTrade) {
-        currTrade.setStatus(TradeStatus.incomplete);
-    }
-
-    /**
-     * set the status of trade to complete and make trade
-     * @param currTrade current trade
-     */
-    void completeTrade(Trade currTrade){
-        currTrade.setStatus(TradeStatus.complete);
-    }
-    /**
-     * set the status of trade to cancelled
-     * @param currTrade current trade
-     */
-    void cancelTrade(Trade currTrade){
-        currTrade.setStatus(TradeStatus.cancelled);
-    }
-    //move to userManager
-
-    void makeTrade(Trade currTrade) {
-        UserManager um = new UserManager();
-        if (currTrade.getType().equals("oneway")){
-            ClientUser bor = um.getUser(currTrade.getUsers().get(0));
-            ClientUser lend = um.getUser(currTrade.getUsers().get(1));
-            System.out.println(bor);
-            System.out.println(bor.getWishBorrow());
-            System.out.println(currTrade.getItemList());
-            System.out.println(currTrade.getItemList().get(0).getName());
-            bor.getWishBorrow().remove(currTrade.getItemList().get(0).getName());
-            lend.getWishLend().remove(currTrade.getItemList().get(0).getName());
-            bor.setBorrowCounter(bor.getBorrowCounter()+1);
-            bor.setLendCounter(bor.getLendCounter()+1);
-
-        }else{
-            ClientUser u1 = um.getUser(currTrade.getUsers().get(0));
-            ClientUser u2 = um.getUser(currTrade.getUsers().get(1));
-            u1.getWishBorrow().remove(currTrade.getItemList().get(1).getName());
-            u1.getWishLend().remove(currTrade.getItemList().get(0).getName());
-            u2.getWishBorrow().remove(currTrade.getItemList().get(0).getName());
-            u2.getWishLend().remove(currTrade.getItemList().get(1).getName());
-            u1.setBorrowCounter(u1.getBorrowCounter()+1);
-            u1.setLendCounter(u1.getLendCounter()+1);
-            u2.setBorrowCounter(u2.getBorrowCounter()+1);
-            u2.setLendCounter(u2.getLendCounter()+1);
-        }
-
-
-    }
-
-
-    /**
-     * return the list of all trades that the user has
-     */
-    public List<Trade> getAllTrade(ClientUser user){
-        ArrayList<Trade> b = new ArrayList<>();
-        for(UUID i: user.getTradeHistory()){
-            b.add(getTrade(i));
-        }
-        return b;
-    }
-
-    /**
-     * return the list of all unconfirmed trades that the user has
-     */
-    public List<Trade> getUnconfirmed(ClientUser user) {
-        List<Trade> trade=new ArrayList<>();
-        for(Trade t: getAllTrade(user)){
-            if(t.getStatus().equals(TradeStatus.unconfirmed) && t.getCreator()!=user.getId()){
-                trade.add(t);
-            }
-        }
-        return trade;
-    }
-
-
-    /**
-     * return the list of all incomplete trades that the user has
-     */
-    public List<Trade> getIncomplete(ClientUser user){
-        List<Trade> trade=new ArrayList<>();
-        for(Trade t: getAllTrade(user)){
-            if(t.getStatus().equals(TradeStatus.incomplete)){
-                trade.add(t);
-            }
-        }
-        return trade;
-    }
-
-    /**
-     * return the list of all complete trades that the user has
-     */
-    public List<Trade> getComplete(ClientUser user) {
-        List<Trade> trade=new ArrayList<>();
-        for(Trade t: getAllTrade(user)){
-            if(t.getStatus().equals(TradeStatus.complete)){
-                trade.add(t);
-            }
-        }
-        return trade;
-    }
-
-    /**
-     * return the list of most recent three trades that the user has
-     * if the user has less than three trades, return all the trades the user has
-     */
-    public List<Trade> getTradeHistoryTop(ClientUser user) {
-        List<Trade> trade=new ArrayList<>();
-        int y = 0;
-        if(getAllTrade(user).size() < 3){
-            trade.addAll(getAllTrade(user));
-            return trade;
-        }
-        for (int i = getAllTrade(user).size(); i>0;i-- ) {
-            if (((!(getAllTrade(user).get(i).getStatus().equals(TradeStatus.unconfirmed))) &&
-                    (!(getAllTrade(user).get(i).getStatus().equals(TradeStatus.cancelled))))&&y!=3) {
-                trade.add(getAllTrade(user).get(i));
-                y++;
-            }
-        }
-        return trade;
-    }
-
-    /**
-     * return the number of incomplete transactions that the user has
-     */
-    public int getIncompleteTransaction(ClientUser user) {
-        int number=0;
-        for (UUID i : user.getTradeHistory()) {
-            //System.out.println(getTrade(i));
-            if (getTrade(i).getStatus().equals(TradeStatus.incomplete)) {
-                number++;
-            }
-        }
-        return number;
-    }
-
-    /**
-     * return the number of transactions of the user has in seven days from the most recent trade
-     */
-    public int getTradeNumber(ClientUser user) {
-        if(user.getTradeHistory().size() == 0){return 0;}
-        Trade s = getTrade(user.getTradeHistory().get(user.getTradeHistory().size() - 1));
-        LocalDateTime x  = s.getCreateTime();
-        LocalDateTime y = x.minusDays(7);
-        int number = 1;
-        for (UUID i : user.getTradeHistory()){
-            if(getTrade(i).getCreateTime().isAfter(y) && getTrade(i).getCreateTime().isBefore(x)){
-                number ++;
-            }
-        }
-        return number;
-    }
-
-    /**
-     * return a list of transactions of the user has in the most recent seven days
-     * @param user the client user that is querying the list of trades in the most recent seven days
-     */
-    public List<Trade> getWeekTradeList(ClientUser user) {
-        List<Trade> result = new ArrayList<Trade>();
-        LocalDateTime x  = LocalDateTime.now();
-        LocalDateTime y = x.minusDays(7);
-        for (UUID id: user.getTradeHistory()) {
-            if (getTrade(id).getCreateTime().isAfter(y) && getTrade(id).getCreateTime().isBefore(x)) {
-                result.add(getTrade(id));
-            }
-        }return result;
-    }
-
 }
 
 

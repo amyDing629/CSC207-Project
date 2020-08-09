@@ -1,5 +1,9 @@
-package User;
+package User.Adapter;
 
+
+import User.Entity.ClientUser;
+import User.UseCase.ItemApprovalManager;
+import User.UseCase.UserManager;
 
 import java.util.ArrayList;
 
@@ -7,15 +11,16 @@ public class removeActions {
     ClientUser user;
     UserManager um;
     ItemApprovalManager iam;
-    public removeActions(ClientUser user,UserManager um,ItemApprovalManager iam){
-        this.user=user;
-        this.um=um;
-        this.iam=iam;
+
+    public removeActions(ClientUser user, UserManager um, ItemApprovalManager iam) {
+        this.user = user;
+        this.um = um;
+        this.iam = iam;
     }
 
 
-    public void deleteAction(ArrayList<String> action){
-        String check=action.get(1);
+    public void deleteAction(ArrayList<String> action) {
+        String check = action.get(1);
         switch (check) {
             case "password":
                 deletePassWord(action.get(0));

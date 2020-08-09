@@ -1,9 +1,8 @@
 package Trade;
 
 import Inventory.Inventory;
-import Inventory.Item;
-import User.ClientUser;
-import User.UserManager;
+import User.Entity.ClientUser;
+import User.UseCase.UserManager;
 
 import javax.swing.*;
 import java.awt.*;

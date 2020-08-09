@@ -1,7 +1,7 @@
 package Trade;
 
-import User.ClientUser;
-import User.UserManager;
+import User.Entity.ClientUser;
+import User.UseCase.UserManager;
 
 import javax.swing.*;
 import java.util.List;
@@ -74,7 +74,7 @@ public class AcceptTradeController {
     void submitBut(String tradeNum){
         tp.resetInputArea();
         if (!checkInput(tradeNum)){
-            tp.wrongInput();;
+            tp.wrongInput();
         }else{
             currTrade = getCurrTrade(tradeNum);
             tp.presentTradeInfo(currTrade);

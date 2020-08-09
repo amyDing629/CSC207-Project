@@ -1,4 +1,6 @@
-package User;
+package User.Gateway;
+
+import User.Entity.ClientUser;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -37,6 +39,13 @@ public class UserDataAccess implements DataAccess {
     public List<Object> getList() {
         deSerialize();
         return new ArrayList<>(userList);
+    }
+
+    public void setList(List<Object> userList) {
+        this.userList.clear();
+        for(Object a: userList){
+            this.userList.add((ClientUser)a);
+        }
     }
 
     @Override

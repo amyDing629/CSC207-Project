@@ -1,4 +1,6 @@
-package User;
+package User.GUI;
+
+import User.Adapter.ILoginSystemBoundary;
 
 public interface View {
 

@@ -1,10 +1,11 @@
 package Main.UI;
 
 import Inventory.Inventory;
-import Inventory.Item;
-import User.*;
+import User.Entity.ClientUser;
+import User.UseCase.AdminActivityManager;
+import User.UseCase.ItemApprovalManager;
+import User.UseCase.UserManager;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 /**

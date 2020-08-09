@@ -5,8 +5,8 @@ import Trade.MeetingSystem.Adapter.MainViewPresenter;
 import Trade.MeetingSystem.Entity.Meeting;
 import Trade.MeetingSystem.MeetingStatus;
 import Trade.MeetingSystem.UseCase.MeetingActionManager;
-import User.ClientUser;
-import User.UserManager;
+import User.Entity.ClientUser;
+import User.UseCase.UserManager;
 
 import javax.swing.*;
 import java.util.List;

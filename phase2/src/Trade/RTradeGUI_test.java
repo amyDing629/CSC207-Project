@@ -2,12 +2,11 @@ package Trade;
 
 import Inventory.Inventory;
 import Inventory.Item;
-import User.ClientUser;
-import User.UserManager;
+import User.Entity.ClientUser;
+import User.UseCase.UserManager;
 
 import javax.swing.*;
 import java.io.IOException;
-import java.util.regex.Pattern;
 
 public class RTradeGUI_test {
     public static void main(String[] args) throws IOException {

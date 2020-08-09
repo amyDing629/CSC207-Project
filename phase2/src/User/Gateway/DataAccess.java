@@ -1,4 +1,4 @@
-package User;
+package User.Gateway;
 
 
 import java.util.List;
@@ -21,6 +21,9 @@ public interface DataAccess {
     void updateSer(); // write list to ser
 
     void deSerialize(); // write ser to list
+
+    void setList(List<Object> userList);
+
 
 //    boolean hasObject(String name);
 

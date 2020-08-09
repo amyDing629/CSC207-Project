@@ -3,6 +3,7 @@ package Trade.MeetingSystem.Adapter;
 import Trade.MeetingSystem.UseCase.DateTime;
 
 import java.time.LocalDateTime;
+import java.util.regex.Pattern;
 
 public class TimePlaceInputController {
 
@@ -29,8 +30,10 @@ public class TimePlaceInputController {
     }
 
     boolean assessPlaceInput(String inputAddress) {
+        Pattern pattern = Pattern.compile("^\\w+([ .\\w]*)$");
         String trimmedInput = inputAddress.trim();
-        return trimmedInput.matches("^\\w+([ .\\w]*)$");
+        return pattern.matcher(trimmedInput).matches();
+//        return trimmedInput.matches("^\\w+([ .\\w]*)$");
     }
 
 

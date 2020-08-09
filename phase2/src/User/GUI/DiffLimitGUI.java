@@ -1,13 +1,17 @@
-package User;
+package User.GUI;
 
 import Inventory.Inventory;
 import Main.UI.UIcontoller;
 import Trade.TradeManager;
+import User.Entity.ClientUser;
+import User.UseCase.AdminActivityManager;
+import User.UseCase.ItemApprovalManager;
+import User.UseCase.UserManager;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class TradeLimitGUI {
+public class DiffLimitGUI {
     UserManager um;
     TradeManager tm;
     ItemApprovalManager iam;
@@ -16,7 +20,7 @@ public class TradeLimitGUI {
     AdminActivityManager aam;
     JFrame pFrame;
     JFrame frame;
-    public TradeLimitGUI(UserManager um, TradeManager tm, Inventory iv, ItemApprovalManager iam, AdminActivityManager aam,UIcontoller uc ,JFrame pFrame) {
+    public DiffLimitGUI(UserManager um, TradeManager tm, Inventory iv, ItemApprovalManager iam, AdminActivityManager aam,UIcontoller uc ,JFrame pFrame) {
         this.um = um;
         this.tm = tm;
         this.iam=iam;
@@ -70,8 +74,8 @@ public class TradeLimitGUI {
         });
         submitButton.addActionListener(e -> {
             frame.setVisible(false);
-            aam.setWeekTransactionLimit(um.getUser(userInput.getText()),Integer.parseInt(userInput1.getText()));
-            JOptionPane.showMessageDialog(null, "success freeeze");
+            aam.setDiff(um.getUser(userInput.getText()),Integer.parseInt(userInput1.getText()));
+            JOptionPane.showMessageDialog(null, "success changed limit");
             UserFreezeSystem d = new UserFreezeSystem(um,tm,iv,iam,aam,uc,frame);
             d.run(um.getUsername(b));
         });

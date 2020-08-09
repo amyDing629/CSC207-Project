@@ -1,14 +1,15 @@
-package User;
+package User.GUI;
 
 import Inventory.Inventory;
-import Main.UI.ChangePass;
 import Main.UI.UIcontoller;
 import Trade.TradeManager;
+import User.Entity.ClientUser;
+import User.UseCase.AdminActivityManager;
+import User.UseCase.ItemApprovalManager;
+import User.UseCase.UserManager;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class editInfoGUI {
     UserManager um;
@@ -71,6 +72,7 @@ public class editInfoGUI {
         JButton CreateAdminGUI = new JButton("Create new Admin");
         CreateAdminGUI.setPreferredSize(new Dimension(300, 30));
         panel.add(CreateAdminGUI);
+
         JButton AddItemSystem = new JButton("Add Item System");
         AddItemSystem.setPreferredSize(new Dimension(300, 30));
         panel.add(AddItemSystem);

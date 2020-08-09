@@ -1,7 +1,10 @@
-package User;
+package User.UseCase;
 
 import Trade.Trade;
 import Trade.TradeManager;
+import User.Entity.ClientUser;
+import User.Gateway.DataAccess;
+import User.Gateway.UserDataAccess;
 
 import java.time.LocalDateTime;
 import java.util.*;
@@ -14,6 +17,19 @@ public class UserManager {
 
 
     DataAccess dataAccess = new UserDataAccess();
+
+    /**
+     * Return the list of ClientUser
+     *
+     * @return list of ClientUser
+     */
+    public List<ClientUser> getUserList() {
+        List<ClientUser> result = new ArrayList<>();
+        for (Object o : dataAccess.getList()) {
+            result.add((ClientUser) o);
+        }
+        return result;
+    }
 
     /**
      * Return the ClientUser with such name, or return null if there no such user.
@@ -50,7 +66,11 @@ public class UserManager {
      */
     public boolean verifyUser(String name, String password) {
         ClientUser user = getUser(name);
-        return user.getPassword().equals(password);
+        if (user == null) {
+            return false;
+        } else {
+            return user.getPassword().equals(password);
+        }
     }
 
 
@@ -66,19 +86,21 @@ public class UserManager {
     }
 
 
-    public int readDiff(ClientUser user) {
-
+    public int readDiff(String username) {
+        ClientUser user = getUser(username);
         return user.getLendCounter() - user.getBorrowCounter();
     }
 
     /**
-     * @param tm the object that edits the Item list of input gateway
-     * @param user the input user
-     * return the list of most frequent three traders that the user trades with
-     * if the user trades with less than three traders, return all the traders the user trades with
+     * @param username the username of the input user
+     *                 return the list of most frequent three traders that the user trades with
+     *                 if the user trades with less than three traders, return all the traders the user trades with
      */
-    public List<String> getFrequentUser(TradeManager tm, ClientUser user) {
-        List<Trade> a = tm.getAllTrade(user);
+    public List<String> getFrequentUser(String username) {
+        TradeManager tm = new TradeManager();
+        ClientUser user = getUser(username);
+
+        List<Trade> a = tm.getAllTrade(username);
         HashMap<UUID, Integer> b = new HashMap<>();
         for (Trade c : a) {
             for (UUID d : c.getUsers()) {

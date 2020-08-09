@@ -1,4 +1,4 @@
-package User;
+package User.Adapter;
 
 public interface ILoginSystemBoundary {
 

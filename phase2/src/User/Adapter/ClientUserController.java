@@ -1,23 +1,18 @@
-package User;
+package User.Adapter;
 
 import Inventory.Inventory;
 import Inventory.Item;
 import Trade.TradeManager;
+import User.Entity.ClientUser;
+import User.UseCase.ItemApprovalManager;
+import User.UseCase.UserManager;
 
 import java.util.UUID;
 
 public class ClientUserController {
-    protected ClientUser user;
     protected final UserManager um;
     protected final ItemApprovalManager iam;
     protected final TradeManager tm;
-
-    public ClientUserController(ClientUser clientUser, UserManager um, ItemApprovalManager iam, TradeManager tm){
-        user = clientUser;
-        this.um = um;
-        this.iam = iam;
-        this.tm = tm;
-    }
 
     public ClientUserController(UserManager um, ItemApprovalManager iam, TradeManager tm){
         this.um = um;
@@ -25,7 +20,8 @@ public class ClientUserController {
         this.tm = tm;
     }
 
-    public boolean getIsAdmin(){return user.getIsAdmin();}
+
+    public boolean getIsAdmin(ClientUser user){return user.getIsAdmin();}
 
     public boolean checkItemExist(String item, Inventory iv){
         for (Item n : iv.getLendingList()) {
@@ -44,7 +40,7 @@ public class ClientUserController {
         return um;
     }
 
-    public String getUsername(){
+    public String getUsername(ClientUser user){
         return user.getUsername();
     }
 

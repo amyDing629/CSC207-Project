@@ -1,9 +1,7 @@
 package User.PointSystem;
 
 import Trade.Trade;
-import User.ClientUser;
-import User.UserManager;
-import Trade.TradeManager;
+import User.Entity.ClientUser;
 
 import javax.swing.*;
 import java.awt.*;

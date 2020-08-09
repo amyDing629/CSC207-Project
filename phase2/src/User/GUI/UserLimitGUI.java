@@ -1,13 +1,17 @@
-package User;
+package User.GUI;
 
 import Inventory.Inventory;
 import Main.UI.UIcontoller;
 import Trade.TradeManager;
+import User.Entity.ClientUser;
+import User.UseCase.AdminActivityManager;
+import User.UseCase.ItemApprovalManager;
+import User.UseCase.UserManager;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class AddItemSystemGUI {
+public class UserLimitGUI {
     UserManager um;
     TradeManager tm;
     ItemApprovalManager iam;
@@ -16,7 +20,7 @@ public class AddItemSystemGUI {
     AdminActivityManager aam;
     JFrame pFrame;
     JFrame frame;
-    public AddItemSystemGUI(UserManager um, TradeManager tm, Inventory iv, ItemApprovalManager iam, AdminActivityManager aam,UIcontoller uc ,JFrame pFrame) {
+    public UserLimitGUI(UserManager um, TradeManager tm, Inventory iv, ItemApprovalManager iam, AdminActivityManager aam,UIcontoller uc ,JFrame pFrame) {
         this.um = um;
         this.tm = tm;
         this.iam=iam;
@@ -26,7 +30,7 @@ public class AddItemSystemGUI {
         this.pFrame=pFrame;
     }
     public void run(String name){
-        frame = new JFrame("User Freeze System");
+        frame = new JFrame("User Limit System");
         frame.setSize(500, 700);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JPanel panel = new JPanel();
@@ -44,17 +48,21 @@ public class AddItemSystemGUI {
 
     private void placeComponents(JFrame frame, JPanel panel, ClientUser b){
 
-        JButton editButton = new JButton("Add item");
+        JButton editButton = new JButton("trade limit");
         editButton.setPreferredSize(new Dimension(300, 30));
 
-        JButton tradeButton = new JButton("Approve item from client user");
+        JButton tradeButton = new JButton("Incomplete Transaction limit");
         tradeButton.setPreferredSize(new Dimension(300, 30));
+
+        JButton inventoryButton = new JButton("difference between borrowed and lend");
+        inventoryButton.setPreferredSize(new Dimension(300, 30));
 
         JButton exitButton = new JButton("quit to menu");
         exitButton.setPreferredSize(new Dimension(300, 30));
 
         panel.add(editButton);
         panel.add(tradeButton);
+        panel.add(inventoryButton);
         panel.add(exitButton);
         exitButton.addActionListener(e -> {
             frame.setVisible(false);
@@ -62,12 +70,17 @@ public class AddItemSystemGUI {
         });
         editButton.addActionListener(e -> {
             frame.setVisible(false);
-            AddItemGUI d=new AddItemGUI(um,tm,iv,iam,aam,uc,frame);
+           TradeLimitGUI d=new TradeLimitGUI(um,tm,iv,iam,aam,uc,frame);
             d.run(um.getUsername(b));
         });
         tradeButton.addActionListener(e -> {
             frame.setVisible(false);
-            ApproveItemGUI d=new ApproveItemGUI(um,tm,iv,iam,aam,uc,frame);
+            IncompleteLimitGUI d=new IncompleteLimitGUI(um,tm,iv,iam,aam,uc,frame);
+            d.run(um.getUsername(b));
+        });
+        inventoryButton.addActionListener(e -> {
+            frame.setVisible(false);
+            DiffLimitGUI d=new DiffLimitGUI (um,tm,iv,iam,aam,uc,frame);
             d.run(um.getUsername(b));
         });
     }

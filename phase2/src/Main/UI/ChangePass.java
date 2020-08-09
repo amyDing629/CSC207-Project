@@ -1,6 +1,6 @@
 package Main.UI;
-import User.ClientUser;
-import User.UserManager;
+import User.Entity.ClientUser;
+import User.UseCase.UserManager;
 
 import java.util.Scanner;
 //check

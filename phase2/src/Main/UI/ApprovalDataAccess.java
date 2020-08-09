@@ -1,8 +1,6 @@
 package Main.UI;
-import Inventory.Item;
-import User.ClientUser;
-import User.ClientUserController;
-import User.ItemApprovalManager;
+
+import User.UseCase.ItemApprovalManager;
 
 import java.io.*;
 import java.util.ArrayList;

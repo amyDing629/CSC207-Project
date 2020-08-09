@@ -1,8 +1,9 @@
 package Inventory;
 
-import User.DataAccess;
+import User.Gateway.DataAccess;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * [use case class]
@@ -13,10 +14,24 @@ public class Inventory {
     DataAccess dataAccess = new InvDataAccess();
 
     /**
+     * Return the lendingList of all users
+     *
+     * @return the lending list
+     */
+    public List<Item> getLendingList() {
+        ArrayList<Item> result = new ArrayList<>();
+        for (Object item : dataAccess.getList()) {
+            result.add((Item) item);
+        }
+        return result;
+    }
+
+    /**
      * get a list of items that is not in the trade
+     *
      * @return available item list
      */
-    public ArrayList<Item> getAvailableList() {
+    public List<Item> getAvailableList() {
         ArrayList<Item> result = new ArrayList<>();
         for (Object item : dataAccess.getList()) {
             Item i = (Item) item;

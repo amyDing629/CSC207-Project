@@ -1,34 +1,34 @@
-package User;
+package User.GUI;
 
-import Inventory.*;
-import Main.UI.UIcontoller;
+import Inventory.InventoryGUI;
 import Trade.TradeGUI_Main;
-import Trade.TradeManager;
+import User.Adapter.ILoginSystemBoundary;
+import User.Entity.ClientUser;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class ClientUserGUI {
-    UserManager um;
-    TradeManager tm;
-    ItemApprovalManager iam;
-    UIcontoller uc;
-    Inventory iv;
-    AdminActivityManager aam;
+public class ClientUserGUI implements View {
+    //    UserManager um;
+//    TradeManager tm;
+//    ItemApprovalManager iam;
+//    UIcontoller uc;
+//    Inventory iv;
+//    AdminActivityManager aam;
     JFrame pFrame;
     JFrame frame;
-    public ClientUserGUI(UserManager um, TradeManager tm, Inventory iv, ItemApprovalManager iam, AdminActivityManager aam,UIcontoller uc ,JFrame pFrame) {
-        this.um = um;
-        this.tm = tm;
-        this.iam=iam;
-        this.uc=uc;
-        this.iv=iv;
-        this.aam=aam;
-        this.pFrame=pFrame;
-    }
-    public void run(String name){
+
+//    public ClientUserGUI(UserManager um, TradeManager tm, Inventory iv, ItemApprovalManager iam, AdminActivityManager aam,UIcontoller uc ,JFrame pFrame) {
+//        this.um = um;
+//        this.tm = tm;
+//        this.iam=iam;
+//        this.uc=uc;
+//        this.iv=iv;
+//        this.aam=aam;
+//        this.pFrame=pFrame;
+//    }
+
+    public void run(String name) {
         frame = new JFrame("Login Success");
         frame.setSize(500, 700);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -100,8 +100,23 @@ public class ClientUserGUI {
 
         tradeButton.addActionListener(e -> {
             frame.setVisible(false);
-            TradeGUI_Main d = new TradeGUI_Main(b,tm,um,iv,frame);
+            TradeGUI_Main d = new TradeGUI_Main(b, tm, um, iv, frame);
             d.run();
         });
+    }
+
+    @Override
+    public ILoginSystemBoundary getPresenter() {
+        return null;
+    }
+
+    @Override
+    public void setPresenter(ILoginSystemBoundary presenter) {
+
+    }
+
+    @Override
+    public void updateUIComponent() {
+
     }
 }

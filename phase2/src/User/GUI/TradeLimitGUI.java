@@ -1,13 +1,17 @@
-package User;
+package User.GUI;
 
 import Inventory.Inventory;
 import Main.UI.UIcontoller;
 import Trade.TradeManager;
+import User.Entity.ClientUser;
+import User.UseCase.AdminActivityManager;
+import User.UseCase.ItemApprovalManager;
+import User.UseCase.UserManager;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class FreeUserGUI {
+public class TradeLimitGUI {
     UserManager um;
     TradeManager tm;
     ItemApprovalManager iam;
@@ -16,7 +20,7 @@ public class FreeUserGUI {
     AdminActivityManager aam;
     JFrame pFrame;
     JFrame frame;
-    public FreeUserGUI(UserManager um, TradeManager tm, Inventory iv, ItemApprovalManager iam, AdminActivityManager aam,UIcontoller uc ,JFrame pFrame) {
+    public TradeLimitGUI(UserManager um, TradeManager tm, Inventory iv, ItemApprovalManager iam, AdminActivityManager aam,UIcontoller uc ,JFrame pFrame) {
         this.um = um;
         this.tm = tm;
         this.iam=iam;
@@ -26,7 +30,7 @@ public class FreeUserGUI {
         this.pFrame=pFrame;
     }
     public void run(String name){
-        frame = new JFrame("Freeze User");
+        frame = new JFrame("Trade limit");
         frame.setSize(500, 700);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JPanel panel = new JPanel();
@@ -44,7 +48,7 @@ public class FreeUserGUI {
 
     private void placeComponents(JFrame frame, JPanel panel, ClientUser b){
 
-        JLabel textLabel = new JLabel("Please enter the user's username below");
+        JLabel textLabel = new JLabel("Please enter the user's username and the limit below");
         textLabel.setPreferredSize(new Dimension(300, 30));
         panel.add(textLabel);
 
@@ -52,6 +56,10 @@ public class FreeUserGUI {
         JTextField userInput = new JTextField(30);
         userInput.setPreferredSize(new Dimension(300, 30));
         panel.add(userInput);
+
+        JTextField userInput1 = new JTextField(30);
+        userInput1.setPreferredSize(new Dimension(300, 30));
+        panel.add(userInput1);
 
         JButton submitButton = new JButton("submit");
         submitButton.setPreferredSize(new Dimension(300, 30));
@@ -66,8 +74,8 @@ public class FreeUserGUI {
         });
         submitButton.addActionListener(e -> {
             frame.setVisible(false);
-            aam.setFreeze(um.getUser(userInput.getText()), true);
-            JOptionPane.showMessageDialog(null, "success freeze");
+            aam.setWeekTransactionLimit(um.getUser(userInput.getText()),Integer.parseInt(userInput1.getText()));
+            JOptionPane.showMessageDialog(null, "success freeeze");
             UserFreezeSystem d = new UserFreezeSystem(um,tm,iv,iam,aam,uc,frame);
             d.run(um.getUsername(b));
         });

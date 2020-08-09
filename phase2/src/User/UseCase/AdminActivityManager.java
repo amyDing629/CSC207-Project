@@ -1,5 +1,6 @@
 package User;
 
+import Trade.TradeDataAccess;
 import Trade.TradeManager;
 
 import java.time.LocalDateTime;
@@ -13,20 +14,23 @@ import java.util.UUID;
  */
 
 public class AdminActivityManager {
-    private final TradeManager tm;
-    private final UserManager um;
+    TradeManager tm = new TradeManager();
+    DataAccess tradeAccess = new TradeDataAccess();
+    DataAccess userAccess = new UserDataAccess();
 
-    public AdminActivityManager(TradeManager tm, UserManager um) {
-        this.tm = tm;
-        this.um = um;
-    }
 
     /**
      * @param a the user that the administrative user wants to set frozen
      * set the user.ClientUser a account frozen
      */
-    public void setFreeze(ClientUser a,boolean s) {
-        a.setFrozen(s);
+//    public void setFreeze(ClientUser a,boolean s) {
+//        a.setFrozen(s);
+//    }
+
+    public void setFreeze(String a,boolean s) {
+        ClientUser ca = (ClientUser)userAccess.getObject(a);
+        if(ca != null){ca.setFrozen(s);}
+        userAccess.updateSer();
     }
 
     /**
@@ -34,13 +38,20 @@ public class AdminActivityManager {
      * @param password the password of the administrative user that wants to add
      * the initial administrative user can add the new administrative user
      */
-    public void addNewAdmin(ClientUser user,String username, String password) {
-        List<ClientUser> userList = um.getUserList();
-        if(user.getUsername().equals("admin")) {
+//    public void addNewAdmin(ClientUser user,String username, String password) {
+//        if(user.getUsername().equals("admin")) {
+//            ClientUser admin = new ClientUser(username, password, true);
+//            userAccess.addObject(admin);
+//        }
+//    }
+
+    public void addNewAdmin(String username, String password) {
+        if(userAccess.getObject("admin")!= null) {
             ClientUser admin = new ClientUser(username, password, true);
-            userList.add(admin);
+            userAccess.addObject(admin);
         }
     }
+
 
     /**
      * Change thresholds for a particular user upon selection
@@ -49,18 +60,21 @@ public class AdminActivityManager {
      * @param whichToChange indicates the threshold to adjust
      */
     public void AdjustThreshold(String username, int newLimit, int whichToChange) {
-        List<ClientUser> userList = um.getUserList();
-        for (ClientUser u: userList) {
-            if (u.getUsername().equals(username)) {
+        List<Object> b = userAccess.getList();
+        for (Object u: b) {
+            ClientUser a = (ClientUser)u;
+            if (a.getUsername().equals(username)) {
                 if (whichToChange == 1) {
-                    u.setDiff(newLimit);
+                    a.setDiff(newLimit);
                 }if (whichToChange == 2) {
-                    u.setWeekTransactionLimit(newLimit);
+                    a.setWeekTransactionLimit(newLimit);
                 }if (whichToChange == 3) {
-                    u.setIncompleteTransaction(newLimit);
+                    a.setIncompleteTransaction(newLimit);
                 }
+
             }
         }
+        userAccess.setList(b);
     }
 
     /**
@@ -69,12 +83,14 @@ public class AdminActivityManager {
      * @param newDiff the new threshold that the admin wants to adjust to
      */
     public void AdjustDiffForUser(String username, int newDiff) {
-        List<ClientUser> userList = um.getUserList();
-        for (ClientUser u: userList) {
-            if (u.getUsername().equals(username)) {
-                u.setDiff(newDiff);
+        List<Object> b = userAccess.getList();
+        for (Object u: b) {
+            ClientUser a = (ClientUser)u;
+            if (a.getUsername().equals(username)) {
+                a.setDiff(newDiff);
             }
         }
+        userAccess.setList(b);
     }
 
     /**
@@ -82,10 +98,12 @@ public class AdminActivityManager {
      * @param newDiff the new threshold that the admin wants to adjust to
      */
     public void AdjustDiffForAll(int newDiff) {
-        List<ClientUser> userList = um.getUserList();
-        for (ClientUser u: userList) {
-            u.setDiff(newDiff);
+        List<Object> b = userAccess.getList();
+        for (Object u: b) {
+            ClientUser a = (ClientUser)u;
+            a.setDiff(newDiff);
         }
+        userAccess.setList(b);
     }
 
     /**
@@ -93,12 +111,14 @@ public class AdminActivityManager {
      * @param newLimit the new threshold that the admin wants to adjust to
      */
     public void AdjustWeeklyLimit(String username, int newLimit) {
-        List<ClientUser> userList = um.getUserList();
-        for (ClientUser u: userList) {
-            if (u.getUsername().equals(username)) {
-                u.setWeekTransactionLimit(newLimit);
+        List<Object> b = userAccess.getList();
+        for (Object u: b) {
+            ClientUser a = (ClientUser)u;
+            if (a.getUsername().equals(username)) {
+                a.setWeekTransactionLimit(newLimit);
             }
         }
+        userAccess.setList(b);
     }
 
     /**
@@ -106,12 +126,14 @@ public class AdminActivityManager {
      * @param newLimit the new threshold that the admin wants to adjust to
      */
     public void AdjustIncompleteLimit(String username, int newLimit) {
-        List<ClientUser> userList = um.getUserList();
-        for (ClientUser u: userList) {
-            if (u.getUsername().equals(username)) {
-                u.setIncompleteTransaction(newLimit);
+        List<Object> b = userAccess.getList();
+        for (Object u: b) {
+            ClientUser a = (ClientUser)u;
+            if (a.getUsername().equals(username)) {
+                a.setIncompleteTransaction(newLimit);
             }
         }
+        userAccess.setList(b);
     }
 
     /**
@@ -136,12 +158,13 @@ public class AdminActivityManager {
     }
 
     /**
-     * @param a the user that the administrative user wants to check the transaction limit
+     * @param username the user name that the administrative user wants to check the transaction limit
      * set the user.ClientUser a account frozen a has exceeded the week transaction limit
      */
-    public boolean tradeLimit(ClientUser a){
+    public boolean tradeLimit(String username){
+        ClientUser a = (ClientUser) userAccess.getObject(username);
         if(!a.getIsFrozen()){
-            a.setFrozen(tm.getTradeNumber(a) > a.getWeekTransactionLimit());
+            a.setFrozen(tm.getTradeNumber(username) > a.getWeekTransactionLimit());
             return true;
         }
         return false;
@@ -163,11 +186,14 @@ public class AdminActivityManager {
      * get the administrative user by the user ID
      */
     public ClientUser getAdmin(UUID userId){
-        for(ClientUser u : um.userList) {
-            if(u.getId().equals(userId) && u.getIsAdmin()) {
-                return u;
+        List<Object> b = userAccess.getList();
+        for(Object u: b) {
+            ClientUser a = (ClientUser)u;
+            if(a.getId().equals(userId) && a.getIsAdmin()) {
+                return a;
             }
-        } return null;
+        }
+        return null;
     }
 
 

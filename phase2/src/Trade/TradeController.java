@@ -2,15 +2,14 @@ package Trade;
 
 import Inventory.Inventory;
 import Inventory.Item;
-import User.ClientUser;
-import User.*;
+import User.Entity.ClientUser;
+import User.UseCase.UserManager;
 
 import javax.swing.*;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * [controller]
@@ -78,7 +77,7 @@ public class TradeController {
             return false;
         }
         if (tarUser == null){
-            tp.tarUserNotFound();;
+            tp.tarUserNotFound();
             return false;
         }
         if (um.getIsFrozen(tarUser)) {
