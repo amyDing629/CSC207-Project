@@ -69,14 +69,15 @@ public class UserDataAccess implements DataAccess {
     }
 
     @Override
-    public void updateSer() {
-        File writer = new File(serFilePath);
-        writer.deleteOnExit();
+    public void updateSer() throws FileNotFoundException {
+        PrintWriter writer = new PrintWriter(serFilePath);
+        writer.print("");
+        writer.close();
         serialize();
     }
 
     @Override
-    public void addObject(Object o) {
+    public void addObject(Object o) throws FileNotFoundException {
         deSerialize();
         userList.add((ClientUser) o);
         updateSer();

@@ -3,6 +3,7 @@ package User.Gateway;
 
 import User.Entity.ClientUser;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.UUID;
 
@@ -14,13 +15,13 @@ public interface DataAccess {
 
     Object getObject(UUID uuid);
 
-    void addObject(Object o);
+    void addObject(Object o) throws FileNotFoundException;
 
     boolean hasObject(Object o);
 
     void removeObject(Object o);
 
-    void updateSer(); // write list to ser
+    void updateSer() throws FileNotFoundException; // write list to ser
 
     void deSerialize(); // write ser to list
 
