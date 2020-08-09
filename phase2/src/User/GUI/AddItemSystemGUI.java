@@ -1,7 +1,7 @@
 package User.GUI;
 //
 //import Inventory.Inventory;
-//import User.Adapter.UIcontoller;
+//import User.Adapter.UIcController;
 //import Trade.TradeManager;
 //import User.UseCase.AdminActivityManager;
 //import User.UseCase.ItemApprovalManager;
@@ -14,12 +14,12 @@ package User.GUI;
 //    UserManager um;
 //    TradeManager tm;
 //    ItemApprovalManager iam;
-//    UIcontoller uc;
+//    UIController uc;
 //    Inventory iv;
 //    AdminActivityManager aam;
 //    JFrame pFrame;
 //    JFrame frame;
-//    public AddItemSystemGUI(UIcontoller uc ,JFrame pFrame) {
+//    public AddItemSystemGUI(UIController uc ,JFrame pFrame) {
 //        this.um = new UserManager();
 //        this.tm = new TradeManager();
 //        this.iam= new ItemApprovalManager();

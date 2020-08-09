@@ -3,7 +3,7 @@ package User.GUI;
 //import Inventory.Inventory;
 //import Inventory.InventoryController;
 //import Inventory.Item;
-//import User.Adapter.UIcontoller;
+//import User.Adapter.UIController;
 //import Trade.TradeManager;
 //import User.Entity.ClientUser;
 //import User.UseCase.AdminActivityManager;
@@ -18,14 +18,14 @@ package User.GUI;
 //    UserManager um;
 //    TradeManager tm;
 //    ItemApprovalManager iam;
-//    UIcontoller uc;
+//    UIController uc;
 //    Inventory iv;
 //    AdminActivityManager aam;
 //    JFrame pFrame;
 //    JFrame frame;
 //    InventoryController ic;
 //
-//    public ApproveItemGUI(UIcontoller uc ,JFrame pFrame) {
+//    public ApproveItemGUI(UIController uc ,JFrame pFrame) {
 //        this.um = new UserManager();
 //        this.tm = new TradeManager();
 //        this.iam= new ItemApprovalManager();

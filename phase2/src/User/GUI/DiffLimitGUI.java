@@ -1,9 +1,8 @@
 package User.GUI;
 
 import Inventory.Inventory;
-import User.Adapter.UIcontoller;
 import Trade.TradeManager;
-import User.Entity.ClientUser;
+import User.Adapter.UIController;
 import User.UseCase.AdminActivityManager;
 import User.UseCase.ItemApprovalManager;
 import User.UseCase.UserManager;
@@ -15,12 +14,12 @@ public class DiffLimitGUI {
     UserManager um;
     TradeManager tm;
     ItemApprovalManager iam;
-    UIcontoller uc;
+    UIController uc;
     Inventory iv;
     AdminActivityManager aam;
     JFrame pFrame;
     JFrame frame;
-    public DiffLimitGUI(UIcontoller uc ,JFrame pFrame) {
+    public DiffLimitGUI(UIController uc ,JFrame pFrame) {
         this.um = new UserManager();
         this.tm = new TradeManager();
         this.iam= new ItemApprovalManager();

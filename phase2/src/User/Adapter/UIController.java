@@ -10,14 +10,14 @@ import User.UseCase.UserManager;
 import java.io.*;
 import java.util.Scanner;
 
-public class UIcontoller {
+public class UIController {
     public UserManager um;
     public AdminActivityManager am;
     public TradeManager tm;
     public ItemApprovalManager iam;
     Inventory iv;
 
-    public UIcontoller(UserManager um, AdminActivityManager am,TradeManager tm,ItemApprovalManager iam,Inventory iv){
+    public UIController(UserManager um, AdminActivityManager am,TradeManager tm,ItemApprovalManager iam,Inventory iv){
         this.um=um;
         this.am=am;
         this.tm=tm;

@@ -1,33 +1,19 @@
 package User.GUI;
 
-import Inventory.Inventory;
-import User.Adapter.UIcontoller;
-import Trade.TradeManager;
-import User.Entity.ClientUser;
+import User.Adapter.UIController;
 import User.UseCase.AdminActivityManager;
-import User.UseCase.ItemApprovalManager;
-import User.UseCase.UserManager;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.FileNotFoundException;
 
 public class FreeUserGUI {
-    UserManager um;
-    TradeManager tm;
-    ItemApprovalManager iam;
-    UIcontoller uc;
-    Inventory iv;
+    UIController uc;
     AdminActivityManager aam;
     JFrame pFrame;
     JFrame frame;
-    public FreeUserGUI(UIcontoller uc ,JFrame pFrame) {
-        this.um = um;
-        this.tm = tm;
-        this.iam=iam;
+    public FreeUserGUI(UIController uc ,JFrame pFrame) {
         this.uc=uc;
-        this.iv=iv;
-        this.aam=aam;
         this.pFrame=pFrame;
     }
     public void run(String name){

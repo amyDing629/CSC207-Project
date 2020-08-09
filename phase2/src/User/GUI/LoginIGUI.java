@@ -14,10 +14,10 @@ public class LoginIGUI implements View {
 //    UserManager um;
 //    TradeManager tm;
 //    ItemApprovalManager iam;
-//    UIcontoller uc;
+//    UIController uc;
 //    Inventory iv;
 //    AdminActivityManager aam;
-//    public LoginIGUI(UserManager um, TradeManager tm, Inventory iv, ItemApprovalManager iam, UIcontoller uc, AdminActivityManager aam) {
+//    public LoginIGUI(UserManager um, TradeManager tm, Inventory iv, ItemApprovalManager iam, UIController uc, AdminActivityManager aam) {
 //        this.um = um;
 //        this.tm = tm;
 //        this.iam = iam;

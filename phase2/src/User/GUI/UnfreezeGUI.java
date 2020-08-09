@@ -1,9 +1,8 @@
 package User.GUI;
 
 import Inventory.Inventory;
-import User.Adapter.UIcontoller;
+import User.Adapter.UIController;
 import Trade.TradeManager;
-import User.Entity.ClientUser;
 import User.UseCase.AdminActivityManager;
 import User.UseCase.ItemApprovalManager;
 import User.UseCase.UserManager;
@@ -15,20 +14,13 @@ import java.util.ArrayList;
 
 public class UnfreezeGUI {
     UserManager um;
-    TradeManager tm;
     ItemApprovalManager iam;
-    UIcontoller uc;
-    Inventory iv;
+    UIController uc;
     AdminActivityManager aam;
     JFrame pFrame;
     JFrame frame;
-    public UnfreezeGUI(UIcontoller uc ,JFrame pFrame) {
-        this.um = um;
-        this.tm = tm;
-        this.iam=iam;
+    public UnfreezeGUI(UIController uc ,JFrame pFrame) {
         this.uc=uc;
-        this.iv=iv;
-        this.aam=aam;
         this.pFrame=pFrame;
     }
     public void run(String name){
