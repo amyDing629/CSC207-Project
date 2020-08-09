@@ -39,6 +39,13 @@ public class UserDataAccess implements DataAccess {
         return new ArrayList<>(userList);
     }
 
+    public void setList(List<Object> userList) {
+        this.userList.clear();
+        for(Object a: userList){
+            this.userList.add((ClientUser)a);
+        }
+    }
+
     @Override
     public Object getObject(String name) {
         deSerialize();

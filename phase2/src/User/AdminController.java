@@ -6,9 +6,9 @@ public class AdminController extends ClientUserController{
     private final AdminActivityManager am;
 
 
-    public AdminController(ClientUser clientUser, UserManager um, ItemApprovalManager iam,
+    public AdminController(UserManager um, ItemApprovalManager iam,
                            AdminActivityManager am, TradeManager tm) {
-        super(clientUser, um, iam, tm);
+        super(um, iam, tm);
         this.am = am;
 
     }
@@ -33,7 +33,7 @@ public class AdminController extends ClientUserController{
         }
     }
 
-    public void createAdmin(String name, String password) {
+    public void createAdmin(ClientUser user, String name, String password) {
         am.addNewAdmin(user, name, password);
     }
 

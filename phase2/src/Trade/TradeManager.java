@@ -3,6 +3,7 @@ package Trade;
 import Inventory.Item;
 import User.ClientUser;
 import User.DataAccess;
+import User.UserDataAccess;
 import User.UserManager;
 
 import java.time.LocalDateTime;
@@ -18,6 +19,7 @@ import java.util.UUID;
  */
 public class TradeManager{
     DataAccess dataAccess = new TradeDataAccess();
+    DataAccess userAccess = new UserDataAccess();
 
     /**
      * Allow the currentUser to create a one-way trade with input otherUserId, item, and trade duration.
@@ -238,7 +240,8 @@ public class TradeManager{
     /**
      * return the number of transactions of the user has in seven days from the most recent trade
      */
-    public int getTradeNumber(ClientUser user) {
+    public int getTradeNumber(String username) {
+        ClientUser user = (ClientUser) userAccess.getObject(username);
         if(user.getTradeHistory().size() == 0){return 0;}
         Trade s = getTrade(user.getTradeHistory().get(user.getTradeHistory().size() - 1));
         LocalDateTime x  = s.getCreateTime();

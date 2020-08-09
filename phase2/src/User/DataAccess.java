@@ -22,6 +22,9 @@ public interface DataAccess {
 
     void deSerialize(); // write ser to list
 
+    void setList(List<Object> userList);
+
+
 //    boolean hasObject(String name);
 
 //    ClientUser getUser(String name);
