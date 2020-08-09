@@ -19,7 +19,7 @@ public class mainRun {
         UserManager um = new UserManager();
         TradeManager tm = new TradeManager();
         ApprovalManager iam = new ApprovalManager();
-        DataAccessFull uaf = new DataAccessFull(iam);
+        DataAccessFull uaf = new DataAccessFull();
 
         AdminActivityManager aam = new AdminActivityManager();
         UIController uc = new UIController(um, aam, tm, iam, iv);

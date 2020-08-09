@@ -1,21 +1,17 @@
 package Main;
 
 import Inventory.InvDataAccess;
-import Inventory.Inventory;
-import Main.UI.ApprovalDataAccess;
 import Trade.TradeDataAccess;
-import Trade.TradeManager;
+import User.Gateway.ApprovalItemDataAccess;
+import User.Gateway.ApprovalUserDataAccess;
 import User.Gateway.UserDataAccess;
-import User.UseCase.ApprovalManager;
-import User.UseCase.UserManager;
-
-import java.io.IOException;
 
 public class DataAccessFull {
     private final InvDataAccess ida;
     private final TradeDataAccess tda;
     private final UserDataAccess fe;
-    private final ApprovalDataAccess aa;
+    private final ApprovalItemDataAccess aa;
+    private final ApprovalUserDataAccess au;
 
     /**
      * [constructor]
@@ -24,17 +20,19 @@ public class DataAccessFull {
         ida = new InvDataAccess();
         tda = new TradeDataAccess();
         fe = new UserDataAccess();
-        aa = new ApprovalDataAccess();
+        aa = new ApprovalItemDataAccess();
+        au = new ApprovalUserDataAccess();
     }
 
     /**
      * update all the files
      */
-    public void updateFile() throws IOException {
+    public void updateFile()  {
         ida.updateSer();
         tda.updateSer();
         fe.updateSer();
-        aa.updateFile();
+        aa.updateSer();
+        au.updateSer();
     }
 
     /**
@@ -44,8 +42,8 @@ public class DataAccessFull {
         ida.deSerialize();
         tda.deSerialize();
         fe.deSerialize();
-        aa.readItem();
-        aa.readUser();
+        aa.deSerialize();
+        au.deSerialize();
     }
 
 

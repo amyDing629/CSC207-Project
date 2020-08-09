@@ -96,7 +96,7 @@ public class editInfoGUI {
 //        });
         limitSystem.addActionListener(e -> {
             frame.setVisible(false);
-            UserLimitGUI d = new UserLimitGUI(um,tm,iv,iam,aam,uc,frame);
+            UserLimitGUI d = new UserLimitGUI(uc,frame);
             d.run(b);
         });
         CreateAdminGUI.addActionListener(e -> {

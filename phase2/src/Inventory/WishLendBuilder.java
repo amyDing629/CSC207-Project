@@ -2,8 +2,7 @@ package Inventory;
 
 import Trade.BorderGUIBuilder;
 import User.Entity.ClientUser;
-import User.ItemApprovalManager;
-import User.UserManager;
+
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,7 +1,5 @@
-package Main.UI;
+package User.Entity;
 
-
-import User.Entity.ClientUser;
 
 public class ItemApprovals extends UserApprovals {
     private String secString;

@@ -1,4 +1,4 @@
-package Main.UI;
+package User.Entity;
 
 
 import User.Entity.ClientUser;
