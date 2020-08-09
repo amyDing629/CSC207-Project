@@ -21,7 +21,7 @@ public class InventoryGUI {
     public InventoryGUI(UUID currUser, JFrame frame){
         this.currUser = currUser;
         this.ivf = frame;
-        UserManager um = new UserManager();
+        um = new UserManager();
 
     };
 

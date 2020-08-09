@@ -1,5 +1,6 @@
 package User.Gateway;
 
+import Inventory.Item;
 import User.Entity.ClientUser;
 
 import java.io.*;
@@ -70,8 +71,21 @@ public class UserDataAccess implements DataAccess {
 
     @Override
     public void updateSer() {
-        File writer = new File(serFilePath);
-        writer.deleteOnExit();
+        File file = new File(serFilePath);
+        try {
+            if(!file.exists()) {
+                boolean result = file.createNewFile();
+                if (!result){
+                    System.out.println("the new file is not created");
+                }
+            }
+            FileWriter fileWriter =new FileWriter(file);
+            fileWriter.write("");
+            fileWriter.flush();
+            fileWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         serialize();
     }
 
@@ -108,17 +122,20 @@ public class UserDataAccess implements DataAccess {
     @SuppressWarnings("unchecked")
     public void deSerialize() {
         try {
-            FileInputStream fileIn = new FileInputStream(serFilePath);
-            InputStream buffer = new BufferedInputStream(fileIn);
-            ObjectInputStream in = new ObjectInputStream(buffer);
+            File file = new File(serFilePath);
+            if (!(file.length() == 0)){
+                FileInputStream fileIn = new FileInputStream(serFilePath);
+                InputStream buffer = new BufferedInputStream(fileIn);
+                ObjectInputStream in = new ObjectInputStream(buffer);
 
-            userList = (List<ClientUser>) in.readObject();
-            in.close();
-            fileIn.close();
+                userList = (List<ClientUser>) in.readObject();
+                in.close();
+                fileIn.close();
+            }
+
         } catch (IOException | ClassNotFoundException i) {
             i.printStackTrace();
         }
-
     }
 
     @Override

@@ -82,8 +82,21 @@ public class InvDataAccess implements DataAccess {
 
     @Override
     public void updateSer() {
-        File writer = new File(serFilePath);
-        writer.deleteOnExit();
+        File file = new File(serFilePath);
+        try {
+            if(!file.exists()) {
+                boolean result = file.createNewFile();
+                if (!result){
+                    System.out.println("the new file is not created");
+                }
+            }
+            FileWriter fileWriter =new FileWriter(file);
+            fileWriter.write("");
+            fileWriter.flush();
+            fileWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         serialize();
     }
 
@@ -91,13 +104,17 @@ public class InvDataAccess implements DataAccess {
     @SuppressWarnings("unchecked")
     public void deSerialize() {
         try {
-            FileInputStream fileIn = new FileInputStream(serFilePath);
-            InputStream buffer = new BufferedInputStream(fileIn);
-            ObjectInputStream in = new ObjectInputStream(buffer);
+            File file = new File(serFilePath);
+            if (!(file.length() == 0)){
+                FileInputStream fileIn = new FileInputStream(serFilePath);
+                InputStream buffer = new BufferedInputStream(fileIn);
+                ObjectInputStream in = new ObjectInputStream(buffer);
 
-            lendingList = (List<Item>) in.readObject();
-            in.close();
-            fileIn.close();
+                lendingList = (List<Item>) in.readObject();
+                in.close();
+                fileIn.close();
+            }
+
         } catch (IOException | ClassNotFoundException i) {
             i.printStackTrace();
         }
