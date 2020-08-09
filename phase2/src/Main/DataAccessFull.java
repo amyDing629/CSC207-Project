@@ -6,9 +6,6 @@ import User.Gateway.ApprovalItemDataAccess;
 import User.Gateway.ApprovalUserDataAccess;
 import User.Gateway.UserDataAccess;
 
-
-import java.io.IOException;
-
 public class DataAccessFull {
     private final InvDataAccess ida;
     private final TradeDataAccess tda;

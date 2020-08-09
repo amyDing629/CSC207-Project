@@ -1,6 +1,6 @@
-package Main.UI;
+package User.Gateway;
 
-import User.Gateway.DataAccess;
+import User.Entity.UserApprovals;
 
 import java.io.*;
 import java.util.ArrayList;

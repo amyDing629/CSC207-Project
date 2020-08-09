@@ -2,10 +2,10 @@ package User.UseCase;
 
 
 
-import Main.UI.ApprovalItemDataAccess;
-import Main.UI.ApprovalUserDataAccess;
-import Main.UI.ItemApprovals;
-import Main.UI.UserApprovals;
+import User.Gateway.ApprovalItemDataAccess;
+import User.Gateway.ApprovalUserDataAccess;
+import User.Entity.ItemApprovals;
+import User.Entity.UserApprovals;
 import User.Gateway.DataAccess;
 
 import java.io.FileNotFoundException;
@@ -14,9 +14,6 @@ import java.util.ArrayList;
 public class ApprovalManager {
     DataAccess itemDataAccess = new ApprovalItemDataAccess();
     DataAccess userDataAccess = new ApprovalUserDataAccess();
-
-    private ArrayList<ItemApprovals> itemApproval;
-    private ArrayList<UserApprovals> userApproval;
 
 
     public ArrayList<ItemApprovals> getItemApprovals(){
