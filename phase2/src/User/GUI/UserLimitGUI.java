@@ -1,9 +1,8 @@
 package User.GUI;
 
 import Inventory.Inventory;
-import User.Adapter.UIcontoller;
+import User.Adapter.UIController;
 import Trade.TradeManager;
-import User.Entity.ClientUser;
 import User.UseCase.AdminActivityManager;
 import User.UseCase.ItemApprovalManager;
 import User.UseCase.UserManager;
@@ -15,12 +14,12 @@ public class UserLimitGUI {
     UserManager um;
     TradeManager tm;
     ItemApprovalManager iam;
-    UIcontoller uc;
+    UIController uc;
     Inventory iv;
     AdminActivityManager aam;
     JFrame pFrame;
     JFrame frame;
-    public UserLimitGUI(UserManager um, TradeManager tm, Inventory iv, ItemApprovalManager iam, AdminActivityManager aam,UIcontoller uc ,JFrame pFrame) {
+    public UserLimitGUI(UserManager um, TradeManager tm, Inventory iv, ItemApprovalManager iam, AdminActivityManager aam,UIController uc ,JFrame pFrame) {
         this.um = um;
         this.tm = tm;
         this.iam=iam;

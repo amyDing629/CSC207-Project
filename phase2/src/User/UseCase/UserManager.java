@@ -6,6 +6,7 @@ import User.Entity.ClientUser;
 import User.Gateway.DataAccess;
 import User.Gateway.UserDataAccess;
 
+import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -54,7 +55,7 @@ public class UserManager {
      *
      * @param user the clientUser we want to add
      */
-    public void addUser(ClientUser user) {
+    public void addUser(ClientUser user) throws FileNotFoundException {
         dataAccess.addObject(user);
     }
 
@@ -81,7 +82,7 @@ public class UserManager {
      * @param password the password of the clientUser
      * @param isAdmin  if the clientUser is admin
      */
-    public void createClientUser(String name, String password, boolean isAdmin) {
+    public void createClientUser(String name, String password, boolean isAdmin) throws FileNotFoundException {
         dataAccess.addObject(new ClientUser(name, password, isAdmin));
     }
 

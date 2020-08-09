@@ -1,9 +1,8 @@
 package User.GUI;
 
 import Inventory.Inventory;
-import User.Adapter.UIcontoller;
+import User.Adapter.UIController;
 import Trade.TradeManager;
-import User.Entity.ClientUser;
 import User.UseCase.AdminActivityManager;
 import User.UseCase.ItemApprovalManager;
 import User.UseCase.UserManager;
@@ -15,12 +14,12 @@ public class editInfoGUI {
     UserManager um;
     TradeManager tm;
     ItemApprovalManager iam;
-    UIcontoller uc;
+    UIController uc;
     Inventory iv;
     AdminActivityManager aam;
     JFrame frame;
     JFrame PFrame;
-    public editInfoGUI(UIcontoller uc ,JFrame pFrame) {
+    public editInfoGUI(UIController uc , JFrame pFrame) {
         this.um = new UserManager();
         this.tm = new TradeManager();
         this.iam= new ItemApprovalManager();

@@ -1,11 +1,8 @@
 package User.GUI;
 
-import Inventory.Inventory;
-import User.Adapter.UIcontoller;
-import Trade.TradeManager;
+
+import User.Adapter.UIController;
 import User.Entity.ClientUser;
-import User.UseCase.AdminActivityManager;
-import User.UseCase.ItemApprovalManager;
 import User.UseCase.UserManager;
 
 import javax.swing.*;
@@ -14,20 +11,11 @@ import java.util.ArrayList;
 
 public class ReverseSystemGUI {
     UserManager um;
-    TradeManager tm;
-    ItemApprovalManager iam;
-    UIcontoller uc;
-    Inventory iv;
-    AdminActivityManager aam;
+    UIController uc;
     JFrame pFrame;
     JFrame frame;
-    public ReverseSystemGUI(UIcontoller uc ,JFrame pFrame) {
-        this.um = um;
-        this.tm = tm;
-        this.iam=iam;
+    public ReverseSystemGUI(UIController uc ,JFrame pFrame) {
         this.uc=uc;
-        this.iv=iv;
-        this.aam=aam;
         this.pFrame=pFrame;
     }
     public void run(String name){

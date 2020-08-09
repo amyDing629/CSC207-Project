@@ -1,9 +1,8 @@
 package User.GUI;
 
 import Inventory.Inventory;
-import User.Adapter.UIcontoller;
 import Trade.TradeManager;
-import User.Entity.ClientUser;
+import User.Adapter.UIController;
 import User.UseCase.AdminActivityManager;
 import User.UseCase.ItemApprovalManager;
 import User.UseCase.UserManager;
@@ -15,12 +14,12 @@ public class TradeLimitGUI {
     UserManager um;
     TradeManager tm;
     ItemApprovalManager iam;
-    UIcontoller uc;
+    UIController uc;
     Inventory iv;
     AdminActivityManager aam;
     JFrame pFrame;
     JFrame frame;
-    public TradeLimitGUI(UserManager um, TradeManager tm, Inventory iv, ItemApprovalManager iam, AdminActivityManager aam,UIcontoller uc ,JFrame pFrame) {
+    public TradeLimitGUI(UserManager um, TradeManager tm, Inventory iv, ItemApprovalManager iam, AdminActivityManager aam,UIController uc ,JFrame pFrame) {
         this.um = um;
         this.tm = tm;
         this.iam=iam;
