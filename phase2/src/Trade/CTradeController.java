@@ -9,6 +9,7 @@ import User.Entity.ClientUser;
 import User.UseCase.UserManager;
 
 import javax.swing.*;
+import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -70,11 +71,19 @@ public class CTradeController implements Observer {
                 tr.setMeeting(mtID);
             }
             if (mt.getStatus().equals(MeetingStatus.CANCELLED)) {
-                tm.cancelTrade(currTrade);
+                try {
+                    tm.cancelTrade(currTrade);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
             }
             if (mt.getStatus().equals(MeetingStatus.COMPLETED)) {
                 if (tr.getDuration() == -1) {
-                    tm.completeTrade(currTrade);
+                    try {
+                        tm.completeTrade(currTrade);
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
                 } else {
                     tr.setSecondMeeting(new MeetingActionManager().setUpSecondMeeting(mtID));
                     System.out.println("secondMeetingID: " + tr.getSecondMeeting());
@@ -85,12 +94,16 @@ public class CTradeController implements Observer {
             Meeting smt = new MeetingActionManager().getMeetingWithId(tr.getSecondMeeting());
             System.out.println("secondMeetingID: " + smt.getID());
             if (smt.getStatus().equals(MeetingStatus.COMPLETED)) {
-                tm.completeTrade(currTrade);
+                try {
+                    tm.completeTrade(currTrade);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
             }
         }
 
     }
-    void completeTrade(){
+    void completeTrade() throws FileNotFoundException {
         makeTrade();
         tm.completeTrade(currTrade);
     }

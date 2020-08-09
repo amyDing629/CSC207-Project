@@ -8,7 +8,7 @@ public class BorderGUIWithThreeTextArea extends BorderGUINoTextArea
     private JTextArea curr;
     private JTextArea list;
     private JTextArea msg;
-    private HashMap<String, JTextArea> inputs;
+    private HashMap<String, JTextArea> inputs = new HashMap<String, JTextArea>();
 
     public BorderGUIWithThreeTextArea(){
         super();

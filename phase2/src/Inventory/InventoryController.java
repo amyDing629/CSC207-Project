@@ -7,6 +7,7 @@ import User.UseCase.ItemApprovalManager;
 import User.UseCase.UserManager;
 
 import javax.swing.*;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -67,7 +68,7 @@ public class InventoryController {
         um.getUser(currUser).addWishBorrow(it);
     }
 
-    void addToWishLend(Item it){
+    void addToWishLend(Item it) throws FileNotFoundException {
         um.getWishLend(iv.getOwnerUUID(it.getName())).add(it.getName());
         iv.add(it);
         iam.removeItem(it.getName());
@@ -353,7 +354,7 @@ public class InventoryController {
         }
     }
 
-    void agreeBut(){
+    void agreeBut() throws FileNotFoundException {
         if (it == null){
             ip.noItemSelected();
         }else{

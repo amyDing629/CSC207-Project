@@ -10,6 +10,7 @@ import User.UseCase.UserManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class UnfreezeGUI {
@@ -92,7 +93,11 @@ public class UnfreezeGUI {
             frame.setVisible(false);
             if(um.getUser(userInput.getText())!=null){
                 iam.removeUser(userInput.getText());
-                aam.setFreeze(userInput.getText(),false);
+                try {
+                    aam.setFreeze(userInput.getText(),false);
+                } catch (FileNotFoundException fileNotFoundException) {
+                    fileNotFoundException.printStackTrace();
+                }
                 JOptionPane.showMessageDialog(null,"Unfreeze successfully");
                 UserFreezeSystem d = new UserFreezeSystem(uc,frame);
                 d.run(b);

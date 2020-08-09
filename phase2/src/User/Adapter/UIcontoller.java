@@ -7,10 +7,7 @@ import User.UseCase.AdminActivityManager;
 import User.UseCase.ItemApprovalManager;
 import User.UseCase.UserManager;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.Scanner;
 
 public class UIcontoller {
@@ -27,7 +24,7 @@ public class UIcontoller {
         this.iam=iam;
         this.iv=iv;
     }
-    public void checkFrozen(String user){
+    public void checkFrozen(String user) throws FileNotFoundException {
         if(um.readDiff(user)>=um.getDiff(user)){
             System.out.println("You have been freeze due to exceed difference between borrow and lend");
             am.setFreeze(user,true);
@@ -42,7 +39,7 @@ public class UIcontoller {
         }
     }
 
-    public void checkFileEmpty(File file){
+    public void checkFileEmpty(File file) throws FileNotFoundException {
         if (file.length() == 0) {
             ClientUser b = new ClientUser("admin", "123", true);
             um.addUser(b);
@@ -88,7 +85,7 @@ public class UIcontoller {
 //        }
 //        return false;
 //    }
-    public void UserDisplayStatus(String user){
+    public void UserDisplayStatus(String user) throws FileNotFoundException {
         System.out.println("Hello," + user);
         System.out.println("Admin:"+um.getIsAdmin(user));
         checkFrozen(user);

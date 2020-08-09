@@ -19,7 +19,7 @@ public class WishLendBuilder extends WishBorrowBuilder implements BorderGUIBuild
 
     @Override
     public void buildFrame() {
-        tg.setFrame(600, 200, "Edit WishLend Session");
+        tg.setFrame(600, 400, "Edit WishLend Session");
     }
 
     public void buildPanelE() {

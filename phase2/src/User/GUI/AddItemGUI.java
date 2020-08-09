@@ -11,6 +11,7 @@ import User.UseCase.UserManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.FileNotFoundException;
 
 public class AddItemGUI {
     UserManager um;
@@ -76,7 +77,11 @@ public class AddItemGUI {
         submitButton.addActionListener(e -> {
             frame.setVisible(false);
             Item item=new Item(userInput.getText(),um.nameToUUID(userInput1.getText()));
-            iv.addItem(item);
+            try {
+                iv.addItem(item);
+            } catch (FileNotFoundException fileNotFoundException) {
+                fileNotFoundException.printStackTrace();
+            }
             JOptionPane.showMessageDialog(null, "success added item");
         });
     }

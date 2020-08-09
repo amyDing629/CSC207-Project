@@ -9,6 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 import java.util.UUID;
 
 public class RTradeGUIBuilder implements BorderGUIBuilder {
@@ -85,25 +86,41 @@ public class RTradeGUIBuilder implements BorderGUIBuilder {
         onewayTemp.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                trc.onewayBut("temp");
+                try {
+                    trc.onewayBut("temp");
+                } catch (FileNotFoundException fileNotFoundException) {
+                    fileNotFoundException.printStackTrace();
+                }
             }
         });
         onewayPer.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                trc.onewayBut("per");
+                try {
+                    trc.onewayBut("per");
+                } catch (FileNotFoundException fileNotFoundException) {
+                    fileNotFoundException.printStackTrace();
+                }
             }
         });
         twowayTemp.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                trc.twowayBut("temp");
+                try {
+                    trc.twowayBut("temp");
+                } catch (FileNotFoundException fileNotFoundException) {
+                    fileNotFoundException.printStackTrace();
+                }
             }
         });
         twowayPer.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                trc.twowayBut("per");
+                try {
+                    trc.twowayBut("per");
+                } catch (FileNotFoundException fileNotFoundException) {
+                    fileNotFoundException.printStackTrace();
+                }
             }
         });
         back.addActionListener(new ActionListener() {

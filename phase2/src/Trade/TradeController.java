@@ -6,6 +6,7 @@ import User.Entity.ClientUser;
 import User.UseCase.UserManager;
 
 import javax.swing.*;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -92,7 +93,7 @@ public class TradeController {
      * @return whether or not the trade is a oneway trade
      * @throws IOException the trade is not created
      */
-    boolean createTrade(String line, String item){
+    boolean createTrade(String line, String item) throws FileNotFoundException {
         ClientUser user = um.getUser(currUser);
         LocalDateTime time = LocalDateTime.now();
         iv.setIsInTrade(item,true);
@@ -121,7 +122,7 @@ public class TradeController {
      * @param item2 the second item
      * @throws IOException if the trade is not created
      */
-    void createTrade(String line, String item1, String item2){
+    void createTrade(String line, String item1, String item2) throws FileNotFoundException {
         iv.setIsInTrade(item1,true);
         iv.setIsInTrade(item2,true);
         LocalDateTime time = LocalDateTime.now();
@@ -150,21 +151,21 @@ public class TradeController {
     /**
      * confirm trade(agree with the trade)
      */
-    void confirmTrade() {
+    void confirmTrade() throws FileNotFoundException {
         tm.confirmTrade(currTrade);
     }
 
     /**
      * set the status of trade to complete and make trade
      */
-    void completeTrade(){
+    void completeTrade() throws FileNotFoundException {
         tm.completeTrade(currTrade);
     }
 
     /**
      * set the status of trade to cancelled
      */
-    void cancelTrade(){
+    void cancelTrade() throws FileNotFoundException {
         tm.cancelTrade(currTrade);
     }
 
@@ -203,7 +204,7 @@ public class TradeController {
         tp.presentTradeInfo(user, item, um.getWishLend(currUser), getSuggestedItemName() );
     }
 
-    void onewayBut(String duration){
+    void onewayBut(String duration) throws FileNotFoundException {
         if (it == null){
             tp.wrongInput();
         }else if (checkInput(it)){
@@ -218,7 +219,7 @@ public class TradeController {
         }
     }
 
-    void twowayBut(String duration){
+    void twowayBut(String duration) throws FileNotFoundException {
 
         String item = bta.getInput("input");
         tp.updateInputArea();

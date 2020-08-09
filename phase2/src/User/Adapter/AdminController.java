@@ -6,6 +6,8 @@ import User.UseCase.AdminActivityManager;
 import User.UseCase.ItemApprovalManager;
 import User.UseCase.UserManager;
 
+import java.io.FileNotFoundException;
+
 public class AdminController extends ClientUserController {
     private final AdminActivityManager am;
 
@@ -21,7 +23,7 @@ public class AdminController extends ClientUserController {
     }
 
 
-    public void checkFrozen(String username){
+    public void checkFrozen(String username) throws FileNotFoundException {
         if(um.readDiff(username)>=um.getDiff(username)){
             System.out.println("You have been freeze due to exceed difference between borrow and lend");
             am.setFreeze(username,true);
@@ -36,7 +38,7 @@ public class AdminController extends ClientUserController {
         }
     }
 
-    public void createAdmin(ClientUser user, String name, String password) {
+    public void createAdmin(ClientUser user, String name, String password) throws FileNotFoundException {
         am.addNewAdmin(name, password);
     }
 

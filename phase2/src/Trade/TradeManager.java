@@ -6,6 +6,7 @@ import User.Gateway.DataAccess;
 import User.Gateway.UserDataAccess;
 import User.UseCase.UserManager;
 
+import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +29,7 @@ public class TradeManager{
      * @param item the only one Inventory.Item to be trade in this created trade.Trade.
      * @param duration the duration of this trade.Trade, unit (days). -1 means the trade.Trade is permanent.
      */
-    UUID createOnewayTrade(UUID currUserId, UUID otherUserId, Item item, int duration, LocalDateTime time) {
+    UUID createOnewayTrade(UUID currUserId, UUID otherUserId, Item item, int duration, LocalDateTime time) throws FileNotFoundException {
         OnewayTrade newTrade = new OnewayTrade(currUserId, otherUserId, item, duration, time);
         item.setIsInTrade(true);
         dataAccess.addObject(newTrade);
@@ -48,7 +49,7 @@ public class TradeManager{
      * @param duration the duration of this trade.Trade, unit (days). -1 means the trade.Trade is permanent.
      */
     UUID createTwowayTrade(UUID currUserId, UUID otherUserId, Item item1to2, Item item2to1, int duration,
-                            LocalDateTime time){
+                            LocalDateTime time) throws FileNotFoundException {
         TwowayTrade newTrade = new TwowayTrade(currUserId, otherUserId, item1to2, item2to1, duration, time);
         dataAccess.addObject(newTrade);
         item1to2.setIsInTrade(true);
@@ -69,7 +70,7 @@ public class TradeManager{
      *
      * @param id the id current trade
      */
-    void confirmTrade(UUID id) {
+    void confirmTrade(UUID id) throws FileNotFoundException {
         Trade trade = getTrade(id);
         trade.setStatus(TradeStatus.incomplete);
         dataAccess.updateSer();
@@ -80,7 +81,7 @@ public class TradeManager{
      *
      * @param id the id current trade
      */
-    void completeTrade(UUID id) {
+    void completeTrade(UUID id) throws FileNotFoundException {
         Trade trade = getTrade(id);
         trade.setStatus(TradeStatus.complete);
         dataAccess.updateSer();
@@ -91,7 +92,7 @@ public class TradeManager{
      *
      * @param id the id current trade
      */
-    void cancelTrade(UUID id) {
+    void cancelTrade(UUID id) throws FileNotFoundException {
         Trade trade = getTrade(id);
         trade.setStatus(TradeStatus.cancelled);
         dataAccess.updateSer();

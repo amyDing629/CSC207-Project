@@ -5,6 +5,7 @@ import Trade.BorderGUIBuilder;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 import java.util.UUID;
 
 public class AgreeReqGUIBuilder extends WishBorrowBuilder implements BorderGUIBuilder {
@@ -42,7 +43,11 @@ public class AgreeReqGUIBuilder extends WishBorrowBuilder implements BorderGUIBu
         agree.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ic.agreeBut();
+                try {
+                    ic.agreeBut();
+                } catch (FileNotFoundException fileNotFoundException) {
+                    fileNotFoundException.printStackTrace();
+                }
             }
         });
 

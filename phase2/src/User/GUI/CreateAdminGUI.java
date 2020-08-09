@@ -10,6 +10,7 @@ import User.UseCase.UserManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.FileNotFoundException;
 
 public class CreateAdminGUI {
     UserManager um;
@@ -74,7 +75,11 @@ public class CreateAdminGUI {
         });
         submitButton.addActionListener(e -> {
             frame.setVisible(false);
-            aam.addNewAdmin(userInput.getText(),userInput1.getText());
+            try {
+                aam.addNewAdmin(userInput.getText(),userInput1.getText());
+            } catch (FileNotFoundException fileNotFoundException) {
+                fileNotFoundException.printStackTrace();
+            }
             JOptionPane.showMessageDialog(null, "successfully created");
             UserFreezeSystem d = new UserFreezeSystem(uc,frame);
             d.run(b);

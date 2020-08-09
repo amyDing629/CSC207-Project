@@ -6,6 +6,7 @@ import Trade.TradeManager;
 import User.UseCase.ItemApprovalManager;
 import User.UseCase.UserManager;
 
+import java.io.FileNotFoundException;
 import java.util.UUID;
 
 public class ClientUserController {
@@ -64,7 +65,7 @@ public class ClientUserController {
         return um.getUser(name) == null;
     }
 
-    public void createClientUser(String name, String password) {
+    public void createClientUser(String name, String password) throws FileNotFoundException {
         um.createClientUser(name, password, false);
     }
 

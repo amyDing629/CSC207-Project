@@ -10,10 +10,11 @@ import User.UseCase.ItemApprovalManager;
 import User.UseCase.UserManager;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 
 public class mainRun {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         Inventory iv = new Inventory();
         UserManager um = new UserManager();
         TradeManager tm = new TradeManager();

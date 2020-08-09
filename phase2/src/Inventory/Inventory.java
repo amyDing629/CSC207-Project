@@ -2,6 +2,7 @@ package Inventory;
 
 import User.Gateway.DataAccess;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -47,7 +48,7 @@ public class Inventory {
      * add the item into the inventory
      * @param item the item added
      */
-    public void addItem(Item item){
+    public void addItem(Item item) throws FileNotFoundException {
         dataAccess.addObject(item);
     }
 
@@ -117,7 +118,7 @@ public class Inventory {
         return false;
     }
 
-    public void add(Item it) {
+    public void add(Item it) throws FileNotFoundException {
         dataAccess.addObject(it);
     }
 

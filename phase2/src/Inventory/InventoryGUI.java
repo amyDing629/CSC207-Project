@@ -43,7 +43,7 @@ public class InventoryGUI {
         menu.add(mk);
         menu.add(wb);
         menu.add(wl);
-        if (!um.getUser(currUser).getIsAdmin()){
+        if (um.getUser(currUser).getIsAdmin()){
             menu.add(ar);
         }
         menu.add(back);

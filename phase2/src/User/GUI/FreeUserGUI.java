@@ -10,6 +10,7 @@ import User.UseCase.UserManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.FileNotFoundException;
 
 public class FreeUserGUI {
     UserManager um;
@@ -69,7 +70,11 @@ public class FreeUserGUI {
         });
         submitButton.addActionListener(e -> {
             frame.setVisible(false);
-            aam.setFreeze(userInput.getText(), true);
+            try {
+                aam.setFreeze(userInput.getText(), true);
+            } catch (FileNotFoundException fileNotFoundException) {
+                fileNotFoundException.printStackTrace();
+            }
             JOptionPane.showMessageDialog(null, "success freeze");
             UserFreezeSystem d = new UserFreezeSystem(uc,frame);
             d.run(b);

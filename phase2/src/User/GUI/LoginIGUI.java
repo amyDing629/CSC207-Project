@@ -6,6 +6,7 @@ import User.Adapter.IUserPresenter;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.UUID;
 
@@ -96,7 +97,11 @@ public class LoginIGUI implements View {
             String name = nameInput.getText();
             String password = Arrays.toString(passwordInput.getPassword());
 //            getPresenter().register(name, password);
-            getPresenter().getUserModel().createClientUser(name, password, false);
+            try {
+                getPresenter().getUserModel().createClientUser(name, password, false);
+            } catch (FileNotFoundException fileNotFoundException) {
+                fileNotFoundException.printStackTrace();
+            }
             JOptionPane.showMessageDialog(null, "success");
         });
 
