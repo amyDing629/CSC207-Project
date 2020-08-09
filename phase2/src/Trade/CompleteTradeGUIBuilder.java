@@ -85,7 +85,6 @@ public class CompleteTradeGUIBuilder implements BorderGUIBuilder {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String tradeNum = tg.getInput();
-                System.out.println(tradeNum);
                 ctc.submitBut(tradeNum);
             }
         });

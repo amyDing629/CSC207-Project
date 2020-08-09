@@ -69,9 +69,7 @@ public class TradeGUI_Main {
                 frame.setVisible(false);
                 BorderGUIBuilder builder = new AcceptTradeGUIBuilder(currUser, tm, um, frame);
                 TradeGUIEngineer engineer = new TradeGUIEngineer(builder);
-
                 engineer.constructGUI();
-
                 TradeGUIPlan tg = engineer.getGUI();
                 tg.run();
 
@@ -86,9 +84,7 @@ public class TradeGUI_Main {
                 frame.setVisible(false);
                 BorderGUIBuilder builder = new CompleteTradeGUIBuilder(currUser, tm, um, frame);
                 TradeGUIEngineer engineer = new TradeGUIEngineer(builder);
-
                 engineer.constructGUI();
-
                 TradeGUIPlan tg = engineer.getGUI();
                 tg.run();
             }

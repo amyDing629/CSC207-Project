@@ -1,6 +1,6 @@
 package Trade;
 
-interface BorderGUIBuilder {
+public interface BorderGUIBuilder {
     void buildFrame();
     void buildPanelN();
     void buildPanelE();

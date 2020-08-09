@@ -1,59 +1,28 @@
 package Inventory;
 
+import Trade.BorderGUIWithThreeTextArea;
+import Trade.InputAndPresent;
 import User.ClientUser;
-
-import java.io.Serializable;
-import java.util.ArrayList;
 
 /**
  * present information of the inventory system to user.
  */
 public class InventoryPresenter {
-    ClientUser currUser;
-    Inventory iv;
+    InputAndPresent bta;
 
     /**
      * [constructor]
-     * @param currUser the user that is using the system
      */
-    InventoryPresenter(ClientUser currUser, Inventory iv){
-        this.currUser = currUser;
-        this.iv = iv;
+    InventoryPresenter(BorderGUIWithThreeTextArea bta){
+        this.bta = bta;
     }
 
     /**
      * print the item that is not in the trade.
      * @return the item name in 'item1,item2' format
      */
-    String printAvailable(){
-        String result = "";
-        for (Item it: iv.getAvailableList()){
-            result = result + iv.getName(it) + "\n";
-        }
-        if (result.equals("")){
-            return "no available item";
-        }
-        return result;
-
-    }
 
 
-
-    /**
-     * print name, description and owner of the item
-     * @param item selected item
-     */
-    String printItemInfo(Item item) {
-        /*
-        System.out.println("item name: " + item.getName());
-        System.out.println("item description: " + item.getDescription());
-        System.out.println("item owner: " + item.getOwnerName());
-
-         */
-        return "Item Info:\nitem name: " + iv.getName(item) + "\n" +
-                "item description: " + iv.getDescription(item)
-                + "\n" + "item owner: " + iv.getOwnerName(item) ;
-    }
 
     /**
      * print the message
@@ -80,20 +49,97 @@ public class InventoryPresenter {
     /**
      * print the notification
      */
-    String addToWishBorrow(boolean isAdded){
+    void addToWishBorrow(boolean isAdded){
         if (isAdded){
-            return "the item has been moved to the wish list";
+            bta.setMsgText("the item has been moved to the wish list");
         }else{
-            return "you can not add your own item to wish borrow list";
+            bta.setMsgText("you can not add your own item to wish borrow list");
         }
     }
 
     /**
      * print the message
      */
-    String isInWishBorrow(){
-        return "the item has already been in your wish list";
+    void isInWishBorrow(){
+       bta.setMsgText("the item has already been in your wish list");
     }
+
+    void noItemSelected(){
+        bta.setMsgText("no item has been selected");
+    }
+
+    void resetCurr(){
+        bta.setCurrText("not item selected");
+    }
+    void updateCurr(String itemInfo){
+
+        bta.setCurrText(itemInfo);
+    }
+
+    void delSuccess(String itemName){
+        bta.setMsgText(itemName + " info has been updated");
+    }
+
+    void updateListB(ClientUser currUser){
+        String result = "";
+        for (String it: currUser.getWishBorrow()){
+            result = result + it + "\n";
+        }
+        if (result.equals("")){
+            bta.setListText("no item");
+        }else{
+            bta.setListText(result);
+        }
+
+    }
+
+    void updateListL(ClientUser currUser){
+        String result = "";
+        for (String it: currUser.getWishLend()){
+            result = result + it + "\n";
+        }
+        if (result.equals("")){
+            bta.setListText("no item");
+        }else{
+            bta.setListText(result);
+        }
+
+    }
+
+    void closeFrame(){
+        bta.getFrame().setVisible(false);
+    }
+
+    void resetInputArea(){
+        bta.setInput("input","item name");
+    }
+
+    void voidItem(){
+        bta.setMsgText("please input item name");
+    }
+
+    void nameUsed(){
+        bta.setMsgText("the item name has already been used");
+    }
+
+    void createSuccess(String itemName){
+        bta.setMsgText(itemName + " has been created");
+    }
+
+    void requestSuccess(String itemName){
+        bta.setMsgText(itemName + " has been requested, please wait for admin user to agree");
+    }
+
+    void editDesSuccess(String itemName){
+        bta.setMsgText(itemName + "'s description has been changed");
+    }
+
+    void updateListM(String availableList){
+        bta.setListText(availableList);
+    }
+
+
+
 
 
 

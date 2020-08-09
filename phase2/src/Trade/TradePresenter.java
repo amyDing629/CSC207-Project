@@ -11,10 +11,10 @@ import java.util.List;
  * present the information of trade
  */
 public class TradePresenter {
-    private BorderGUIWithThreeTextArea bta;
+    private final InputAndPresent bta;
 
 
-    TradePresenter(BorderGUIWithThreeTextArea bta){
+    TradePresenter(InputAndPresent bta){
         this.bta = bta;
     }
 

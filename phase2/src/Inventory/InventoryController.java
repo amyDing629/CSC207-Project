@@ -1,8 +1,13 @@
 package Inventory;
+import Trade.BorderGUIBuilder;
+import Trade.BorderGUIWithThreeTextArea;
+import Trade.TradeGUIEngineer;
+import Trade.TradeGUIPlan;
 import User.ClientUser;
 import User.ItemApprovalManager;
 import User.UserManager;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,52 +30,47 @@ public class InventoryController {
 
     ItemApprovalManager iam;
 
+    BorderGUIWithThreeTextArea bta;
+
+    Item it;
+
+    InventoryPresenter ip;
+
+    JFrame fr;
+
     /**
      * [constructor]
      * @param currUser current user
      */
-    public InventoryController(ClientUser currUser, Inventory iv, UserManager um, ItemApprovalManager iam){
+    public InventoryController(ClientUser currUser, BorderGUIWithThreeTextArea bta, JFrame fr){
         this.currUser = currUser;
-        this.iv = iv;
-        this.um = um;
-        this.iam = iam;
+        this.iv = new Inventory();
+        this.um = new UserManager();
+        this.iam = new ItemApprovalManager();
+        this.bta = bta;
+        ip = new InventoryPresenter(bta);
+        this.fr = fr;
     }
 
-    /**
-     * user select an item and record the item in the system
-     * @param line the input from user of the item selected.
-     * @return wheter the item has been selected.
-     */
-    boolean selectItem(String line){
-        for (Item it: iv.getLendingList()){
-            if (iv.getName(it).equals(line)){
-                //System.out.println(it + " has been selected");
-                return true;
-            }
-        }
-        return false;
-    }
 
     /**
      * if the input item is the user's own item, return true. Else, return false.
-     * @param it the input item
      * @return whether the input item is the user's own item.
      */
-    boolean isOwnItem(Item it){
+    boolean isOwnItem(){
         return iv.getOwnerName(it).equals(currUser.getUsername());
     }
 
     /**
      * move the selected item to user's wishBorrow list.
-     * @param it the selected item.
      */
-    void moveToWishList(Item it){
+    void moveToWishList(){
         currUser.addWishBorrow(iv.getName(it));
     }
 
-    void addToWishLend(Item it){
+    void addToWishLend(){
         um.getWishLend(um.getUser(iv.getOwnerName(it))).add(iv.getName(it));
-        iv.getLendingList().add(it);
+        iv.add(it);
         iam.removeItem(iv.getName(it));
     }
 
@@ -79,10 +79,9 @@ public class InventoryController {
     }
 
     /**
-     * @param it: current item
      * @return whether the item is the currUser's wish list
      */
-    boolean isInOwnWishList(Item it){
+    boolean isInOwnWishList(){
         return currUser.getWishBorrow().contains(iv.getName(it));
     }
 
@@ -103,18 +102,6 @@ public class InventoryController {
             return "no item";
         }
         return result.toString();
-    }
-
-    public String printWishBorrow(){
-        StringBuilder result = new StringBuilder();
-        for (String it: um.getWishBorrow(currUser)){
-            result.append(it).append("\n");
-        }
-        if (result.toString().equals("")){
-            return "no item";
-        }
-        return result.toString();
-
     }
 
 
@@ -196,14 +183,184 @@ public class InventoryController {
         iv.setDescription(des, item);
     }
 
-    boolean itemExist(String name){
-        for (Item it: iv.getLendingList()){
-            if (iv.getName(it).equals(name)){
-                return true;
-            }
+
+
+    void delButB(){
+        if (it == null){
+            ip.noItemSelected();
+        }else{
+            deleteItemB(it);
+            ip.noItemSelected();
+            ip.delSuccess(it.getName());
+            it = null;
+            ip.updateListB(currUser);
         }
-        return false;
     }
+
+
+    void delButL(){
+        if (it == null){
+            ip.noItemSelected();
+        }else{
+            deleteItemL(it);
+            ip.noItemSelected();
+            ip.delSuccess(it.getName());
+            it = null;
+            ip.updateListL(currUser);
+        }
+    }
+
+
+    void updateCurr(){
+        ip.resetCurr();
+    }
+
+    void updateLstB(){
+        ip.updateListB(currUser);
+    }
+
+    void updateLstL(){
+        ip.updateListL(currUser);
+    }
+
+
+    void addButB(){
+        it = null;
+        ip.updateListB(currUser);
+        ip.closeFrame();
+        BorderGUIBuilder builder = new WishBorrowAddBuilder(currUser, bta.getFrame());
+        TradeGUIEngineer engineer = new TradeGUIEngineer(builder);
+        engineer.constructGUI();
+        TradeGUIPlan tg = engineer.getGUI();
+        tg.run();
+    }
+
+    void addButL(){
+        addItem(it.getName(), it.getDescription());
+        ip.resetCurr();
+        ip.requestSuccess(it.getName());
+        it = null;
+    }
+
+    public void updateButB(){
+        updateLstB();
+        updateCurr();
+    }
+
+    public void updateButL(){
+        updateLstL();
+        updateCurr();
+    }
+
+    void submitButB(){
+        String input = bta.getInput("input");
+        ip.resetInputArea();
+        if (!um.getWishBorrow(currUser).contains(input)){
+            ip.wrongInput();;
+        }else{
+            it = iv.getItem(input);
+            ip.updateCurr(getItemInfo());
+        }
+    }
+
+    void submitButL(){
+        String input = bta.getInput("input");
+        ip.resetInputArea();
+        if (!um.getWishLend(currUser).contains(input)){
+            ip.wrongInput();;
+        }else{
+            it = iv.getItem(input);
+            ip.updateCurr(getItemInfo());
+        }
+    }
+
+    void submitButM(){
+        String input = bta.getInput("input");
+        ip.resetInputArea();
+        if (!iv.getAvailableList().contains(iv.getItem(input))){
+            ip.wrongInput();;
+        }else{
+            it = iv.getItem(input);
+            ip.updateCurr(getItemInfo());
+        }
+    }
+
+    void backBut(){
+        fr.setVisible(true);
+        ip.closeFrame();
+    }
+
+    String getItemInfo() {
+        /*
+        System.out.println("item name: " + item.getName());
+        System.out.println("item description: " + item.getDescription());
+        System.out.println("item owner: " + item.getOwnerName());
+
+         */
+        return "Item Info:\nitem name: " + iv.getName(it) + "\n" +
+                "item description: " + iv.getDescription(it)
+                + "\n" + "item owner: " + iv.getOwnerName(it) ;
+    }
+
+
+    void createBut(){
+        String itemName = bta.getInput("name");
+        String description = bta.getInput("des");
+        if (itemName.equals("")) {
+            ip.voidItem();
+        }else if(iv.itemExist(itemName)){
+            ip.nameUsed();
+        }
+        else {
+            it = createItem(itemName);
+            setDescription(description, it);
+            ip.updateCurr(getItemInfo());
+            ip.createSuccess(it.getName());
+        }
+    }
+
+    void editDes(){
+        if (it == null){
+            ip.noItemSelected();
+        }else{
+            String description = bta.getInput("des");
+            setDescription(description, it);
+            ip.editDesSuccess(it.getName());
+            ip.updateCurr(getItemInfo());
+        }
+    }
+
+    String printAvailable(){
+        String result = "";
+        for (Item it: iv.getAvailableList()){
+            result = result + iv.getName(it) + "\n";
+        }
+        if (result.equals("")){
+            return "no available item";
+        }
+        return result;
+
+    }
+
+    void updateListM(){
+        ip.updateListM(printAvailable());
+    }
+
+    void addToWishBorrow(){
+        if (isOwnItem()) {
+            ip.addToWishBorrow(false);
+        } else if (isInOwnWishList()) {
+            ip.isInWishBorrow();
+        } else {
+            moveToWishList();
+            ip.updateListM(printAvailable());
+            ip.addToWishBorrow(true);
+        }
+    }
+
+
+
+
 
 
 

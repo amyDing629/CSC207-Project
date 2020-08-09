@@ -25,7 +25,7 @@ public class GUI_run {
         um.addUser(daniel);
         um.addUser(amy);
         um.addUser(admin);
-        InventoryGUI igAmy = new InventoryGUI(amy, iv, um, iam, frame);
+        InventoryGUI igAmy = new InventoryGUI(amy, frame);
         igAmy.run();
         AgreeRequestsGUI ar = new AgreeRequestsGUI(admin, iv, um, iam, frame);
         ar.run();

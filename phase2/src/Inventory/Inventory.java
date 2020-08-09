@@ -92,4 +92,31 @@ public class Inventory {
         return it.getOwnerName();
     }
 
+    boolean itemExist(String name){
+        for (Object it: dataAccess.getList()){
+            if (getName((Item)it).equals(name)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void add(Item it) {
+        dataAccess.addObject(it);
+    }
+
+    /**
+     * user select an item and record the item in the system
+     * @param line the input from user of the item selected.
+     * @return wheter the item has been selected.
+     */
+    boolean selectItem(String line){
+        for (Object it: dataAccess.getList()){
+            if (getName((Item)it).equals(line)){
+                //System.out.println(it + " has been selected");
+                return true;
+            }
+        }
+        return false;
+    }
 }
