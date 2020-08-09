@@ -42,7 +42,7 @@ public class PointManager {
      * Set (update) the bonus points for particular user and update the pointList.
      */
     public void setUserPoints(ClientUser user) {
-        int newPoint = this.tm.getComplete(user).size() - user.getSelectedBonusTrades().size() * this.exStandard;
+        int newPoint = this.tm.getComplete(user.getUsername()).size() - user.getSelectedBonusTrades().size() * this.exStandard;
         user.setBonusPoints(newPoint);
         this.pointList.put(user.getId(), newPoint);
     }
@@ -93,7 +93,7 @@ public class PointManager {
     public void CountPointsSince(LocalDateTime dateTime) {
         for (UUID userId: this.pointList.keySet()) {
             ClientUser user = this.um.getUser(userId);
-            List<Trade> trades = this.tm.getAllTrade(user);
+            List<Trade> trades = this.tm.getAllTrade(user.getUsername());
             int count = 0;
             for (Trade t: trades) {
                 if (t.getCreateTime().isAfter(dateTime) && !t.getStatus().equals(TradeStatus.cancelled)) {
@@ -116,20 +116,6 @@ public class PointManager {
             }
         }return result;
     }
-
-
-    /**
-     * TODO: Delete
-     * Temporary test method.
-     */
-    public void addPoints(String username, int num) {
-        for (ClientUser u: this.um.getUserList()) {
-            if (u.getUsername().equals(username)) {
-                this.pointList.put(u.getId(), this.pointList.get(u.getId()) + num);
-            }
-        }
-    }
-
 
 
 }

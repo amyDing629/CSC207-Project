@@ -45,7 +45,7 @@ public class AwardActivities {
      */
     public List<Trade> getTradesForExchange(ClientUser user){
         List<Trade> result = new ArrayList<Trade>();
-        List<Trade> list = this.tm.getWeekTradeList(user); // get all trades within the most recent seven days
+        List<Trade> list = this.tm.getWeekTradeList(user.getUsername()); // get all trades within the most recent seven days
         for (Trade t: list) {
             if (t.getStatus().equals(TradeStatus.incomplete) && !user.getSelectedBonusTrades().contains(t.getId())) {
                 result.add(t); // get incomplete trade from the recent trades
