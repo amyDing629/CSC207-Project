@@ -1,4 +1,8 @@
-package User;
+package User.Adapter;
+
+import User.Entity.ClientUser;
+import User.GUI.View;
+import User.UseCase.UserManager;
 
 public class LoginSystemPresenter implements ILoginSystemBoundary {
 
@@ -18,7 +22,7 @@ public class LoginSystemPresenter implements ILoginSystemBoundary {
 
     public void run() {
         view.setPresenter(this);
-//        view.run();
+        view.run();
     }
 
     public void register(String name, String password) {

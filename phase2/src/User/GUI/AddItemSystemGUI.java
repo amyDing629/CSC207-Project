@@ -1,13 +1,17 @@
-package User;
+package User.GUI;
 
 import Inventory.Inventory;
 import Main.UI.UIcontoller;
 import Trade.TradeManager;
+import User.Entity.ClientUser;
+import User.UseCase.AdminActivityManager;
+import User.UseCase.ItemApprovalManager;
+import User.UseCase.UserManager;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class UserFreezeSystem {
+public class AddItemSystemGUI {
     UserManager um;
     TradeManager tm;
     ItemApprovalManager iam;
@@ -16,7 +20,7 @@ public class UserFreezeSystem {
     AdminActivityManager aam;
     JFrame pFrame;
     JFrame frame;
-    public UserFreezeSystem(UserManager um, TradeManager tm, Inventory iv, ItemApprovalManager iam, AdminActivityManager aam,UIcontoller uc ,JFrame pFrame) {
+    public AddItemSystemGUI(UserManager um, TradeManager tm, Inventory iv, ItemApprovalManager iam, AdminActivityManager aam,UIcontoller uc ,JFrame pFrame) {
         this.um = um;
         this.tm = tm;
         this.iam=iam;
@@ -44,33 +48,17 @@ public class UserFreezeSystem {
 
     private void placeComponents(JFrame frame, JPanel panel, ClientUser b){
 
-        JLabel freezeStatus = new JLabel("Freeze Status: "+ um.getIsFrozen(b));
-        freezeStatus.setPreferredSize(new Dimension(300, 30));
-        panel.add(freezeStatus);
-
-
-        JButton editButton = new JButton("request to remove freeze");
+        JButton editButton = new JButton("Add item");
         editButton.setPreferredSize(new Dimension(300, 30));
 
-        JButton tradeButton = new JButton("Freeze User");
+        JButton tradeButton = new JButton("Approve item from client user");
         tradeButton.setPreferredSize(new Dimension(300, 30));
-
-        JButton inventoryButton = new JButton("Unfreeze User");
-        inventoryButton.setPreferredSize(new Dimension(300, 30));
 
         JButton exitButton = new JButton("quit to menu");
         exitButton.setPreferredSize(new Dimension(300, 30));
 
-        if(!um.getIsAdmin(b)){
-            tradeButton.setEnabled(false);
-            inventoryButton.setEnabled(false);
-        }
-        if(!um.getIsFrozen(b)){
-            editButton.setEnabled(false);
-        }
         panel.add(editButton);
         panel.add(tradeButton);
-        panel.add(inventoryButton);
         panel.add(exitButton);
         exitButton.addActionListener(e -> {
             frame.setVisible(false);
@@ -78,17 +66,12 @@ public class UserFreezeSystem {
         });
         editButton.addActionListener(e -> {
             frame.setVisible(false);
-            RequestUnfreezeTicketGUI d=new RequestUnfreezeTicketGUI(um,tm,iv,iam,aam,uc,frame);
+            AddItemGUI d=new AddItemGUI(um,tm,iv,iam,aam,uc,frame);
             d.run(um.getUsername(b));
         });
         tradeButton.addActionListener(e -> {
             frame.setVisible(false);
-            FreeUserGUI d=new FreeUserGUI(um,tm,iv,iam,aam,uc,frame);
-            d.run(um.getUsername(b));
-        });
-        inventoryButton.addActionListener(e -> {
-            frame.setVisible(false);
-            UnfreezeGUI d=new UnfreezeGUI(um,tm,iv,iam,aam,uc,frame);
+            ApproveItemGUI d=new ApproveItemGUI(um,tm,iv,iam,aam,uc,frame);
             d.run(um.getUsername(b));
         });
     }

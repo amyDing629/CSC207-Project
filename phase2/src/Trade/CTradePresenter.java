@@ -1,7 +1,5 @@
 package Trade;
 
-import User.ClientUser;
-
 import java.util.List;
 
 public class CTradePresenter {

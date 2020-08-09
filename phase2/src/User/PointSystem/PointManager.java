@@ -1,15 +1,12 @@
 package User.PointSystem;
 
-import User.ClientUser;
-import User.UserManager;
-import Trade.TradeManager;
 import Trade.Trade;
+import Trade.TradeManager;
 import Trade.TradeStatus;
+import User.Entity.ClientUser;
+import User.UseCase.UserManager;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.*;
 
 /**
@@ -24,7 +21,7 @@ public class PointManager {
     /**
      * A list of all users with the bonus points they earn
      */
-    private Map<UUID, Integer> pointList;
+    private final Map<UUID, Integer> pointList;
 
     /**
      * The points needed to exchange one bonus trade which will not count towards being frozen

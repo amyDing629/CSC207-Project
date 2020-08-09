@@ -1,4 +1,4 @@
-package User;
+package User.UseCase;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package User;
+package User.Gateway;
 
 
 import java.util.List;

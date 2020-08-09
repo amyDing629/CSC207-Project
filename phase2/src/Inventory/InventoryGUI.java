@@ -1,8 +1,8 @@
 package Inventory;
 
-import User.ClientUser;
-import User.ItemApprovalManager;
-import User.UserManager;
+import User.Entity.ClientUser;
+import User.UseCase.ItemApprovalManager;
+import User.UseCase.UserManager;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -23,7 +23,7 @@ public class InventoryGUI {
         this.ivf = frame;
         this.iam = iam;
 
-    };
+    }
 
     public void run(){
         JFrame frame = new JFrame("Inventory Session");

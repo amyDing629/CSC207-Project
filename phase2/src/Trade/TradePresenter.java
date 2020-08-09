@@ -1,7 +1,7 @@
 package Trade;
 
 import Inventory.Item;
-import User.ClientUser;
+import User.Entity.ClientUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +11,7 @@ import java.util.List;
  * present the information of trade
  */
 public class TradePresenter {
-    private BorderGUIWithThreeTextArea bta;
+    private final BorderGUIWithThreeTextArea bta;
 
 
     TradePresenter(BorderGUIWithThreeTextArea bta){

@@ -1,14 +1,16 @@
 package Main.UI;
 import Inventory.Inventory;
-import Inventory.Item;
 import Trade.TradeManager;
-import User.*;
+import User.Entity.ClientUser;
+import User.Gateway.UserDataAccess;
+import User.UseCase.AdminActivityManager;
+import User.UseCase.ItemApprovalManager;
+import User.UseCase.UserManager;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class UIcontoller {

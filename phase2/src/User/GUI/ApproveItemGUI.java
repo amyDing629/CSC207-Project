@@ -1,15 +1,20 @@
-package User;
+package User.GUI;
 
 import Inventory.Inventory;
-import Main.UI.ApprovalDataAccess;
+import Inventory.InventoryController;
+import Inventory.Item;
 import Main.UI.UIcontoller;
 import Trade.TradeManager;
+import User.Entity.ClientUser;
+import User.UseCase.AdminActivityManager;
+import User.UseCase.ItemApprovalManager;
+import User.UseCase.UserManager;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class UnfreezeGUI {
+public class ApproveItemGUI {
     UserManager um;
     TradeManager tm;
     ItemApprovalManager iam;
@@ -18,7 +23,9 @@ public class UnfreezeGUI {
     AdminActivityManager aam;
     JFrame pFrame;
     JFrame frame;
-    public UnfreezeGUI(UserManager um, TradeManager tm, Inventory iv, ItemApprovalManager iam, AdminActivityManager aam,UIcontoller uc ,JFrame pFrame) {
+    InventoryController ic;
+
+    public ApproveItemGUI(UserManager um, TradeManager tm, Inventory iv, ItemApprovalManager iam, AdminActivityManager aam,UIcontoller uc ,JFrame pFrame) {
         this.um = um;
         this.tm = tm;
         this.iam=iam;
@@ -45,7 +52,7 @@ public class UnfreezeGUI {
     }
 
     private void placeComponents(JFrame frame, JPanel panel, ClientUser b){
-
+        ic=new InventoryController(b,iv,um,iam);
         JTextArea textArea = new JTextArea(5, 20);
         textArea.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(textArea);
@@ -57,16 +64,16 @@ public class UnfreezeGUI {
         c.weightx = 1.0;
         c.weighty = 1.0;
         panel.add(scrollPane, c);
-        iam.addApproval("2","admin5","hahahaha");
-
         StringBuilder hi= new StringBuilder();
-        ArrayList<ArrayList<String>> usa = iam.getUserApproval();
+        ArrayList<ArrayList<String>> usa = iam.getItemApproval();
         if(usa.size()==0){
-            hi.append("Currently there is no unfreeze ticket\n");
+            hi.append("Currently there is no approves\n");
         }
+
         for (int i = 0; i < usa.size(); i++) {
-            hi.append("User").append(i).append(": ").append(usa.get(i).get(1)).append("\n");
-            hi.append("Reason: ").append(usa.get(i).get(2)).append("\n");
+            hi.append("Item ").append(i).append(": ").append(usa.get(i).get(1)).append("\n");
+            hi.append("Description: ").append(usa.get(i).get(2)).append("\n");
+            hi.append("Owner: ").append(usa.get(i).get(3)).append("\n");
             hi.append("**************************").append("\n");
         }
         System.out.println(hi.toString());
@@ -82,22 +89,25 @@ public class UnfreezeGUI {
         JButton exit = new JButton("exit");
         exit.setPreferredSize(new Dimension(300, 30));
         panel.add(exit);
-
         exit.addActionListener(e -> {
             frame.setVisible(false);
             pFrame.setVisible(true);
         });
         submitButton.addActionListener(e -> {
-            frame.setVisible(false);
-            if(um.getUser(userInput.getText())!=null){
-                iam.removeUser(userInput.getText());
-                aam.setFreeze(um.getUser(userInput.getText()),false);
-                JOptionPane.showMessageDialog(null,"Unfreeze successfully");
-                UserFreezeSystem d = new UserFreezeSystem(um,tm,iv,iam,aam,uc,frame);
-                d.run(um.getUsername(b));
+            int there=0;
+            for (ArrayList<String> strings : usa) {
+                if (strings.get(1).equals(userInput.getText())) {
+                    Item z = new Item(strings.get(1), strings.get(3));
+                    z.setDescription(strings.get(2));
+                    iv.addItem(z);
+                    there = 1;
+                    um.getUser(strings.get(3)).addWishes(strings.get(1));
+                    iam.removeItem(strings.get(1));
+                    JOptionPane.showMessageDialog(null, "item add successfully");
+                }
             }
-            else{
-                JOptionPane.showMessageDialog(null, "invalid user");
+            if(there==0){
+                JOptionPane.showMessageDialog(null,"item name not found");
             }
         });
     }

@@ -2,10 +2,10 @@ package Main.UI;
 
 import Inventory.Inventory;
 import Inventory.Item;
-import User.ClientUser;
-import User.ClientUserController;
-import User.ItemApprovalManager;
-import User.UserManager;
+import User.Adapter.ClientUserController;
+import User.Entity.ClientUser;
+import User.UseCase.ItemApprovalManager;
+import User.UseCase.UserManager;
 
 import java.util.ArrayList;
 import java.util.Scanner;

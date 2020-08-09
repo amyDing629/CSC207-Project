@@ -1,9 +1,11 @@
 package Main.UI;
 
-import User.*;
+import User.Entity.ClientUser;
+import User.UseCase.AdminActivityManager;
+import User.UseCase.ItemApprovalManager;
+import User.UseCase.UserManager;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class UserFreezeSystem {
     ClientUser user;

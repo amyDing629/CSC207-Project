@@ -1,9 +1,6 @@
 package Main.UI;
 
-import User.ClientUser;
-import User.UserManager;
-
-import java.util.Scanner;
+import User.UseCase.UserManager;
 
 /**
  * [ClientUser Interface]

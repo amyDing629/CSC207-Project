@@ -4,6 +4,10 @@ import Inventory.Inventory;
 import Main.DataAccessFull;
 import Main.UI.UIcontoller;
 import Trade.TradeManager;
+import User.GUI.LoginIGUI;
+import User.UseCase.AdminActivityManager;
+import User.UseCase.ItemApprovalManager;
+import User.UseCase.UserManager;
 
 import java.io.File;
 

@@ -3,9 +3,10 @@ package User.PointSystem;
 import Trade.Trade;
 import Trade.TradeManager;
 import Trade.TradeStatus;
-import User.ClientUser;
+import User.Entity.ClientUser;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Pattern;
 
 /**

@@ -1,9 +1,6 @@
 package Inventory;
 
-import User.ClientUser;
-
-import java.io.Serializable;
-import java.util.ArrayList;
+import User.Entity.ClientUser;
 
 /**
  * present information of the inventory system to user.

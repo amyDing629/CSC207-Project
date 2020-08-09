@@ -2,9 +2,8 @@ package Trade;
 
 import Inventory.Inventory;
 import Inventory.Item;
-import User.ClientUser;
-import User.UserManager;
-import javafx.util.Builder;
+import User.Entity.ClientUser;
+import User.UseCase.UserManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,15 +14,16 @@ public class RTradeGUIBuilder implements BorderGUIBuilder {
 
 
     private final TradeController trc;
-    private BorderGUIWithThreeTextArea tg;
-    private JFrame fr;
+    private final BorderGUIWithThreeTextArea tg;
+    private final JFrame fr;
 
     /**
      * [constructor]
+     *
      * @param currUser current user
-     * @param item item selected by the current user
+     * @param item     item selected by the current user
      */
-    public RTradeGUIBuilder(ClientUser currUser, Item item, TradeManager tm, UserManager um, Inventory iv, JFrame fr){
+    public RTradeGUIBuilder(ClientUser currUser, Item item, TradeManager tm, UserManager um, Inventory iv, JFrame fr) {
 
 
         tg = new BorderGUIWithThreeTextArea();

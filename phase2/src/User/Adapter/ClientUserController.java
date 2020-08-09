@@ -1,8 +1,11 @@
-package User;
+package User.Adapter;
 
 import Inventory.Inventory;
 import Inventory.Item;
 import Trade.TradeManager;
+import User.Entity.ClientUser;
+import User.UseCase.ItemApprovalManager;
+import User.UseCase.UserManager;
 
 import java.util.UUID;
 

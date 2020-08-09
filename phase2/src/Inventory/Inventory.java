@@ -1,6 +1,6 @@
 package Inventory;
 
-import User.DataAccess;
+import User.Gateway.DataAccess;
 
 import java.util.ArrayList;
 

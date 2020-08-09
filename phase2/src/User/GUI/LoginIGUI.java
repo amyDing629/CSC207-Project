@@ -1,9 +1,7 @@
-package User;
+package User.GUI;
 
-import Inventory.Inventory;
 import Main.DataAccessFull;
-import Main.UI.UIcontoller;
-import Trade.TradeManager;
+import User.Adapter.ILoginSystemBoundary;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,33 +9,28 @@ import java.io.IOException;
 import java.util.Arrays;
 
 public class LoginIGUI implements View {
-    UserManager um;
-    TradeManager tm;
-    ItemApprovalManager iam;
-    UIcontoller uc;
-    Inventory iv;
-    AdminActivityManager aam;
+//    UserManager um;
+//    TradeManager tm;
+//    ItemApprovalManager iam;
+//    UIcontoller uc;
+//    Inventory iv;
+//    AdminActivityManager aam;
 
     JFrame frame;
-
 
     // presenter
     ILoginSystemBoundary presenter;
 
-    public LoginIGUI() {
-        run();
-    }
+//    public LoginIGUI(UserManager um, TradeManager tm, Inventory iv, ItemApprovalManager iam, UIcontoller uc, AdminActivityManager aam) {
+//        this.um = um;
+//        this.tm = tm;
+//        this.iam = iam;
+//        this.uc = uc;
+//        this.iv = iv;
+//        this.aam = aam;
+//    }
 
-    public LoginIGUI(UserManager um, TradeManager tm, Inventory iv, ItemApprovalManager iam, UIcontoller uc, AdminActivityManager aam) {
-        this.um = um;
-        this.tm = tm;
-        this.iam = iam;
-        this.uc = uc;
-        this.iv = iv;
-        this.aam = aam;
-    }
-
-    public void run(){
+    public void run() {
         frame = new JFrame("Login/Register");
         frame.setSize(330, 200);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

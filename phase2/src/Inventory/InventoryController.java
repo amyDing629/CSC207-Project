@@ -1,9 +1,8 @@
 package Inventory;
-import User.ClientUser;
-import User.ItemApprovalManager;
-import User.UserManager;
+import User.Entity.ClientUser;
+import User.UseCase.ItemApprovalManager;
+import User.UseCase.UserManager;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 

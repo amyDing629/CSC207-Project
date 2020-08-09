@@ -1,8 +1,9 @@
-package User;
+package User.Entity;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 /**
  * [Entity class]
@@ -66,13 +67,13 @@ public class ClientUser implements Serializable {
     /**
      * the list of trades that is set to bonus, so that it's not counting towards being frozen
      */
-    private List<UUID> selectedBonusTrades;
+    private final List<UUID> selectedBonusTrades;
 
     /**
      * the bonus points that the client user has.
      */
     private int bonusPoints;
-    private ArrayList<ArrayList<String>> actions;
+    private final ArrayList<ArrayList<String>> actions;
 
     /**
      * @param username the username of the user account

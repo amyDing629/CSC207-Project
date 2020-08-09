@@ -1,8 +1,12 @@
-package User;
+package User.Adapter;
 
 import Trade.TradeManager;
+import User.Entity.ClientUser;
+import User.UseCase.AdminActivityManager;
+import User.UseCase.ItemApprovalManager;
+import User.UseCase.UserManager;
 
-public class AdminController extends ClientUserController{
+public class AdminController extends ClientUserController {
     private final AdminActivityManager am;
 
 

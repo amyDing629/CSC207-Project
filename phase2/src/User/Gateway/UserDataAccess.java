@@ -1,4 +1,6 @@
-package User;
+package User.Gateway;
+
+import User.Entity.ClientUser;
 
 import java.io.*;
 import java.util.ArrayList;

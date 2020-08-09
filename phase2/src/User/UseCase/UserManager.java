@@ -1,7 +1,10 @@
-package User;
+package User.UseCase;
 
 import Trade.Trade;
 import Trade.TradeManager;
+import User.Entity.ClientUser;
+import User.Gateway.DataAccess;
+import User.Gateway.UserDataAccess;
 
 import java.time.LocalDateTime;
 import java.util.*;

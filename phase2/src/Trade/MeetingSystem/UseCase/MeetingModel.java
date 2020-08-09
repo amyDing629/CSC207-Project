@@ -2,7 +2,7 @@ package Trade.MeetingSystem.UseCase;
 
 import Trade.MeetingSystem.Entity.Meeting;
 import Trade.MeetingSystem.MeetingStatus;
-import User.UserManager;
+import User.UseCase.UserManager;
 
 import java.util.UUID;
 

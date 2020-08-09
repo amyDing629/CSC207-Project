@@ -1,11 +1,9 @@
 package Main.UI;
 
-import User.AdminActivityManager;
-import User.ClientUser;
-import User.ItemApprovalManager;
-import User.UserManager;
-
-import java.util.Scanner;
+import User.Entity.ClientUser;
+import User.UseCase.AdminActivityManager;
+import User.UseCase.ItemApprovalManager;
+import User.UseCase.UserManager;
 
 public class UserLimit {
 
