@@ -1,7 +1,10 @@
-package User;
+package User.UseCase;
 
 import Trade.TradeDataAccess;
 import Trade.TradeManager;
+import User.Entity.ClientUser;
+import User.Gateway.DataAccess;
+import User.Gateway.UserDataAccess;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -137,18 +140,20 @@ public class AdminActivityManager {
     }
 
     /**
-     * @param a the user that the administrative user wants to check the incomplete transaction limit
+     * @param username the user that the administrative user wants to check the incomplete transaction limit
      * set the account of user a frozen if a has exceeded the incomplete transaction limit
      */
-    public boolean incompleteTransaction(ClientUser a){
+    public boolean incompleteTransaction(String username){
+        ClientUser a = (ClientUser) userAccess.getObject(username);
         if(!a.getIsFrozen()){
-            a.setFrozen(tm.getIncompleteTransaction(a) > a.getIncompleteTransactionLimit());
+            a.setFrozen(tm.getIncompleteTransaction(username) > a.getIncompleteTransactionLimit());
             return true;
         }
         return false;
     }
 
-    public boolean checkLeft(ClientUser a){
+    public boolean checkLeft(String username){
+        ClientUser a = (ClientUser) userAccess.getObject(username);
         LocalDateTime now = LocalDateTime.now();
         if(!a.getIsLeft()){
             a.setLeft(now.isBefore(a.getEnd()));
