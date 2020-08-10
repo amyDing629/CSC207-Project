@@ -17,7 +17,7 @@ public class IncompleteLimitGUI {
         this.pFrame=pFrame;
     }
     public void run(String name){
-        frame = new JFrame("Trade limit");
+        frame = new JFrame("Trade Limit");
         frame.setSize(500, 700);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JPanel panel = new JPanel();
@@ -48,11 +48,11 @@ public class IncompleteLimitGUI {
         userInput1.setPreferredSize(new Dimension(300, 30));
         panel.add(userInput1);
 
-        JButton submitButton = new JButton("submit");
+        JButton submitButton = new JButton("Submit");
         submitButton.setPreferredSize(new Dimension(300, 30));
         panel.add(submitButton);
 
-        JButton exit = new JButton("exit");
+        JButton exit = new JButton("Back");
         exit.setPreferredSize(new Dimension(300, 30));
         panel.add(exit);
         exit.addActionListener(e -> {

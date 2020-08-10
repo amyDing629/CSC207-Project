@@ -3,12 +3,8 @@ package Inventory;
 import Trade.BorderGUIBuilder;
 import Trade.BorderGUINoTextArea;
 import Trade.BorderGUIWithThreeTextArea;
-import User.Entity.ClientUser;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.UUID;
 
 public class WishBorrowAddBuilder implements BorderGUIBuilder {
     InventoryController ic;

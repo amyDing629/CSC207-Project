@@ -2,10 +2,7 @@ package Trade.MeetingSystem.Adapter;
 
 import Trade.MeetingSystem.Entity.Meeting;
 import Trade.MeetingSystem.MeetingStatus;
-import Trade.MeetingSystem.UseCase.DateTime;
-import Trade.MeetingSystem.UseCase.MeetingActionManager;
-import Trade.MeetingSystem.UseCase.MeetingModel;
-import Trade.MeetingSystem.UseCase.Model;
+import Trade.MeetingSystem.UseCase.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -19,7 +16,7 @@ public class EditViewPresenter extends Observable implements IPresenter {
     MeetingStatus meetingStatus;
 
     // Use case
-    MeetingActionManager meetingActionManager = new MeetingActionManager();
+    MeetingManager meetingManager = new MeetingActionManager();
     Model meetingModel;
     DateTime dt = new DateTime();
 
@@ -58,10 +55,10 @@ public class EditViewPresenter extends Observable implements IPresenter {
         LocalDateTime setDateTime = dt.convertToLocalDateTime(inputDateTime);
         String setPlace = inputAddress.trim();
 
-        assert meetingActionManager.isMeetingIdExist(meetingID);
-        Meeting m = meetingActionManager.getMeetingWithId(meetingID);
+        assert meetingManager.isMeetingIdExist(meetingID);
+        Meeting m = meetingManager.getMeetingWithId(meetingID);
 
-        meetingActionManager.editMeeting(m, currLogInUser, setDateTime, setPlace);
+        meetingManager.editMeeting(m, currLogInUser, setDateTime, setPlace);
 
         // notify observers
         setChanged();

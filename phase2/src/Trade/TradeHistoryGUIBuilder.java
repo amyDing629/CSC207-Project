@@ -1,13 +1,7 @@
 package Trade;
 
-import User.Entity.ClientUser;
-import User.UseCase.UserManager;
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.UUID;
 
 public class TradeHistoryGUIBuilder implements BorderGUIBuilder {
     TradeHistoryController thc;
@@ -32,30 +26,20 @@ public class TradeHistoryGUIBuilder implements BorderGUIBuilder {
 
     @Override
     public void buildPanelE() {
-        JButton update = new JButton("update");
+        JButton update = new JButton("Update");
         JPanel upPanel = new JPanel();
-        JButton back = new JButton("return");
+        JButton back = new JButton("Back");
         upPanel.add(update);
         upPanel.add(back);
         upPanel.setLayout(new BoxLayout(upPanel, BoxLayout.Y_AXIS));
         bgUI.setEast(upPanel);
 
-        back.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                thc.backBut();
-            }
+        back.addActionListener(e -> thc.backBut());
+
+        update.addActionListener(e -> {
+            thc.updateTrade();
+            thc.updateUser();
         });
-
-        update.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                thc.updateTrade();
-                thc.updateUser();
-            }
-        });
-
-
 
     }
 

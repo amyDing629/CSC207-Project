@@ -153,10 +153,10 @@ public class RTradeController {
         um.addUser(curr);
         um.addUser(tar);
     }
-    /**
-     * check the status of the current trade
-     * @return the status
-     */
+//    /**
+//     * check the status of the current trade
+//     * @return the status
+//     */
 //    String checkTradeMeeting() {
 //        return tm.checkTradeMeeting(currTrade);
 //    }
@@ -252,17 +252,6 @@ public class RTradeController {
         frame.setVisible(true);
         tp.closeFrame();
     }
-
-
-
-
-
-
-
-
-
-
-
 
 }
 

@@ -6,6 +6,7 @@ import User.Adapter.ClientUserController;
 
 import javax.swing.*;
 import java.awt.*;
+
 public class UnfreezeGUI {
     ApprovalController avc;
     ClientUserController uc;
@@ -50,11 +51,11 @@ public class UnfreezeGUI {
         userInput.setPreferredSize(new Dimension(300, 30));
         panel.add(userInput);
 
-        JButton submitButton = new JButton("submit");
+        JButton submitButton = new JButton("Submit");
         submitButton.setPreferredSize(new Dimension(300, 30));
         panel.add(submitButton);
 
-        JButton exit = new JButton("exit");
+        JButton exit = new JButton("Back");
         exit.setPreferredSize(new Dimension(300, 30));
         panel.add(exit);
 
@@ -72,7 +73,7 @@ public class UnfreezeGUI {
                 d.run(b);
             }
             else{
-                JOptionPane.showMessageDialog(null, "invalid user");
+                JOptionPane.showMessageDialog(null, "Invalid User");
             }
         });
     }

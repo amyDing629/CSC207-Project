@@ -7,7 +7,6 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 public abstract class InputTimePlaceView extends JDialog {
-    IPresenter presenter;
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonClear;
@@ -16,6 +15,9 @@ public abstract class InputTimePlaceView extends JDialog {
     private JButton buttonBack;
     private JTextField placeTextField;
     private JFormattedTextField timeFormattedTextField;
+
+    // presenter
+    private IPresenter presenter;
 
     public InputTimePlaceView() {
         setContentPane(contentPane);

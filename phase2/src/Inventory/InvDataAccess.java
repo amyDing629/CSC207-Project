@@ -1,6 +1,5 @@
 package Inventory;
 
-import Trade.Trade;
 import User.Gateway.DataAccess;
 
 import java.io.*;

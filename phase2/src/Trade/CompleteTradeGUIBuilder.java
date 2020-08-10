@@ -1,14 +1,8 @@
 package Trade;
 
-import User.Entity.ClientUser;
-import User.UseCase.UserManager;
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.UUID;
 
 public class CompleteTradeGUIBuilder implements BorderGUIBuilder {
     CTradeController ctc;
@@ -37,15 +31,12 @@ public class CompleteTradeGUIBuilder implements BorderGUIBuilder {
     @Override
     public void buildPanelE() {
         JPanel panelE = new JPanel();
-        JButton action = new JButton("action");
+        JButton action = new JButton("Go to Meeting");
         panelE.setLayout(new BoxLayout(panelE, BoxLayout.Y_AXIS));
         panelE.add(action);
-        action.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ctc.action();
-                ctc.closeFrame();
-            }
+        action.addActionListener(e -> {
+            ctc.action();
+            ctc.closeFrame();
         });
         tg.setEast(panelE);
 
@@ -69,44 +60,32 @@ public class CompleteTradeGUIBuilder implements BorderGUIBuilder {
     @Override
     public void buildPanelS() {
         JPanel panelS =  new JPanel();
-        JLabel input = new JLabel("input trade number");
-        JTextArea inputArea = new JTextArea("trade number");
-        JButton submit = new JButton("submit");
-        JButton back = new JButton("return to trade menu");
-        JButton update = new JButton("update");
+        JLabel input = new JLabel("Input Trade Number");
+        JTextArea inputArea = new JTextArea("Trade Number");
+        JButton submit = new JButton("Submit");
+        JButton back = new JButton("Back");
+        JButton update = new JButton("Update");
         panelS.add(input);
         panelS.add(inputArea);
         panelS.add(submit);
         panelS.add(back);
         panelS.add(update);
         tg.setSouth(panelS);
-        tg.addInput("input", inputArea);
-        tg.setInput("input", "trade number");
-        submit.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String tradeNum = tg.getInput("input");
-                ctc.submitBut(tradeNum);
-            }
+        tg.addInput("Input", inputArea);
+        tg.setInput("Input", "Trade Number");
+
+        submit.addActionListener(e -> {
+            String tradeNum = tg.getInput("Input");
+            ctc.submitBut(tradeNum);
         });
-        back.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ctc.backBut(tf);
-            }
-        });
-        update.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ctc.updateBut();
-            }
-        });
+        back.addActionListener(e -> ctc.backBut(tf));
+        update.addActionListener(e -> ctc.updateBut());
     }
 
     @Override
     public void buildPanelC() {
         JPanel panelC =  new JPanel();
-        JLabel currTradeL = new JLabel("Trade selected");
+        JLabel currTradeL = new JLabel("Trade Selected");
         JTextArea currArea = new JTextArea();
         panelC.setLayout(new BoxLayout(panelC, BoxLayout.Y_AXIS));
         panelC.add(currTradeL);

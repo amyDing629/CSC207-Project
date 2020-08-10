@@ -6,16 +6,18 @@ import javax.swing.*;
 import java.awt.*;
 
 public class TradeLimitGUI {
+
     ClientUserController uc;
     AdminController ac;
     JFrame pFrame;
     JFrame frame;
+
     public TradeLimitGUI(ClientUserController uc ,JFrame pFrame) {
         this.uc=uc;
         this.pFrame=pFrame;
     }
     public void run(String name){
-        frame = new JFrame("Trade limit");
+        frame = new JFrame("Trade Limit");
         frame.setSize(500, 700);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JPanel panel = new JPanel();
@@ -45,11 +47,11 @@ public class TradeLimitGUI {
         userInput1.setPreferredSize(new Dimension(300, 30));
         panel.add(userInput1);
 
-        JButton submitButton = new JButton("submit");
+        JButton submitButton = new JButton("Submit");
         submitButton.setPreferredSize(new Dimension(300, 30));
         panel.add(submitButton);
 
-        JButton exit = new JButton("exit");
+        JButton exit = new JButton("Back");
         exit.setPreferredSize(new Dimension(300, 30));
         panel.add(exit);
         exit.addActionListener(e -> {
@@ -59,7 +61,7 @@ public class TradeLimitGUI {
         submitButton.addActionListener(e -> {
             frame.setVisible(false);
             ac.setWeekTransactionLimit(userInput.getText(),Integer.parseInt(userInput1.getText()));
-            JOptionPane.showMessageDialog(null, "success freeeze");
+            JOptionPane.showMessageDialog(null, "Successfully froze the user!");
             UserFreezeSystem d = new UserFreezeSystem(uc,frame);
             d.run(b);
         });

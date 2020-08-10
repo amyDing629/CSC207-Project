@@ -36,7 +36,7 @@ public class UserFreezeSystem {
         panel.add(freezeStatus);
 
 
-        JButton editButton = new JButton("request to remove freeze");
+        JButton editButton = new JButton("Request to remove freeze");
         editButton.setPreferredSize(new Dimension(300, 30));
 
         JButton tradeButton = new JButton("Freeze User");

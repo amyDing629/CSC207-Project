@@ -60,10 +60,12 @@ public class LoginGUI{
         logInButton.setBounds(100,80,80,25);
         panel.add(logInButton);
 
-        JButton exploreButton=new JButton("Explore");
+        JButton exploreButton = new JButton("Explore");
+        exploreButton.setToolTipText("Mandatory 3: Explore the market as a visitor");
+        panel.add(exploreButton);
+
         JButton exitButton = new JButton("Quit");
         exitButton.setPreferredSize(new Dimension(300, 30));
-        panel.add(exploreButton);
         panel.add(exitButton);
         UserManager um=new UserManager();
 
@@ -118,14 +120,6 @@ public class LoginGUI{
         });
 
         exitButton.addActionListener(e -> {
-
-            // TODO: only access controller or presenter, allow use case to use gateway
-//
-//            try {
-//
-//            } catch (IOException ioException) {
-//                ioException.printStackTrace();
-//            }
             frame.setVisible(false);
             DataAccessFull adf = new DataAccessFull();
             adf.updateFile();

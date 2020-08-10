@@ -18,7 +18,7 @@ public class SetupView extends InputTimePlaceView {
         if (inputController.assessInput(timeFieldText, placeFieldText)) {
 
             // perform set up with inner app
-            presenter.performAction(timeFieldText, placeFieldText);
+            getPresenter().performAction(timeFieldText, placeFieldText);
 
             // set fields no longer editable
             timeFormattedTextField.setEnabled(false);

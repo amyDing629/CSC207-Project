@@ -43,11 +43,11 @@ public class FreeUserGUI {
         userInput.setPreferredSize(new Dimension(300, 30));
         panel.add(userInput);
 
-        JButton submitButton = new JButton("submit");
+        JButton submitButton = new JButton("Submit");
         submitButton.setPreferredSize(new Dimension(300, 30));
         panel.add(submitButton);
 
-        JButton exit = new JButton("exit");
+        JButton exit = new JButton("Exit");
         exit.setPreferredSize(new Dimension(300, 30));
         panel.add(exit);
         exit.addActionListener(e -> {
@@ -57,7 +57,7 @@ public class FreeUserGUI {
         submitButton.addActionListener(e -> {
             frame.setVisible(false);
             ac.setFreeze(userInput.getText(), true);
-            JOptionPane.showMessageDialog(null, "success freeze");
+            JOptionPane.showMessageDialog(null, "Successfully froze the User");
             UserFreezeSystem d = new UserFreezeSystem(uc,frame);
             d.run(b);
         });

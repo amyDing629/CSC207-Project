@@ -3,6 +3,7 @@ package Trade;
 import java.util.List;
 
 public class TradeHistoryPresenter {
+
     BorderGUIWithThreeTextArea tgp;
 
     public TradeHistoryPresenter(BorderGUIWithThreeTextArea tgp) {
@@ -19,7 +20,7 @@ public class TradeHistoryPresenter {
             result = result + i + ". " + tradeList.get(i).toString() + "\n";
         }
         if (result.equals("")) {
-            tgp.setListText("no available trade");
+            tgp.setListText("No Available Trade");
         } else {
             tgp.setListText(result);
         }
@@ -31,7 +32,7 @@ public class TradeHistoryPresenter {
             result = result + a + "\n";
         }
         if (result.equals("")) {
-            tgp.setCurrText("no User");
+            tgp.setCurrText("No User");
         } else {
             tgp.setCurrText(result);
         }

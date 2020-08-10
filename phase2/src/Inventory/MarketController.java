@@ -3,7 +3,6 @@ package Inventory;
 import Trade.BorderGUIWithThreeTextArea;
 import User.UseCase.UserManager;
 
-
 import javax.swing.*;
 
 public class MarketController {

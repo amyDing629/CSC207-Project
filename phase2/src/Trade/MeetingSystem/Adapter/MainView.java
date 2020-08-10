@@ -7,8 +7,6 @@ import javax.swing.*;
 import java.util.UUID;
 
 public class MainView {
-    // Presenter
-    MPresenter presenter;
     private JFrame frame;
     private JPanel panel1;
     private JButton backButton;
@@ -20,9 +18,10 @@ public class MainView {
     private JButton editButton;
     private JTextArea welcomeTextArea;
 
-
     private boolean isFirst; // is first meeting
 
+    // Presenter
+    private MPresenter presenter;
 
     public MainView() {
         initComponents();
@@ -136,7 +135,7 @@ public class MainView {
                     new SetupViewPresenter(getPresenter().getMeetingID(), getPresenter().getCurrLogInUser(),
                             getPresenter().getUsers(), getPresenter().getObserver());
             setupViewPresenter.run();
-            getPresenter().setMeetingID(setupViewPresenter.getMeetingID()); // TODO: Observer Pattern ?????
+            getPresenter().setMeetingID(setupViewPresenter.getMeetingID());
             updateViewFromModel(isFirst);
         });
         editButton.addActionListener(e -> {

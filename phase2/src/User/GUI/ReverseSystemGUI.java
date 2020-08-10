@@ -48,7 +48,7 @@ public class ReverseSystemGUI {
         StringBuilder hi= new StringBuilder("Username:\n");
         ArrayList<ClientUser> name= (ArrayList<ClientUser>) uc.getUserList();
         if(name.size()==0){
-            hi.append("Currently there is no users\n");
+            hi.append("No users currently\n");
         }
         for (ClientUser user : name) {
             hi.append(user.getUsername()).append("\n");

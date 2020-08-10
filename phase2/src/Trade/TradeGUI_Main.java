@@ -10,7 +10,6 @@ public class TradeGUI_Main {
     String currUser;
     JFrame cf;
 
-
     /**
      * constructor
      * @param currUser the user that is using the system
@@ -27,11 +26,11 @@ public class TradeGUI_Main {
 
         JPanel menu = new JPanel();
         JLabel lb = new JLabel("    Hello, "+ currUser);
-        JButton rt = new JButton("request trade");
-        JButton ct = new JButton("complete trade");
-        JButton at = new JButton("agree/refuse requested trade");
-        JButton th = new JButton("view trade history(also frequent traders)");
-        JButton re = new JButton("return to login menu");
+        JButton rt = new JButton("Request Trade");
+        JButton ct = new JButton("Complete Trade");
+        JButton at = new JButton("Agree/Refuse Requested Trade");
+        JButton th = new JButton("View Trade History (and Frequent Traders)");
+        JButton re = new JButton("Back");
 
         menu.setLayout(new BoxLayout(menu, BoxLayout.Y_AXIS));
         menu.add(lb);
@@ -44,79 +43,48 @@ public class TradeGUI_Main {
         frame.getContentPane().add(menu);
         frame.setVisible(true);
 
-        rt.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
-                BorderGUIBuilder builder = new SelectItemToTradeBuilder(currUser, frame);
-                TradeGUIEngineer engineer = new TradeGUIEngineer(builder);
-                engineer.constructGUI();
-                TradeGUIPlan tg = engineer.getGUI();
-                tg.run();
-            }
+        rt.addActionListener(e -> {
+            frame.setVisible(false);
+            BorderGUIBuilder builder = new SelectItemToTradeBuilder(currUser, frame);
+            TradeGUIEngineer engineer = new TradeGUIEngineer(builder);
+            engineer.constructGUI();
+            TradeGUIPlan tg = engineer.getGUI();
+            tg.run();
         });
 
-        at.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
-                BorderGUIBuilder builder = new AcceptTradeGUIBuilder(currUser, frame);
-                TradeGUIEngineer engineer = new TradeGUIEngineer(builder);
-                engineer.constructGUI();
-                TradeGUIPlan tg = engineer.getGUI();
-                tg.run();
+        at.addActionListener(e -> {
+            frame.setVisible(false);
+            BorderGUIBuilder builder = new AcceptTradeGUIBuilder(currUser, frame);
+            TradeGUIEngineer engineer = new TradeGUIEngineer(builder);
+            engineer.constructGUI();
+            TradeGUIPlan tg = engineer.getGUI();
+            tg.run();
 
-            }
         });
 
-        ct.addActionListener(new ActionListener() {
-            @Override
-            //to do
-            public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
-                BorderGUIBuilder builder = new CompleteTradeGUIBuilder(currUser, frame);
-                TradeGUIEngineer engineer = new TradeGUIEngineer(builder);
-                engineer.constructGUI();
-                TradeGUIPlan tg = engineer.getGUI();
-                tg.run();
-            }
+        ct.addActionListener(e -> {
+            frame.setVisible(false);
+            BorderGUIBuilder builder = new CompleteTradeGUIBuilder(currUser, frame);
+            TradeGUIEngineer engineer = new TradeGUIEngineer(builder);
+            engineer.constructGUI();
+            TradeGUIPlan tg = engineer.getGUI();
+            tg.run();
         });
 
-        th.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
-                BorderGUIBuilder builder = new TradeHistoryGUIBuilder(currUser, frame);
-                TradeGUIEngineer engineer = new TradeGUIEngineer(builder);
-                engineer.constructGUI();
-                TradeGUIPlan tg = engineer.getGUI();
-                tg.run();
-            }
+        th.addActionListener(e -> {
+            frame.setVisible(false);
+            BorderGUIBuilder builder = new TradeHistoryGUIBuilder(currUser, frame);
+            TradeGUIEngineer engineer = new TradeGUIEngineer(builder);
+            engineer.constructGUI();
+            TradeGUIPlan tg = engineer.getGUI();
+            tg.run();
         });
 
-        re.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
-                cf.setVisible(true);
-            }
+        re.addActionListener(e -> {
+            frame.setVisible(false);
+            cf.setVisible(true);
         });
 
-
-
-
-
-
-
-
-        
     }
-
-
-
-
-
-
-
 
 }

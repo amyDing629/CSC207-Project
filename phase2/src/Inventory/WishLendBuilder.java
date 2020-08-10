@@ -1,15 +1,8 @@
 package Inventory;
 
 import Trade.BorderGUIBuilder;
-import User.Entity.ClientUser;
-
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.FileNotFoundException;
-import java.util.UUID;
 
 public class WishLendBuilder extends WishBorrowBuilder implements BorderGUIBuilder {
 

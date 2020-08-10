@@ -368,12 +368,4 @@ public class InventoryController {
         }
     }
 
-
-
-
-
-
-
-
-
 }
