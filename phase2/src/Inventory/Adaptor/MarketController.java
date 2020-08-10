@@ -36,28 +36,29 @@ public class MarketController {
     }
 
     String printAvailable(){
-        String result = "";
+        StringBuilder result = new StringBuilder();
         for (String it: iv.getAvailableList()){
-            result = result + it + "\n";
+            result.append(it).append("\n");
         }
-        if (result.equals("")){
+        if (result.toString().equals("")){
             return "no available item";
         }
-        return result;
+        return result.toString();
 
     }
 
     String getItemInfo() {
-        /*
-        System.out.println("item name: " + item.getName());
-        System.out.println("item description: " + item.getDescription());
-        System.out.println("item owner: " + item.getOwnerName());
-
-         */
         UserManager um = new UserManager();
-        return "Item Info:\nitem name: " + iv.getName(it) + "\n" +
-                "item description: " + iv.getDescription(it)
-                + "\n" + "item owner: " + um.UUIDToName(it.getOwnerUUID());
+        if (iv.getName(it) == null) {
+            return "No Item Selected";
+        } else {
+            System.out.println(iv.getName(it));
+            System.out.println(iv.getDescription(it));
+            System.out.println(it.getOwnerUUID());
+            return "Item Info:\nitem name: " + iv.getName(it) + "\n" +
+                    "item description: " + iv.getDescription(it)
+                    + "\n" + "item owner: " + um.UUIDToName(it.getOwnerUUID());
+        }
     }
 
     void submitButM(){
@@ -66,7 +67,7 @@ public class MarketController {
         System.out.println("market controller" + iv.getAvailableList() + iv.getItem(input));
         System.out.println(iv.getAvailableList().contains(input));
         if (!iv.getAvailableList().contains(input)){
-            ip.wrongInput();;
+            ip.wrongInput();
         }else{
             it = iv.getItem(input);
             ip.updateCurr(getItemInfo());
