@@ -71,7 +71,7 @@ public class SelectItemToTradeBuilder implements BorderGUIBuilder {
         panelS.add(submit);
         panelS.add(back);
         bta.setSouth(panelS);
-        bta.addInput("Input", inputArea);
+        bta.addInput("input", inputArea);
 
         submit.addActionListener(e -> sc.submitBut());
         back.addActionListener(e -> sc.backBut());

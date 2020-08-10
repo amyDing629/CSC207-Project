@@ -67,7 +67,7 @@ public class WishBorrowAddBuilder implements BorderGUIBuilder {
         panelS.add(awl);
         panelS.add(back);
         tg.setSouth(panelS);
-        tg.addInput("Input", ta);
+        tg.addInput("input", ta);
         submit.addActionListener(e -> ic.submitButM());
         back.addActionListener(e -> ic.backBut());
         awl.addActionListener(e -> ic.addToWishBorrow());

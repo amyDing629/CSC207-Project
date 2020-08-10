@@ -36,8 +36,8 @@ public class WishLendBuilder extends WishBorrowBuilder implements BorderGUIBuild
         panelE.add(add);
         panelE.add(editDes);
         tg.setEast(panelE);
-        tg.addInput("Name", name);
-        tg.addInput("Description", des);
+        tg.addInput("name", name);
+        tg.addInput("des", des);
 
         delete.addActionListener(e -> ic.delButL());
         add.addActionListener(e -> ic.addButL());
@@ -71,7 +71,7 @@ public class WishLendBuilder extends WishBorrowBuilder implements BorderGUIBuild
         panelS.add(back);
         panelS.add(update);
         tg.setSouth(panelS);
-        tg.addInput("Input", inputArea);
+        tg.addInput("input", inputArea);
 
         submit.addActionListener(e -> ic.submitButL());
         back.addActionListener(e -> ic.backBut());
