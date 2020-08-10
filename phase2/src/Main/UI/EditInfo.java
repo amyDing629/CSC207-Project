@@ -1,6 +1,6 @@
 //package Main.UI;
 //
-//import Inventory.Inventory;
+//import Inventory.UseCase.Inventory;
 //import User.Entity.ClientUser;
 //import User.UseCase.AdminActivityManager;
 //import User.UseCase.ItemApprovalManager;

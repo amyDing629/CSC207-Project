@@ -1,13 +1,11 @@
 package User.PointSystem;
 
-import Trade.BorderGUIBuilder;
-import Trade.BorderGUINoTextArea;
-import Trade.BorderGUIWithThreeTextArea;
-import Trade.TradeGUIHelper;
+import Trade.Adaptor.BorderGUIBuilder;
+import Trade.Adaptor.BorderGUINoTextArea;
+import Trade.Adaptor.BorderGUIWithThreeTextArea;
+import Trade.Adaptor.TradeGUIHelper;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class PointGUIBuilder implements BorderGUIBuilder {

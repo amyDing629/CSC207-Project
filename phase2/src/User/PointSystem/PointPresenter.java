@@ -1,7 +1,7 @@
 package User.PointSystem;
 
-import Trade.BorderGUIWithThreeTextArea;
-import Trade.Trade;
+import Trade.Adaptor.BorderGUIWithThreeTextArea;
+import Trade.Entity.Trade;
 
 import java.util.List;
 

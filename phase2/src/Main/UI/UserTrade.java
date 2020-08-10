@@ -1,7 +1,7 @@
 //package Main.UI;
 //
-//import Trade.Trade;
-//import Trade.TradeManager;
+//import Trade.Entity.Trade;
+//import Trade.UseCase.TradeManager;
 //import Trade.TradeUI;
 //import User.ClientUser;
 //import User.UserManager;

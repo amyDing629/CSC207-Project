@@ -1,10 +1,10 @@
 package User.GUI;
 //
-//import Inventory.Inventory;
-//import Inventory.InventoryController;
-//import Inventory.Item;
+//import Inventory.UseCase.Inventory;
+//import Inventory.Adaptor.InventoryController;
+//import Inventory.Entity.Item;
 //import User.Adapter.UIController;
-//import Trade.TradeManager;
+//import Trade.UseCase.TradeManager;
 //import User.Entity.ClientUser;
 //import User.UseCase.AdminActivityManager;
 //import User.UseCase.ItemApprovalManager;

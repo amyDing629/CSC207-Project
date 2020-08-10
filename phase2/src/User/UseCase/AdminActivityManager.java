@@ -1,14 +1,11 @@
 package User.UseCase;
 
-import Trade.TradeDataAccess;
-import Trade.TradeManager;
+import Trade.UseCase.TradeManager;
 import User.Entity.ClientUser;
 import User.Gateway.DataAccess;
 import User.Gateway.UserDataAccess;
 
-import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 

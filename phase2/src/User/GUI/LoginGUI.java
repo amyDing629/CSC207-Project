@@ -1,21 +1,18 @@
 package User.GUI;
 
-import Inventory.MarketBuilder;
+import Inventory.Adaptor.MarketBuilder;
 import Main.DataAccessFull;
-import Trade.BorderGUIBuilder;
-import Trade.TradeGUIEngineer;
-import Trade.TradeGUIPlan;
+import Trade.Adaptor.BorderGUIBuilder;
+import Trade.Adaptor.TradeGUIEngineer;
+import Trade.Adaptor.TradeGUIPlan;
 import User.Adapter.ClientUserController;
 import User.Adapter.ClientUserPresenter;
 import User.Adapter.LoginSystemPresenter;
 import User.Entity.ClientUser;
 import User.UseCase.UserManager;
-import com.sun.security.ntlm.Client;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.FileNotFoundException;
-import java.util.Arrays;
 import java.util.UUID;
 
 public class LoginGUI{

@@ -1,7 +1,11 @@
 package User.GUI;
 
-import Inventory.InventoryGUI;
-import Trade.*;
+import Inventory.Adaptor.InventoryGUI;
+import Trade.Adaptor.BorderGUIBuilder;
+import Trade.Adaptor.TradeGUIEngineer;
+import Trade.Adaptor.TradeGUIPlan;
+import Trade.Adaptor.TradeGUI_Main;
+import Trade.UseCase.TradeManager;
 import User.Adapter.ClientUserController;
 import User.Adapter.IUserPresenter;
 import User.PointSystem.PointGUIBuilder;

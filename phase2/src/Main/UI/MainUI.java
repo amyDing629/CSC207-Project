@@ -1,7 +1,7 @@
 package Main.UI;
 
-//import Inventory.Inventory;
-//import Trade.TradeManager;
+//import Inventory.UseCase.Inventory;
+//import Trade.UseCase.TradeManager;
 //import User.*;
 //import com.sun.deploy.ui.DialogTemplate;
 //

@@ -1,6 +1,5 @@
 package User.Gateway;
 
-import Inventory.Item;
 import User.Entity.ClientUser;
 
 import java.io.*;

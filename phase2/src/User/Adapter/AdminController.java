@@ -1,10 +1,6 @@
 package User.Adapter;
 
-import Trade.TradeManager;
-import User.Entity.ClientUser;
 import User.UseCase.AdminActivityManager;
-import User.UseCase.ApprovalManager;
-import User.UseCase.UserManager;
 
 import java.io.FileNotFoundException;
 

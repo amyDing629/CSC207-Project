@@ -1,7 +1,7 @@
 package User.PointSystem;
 
-import Trade.Trade;
-import Trade.TradeManager;
+import Trade.Entity.Trade;
+import Trade.UseCase.TradeManager;
 import Trade.TradeStatus;
 import User.Entity.ClientUser;
 import User.UseCase.UserManager;
