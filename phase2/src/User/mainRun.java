@@ -23,7 +23,7 @@ public class mainRun {
 
         AdminActivityManager aam = new AdminActivityManager();
         UIController uc = new UIController(um, aam, tm, iam, iv);
-        uc.checkFileEmpty(new File("phase2/src/username.txt"));
+        uc.checkFileEmpty(new File("phase2/src/user.ser"));
         uaf.readFile();
 
         LoginIGUI lo = new LoginIGUI();
