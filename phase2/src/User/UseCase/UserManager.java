@@ -106,8 +106,14 @@ public class UserManager {
      * @param password the password of the clientUser
      * @param isAdmin  if the clientUser is admin
      */
-    public void createClientUser(String name, String password, boolean isAdmin) throws FileNotFoundException {
-        dataAccess.addObject(new ClientUser(name, password, isAdmin));
+    public boolean createClientUser(String name, String password, boolean isAdmin) {
+        if(!dataAccess.hasObject(name)) {
+            dataAccess.addObject(new ClientUser(name, password, isAdmin));
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
 

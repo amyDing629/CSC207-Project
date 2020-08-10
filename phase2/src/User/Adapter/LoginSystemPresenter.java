@@ -8,6 +8,7 @@ import User.GUI.View;
 import User.UseCase.UserManager;
 
 import javax.swing.*;
+import java.io.FileNotFoundException;
 import java.util.UUID;
 
 public class LoginSystemPresenter implements IUserPresenter {
@@ -46,9 +47,8 @@ public class LoginSystemPresenter implements IUserPresenter {
         view.setVisible(true);
     }
 
-    public void register(String name, String password) {
-        ClientUser user = new ClientUser(name, password, false);
-        um.addUser(user);
+    public boolean register(String name, String password) {
+            return um.createClientUser(name,password,false);
     }
 
     public boolean login(String name, String password) {

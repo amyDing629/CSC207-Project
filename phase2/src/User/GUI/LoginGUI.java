@@ -14,6 +14,7 @@ import com.sun.security.ntlm.Client;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.UUID;
 
@@ -89,12 +90,15 @@ public class LoginGUI{
         registerButton.addActionListener(e -> {
             String name = nameInput.getText();
             String password = new String(passwordInput.getPassword());
-            lsp.register(name, password);
+            if(lsp.register(name, password)){
+                JOptionPane.showMessageDialog(null, "Already exist");
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "success");
+            }
             //lsp.getUserModel().createClientUser(name, password, false);
-            JOptionPane.showMessageDialog(null, "success");
             for(ClientUser i:um.getUserList()){
-                System.out.println(i.getUsername());
-                System.out.println(i.getPassword());
+                System.out.println(i.toString());
             }
         });
 

@@ -143,7 +143,7 @@ public class UserDataAccess implements DataAccess {
     public boolean hasObject(Object o) {
         deSerialize();
         for (ClientUser i: userList){
-            if (i.getId().equals(o)){
+            if (i.getUsername().equals(o)){
                 return true;
             }
         }
