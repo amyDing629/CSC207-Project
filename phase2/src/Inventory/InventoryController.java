@@ -108,8 +108,11 @@ public class InventoryController {
     }
 
     public Item getItemByRequestList(String itemName){
+        System.out.println(iam.getItemApprovals());
         ItemApprovals k=iam.getItemApproval(itemName);
-        return iv.createItem(itemName,um.getId(um.getUser(k.getCurUserName())));
+        System.out.println(k);
+
+        return iv.createItem(itemName,um.nameToUUID(k.getCurUserName()));
     }
 
     public boolean iamCheckInput(String name){
