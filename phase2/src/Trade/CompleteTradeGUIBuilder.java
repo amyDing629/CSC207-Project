@@ -36,7 +36,6 @@ public class CompleteTradeGUIBuilder implements BorderGUIBuilder {
         panelE.add(action);
         action.addActionListener(e -> {
             ctc.action();
-            ctc.closeFrame();
         });
         tg.setEast(panelE);
 

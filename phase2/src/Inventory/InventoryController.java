@@ -74,7 +74,9 @@ public class InventoryController {
      * move the selected item to user's wishBorrow list.
      */
     void moveToWishList(){
-        um.getUser(currUser).addWishBorrow(it);
+        ClientUser user = um.popUser(currUser);
+        user.getWishBorrow().add(it);
+        um.addUser(user);
     }
 
     void addToWishLend(Item it) {

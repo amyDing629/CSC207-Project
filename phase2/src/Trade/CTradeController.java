@@ -186,6 +186,7 @@ public class CTradeController implements Observer {
                 mPresenter.run();
                 mPresenter.addObserver(this);
             }
+            closeFrame();
         }
 
     }

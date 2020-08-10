@@ -3,8 +3,12 @@ package Inventory;
 import Trade.BorderGUIBuilder;
 import Trade.BorderGUINoTextArea;
 import Trade.BorderGUIWithThreeTextArea;
+import User.Entity.ClientUser;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.UUID;
 
 public class WishBorrowAddBuilder implements BorderGUIBuilder {
     InventoryController ic;
@@ -23,9 +27,8 @@ public class WishBorrowAddBuilder implements BorderGUIBuilder {
     @Override
     public void buildPanelN() {
         JPanel panelN = new JPanel();
-        JLabel msg = new JLabel("Message:", SwingConstants.LEFT);
+        JLabel msg = new JLabel("message:", SwingConstants.LEFT);
         JTextArea msgArea = new JTextArea();
-        msgArea.setEditable(false);
         panelN.add(msg);
         panelN.add(msgArea);
         tg.setNorth(panelN);
@@ -40,7 +43,7 @@ public class WishBorrowAddBuilder implements BorderGUIBuilder {
     @Override
     public void buildPanelW() {
         JPanel panelW = new JPanel();
-        JLabel il = new JLabel("Available Item List");
+        JLabel il = new JLabel("available item list");
         JTextArea itemList = new JTextArea();
         itemList.setText(ic.printAvailable());
         JScrollPane sp = new JScrollPane(itemList);
@@ -58,32 +61,46 @@ public class WishBorrowAddBuilder implements BorderGUIBuilder {
     @Override
     public void buildPanelS() {
         JPanel panelS = new JPanel();
-        JTextArea ta = new JTextArea("Type item name here");
-        JButton submit = new JButton("Submit");
-        JButton awl = new JButton("Add to wish list");
-        JButton back  = new JButton("Back");
+        JTextArea ta = new JTextArea("type item name here");
+        JButton submit = new JButton("submit");
+        JButton awl = new JButton("add to wish list");
+        JButton back  = new JButton("return");
         panelS.add(ta);
         panelS.add(submit);
         panelS.add(awl);
         panelS.add(back);
         tg.setSouth(panelS);
         tg.addInput("input", ta);
-        submit.addActionListener(e -> ic.submitButM());
-        back.addActionListener(e -> ic.backBut());
-        awl.addActionListener(e -> ic.addToWishBorrow());
+        submit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ic.submitButM();
+            }
+        });
+        back.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ic.backBut();
+            }
+        });
+        awl.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ic.addToWishBorrow();
+            }
+        });
 
     }
 
     @Override
     public void buildPanelC() {
         JPanel panelC = new JPanel();
-        JLabel currTradeL = new JLabel("Item Selected");
+        JLabel currTradeL = new JLabel("item selected");
         JTextArea currArea = new JTextArea();
-        currArea.setEditable(false);
         panelC.setLayout(new BoxLayout(panelC, BoxLayout.Y_AXIS));
         panelC.add(currTradeL);
         panelC.add(currArea);
-        currArea.setText("No Item Selected");
+        currArea.setText("no item selected");
         tg.setCenter(panelC);
         tg.initializeCurr(currArea);
         ic.updateCurr();
