@@ -1,13 +1,13 @@
 package User.GUI;
 
 import User.Adapter.AdminController;
+import User.Adapter.ApprovalController;
 import User.Adapter.ClientUserController;
-import User.UseCase.ApprovalManager;
 
 import javax.swing.*;
 import java.awt.*;
 public class UnfreezeGUI {
-    ApprovalManager iam;
+    ApprovalController avc;
     ClientUserController uc;
     AdminController ac;
     JFrame pFrame;
@@ -45,7 +45,7 @@ public class UnfreezeGUI {
         c.weighty = 1.0;
         panel.add(scrollPane, c);
 
-        textArea.setText(iam.AllUserApprovals());
+        textArea.setText(avc.AllUserApprovals());
         JTextField userInput = new JTextField(30);
         userInput.setPreferredSize(new Dimension(300, 30));
         panel.add(userInput);
@@ -65,7 +65,7 @@ public class UnfreezeGUI {
         submitButton.addActionListener(e -> {
             frame.setVisible(false);
             if(uc.getUser(userInput.getText())!=null){
-                iam.removeUserApproval(userInput.getText());
+                avc.removeUserApproval(userInput.getText());
                 ac.setFreeze(userInput.getText(),false);
                 JOptionPane.showMessageDialog(null,"Unfreeze successfully");
                 UserFreezeSystem d = new UserFreezeSystem(uc,frame);

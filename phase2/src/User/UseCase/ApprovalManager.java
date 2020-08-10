@@ -9,7 +9,6 @@ import User.Entity.ItemApprovals;
 import User.Entity.UserApprovals;
 import User.Gateway.DataAccess;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class ApprovalManager {
