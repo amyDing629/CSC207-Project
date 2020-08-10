@@ -1,12 +1,10 @@
 package User.GUI;
 
 import User.Adapter.ClientUserController;
-import User.Adapter.UIController;
 import User.UseCase.ApprovalManager;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.FileNotFoundException;
 
 public class RequestUnfreezeTicketGUI {
     ApprovalManager iam;

@@ -1,23 +1,18 @@
 package User.GUI;
 
-import Inventory.Inventory;
 import User.Adapter.ClientUserController;
-import User.Adapter.UIController;
-import Trade.TradeManager;
-import User.UseCase.AdminActivityManager;
-import User.UseCase.ApprovalManager;
 import User.UseCase.UserManager;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class editInfoGUI {
-    UserManager um;
+//    UserManager um;
     ClientUserController uc;
     JFrame frame;
     JFrame PFrame;
     public editInfoGUI(ClientUserController uc , JFrame pFrame) {
-        this.um = new UserManager();
+//        this.um = new UserManager();
         this.uc = uc;
         this.PFrame=pFrame;
     }
@@ -40,7 +35,7 @@ public class editInfoGUI {
 
     private void placeComponents(JFrame frame, JPanel panel, String b){
 
-        JLabel isAdmin = new JLabel("Admin: "+ um.getIsAdmin(b));
+        JLabel isAdmin = new JLabel("Admin: "+ uc.getIsAdmin(b));
         isAdmin.setPreferredSize(new Dimension(300, 30));
         panel.add(isAdmin);
 
@@ -75,7 +70,7 @@ public class editInfoGUI {
         JButton exit = new JButton("exit");
         exit.setPreferredSize(new Dimension(300, 30));
         panel.add(exit);
-        if(!um.getIsAdmin(b)){
+        if(!uc.getIsAdmin(b)){
             limitSystem.setEnabled(false);
         }
         exit.addActionListener(e -> {

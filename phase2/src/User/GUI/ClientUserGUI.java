@@ -3,11 +3,8 @@ package User.GUI;
 import Inventory.InventoryGUI;
 import Trade.*;
 import User.Adapter.ClientUserController;
-import User.Adapter.ClientUserPresenter;
 import User.Adapter.IUserPresenter;
-import User.Adapter.UIController;
 import User.PointSystem.PointGUIBuilder;
-import User.UseCase.ApprovalManager;
 import User.UseCase.UserManager;
 
 import javax.swing.*;

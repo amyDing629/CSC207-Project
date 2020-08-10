@@ -2,12 +2,9 @@ package User.GUI;
 
 import User.Adapter.AdminController;
 import User.Adapter.ClientUserController;
-import User.Adapter.UIController;
-import User.UseCase.AdminActivityManager;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.FileNotFoundException;
 
 public class FreeUserGUI {
     ClientUserController uc;
