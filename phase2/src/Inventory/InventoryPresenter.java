@@ -146,6 +146,10 @@ public class InventoryPresenter {
         bta.setMsgText("the item has been added to lend list successfully");
     }
 
+    void itemInInv(){
+        bta.setMsgText("can't add the item since the item name already exist");
+    }
+
 
 
 

@@ -80,7 +80,7 @@ public class AgreeReqGUIBuilder implements BorderGUIBuilder {
         update.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ic.updateButB();
+                ic.updateButR();
             }
         });
 
@@ -117,11 +117,7 @@ public class AgreeReqGUIBuilder implements BorderGUIBuilder {
         agree.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    ic.agreeBut();
-                } catch (FileNotFoundException fileNotFoundException) {
-                    fileNotFoundException.printStackTrace();
-                }
+                ic.agreeBut();
             }
         });
 

@@ -57,6 +57,15 @@ public class InventoryController {
     }
 
 
+    boolean isInInventory(String name){
+        for (Item it: iv.getLendingList()){
+            if (it.getName().equals(name)){
+                return true;
+            }
+        }
+        return false;
+    }
+
     /**
      * if the input item is the user's own item, return true. Else, return false.
      * @return whether the input item is the user's own item.
@@ -73,9 +82,16 @@ public class InventoryController {
     }
 
     void addToWishLend(Item it) {
-        um.getWishLend(iv.getOwnerUUID(it.getName())).add(it.getName());
-        iv.add(it);
-        iam.removeItemApproval(it.getName());
+        if (!isInInventory(it.getName())){
+            iv.add(it);
+            ClientUser u = um.popUser(it.getOwnerUUID());
+            u.getWishLend().add(it.getName());
+            iam.removeItemApproval(it.getName());
+            um.addUser(u);
+        }else{
+            ip.itemInInv();
+        }
+
     }
 
     void removeItemFromIam(Item it){
@@ -231,6 +247,14 @@ public class InventoryController {
         updateCurr();
     }
 
+    public void updateButR(){
+    }
+
+    public void updateListR(){
+        ip.updateListM(printRequest());
+
+    }
+
     void submitButB(){
         String input = bta.getInput("input");
         ip.resetInputArea();
@@ -329,11 +353,12 @@ public class InventoryController {
         }
     }
 
-    void agreeBut() throws FileNotFoundException {
+    void agreeBut(){
         if (it == null){
             ip.noItemSelected();
         }else{
             addToWishLend(getItemByRequestList(it));
+            iam.removeItemApproval(it);
             ip.resetCurr();
             ip.addLSuccess();
             it = null;
@@ -345,7 +370,9 @@ public class InventoryController {
         if (it == null) {
             ip.noItemSelected();
         }else{
-            removeItemFromIam(getItem(it));
+            System.out.println(iam.getItemApprovals());
+            iam.removeItemApproval(it);
+            System.out.println(iam.getItemApprovals());
             ip.resetCurr();
             it = null;
             ip.updateListM(printRequest());
