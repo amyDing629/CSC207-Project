@@ -63,7 +63,7 @@ public class SelectItemToTradeBuilder implements BorderGUIBuilder {
     public void buildPanelS() {
         JPanel panelS = new JPanel();
         JLabel input = new JLabel("Input Item Name");
-        JTextArea inputArea = new JTextArea("Item Name");
+        JTextArea inputArea = new JTextArea("Item Name", 1, 10);
         JButton submit = new JButton("Submit");
         JButton back = new JButton("Back");
         panelS.add(input);
