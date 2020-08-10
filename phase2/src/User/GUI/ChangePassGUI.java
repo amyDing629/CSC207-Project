@@ -55,8 +55,11 @@ public class ChangePassGUI {
             pFrame.setVisible(true);
         });
         submitButton.addActionListener(e -> {
+            System.out.println(b.getPassword());
             frame.setVisible(false);
-            uc.setPassword(b.getUsername(),passInput.getText());
+            System.out.println(passInput.getText());
+            b.setPassword(passInput.getText());
+            System.out.println(b.getPassword());
             JOptionPane.showMessageDialog(null, "success changed pass");
         });
     }

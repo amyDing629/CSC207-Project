@@ -60,7 +60,7 @@ public class editInfoGUI {
         AddItemSystem.setPreferredSize(new Dimension(300, 30));
         panel.add(AddItemSystem);
 
-        JButton ReverseSystem = new JButton("Add Item System");
+        JButton ReverseSystem = new JButton("Reverse System");
         ReverseSystem.setPreferredSize(new Dimension(300, 30));
         panel.add(ReverseSystem);
 
@@ -69,6 +69,10 @@ public class editInfoGUI {
         panel.add(exit);
         if(!uc.getIsAdmin(b)){
             limitSystem.setEnabled(false);
+            AddItemSystem.setEnabled(false);
+            ReverseSystem.setEnabled(false);
+            CreateAdminGUI.setEnabled(false);
+
         }
         exit.addActionListener(e -> {
             frame.setVisible(false);
