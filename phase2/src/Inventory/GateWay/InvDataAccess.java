@@ -115,7 +115,6 @@ public class InvDataAccess implements DataAccess {
                 lendingList = (List<Item>) in.readObject();
                 in.close();
                 fileIn.close();
-                //System.out.println("deSerialize: "+lendingList);
             }
 
         } catch (IOException | ClassNotFoundException i) {

@@ -68,8 +68,12 @@ public class InventoryController {
      * if the input item is the user's own item, return true. Else, return false.
      * @return whether the input item is the user's own item.
      */
-    boolean isOwnItem(){
+    private boolean isOwnItem(){
         return iv.getOwnerUUID(it).equals(currUser);
+    }
+
+    private boolean noItemFound(){
+        return it == null;
     }
 
     /**
@@ -340,7 +344,7 @@ public class InventoryController {
     }
 
     void addToWishBorrow(){
-        if (isOwnItem()) {
+        if (noItemFound() || isOwnItem()) {
             ip.addToWishBorrow(false);
         } else if (isInOwnWishList()) {
             ip.isInWishBorrow();
@@ -375,13 +379,5 @@ public class InventoryController {
             updateListR();
         }
     }
-
-
-
-
-
-
-
-
 
 }
