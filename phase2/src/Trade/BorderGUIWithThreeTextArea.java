@@ -54,7 +54,6 @@ public class BorderGUIWithThreeTextArea extends BorderGUINoTextArea
         msg.setEditable(false);
     }
 
-
     @Override
     public String getInput(String key) {
         return inputs.get(key).getText();
