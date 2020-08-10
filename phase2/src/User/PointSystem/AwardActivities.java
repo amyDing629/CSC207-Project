@@ -17,6 +17,7 @@ import User.UseCase.UserManager;
  * Responsible for awarding the users with bonus trades.
  */
 public class AwardActivities {
+
     TradeManager tm = new TradeManager();
     PointManager pm = new PointManager();
     Trade currTrade;
@@ -86,8 +87,6 @@ public class AwardActivities {
         }
 
     }
-
-
 
     void submitBut(String tradeNum){
         pp.resetInputArea();

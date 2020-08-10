@@ -14,9 +14,6 @@ public class BorderGUIWithThreeTextArea extends BorderGUINoTextArea
         super();
     }
 
-
-
-
     @Override
     public void setListText(String str) {
         list.setText(str);
