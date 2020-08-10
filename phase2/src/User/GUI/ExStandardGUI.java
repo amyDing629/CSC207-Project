@@ -34,7 +34,7 @@ public class ExStandardGUI {
 
     public void placeComponents(JFrame frame, JPanel panel, String b){
 
-        JLabel textLabel = new JLabel("Please enter the points needed \\n for 1 bonus trade");
+        JLabel textLabel = new JLabel("Please enter points needed for 1 bonus trade");
         textLabel.setPreferredSize(new Dimension(300, 30));
         panel.add(textLabel);
 
