@@ -122,7 +122,9 @@ public class InventoryController {
 
     public Item getItemByRequestList(String itemName){
         ItemApprovals k=iam.getItemApproval(itemName);
-        return iv.createItem(itemName,um.nameToUUID(k.getCurUserName()));
+        Item item = iv.createItem(itemName,um.nameToUUID(k.getCurUserName()));
+        //item.setDescription(//TODO);
+        return item;
     }
 
     public boolean iamCheckInput(String name){
@@ -158,7 +160,9 @@ public class InventoryController {
 
 
     public void setDescription(String des, String itemName){
-        iv.setDescription(itemName, des);
+        Item item = iv.popItem(itemName);
+        item.setDescription(des);
+        iv.addItem(item);
     }
 
 

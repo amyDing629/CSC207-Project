@@ -74,7 +74,7 @@ public class TradeManager{
      *
      * @param id the id current trade
      */
-    void confirmTrade(UUID id) throws FileNotFoundException {
+    void confirmTrade(UUID id){
         Trade trade = getTrade(id);
         trade.setStatus(TradeStatus.incomplete);
         dataAccess.updateSer();

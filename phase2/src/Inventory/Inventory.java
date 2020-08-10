@@ -1,5 +1,6 @@
 package Inventory;
 
+import Trade.Trade;
 import User.Gateway.DataAccess;
 
 import java.io.FileNotFoundException;
@@ -48,7 +49,7 @@ public class Inventory {
      * add the item into the inventory
      * @param item the item added
      */
-    public void addItem(Item item) throws FileNotFoundException {
+    public void addItem(Item item){
         dataAccess.addObject(item);
     }
 
@@ -135,6 +136,16 @@ public class Inventory {
             }
         }
         return false;
+    }
+
+    public Item popItem(String itemName){
+        if (dataAccess.hasObject(itemName)) {
+            Item item =  (Item) dataAccess.getObject(itemName);
+            dataAccess.removeObject(itemName);
+            return item;
+        } else {
+            return null;
+        }
     }
 
 
