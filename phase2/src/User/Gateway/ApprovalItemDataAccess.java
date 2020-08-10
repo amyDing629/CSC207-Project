@@ -62,7 +62,7 @@ public class ApprovalItemDataAccess implements DataAccess {
     @Override
     public boolean hasObject(Object o) {
         for (ItemApprovals itemApprovals : ItemApprovalsList) {
-            if (o.equals(itemApprovals)) {
+            if (o.equals(itemApprovals.getFstString())) {
                 return true;
             }
         }
