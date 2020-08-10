@@ -19,7 +19,7 @@ public class editInfoGUI {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JPanel panel = new JPanel();
         panel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        JLabel welcomeLabel = new JLabel("Hello, user" + name);
+        JLabel welcomeLabel = new JLabel("Hello, " + name);
         welcomeLabel.setPreferredSize(new Dimension(300, 30));
         panel.add(welcomeLabel);
         frame.add(panel);
