@@ -58,7 +58,7 @@ public class ChangePassGUI {
             System.out.println(b.getPassword());
             frame.setVisible(false);
             System.out.println(passInput.getText());
-            b.setPassword(passInput.getText());
+            uc.setPassword(b.getUsername(), passInput.getText());
             System.out.println(b.getPassword());
             JOptionPane.showMessageDialog(null, "Successfully changed the password!");
         });
