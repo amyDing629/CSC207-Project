@@ -82,7 +82,7 @@ public class ApprovalItemDataAccess implements DataAccess {
     }
 
 
-    @Override
+    @Override @SuppressWarnings("ALL")
     public void updateSer() {
         File file = new File(serFilePath);
         file.delete();
