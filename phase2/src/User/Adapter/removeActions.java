@@ -46,10 +46,10 @@ public class removeActions {
     }
 
     private void deleteFreezeTicket(){
-        iam.removeUser(user.getUsername());
+        iam.removeUserApproval(user.getUsername());
     }
 
     private void deleteItemTicket(String itemName){
-        iam.removeItem(itemName);
+        iam.removeItemApproval(itemName);
     }
 }
