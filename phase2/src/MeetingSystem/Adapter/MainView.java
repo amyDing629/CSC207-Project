@@ -1,0 +1,170 @@
+package MeetingSystem.Adapter;
+
+import MeetingSystem.MeetingStatus;
+import MeetingSystem.UseCase.Model;
+
+import javax.swing.*;
+import java.util.UUID;
+
+public class MainView {
+    private JFrame frame;
+    private JPanel panel1;
+    private JButton backButton;
+    private JButton confirmButton;
+    private JTextArea meetingInfoTextArea;
+    private JButton helpButton;
+    private JButton agreeButton;
+    private JButton setUpButton;
+    private JButton editButton;
+    private JTextArea welcomeTextArea;
+
+    private boolean isFirst; // is first meeting
+
+    // Presenter
+    private MPresenter presenter;
+
+    public MainView() {
+        initComponents();
+    }
+
+    private void backActionPerformed(java.awt.event.ActionEvent evt) {
+        getPresenter().back();
+        frame.setVisible(false);
+    }
+
+    public void updateViewFromModel(boolean isFirst) {
+        this.isFirst = isFirst;
+        Model model = getPresenter().getModel();
+        UUID meetingID = getPresenter().getMeetingID();
+        MeetingStatus meetingStatus = model.getMeetingStatus(meetingID);
+
+        // update welcome view, meeting info view
+        welcomeTextArea.setText(model.getCurrUser());
+        meetingInfoTextArea.setText(model.getMeetingInfo(meetingID));
+
+        // TODO: strategy pattern
+        if (isFirst) { // first meeting view
+
+            // update Button view
+            if (meetingStatus.equals(MeetingStatus.DNE)) {
+                // set up session
+                setUpButton.setVisible(true);
+                editButton.setVisible(false);
+                agreeButton.setVisible(false);
+                confirmButton.setVisible(false);
+            } else if (meetingStatus.equals(MeetingStatus.INCOMPLETE)) {
+                setUpButton.setVisible(false);
+                editButton.setVisible(!model.otherUserAgreed(meetingID) && !model.isLastUserCurrUser());
+                agreeButton.setVisible(!model.isLastUserCurrUser());
+                confirmButton.setVisible(false);
+            } else if (meetingStatus.equals(MeetingStatus.AGREED)) {
+                welcomeTextArea.setText("Meeting Agreed by both users!");
+                setUpButton.setVisible(false);
+                editButton.setVisible(false);
+                agreeButton.setVisible(false);
+                confirmButton.setVisible(!model.isLastUserCurrUser());
+            } else {
+                // cancelled or completed
+                setUpButton.setVisible(false);
+                editButton.setVisible(false);
+                agreeButton.setVisible(false);
+                confirmButton.setVisible(false);
+            }
+
+            if (model.isLastUserCurrUser()) {
+                setUpButton.setVisible(false);
+                editButton.setVisible(false);
+                agreeButton.setVisible(false);
+                confirmButton.setVisible(false);
+                welcomeTextArea.setText("Please wait the other user to edit/agree/confirm!");
+            }
+
+            if (meetingStatus.equals(MeetingStatus.CANCELLED)) {
+                welcomeTextArea.setText("Meeting Cancelled!");
+            } else if (meetingStatus.equals(MeetingStatus.COMPLETED)) {
+                welcomeTextArea.setText("Meeting Confirmed by both users!");
+            }
+        } else { // second meeting view
+
+            confirmButton.setVisible(true);
+
+            if (model.isLastUserCurrUser()) {
+                setUpButton.setVisible(false);
+                editButton.setVisible(false);
+                agreeButton.setVisible(false);
+                confirmButton.setVisible(false);
+                welcomeTextArea.setText("Please wait the other user to confirm!");
+            }
+
+            if (meetingStatus.equals(MeetingStatus.COMPLETED)) {
+                welcomeTextArea.setText("Meeting Confirmed by both users!");
+            }
+        }
+
+
+    }
+
+    public void open() {
+        frame.setVisible(true);
+    }
+
+    public MPresenter getPresenter() {
+        return presenter;
+    }
+
+    public void setPresenter(MPresenter presenter) {
+        this.presenter = presenter;
+    }
+
+    private void initComponents() {
+        frame = new JFrame("Meeting System");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(800, 600);
+
+        frame.getContentPane().add(panel1);
+        frame.setVisible(true);
+
+        backButton.addActionListener(e -> {
+            // back to Trade System
+            frame.setVisible(false);
+            backActionPerformed(e);
+        });
+        setUpButton.addActionListener(e -> {
+            // go to setup view
+            SetupViewPresenter setupViewPresenter =
+                    new SetupViewPresenter(getPresenter().getMeetingID(), getPresenter().getCurrLogInUser(),
+                            getPresenter().getUsers(), getPresenter().getObserver());
+            setupViewPresenter.run();
+            getPresenter().setMeetingID(setupViewPresenter.getMeetingID());
+            updateViewFromModel(isFirst);
+        });
+        editButton.addActionListener(e -> {
+            // go to edit view
+            EditViewPresenter editViewPresenter =
+                    new EditViewPresenter(getPresenter().getMeetingID(), getPresenter().getCurrLogInUser(),
+                            getPresenter().getObserver());
+            editViewPresenter.run();
+            updateViewFromModel(isFirst);
+        });
+        agreeButton.addActionListener(e -> {
+            // go to agree view
+            AgreeViewPresenter agreeViewPresenter =
+                    new AgreeViewPresenter(getPresenter().getMeetingID(), getPresenter().getCurrLogInUser());
+            agreeViewPresenter.run();
+            updateViewFromModel(isFirst);
+        });
+        confirmButton.addActionListener(e -> {
+            // go to confirm view
+            ConfirmViewPresenter confirmViewPresenter =
+                    new ConfirmViewPresenter(getPresenter().getMeetingID(), getPresenter().getCurrLogInUser(),
+                            getPresenter().getObserver());
+            confirmViewPresenter.run();
+            updateViewFromModel(isFirst);
+        });
+        helpButton.addActionListener(e -> {
+            // TODO: go to help view
+        });
+    }
+
+
+}

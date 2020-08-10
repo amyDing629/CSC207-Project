@@ -2,10 +2,10 @@ package Trade;
 
 import Inventory.Item;
 import Main.GateWay;
-import Trade.MeetingSystem.DateTime;
-import Trade.MeetingSystem.Meeting;
-import Trade.MeetingSystem.MeetingEditor;
-import Trade.MeetingSystem.MeetingStatus;
+import MeetingSystem.DateTime;
+import MeetingSystem.Meeting;
+import MeetingSystem.MeetingEditor;
+import MeetingSystem.MeetingStatus;
 
 import java.io.*;
 import java.time.LocalDateTime;

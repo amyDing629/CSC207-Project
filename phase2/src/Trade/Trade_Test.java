@@ -22,7 +22,6 @@ public class Trade_Test {
         amy.addWishes("apple");
         Inventory iv = new Inventory();
         UserManager um = new UserManager();
-        TradeManager tm = new TradeManager();
         iv.addItem(apple);
         iv.addItem(pear);
         um.addUser(daniel);

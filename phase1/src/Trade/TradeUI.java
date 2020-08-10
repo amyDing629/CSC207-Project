@@ -1,6 +1,6 @@
 package Trade;
 
-import Trade.MeetingSystem.MeetingSystem;
+import MeetingSystem.MeetingSystem;
 import User.ClientUser;
 import User.UserManager;
 

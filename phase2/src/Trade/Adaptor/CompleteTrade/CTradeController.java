@@ -1,11 +1,11 @@
 package Trade.Adaptor.CompleteTrade;
 
 import Trade.Adaptor.BorderGUIWithThreeTextArea;
-import Trade.MeetingSystem.Adapter.MPresenter;
-import Trade.MeetingSystem.Adapter.MainViewPresenter;
-import Trade.MeetingSystem.Entity.Meeting;
-import Trade.MeetingSystem.MeetingStatus;
-import Trade.MeetingSystem.UseCase.MeetingActionManager;
+import MeetingSystem.Adapter.MPresenter;
+import MeetingSystem.Adapter.MainViewPresenter;
+import MeetingSystem.Entity.Meeting;
+import MeetingSystem.MeetingStatus;
+import MeetingSystem.UseCase.MeetingActionManager;
 import Trade.Entity.Trade;
 import Trade.TradeStatus;
 import User.Entity.ClientUser;

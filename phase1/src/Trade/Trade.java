@@ -1,7 +1,7 @@
 package Trade;
 
 import Inventory.Item;
-import Trade.MeetingSystem.Meeting;
+import MeetingSystem.Meeting;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
