@@ -8,6 +8,9 @@ import Trade.TradeGUIPlan;
 import User.Adapter.ClientUserController;
 import User.Adapter.ClientUserPresenter;
 import User.Adapter.LoginSystemPresenter;
+import User.Entity.ClientUser;
+import User.UseCase.UserManager;
+import com.sun.security.ntlm.Client;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,7 +21,6 @@ public class LoginGUI{
 
     JFrame frame;
     LoginSystemPresenter lsp;
-
     // presenter
 
     public void run() {
@@ -62,11 +64,11 @@ public class LoginGUI{
         exitButton.setPreferredSize(new Dimension(300, 30));
         panel.add(exploreButton);
         panel.add(exitButton);
-
+        UserManager um=new UserManager();
 
         logInButton.addActionListener(e -> {
             String name = nameInput.getText();
-            String password = Arrays.toString(passwordInput.getPassword());
+            String password = new String(passwordInput.getPassword());
             boolean response = lsp.login(name, password);
             //boolean response = lsp.getUserModel().verifyUser(name, password);
             if (!response)
@@ -86,10 +88,14 @@ public class LoginGUI{
 
         registerButton.addActionListener(e -> {
             String name = nameInput.getText();
-            String password = Arrays.toString(passwordInput.getPassword());
+            String password = new String(passwordInput.getPassword());
             lsp.register(name, password);
             //lsp.getUserModel().createClientUser(name, password, false);
             JOptionPane.showMessageDialog(null, "success");
+            for(ClientUser i:um.getUserList()){
+                System.out.println(i.getUsername());
+                System.out.println(i.getPassword());
+            }
         });
 
 
