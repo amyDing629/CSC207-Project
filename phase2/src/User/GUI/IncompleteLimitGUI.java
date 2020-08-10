@@ -9,7 +9,6 @@ import java.awt.*;
 public class IncompleteLimitGUI {
     ClientUserController uc;
     AdminController ac;
-//    AdminActivityManager aam;
     JFrame pFrame;
     JFrame frame;
     public IncompleteLimitGUI(ClientUserController uc ,JFrame pFrame) {

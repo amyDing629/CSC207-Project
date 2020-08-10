@@ -1,13 +1,11 @@
 package User.GUI;
 
 import User.Adapter.ClientUserController;
-import User.UseCase.UserManager;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class UserFreezeSystem {
-    UserManager um;
     ClientUserController uc;
     JFrame pFrame;
     JFrame frame;
@@ -33,7 +31,7 @@ public class UserFreezeSystem {
 
     private void placeComponents(JFrame frame, JPanel panel, String b){
 
-        JLabel freezeStatus = new JLabel("Freeze Status: "+ um.getIsFrozen(um.nameToUUID(b)));
+        JLabel freezeStatus = new JLabel("Freeze Status: "+ uc.getIsFrozen(uc.nameToUUID(b)));
         freezeStatus.setPreferredSize(new Dimension(300, 30));
         panel.add(freezeStatus);
 
@@ -50,11 +48,11 @@ public class UserFreezeSystem {
         JButton exitButton = new JButton("quit to menu");
         exitButton.setPreferredSize(new Dimension(300, 30));
 
-        if(!um.getIsAdmin(b)){
+        if(!uc.getIsAdmin(b)){
             tradeButton.setEnabled(false);
             inventoryButton.setEnabled(false);
         }
-        if(!um.getIsFrozen(um.nameToUUID(b))){
+        if(!uc.getIsFrozen(uc.nameToUUID(b))){
             editButton.setEnabled(false);
         }
         panel.add(editButton);

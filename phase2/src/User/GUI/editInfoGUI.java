@@ -1,18 +1,15 @@
 package User.GUI;
 
 import User.Adapter.ClientUserController;
-import User.UseCase.UserManager;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class editInfoGUI {
-//    UserManager um;
     ClientUserController uc;
     JFrame frame;
     JFrame PFrame;
     public editInfoGUI(ClientUserController uc , JFrame pFrame) {
-//        this.um = new UserManager();
         this.uc = uc;
         this.PFrame=pFrame;
     }
