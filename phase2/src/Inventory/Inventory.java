@@ -118,7 +118,7 @@ public class Inventory {
         return false;
     }
 
-    public void add(Item it) throws FileNotFoundException {
+    public void add(Item it){
         dataAccess.addObject(it);
     }
 

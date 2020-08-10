@@ -87,7 +87,6 @@ public class ApprovalItemDataAccess implements DataAccess {
         File file = new File(serFilePath);
         file.delete();
         try {
-            file.delete();
             if(!file.exists()) {
                 boolean result = file.createNewFile();
                 if (!result){

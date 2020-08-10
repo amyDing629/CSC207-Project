@@ -72,7 +72,7 @@ public class InventoryController {
         um.getUser(currUser).addWishBorrow(it);
     }
 
-    void addToWishLend(Item it) throws FileNotFoundException {
+    void addToWishLend(Item it) {
         um.getWishLend(iv.getOwnerUUID(it.getName())).add(it.getName());
         iv.add(it);
         iam.removeItemApproval(it.getName());
@@ -95,17 +95,6 @@ public class InventoryController {
      */
     Item getItem(String line){
         return iv.getItem(line);
-    }
-
-    public String printWishLend(){
-        StringBuilder result = new StringBuilder();
-        for (String it: um.getWishLend(currUser)){
-            result.append(it).append("\n");
-        }
-        if (result.toString().equals("")){
-            return "no item";
-        }
-        return result.toString();
     }
 
 
@@ -246,7 +235,21 @@ public class InventoryController {
             ip.wrongInput();;
         }else{
             it = input;
-            ip.updateCurr(getItemInfo());
+            ip.updateCurr(getItemInfo(iv.getItem(it)));
+        }
+    }
+
+    void submitButR(){
+        String input = bta.getInput("input");
+        ip.resetInputArea();
+        if (!iamCheckInput(input)){
+            ip.wrongInput();
+        }else{
+            it = input;
+            System.out.println(it);
+            Item item = getItemByRequestList(input);
+            System.out.println(item);
+            ip.updateCurr(getItemInfo(item));
         }
     }
 
@@ -257,7 +260,7 @@ public class InventoryController {
             ip.wrongInput();;
         }else{
             it = input;
-            ip.updateCurr(getItemInfo());
+            ip.updateCurr(getItemInfo(iv.getItem(it)));
         }
     }
 
@@ -266,10 +269,10 @@ public class InventoryController {
         ip.resetInputArea();
         System.out.println("submitButM: " + iv.getAvailableList());
         if (!iv.getAvailableList().contains(input)){
-            ip.wrongInput();;
+            ip.wrongInput();
         }else{
             it = input;
-            ip.updateCurr(getItemInfo());
+            ip.updateCurr(getItemInfo(iv.getItem(it)));
         }
     }
 
@@ -278,11 +281,10 @@ public class InventoryController {
         ip.closeFrame();
     }
 
-    String getItemInfo() {
-        Item item = iv.getItem(it);
-        return "Item Info:\nitem name: " + iv.getName(item) + "\n" +
-                "item description: " + iv.getDescription(item)
-                + "\n" + "item owner: " + um.UUIDToName(item.getOwnerUUID());
+    String getItemInfo(Item it) {
+        return "Item Info:\nitem name: " + iv.getName(it) + "\n" +
+                "item description: " + iv.getDescription(it)
+                + "\n" + "item owner: " + um.UUIDToName(it.getOwnerUUID());
     }
 
     void editDes(){
@@ -292,7 +294,7 @@ public class InventoryController {
             String description = bta.getInput("des");
             setDescription(description, it);
             ip.editDesSuccess(it);
-            ip.updateCurr(getItemInfo());
+            ip.updateCurr(getItemInfo(iv.getItem(it)));
         }
     }
 

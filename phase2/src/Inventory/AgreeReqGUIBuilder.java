@@ -68,7 +68,7 @@ public class AgreeReqGUIBuilder implements BorderGUIBuilder {
         submit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ic.submitButB();
+                ic.submitButR();
             }
         });
         back.addActionListener(new ActionListener() {

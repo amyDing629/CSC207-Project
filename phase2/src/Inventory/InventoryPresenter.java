@@ -30,8 +30,7 @@ public class InventoryPresenter {
     /**
      * print the message
      */
-    String wrongInput(){
-        return "wrong input, please type again";
+    void wrongInput(){ bta.setMsgText("wrong input");
     }
 
     /**
