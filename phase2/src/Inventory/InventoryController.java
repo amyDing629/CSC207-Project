@@ -125,7 +125,7 @@ public class InventoryController {
     public Item getItemByRequestList(String itemName){
         ItemApprovals k=iam.getItemApproval(itemName);
         Item item = iv.createItem(itemName,um.nameToUUID(k.getCurUserName()));
-        //item.setDescription(//TODO);
+        item.setDescription(k.getSecString());
         return item;
     }
 
