@@ -11,21 +11,17 @@ import javax.swing.*;
 import java.awt.*;
 
 public class editInfoGUI {
-    UserManager um;
     TradeManager tm;
     ApprovalManager iam;
     UIController uc;
     Inventory iv;
-    AdminActivityManager aam;
     JFrame frame;
     JFrame PFrame;
     public editInfoGUI(UIController uc , JFrame pFrame) {
-        this.um = new UserManager();
         this.tm = new TradeManager();
         this.iam= new ApprovalManager();
         this.uc=uc;
         this.iv=new Inventory();
-        this.aam=new AdminActivityManager();
         this.PFrame=pFrame;
     }
     public void run(String name){
@@ -47,7 +43,7 @@ public class editInfoGUI {
 
     private void placeComponents(JFrame frame, JPanel panel, String b){
 
-        JLabel isAdmin = new JLabel("Admin: "+ um.getIsAdmin(b));
+        JLabel isAdmin = new JLabel("Admin: "+ uc.getIsAdmin(b));
         isAdmin.setPreferredSize(new Dimension(300, 30));
         panel.add(isAdmin);
 
@@ -82,7 +78,7 @@ public class editInfoGUI {
         JButton exit = new JButton("exit");
         exit.setPreferredSize(new Dimension(300, 30));
         panel.add(exit);
-        if(!um.getIsAdmin(b)){
+        if(!uc.getIsAdmin(b)){
             limitSystem.setEnabled(false);
         }
         exit.addActionListener(e -> {
