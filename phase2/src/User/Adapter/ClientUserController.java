@@ -74,6 +74,14 @@ public class ClientUserController {
         um.createClientUser(name, password, false);
     }
 
+    public boolean getIsFrozen(UUID userID){
+        return um.getIsFrozen(userID);
+    }
+
+    public UUID nameToUUID(String name){
+        return um.nameToUUID(name);
+    }
+
 
     public UUID getIDbyName(String name) {
         return um.getUser(name).getId();

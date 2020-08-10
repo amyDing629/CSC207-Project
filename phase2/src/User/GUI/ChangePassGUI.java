@@ -1,7 +1,6 @@
 package User.GUI;
 
 import User.Adapter.ClientUserController;
-import User.Adapter.UIController;
 import User.Entity.ClientUser;
 
 import javax.swing.*;

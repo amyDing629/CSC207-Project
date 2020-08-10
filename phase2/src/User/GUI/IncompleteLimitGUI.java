@@ -2,10 +2,6 @@ package User.GUI;
 
 import User.Adapter.AdminController;
 import User.Adapter.ClientUserController;
-import User.Adapter.UIController;
-import User.Entity.ClientUser;
-import User.UseCase.AdminActivityManager;
-import User.UseCase.UserManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,7 +9,6 @@ import java.awt.*;
 public class IncompleteLimitGUI {
     ClientUserController uc;
     AdminController ac;
-//    AdminActivityManager aam;
     JFrame pFrame;
     JFrame frame;
     public IncompleteLimitGUI(ClientUserController uc ,JFrame pFrame) {

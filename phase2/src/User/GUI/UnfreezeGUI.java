@@ -2,14 +2,11 @@ package User.GUI;
 
 import User.Adapter.AdminController;
 import User.Adapter.ClientUserController;
-import User.Adapter.UIController;
 import User.UseCase.ApprovalManager;
-import User.UseCase.UserManager;
 
 import javax.swing.*;
 import java.awt.*;
 public class UnfreezeGUI {
-    UserManager um;
     ApprovalManager iam;
     ClientUserController uc;
     AdminController ac;
@@ -67,7 +64,7 @@ public class UnfreezeGUI {
         });
         submitButton.addActionListener(e -> {
             frame.setVisible(false);
-            if(um.getUser(userInput.getText())!=null){
+            if(uc.getUser(userInput.getText())!=null){
                 iam.removeUserApproval(userInput.getText());
                 ac.setFreeze(userInput.getText(),false);
                 JOptionPane.showMessageDialog(null,"Unfreeze successfully");

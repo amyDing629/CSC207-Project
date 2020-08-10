@@ -7,12 +7,10 @@ import Trade.TradeGUIEngineer;
 import Trade.TradeGUIPlan;
 import User.Adapter.ClientUserController;
 import User.Adapter.ClientUserPresenter;
-import User.Adapter.IUserPresenter;
 import User.Adapter.LoginSystemPresenter;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.UUID;
 
