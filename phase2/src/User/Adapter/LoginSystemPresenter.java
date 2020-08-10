@@ -1,9 +1,13 @@
 package User.Adapter;
 
+import Inventory.InventoryGUI;
+import Inventory.MarketBuilder;
 import Trade.TradeManager;
+import User.Entity.ClientUser;
 import User.GUI.View;
 import User.UseCase.UserManager;
 
+import javax.swing.*;
 import java.util.UUID;
 
 public class LoginSystemPresenter implements IUserPresenter {
@@ -12,9 +16,9 @@ public class LoginSystemPresenter implements IUserPresenter {
     UserManager um = new UserManager();
 
     // view
-    View view;
+    JFrame view;
 
-    public LoginSystemPresenter(View view) {
+    public LoginSystemPresenter(JFrame view) {
         this.view = view;
     }
 
@@ -39,22 +43,21 @@ public class LoginSystemPresenter implements IUserPresenter {
     }
 
     public void run() {
-        view.setPresenter(this);
-        view.run();
+        view.setVisible(true);
     }
 
-//    public void register(String name, String password) {
-//        ClientUser user = new ClientUser(name, password, false);
-//        um.addUser(user);
-//    }
-//
-//    public boolean login(String name, String password) {
-//        return um.verifyUser(name, password);
-//    }
-//
-//
-//    public void explore() {
-//        new InventoryGUI();
-//    }
+    public void register(String name, String password) {
+        ClientUser user = new ClientUser(name, password, false);
+        um.addUser(user);
+    }
+
+    public boolean login(String name, String password) {
+        return um.verifyUser(name, password);
+    }
+
+
+    public void explore() {
+        new MarketBuilder(view);
+    }
 
 }

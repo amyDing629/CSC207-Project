@@ -54,11 +54,8 @@ public class WishLendBuilder extends WishBorrowBuilder implements BorderGUIBuild
         add.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    ic.addButL();
-                } catch (FileNotFoundException fileNotFoundException) {
-                    fileNotFoundException.printStackTrace();
-                }
+                ic.addButL();
+
             }
         });
         editDes.addActionListener(new ActionListener() {

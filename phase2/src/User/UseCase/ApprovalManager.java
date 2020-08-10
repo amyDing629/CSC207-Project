@@ -65,10 +65,10 @@ public class ApprovalManager {
     public UserApprovals getUserApproval(String username){
         return (UserApprovals) userDataAccess.getObject(username);
     }
-    public void addApprovals(ClientUser user,String name,String des) throws FileNotFoundException {
+    public void addApprovals(ClientUser user,String name,String des){
         itemDataAccess.addObject(new ItemApprovals(user,name,des));
     }
-    public void addApprovals(ClientUser user,String des) throws FileNotFoundException {
+    public void addApprovals(ClientUser user,String des){
         userDataAccess.addObject(new UserApprovals(user,des));
     }
 

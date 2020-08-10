@@ -81,8 +81,6 @@ public class UserDataAccess implements DataAccess {
                 }
             }
             FileWriter fileWriter =new FileWriter(file);
-            fileWriter.write("");
-            fileWriter.flush();
             fileWriter.close();
         } catch (IOException e) {
             e.printStackTrace();

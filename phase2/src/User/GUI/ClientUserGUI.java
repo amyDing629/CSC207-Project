@@ -3,6 +3,7 @@ package User.GUI;
 import Inventory.InventoryGUI;
 import Trade.*;
 import User.Adapter.ClientUserController;
+import User.Adapter.ClientUserPresenter;
 import User.Adapter.IUserPresenter;
 import User.Adapter.UIController;
 import User.PointSystem.PointGUIBuilder;
@@ -14,9 +15,9 @@ import java.awt.*;
 import java.util.UUID;
 
 public class ClientUserGUI implements View {
-//    UserManager um;
-    TradeManager tm;
-    UIController uc;
+    UserManager um = new UserManager();
+    TradeManager tm = new TradeManager();
+    ClientUserController uc = new ClientUserController();
 //    Inventory iv;
 //    AdminActivityManager aam;
 //    public ClientUserGUI(UserManager um, TradeManager tm, Inventory iv, ItemApprovalManager iam, AdminActivityManager aam,UIController uc ,JFrame pFrame) {
@@ -30,13 +31,15 @@ public class ClientUserGUI implements View {
 //    }
 
     JFrame pFrame; // previous frame
-    JFrame frame; // this frame
+    JFrame frame;// this frame
+    String currUser;
 
     IUserPresenter presenter;
-    ClientUserController controller;
+    ClientUserController controller = new ClientUserController();
 
-    public ClientUserGUI(JFrame pFrame) {
+    public ClientUserGUI(JFrame pFrame, String currUser) {
         this.pFrame = pFrame;
+        this.currUser = currUser;
     }
 
     public void run() {
@@ -45,20 +48,19 @@ public class ClientUserGUI implements View {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JPanel panel = new JPanel();
         panel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        String b = controller.getNameByID(getPresenter().getCurrUser());
-        JLabel welcomeLabel = new JLabel("Welcome: " + controller.getNameByID(getPresenter().getCurrUser()));
+        JLabel welcomeLabel = new JLabel("Welcome: " + currUser);
         welcomeLabel.setPreferredSize(new Dimension(300, 30));
         panel.add(welcomeLabel);
         frame.add(panel);
 
-        placeComponents(frame, panel, b);
+        placeComponents(frame, panel, currUser);
         frame.setVisible(true);
     }
 
-    private void placeComponents(JFrame frame, JPanel panel, String b ) {
+    private void placeComponents(JFrame frame, JPanel panel, String b) {
 
-        UUID userId = getPresenter().getCurrUser();
-        boolean isFrozen = getPresenter().getUserModel().getIsFrozen(userId);
+        UUID userId = um.nameToUUID(b);
+        boolean isFrozen = um.getIsFrozen(userId);
 
 
 
@@ -66,16 +68,16 @@ public class ClientUserGUI implements View {
         freezeStatus.setPreferredSize(new Dimension(300, 30));
         panel.add(freezeStatus);
 
-        JLabel tradeLimit = new JLabel("Trade limit: " + tm.getTradeNumber(uc.UUIDToName(userId)) + "/" + uc.getWeekTransactionLimit(uc.UUIDToName(userId)));
+        JLabel tradeLimit = new JLabel("Trade limit: " + tm.getTradeNumber(um.UUIDToName(userId)) + "/" + um.getWeekTransactionLimit(um.UUIDToName(userId)));
         tradeLimit.setPreferredSize(new Dimension(300, 30));
         panel.add(tradeLimit);
 
         JLabel inCompLimit = new JLabel("Incomplete trade limit: " + tm.getIncompleteTransaction(userId) +
-                "/" + uc.getIncompleteTransactionLimit(uc.UUIDToName(userId)));
+                "/" + um.getIncompleteTransactionLimit(um.UUIDToName(userId)));
         inCompLimit.setPreferredSize(new Dimension(300, 30));
         panel.add(inCompLimit);
 
-        JLabel diff = new JLabel("Difference between borrow and lend: "+ uc.readDiff(uc.UUIDToName(userId)) + "/" +uc.getDiff(uc.UUIDToName(userId)));
+        JLabel diff = new JLabel("Difference between borrow and lend: "+ um.readDiff(um.UUIDToName(userId)) + "/" +um.getDiff(um.UUIDToName(userId)));
         diff.setPreferredSize(new Dimension(300, 30));
         panel.add(diff);
 
@@ -93,9 +95,8 @@ public class ClientUserGUI implements View {
         panel.add(inventoryButton);
 
         JButton pointButton = new JButton("point system");
-        inventoryButton.setPreferredSize(new Dimension(300, 30));
-        panel.add(inventoryButton);
-
+        pointButton.setPreferredSize(new Dimension(300, 30));
+        panel.add(pointButton);
 
         JButton exitButton = new JButton("quit to menu");
         exitButton.setPreferredSize(new Dimension(300, 30));

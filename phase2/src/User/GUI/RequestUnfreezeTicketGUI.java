@@ -58,11 +58,7 @@ public class RequestUnfreezeTicketGUI {
         });
         submitButton.addActionListener(e -> {
             frame.setVisible(false);
-            try {
-                iam.addApprovals(uc.getUser(name),textLabel.getText());
-            } catch (FileNotFoundException fileNotFoundException) {
-                fileNotFoundException.printStackTrace();
-            }
+            iam.addApprovals(uc.getUser(name),textLabel.getText());
             JOptionPane.showMessageDialog(null,"Request successfully");
             JOptionPane.showMessageDialog(null,"Please wait for the administrator to approve");
             UserFreezeSystem d = new UserFreezeSystem(uc,frame);

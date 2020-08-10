@@ -1,6 +1,8 @@
 package User.Entity;
 
-public class UserApprovals {
+import java.io.Serializable;
+
+public class UserApprovals implements Serializable {
     ClientUser user;
     String fstString;
     public UserApprovals(ClientUser user, String fstString){

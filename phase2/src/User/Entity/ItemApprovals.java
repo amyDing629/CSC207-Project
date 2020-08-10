@@ -1,7 +1,9 @@
 package User.Entity;
 
 
-public class ItemApprovals extends UserApprovals {
+import java.io.Serializable;
+
+public class ItemApprovals extends UserApprovals implements Serializable {
     private String secString;
     public ItemApprovals(ClientUser user, String fstString, String secString) {
         super(user, fstString);

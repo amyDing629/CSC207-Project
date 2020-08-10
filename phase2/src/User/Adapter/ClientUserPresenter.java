@@ -4,12 +4,13 @@ import Trade.TradeManager;
 import User.GUI.View;
 import User.UseCase.UserManager;
 
+import javax.swing.*;
 import java.util.UUID;
 
 public class ClientUserPresenter implements IUserPresenter {
 
     // View
-    View view;
+    JFrame view;
 
     // Use Case
     UserManager userManager = new UserManager();
@@ -18,7 +19,7 @@ public class ClientUserPresenter implements IUserPresenter {
     // Other
     UUID currUser;
 
-    public ClientUserPresenter(UUID currUser, View view) {
+    public ClientUserPresenter(UUID currUser, JFrame view) {
         this.currUser = currUser;
         this.view = view;
     }
@@ -46,7 +47,6 @@ public class ClientUserPresenter implements IUserPresenter {
 
     @Override
     public void run() {
-        view.setPresenter(this);
-        view.run();
+        view.setVisible(true);
     }
 }

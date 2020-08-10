@@ -1,6 +1,7 @@
 package User.Gateway;
 
 
+import Trade.Trade;
 import User.Entity.ItemApprovals;
 
 import java.io.*;
@@ -106,17 +107,21 @@ public class ApprovalItemDataAccess implements DataAccess {
     @SuppressWarnings("unchecked")
     public void deSerialize() {
         try {
-            FileInputStream fileIn = new FileInputStream(serFilePath);
-            InputStream buffer = new BufferedInputStream(fileIn);
-            ObjectInputStream in = new ObjectInputStream(buffer);
+            File file = new File(serFilePath);
+            if (!(file.length() == 0)){
+                FileInputStream fileIn = new FileInputStream(serFilePath);
+                InputStream buffer = new BufferedInputStream(fileIn);
+                ObjectInputStream in = new ObjectInputStream(buffer);
 
-            ItemApprovalsList = (List<ItemApprovals>) in.readObject();
-            in.close();
-            fileIn.close();
+                ItemApprovalsList = (List<ItemApprovals>) in.readObject();
+                in.close();
+                fileIn.close();
+                //System.out.println("deSerialize: "+lendingList);
+            }
+
         } catch (IOException | ClassNotFoundException i) {
             i.printStackTrace();
         }
-
     }
 
     @Override

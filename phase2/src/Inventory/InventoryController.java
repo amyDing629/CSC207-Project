@@ -150,7 +150,7 @@ public class InventoryController {
         um.addUser(user);
     }
 
-    public void addItem(String name, String des) throws FileNotFoundException {
+    public void addItem(String name, String des){
         iam.addApprovals(um.getUser(currUser),name,des);
     }
 
@@ -213,7 +213,7 @@ public class InventoryController {
         tg.run();
     }
 
-    void addButL() throws FileNotFoundException {
+    void addButL(){
         String itemName = bta.getInput("name");
         String description = bta.getInput("des");
         if (itemName.equals("")) {
