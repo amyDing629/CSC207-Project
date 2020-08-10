@@ -32,8 +32,6 @@ public class RTradeGUIBuilder implements BorderGUIBuilder {
         this.fr = fr;
     }
 
-
-
     @Override
     public void buildFrame() {
         tg.setFrame(800, 200, "Request Trade Session");

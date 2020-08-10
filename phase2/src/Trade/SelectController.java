@@ -57,13 +57,18 @@ public class SelectController {
     }
 
     void enterRTradeGUI(){
-        bta.getFrame().setVisible(false);
-        BorderGUIBuilder builder = new RTradeGUIBuilder(currUser, currItem, bta.getFrame());
-        TradeGUIEngineer engineer = new TradeGUIEngineer(builder);
-        engineer.constructGUI();
-        TradeGUIPlan tg = engineer.getGUI();
-        tg.run();
-        sp.closeFrame();
+        if (currItem == null){
+            sp.notItemSelected();
+        }else{
+            bta.getFrame().setVisible(false);
+            BorderGUIBuilder builder = new RTradeGUIBuilder(currUser, currItem, bta.getFrame());
+            TradeGUIEngineer engineer = new TradeGUIEngineer(builder);
+            engineer.constructGUI();
+            TradeGUIPlan tg = engineer.getGUI();
+            tg.run();
+            sp.closeFrame();
+        }
+
 
     }
 

@@ -72,7 +72,6 @@ public class CTradeController implements Observer {
                 Trade trade = tm.popTrade(currTrade);
                 trade.setMeeting(mtID);
                 tm.addTrade(trade);
-
             }
             if (mt.getStatus().equals(MeetingStatus.CANCELLED)) {
                 Trade trade = tm.popTrade(currTrade);

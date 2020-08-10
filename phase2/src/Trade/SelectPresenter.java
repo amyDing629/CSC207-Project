@@ -39,4 +39,8 @@ public class SelectPresenter {
     public void updateSuccess(){
         bta.setMsgText("The item info has been updated");
     }
+
+    public void notItemSelected(){
+        bta.setMsgText("no item is selected");
+    }
 }

@@ -75,7 +75,6 @@ public class AcceptTradeController {
     }
 
     void submitBut(String tradeNum){
-        tp.resetInputArea();
         if (!checkInput(tradeNum)){
             tp.wrongInput();
         }else{
