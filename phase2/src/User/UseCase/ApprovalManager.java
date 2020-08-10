@@ -33,11 +33,11 @@ public class ApprovalManager {
     }
 
     public void removeItemApproval(String ua){
-        userDataAccess.removeObject(ua);
+        itemDataAccess.removeObject(ua);
     }
 
     public void removeUserApproval(String ua){
-        itemDataAccess.removeObject(ua);
+        userDataAccess.removeObject(ua);
     }
 
     public ItemApprovals getItemApproval(String username){
