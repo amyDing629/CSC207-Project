@@ -32,16 +32,16 @@ public class UserLimitGUI {
 
     private void placeComponents(JFrame frame, JPanel panel, String b){
 
-        JButton editButton = new JButton("trade limit");
+        JButton editButton = new JButton("Trade Limit");
         editButton.setPreferredSize(new Dimension(300, 30));
 
-        JButton tradeButton = new JButton("Incomplete Transaction limit");
+        JButton tradeButton = new JButton("Incomplete Transaction Limit");
         tradeButton.setPreferredSize(new Dimension(300, 30));
 
-        JButton inventoryButton = new JButton("difference between borrowed and lend");
+        JButton inventoryButton = new JButton("Difference between borrowed and lend");
         inventoryButton.setPreferredSize(new Dimension(300, 30));
 
-        JButton exitButton = new JButton("quit to menu");
+        JButton exitButton = new JButton("Back");
         exitButton.setPreferredSize(new Dimension(300, 30));
 
         panel.add(editButton);

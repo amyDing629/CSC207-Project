@@ -52,16 +52,16 @@ public class LoginGUI{
         passwordInput.setBounds(100,50,80,25);
         panel.add(passwordInput);
 
-        JButton registerButton = new JButton("register");
+        JButton registerButton = new JButton("Register");
         registerButton.setBounds(190,80,80,25);
         panel.add(registerButton);
 
-        JButton logInButton = new JButton("login");
+        JButton logInButton = new JButton("Login");
         logInButton.setBounds(100,80,80,25);
         panel.add(logInButton);
 
-        JButton exploreButton=new JButton("explore");
-        JButton exitButton = new JButton("quit");
+        JButton exploreButton=new JButton("Explore");
+        JButton exitButton = new JButton("Quit");
         exitButton.setPreferredSize(new Dimension(300, 30));
         panel.add(exploreButton);
         panel.add(exitButton);
@@ -71,9 +71,11 @@ public class LoginGUI{
             String name = nameInput.getText();
             String password = new String(passwordInput.getPassword());
             boolean response = lsp.login(name, password);
+            System.out.println(response);
             //boolean response = lsp.getUserModel().verifyUser(name, password);
             if (!response)
-                JOptionPane.showMessageDialog(null, "invalid user");
+                JOptionPane.showMessageDialog(null,
+                        "Invalid Login! Please check the username and/or password!");
             else {
                 frame.setVisible(false);
 
@@ -91,11 +93,14 @@ public class LoginGUI{
             String name = nameInput.getText();
             String password = new String(passwordInput.getPassword());
             if(lsp.register(name, password)){
-                JOptionPane.showMessageDialog(null, "success");
+                JOptionPane.showMessageDialog(null, "Success");
             }
             else{
-                JOptionPane.showMessageDialog(null, "already exist u noob,go check ur file nerd");
+                JOptionPane.showMessageDialog(null,
+                        "This username has already been registered! Please register with a new one!");
             }
+
+            // TODO: delete
             //lsp.getUserModel().createClientUser(name, password, false);
             for(ClientUser i:um.getUserList()){
                 System.out.println(i.toString());

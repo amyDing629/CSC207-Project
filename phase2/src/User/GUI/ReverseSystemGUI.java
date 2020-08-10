@@ -59,11 +59,11 @@ public class ReverseSystemGUI {
         userInput.setPreferredSize(new Dimension(300, 30));
         panel.add(userInput);
 
-        JButton submitButton = new JButton("submit");
+        JButton submitButton = new JButton("Submit");
         submitButton.setPreferredSize(new Dimension(300, 30));
         panel.add(submitButton);
 
-        JButton exit = new JButton("exit");
+        JButton exit = new JButton("Back");
         exit.setPreferredSize(new Dimension(300, 30));
         panel.add(exit);
 

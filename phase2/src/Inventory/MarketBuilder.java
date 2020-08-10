@@ -63,9 +63,9 @@ public class MarketBuilder implements BorderGUIBuilder {
     @Override
     public void buildPanelS() {
         JPanel panelS = new JPanel();
-        JTextArea ta = new JTextArea("type item name here");
-        JButton submit = new JButton("submit");
-        JButton back  = new JButton("return");
+        JTextArea ta = new JTextArea("Type item name here");
+        JButton submit = new JButton("Submit");
+        JButton back  = new JButton("Return");
         panelS.add(ta);
         panelS.add(submit);
         panelS.add(back);
@@ -90,8 +90,10 @@ public class MarketBuilder implements BorderGUIBuilder {
     @Override
     public void buildPanelC() {
         JPanel panelC = new JPanel();
-        JLabel currTradeL = new JLabel("item selected");
+        JLabel currTradeL = new JLabel("Item Selected");
         JTextArea currArea = new JTextArea();
+        currArea.setEditable(false);
+
         panelC.setLayout(new BoxLayout(panelC, BoxLayout.Y_AXIS));
         panelC.add(currTradeL);
         panelC.add(currArea);

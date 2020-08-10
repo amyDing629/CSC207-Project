@@ -28,8 +28,9 @@ public class AgreeReqGUIBuilder implements BorderGUIBuilder {
     @Override
     public void buildPanelN() {
         JPanel panelN = new JPanel();
-        JLabel msg = new JLabel("message:", SwingConstants.LEFT);
+        JLabel msg = new JLabel("Message:", SwingConstants.LEFT);
         JTextArea msgArea = new JTextArea();
+        msgArea.setEditable(false);
         panelN.add(msg);
         panelN.add(msgArea);
         tg.initializeMsg(msgArea);
@@ -53,36 +54,22 @@ public class AgreeReqGUIBuilder implements BorderGUIBuilder {
     @Override
     public void buildPanelS() {
         JPanel panelS = new JPanel();
-        JLabel input = new JLabel("input item name");
-        JTextArea inputArea = new JTextArea("item name");
-        JButton submit = new JButton("submit");
-        JButton back = new JButton("return");
-        JButton update = new JButton("update");
+        JLabel input = new JLabel("Input Item Name");
+        JTextArea inputArea = new JTextArea("Item Name");
+        JButton submit = new JButton("Submit");
+        JButton back = new JButton("Back");
+        JButton update = new JButton("Update");
         panelS.add(input);
         panelS.add(inputArea);
         panelS.add(submit);
         panelS.add(back);
         panelS.add(update);
         tg.setSouth(panelS);
-        tg.addInput("input", inputArea);
-        submit.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ic.submitButR();
-            }
-        });
-        back.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ic.backBut();
-            }
-        });
-        update.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ic.updateButR();
-            }
-        });
+        tg.addInput("Input", inputArea);
+
+        submit.addActionListener(e -> ic.submitButR());
+        back.addActionListener(e -> ic.backBut());
+        update.addActionListener(e -> ic.updateButR());
 
 
     }
@@ -90,12 +77,13 @@ public class AgreeReqGUIBuilder implements BorderGUIBuilder {
     @Override
     public void buildPanelC() {
         JPanel panelC = new JPanel();
-        JLabel currTradeL = new JLabel("item selected");
+        JLabel currTradeL = new JLabel("Item Selected");
         JTextArea currArea = new JTextArea();
+        currArea.setEditable(false);
         panelC.setLayout(new BoxLayout(panelC, BoxLayout.Y_AXIS));
         panelC.add(currTradeL);
         panelC.add(currArea);
-        currArea.setText("no item selected");
+        currArea.setText("No Item Selected");
         tg.setCenter(panelC);
         tg.initializeCurr(currArea);
         ic.updateCurr();
@@ -108,26 +96,15 @@ public class AgreeReqGUIBuilder implements BorderGUIBuilder {
 
     public void buildPanelE(){
         JPanel panelE = new JPanel();
-        JButton agree = new JButton("agree");
-        JButton disagree = new JButton("disagree");
+        JButton agree = new JButton("Agree");
+        JButton disagree = new JButton("Disagree");
         panelE.setLayout(new BoxLayout(panelE, BoxLayout.Y_AXIS));
         panelE.add(agree);
         panelE.add(disagree);
         tg.setEast(panelE);
-        agree.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ic.agreeBut();
-            }
-        });
 
-
-        disagree.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ic.disagreeBut();
-            }
-        });
+        agree.addActionListener(e -> ic.agreeBut());
+        disagree.addActionListener(e -> ic.disagreeBut());
 
 
     }

@@ -5,14 +5,10 @@ import Trade.TradeGUIEngineer;
 import Trade.TradeGUIPlan;
 import User.Entity.ClientUser;
 import User.Entity.ItemApprovals;
-import User.Gateway.DataAccess;
-import User.Gateway.UserDataAccess;
 import User.UseCase.ApprovalManager;
 import User.UseCase.UserManager;
 
 import javax.swing.*;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -84,10 +80,11 @@ public class InventoryController {
     void addToWishLend(Item it) {
         if (!isInInventory(it.getName())){
             iv.add(it);
-            ClientUser u = um.popUser(it.getOwnerUUID());
-            u.getWishLend().add(it.getName());
+            ClientUser user = um.popUser(it.getOwnerUUID());
+            user.getWishLend().add(it.getName());
             iam.removeItemApproval(it.getName());
-            um.addUser(u);
+            um.addUser(user);
+
         }else{
             ip.itemInInv();
         }
@@ -124,10 +121,7 @@ public class InventoryController {
     }
 
     public Item getItemByRequestList(String itemName){
-        System.out.println(iam.getItemApprovals());
         ItemApprovals k=iam.getItemApproval(itemName);
-        System.out.println(k);
-
         return iv.createItem(itemName,um.nameToUUID(k.getCurUserName()));
     }
 
@@ -137,7 +131,7 @@ public class InventoryController {
 
 
     public List<String> getWishLend(){
-        return um.getWishLend(currUser);
+        return um.getUser(currUser).getWishLend();
     }
 
     public List<String> getWishBorrow(){
@@ -205,9 +199,7 @@ public class InventoryController {
         ip.updateListB(currUser);
     }
 
-    void updateLstL(){
-        ip.updateListL(currUser);
-    }
+    void updateLstL(){ ip.updateListL(currUser); }
 
 
     void addButB(){
@@ -248,6 +240,7 @@ public class InventoryController {
     }
 
     public void updateButR(){
+        updateListR();
     }
 
     public void updateListR(){
@@ -273,9 +266,7 @@ public class InventoryController {
             ip.wrongInput();
         }else{
             it = input;
-            System.out.println(it);
             Item item = getItemByRequestList(input);
-            System.out.println(item);
             ip.updateCurr(getItemInfo(item));
         }
     }
@@ -294,7 +285,6 @@ public class InventoryController {
     void submitButM(){
         String input = bta.getInput("input");
         ip.resetInputArea();
-        System.out.println("submitButM: " + iv.getAvailableList());
         if (!iv.getAvailableList().contains(input)){
             ip.wrongInput();
         }else{
@@ -362,7 +352,7 @@ public class InventoryController {
             ip.resetCurr();
             ip.addLSuccess();
             it = null;
-            ip.updateListM(printRequest());
+            updateListR();
         }
     }
 
@@ -370,12 +360,11 @@ public class InventoryController {
         if (it == null) {
             ip.noItemSelected();
         }else{
-            System.out.println(iam.getItemApprovals());
             iam.removeItemApproval(it);
-            System.out.println(iam.getItemApprovals());
             ip.resetCurr();
+            ip.delSuccess(it);
             it = null;
-            ip.updateListM(printRequest());
+            updateListR();
         }
     }
 

@@ -99,14 +99,14 @@ public class RTradeController {
             case "1":
                 currTrade = tm.createOnewayTrade(currUser, tarUser, getItem(it), 30, time);
                 Trade trade = tm.popTrade(currTrade);
-                tm.setCreator(trade.getId(), currUser);
+                trade.setCreator(currUser);
                 tm.addTrade(trade);
                 updateTradeHistory();
                 return true;
             case "2":
                 currTrade = tm.createOnewayTrade(currUser, tarUser, getItem(it), -1, time);
                 Trade trade1 = tm.popTrade(currTrade);
-                tm.setCreator(trade1.getId(), currUser);
+                trade1.setCreator(currUser);
                 tm.addTrade(trade1);
                 updateTradeHistory();
                 return true;

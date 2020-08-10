@@ -8,7 +8,7 @@ public class BorderGUIWithThreeTextArea extends BorderGUINoTextArea
     private JTextArea curr;
     private JTextArea list;
     private JTextArea msg;
-    private HashMap<String, JTextArea> inputs = new HashMap<String, JTextArea>();
+    private HashMap<String, JTextArea> inputs = new HashMap<>();
 
     public BorderGUIWithThreeTextArea(){
         super();
@@ -20,35 +20,38 @@ public class BorderGUIWithThreeTextArea extends BorderGUINoTextArea
     @Override
     public void setListText(String str) {
         list.setText(str);
-
+        list.setEditable(false);
     }
 
     @Override
     public void setCurrText(String str) {
         curr.setText(str);
-
+        curr.setEditable(false);
     }
 
     @Override
     public void setMsgText(String str) {
         msg.setText(str);
-
+        msg.setEditable(false);
     }
 
 
     @Override
     public void initializeList(JTextArea ta) {
         list = ta;
+        list.setEditable(false);
     }
 
     @Override
     public void initializeCurr(JTextArea ta) {
         curr = ta;
+        curr.setEditable(false);
     }
 
     @Override
     public void initializeMsg(JTextArea ta) {
         msg = ta;
+        msg.setEditable(false);
     }
 
 
@@ -65,6 +68,5 @@ public class BorderGUIWithThreeTextArea extends BorderGUINoTextArea
     @Override
     public void addInput(String key, JTextArea input) {
         inputs.put(key, input);
-        ;
     }
 }

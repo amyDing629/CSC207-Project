@@ -32,11 +32,11 @@ public class InventoryGUI {
 
         JPanel menu = new JPanel();
         JLabel label = new JLabel("    Hello, "+ currUser);
-        JButton mk = new JButton("market");
-        JButton wb = new JButton("WishBorrow");
-        JButton wl = new JButton("WishLend");
-        JButton ar = new JButton("AgreeRequest");
-        JButton back = new JButton("return");
+        JButton mk = new JButton("Market");
+        JButton wb = new JButton("WishList - Borrow");
+        JButton wl = new JButton("WishList - Lend");
+        JButton ar = new JButton("Agree Request (Admin Only)");
+        JButton back = new JButton("Return");
 
         menu.setLayout(new BoxLayout(menu, BoxLayout.Y_AXIS));
         menu.add(label);

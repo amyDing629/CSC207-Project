@@ -28,8 +28,9 @@ public class AcceptTradeGUIBuilder implements BorderGUIBuilder {
     @Override
     public void buildPanelN() {
         JPanel panelN = new JPanel();
-        JLabel msg = new JLabel("message:", SwingConstants.LEFT);
+        JLabel msg = new JLabel("Message:", SwingConstants.LEFT);
         JTextArea msgArea = new JTextArea();
+        msgArea.setEditable(false);
         panelN.add(msg);
         panelN.add(msgArea);
         tg.initializeMsg(msgArea);
@@ -40,24 +41,14 @@ public class AcceptTradeGUIBuilder implements BorderGUIBuilder {
     @Override
     public void buildPanelE() {
         JPanel panelE = new JPanel();
-        JButton agree = new JButton("agree");
-        JButton refuse = new JButton("refuse");
+        JButton agree = new JButton("Agree");
+        JButton refuse = new JButton("Refuse");
         panelE.setLayout(new BoxLayout(panelE, BoxLayout.Y_AXIS));
         panelE.add(agree);
         panelE.add(refuse);
         tg.setEast(panelE);
-        agree.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                atc.agreeBut(true);
-            }
-        });
-        refuse.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                atc.agreeBut(false);
-            }
-        });
+        agree.addActionListener(e -> atc.agreeBut(true));
+        refuse.addActionListener(e -> atc.agreeBut(false));
     }
 
     @Override
@@ -78,23 +69,23 @@ public class AcceptTradeGUIBuilder implements BorderGUIBuilder {
     @Override
     public void buildPanelS() {
         JPanel panelS =  new JPanel();
-        JLabel input = new JLabel("input trade number");
-        JTextArea inputArea = new JTextArea("trade number");
-        JButton submit = new JButton("submit");
-        JButton back = new JButton("return to trade menu");
-        JButton update = new JButton("update");
+        JLabel input = new JLabel("Input Trade Number");
+        JTextArea inputArea = new JTextArea("Trade Number");
+        JButton submit = new JButton("Submit");
+        JButton back = new JButton("Back to trade menu");
+        JButton update = new JButton("Update");
         panelS.add(input);
         panelS.add(inputArea);
         panelS.add(submit);
         panelS.add(back);
         panelS.add(update);
         tg.setSouth(panelS);
-        tg.addInput("input", inputArea);
-        tg.setInput("input", "trade number");
+        tg.addInput("Input", inputArea);
+        tg.setInput("Input", "Trade Number");
         submit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String tradeNum = tg.getInput("input");
+                String tradeNum = tg.getInput("Input");
                 System.out.println(tradeNum);
                 atc.submitBut(tradeNum);
             }
@@ -116,8 +107,10 @@ public class AcceptTradeGUIBuilder implements BorderGUIBuilder {
     @Override
     public void buildPanelC() {
         JPanel panelC =  new JPanel();
-        JLabel currTradeL = new JLabel("Trade selected");
+        JLabel currTradeL = new JLabel("Trade Selected");
         JTextArea currArea = new JTextArea();
+        currArea.setEditable(false);
+
         panelC.setLayout(new BoxLayout(panelC, BoxLayout.Y_AXIS));
         panelC.add(currTradeL);
         panelC.add(currArea);
