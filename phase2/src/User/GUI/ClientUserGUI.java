@@ -14,18 +14,6 @@ import java.util.UUID;
 public class ClientUserGUI implements View {
     UserManager um = new UserManager();
     TradeManager tm = new TradeManager();
-    ClientUserController uc = new ClientUserController();
-//    Inventory iv;
-//    AdminActivityManager aam;
-//    public ClientUserGUI(UserManager um, TradeManager tm, Inventory iv, ItemApprovalManager iam, AdminActivityManager aam,UIController uc ,JFrame pFrame) {
-//        this.um = um;
-//        this.tm = tm;
-//        this.iam=iam;
-//        this.uc=uc;
-//        this.iv=iv;
-//        this.aam=aam;
-//        this.pFrame=pFrame;
-//    }
 
     JFrame pFrame; // previous frame
     JFrame frame;// this frame
@@ -65,7 +53,8 @@ public class ClientUserGUI implements View {
         freezeStatus.setPreferredSize(new Dimension(300, 30));
         panel.add(freezeStatus);
 
-        JLabel tradeLimit = new JLabel("Trade limit: " + tm.getTradeNumber(um.UUIDToName(userId)) + "/" + um.getWeekTransactionLimit(um.UUIDToName(userId)));
+        JLabel tradeLimit = new JLabel("Trade limit: " + tm.getTradeNumber(um.UUIDToName(userId)) + "/" +
+                um.getWeekTransactionLimit(um.UUIDToName(userId)));
         tradeLimit.setPreferredSize(new Dimension(300, 30));
         panel.add(tradeLimit);
 
@@ -74,7 +63,8 @@ public class ClientUserGUI implements View {
         inCompLimit.setPreferredSize(new Dimension(300, 30));
         panel.add(inCompLimit);
 
-        JLabel diff = new JLabel("Difference between borrow and lend: "+ um.readDiff(um.UUIDToName(userId)) + "/" +um.getDiff(um.UUIDToName(userId)));
+        JLabel diff = new JLabel("Difference between borrow and lend: "+ um.readDiff(um.UUIDToName(userId)) +
+                "/" +um.getDiff(um.UUIDToName(userId)));
         diff.setPreferredSize(new Dimension(300, 30));
         panel.add(diff);
 
@@ -91,11 +81,12 @@ public class ClientUserGUI implements View {
         inventoryButton.setPreferredSize(new Dimension(300, 30));
         panel.add(inventoryButton);
 
-        JButton pointButton = new JButton("point system");
+        JButton pointButton = new JButton("Redeem Points");
+        pointButton.setToolTipText("Redeem points for free trades! (The redeemed trade will not count to trade limit!)");
         pointButton.setPreferredSize(new Dimension(300, 30));
         panel.add(pointButton);
 
-        JButton exitButton = new JButton("quit to menu");
+        JButton exitButton = new JButton("Log out");
         exitButton.setPreferredSize(new Dimension(300, 30));
         panel.add(exitButton);
 

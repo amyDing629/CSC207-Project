@@ -88,7 +88,9 @@ public class UserDataAccess implements DataAccess {
             e.printStackTrace();
         }
         serialize();
-        System.out.println("user list: "+ userList);
+
+        //TODO: delete
+        System.out.println("user list: "+ userList.toString());
         for (ClientUser a: userList){
             if (a.getUsername().equals("amy")){
                 System.out.println(a.getWishLend());

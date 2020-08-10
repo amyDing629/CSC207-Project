@@ -45,7 +45,7 @@ public class UserFreezeSystem {
         JButton inventoryButton = new JButton("Unfreeze User");
         inventoryButton.setPreferredSize(new Dimension(300, 30));
 
-        JButton exitButton = new JButton("quit to menu");
+        JButton exitButton = new JButton("Back");
         exitButton.setPreferredSize(new Dimension(300, 30));
 
         if(!uc.getIsAdmin(b)){

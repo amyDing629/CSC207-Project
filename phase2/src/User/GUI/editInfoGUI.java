@@ -19,7 +19,7 @@ public class editInfoGUI {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JPanel panel = new JPanel();
         panel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        JLabel welcomeLabel = new JLabel("Hello, user, " + name);
+        JLabel welcomeLabel = new JLabel("Hello, " + name);
         welcomeLabel.setPreferredSize(new Dimension(300, 30));
         panel.add(welcomeLabel);
         frame.add(panel);
@@ -44,27 +44,28 @@ public class editInfoGUI {
         changePass.setPreferredSize(new Dimension(300, 30));
         panel.add(changePass);
 
-        JButton freezeSystem = new JButton("ClientUser Freeze System");
+        JButton freezeSystem = new JButton("ClientUser Freeze System (Admin Only)");
         freezeSystem.setPreferredSize(new Dimension(300, 30));
         panel.add(freezeSystem);
 
-        JButton limitSystem = new JButton("ClientUser Limit System");
+        JButton limitSystem = new JButton("ClientUser Limit System (Admin Only)");
         limitSystem.setPreferredSize(new Dimension(300, 30));
         panel.add(limitSystem);
 
-        JButton CreateAdminGUI = new JButton("Create new Admin");
+        JButton CreateAdminGUI = new JButton("Create New Admin (Admin Only)");
         CreateAdminGUI.setPreferredSize(new Dimension(300, 30));
         panel.add(CreateAdminGUI);
 
-        JButton AddItemSystem = new JButton("Add Item System");
+        JButton AddItemSystem = new JButton("Add Item");
         AddItemSystem.setPreferredSize(new Dimension(300, 30));
         panel.add(AddItemSystem);
 
-        JButton ReverseSystem = new JButton("Add Item System");
+        JButton ReverseSystem = new JButton("Reverse System (Admin Only)");
+        ReverseSystem.setToolTipText("Mandatory 1: Undo anything reasonable by admin");
         ReverseSystem.setPreferredSize(new Dimension(300, 30));
         panel.add(ReverseSystem);
 
-        JButton exit = new JButton("exit");
+        JButton exit = new JButton("Back");
         exit.setPreferredSize(new Dimension(300, 30));
         panel.add(exit);
         if(!uc.getIsAdmin(b)){

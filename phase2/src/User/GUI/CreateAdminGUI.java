@@ -49,11 +49,11 @@ public class CreateAdminGUI {
         panel.add(userInput1);
 
 
-        JButton submitButton = new JButton("submit");
+        JButton submitButton = new JButton("Submit");
         submitButton.setPreferredSize(new Dimension(300, 30));
         panel.add(submitButton);
 
-        JButton exit = new JButton("exit");
+        JButton exit = new JButton("Back");
         exit.setPreferredSize(new Dimension(300, 30));
         panel.add(exit);
         exit.addActionListener(e -> {
@@ -67,7 +67,7 @@ public class CreateAdminGUI {
             } catch (FileNotFoundException fileNotFoundException) {
                 fileNotFoundException.printStackTrace();
             }
-            JOptionPane.showMessageDialog(null, "successfully created");
+            JOptionPane.showMessageDialog(null, "Successfully created");
             UserFreezeSystem d = new UserFreezeSystem(uc,frame);
             d.run(b);
         });
