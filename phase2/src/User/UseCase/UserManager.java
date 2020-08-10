@@ -63,10 +63,10 @@ public class UserManager {
         }
     }
 
-    public ClientUser popUser(UUID userId){
-        if (dataAccess.hasObject(userId)) {
-            ClientUser result =  (ClientUser) dataAccess.getObject(userId);
-            dataAccess.removeObject(userId);
+    public ClientUser popUser(UUID id){
+        if (dataAccess.hasObject(id)) {
+            ClientUser result =  (ClientUser) dataAccess.getObject(id);
+            dataAccess.removeObject(id);
             System.out.println(getUserList());
             return result;
         } else {

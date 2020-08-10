@@ -99,7 +99,7 @@ public class InventoryPresenter {
     void updateListL(UUID currUser){
         String result = "";
         UserManager um = new UserManager();
-        for (String it: um.getWishLend(currUser)){
+        for (String it: um.getUser(currUser).getWishLend()){
             result = result + it + "\n";
         }
         if (result.equals("")){

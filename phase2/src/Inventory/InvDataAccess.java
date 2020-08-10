@@ -1,5 +1,6 @@
 package Inventory;
 
+import Trade.Trade;
 import User.Gateway.DataAccess;
 
 import java.io.*;
@@ -26,7 +27,7 @@ public class InvDataAccess implements DataAccess {
 
         try {
             File serFile = new File(serFilePath);
-            if (serFile.exists()) {
+            if (serFile.exists() && !(serFile.length() == 0)) {
                 deSerialize();
             } else {
                 serFile.createNewFile();

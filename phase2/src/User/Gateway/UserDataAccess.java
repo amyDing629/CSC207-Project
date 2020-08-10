@@ -88,6 +88,12 @@ public class UserDataAccess implements DataAccess {
             e.printStackTrace();
         }
         serialize();
+        System.out.println("user list: "+ userList);
+        for (ClientUser a: userList){
+            if (a.getUsername().equals("amy")){
+                System.out.println(a.getWishLend());
+            }
+        }
     }
 
     @Override
@@ -143,7 +149,7 @@ public class UserDataAccess implements DataAccess {
     public boolean hasObject(Object o) {
         deSerialize();
         for (ClientUser i: userList){
-            if (i.getUsername().equals(o)){
+            if (i.getId().equals(o)){
                 return true;
             }
         }
