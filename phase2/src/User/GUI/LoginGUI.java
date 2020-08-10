@@ -91,10 +91,10 @@ public class LoginGUI{
             String name = nameInput.getText();
             String password = new String(passwordInput.getPassword());
             if(lsp.register(name, password)){
-                JOptionPane.showMessageDialog(null, "Already exist");
+                JOptionPane.showMessageDialog(null, "success");
             }
             else{
-                JOptionPane.showMessageDialog(null, "success");
+                JOptionPane.showMessageDialog(null, "already exist u noob,go check ur file nerd");
             }
             //lsp.getUserModel().createClientUser(name, password, false);
             for(ClientUser i:um.getUserList()){
