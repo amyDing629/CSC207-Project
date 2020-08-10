@@ -1,6 +1,7 @@
 package User.Gateway;
 
 import Inventory.Item;
+import Trade.Trade;
 import User.Entity.ClientUser;
 
 import java.io.*;
@@ -10,7 +11,6 @@ import java.util.UUID;
 
 public class UserDataAccess implements DataAccess {
 
-    private final String txtFilePath = "phase2/src/username.txt";
     private final String serFilePath = "phase2/src/user.ser";
     private List<ClientUser> userList;
 
@@ -33,7 +33,6 @@ public class UserDataAccess implements DataAccess {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     @Override
@@ -72,7 +71,7 @@ public class UserDataAccess implements DataAccess {
     @Override
     public void updateSer() {
         File file = new File(serFilePath);
-        file.deleteOnExit();
+        Boolean result1 = file.delete();
         try {
             if(!file.exists()) {
                 boolean result = file.createNewFile();
@@ -132,6 +131,7 @@ public class UserDataAccess implements DataAccess {
                 userList = (List<ClientUser>) in.readObject();
                 in.close();
                 fileIn.close();
+                //System.out.println("deSerialize: "+lendingList);
             }
 
         } catch (IOException | ClassNotFoundException i) {

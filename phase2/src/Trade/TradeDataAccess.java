@@ -66,7 +66,7 @@ public class TradeDataAccess implements DataAccess {
     @Override
     public void updateSer() {
         File file = new File(serFilePath);
-        file.deleteOnExit();
+        file.delete();
         try {
             if(!file.exists()) {
                 boolean result = file.createNewFile();

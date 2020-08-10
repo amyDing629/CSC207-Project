@@ -83,6 +83,7 @@ public class ApprovalUserDataAccess implements DataAccess {
     @Override
     public void updateSer() {
         File file = new File(serFilePath);
+        file.delete();
         try {
             if(!file.exists()) {
                 boolean result = file.createNewFile();
