@@ -32,7 +32,7 @@ public class PointPresenter {
     }
 
     public void resetInputArea(){
-        tg.setInput("input", "trade number");
+        tg.setInput("Input", "Trade Number");
     }
 
     public void presentTradeInfo(Trade trade){
@@ -40,7 +40,7 @@ public class PointPresenter {
     }
 
     public void changeSuccess(){
-        tg.setMsgText("the trade has been set to bonus");
+        tg.setMsgText("The trade has been set to bonus");
     }
 
     public void updateSuccess(){
@@ -48,23 +48,23 @@ public class PointPresenter {
     }
 
     public void wrongInput(){
-        tg.setMsgText("wrong input");
+        tg.setMsgText("Wrong input");
     }
 
     public void noTradeCurr(){
-        tg.setCurrText("no trade selected");
+        tg.setCurrText("No trade selected");
     }
 
     public void notTradeSelected(){
-        tg.setMsgText("no trade is selected");
+        tg.setMsgText("No trade is selected");
     }
 
     public void updatePoint(int points){
-        tg.setInput("points", String.valueOf(points));
+        tg.setInput("Points", String.valueOf(points));
     }
 
     void resetCurr(){
-        tg.setCurrText("no trade selected");
+        tg.setCurrText("No trade selected");
     }
 
 }

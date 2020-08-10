@@ -66,7 +66,7 @@ public class AcceptTradeGUIBuilder implements BorderGUIBuilder {
         JLabel input = new JLabel("Input Trade Number");
         JTextArea inputArea = new JTextArea("Trade Number");
         JButton submit = new JButton("Submit");
-        JButton back = new JButton("Back to trade menu");
+        JButton back = new JButton("Back");
         JButton update = new JButton("Update");
         panelS.add(input);
         panelS.add(inputArea);

@@ -2,7 +2,6 @@ package User.PointSystem;
 
 import Trade.BorderGUIBuilder;
 import Trade.BorderGUINoTextArea;
-import User.Entity.ClientUser;
 import Trade.BorderGUIWithThreeTextArea;
 import Trade.TradeGUIHelper;
 import javax.swing.*;
@@ -12,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class PointGUIBuilder implements BorderGUIBuilder {
+
     String currUser;
     AwardActivities aa;
     BorderGUIWithThreeTextArea tg;
@@ -24,7 +24,7 @@ public class PointGUIBuilder implements BorderGUIBuilder {
 
     @Override
     public void buildFrame() {
-        tg.setFrame(800, 400, "point session");
+        tg.setFrame(800, 400, "Redeem Point Session");
     }
 
     @Override
@@ -37,21 +37,17 @@ public class PointGUIBuilder implements BorderGUIBuilder {
     @Override
     public void buildPanelE() {
         JPanel panelE = new JPanel();
-        JLabel p = new JLabel("points");
+        JLabel p = new JLabel("Points");
         JTextArea points = new JTextArea();
+        points.setEditable(false);
         points.setPreferredSize(new Dimension(50, 50));
         JButton eb = new JButton("Get Bonus");
         panelE.setLayout(new BoxLayout(panelE, BoxLayout.Y_AXIS));
         panelE.add(p);
         panelE.add(points);
         panelE.add(eb);
-        eb.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                aa.ebBut();
-            }
-        });
-        tg.addInput("points", points);
+        eb.addActionListener(e -> aa.ebBut());
+        tg.addInput("Points", points);
         aa.updatePoint();
         tg.setEast(panelE);
 
@@ -62,6 +58,7 @@ public class PointGUIBuilder implements BorderGUIBuilder {
         JPanel panelW =  new JPanel();
         JLabel tradeList = new JLabel("Available Trades");
         JTextArea tradeArea = new JTextArea();
+        tradeArea.setEditable(false);
         JScrollPane jsp= new JScrollPane(tradeArea);
         panelW.setLayout(new BoxLayout(panelW, BoxLayout.Y_AXIS));
         panelW.add(tradeList);
@@ -70,53 +67,41 @@ public class PointGUIBuilder implements BorderGUIBuilder {
         tg.setWest(panelW);
         tg.initializeList(tradeArea);
         aa.updateList();
-
     }
 
     @Override
     public void buildPanelS() {
         JPanel panelS =  new JPanel();
-        JLabel input = new JLabel("input trade number");
-        JTextArea inputArea = new JTextArea("trade number");
-        JButton submit = new JButton("submit");
-        JButton back = new JButton("return to trade menu");
-        JButton update = new JButton("update");
+        JLabel input = new JLabel("Input Trade Number");
+        JTextArea inputArea = new JTextArea("Trade Number", 1, 10);
+        JButton submit = new JButton("Submit");
+        JButton back = new JButton("Back");
+        JButton update = new JButton("Update");
         panelS.add(input);
         panelS.add(inputArea);
         panelS.add(submit);
         panelS.add(back);
         panelS.add(update);
         tg.setSouth(panelS);
-        tg.addInput("input", inputArea);
-        tg.setInput("input", "trade number");
-        submit.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String tradeNum = tg.getInput("input");
-                System.out.println(tradeNum);
-                aa.submitBut(tradeNum);
-            }
+        tg.addInput("Input", inputArea);
+        tg.setInput("Input", "Trade Number");
+
+        submit.addActionListener(e -> {
+            String tradeNum = tg.getInput("Input");
+            System.out.println(tradeNum);
+            aa.submitBut(tradeNum);
         });
-        back.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                aa.backBut();
-            }
-        });
-        update.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                aa.updateBut();
-            }
-        });
+        back.addActionListener(e -> aa.backBut());
+        update.addActionListener(e -> aa.updateBut());
     }
 
 
     @Override
     public void buildPanelC() {
         JPanel panelC =  new JPanel();
-        JLabel currTradeL = new JLabel("Trade selected");
+        JLabel currTradeL = new JLabel("Trade Selected");
         JTextArea currArea = new JTextArea();
+        currArea.setEditable(false);
         panelC.setLayout(new BoxLayout(panelC, BoxLayout.Y_AXIS));
         panelC.add(currTradeL);
         panelC.add(currArea);
