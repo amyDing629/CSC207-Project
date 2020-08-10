@@ -31,7 +31,7 @@ public class UserLimitGUI {
 
     private void placeComponents(JFrame frame, JPanel panel, String b){
 
-        JButton editButton = new JButton("Trade Limit");
+        JButton editButton = new JButton("Weekly Transaction Limit");
         editButton.setPreferredSize(new Dimension(300, 30));
 
         JButton tradeButton = new JButton("Incomplete Transaction Limit");
@@ -40,12 +40,16 @@ public class UserLimitGUI {
         JButton inventoryButton = new JButton("Difference between borrowed and lend");
         inventoryButton.setPreferredSize(new Dimension(300, 30));
 
+        JButton pointButton = new JButton("Redeem standard for bonus point");
+        inventoryButton.setPreferredSize(new Dimension(300, 30));
+
         JButton exitButton = new JButton("Back");
         exitButton.setPreferredSize(new Dimension(300, 30));
 
         panel.add(editButton);
         panel.add(tradeButton);
         panel.add(inventoryButton);
+        panel.add(pointButton);
         panel.add(exitButton);
         exitButton.addActionListener(e -> {
             frame.setVisible(false);
@@ -64,6 +68,11 @@ public class UserLimitGUI {
         inventoryButton.addActionListener(e -> {
             frame.setVisible(false);
             DiffLimitGUI d=new DiffLimitGUI (uc,frame);
+            d.run(b);
+        });
+        pointButton.addActionListener(e ->{
+            frame.setVisible(false);
+            ExStandardGUI d=new ExStandardGUI(uc,frame);
             d.run(b);
         });
     }
