@@ -42,7 +42,7 @@ public class ApprovalItemDataAccess implements DataAccess {
     public ItemApprovals getObject(String name) {
         deSerialize();
         for (ItemApprovals itemApprovals : ItemApprovalsList) {
-            if (itemApprovals.getCurUserName().equals(name)) {
+            if (itemApprovals.getFstString().equals(name)) {
                 return itemApprovals;
             }
         }
