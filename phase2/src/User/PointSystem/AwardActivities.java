@@ -27,6 +27,9 @@ public class AwardActivities {
     String currUser;
     UserManager um;
 
+    /**
+     * Constructs the AwardActivities for user
+     */
     public AwardActivities(String currUser, JFrame fr, BorderGUIWithThreeTextArea tg){
         this.currUser = currUser;
         this.fr = fr;
@@ -70,18 +73,18 @@ public class AwardActivities {
     }
 
     /**
-     * When the user click on getBonus button,
-     * 1. the tradeId is added into user's bonusTradeList (this Trade will not be removed from tradeHistory)
-     * 2. the bonus point is reduced by a fixed amount
-     * 3. update the PointManager.pointList
-     * 4. update the ClientUser.bonusPoints
+     * Set the selected trade to bonus and update the points for user. (update pointList as well)
+     * Notify the user when bonus points are not enough to exchange for a trade.
      * @param user the current user who is making actions
      * @param selected the trade user selected to be bonus
      */
     public void getBonus(ClientUser user, Trade selected){
         if (selected == null){
             pp.notTradeSelected();
-        }else{
+        }else if (pm.getUserPoints(user) < pm.getExStandard()){
+           pp.pointNotEnough();
+        }
+        else{
             user.addBonusTrade(selected.getId());
             this.pm.setUserPoints(user.getId());
         }

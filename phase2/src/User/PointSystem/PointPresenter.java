@@ -51,6 +51,8 @@ public class PointPresenter {
         tg.setMsgText("Wrong input");
     }
 
+    public void pointNotEnough() {tg.setMsgText("Not enough points to exchange for bonus trade");}
+
     public void noTradeCurr(){
         tg.setCurrText("No trade selected");
     }
