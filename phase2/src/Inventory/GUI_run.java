@@ -24,9 +24,9 @@ public class GUI_run {
         um.addUser(daniel);
         um.addUser(amy);
         um.addUser(admin);
-        InventoryGUI igAmy = new InventoryGUI(amy.getId(), frame);
+        InventoryGUI igAmy = new InventoryGUI("amy", frame);
         igAmy.run();
-        InventoryGUI ar = new InventoryGUI(admin.getId(), frame);
+        InventoryGUI ar = new InventoryGUI("admin", frame);
         ar.run();
     }
 }

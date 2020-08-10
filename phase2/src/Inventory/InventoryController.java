@@ -46,14 +46,14 @@ public class InventoryController {
      * [constructor]
      * @param currUser current user
      */
-    public InventoryController(UUID currUser, BorderGUIWithThreeTextArea bta, JFrame fr){
-        this.currUser = currUser;
+    public InventoryController(String currUser, BorderGUIWithThreeTextArea bta, JFrame fr){
         iv = new Inventory();
         um = new UserManager();
         iam = new ApprovalManager();
         this.bta = bta;
         ip = new InventoryPresenter(bta);
         this.fr = fr;
+        this.currUser = um.nameToUUID(currUser);
     }
 
 
@@ -154,9 +154,6 @@ public class InventoryController {
         iam.addApprovals(um.getUser(currUser),name,des);
     }
 
-    Item createItem(String name){
-        return iv.createItem(name, currUser);
-    }
 
     public void setDescription(String des, String itemName){
         iv.setDescription(itemName, des);
@@ -209,7 +206,7 @@ public class InventoryController {
         it = null;
         ip.updateListB(currUser);
         ip.closeFrame();
-        BorderGUIBuilder builder = new WishBorrowAddBuilder(currUser, bta.getFrame());
+        BorderGUIBuilder builder = new WishBorrowAddBuilder(um.UUIDToName(currUser), bta.getFrame());
         TradeGUIEngineer engineer = new TradeGUIEngineer(builder);
         engineer.constructGUI();
         TradeGUIPlan tg = engineer.getGUI();

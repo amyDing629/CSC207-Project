@@ -13,12 +13,12 @@ import java.awt.event.ActionListener;
 import java.util.UUID;
 
 public class InventoryGUI {
-    private final UUID currUser;
+    private final String currUser;
     private final JFrame ivf;
-    private UserManager um;
+    private final UserManager um;
 
 
-    public InventoryGUI(UUID currUser, JFrame frame){
+    public InventoryGUI(String currUser, JFrame frame){
         this.currUser = currUser;
         this.ivf = frame;
         um = new UserManager();
@@ -31,7 +31,7 @@ public class InventoryGUI {
         frame.setSize(200, 200);
 
         JPanel menu = new JPanel();
-        JLabel label = new JLabel("    Hello, "+ um.getUsername(currUser));
+        JLabel label = new JLabel("    Hello, "+ currUser);
         JButton mk = new JButton("market");
         JButton wb = new JButton("WishBorrow");
         JButton wl = new JButton("WishLend");

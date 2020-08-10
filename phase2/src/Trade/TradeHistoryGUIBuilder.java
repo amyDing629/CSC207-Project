@@ -13,7 +13,7 @@ public class TradeHistoryGUIBuilder implements BorderGUIBuilder {
     TradeHistoryController thc;
     BorderGUIWithThreeTextArea bgUI;
 
-    public TradeHistoryGUIBuilder(UUID currUser, JFrame tf){
+    public TradeHistoryGUIBuilder(String currUser, JFrame tf){
         bgUI = new BorderGUIWithThreeTextArea();
         this.thc = new TradeHistoryController(currUser, bgUI, tf);
     }

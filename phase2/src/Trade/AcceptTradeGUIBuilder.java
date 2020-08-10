@@ -14,9 +14,9 @@ public class AcceptTradeGUIBuilder implements BorderGUIBuilder {
     AcceptTradeController atc;
     JFrame tf;
 
-    public AcceptTradeGUIBuilder(UUID user, TradeManager tm, UserManager um, JFrame tf){
+    public AcceptTradeGUIBuilder(String user, JFrame tf){
         tg = new BorderGUIWithThreeTextArea();
-        atc = new AcceptTradeController(user, tm, um, tg);
+        atc = new AcceptTradeController(user, tg);
         this.tf = tf;
     }
 

@@ -1,5 +1,6 @@
 package User.GUI;
 
+import User.Adapter.ClientUserController;
 import User.Adapter.UIController;
 import User.Entity.ClientUser;
 
@@ -7,10 +8,10 @@ import javax.swing.*;
 import java.awt.*;
 
 public class ChangePassGUI {
-    UIController uc;
+    ClientUserController uc;
     JFrame pFrame;
     JFrame frame;
-    public ChangePassGUI(UIController uc ,JFrame pFrame) {
+    public ChangePassGUI(ClientUserController uc , JFrame pFrame) {
         this.uc = uc;
         this.pFrame=pFrame;
     }

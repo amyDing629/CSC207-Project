@@ -88,8 +88,8 @@ public class LoginIGUI implements View {
                 ClientUserPresenter clientUserPresenter = new ClientUserPresenter(uuid, this);
                 clientUserPresenter.run();
 
-//                ClientUserGUI a = new ClientUserGUI(frame);
-//                a.run();
+                ClientUserGUI a = new ClientUserGUI(frame);
+                a.run();
             }
         });
 

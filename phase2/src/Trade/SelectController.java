@@ -20,14 +20,14 @@ public class SelectController {
     List<String> wishList;
     JFrame fr;
 
-    public SelectController(UUID currUser, BorderGUIWithThreeTextArea bta, JFrame fr){
-        this.currUser = currUser;
+    public SelectController(String currUser, BorderGUIWithThreeTextArea bta, JFrame fr){
         this.um = new UserManager();
         this.iv = new Inventory();
         this.bta = bta;
         this.tm = new TradeManager();
         sp = new SelectPresenter(bta);
         this.fr = fr;
+        this.currUser = um.nameToUUID(currUser);
     }
 
     public String getWishList(){

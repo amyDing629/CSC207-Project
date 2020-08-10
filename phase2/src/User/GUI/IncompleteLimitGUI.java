@@ -1,18 +1,24 @@
 package User.GUI;
 
 import User.Adapter.AdminController;
+import User.Adapter.ClientUserController;
 import User.Adapter.UIController;
+import User.Entity.ClientUser;
+import User.UseCase.AdminActivityManager;
+import User.UseCase.UserManager;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class IncompleteLimitGUI {
-    UIController uc;
+    ClientUserController uc;
     AdminController ac;
+//    AdminActivityManager aam;
     JFrame pFrame;
     JFrame frame;
-    public IncompleteLimitGUI(UIController uc ,JFrame pFrame) {
+    public IncompleteLimitGUI(ClientUserController uc ,JFrame pFrame) {
         this.uc=uc;
+        this.ac = new AdminController();
         this.pFrame=pFrame;
     }
     public void run(String name){

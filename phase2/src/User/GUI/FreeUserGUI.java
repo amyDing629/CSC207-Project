@@ -1,6 +1,7 @@
 package User.GUI;
 
 import User.Adapter.AdminController;
+import User.Adapter.ClientUserController;
 import User.Adapter.UIController;
 import User.UseCase.AdminActivityManager;
 
@@ -9,11 +10,11 @@ import java.awt.*;
 import java.io.FileNotFoundException;
 
 public class FreeUserGUI {
-    UIController uc;
+    ClientUserController uc;
     AdminController ac;
     JFrame pFrame;
     JFrame frame;
-    public FreeUserGUI(UIController uc ,JFrame pFrame) {
+    public FreeUserGUI(ClientUserController uc ,JFrame pFrame) {
         this.uc=uc;
         this.pFrame=pFrame;
         ac = new AdminController();

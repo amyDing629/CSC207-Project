@@ -3,10 +3,15 @@ package User.Adapter;
 import Inventory.Inventory;
 import Inventory.Item;
 import Trade.TradeManager;
+import User.Entity.ClientUser;
+import User.Gateway.UserDataAccess;
 import User.UseCase.ApprovalManager;
 import User.UseCase.UserManager;
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class ClientUserController {
@@ -76,5 +81,28 @@ public class ClientUserController {
 
     public String getNameByID(UUID uuid) {
         return um.getUser(uuid).getUsername();
+    }
+
+    public ClientUser getUser(String username){
+        return um.getUser(username);
+    }
+
+    public void checkFileEmpty(File file) throws FileNotFoundException {
+        if (file.length() == 0) {
+            ClientUser b = new ClientUser("admin", "123", true);
+            um.addUser(b);
+            new UserDataAccess().serialize();
+        }
+    }
+
+    public String getPassword(String username){
+        return um.getPassword(um.getUser(username));
+    }
+    public void setPassword(String name, String password){
+        um.setPassword(um.getUser(name), password);
+    }
+    public List<ClientUser> getUserList() {return um.getUserList();}
+    public ArrayList<ArrayList<String>> getActions(String username) {
+        return um.getActions(um.getUser(username));
     }
 }

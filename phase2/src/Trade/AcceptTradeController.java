@@ -16,11 +16,11 @@ public class AcceptTradeController {
     Trade currTrade;
     AcceptTradePresenter tp;
 
-    public AcceptTradeController(UUID userID, TradeManager tm, UserManager um, BorderGUIWithThreeTextArea tg){
-        currUser = userID;
-        this.tm = tm;
-        this.um = um;
+    public AcceptTradeController(String userName, BorderGUIWithThreeTextArea tg){
+        this.tm = new TradeManager();
+        this.um = new UserManager();
         tp = new AcceptTradePresenter(tg);
+        currUser = um.nameToUUID(userName);
     }
 
     List<Trade> getUnconfirmed(){

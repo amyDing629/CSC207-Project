@@ -13,7 +13,7 @@ import java.util.UUID;
 
 public class WishLendBuilder extends WishBorrowBuilder implements BorderGUIBuilder {
 
-    public WishLendBuilder(UUID currUser, JFrame tf) {
+    public WishLendBuilder(String currUser, JFrame tf) {
         super(currUser, tf);
     }
 

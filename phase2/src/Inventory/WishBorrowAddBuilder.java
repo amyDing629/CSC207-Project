@@ -14,7 +14,7 @@ public class WishBorrowAddBuilder implements BorderGUIBuilder {
     InventoryController ic;
     BorderGUIWithThreeTextArea tg;
 
-    public WishBorrowAddBuilder(UUID currUser, JFrame fr) {
+    public WishBorrowAddBuilder(String currUser, JFrame fr) {
         tg = new BorderGUIWithThreeTextArea();
         ic = new InventoryController(currUser, tg, fr);
     }

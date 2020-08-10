@@ -10,7 +10,7 @@ import java.util.UUID;
 
 public class AgreeReqGUIBuilder extends WishBorrowBuilder implements BorderGUIBuilder {
 
-    public AgreeReqGUIBuilder(UUID currUser, JFrame fr) {
+    public AgreeReqGUIBuilder(String currUser, JFrame fr) {
         super(currUser, fr);
     }
 

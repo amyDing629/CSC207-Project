@@ -1,6 +1,7 @@
 package User.GUI;
 
 import User.Adapter.AdminController;
+import User.Adapter.ClientUserController;
 import User.Adapter.UIController;
 import User.UseCase.ApprovalManager;
 import User.UseCase.UserManager;
@@ -10,11 +11,11 @@ import java.awt.*;
 public class UnfreezeGUI {
     UserManager um;
     ApprovalManager iam;
-    UIController uc;
+    ClientUserController uc;
     AdminController ac;
     JFrame pFrame;
     JFrame frame;
-    public UnfreezeGUI(UIController uc ,JFrame pFrame) {
+    public UnfreezeGUI(ClientUserController uc ,JFrame pFrame) {
         this.uc=uc;
         this.pFrame=pFrame;
     }

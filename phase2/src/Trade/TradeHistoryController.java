@@ -16,12 +16,12 @@ public class TradeHistoryController {
     List<String> userList;
     JFrame fr;
 
-    public TradeHistoryController(UUID currUser, BorderGUIWithThreeTextArea tgp, JFrame fr){
-        this.currUser = currUser;
+    public TradeHistoryController(String currUser, BorderGUIWithThreeTextArea tgp, JFrame fr){
         this.tm = new TradeManager();
         this.um = new UserManager();
         this.fr = fr;
         tp = new TradeHistoryPresenter(tgp);
+        this.currUser = um.nameToUUID(currUser);
 
     }
 

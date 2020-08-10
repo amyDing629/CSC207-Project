@@ -27,9 +27,9 @@ public class RTradeGUI_test {
         um.addUser(amy);
         JFrame f = new JFrame();
 
-        TradeGUI_Main trmD = new TradeGUI_Main(daniel.getId(), tm, um, iv, f);
+        TradeGUI_Main trmD = new TradeGUI_Main("daniel", f);
         trmD.run();
-        TradeGUI_Main trmA = new TradeGUI_Main(amy.getId(), tm, um, iv, f);
+        TradeGUI_Main trmA = new TradeGUI_Main("amy", f);
         trmA.run();
 
 

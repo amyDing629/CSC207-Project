@@ -5,9 +5,12 @@ import Trade.TradeManager;
 import Trade.TradeStatus;
 import User.Entity.ClientUser;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
+import Trade.BorderGUIWithThreeTextArea;
+import User.UseCase.UserManager;
 
 /**
  * [Controller]
@@ -18,6 +21,18 @@ public class AwardActivities {
     PointManager pm;
     Trade currTrade;
     ArrayList<Trade> tradeList;
+    JFrame fr;
+    PointPresenter pp;
+    String currUser;
+    UserManager um;
+
+    public AwardActivities(String currUser, JFrame fr, BorderGUIWithThreeTextArea tg){
+        this.currUser = currUser;
+        this.fr = fr;
+        pp = new PointPresenter(tg);
+        um = new UserManager();
+
+    }
 
     Trade getCurrTrade(String num){
         int tradeNum = Integer.parseInt(num.trim());
@@ -28,8 +43,8 @@ public class AwardActivities {
 
     boolean checkInput(String num){
         if (!isNum(num)){
-            return false;
-        }else return !(Integer.parseInt(num) < 0 | Integer.parseInt(num) >= tradeList.size());
+            return true;
+        }else return Integer.parseInt(num) < 0 | Integer.parseInt(num) >= tradeList.size();
     }
 
     private boolean isNum(String str){
@@ -67,21 +82,40 @@ public class AwardActivities {
         this.pm.setUserPoints(user.getId());
     }
 
-    /**
-     * Return the string representation of trades to exchange
-     */
-    public String toString(List<Trade> tradeList) {
-        StringBuilder results = new StringBuilder();
-        for (Trade t: tradeList) {
-            String trade = "Trade{" +
-                    "tradeId=" + t.getId() +
-                    ", user1=" + t.getUsers().get(0) +
-                    ", user2=" + t.getUsers().get(1) +
-                    ", create at=" + t.getCreateTime() +
-                    "} ";
-            results.append(trade);
+
+
+    void submitBut(String tradeNum){
+        pp.resetInputArea();
+        if (checkInput(tradeNum)){
+            pp.wrongInput();
+        }else{
+            currTrade = getCurrTrade(tradeNum);
+            pp.presentTradeInfo(currTrade);
+            pp.updateSuccess();
         }
-        return results.toString();
+    }
+
+    void backBut(){
+        fr.setVisible(true);
+        pp.closeFrame();
+    }
+
+    public void updateBut(){
+        pp.updateFrame(getTradesForExchange(um.getUser(currUser)));
+        pp.updatePoint(um.getUser(currUser).getBonusPoints());
+        noTradeSelected();
+        pp.resetCurr();
+
+    }
+
+    public void noTradeSelected(){
+        pp.noTradeCurr();
+    }
+
+    public void ebBut(){
+        getBonus(um.getUser(currUser), currTrade);
+        updateBut();
+        pp.changeSuccess();
     }
 
 }

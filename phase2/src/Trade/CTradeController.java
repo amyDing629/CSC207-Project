@@ -25,11 +25,12 @@ public class CTradeController implements Observer {
     CTradePresenter tp;
     BorderGUIWithThreeTextArea tg;
 
-    public CTradeController(UUID currUser, BorderGUIWithThreeTextArea tg) {
-        this.currUser = currUser;
+    public CTradeController(String currUser, BorderGUIWithThreeTextArea tg) {
+
         tm = new TradeManager();
         um = new UserManager();
         tp = new CTradePresenter(tg);
+        this.currUser = um.nameToUUID(currUser);
         this.tg = tg;
     }
 

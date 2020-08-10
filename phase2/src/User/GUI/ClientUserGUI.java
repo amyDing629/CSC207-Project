@@ -1,9 +1,11 @@
 package User.GUI;
 
-import Trade.TradeManager;
+import Inventory.InventoryGUI;
+import Trade.*;
 import User.Adapter.ClientUserController;
 import User.Adapter.IUserPresenter;
 import User.Adapter.UIController;
+import User.PointSystem.PointGUIBuilder;
 import User.UseCase.ApprovalManager;
 import User.UseCase.UserManager;
 
@@ -43,16 +45,17 @@ public class ClientUserGUI implements View {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JPanel panel = new JPanel();
         panel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        String b = controller.getNameByID(getPresenter().getCurrUser());
         JLabel welcomeLabel = new JLabel("Welcome: " + controller.getNameByID(getPresenter().getCurrUser()));
         welcomeLabel.setPreferredSize(new Dimension(300, 30));
         panel.add(welcomeLabel);
         frame.add(panel);
 
-        placeComponents(frame, panel);
+        placeComponents(frame, panel, b);
         frame.setVisible(true);
     }
 
-    private void placeComponents(JFrame frame, JPanel panel) {
+    private void placeComponents(JFrame frame, JPanel panel, String b ) {
 
         UUID userId = getPresenter().getCurrUser();
         boolean isFrozen = getPresenter().getUserModel().getIsFrozen(userId);
@@ -89,6 +92,10 @@ public class ClientUserGUI implements View {
         inventoryButton.setPreferredSize(new Dimension(300, 30));
         panel.add(inventoryButton);
 
+        JButton pointButton = new JButton("point system");
+        inventoryButton.setPreferredSize(new Dimension(300, 30));
+        panel.add(inventoryButton);
+
 
         JButton exitButton = new JButton("quit to menu");
         exitButton.setPreferredSize(new Dimension(300, 30));
@@ -96,14 +103,23 @@ public class ClientUserGUI implements View {
 
         editButton.addActionListener(e -> {
             frame.setVisible(false);
-//            editInfoGUI d = new editInfoGUI(um,tm,iv,iam,uc,aam,frame);
-//            d.run(um.getUsername(b));
+            editInfoGUI d = new editInfoGUI(controller, frame);
+            d.run(b);
+        });
+
+        pointButton.addActionListener(e -> {
+            frame.setVisible(false);
+            BorderGUIBuilder builder = new PointGUIBuilder(b, frame);
+            TradeGUIEngineer engineer = new TradeGUIEngineer(builder);
+            engineer.constructGUI();
+            TradeGUIPlan tg = engineer.getGUI();
+            tg.run();
         });
 
         inventoryButton.addActionListener(e -> {
             frame.setVisible(false);
-//            InventoryGUI d = new InventoryGUI(b,iv,um,iam,frame);
-//            d.run();
+            InventoryGUI d = new InventoryGUI(b ,frame);
+            d.run();
         });
 
         exitButton.addActionListener(e -> {
@@ -113,8 +129,8 @@ public class ClientUserGUI implements View {
 
         tradeButton.addActionListener(e -> {
             frame.setVisible(false);
-//            TradeGUI_Main d = new TradeGUI_Main(b, tm, um, iv, frame);
-//            d.run();
+            TradeGUI_Main d = new TradeGUI_Main(b, frame);
+            d.run();
         });
     }
 

@@ -1,8 +1,5 @@
 package Trade;
 
-import Inventory.Inventory;
-import User.Entity.ClientUser;
-import User.UseCase.UserManager;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -10,10 +7,7 @@ import java.awt.event.ActionListener;
 import java.util.UUID;
 
 public class TradeGUI_Main {
-    UUID currUser;
-    UserManager um;
-    TradeManager tm;
-    Inventory iv;
+    String currUser;
     JFrame cf;
 
 
@@ -21,11 +15,8 @@ public class TradeGUI_Main {
      * constructor
      * @param currUser the user that is using the system
      */
-    public TradeGUI_Main(UUID currUser, TradeManager tm, UserManager um, Inventory iv, JFrame cf){
+    public TradeGUI_Main(String currUser, JFrame cf){
         this.currUser = currUser;
-        this.tm = tm;
-        this.um = um;
-        this.iv = iv;
         this.cf = cf;
     }
 
@@ -35,7 +26,7 @@ public class TradeGUI_Main {
         frame.setSize(400, 250);
 
         JPanel menu = new JPanel();
-        JLabel lb = new JLabel("    Hello, "+um.getUsername(currUser));
+        JLabel lb = new JLabel("    Hello, "+ currUser);
         JButton rt = new JButton("request trade");
         JButton ct = new JButton("complete trade");
         JButton at = new JButton("agree/refuse requested trade");
@@ -57,7 +48,7 @@ public class TradeGUI_Main {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
-                BorderGUIBuilder builder = new SelectItemToTradeBuilder(currUser, tm, um, iv, frame);
+                BorderGUIBuilder builder = new SelectItemToTradeBuilder(currUser, frame);
                 TradeGUIEngineer engineer = new TradeGUIEngineer(builder);
                 engineer.constructGUI();
                 TradeGUIPlan tg = engineer.getGUI();
@@ -69,13 +60,12 @@ public class TradeGUI_Main {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
-                BorderGUIBuilder builder = new AcceptTradeGUIBuilder(currUser, tm, um, frame);
+                BorderGUIBuilder builder = new AcceptTradeGUIBuilder(currUser, frame);
                 TradeGUIEngineer engineer = new TradeGUIEngineer(builder);
                 engineer.constructGUI();
                 TradeGUIPlan tg = engineer.getGUI();
                 tg.run();
 
-                //new AcceptTradeGUI(currUser, tm, um, frame).run();
             }
         });
 

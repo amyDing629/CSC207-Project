@@ -19,7 +19,7 @@ public class TradeGUIHelper {
         return back;
     }
 
-    ArrayList<Object> createMessagePanel(){
+    public ArrayList<Object> createMessagePanel(){
         JPanel panelN = new JPanel();
         JLabel msg = new JLabel("message:", SwingConstants.LEFT);
         JTextArea msgArea = new JTextArea();

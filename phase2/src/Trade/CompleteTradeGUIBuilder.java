@@ -15,7 +15,7 @@ public class CompleteTradeGUIBuilder implements BorderGUIBuilder {
     JFrame tf;
     BorderGUIWithThreeTextArea tg;
 
-    public CompleteTradeGUIBuilder(UUID currUser, JFrame tf) {
+    public CompleteTradeGUIBuilder(String currUser, JFrame tf) {
         tg = new BorderGUIWithThreeTextArea();
         ctc = new CTradeController(currUser, tg);
         this.tf = tf;

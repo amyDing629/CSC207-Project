@@ -1,6 +1,7 @@
 package User.GUI;
 
 import User.Adapter.AdminController;
+import User.Adapter.ClientUserController;
 import User.Adapter.UIController;
 
 import javax.swing.*;
@@ -8,12 +9,13 @@ import java.awt.*;
 import java.io.FileNotFoundException;
 
 public class CreateAdminGUI {
-    UIController uc;
+    ClientUserController uc;
     AdminController ac;
     JFrame pFrame;
     JFrame frame;
-    public CreateAdminGUI(UIController uc ,JFrame pFrame) {
+    public CreateAdminGUI(ClientUserController uc , JFrame pFrame) {
         this.uc=uc;
+        ac= new AdminController();
         this.pFrame=pFrame;
     }
     public void run(String name){
