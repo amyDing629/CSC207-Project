@@ -10,7 +10,6 @@ import java.io.FileNotFoundException;
 
 public class FreeUserGUI {
     UIController uc;
-//    AdminActivityManager aam;
     AdminController ac;
     JFrame pFrame;
     JFrame frame;

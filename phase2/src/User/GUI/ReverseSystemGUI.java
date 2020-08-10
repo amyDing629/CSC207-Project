@@ -3,14 +3,12 @@ package User.GUI;
 
 import User.Adapter.UIController;
 import User.Entity.ClientUser;
-import User.UseCase.UserManager;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
 public class ReverseSystemGUI {
-    UserManager um;
     UIController uc;
     JFrame pFrame;
     JFrame frame;
@@ -29,7 +27,6 @@ public class ReverseSystemGUI {
         panel.add(welcomeLabel);
         frame.add(panel);
 
-        ClientUser b = um.getUser(name);
 
         placeComponents(frame, panel, name);
         frame.setVisible(true);
@@ -49,7 +46,7 @@ public class ReverseSystemGUI {
         c.weighty = 1.0;
         panel.add(scrollPane, c);
         StringBuilder hi= new StringBuilder("Username:\n");
-        ArrayList<ClientUser> name= (ArrayList<ClientUser>) um.getUserList();
+        ArrayList<ClientUser> name= (ArrayList<ClientUser>) uc.getUserList();
         if(name.size()==0){
             hi.append("Currently there is no users\n");
         }
@@ -75,8 +72,8 @@ public class ReverseSystemGUI {
             pFrame.setVisible(true);
         });
         submitButton.addActionListener(e -> {
-            if(um.getUser(userInput.getText())!=null){
-                createNext(frame,panel,um.getUser(userInput.getText()),textArea,exit);
+            if(uc.getUser(userInput.getText())!=null){
+                createNext(frame,panel,uc.getUser(userInput.getText()),textArea,exit);
             }
         });
     }
@@ -96,7 +93,7 @@ public class ReverseSystemGUI {
         panel.remove(exit);
         if(!textArea.getText().equals("Currently there is no users")){
             StringBuilder lol= new StringBuilder("Actions: ");
-            ArrayList<ArrayList<String>> z=um.getActions(a);
+            ArrayList<ArrayList<String>> z=uc.getActions(a.getUsername());
             for (ArrayList<String> strings : z) {
                 lol.append(strings.get(1)).append("\n");
             }

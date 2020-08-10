@@ -1,27 +1,18 @@
 package User.GUI;
 
-import Inventory.Inventory;
-import Trade.TradeManager;
 import User.Adapter.AdminController;
 import User.Adapter.UIController;
-import User.UseCase.AdminActivityManager;
-import User.UseCase.ApprovalManager;
-import User.UseCase.UserManager;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class DiffLimitGUI {
-    UserManager um;
     UIController uc;
-//    AdminActivityManager aam;
     AdminController ac;
     JFrame pFrame;
     JFrame frame;
     public DiffLimitGUI(UIController uc ,JFrame pFrame) {
-        this.um = new UserManager();
         this.uc=uc;
-//        this.aam=new AdminActivityManager();
         ac = new AdminController();
         this.pFrame=pFrame;
     }

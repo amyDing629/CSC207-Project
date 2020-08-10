@@ -12,8 +12,9 @@ import java.awt.*;
 import java.util.UUID;
 
 public class ClientUserGUI implements View {
-    UserManager um;
+//    UserManager um;
     TradeManager tm;
+    UIController uc;
 //    Inventory iv;
 //    AdminActivityManager aam;
 //    public ClientUserGUI(UserManager um, TradeManager tm, Inventory iv, ItemApprovalManager iam, AdminActivityManager aam,UIController uc ,JFrame pFrame) {
@@ -62,16 +63,16 @@ public class ClientUserGUI implements View {
         freezeStatus.setPreferredSize(new Dimension(300, 30));
         panel.add(freezeStatus);
 
-        JLabel tradeLimit = new JLabel("Trade limit: " + tm.getTradeNumber(um.UUIDToName(userId)) + "/" + um.getWeekTransactionLimit(um.UUIDToName(userId)));
+        JLabel tradeLimit = new JLabel("Trade limit: " + tm.getTradeNumber(uc.UUIDToName(userId)) + "/" + uc.getWeekTransactionLimit(uc.UUIDToName(userId)));
         tradeLimit.setPreferredSize(new Dimension(300, 30));
         panel.add(tradeLimit);
 
         JLabel inCompLimit = new JLabel("Incomplete trade limit: " + tm.getIncompleteTransaction(userId) +
-                "/" + um.getIncompleteTransactionLimit(um.UUIDToName(userId)));
+                "/" + uc.getIncompleteTransactionLimit(uc.UUIDToName(userId)));
         inCompLimit.setPreferredSize(new Dimension(300, 30));
         panel.add(inCompLimit);
 
-        JLabel diff = new JLabel("Difference between borrow and lend: "+ um.readDiff(um.UUIDToName(userId)) + "/" +um.getDiff(um.UUIDToName(userId)));
+        JLabel diff = new JLabel("Difference between borrow and lend: "+ uc.readDiff(uc.UUIDToName(userId)) + "/" +uc.getDiff(uc.UUIDToName(userId)));
         diff.setPreferredSize(new Dimension(300, 30));
         panel.add(diff);
 

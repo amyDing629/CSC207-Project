@@ -1,16 +1,13 @@
 package User.GUI;
 
 import User.Adapter.UIController;
-import User.Entity.ClientUser;
 import User.UseCase.ApprovalManager;
-import User.UseCase.UserManager;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.FileNotFoundException;
 
 public class RequestUnfreezeTicketGUI {
-    UserManager um;
     ApprovalManager iam;
     UIController uc;
     JFrame pFrame;
@@ -30,7 +27,6 @@ public class RequestUnfreezeTicketGUI {
         panel.add(welcomeLabel);
         frame.add(panel);
 
-        ClientUser b = um.getUser(name);
 
         placeComponents(frame, panel, name);
         frame.setVisible(true);
@@ -62,7 +58,7 @@ public class RequestUnfreezeTicketGUI {
         submitButton.addActionListener(e -> {
             frame.setVisible(false);
             try {
-                iam.addApprovals(um.getUser(name),textLabel.getText());
+                iam.addApprovals(uc.getUser(name),textLabel.getText());
             } catch (FileNotFoundException fileNotFoundException) {
                 fileNotFoundException.printStackTrace();
             }

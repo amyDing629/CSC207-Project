@@ -8,7 +8,10 @@ import User.UseCase.ApprovalManager;
 import User.UseCase.UserManager;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import java.util.UUID;
 
 public class UIController {
     public UserManager um;
@@ -87,6 +90,42 @@ public class UIController {
 
     public String getPassword(String username){
         return um.getPassword(um.getUser(username));
+    }
+
+    public boolean getIsFrozen(UUID userID){
+        return um.getIsFrozen(userID);
+    }
+
+    public UUID nameToUUID(String name){
+        return um.nameToUUID(name);
+    }
+
+    public boolean getIsAdmin(String a){return um.getIsAdmin(a);}
+
+    public List<ClientUser> getUserList() {return um.getUserList();}
+
+    public ArrayList<ArrayList<String>> getActions(String username) {
+        return um.getActions(um.getUser(username));
+    }
+
+    public String UUIDToName(UUID userID){
+        return um.UUIDToName(userID);
+    }
+
+    public int getWeekTransactionLimit(String a) {
+        return um.getWeekTransactionLimit(a);
+    }
+
+    public int getIncompleteTransactionLimit(String a) {
+        return um.getIncompleteTransactionLimit(a);
+    }
+
+    public int readDiff(String username) {
+        return um.readDiff(username);
+    }
+
+    public int getDiff(String a) {
+        return um.getDiff(a);
     }
 
 //    public boolean checkItemExist(String item){

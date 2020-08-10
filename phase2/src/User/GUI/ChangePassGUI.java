@@ -2,18 +2,15 @@ package User.GUI;
 
 import User.Adapter.UIController;
 import User.Entity.ClientUser;
-import User.UseCase.UserManager;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class ChangePassGUI {
-//    UserManager um;
     UIController uc;
     JFrame pFrame;
     JFrame frame;
     public ChangePassGUI(UIController uc ,JFrame pFrame) {
-//        this.um = new UserManager();
         this.uc = uc;
         this.pFrame=pFrame;
     }

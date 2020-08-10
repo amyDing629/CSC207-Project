@@ -2,16 +2,12 @@ package User.GUI;
 
 import User.Adapter.AdminController;
 import User.Adapter.UIController;
-import User.Entity.ClientUser;
-import User.UseCase.AdminActivityManager;
-import User.UseCase.UserManager;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class IncompleteLimitGUI {
     UIController uc;
-//    AdminActivityManager aam;
     AdminController ac;
     JFrame pFrame;
     JFrame frame;
