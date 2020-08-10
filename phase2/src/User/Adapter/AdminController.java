@@ -58,6 +58,9 @@ public class AdminController extends ClientUserController {
         am.setWeekTransactionLimit(username, weekTransaction);
     }
 
+    public void setExchangeStandard(int exStandard) {
+        am.setExchangeStandard(exStandard);
+    }
 
 
 }

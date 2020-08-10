@@ -5,6 +5,7 @@ import Trade.TradeManager;
 import User.Entity.ClientUser;
 import User.Gateway.DataAccess;
 import User.Gateway.UserDataAccess;
+import User.PointSystem.PointManager;
 
 import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
@@ -20,6 +21,7 @@ import java.util.UUID;
 public class AdminActivityManager {
     UserManager um = new UserManager();
     TradeManager tm = new TradeManager();
+    PointManager pm = new PointManager();
 //    DataAccess tradeAccess = new TradeDataAccess();
     DataAccess userAccess = new UserDataAccess();
 
@@ -186,7 +188,9 @@ public class AdminActivityManager {
     public void setIncompleteTransaction(String username,int incompleteTransaction) {
        um.getUser(username).setIncompleteTransaction(incompleteTransaction);
     }
-
+    public void setExchangeStandard(int exStandard) {
+        pm.setExStandard(exStandard);
+    }
 
     /**
      * @param userId The ID of the administrative user.
