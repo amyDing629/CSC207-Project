@@ -43,11 +43,11 @@ public class ChangePassGUI {
         passInput.setPreferredSize(new Dimension(300, 30));
         panel.add(passInput);
 
-        JButton submitButton = new JButton("submit");
+        JButton submitButton = new JButton("Submit");
         submitButton.setPreferredSize(new Dimension(300, 30));
         panel.add(submitButton);
 
-        JButton exit = new JButton("exit");
+        JButton exit = new JButton("Back");
         exit.setPreferredSize(new Dimension(300, 30));
         panel.add(exit);
         exit.addActionListener(e -> {
@@ -60,7 +60,7 @@ public class ChangePassGUI {
             System.out.println(passInput.getText());
             b.setPassword(passInput.getText());
             System.out.println(b.getPassword());
-            JOptionPane.showMessageDialog(null, "success changed pass");
+            JOptionPane.showMessageDialog(null, "Successfully changed the password!");
         });
     }
 }

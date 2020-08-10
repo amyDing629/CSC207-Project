@@ -1,16 +1,13 @@
 package Inventory;
 
 import Trade.BorderGUIBuilder;
-import Trade.CompleteTradeGUIBuilder;
 import Trade.TradeGUIEngineer;
 import Trade.TradeGUIPlan;
-import User.Entity.ClientUser;
 import User.UseCase.UserManager;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.UUID;
 
 public class InventoryGUI {
     private final String currUser;
@@ -51,61 +48,46 @@ public class InventoryGUI {
         frame.getContentPane().add(menu);
         frame.setVisible(true);
 
-        mk.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
-                BorderGUIBuilder builder = new MarketBuilder(frame);
-                TradeGUIEngineer engineer = new TradeGUIEngineer(builder);
-                engineer.constructGUI();
-                TradeGUIPlan tg = engineer.getGUI();
-                tg.run();
-            }
+        mk.addActionListener(e -> {
+            frame.setVisible(false);
+            BorderGUIBuilder builder = new MarketBuilder(frame);
+            TradeGUIEngineer engineer = new TradeGUIEngineer(builder);
+            engineer.constructGUI();
+            TradeGUIPlan tg = engineer.getGUI();
+            tg.run();
         });
 
-        wb.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
-                BorderGUIBuilder builder = new WishBorrowBuilder(currUser, frame);
-                TradeGUIEngineer engineer = new TradeGUIEngineer(builder);
-                engineer.constructGUI();
-                TradeGUIPlan tg = engineer.getGUI();
-                tg.run();
-            }
+        wb.addActionListener(e -> {
+            frame.setVisible(false);
+            BorderGUIBuilder builder = new WishBorrowBuilder(currUser, frame);
+            TradeGUIEngineer engineer = new TradeGUIEngineer(builder);
+            engineer.constructGUI();
+            TradeGUIPlan tg = engineer.getGUI();
+            tg.run();
         });
 
-        wl.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
-                BorderGUIBuilder builder = new WishLendBuilder(currUser, frame);
-                TradeGUIEngineer engineer = new TradeGUIEngineer(builder);
-                engineer.constructGUI();
-                TradeGUIPlan tg = engineer.getGUI();
-                tg.run();
+        wl.addActionListener(e -> {
+            frame.setVisible(false);
+            BorderGUIBuilder builder = new WishLendBuilder(currUser, frame);
+            TradeGUIEngineer engineer = new TradeGUIEngineer(builder);
+            engineer.constructGUI();
+            TradeGUIPlan tg = engineer.getGUI();
+            tg.run();
 
-            }
         });
 
-        ar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
-                BorderGUIBuilder builder = new AgreeReqGUIBuilder(currUser, frame);
-                TradeGUIEngineer engineer = new TradeGUIEngineer(builder);
-                engineer.constructGUI();
-                TradeGUIPlan tg = engineer.getGUI();
-                tg.run();
-            }
+        ar.addActionListener(e -> {
+            frame.setVisible(false);
+            BorderGUIBuilder builder = new AgreeReqGUIBuilder(currUser, frame);
+            TradeGUIEngineer engineer = new TradeGUIEngineer(builder);
+            engineer.constructGUI();
+            TradeGUIPlan tg = engineer.getGUI();
+            tg.run();
         });
 
-        back.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
-                ivf.setVisible(true);
-            }
+        back.addActionListener(e -> {
+            frame.setVisible(false);
+            ivf.setVisible(true);
         });
 
 

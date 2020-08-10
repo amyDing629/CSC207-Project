@@ -3,6 +3,7 @@ package Trade.MeetingSystem.Adapter;
 import Trade.MeetingSystem.Entity.Meeting;
 import Trade.MeetingSystem.MeetingStatus;
 import Trade.MeetingSystem.UseCase.MeetingActionManager;
+import Trade.MeetingSystem.UseCase.MeetingManager;
 import Trade.MeetingSystem.UseCase.MeetingModel;
 import Trade.MeetingSystem.UseCase.Model;
 
@@ -16,7 +17,7 @@ public class AgreeViewPresenter implements IPresenter {
     MeetingStatus meetingStatus;
 
     // Use case
-    MeetingActionManager meetingActionManager = new MeetingActionManager();
+    MeetingManager meetingManager = new MeetingActionManager();
     Model meetingModel;
 
     // View
@@ -51,10 +52,10 @@ public class AgreeViewPresenter implements IPresenter {
 
     private void performAgree(UUID currLogInUser) {
 
-        assert meetingActionManager.isMeetingIdExist(meetingID);
-        Meeting m = meetingActionManager.getMeetingWithId(meetingID);
+        assert meetingManager.isMeetingIdExist(meetingID);
+        Meeting m = meetingManager.getMeetingWithId(meetingID);
 
-        meetingActionManager.agreeMeeting(m, currLogInUser);
+        meetingManager.agreeMeeting(m, currLogInUser);
     }
 
     @Override

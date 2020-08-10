@@ -1,13 +1,7 @@
 package Trade;
 
-import User.Entity.ClientUser;
-import User.UseCase.UserManager;
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.UUID;
 
 public class AcceptTradeGUIBuilder implements BorderGUIBuilder {
     BorderGUIWithThreeTextArea tg;
@@ -82,26 +76,13 @@ public class AcceptTradeGUIBuilder implements BorderGUIBuilder {
         tg.setSouth(panelS);
         tg.addInput("Input", inputArea);
         tg.setInput("Input", "Trade Number");
-        submit.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String tradeNum = tg.getInput("Input");
-                System.out.println(tradeNum);
-                atc.submitBut(tradeNum);
-            }
+        submit.addActionListener(e -> {
+            String tradeNum = tg.getInput("Input");
+            System.out.println(tradeNum);
+            atc.submitBut(tradeNum);
         });
-        back.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                atc.backBut(tf);
-            }
-        });
-        update.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                atc.updateBut();
-            }
-        });
+        back.addActionListener(e -> atc.backBut(tf));
+        update.addActionListener(e -> atc.updateBut());
     }
 
     @Override

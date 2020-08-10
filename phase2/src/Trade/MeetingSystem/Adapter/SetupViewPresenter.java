@@ -1,10 +1,7 @@
 package Trade.MeetingSystem.Adapter;
 
 import Trade.MeetingSystem.MeetingStatus;
-import Trade.MeetingSystem.UseCase.DateTime;
-import Trade.MeetingSystem.UseCase.MeetingActionManager;
-import Trade.MeetingSystem.UseCase.MeetingModel;
-import Trade.MeetingSystem.UseCase.Model;
+import Trade.MeetingSystem.UseCase.*;
 
 import java.time.LocalDateTime;
 import java.util.*;
@@ -18,7 +15,7 @@ public class SetupViewPresenter extends Observable implements IPresenter {
     List<UUID> users;
 
     // Use case
-    MeetingActionManager meetingActionManager = new MeetingActionManager();
+    MeetingManager meetingManager = new MeetingActionManager();
     Model meetingModel;
     DateTime dt = new DateTime();
 
@@ -58,7 +55,7 @@ public class SetupViewPresenter extends Observable implements IPresenter {
     private UUID performSetUp(String inputDateTime, String inputAddress, List<UUID> users, UUID currLogInUser) {
         LocalDateTime setDateTime = dt.convertToLocalDateTime(inputDateTime);
         String setPlace = inputAddress.trim();
-        meetingID = meetingActionManager.setUpMeeting((ArrayList<UUID>) users, setDateTime, setPlace, currLogInUser);
+        meetingID = meetingManager.setUpMeeting((ArrayList<UUID>) users, setDateTime, setPlace, currLogInUser);
 
         // notify observers
         setChanged();

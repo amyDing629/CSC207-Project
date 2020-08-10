@@ -18,7 +18,7 @@ public class DiffLimitGUI {
         this.pFrame=pFrame;
     }
     public void run(String name){
-        frame = new JFrame("Trade limit");
+        frame = new JFrame("Trade Limit");
         frame.setSize(500, 700);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JPanel panel = new JPanel();
@@ -48,11 +48,11 @@ public class DiffLimitGUI {
         userInput1.setPreferredSize(new Dimension(300, 30));
         panel.add(userInput1);
 
-        JButton submitButton = new JButton("submit");
+        JButton submitButton = new JButton("Submit");
         submitButton.setPreferredSize(new Dimension(300, 30));
         panel.add(submitButton);
 
-        JButton exit = new JButton("exit");
+        JButton exit = new JButton("Back");
         exit.setPreferredSize(new Dimension(300, 30));
         panel.add(exit);
         exit.addActionListener(e -> {
@@ -62,7 +62,7 @@ public class DiffLimitGUI {
         submitButton.addActionListener(e -> {
             frame.setVisible(false);
             ac.setDiff(userInput.getText(),Integer.parseInt(userInput1.getText()));
-            JOptionPane.showMessageDialog(null, "success changed limit");
+            JOptionPane.showMessageDialog(null, "Successfully changed limit");
             UserFreezeSystem d = new UserFreezeSystem(uc,frame);
             d.run(b);
         });

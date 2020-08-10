@@ -5,10 +5,6 @@ import Trade.BorderGUINoTextArea;
 import Trade.BorderGUIWithThreeTextArea;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.FileNotFoundException;
-import java.util.UUID;
 
 public class AgreeReqGUIBuilder implements BorderGUIBuilder {
     InventoryController ic;

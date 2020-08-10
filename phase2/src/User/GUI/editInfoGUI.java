@@ -19,7 +19,7 @@ public class editInfoGUI {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JPanel panel = new JPanel();
         panel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        JLabel welcomeLabel = new JLabel("Hello, user, " + name);
+        JLabel welcomeLabel = new JLabel("Hello, user" + name);
         welcomeLabel.setPreferredSize(new Dimension(300, 30));
         panel.add(welcomeLabel);
         frame.add(panel);
@@ -64,7 +64,7 @@ public class editInfoGUI {
         ReverseSystem.setPreferredSize(new Dimension(300, 30));
         panel.add(ReverseSystem);
 
-        JButton exit = new JButton("exit");
+        JButton exit = new JButton("Back");
         exit.setPreferredSize(new Dimension(300, 30));
         panel.add(exit);
         if(!uc.getIsAdmin(b)){

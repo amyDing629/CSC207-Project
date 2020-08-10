@@ -1,6 +1,5 @@
 package User.GUI;
 
-
 import User.Adapter.ClientUserController;
 
 import javax.swing.*;

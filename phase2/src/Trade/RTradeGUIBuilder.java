@@ -42,7 +42,7 @@ public class RTradeGUIBuilder implements BorderGUIBuilder {
     @Override
     public void buildPanelN() {
         JPanel msg = new JPanel();
-        JLabel msgl = new JLabel("message:", SwingConstants.LEFT);
+        JLabel msgl = new JLabel("Message:", SwingConstants.LEFT);
         msg.add(msgl);
         JTextArea jtz = new JTextArea();
         msg.add(jtz);
@@ -54,13 +54,13 @@ public class RTradeGUIBuilder implements BorderGUIBuilder {
     public void buildPanelE() {
         JPanel panelRight = new JPanel();
         panelRight.setLayout(new BoxLayout(panelRight, BoxLayout.Y_AXIS));
-        JLabel label = new JLabel("input second item name here " +
+        JLabel label = new JLabel("Input second item name here " +
                 "for a two way trade", SwingConstants.LEFT);
-        JTextArea ta = new JTextArea("type item name here");
+        JTextArea ta = new JTextArea("Type item name here");
         panelRight.add(label);
         panelRight.add(ta);
         tg.setEast(panelRight);
-        tg.addInput("input", ta);
+        tg.addInput("Input", ta);
     }
 
     @Override
@@ -74,59 +74,42 @@ public class RTradeGUIBuilder implements BorderGUIBuilder {
         JButton onewayPer = new JButton("One way-Permanent");
         JButton twowayTemp = new JButton("Two way-Temporary");
         JButton twowayPer = new JButton("Two way-Permanent");
-        JButton back = new JButton("return");
+        JButton back = new JButton("Back");
         panelS.add(onewayTemp);
         panelS.add(onewayPer);
         panelS.add(twowayTemp);
         panelS.add(twowayPer);
         panelS.add(back);
         tg.setSouth(panelS);
-        onewayTemp.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    trc.onewayBut("temp");
-                } catch (FileNotFoundException fileNotFoundException) {
-                    fileNotFoundException.printStackTrace();
-                }
+        onewayTemp.addActionListener(e -> {
+            try {
+                trc.onewayBut("temp");
+            } catch (FileNotFoundException fileNotFoundException) {
+                fileNotFoundException.printStackTrace();
             }
         });
-        onewayPer.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    trc.onewayBut("per");
-                } catch (FileNotFoundException fileNotFoundException) {
-                    fileNotFoundException.printStackTrace();
-                }
+        onewayPer.addActionListener(e -> {
+            try {
+                trc.onewayBut("per");
+            } catch (FileNotFoundException fileNotFoundException) {
+                fileNotFoundException.printStackTrace();
             }
         });
-        twowayTemp.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    trc.twowayBut("temp");
-                } catch (FileNotFoundException fileNotFoundException) {
-                    fileNotFoundException.printStackTrace();
-                }
+        twowayTemp.addActionListener(e -> {
+            try {
+                trc.twowayBut("temp");
+            } catch (FileNotFoundException fileNotFoundException) {
+                fileNotFoundException.printStackTrace();
             }
         });
-        twowayPer.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    trc.twowayBut("per");
-                } catch (FileNotFoundException fileNotFoundException) {
-                    fileNotFoundException.printStackTrace();
-                }
+        twowayPer.addActionListener(e -> {
+            try {
+                trc.twowayBut("per");
+            } catch (FileNotFoundException fileNotFoundException) {
+                fileNotFoundException.printStackTrace();
             }
         });
-        back.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                trc.backBut(fr);
-            }
-        });
+        back.addActionListener(e -> trc.backBut(fr));
 
 
 

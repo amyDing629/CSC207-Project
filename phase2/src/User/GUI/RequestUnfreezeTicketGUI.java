@@ -7,10 +7,12 @@ import javax.swing.*;
 import java.awt.*;
 
 public class RequestUnfreezeTicketGUI {
+
     ApprovalManager iam;
     ClientUserController uc;
     JFrame pFrame;
     JFrame frame;
+
     public RequestUnfreezeTicketGUI(ClientUserController uc ,JFrame pFrame) {
         this.uc=uc;
         this.pFrame=pFrame;
@@ -42,11 +44,11 @@ public class RequestUnfreezeTicketGUI {
         userInput.setPreferredSize(new Dimension(300, 30));
         panel.add(userInput);
 
-        JButton submitButton = new JButton("submit");
+        JButton submitButton = new JButton("Submit");
         submitButton.setPreferredSize(new Dimension(300, 30));
         panel.add(submitButton);
 
-        JButton exit = new JButton("exit");
+        JButton exit = new JButton("Back");
         exit.setPreferredSize(new Dimension(300, 30));
         panel.add(exit);
 
@@ -58,7 +60,7 @@ public class RequestUnfreezeTicketGUI {
             frame.setVisible(false);
             iam.addApprovals(uc.getUser(name),textLabel.getText());
             JOptionPane.showMessageDialog(null,"Request successfully");
-            JOptionPane.showMessageDialog(null,"Please wait for the administrator to approve");
+            JOptionPane.showMessageDialog(null,"Please wait for the admin to approve");
             UserFreezeSystem d = new UserFreezeSystem(uc,frame);
             d.run(name);
         });
