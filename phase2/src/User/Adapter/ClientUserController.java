@@ -106,8 +106,9 @@ public class ClientUserController {
     public String getPassword(String username){
         return um.getPassword(um.getUser(username));
     }
+
     public void setPassword(String name, String password){
-        um.setPassword(um.getUser(name), password);
+        um.setPassword(name, password);
     }
     public List<ClientUser> getUserList() {return um.getUserList();}
     public ArrayList<ArrayList<String>> getActions(String username) {

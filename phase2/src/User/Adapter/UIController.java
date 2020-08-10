@@ -81,7 +81,7 @@ public class UIController {
     }
 
     public void setPassword(String name, String password){
-        um.setPassword(um.getUser(name), password);
+        um.setPassword(name, password);
     }
 
     public ClientUser getUser(String username){

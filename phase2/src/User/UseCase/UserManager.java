@@ -204,9 +204,10 @@ public class UserManager {
         return a.getId();
     }
 
-    public void setPassword(ClientUser a, String password) {
+    public void setPassword(String name, String password) {
+        ClientUser a = popUser(nameToUUID(name));
         a.setPassword(password);
-        dataAccess.updateSer();
+        addUser(a);
     }
 
     //finished
