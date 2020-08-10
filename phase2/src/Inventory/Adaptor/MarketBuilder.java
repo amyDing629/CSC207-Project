@@ -5,8 +5,7 @@ import Trade.Adaptor.BorderGUINoTextArea;
 import Trade.Adaptor.BorderGUIWithThreeTextArea;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 
 public class MarketBuilder implements BorderGUIBuilder {
 
@@ -70,18 +69,8 @@ public class MarketBuilder implements BorderGUIBuilder {
         panelS.add(back);
         tg.setSouth(panelS);
         tg.addInput("input", ta);
-        submit.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ic.submitButM();
-            }
-        });
-        back.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ic.backBut();
-            }
-        });
+        submit.addActionListener(e -> ic.submitButM());
+        back.addActionListener(e -> ic.backBut());
 
 
     }

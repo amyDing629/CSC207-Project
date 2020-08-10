@@ -42,25 +42,9 @@ public class WishLendBuilder extends WishBorrowBuilder implements BorderGUIBuild
         tg.setEast(panelE);
         tg.addInput("name", name);
         tg.addInput("des", des);
-        delete.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ic.delButL();
-            }
-        });
-        add.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ic.addButL();
-
-            }
-        });
-        editDes.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ic.editDes();
-            }
-        });
+        delete.addActionListener(e -> ic.delButL());
+        add.addActionListener(e -> ic.addButL());
+        editDes.addActionListener(e -> ic.editDes());
     }
 
     public void buildPanelW(){
@@ -91,24 +75,9 @@ public class WishLendBuilder extends WishBorrowBuilder implements BorderGUIBuild
         panelS.add(update);
         tg.setSouth(panelS);
         tg.addInput("input", inputArea);
-        submit.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ic.submitButL();
-            }
-        });
-        back.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ic.backBut();
-            }
-        });
-        update.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ic.updateButL();
-            }
-        });
+        submit.addActionListener(e -> ic.submitButL());
+        back.addActionListener(e -> ic.backBut());
+        update.addActionListener(e -> ic.updateButL());
 
 
     }

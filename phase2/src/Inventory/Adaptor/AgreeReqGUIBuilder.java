@@ -63,24 +63,9 @@ public class AgreeReqGUIBuilder implements BorderGUIBuilder {
         panelS.add(update);
         tg.setSouth(panelS);
         tg.addInput("input", inputArea);
-        submit.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ic.submitButR();
-            }
-        });
-        back.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ic.backBut();
-            }
-        });
-        update.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ic.updateButR();
-            }
-        });
+        submit.addActionListener(e -> ic.submitButR());
+        back.addActionListener(e -> ic.backBut());
+        update.addActionListener(e -> ic.updateButR());
 
 
     }
@@ -112,22 +97,9 @@ public class AgreeReqGUIBuilder implements BorderGUIBuilder {
         panelE.add(agree);
         panelE.add(disagree);
         tg.setEast(panelE);
-        agree.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ic.agreeBut();
-            }
-        });
 
-
-        disagree.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ic.disagreeBut();
-            }
-        });
-
-
+        agree.addActionListener(e -> ic.agreeBut());
+        disagree.addActionListener(e -> ic.disagreeBut());
     }
 
 

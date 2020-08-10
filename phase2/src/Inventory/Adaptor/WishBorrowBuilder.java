@@ -5,8 +5,6 @@ import Trade.Adaptor.BorderGUINoTextArea;
 import Trade.Adaptor.BorderGUIWithThreeTextArea;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class WishBorrowBuilder implements BorderGUIBuilder {
     InventoryController ic;
@@ -46,13 +44,9 @@ public class WishBorrowBuilder implements BorderGUIBuilder {
         panelE.add(delete);
         tg.setEast(panelE);
 
-        delete.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) { ic.delButB(); }});
+        delete.addActionListener(e -> ic.delButB());
 
-        add.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) { ic.addButB(); }});
+        add.addActionListener(e -> ic.addButB());
     }
 
     @Override
