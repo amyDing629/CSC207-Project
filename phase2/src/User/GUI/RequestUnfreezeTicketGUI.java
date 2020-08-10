@@ -58,7 +58,7 @@ public class RequestUnfreezeTicketGUI {
         submitButton.addActionListener(e -> {
             frame.setVisible(false);
             try {
-                iam.addApprovals(um.getUser(name),textLabel.getText());
+                iam.addApprovals(uc.getUser(name),textLabel.getText());
             } catch (FileNotFoundException fileNotFoundException) {
                 fileNotFoundException.printStackTrace();
             }

@@ -1,23 +1,16 @@
 package User.GUI;
 
-import Inventory.Inventory;
 import User.Adapter.AdminController;
 import User.Adapter.UIController;
-import Trade.TradeManager;
-import User.UseCase.AdminActivityManager;
 import User.UseCase.ApprovalManager;
 import User.UseCase.UserManager;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-
 public class UnfreezeGUI {
     UserManager um;
     ApprovalManager iam;
     UIController uc;
-//    AdminActivityManager aam;
     AdminController ac;
     JFrame pFrame;
     JFrame frame;
