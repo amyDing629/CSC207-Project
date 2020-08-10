@@ -87,7 +87,7 @@ public class ClientUserController {
         return um.getUser(username);
     }
 
-    public void checkFileEmpty(File file) throws FileNotFoundException {
+    public void checkFileEmpty(File file){
         if (file.length() == 0) {
             ClientUser b = new ClientUser("admin", "123", true);
             um.addUser(b);

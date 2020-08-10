@@ -17,8 +17,8 @@ import User.UseCase.UserManager;
  * Responsible for awarding the users with bonus trades.
  */
 public class AwardActivities {
-    TradeManager tm;
-    PointManager pm;
+    TradeManager tm = new TradeManager();
+    PointManager pm = new PointManager();
     Trade currTrade;
     ArrayList<Trade> tradeList;
     JFrame fr;
@@ -60,7 +60,7 @@ public class AwardActivities {
      */
     public List<Trade> getTradesForExchange(ClientUser user){
         List<Trade> result = new ArrayList<Trade>();
-        List<Trade> list = this.tm.getWeekTradeList(user.getUsername()); // get all trades within the most recent seven days
+        List<Trade> list = tm.getWeekTradeList(user.getUsername()); // get all trades within the most recent seven days
         for (Trade t: list) {
             if (t.getStatus().equals(TradeStatus.incomplete) && !user.getSelectedBonusTrades().contains(t.getId())) {
                 result.add(t); // get incomplete trade from the recent trades
@@ -108,6 +108,10 @@ public class AwardActivities {
 
     }
 
+    public void updatePoint(){
+        pp.updatePoint(um.getUser(currUser).getBonusPoints());
+
+    }
     public void noTradeSelected(){
         pp.noTradeCurr();
     }
@@ -116,6 +120,10 @@ public class AwardActivities {
         getBonus(um.getUser(currUser), currTrade);
         updateBut();
         pp.changeSuccess();
+    }
+
+    public void updateList(){
+        pp.updateFrame(getTradesForExchange(um.getUser(currUser)));
     }
 
 }

@@ -31,9 +31,9 @@ public class PointManager {
     /**
      * Constructs the Point Manager to manage points for client users.
      */
-    public PointManager(UserManager um, TradeManager tm){
-        this.um = um;
-        this.tm = tm;
+    public PointManager(){
+        this.um = new UserManager();
+        this.tm = new TradeManager();
         this.pointList = new HashMap<>();
         this.exStandard = 5;
     }

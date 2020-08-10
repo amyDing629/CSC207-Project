@@ -44,15 +44,15 @@ public class PointGUIBuilder implements BorderGUIBuilder {
         panelE.add(p);
         panelE.add(points);
         panelE.add(eb);
-        tg.addInput("points", points);
-        aa.updateBut();
         eb.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 aa.ebBut();
             }
         });
-
+        tg.addInput("points", points);
+        aa.updatePoint();
+        tg.setEast(panelE);
 
     }
 
@@ -68,7 +68,7 @@ public class PointGUIBuilder implements BorderGUIBuilder {
         panelW.setPreferredSize(new Dimension(380,370));
         tg.setWest(panelW);
         tg.initializeList(tradeArea);
-        aa.updateBut();
+        aa.updateList();
 
     }
 
