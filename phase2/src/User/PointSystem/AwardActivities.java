@@ -78,8 +78,13 @@ public class AwardActivities {
      * @param selected the trade user selected to be bonus
      */
     public void getBonus(ClientUser user, Trade selected){
+        if (selected == null){
+            pp.notTradeSelected();
+        }else{
             user.addBonusTrade(selected.getId());
-        this.pm.setUserPoints(user.getId());
+            this.pm.setUserPoints(user.getId());
+        }
+
     }
 
 

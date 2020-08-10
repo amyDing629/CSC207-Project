@@ -1,5 +1,10 @@
 package User.GUI;
 
+import Inventory.MarketBuilder;
+import Main.DataAccessFull;
+import Trade.BorderGUIBuilder;
+import Trade.TradeGUIEngineer;
+import Trade.TradeGUIPlan;
 import User.Adapter.ClientUserController;
 import User.Adapter.ClientUserPresenter;
 import User.Adapter.IUserPresenter;
@@ -84,30 +89,34 @@ public class LoginGUI{
         registerButton.addActionListener(e -> {
             String name = nameInput.getText();
             String password = Arrays.toString(passwordInput.getPassword());
-//            getPresenter().register(name, password);
-            try {
-                lsp.getUserModel().createClientUser(name, password, false);
-            } catch (FileNotFoundException fileNotFoundException) {
-                fileNotFoundException.printStackTrace();
-            }
+            lsp.register(name, password);
+            //lsp.getUserModel().createClientUser(name, password, false);
             JOptionPane.showMessageDialog(null, "success");
         });
 
 
         exploreButton.addActionListener(e -> {
-//            getPresenter().explore();
+            frame.setVisible(false);
+            BorderGUIBuilder builder = new MarketBuilder(frame);
+            TradeGUIEngineer engineer = new TradeGUIEngineer(builder);
+            engineer.constructGUI();
+            TradeGUIPlan tg = engineer.getGUI();
+            tg.run();
         });
 
         exitButton.addActionListener(e -> {
 
             // TODO: only access controller or presenter, allow use case to use gateway
-//            DataAccessFull adf = new DataAccessFull(um, tm, iv, iam);
+//
 //            try {
-//                adf.updateFile();
+//
 //            } catch (IOException ioException) {
 //                ioException.printStackTrace();
 //            }
             frame.setVisible(false);
+            DataAccessFull adf = new DataAccessFull();
+            adf.updateFile();
+
         });
 
     }

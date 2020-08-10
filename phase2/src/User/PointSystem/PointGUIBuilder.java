@@ -39,6 +39,7 @@ public class PointGUIBuilder implements BorderGUIBuilder {
         JPanel panelE = new JPanel();
         JLabel p = new JLabel("points");
         JTextArea points = new JTextArea();
+        points.setPreferredSize(new Dimension(50, 50));
         JButton eb = new JButton("Get Bonus");
         panelE.setLayout(new BoxLayout(panelE, BoxLayout.Y_AXIS));
         panelE.add(p);
