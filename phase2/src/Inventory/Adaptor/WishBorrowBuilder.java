@@ -84,15 +84,9 @@ public class WishBorrowBuilder implements BorderGUIBuilder {
         panelS.add(update);
         tg.setSouth(panelS);
         tg.addInput("input", inputArea);
-        submit.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) { ic.submitButB(); }});
-        back.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) { ic.backBut(); }});
-        update.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) { ic.updateButB(); }});
+        submit.addActionListener(e -> ic.submitButB());
+        back.addActionListener(e -> ic.backBut());
+        update.addActionListener(e -> ic.updateButB());
     }
 
     @Override

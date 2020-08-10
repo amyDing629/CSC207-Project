@@ -1,6 +1,6 @@
-package Inventory;
+package Inventory.Adaptor;
 
-import Trade.BorderGUIWithThreeTextArea;
+import Trade.Adaptor.BorderGUIWithThreeTextArea;
 
 import javax.swing.*;
 
