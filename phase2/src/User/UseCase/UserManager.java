@@ -205,7 +205,8 @@ public class UserManager {
     }
 
     public void setPassword(ClientUser a, String password) {
-       a.setPassword(password);
+        a.setPassword(password);
+        dataAccess.updateSer();
     }
 
     //finished

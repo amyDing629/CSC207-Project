@@ -170,18 +170,23 @@ public class CTradeController implements Observer {
     }
 
     public void action(){
-        Trade tr = tm.getTrade(currTrade);
-        ClientUser user = um.getUser(currUser);
-        if (enterFirst()) {
-            MPresenter mPresenter = new MainViewPresenter(tr.getMeeting(), user.getId(),
-                    tr.getUsers(), true, tg.getFrame());
-            mPresenter.run();
-            mPresenter.addObserver(this);
-        }else {
-            MPresenter mPresenter = new MainViewPresenter(tr.getSecondMeeting(),
-                    user.getId(), tr.getUsers(), false, tg.getFrame());
-            mPresenter.run();
-            mPresenter.addObserver(this);
+        if (currTrade == null){
+            tp.notTradeSelected();
+        }else{
+            Trade tr = tm.getTrade(currTrade);
+            ClientUser user = um.getUser(currUser);
+            if (enterFirst()) {
+                MPresenter mPresenter = new MainViewPresenter(tr.getMeeting(), user.getId(),
+                        tr.getUsers(), true, tg.getFrame());
+                mPresenter.run();
+                mPresenter.addObserver(this);
+            }else {
+                MPresenter mPresenter = new MainViewPresenter(tr.getSecondMeeting(),
+                        user.getId(), tr.getUsers(), false, tg.getFrame());
+                mPresenter.run();
+                mPresenter.addObserver(this);
+            }
         }
+
     }
 }
