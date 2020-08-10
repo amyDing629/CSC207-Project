@@ -1,8 +1,8 @@
 package User.Adapter;
 
-import Inventory.Inventory;
-import Inventory.Item;
-import Trade.TradeManager;
+import Inventory.UseCase.Inventory;
+import Inventory.Entity.Item;
+import Trade.UseCase.TradeManager;
 import User.Entity.ClientUser;
 import User.Gateway.UserDataAccess;
 import User.UseCase.ApprovalManager;

@@ -1,6 +1,6 @@
 //package User.PointSystem;
 //
-//import Trade.Trade;
+//import Trade.Entity.Trade;
 //import User.Entity.ClientUser;
 //
 //import javax.swing.*;

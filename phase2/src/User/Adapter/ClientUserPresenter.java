@@ -1,7 +1,6 @@
 package User.Adapter;
 
-import Trade.TradeManager;
-import User.GUI.View;
+import Trade.UseCase.TradeManager;
 import User.UseCase.UserManager;
 
 import javax.swing.*;

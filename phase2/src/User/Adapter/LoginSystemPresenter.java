@@ -1,14 +1,10 @@
 package User.Adapter;
 
-import Inventory.InventoryGUI;
-import Inventory.MarketBuilder;
-import Trade.TradeManager;
-import User.Entity.ClientUser;
-import User.GUI.View;
+import Inventory.Adaptor.MarketBuilder;
+import Trade.UseCase.TradeManager;
 import User.UseCase.UserManager;
 
 import javax.swing.*;
-import java.io.FileNotFoundException;
 import java.util.UUID;
 
 public class LoginSystemPresenter implements IUserPresenter {

@@ -1,4 +1,0 @@
-package Trade;
-
-interface iTradePresenter {
-}

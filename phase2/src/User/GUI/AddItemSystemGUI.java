@@ -1,8 +1,8 @@
 package User.GUI;
 //
-//import Inventory.Inventory;
+//import Inventory.UseCase.Inventory;
 //import User.Adapter.UIcController;
-//import Trade.TradeManager;
+//import Trade.UseCase.TradeManager;
 //import User.UseCase.AdminActivityManager;
 //import User.UseCase.ItemApprovalManager;
 //import User.UseCase.UserManager;

@@ -1,7 +1,6 @@
 package User.Gateway;
 
 
-import Trade.Trade;
 import User.Entity.ItemApprovals;
 
 import java.io.*;

@@ -1,7 +1,7 @@
 //package Main.UI;
 ////check
-//import Inventory.Inventory;
-//import Trade.TradeManager;
+//import Inventory.UseCase.Inventory;
+//import Trade.UseCase.TradeManager;
 //import User.AdminActivityManager;
 //import User.ClientUser;
 //import User.ItemApprovalManager;

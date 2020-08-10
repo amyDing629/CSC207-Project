@@ -1,6 +1,6 @@
 package User.Adapter;
 
-import Trade.TradeManager;
+import Trade.UseCase.TradeManager;
 import User.UseCase.UserManager;
 
 import java.util.UUID;

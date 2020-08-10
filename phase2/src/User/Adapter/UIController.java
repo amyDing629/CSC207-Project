@@ -1,6 +1,6 @@
 package User.Adapter;
-import Inventory.Inventory;
-import Trade.TradeManager;
+import Inventory.UseCase.Inventory;
+import Trade.UseCase.TradeManager;
 import User.Entity.ClientUser;
 import User.Gateway.UserDataAccess;
 import User.UseCase.AdminActivityManager;

@@ -1,7 +1,7 @@
 package User.PointSystem;
 
-import Trade.Trade;
-import Trade.TradeManager;
+import Trade.Entity.Trade;
+import Trade.UseCase.TradeManager;
 import Trade.TradeStatus;
 import User.Entity.ClientUser;
 
@@ -9,7 +9,7 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
-import Trade.BorderGUIWithThreeTextArea;
+import Trade.Adaptor.BorderGUIWithThreeTextArea;
 import User.UseCase.UserManager;
 
 /**

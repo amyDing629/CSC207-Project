@@ -1,7 +1,7 @@
 package Main;
 
-import Inventory.InvDataAccess;
-import Trade.TradeDataAccess;
+import Inventory.GateWay.InvDataAccess;
+import Trade.GateWay.TradeDataAccess;
 import User.Gateway.ApprovalItemDataAccess;
 import User.Gateway.ApprovalUserDataAccess;
 import User.Gateway.UserDataAccess;
