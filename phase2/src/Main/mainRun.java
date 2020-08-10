@@ -1,4 +1,4 @@
-package User;
+package Main;
 import Main.DataAccessFull;
 import User.Adapter.ClientUserController;
 import User.GUI.LoginGUI;
