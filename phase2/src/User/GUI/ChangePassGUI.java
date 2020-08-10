@@ -7,14 +7,19 @@ import javax.swing.*;
 import java.awt.*;
 
 public class ChangePassGUI {
+
     ClientUserController uc;
     JFrame pFrame;
     JFrame frame;
+    String userName;
+
     public ChangePassGUI(ClientUserController uc , JFrame pFrame) {
         this.uc = uc;
         this.pFrame=pFrame;
     }
     public void run(String name){
+        this.userName = name;
+
         frame = new JFrame("Change your password");
         frame.setSize(500, 700);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -25,14 +30,12 @@ public class ChangePassGUI {
         panel.add(welcomeLabel);
         frame.add(panel);
 
-        ClientUser b = uc.getUser(name);
-
-        placeComponents(frame, panel, b);
+        placeComponents(frame, panel);
         frame.setVisible(true);
     }
 
-    private void placeComponents(JFrame frame, JPanel panel, ClientUser b){
-        JLabel curPass = new JLabel("Current password:"+ uc.getPassword(b.getUsername()));
+    private void placeComponents(JFrame frame, JPanel panel){
+        JLabel curPass = new JLabel("Current password:"+ uc.getPassword(getUserName()));
         curPass.setPreferredSize(new Dimension(300, 30));
         panel.add(curPass);
         JLabel nameLabel = new JLabel("Change your password");
@@ -55,12 +58,17 @@ public class ChangePassGUI {
             pFrame.setVisible(true);
         });
         submitButton.addActionListener(e -> {
-            System.out.println(b.getPassword());
+//            System.out.println(b.getPassword());
             frame.setVisible(false);
-            System.out.println(passInput.getText());
-            b.setPassword(passInput.getText());
-            System.out.println(b.getPassword());
+//            System.out.println(passInput.getText());
+            uc.setPassword(getUserName(), passInput.getText());
+//            b.setPassword(passInput.getText());
+//            System.out.println(b.getPassword());
             JOptionPane.showMessageDialog(null, "Successfully changed the password!");
         });
+    }
+
+    String getUserName() {
+        return userName;
     }
 }

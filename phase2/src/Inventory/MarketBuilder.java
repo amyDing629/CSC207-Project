@@ -63,7 +63,7 @@ public class MarketBuilder implements BorderGUIBuilder {
     @Override
     public void buildPanelS() {
         JPanel panelS = new JPanel();
-        JTextArea ta = new JTextArea("Type item name here");
+        JTextArea ta = new JTextArea("Type item name here", 1, 10);
         JButton submit = new JButton("Submit");
         JButton back  = new JButton("Return");
         panelS.add(ta);

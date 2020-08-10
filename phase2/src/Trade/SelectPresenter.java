@@ -1,7 +1,5 @@
 package Trade;
 
-import Inventory.Item;
-
 import java.util.List;
 
 public class SelectPresenter {
@@ -17,11 +15,11 @@ public class SelectPresenter {
     }
 
     public void updateFrame(List<String> il){
-        String result = "";
+        StringBuilder result = new StringBuilder();
         for (String it: il){
-            result = result + it + "\n";
+            result.append(it).append("\n");
         }
-        bta.setListText(result);
+        bta.setListText(result.toString());
     }
 
     public void resetInputArea(){

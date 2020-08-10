@@ -341,7 +341,7 @@ public class ClientUser implements Serializable {
      * set the input string as the password
      */
     public void setPassword(String password) {
-        this.password=password;
+        this.password = password;
     }
 
     /**

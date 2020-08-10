@@ -83,11 +83,11 @@ public class PointGUIBuilder implements BorderGUIBuilder {
         panelS.add(back);
         panelS.add(update);
         tg.setSouth(panelS);
-        tg.addInput("Input", inputArea);
-        tg.setInput("Input", "Trade Number");
+        tg.addInput("input", inputArea);
+        tg.setInput("input", "Trade Number");
 
         submit.addActionListener(e -> {
-            String tradeNum = tg.getInput("Input");
+            String tradeNum = tg.getInput("input");
             System.out.println(tradeNum);
             aa.submitBut(tradeNum);
         });

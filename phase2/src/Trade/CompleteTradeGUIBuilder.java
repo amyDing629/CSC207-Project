@@ -61,7 +61,7 @@ public class CompleteTradeGUIBuilder implements BorderGUIBuilder {
     public void buildPanelS() {
         JPanel panelS =  new JPanel();
         JLabel input = new JLabel("Input Trade Number");
-        JTextArea inputArea = new JTextArea("Trade Number");
+        JTextArea inputArea = new JTextArea("Trade Number", 1, 10);
         JButton submit = new JButton("Submit");
         JButton back = new JButton("Back");
         JButton update = new JButton("Update");
@@ -71,11 +71,11 @@ public class CompleteTradeGUIBuilder implements BorderGUIBuilder {
         panelS.add(back);
         panelS.add(update);
         tg.setSouth(panelS);
-        tg.addInput("Input", inputArea);
-        tg.setInput("Input", "Trade Number");
+        tg.addInput("input", inputArea);
+        tg.setInput("input", "Trade Number");
 
         submit.addActionListener(e -> {
-            String tradeNum = tg.getInput("Input");
+            String tradeNum = tg.getInput("input");
             ctc.submitBut(tradeNum);
         });
         back.addActionListener(e -> ctc.backBut(tf));

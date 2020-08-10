@@ -32,7 +32,7 @@ public class PointPresenter {
     }
 
     public void resetInputArea(){
-        tg.setInput("Input", "Trade Number");
+        tg.setInput("input", "Trade Number");
     }
 
     public void presentTradeInfo(Trade trade){
