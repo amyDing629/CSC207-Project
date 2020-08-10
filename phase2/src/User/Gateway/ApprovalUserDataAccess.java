@@ -40,6 +40,7 @@ public class ApprovalUserDataAccess implements DataAccess {
 
     @Override
     public UserApprovals getObject(String name) {
+        deSerialize();
         for (UserApprovals userApprovals : UserApprovalsList) {
             if (userApprovals.getCurUserName().equals(name)) {
                 return userApprovals;
@@ -55,6 +56,7 @@ public class ApprovalUserDataAccess implements DataAccess {
 
     @Override
     public void addObject(Object o) {
+        deSerialize();
         UserApprovalsList.add((UserApprovals)o);
         updateSer();
     }

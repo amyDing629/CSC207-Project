@@ -40,6 +40,7 @@ public class ApprovalItemDataAccess implements DataAccess {
 
     @Override
     public ItemApprovals getObject(String name) {
+        deSerialize();
         for (ItemApprovals itemApprovals : ItemApprovalsList) {
             if (itemApprovals.getCurUserName().equals(name)) {
                 return itemApprovals;
@@ -55,6 +56,7 @@ public class ApprovalItemDataAccess implements DataAccess {
 
     @Override
     public void addObject(Object o) {
+        deSerialize();
         ItemApprovalsList.add((ItemApprovals)o);
         updateSer();
     }
