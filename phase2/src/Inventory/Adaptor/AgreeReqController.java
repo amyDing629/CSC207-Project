@@ -49,14 +49,14 @@ public class AgreeReqController implements iItemController {
 
     }
 
-    public Item getItemByRequestList(String itemName){
+    private Item getItemByRequestList(String itemName){
         ItemApprovals k=iam.getItemApproval(itemName);
         Item item = iv.createItem(itemName,um.nameToUUID(k.getCurUserName()));
         item.setDescription(k.getSecString());
         return item;
     }
 
-    public boolean iamCheckInput(String name){
+    private boolean iamCheckInput(String name){
         return iam.hasItemApprovals(name);
     }
 
@@ -111,7 +111,7 @@ public class AgreeReqController implements iItemController {
                 + "\n" + "item owner: " + um.UUIDToName(it.getOwnerUUID());
     }
 
-    public void addToList(Item it) {
+    private void addToList(Item it) {
         if (!isInList(it.getName())){
             iv.add(it);
             ClientUser user = um.popUser(it.getOwnerUUID());

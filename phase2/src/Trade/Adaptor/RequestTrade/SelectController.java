@@ -62,9 +62,9 @@ public class SelectController {
         }else{
             bta.getFrame().setVisible(false);
             BorderGUIBuilder builder = new RTradeGUIBuilder(currUser, currItem, bta.getFrame());
-            TradeGUIEngineer engineer = new TradeGUIEngineer(builder);
+            BorderGUIEngineer engineer = new BorderGUIEngineer(builder);
             engineer.constructGUI();
-            TradeGUIPlan tg = engineer.getGUI();
+            GUIPlan tg = engineer.getGUI();
             tg.run();
             sp.closeFrame();
         }

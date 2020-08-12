@@ -1,14 +1,14 @@
 package Trade.Adaptor;
 
-public class TradeGUIEngineer {
+public class BorderGUIEngineer {
     private final BorderGUIBuilder tgBuilder;
 
-    public TradeGUIEngineer(BorderGUIBuilder tgb){
+    public BorderGUIEngineer(BorderGUIBuilder tgb){
         tgBuilder = tgb;
     }
 
 
-    public TradeGUIPlan getGUI()
+    public GUIPlan getGUI()
     {
         return tgBuilder.getTradeGUI();
     }

@@ -1,7 +1,6 @@
 package Trade.Adaptor.TradeHistory;
 
 import Trade.Adaptor.BorderGUIBuilder;
-import Trade.Adaptor.BorderGUINoTextArea;
 import Trade.Adaptor.BorderGUI;
 
 import javax.swing.*;

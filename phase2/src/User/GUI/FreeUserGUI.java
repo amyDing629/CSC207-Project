@@ -2,7 +2,6 @@ package User.GUI;
 
 import User.Adapter.AdminController;
 import User.Adapter.ClientUserController;
-
 import javax.swing.*;
 import java.awt.*;
 

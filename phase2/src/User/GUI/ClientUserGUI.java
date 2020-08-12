@@ -2,8 +2,8 @@ package User.GUI;
 
 import Inventory.Adaptor.InventoryGUI;
 import Trade.Adaptor.BorderGUIBuilder;
-import Trade.Adaptor.TradeGUIEngineer;
-import Trade.Adaptor.TradeGUIPlan;
+import Trade.Adaptor.BorderGUIEngineer;
+import Trade.Adaptor.GUIPlan;
 import Trade.Adaptor.TradeGUI_Main;
 import Trade.UseCase.TradeManager;
 import User.Adapter.ClientUserController;
@@ -103,9 +103,9 @@ public class ClientUserGUI implements View {
         pointButton.addActionListener(e -> {
             frame.setVisible(false);
             BorderGUIBuilder builder = new PointGUIBuilder(b, frame);
-            TradeGUIEngineer engineer = new TradeGUIEngineer(builder);
+            BorderGUIEngineer engineer = new BorderGUIEngineer(builder);
             engineer.constructGUI();
-            TradeGUIPlan tg = engineer.getGUI();
+            GUIPlan tg = engineer.getGUI();
             tg.run();
         });
 

@@ -4,8 +4,8 @@ import Inventory.Entity.Item;
 import Inventory.UseCase.Inventory;
 import Trade.Adaptor.BorderGUIBuilder;
 import Trade.Adaptor.BorderGUI;
-import Trade.Adaptor.TradeGUIEngineer;
-import Trade.Adaptor.TradeGUIPlan;
+import Trade.Adaptor.BorderGUIEngineer;
+import Trade.Adaptor.GUIPlan;
 import User.Entity.ClientUser;
 import User.UseCase.UserManager;
 
@@ -91,9 +91,9 @@ public class WishBorrowController implements iItemController {
         updateBut();
         ip.closeFrame();
         BorderGUIBuilder builder = new WishBorrowAddBuilder(um.UUIDToName(currUser), bta.getFrame());
-        TradeGUIEngineer engineer = new TradeGUIEngineer(builder);
+        BorderGUIEngineer engineer = new BorderGUIEngineer(builder);
         engineer.constructGUI();
-        TradeGUIPlan tg = engineer.getGUI();
+        GUIPlan tg = engineer.getGUI();
         tg.run();
     }
 

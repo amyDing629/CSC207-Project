@@ -8,10 +8,20 @@ import User.Entity.ClientUser;
 import User.UseCase.UserManager;
 
 import javax.swing.*;
+import java.io.File;
 import java.io.IOException;
 
 public class Trade_Test {
     public static void main(String[] args) throws IOException {
+        File file = new File("phase2/src/itemList.ser");
+        file.delete();
+        boolean result = file.createNewFile();
+        File file1 = new File("phase2/src/user.ser");
+        file1.delete();
+        boolean result1 = file.createNewFile();
+        File file2 = new File("phase2/src/trade.ser");
+        file.delete();
+        boolean result2 = file.createNewFile();
         ClientUser daniel = new ClientUser("daniel", "123", false);
         ClientUser amy = new ClientUser("amy", "123", false);
         Item apple = new Item("apple", amy.getId());
