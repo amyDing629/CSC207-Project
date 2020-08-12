@@ -96,7 +96,6 @@ public class UserManager {
      * @param isAdmin  if the clientUser is admin
      */
     public boolean createClientUser(String name, String password, boolean isAdmin) {
-        dataAccess.updateSer();
         if((getUser(name)==null)) {
             dataAccess.addObject(new ClientUser(name, password, isAdmin));
             return true;

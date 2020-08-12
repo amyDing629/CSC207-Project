@@ -69,17 +69,14 @@ public class CreateAdminGUI {
 
         });
         submitButton.addActionListener(e -> {
-            if(userInput1.getText().equals("")|| !uc.checkUser(userInput.getText())) {
+            if(userInput1.getText().equals("")|| !uc.checkUser(userInput.getText())|| userInput.getText().equals("")) {
 
                 String error="";
-                if(userInput1.getText().equals("")){
-                    error+="Password can't not be empty";
-                }
-                if(!error.equals("")){
-                    error+=" and ";
+                if(userInput1.getText().equals("")||userInput.getText().equals("")){
+                    error+="Password or Name can't not be empty";
                 }
                 if(!uc.checkUser(userInput.getText())){
-                    error+="username already exist";
+                    error+="; username already exist";
                 }
                 JOptionPane.showMessageDialog(null, error);
             }
