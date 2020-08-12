@@ -68,7 +68,6 @@ public class LoginGUI{
             String password = new String(passwordInput.getPassword());
             boolean response = lsp.login(name, password);
             System.out.println(response);
-            //boolean response = lsp.getUserModel().verifyUser(name, password);
             if (!response) {
                 JOptionPane.showMessageDialog(null,
                         "Invalid Login! Please check the username and/or password!");
@@ -90,8 +89,7 @@ public class LoginGUI{
             String name = nameInput.getText();
             String password = new String(passwordInput.getPassword());
             if(!name.equals("")&&!password.equals("")){
-                boolean check=lsp.register(name,password);
-                if(check){
+                if(lsp.register(name,password)){
                     JOptionPane.showMessageDialog(null, "Success");
                 }
                 else{

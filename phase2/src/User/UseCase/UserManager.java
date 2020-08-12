@@ -99,8 +99,7 @@ public class UserManager {
      */
     public boolean createClientUser(String name, String password, boolean isAdmin) {
         dataAccess.updateSer();
-        System.out.println("asdsadsa"+dataAccess.hasObject(name));
-        if(!dataAccess.hasObject(nameToUUID(name))) {
+        if((getUser(name)==null)) {
             dataAccess.addObject(new ClientUser(name, password, isAdmin));
             return true;
         }
