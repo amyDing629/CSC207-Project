@@ -6,7 +6,7 @@ import Trade.TradeStatus;
 import User.Entity.ClientUser;
 
 import javax.swing.*;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
 import java.util.regex.Pattern;
 import Trade.Adaptor.BorderGUI;
@@ -75,10 +75,11 @@ public class AwardActivities {
     /**
      * Set the selected trade to bonus and update the points for user. (update pointList as well)
      * Notify the user when bonus points are not enough to exchange for a trade.
-     * @param user the current user who is making actions
+     * @param userId the ID of current user who is making actions
      * @param selected the trade user selected to be bonus
      */
-    public void getBonus(ClientUser user, Trade selected){
+    public void getBonus(UUID userId, Trade selected){
+        ClientUser user = this.um.popUser(userId);
         if (selected == null){
             pp.notTradeSelected();
         }else if (pm.getUserPoints(user) < pm.getExStandard()){
@@ -87,6 +88,7 @@ public class AwardActivities {
         else{
             user.addBonusTrade(selected.getId());
             this.pm.setUserPoints(user.getId());
+            this.um.addUser(user);
         }
 
     }
@@ -116,15 +118,17 @@ public class AwardActivities {
     }
 
     public void updatePoint(){
-        pp.updatePoint(um.getUser(currUser).getBonusPoints());
-
+        ClientUser user = um.getUser(currUser);
+        pm.setUserPoints(user.getId());
+        pp.updatePoint(pm.getUserPoints(user));
     }
+
     public void noTradeSelected(){
         pp.noTradeCurr();
     }
 
     public void ebBut(){
-        getBonus(um.getUser(currUser), currTrade);
+        getBonus(um.getUser(currUser).getId(), currTrade);
         updateBut();
         pp.changeSuccess();
     }
