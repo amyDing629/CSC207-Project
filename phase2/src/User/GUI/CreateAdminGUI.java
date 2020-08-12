@@ -62,14 +62,31 @@ public class CreateAdminGUI {
         });
         submitButton.addActionListener(e -> {
             frame.setVisible(false);
-            try {
-                ac.createAdmin(userInput.getText(),userInput1.getText());
-            } catch (FileNotFoundException fileNotFoundException) {
-                fileNotFoundException.printStackTrace();
+            if(userInput1.getText().equals("")|| uc.checkUser(userInput.getText())) {
+
+               /* System.out.println("--------------------");
+                System.out.println(userInput.getText());
+                System.out.println(userInput1.getText());
+                System.out.println(userInput1.getText().equals(""));
+                System.out.println(uc.checkUser(userInput.getText()));
+                System.out.println("--------------------");
+                ac.createAdmin(userInput.getText(), userInput1.getText());
+                */
+                JOptionPane.showMessageDialog(null, "Success created admin");
             }
-            JOptionPane.showMessageDialog(null, "Successfully created");
-            UserFreezeSystem d = new UserFreezeSystem(uc,frame);
-            d.run(b);
+            else{
+                String error="";
+                if(userInput1.getText().equals("")){
+                    error+="Password can't not be empty";
+                }
+                if(!error.equals("")){
+                    error+=" and ";
+                }
+                if(!uc.checkUser(userInput.getText())){
+                    error+="username already exist";
+                }
+                JOptionPane.showMessageDialog(null, error);
+            }
         });
     }
 }

@@ -59,6 +59,7 @@ public class ClientUserController {
      * find the user by the user ID
      */
     public boolean checkUser(UUID userId) {
+
         return um.getUser(userId) == null;
     }
 
@@ -98,8 +99,8 @@ public class ClientUserController {
     public void checkFileEmpty(File file){
         if (file.length() == 0) {
             ClientUser b = new ClientUser("admin", "123", true);
-            um.addUser(b);
-            new UserDataAccess().serialize();
+            UserDataAccess users =new UserDataAccess();
+            users.addObject(b);
         }
     }
 

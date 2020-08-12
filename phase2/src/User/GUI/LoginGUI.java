@@ -91,18 +91,25 @@ public class LoginGUI{
         registerButton.addActionListener(e -> {
             String name = nameInput.getText();
             String password = new String(passwordInput.getPassword());
-            if(lsp.register(name, password)){
-                JOptionPane.showMessageDialog(null, "Success");
+            if(!name.equals("")&&!password.equals("")){
+                boolean check=lsp.register(name,password);
+                if(check){
+                    JOptionPane.showMessageDialog(null, "Success");
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "Username already exist");
+                }
             }
             else{
                 JOptionPane.showMessageDialog(null,
-                        "This username has already been registered! Please register with a new one!");
+                        "There is problem with either the username exit or the empty password");
             }
 
             // TODO: delete
             //lsp.getUserModel().createClientUser(name, password, false);
             for(ClientUser i:um.getUserList()){
-                System.out.println(i.toString());
+                System.out.println(i.getUsername());
+                System.out.println(i.getPassword());
             }
         });
 

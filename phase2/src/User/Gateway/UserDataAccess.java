@@ -87,8 +87,6 @@ public class UserDataAccess implements DataAccess {
         }
         serialize();
 
-        //TODO: delete
-        System.out.println("user list: "+ userList.toString());
         for (ClientUser a: userList){
             if (a.getUsername().equals("amy")){
                 System.out.println(a.getWishLend());
@@ -156,6 +154,15 @@ public class UserDataAccess implements DataAccess {
         return false;
     }
 
+    public boolean hasObjectByName(Object o){
+        deSerialize();
+        for (ClientUser i: userList){
+            if (i.getUsername().equals(o)){
+                return true;
+            }
+        }
+        return false;
+    }
     @Override
     public void removeObject(String o) {
 
