@@ -1,8 +1,8 @@
 package Inventory.Adaptor;
 
 import Trade.Adaptor.BorderGUIBuilder;
-import Trade.Adaptor.TradeGUIEngineer;
-import Trade.Adaptor.TradeGUIPlan;
+import Trade.Adaptor.BorderGUIEngineer;
+import Trade.Adaptor.GUIPlan;
 import User.UseCase.UserManager;
 
 import javax.swing.*;
@@ -47,27 +47,27 @@ public class InventoryGUI {
         mk.addActionListener(e -> {
             frame.setVisible(false);
             BorderGUIBuilder builder = new MarketBuilder(frame);
-            TradeGUIEngineer engineer = new TradeGUIEngineer(builder);
+            BorderGUIEngineer engineer = new BorderGUIEngineer(builder);
             engineer.constructGUI();
-            TradeGUIPlan tg = engineer.getGUI();
+            GUIPlan tg = engineer.getGUI();
             tg.run();
         });
 
         wb.addActionListener(e -> {
             frame.setVisible(false);
             BorderGUIBuilder builder = new WishBorrowBuilder(currUser, frame);
-            TradeGUIEngineer engineer = new TradeGUIEngineer(builder);
+            BorderGUIEngineer engineer = new BorderGUIEngineer(builder);
             engineer.constructGUI();
-            TradeGUIPlan tg = engineer.getGUI();
+            GUIPlan tg = engineer.getGUI();
             tg.run();
         });
 
         wl.addActionListener(e -> {
             frame.setVisible(false);
             BorderGUIBuilder builder = new WishLendBuilder(currUser, frame);
-            TradeGUIEngineer engineer = new TradeGUIEngineer(builder);
+            BorderGUIEngineer engineer = new BorderGUIEngineer(builder);
             engineer.constructGUI();
-            TradeGUIPlan tg = engineer.getGUI();
+            GUIPlan tg = engineer.getGUI();
             tg.run();
 
         });
@@ -75,9 +75,9 @@ public class InventoryGUI {
         ar.addActionListener(e -> {
             frame.setVisible(false);
             BorderGUIBuilder builder = new AgreeReqGUIBuilder(frame);
-            TradeGUIEngineer engineer = new TradeGUIEngineer(builder);
+            BorderGUIEngineer engineer = new BorderGUIEngineer(builder);
             engineer.constructGUI();
-            TradeGUIPlan tg = engineer.getGUI();
+            GUIPlan tg = engineer.getGUI();
             tg.run();
         });
 

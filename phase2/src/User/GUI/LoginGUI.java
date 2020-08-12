@@ -3,8 +3,8 @@ package User.GUI;
 import Inventory.Adaptor.MarketBuilder;
 import Main.DataAccessFull;
 import Trade.Adaptor.BorderGUIBuilder;
-import Trade.Adaptor.TradeGUIEngineer;
-import Trade.Adaptor.TradeGUIPlan;
+import Trade.Adaptor.BorderGUIEngineer;
+import Trade.Adaptor.GUIPlan;
 import User.Adapter.ClientUserController;
 import User.Adapter.ClientUserPresenter;
 import User.Adapter.LoginSystemPresenter;
@@ -28,11 +28,11 @@ public class LoginGUI{
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JPanel panel = new JPanel();
         frame.add(panel);
-        placeComponents(frame, panel);
+        placeComponents(panel);
         frame.setVisible(true);
     }
 
-    private void placeComponents(JFrame frame, JPanel panel){
+    private void placeComponents(JPanel panel){
         JLabel userLabel = new JLabel("User:");
         userLabel.setBounds(10,20,80,25);
         panel.add(userLabel);
@@ -101,18 +101,15 @@ public class LoginGUI{
 
             // TODO: delete
             //lsp.getUserModel().createClientUser(name, password, false);
-            for(ClientUser i:um.getUserList()){
-                System.out.println(i.toString());
-            }
         });
 
 
         exploreButton.addActionListener(e -> {
             frame.setVisible(false);
             BorderGUIBuilder builder = new MarketBuilder(frame);
-            TradeGUIEngineer engineer = new TradeGUIEngineer(builder);
+            BorderGUIEngineer engineer = new BorderGUIEngineer(builder);
             engineer.constructGUI();
-            TradeGUIPlan tg = engineer.getGUI();
+            GUIPlan tg = engineer.getGUI();
             tg.run();
         });
 

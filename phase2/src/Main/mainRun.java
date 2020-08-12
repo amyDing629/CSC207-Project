@@ -14,5 +14,10 @@ public class mainRun {
 
         LoginGUI lo = new LoginGUI();
         lo.run();
+        LoginGUI lol = new LoginGUI();
+        lol.run();
+        LoginGUI admin = new LoginGUI();
+        admin.run();
+
     }
 }

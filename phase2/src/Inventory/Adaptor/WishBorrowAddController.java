@@ -128,7 +128,7 @@ public class WishBorrowAddController implements iItemController {
         ip.updateList(printList());
     }
 
-    void addToWishBorrow(){
+    private void addToWishBorrow(){
         if (noItemFound() || isOwnItem()) {
             ip.addToWishBorrow(false);
         } else if (isInList(it)) {

@@ -49,7 +49,7 @@ public class WishLendController implements iItemController {
 
 
 
-    public void deleteItemL(String it){
+    public void deleteItem(String it){
         if (iv.deleteItem(it)){
             ClientUser user = um.popUser(currUser);
             user.getWishLend().remove(it);
@@ -67,7 +67,7 @@ public class WishLendController implements iItemController {
         if (it == null){
             ip.noItemSelected();
         }else{
-            deleteItemL(it);
+            deleteItem(it);
             ip.noItemSelected();
             ip.delSuccess(it);
             ip.resetCurr();

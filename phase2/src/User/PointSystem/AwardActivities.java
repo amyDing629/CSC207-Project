@@ -21,7 +21,7 @@ public class AwardActivities {
     TradeManager tm = new TradeManager();
     PointManager pm = new PointManager();
     Trade currTrade;
-    ArrayList<Trade> tradeList;
+    List<Trade> tradeList;
     JFrame fr;
     PointPresenter pp;
     String currUser;
@@ -64,8 +64,8 @@ public class AwardActivities {
      */
     public List<Trade> getTradesForExchange(ClientUser user){
         List<Trade> result = new ArrayList<Trade>();
-        List<Trade> list = tm.getWeekTradeList(user.getUsername()); // get all trades within the most recent seven days
-        for (Trade t: list) {
+        tradeList = tm.getWeekTradeList(user.getUsername()); // get all trades within the most recent seven days
+        for (Trade t: tradeList) {
             if (t.getStatus().equals(TradeStatus.incomplete) && !user.getSelectedBonusTrades().contains(t.getId())) {
                 result.add(t); // get incomplete trade from the recent trades
             }

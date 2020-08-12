@@ -1,5 +1,6 @@
 package User.Adapter;
 
+import User.Entity.ClientUser;
 import User.UseCase.AdminActivityManager;
 
 import java.io.FileNotFoundException;
@@ -47,11 +48,15 @@ public class AdminController extends ClientUserController {
     }
 
     public void setIncompleteTransaction(String username,int incompleteTransaction) {
-        am.setIncompleteTransaction(username, incompleteTransaction);
+        ClientUser user = um.popUser(um.nameToUUID(username));
+        user.setIncompleteTransaction(incompleteTransaction);
+        um.addUser(user);
     }
 
     public void setWeekTransactionLimit(String username, int weekTransaction){
-        am.setWeekTransactionLimit(username, weekTransaction);
+        ClientUser user = um.popUser(um.nameToUUID(username));
+        user.setWeekTransactionLimit(weekTransaction);
+        um.addUser(user);
     }
 
     public void setExchangeStandard(int exStandard) {
