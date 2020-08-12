@@ -99,14 +99,14 @@ public class RTradeController {
         iv.setIsInTrade(item,true);
         switch (line) {
             case "1":
-                currTrade = tm.createOnewayTrade(currUser, tarUser, getItem(it), 30, time);
+                currTrade = tm.createOnewayTrade(currUser, tarUser, it, 30, time);
                 Trade trade = tm.popTrade(currTrade);
                 trade.setCreator(currUser);
                 tm.addTrade(trade);
                 updateTradeHistory();
                 return true;
             case "2":
-                currTrade = tm.createOnewayTrade(currUser, tarUser, getItem(it), -1, time);
+                currTrade = tm.createOnewayTrade(currUser, tarUser, it, -1, time);
                 Trade trade1 = tm.popTrade(currTrade);
                 trade1.setCreator(currUser);
                 tm.addTrade(trade1);
@@ -130,14 +130,14 @@ public class RTradeController {
         iv.setIsInTrade(item2,true);
         LocalDateTime time = LocalDateTime.now();
         if (line.equals("3")){
-            currTrade = tm.createTwowayTrade(currUser, tarUser, getItem(item1), getItem(item2), 30, time);
+            currTrade = tm.createTwowayTrade(currUser, tarUser, item1, item2, 30, time);
             Trade trade = tm.popTrade(currTrade);
             tm.setCreator(trade.getId(), currUser);
             tm.addTrade(trade);
             updateTradeHistory();
 
         }else{
-            currTrade = tm.createTwowayTrade(currUser, tarUser, getItem(item1), getItem(item2), -1, time);
+            currTrade = tm.createTwowayTrade(currUser, tarUser, item1, item2, -1, time);
             Trade trade = tm.popTrade(currTrade);
             tm.setCreator(trade.getId(), currUser);
             tm.addTrade(trade);

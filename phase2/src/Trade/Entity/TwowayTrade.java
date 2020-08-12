@@ -11,8 +11,8 @@ import java.util.UUID;
 public class TwowayTrade extends Trade implements Serializable {
     private final UUID trader1Id;
     private final UUID trader2Id;
-    private final Item item1to2;
-    private final Item item2to1;
+    private final String item1to2;
+    private final String item2to1;
     static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     /**
@@ -23,7 +23,7 @@ public class TwowayTrade extends Trade implements Serializable {
      * @param item2 the item that trader2 give to trader1
      * @param duration whether the trade is temporary or permanent
      */
-    public TwowayTrade(UUID trader1Id, UUID trader2Id, Item item1, Item item2, int duration, LocalDateTime time) {
+    public TwowayTrade(UUID trader1Id, UUID trader2Id, String item1, String item2, int duration, LocalDateTime time) {
         super(duration, time);
         this.trader1Id = trader1Id;
         this.trader2Id = trader2Id;
@@ -57,8 +57,8 @@ public class TwowayTrade extends Trade implements Serializable {
      * @return a list of items
      */
     @Override
-    public ArrayList<Item> getItemList() {
-        ArrayList<Item> rst = new ArrayList<>();
+    public ArrayList<String> getItemList() {
+        ArrayList<String> rst = new ArrayList<>();
         rst.add(item1to2);
         rst.add(item2to1);
         return rst;

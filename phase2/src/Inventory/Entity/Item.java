@@ -50,7 +50,7 @@ public class Item implements Serializable {
      * setter for isInTrade. When a trade is created, isInTrade need to be set to true.
      * @param inTrade: new inTrade status
      */
-    public void setIsInTrade(Boolean inTrade){
+    public void setIsInTrade(boolean inTrade){
         isInTrade = inTrade;
     }
 

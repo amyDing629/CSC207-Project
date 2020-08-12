@@ -1,6 +1,7 @@
 package Trade.UseCase;
 
 import Inventory.Entity.Item;
+import Inventory.UseCase.Inventory;
 import Trade.Entity.OnewayTrade;
 import Trade.Entity.Trade;
 import Trade.Entity.TwowayTrade;
@@ -32,9 +33,12 @@ public class TradeManager{
      * @param item the only one Inventory.Entity.Item to be trade in this created trade.Trade.
      * @param duration the duration of this trade.Trade, unit (days). -1 means the trade.Trade is permanent.
      */
-    public UUID createOnewayTrade(UUID currUserId, UUID otherUserId, Item item, int duration, LocalDateTime time){
+    public UUID createOnewayTrade(UUID currUserId, UUID otherUserId, String item, int duration, LocalDateTime time){
         OnewayTrade newTrade = new OnewayTrade(currUserId, otherUserId, item, duration, time);
-        item.setIsInTrade(true);
+        Inventory iv = new Inventory();
+        Item it = iv.popItem(item);
+        it.setIsInTrade(true);
+        iv.add(it);
         dataAccess.addObject(newTrade);
         // Record this new trade.Trade in system
 
@@ -55,12 +59,17 @@ public class TradeManager{
      * @param item2to1 the other Inventory.Entity.Item to be trade in this created trade.Trade.
      * @param duration the duration of this trade.Trade, unit (days). -1 means the trade.Trade is permanent.
      */
-    public UUID createTwowayTrade(UUID currUserId, UUID otherUserId, Item item1to2, Item item2to1, int duration,
+    public UUID createTwowayTrade(UUID currUserId, UUID otherUserId, String item1to2, String item2to1, int duration,
                                   LocalDateTime time){
         TwowayTrade newTrade = new TwowayTrade(currUserId, otherUserId, item1to2, item2to1, duration, time);
         dataAccess.addObject(newTrade);
-        item1to2.setIsInTrade(true);
-        item2to1.setIsInTrade(true);
+        Inventory iv = new Inventory();
+        Item it1 = iv.popItem(item1to2);
+        Item it2 = iv.popItem(item2to1);
+        it1.setIsInTrade(true);
+        it2.setIsInTrade(true);
+        iv.add(it1);
+        iv.add(it2);
         // Update trade history for both users
         //updateTradeHistory(currUserId, otherUserId, newTrade);
         return newTrade.getId();
@@ -117,10 +126,10 @@ public class TradeManager{
             System.out.println(bor);
             System.out.println(bor.getWishBorrow());
             System.out.println(currTrade.getItemList());
-            System.out.println(currTrade.getItemList().get(0).getName());
+            System.out.println(currTrade.getItemList().get(0));
 
-            bor.getWishBorrow().remove(currTrade.getItemList().get(0).getName());
-            lend.getWishLend().remove(currTrade.getItemList().get(0).getName());
+            bor.getWishBorrow().remove(currTrade.getItemList().get(0));
+            lend.getWishLend().remove(currTrade.getItemList().get(0));
             bor.setBorrowCounter(bor.getBorrowCounter()+1);
             bor.setLendCounter(bor.getLendCounter()+1);
 
@@ -128,10 +137,10 @@ public class TradeManager{
             ClientUser u1 = um.getUser(currTrade.getUsers().get(0));
             ClientUser u2 = um.getUser(currTrade.getUsers().get(1));
 
-            u1.getWishBorrow().remove(currTrade.getItemList().get(1).getName());
-            u1.getWishLend().remove(currTrade.getItemList().get(0).getName());
-            u2.getWishBorrow().remove(currTrade.getItemList().get(0).getName());
-            u2.getWishLend().remove(currTrade.getItemList().get(1).getName());
+            u1.getWishBorrow().remove(currTrade.getItemList().get(1));
+            u1.getWishLend().remove(currTrade.getItemList().get(0));
+            u2.getWishBorrow().remove(currTrade.getItemList().get(0));
+            u2.getWishLend().remove(currTrade.getItemList().get(1));
 
             u1.setBorrowCounter(u1.getBorrowCounter()+1);
             u1.setLendCounter(u1.getLendCounter()+1);

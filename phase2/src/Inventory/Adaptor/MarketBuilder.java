@@ -9,7 +9,7 @@ import javax.swing.*;
 
 public class MarketBuilder implements BorderGUIBuilder {
 
-    MarketController ic;
+    iItemController ic;
     BorderGUIWithThreeTextArea tg;
 
     public MarketBuilder(JFrame fr) {
@@ -45,14 +45,14 @@ public class MarketBuilder implements BorderGUIBuilder {
         JPanel panelW = new JPanel();
         JLabel il = new JLabel("available item list");
         JTextArea itemList = new JTextArea();
-        itemList.setText(ic.printAvailable());
+        itemList.setText(ic.printList());
         JScrollPane sp = new JScrollPane(itemList);
         panelW.setLayout(new BoxLayout(panelW, BoxLayout.Y_AXIS));
         panelW.add(il);
         panelW.add(sp);
         tg.setWest(panelW);
         tg.initializeList(itemList);
-        ic.updateListM();
+        ic.updateList();
 
 
 
@@ -64,13 +64,15 @@ public class MarketBuilder implements BorderGUIBuilder {
         JTextArea ta = new JTextArea("Type item name here", 1, 10);
         JButton submit = new JButton("Submit");
         JButton back  = new JButton("Return");
+        JButton update = new JButton("update");
         panelS.add(ta);
         panelS.add(submit);
         panelS.add(back);
         tg.setSouth(panelS);
         tg.addInput("input", ta);
-        submit.addActionListener(e -> ic.submitButM());
+        submit.addActionListener(e -> ic.submitBut());
         back.addActionListener(e -> ic.backBut());
+        update.addActionListener(e -> ic.updateBut());
 
 
     }

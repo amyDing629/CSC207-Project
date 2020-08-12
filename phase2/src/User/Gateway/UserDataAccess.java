@@ -9,7 +9,6 @@ import java.util.UUID;
 
 public class UserDataAccess implements DataAccess {
 
-    private final String txtFilePath = "phase2/src/username.txt";
     private final String serFilePath = "phase2/src/user.ser";
     private List<ClientUser> userList;
 

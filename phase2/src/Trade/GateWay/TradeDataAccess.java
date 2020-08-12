@@ -101,6 +101,7 @@ public class TradeDataAccess implements DataAccess {
 
     // source: https://stackoverflow.com/questions/31540556/casting-object-to-list-results-in-unchecked-cast-warning
     @SuppressWarnings("unchecked")
+    @Override
     public void deSerialize() {
         try {
             File file = new File(serFilePath);

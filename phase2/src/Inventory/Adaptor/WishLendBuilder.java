@@ -1,6 +1,8 @@
 package Inventory.Adaptor;
 
 import Trade.Adaptor.BorderGUIBuilder;
+import Trade.Adaptor.BorderGUINoTextArea;
+import Trade.Adaptor.BorderGUIWithThreeTextArea;
 
 
 import javax.swing.*;
@@ -8,15 +10,30 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class WishLendBuilder extends WishBorrowBuilder implements BorderGUIBuilder {
+public class WishLendBuilder implements BorderGUIBuilder {
 
-    public WishLendBuilder(String currUser, JFrame tf) {
-        super(currUser, tf);
+    iItemController ic;
+    BorderGUIWithThreeTextArea tg;
+
+    public WishLendBuilder(String currUser, JFrame fr){
+        tg = new BorderGUIWithThreeTextArea();
+        ic = new WishLendController(currUser, tg, fr);
     }
 
     @Override
     public void buildFrame() {
         tg.setFrame(600, 400, "Edit WishLend Session");
+    }
+
+    @Override
+    public void buildPanelN() {
+        JPanel panelN = new JPanel();
+        JLabel msg = new JLabel("message:", SwingConstants.LEFT);
+        JTextArea msgArea = new JTextArea();
+        panelN.add(msg);
+        panelN.add(msgArea);
+        tg.initializeMsg(msgArea);
+        tg.setNorth(panelN);
     }
 
     public void buildPanelE() {
@@ -42,9 +59,9 @@ public class WishLendBuilder extends WishBorrowBuilder implements BorderGUIBuild
         tg.setEast(panelE);
         tg.addInput("name", name);
         tg.addInput("des", des);
-        delete.addActionListener(e -> ic.delButL());
-        add.addActionListener(e -> ic.addButL());
-        editDes.addActionListener(e -> ic.editDes());
+        delete.addActionListener(e -> ic.performActionTwo());
+        add.addActionListener(e -> ic.performActionOne());
+        editDes.addActionListener(e -> ic.performActionThree());
     }
 
     public void buildPanelW(){
@@ -57,7 +74,7 @@ public class WishLendBuilder extends WishBorrowBuilder implements BorderGUIBuild
         panelW.add(jsp);
         tg.setWest(panelW);
         tg.initializeList(wishArea);
-        ic.updateLstL();
+        ic.updateList();
     }
 
     @Override
@@ -75,11 +92,31 @@ public class WishLendBuilder extends WishBorrowBuilder implements BorderGUIBuild
         panelS.add(update);
         tg.setSouth(panelS);
         tg.addInput("input", inputArea);
-        submit.addActionListener(e -> ic.submitButL());
+        submit.addActionListener(e -> ic.submitBut());
         back.addActionListener(e -> ic.backBut());
-        update.addActionListener(e -> ic.updateButL());
+        update.addActionListener(e -> ic.updateBut());
 
 
+    }
+
+    @Override
+    public void buildPanelC() {
+        JPanel panelC = new JPanel();
+        JLabel currTradeL = new JLabel("item selected");
+        JTextArea currArea = new JTextArea();
+        panelC.setLayout(new BoxLayout(panelC, BoxLayout.Y_AXIS));
+        panelC.add(currTradeL);
+        panelC.add(currArea);
+        currArea.setText("no item selected");
+        tg.setCenter(panelC);
+        tg.initializeCurr(currArea);
+        ic.updateCurr();
+
+    }
+
+    @Override
+    public BorderGUINoTextArea getTradeGUI() {
+        return tg;
     }
 
 }

@@ -7,12 +7,12 @@ import Trade.Adaptor.BorderGUIWithThreeTextArea;
 import javax.swing.*;
 
 public class WishBorrowBuilder implements BorderGUIBuilder {
-    InventoryController ic;
+    iItemController ic;
     BorderGUIWithThreeTextArea tg;
 
     public WishBorrowBuilder(String currUser, JFrame fr){
         tg = new BorderGUIWithThreeTextArea();
-        ic = new InventoryController(currUser, tg, fr);
+        ic = new WishBorrowController(currUser, tg, fr);
     }
 
     @Override
@@ -44,9 +44,8 @@ public class WishBorrowBuilder implements BorderGUIBuilder {
         panelE.add(delete);
         tg.setEast(panelE);
 
-        delete.addActionListener(e -> ic.delButB());
-
-        add.addActionListener(e -> ic.addButB());
+        delete.addActionListener(e -> ic.performActionTwo());
+        add.addActionListener(e -> ic.performActionOne());
     }
 
     @Override
@@ -60,7 +59,7 @@ public class WishBorrowBuilder implements BorderGUIBuilder {
         panelW.add(jsp);
         tg.setWest(panelW);
         tg.initializeList(wishArea);
-        ic.updateLstB();
+        ic.updateList();
     }
 
     @Override
@@ -78,9 +77,9 @@ public class WishBorrowBuilder implements BorderGUIBuilder {
         panelS.add(update);
         tg.setSouth(panelS);
         tg.addInput("input", inputArea);
-        submit.addActionListener(e -> ic.submitButB());
+        submit.addActionListener(e -> ic.submitBut());
         back.addActionListener(e -> ic.backBut());
-        update.addActionListener(e -> ic.updateButB());
+        update.addActionListener(e -> ic.updateBut());
     }
 
     @Override

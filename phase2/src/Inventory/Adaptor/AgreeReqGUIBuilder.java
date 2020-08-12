@@ -9,12 +9,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class AgreeReqGUIBuilder implements BorderGUIBuilder {
-    InventoryController ic;
+    iItemController ic;
     BorderGUIWithThreeTextArea tg;
 
     public AgreeReqGUIBuilder(String currUser, JFrame fr){
         tg = new BorderGUIWithThreeTextArea();
-        ic = new InventoryController(currUser, tg, fr);
+        ic = new AgreeReqController(currUser, tg, fr);
     }
 
 
@@ -45,7 +45,7 @@ public class AgreeReqGUIBuilder implements BorderGUIBuilder {
         panelW.add(jsp);
         tg.setWest(panelW);
         tg.initializeList(requestArea);
-        tg.setListText(ic.printRequest());
+        tg.setListText(ic.printList());
     }
 
     @Override
@@ -63,9 +63,9 @@ public class AgreeReqGUIBuilder implements BorderGUIBuilder {
         panelS.add(update);
         tg.setSouth(panelS);
         tg.addInput("input", inputArea);
-        submit.addActionListener(e -> ic.submitButR());
+        submit.addActionListener(e -> ic.submitBut());
         back.addActionListener(e -> ic.backBut());
-        update.addActionListener(e -> ic.updateButR());
+        update.addActionListener(e -> ic.updateBut());
 
 
     }
@@ -98,8 +98,8 @@ public class AgreeReqGUIBuilder implements BorderGUIBuilder {
         panelE.add(disagree);
         tg.setEast(panelE);
 
-        agree.addActionListener(e -> ic.agreeBut());
-        disagree.addActionListener(e -> ic.disagreeBut());
+        agree.addActionListener(e -> ic.performActionOne());
+        disagree.addActionListener(e -> ic.performActionTwo());
     }
 
 

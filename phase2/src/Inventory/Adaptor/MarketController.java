@@ -6,7 +6,7 @@ import User.UseCase.UserManager;
 import Inventory.Entity.Item;
 import javax.swing.*;
 
-public class MarketController {
+public class MarketController implements iItemController {
     Inventory iv;
     BorderGUIWithThreeTextArea bta;
     JFrame fr;
@@ -20,22 +20,7 @@ public class MarketController {
     }
 
 
-    Item getItem(String line){
-        return iv.getItem(line);
-    }
-
-    String wrongInput(){
-        return "wrong input, please type again";
-    }
-
-    String printItemInfo(Item item) {
-        UserManager um = new UserManager();
-        return "Item Info:\nitem name: " + iv.getName(item) + "\n" +
-                "item description: " + iv.getDescription(item)
-                + "\n" + "item owner: " + um.UUIDToName(item.getOwnerUUID()) ;
-    }
-
-    String printAvailable(){
+    public String printList(){
         StringBuilder result = new StringBuilder();
         for (String it: iv.getAvailableList()){
             result.append(it).append("\n");
@@ -47,21 +32,19 @@ public class MarketController {
 
     }
 
-    String getItemInfo() {
+
+    public String getItemInfo(Item it) {
         UserManager um = new UserManager();
         if (iv.getName(it) == null) {
             return "No Item Selected";
         } else {
-            System.out.println(iv.getName(it));
-            System.out.println(iv.getDescription(it));
-            System.out.println(it.getOwnerUUID());
             return "Item Info:\nitem name: " + iv.getName(it) + "\n" +
                     "item description: " + iv.getDescription(it)
                     + "\n" + "item owner: " + um.UUIDToName(it.getOwnerUUID());
         }
     }
 
-    void submitButM(){
+    public void submitBut(){
         String input = bta.getInput("input");
         ip.resetInputArea();
         System.out.println("market controller" + iv.getAvailableList() + iv.getItem(input));
@@ -70,22 +53,46 @@ public class MarketController {
             ip.wrongInput();
         }else{
             it = iv.getItem(input);
-            ip.updateCurr(getItemInfo());
+            ip.updateCurr(getItemInfo(it));
         }
     }
 
-    void updateListM(){
-        ip.updateListM(printAvailable());
+    public void updateList(){
+        ip.updateListM(printList());
     }
 
-    void backBut(){
+    @Override
+    public void updateBut() {
+        updateList();
+        updateCurr();
+    }
+
+
+    public void backBut(){
         fr.setVisible(true);
         ip.closeFrame();
     }
 
-    void updateCurr(){
+
+    @Override
+    public boolean isInList(String name){
+        return false;
+    }
+
+    public void updateCurr(){
         ip.resetCurr();
     }
+
+    @Override
+    public void performActionOne() { }
+
+    @Override
+    public void performActionTwo() { }
+
+    @Override
+    public void performActionThree() {
+    }
+
 
 
 }

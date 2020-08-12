@@ -112,8 +112,8 @@ public class CTradeController implements Observer {
         if (tr.getType().equals("oneway")) {
             ClientUser bor = um.popUser(tr.getUsers().get(0));
             ClientUser lend = um.popUser(tr.getUsers().get(1));
-            bor.getWishBorrow().remove(tr.getItemList().get(0).getName());
-            lend.getWishLend().remove(tr.getItemList().get(0).getName());
+            bor.getWishBorrow().remove(tr.getItemList().get(0));
+            lend.getWishLend().remove(tr.getItemList().get(0));
             bor.setBorrowCounter(bor.getBorrowCounter() + 1);
             bor.setLendCounter(bor.getLendCounter() + 1);
             um.addUser(bor);
@@ -122,10 +122,10 @@ public class CTradeController implements Observer {
         } else {
             ClientUser u1 = um.popUser(tr.getUsers().get(0));
             ClientUser u2 = um.popUser(tr.getUsers().get(1));
-            u1.getWishBorrow().remove(tr.getItemList().get(1).getName());
-            u1.getWishLend().remove(tr.getItemList().get(0).getName());
-            u2.getWishBorrow().remove(tr.getItemList().get(0).getName());
-            u2.getWishLend().remove(tr.getItemList().get(1).getName());
+            u1.getWishBorrow().remove(tr.getItemList().get(1));
+            u1.getWishLend().remove(tr.getItemList().get(0));
+            u2.getWishBorrow().remove(tr.getItemList().get(0));
+            u2.getWishLend().remove(tr.getItemList().get(1));
             u1.setBorrowCounter(u1.getBorrowCounter() + 1);
             u1.setLendCounter(u1.getLendCounter() + 1);
             u2.setBorrowCounter(u2.getBorrowCounter() + 1);

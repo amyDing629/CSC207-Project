@@ -44,8 +44,6 @@ public abstract class Trade implements Serializable {
 
     private UUID creator;
 
-    public static int temp = 30;
-
 
     /**
      * [constructor]
@@ -126,22 +124,6 @@ public abstract class Trade implements Serializable {
 
     }
 
-    /**
-     * edit meeting
-     * @param mt the new meeting edited
-     */
-    public void changeMeeting(UUID mt){
-        meeting = mt;
-
-    }
-
-    /**
-     * edit second meeting
-     * @param mt the new meeting edited
-     */
-    public void changeSecondMeeting(UUID mt){
-        secondMeeting = mt;
-    }
 
 
     public void setSecondMeeting(UUID meetingID){
@@ -182,7 +164,7 @@ public abstract class Trade implements Serializable {
      * getter for items involved in the trade
      * @return a list of items
      */
-    public abstract ArrayList<Item> getItemList();
+    public abstract ArrayList<String> getItemList();
 
     /**
      * get whether the trade is a onewayTrade or a twowayTrade

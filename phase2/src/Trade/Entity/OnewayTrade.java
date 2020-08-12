@@ -11,7 +11,7 @@ import java.util.UUID;
 public class OnewayTrade extends Trade implements Serializable {
     private final UUID lenderId;
     private final UUID borrowerId;
-    private final Item item;
+    private final String item;
     static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     /**
@@ -20,7 +20,7 @@ public class OnewayTrade extends Trade implements Serializable {
      * @param item the two item traders what to trade
      * @param duration whether the trade is temporary or permanent
      */
-    public OnewayTrade(UUID borrower, UUID lender, Item item, int duration, LocalDateTime time) {
+    public OnewayTrade(UUID borrower, UUID lender, String item, int duration, LocalDateTime time) {
         super(duration, time);
         borrowerId = borrower;
         lenderId = lender;
@@ -33,7 +33,7 @@ public class OnewayTrade extends Trade implements Serializable {
      * getter for item of the trade
      * @return item
      */
-    public Item getItem() {
+    public String getItem() {
         return item;
     }
 
@@ -63,8 +63,8 @@ public class OnewayTrade extends Trade implements Serializable {
      * get item involved in the trade
      * @return item
      */
-    public ArrayList<Item> getItemList(){
-        ArrayList<Item> rst = new ArrayList<Item>();
+    public ArrayList<String> getItemList(){
+        ArrayList<String> rst = new ArrayList<String>();
         rst.add(item);
         return rst;
     }

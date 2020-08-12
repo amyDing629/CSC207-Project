@@ -27,8 +27,7 @@ public interface DataAccess {
 
     void deSerialize(); // write ser to list
 
-    void setList(List<Object> userList);
-
+    void setList(List<Object> list);
 
 
 //    boolean hasObject(String name);

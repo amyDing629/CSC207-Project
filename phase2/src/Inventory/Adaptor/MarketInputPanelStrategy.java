@@ -21,7 +21,7 @@ class VisitorStrategy implements MarketInputPanelStrategy {
         tg.setSouth(panelS);
         tg.addInput("input", ta);
 
-        submit.addActionListener(e -> ic.submitButM());
+        submit.addActionListener(e -> ic.submitBut());
         back.addActionListener(e -> ic.backBut());
     }
 
@@ -40,7 +40,7 @@ class RegularStrategy implements MarketInputPanelStrategy {
         tg.setSouth(panelS);
         tg.addInput("input", ta);
 
-        submit.addActionListener(e -> ic.submitButM());
+        submit.addActionListener(e -> ic.submitBut());
         back.addActionListener(e -> ic.backBut());
     }
 
