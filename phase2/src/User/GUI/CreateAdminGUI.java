@@ -61,7 +61,6 @@ public class CreateAdminGUI {
             pFrame.setVisible(true);
         });
         submitButton.addActionListener(e -> {
-            frame.setVisible(false);
             if(userInput1.getText().equals("")|| uc.checkUser(userInput.getText())) {
 
                /* System.out.println("--------------------");
