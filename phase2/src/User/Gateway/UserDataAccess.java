@@ -89,7 +89,7 @@ public class UserDataAccess implements DataAccess {
 
         for (ClientUser a: userList){
             if (a.getUsername().equals("amy")){
-                System.out.println(a.getWishLend());
+                System.out.println("wish borrow" + a.getWishBorrow());
             }
         }
     }

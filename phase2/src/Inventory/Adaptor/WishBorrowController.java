@@ -74,7 +74,6 @@ public class WishBorrowController implements iItemController {
     }
 
     public String printList(){
-        System.out.println("wish borrow: " + um.getUser(currUser).getWishBorrow());
         StringBuilder result = new StringBuilder();
         for (String it: um.getUser(currUser).getWishBorrow()){
             result.append(it).append("\n");

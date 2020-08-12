@@ -39,7 +39,6 @@ public class UserManager {
      *             find the user by the user name
      */
     public ClientUser getUser(String name) {
-        dataAccess.updateSer();
         return (ClientUser) dataAccess.getObject(name);
     }
 
@@ -48,13 +47,11 @@ public class UserManager {
      *               find the user by the user ID
      */
     public ClientUser getUser(UUID userId) {
-        dataAccess.updateSer();
         return (ClientUser) dataAccess.getObject(userId);
     }
 
 
     public ClientUser popUser(UUID id){
-        dataAccess.updateSer();
         if (dataAccess.hasObject(id)) {
             ClientUser result =  (ClientUser) dataAccess.getObject(id);
             dataAccess.removeObject(id);
