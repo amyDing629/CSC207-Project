@@ -50,8 +50,11 @@ public class AdminActivityManager {
 
     public void addNewAdmin(String username, String password) {
         if(userAccess.getObject("admin")!= null) {
-            ClientUser admin = new ClientUser(username, password, true);
-            userAccess.addObject(admin);
+            um.addUser(new ClientUser(username, password, true));
+        }
+        for(ClientUser i:um.getUserList()){
+            System.out.println(i.getUsername());
+            System.out.println(i.getPassword());
         }
     }
 

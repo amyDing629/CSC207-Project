@@ -65,7 +65,6 @@ public class UnfreezeGUI {
             pFrame.setVisible(true);
         });
         submitButton.addActionListener(e -> {
-            frame.setVisible(false);
             if(uc.getUser(userInput.getText())!=null){
                 avc.removeUserApproval(userInput.getText());
                 ac.setFreeze(userInput.getText(),false);

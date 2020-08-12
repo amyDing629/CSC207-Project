@@ -2,6 +2,8 @@ package User.GUI;
 
 import User.Adapter.AdminController;
 import User.Adapter.ClientUserController;
+import User.Entity.ClientUser;
+import User.UseCase.UserManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -59,6 +61,12 @@ public class CreateAdminGUI {
         exit.addActionListener(e -> {
             frame.setVisible(false);
             pFrame.setVisible(true);
+            UserManager um=new UserManager();
+            for(ClientUser i:um.getUserList()){
+                System.out.println(i.getUsername());
+                System.out.println(i.getPassword());
+            }
+
         });
         submitButton.addActionListener(e -> {
             if(userInput1.getText().equals("")|| !uc.checkUser(userInput.getText())) {
@@ -76,11 +84,7 @@ public class CreateAdminGUI {
                 JOptionPane.showMessageDialog(null, error);
             }
             else{
-                try {
-                    ac.createAdmin(userInput.getText(),userInput1.getText());
-                } catch (FileNotFoundException fileNotFoundException) {
-                    fileNotFoundException.printStackTrace();
-                }
+                ac.createAdmin(userInput.getText(),userInput1.getText());
                 JOptionPane.showMessageDialog(null, "Success created admin");
             }
         });

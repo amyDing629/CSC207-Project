@@ -1,6 +1,8 @@
 package User.GUI;
 
 import User.Adapter.ClientUserController;
+import User.Entity.ClientUser;
+import User.UseCase.UserManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -73,6 +75,12 @@ public class editInfoGUI {
         exit.addActionListener(e -> {
             frame.setVisible(false);
             PFrame.setVisible(true);
+            UserManager um=new UserManager();
+            for(ClientUser i:um.getUserList()){
+                System.out.println(i.getUsername());
+                System.out.println(i.getPassword());
+                System.out.println("----------");
+            }
         });
         limitSystem.addActionListener(e -> {
             frame.setVisible(false);

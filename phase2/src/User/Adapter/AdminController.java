@@ -20,7 +20,7 @@ public class AdminController extends ClientUserController {
     }
 
 
-    public void checkFrozen(String username) throws FileNotFoundException {
+    public void checkFrozen(String username) {
         if(um.readDiff(username)>=um.getDiff(username)){
             System.out.println("You have been freeze due to exceed difference between borrow and lend");
             am.setFreeze(username,true);
@@ -39,7 +39,7 @@ public class AdminController extends ClientUserController {
         am.setDiff(username, diff);
     }
 
-    public void createAdmin(String name, String password) throws FileNotFoundException {
+    public void createAdmin(String name, String password) {
         am.addNewAdmin(name, password);
     }
 

@@ -66,14 +66,16 @@ public class LoginGUI{
         logInButton.addActionListener(e -> {
             String name = nameInput.getText();
             String password = new String(passwordInput.getPassword());
+            for(ClientUser i:um.getUserList()){
+                System.out.println(i.getUsername());
+                System.out.println(i.getPassword());
+            }
             boolean response = lsp.login(name, password);
-            System.out.println(response);
             if (!response) {
                 JOptionPane.showMessageDialog(null,
                         "Invalid Login! Please check the username and/or password!");
             }
             else {
-
                 ClientUserController controller = new ClientUserController();
                 UUID uuid = controller.getIDbyName(name);
                 ClientUserPresenter clientUserPresenter = new ClientUserPresenter(uuid, frame);
@@ -82,6 +84,11 @@ public class LoginGUI{
                 ClientUserGUI a = new ClientUserGUI(frame, name);
                 a.run();
                 frame.setVisible(false);
+
+                for(ClientUser i:um.getUserList()){
+                    System.out.println(i.getUsername());
+                    System.out.println(i.getPassword());
+                }
             }
         });
 

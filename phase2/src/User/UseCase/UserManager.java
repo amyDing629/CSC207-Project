@@ -81,6 +81,7 @@ public class UserManager {
      *                 Check if the name matches with the password
      */
     public boolean verifyUser(String name, String password) {
+        dataAccess.deSerialize();
         ClientUser user = getUser(name);
         if (user == null) {
             return false;
