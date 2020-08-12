@@ -8,7 +8,7 @@ import java.awt.*;
 
 public class RequestUnfreezeTicketGUI {
 
-    ApprovalManager iam;
+    ApprovalManager iam = new ApprovalManager();
     ClientUserController uc;
     JFrame pFrame;
     JFrame frame;

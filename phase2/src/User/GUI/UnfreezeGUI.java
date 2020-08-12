@@ -3,7 +3,6 @@ package User.GUI;
 import User.Adapter.AdminController;
 import User.Adapter.ApprovalController;
 import User.Adapter.ClientUserController;
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -15,6 +14,8 @@ public class UnfreezeGUI {
     JFrame frame;
     public UnfreezeGUI(ClientUserController uc ,JFrame pFrame) {
         this.uc=uc;
+        this.avc= new ApprovalController();
+        this.ac = new AdminController();
         this.pFrame=pFrame;
     }
     public void run(String name){

@@ -3,7 +3,7 @@ package User.Adapter;
 import User.UseCase.ApprovalManager;
 
 public class ApprovalController {
-    ApprovalManager am;
+    ApprovalManager am = new ApprovalManager();
 
     public String AllUserApprovals(){
         return am.AllUserApprovals();
