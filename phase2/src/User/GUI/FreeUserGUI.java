@@ -56,11 +56,11 @@ public class FreeUserGUI {
         submitButton.addActionListener(e -> {
             frame.setVisible(false);
             if(ac.checkUser(userInput.getText())) {
-                ac.setFreeze(userInput.getText(), true);
-                JOptionPane.showMessageDialog(null, "Success");
+                JOptionPane.showMessageDialog(null, "There is no such user exist");
             }
             else{
-                JOptionPane.showMessageDialog(null, "There is no such user exist");
+                ac.setFreeze(userInput.getText(), true);
+                JOptionPane.showMessageDialog(null, "Success");
             }
         });
     }

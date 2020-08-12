@@ -67,10 +67,10 @@ public class CreateAdminGUI {
                 if(userInput1.getText().equals("")){
                     error+="Password can't not be empty";
                 }
-                if(!error.equals("")){
+                if(error.equals("")){
                     error+=" and ";
                 }
-                if(!uc.checkUser(userInput.getText())){
+                if(uc.checkUser(userInput.getText())){
                     error+="username already exist";
                 }
                 JOptionPane.showMessageDialog(null, error);
