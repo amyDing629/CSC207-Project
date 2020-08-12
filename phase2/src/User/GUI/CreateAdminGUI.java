@@ -61,15 +61,20 @@ public class CreateAdminGUI {
             pFrame.setVisible(true);
         });
         submitButton.addActionListener(e -> {
-            frame.setVisible(false);
-            try {
-                ac.createAdmin(userInput.getText(),userInput1.getText());
-            } catch (FileNotFoundException fileNotFoundException) {
-                fileNotFoundException.printStackTrace();
+            if (!userInput.getText().equals("") && !userInput1.getText().equals("")){
+                try {
+                    ac.createAdmin(userInput.getText(),userInput1.getText());
+                } catch (FileNotFoundException fileNotFoundException) {
+                    fileNotFoundException.printStackTrace();
+                }
+                frame.setVisible(false);
+                JOptionPane.showMessageDialog(null, "Successfully created");
+                UserFreezeSystem d = new UserFreezeSystem(uc,frame);
+                d.run(b);
+            }else{
+                JOptionPane.showMessageDialog(null, "Name or password should not be empty");
             }
-            JOptionPane.showMessageDialog(null, "Successfully created");
-            UserFreezeSystem d = new UserFreezeSystem(uc,frame);
-            d.run(b);
+
         });
     }
 }

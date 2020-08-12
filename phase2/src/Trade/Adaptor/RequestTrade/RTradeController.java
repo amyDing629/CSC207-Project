@@ -132,14 +132,14 @@ public class RTradeController {
         if (line.equals("3")){
             currTrade = tm.createTwowayTrade(currUser, tarUser, item1, item2, 30, time);
             Trade trade = tm.popTrade(currTrade);
-            tm.setCreator(trade.getId(), currUser);
+            trade.setCreator(currUser);
             tm.addTrade(trade);
             updateTradeHistory();
 
         }else{
             currTrade = tm.createTwowayTrade(currUser, tarUser, item1, item2, -1, time);
             Trade trade = tm.popTrade(currTrade);
-            tm.setCreator(trade.getId(), currUser);
+            trade.setCreator(currUser);
             tm.addTrade(trade);
             updateTradeHistory();
 
@@ -245,7 +245,7 @@ public class RTradeController {
                 tp.createSuccess("(two way-permanent)");
             }else{
                 createTrade("3", it, item);
-                tp.createSuccess("two way-temporary");
+                tp.createSuccess("(two way-temporary)");
             }
         }
     }

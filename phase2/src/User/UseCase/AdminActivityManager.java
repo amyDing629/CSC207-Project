@@ -185,8 +185,8 @@ public class AdminActivityManager {
     }
     public void setIncompleteTransaction(String username,int incompleteTransaction) {
         userAccess.deSerialize();
-       um.getUser(username).setIncompleteTransaction(incompleteTransaction);
-       userAccess.updateSer();
+        um.getUser(username).setIncompleteTransaction(incompleteTransaction);
+        userAccess.updateSer();
     }
     public void setExchangeStandard(int exStandard) {
         userAccess.deSerialize();

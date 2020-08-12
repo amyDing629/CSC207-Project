@@ -56,7 +56,7 @@ public class RTradeGUIBuilder implements BorderGUIBuilder {
         panelRight.add(label);
         panelRight.add(ta);
         tg.setEast(panelRight);
-        tg.addInput("Input", ta);
+        tg.addInput("input", ta);
     }
 
     @Override
