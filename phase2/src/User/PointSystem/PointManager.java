@@ -5,7 +5,6 @@ import Trade.UseCase.TradeManager;
 import Trade.TradeStatus;
 import User.Entity.ClientUser;
 import User.UseCase.UserManager;
-
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -51,17 +50,17 @@ public class PointManager {
      * Return the list of user id and corresponding points.
      * @return pointList
      */
-    public Map<UUID, Integer> getPointList() {return this.pointList;}
+//    public Map<UUID, Integer> getPointList() {return this.pointList;}
 
 
-    /**
-     * Set the list of user id and the bonus points the use has. (setter for pointList)
-     */
-    public void setAllPoints() {
-        for (ClientUser user: this.um.getUserList()) {
-            this.setUserPoints(user.getId());
-        }
-    }
+//    /**
+//     * Set the list of user id and the bonus points the use has. (setter for pointList)
+//     */
+//    public void setAllPoints() {
+//        for (ClientUser user: this.um.getUserList()) {
+//            this.setUserPoints(user.getId());
+//        }
+//    }
 
     /**
      * Return the number of bonus points for user

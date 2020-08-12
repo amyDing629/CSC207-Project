@@ -8,7 +8,7 @@ import java.awt.*;
 public class TradeLimitGUI {
 
     ClientUserController uc;
-    AdminController ac;
+    AdminController ac = new AdminController();
     JFrame pFrame;
     JFrame frame;
 
@@ -61,7 +61,7 @@ public class TradeLimitGUI {
         submitButton.addActionListener(e -> {
             frame.setVisible(false);
             ac.setWeekTransactionLimit(userInput.getText(),Integer.parseInt(userInput1.getText()));
-            JOptionPane.showMessageDialog(null, "Successfully froze the user!");
+            JOptionPane.showMessageDialog(null, "Successfully set the limit!");
             UserFreezeSystem d = new UserFreezeSystem(uc,frame);
             d.run(b);
         });

@@ -7,8 +7,8 @@ import Trade.Adaptor.BorderGUI;
 import javax.swing.*;
 
 public class AgreeReqGUIBuilder implements BorderGUIBuilder {
-    iItemController ic;
-    BorderGUI tg;
+    private iItemController ic;
+    private BorderGUI tg;
 
     public AgreeReqGUIBuilder(JFrame fr){
         tg = new BorderGUI();

@@ -48,18 +48,18 @@ public class TradeGUI_Main {
         rt.addActionListener(e -> {
             frame.setVisible(false);
             BorderGUIBuilder builder = new SelectItemToTradeBuilder(currUser, frame);
-            TradeGUIEngineer engineer = new TradeGUIEngineer(builder);
+            BorderGUIEngineer engineer = new BorderGUIEngineer(builder);
             engineer.constructGUI();
-            TradeGUIPlan tg = engineer.getGUI();
+            GUIPlan tg = engineer.getGUI();
             tg.run();
         });
 
         at.addActionListener(e -> {
             frame.setVisible(false);
             BorderGUIBuilder builder = new AcceptTradeGUIBuilder(currUser, frame);
-            TradeGUIEngineer engineer = new TradeGUIEngineer(builder);
+            BorderGUIEngineer engineer = new BorderGUIEngineer(builder);
             engineer.constructGUI();
-            TradeGUIPlan tg = engineer.getGUI();
+            GUIPlan tg = engineer.getGUI();
             tg.run();
 
         });
@@ -67,18 +67,18 @@ public class TradeGUI_Main {
         ct.addActionListener(e -> {
             frame.setVisible(false);
             BorderGUIBuilder builder = new CompleteTradeGUIBuilder(currUser, frame);
-            TradeGUIEngineer engineer = new TradeGUIEngineer(builder);
+            BorderGUIEngineer engineer = new BorderGUIEngineer(builder);
             engineer.constructGUI();
-            TradeGUIPlan tg = engineer.getGUI();
+            GUIPlan tg = engineer.getGUI();
             tg.run();
         });
 
         th.addActionListener(e -> {
             frame.setVisible(false);
             BorderGUIBuilder builder = new TradeHistoryGUIBuilder(currUser, frame);
-            TradeGUIEngineer engineer = new TradeGUIEngineer(builder);
+            BorderGUIEngineer engineer = new BorderGUIEngineer(builder);
             engineer.constructGUI();
-            TradeGUIPlan tg = engineer.getGUI();
+            GUIPlan tg = engineer.getGUI();
             tg.run();
         });
 

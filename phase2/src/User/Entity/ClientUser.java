@@ -146,13 +146,6 @@ public class ClientUser implements Serializable {
     }
 
     /**
-     * the real difference between borrow amount and lend amount
-     */
-    public int readDiff(){
-        return lendCounter - borrowCounter;
-    }
-
-    /**
      * return the diff of the user between the borrow amount and lend amount
      */
     public int getDiff() {
@@ -231,43 +224,11 @@ public class ClientUser implements Serializable {
     }
 
     /**
-     * @param hi the name of the item
-     * the name of item that the user does not have to lend
-     */
-    public void removeLWishes(String hi){
-        this.wishLend.remove(hi);
-    }
-
-    /**
-     * @param wishLend the list of items the user wants to lend
-     * set the list of items that the user wants to lend as wishlend list
-     */
-    public void setWishLend(List<String> wishLend){
-        this.wishLend = wishLend;
-    }
-
-    /**
-     * @param notification all the notifications the user has
-     * set all the notifications as the list
-     */
-    public void setNotification(List<String> notification){
-        this.notification = notification;
-    }
-
-    /**
      * @param diff the number of the difference between number of borrowed items and lend items
      * set the integer as the number of the difference between number of borrowed items and lend items
      */
     public void setDiff(int diff) {
         this.diff = diff;
-    }
-
-    /**
-     * @param tradeHistory all the trades' ids that the user has
-     * set the user's trade history as the list of ids
-     */
-    public void setTradeHistory(List<UUID> tradeHistory) {
-        this.tradeHistory = tradeHistory;
     }
 
     /**
@@ -326,14 +287,6 @@ public class ClientUser implements Serializable {
      */
     public int getIncompleteTransactionLimit() {
         return incompleteTransactionLimit;
-    }
-
-    /**
-     * @param wishBorrow the input item list
-     * set the borrow list as input item list
-     */
-    public void setWishBorrow(ArrayList<String> wishBorrow) {
-        this.wishBorrow =wishBorrow;
     }
 
     /**

@@ -1,7 +1,6 @@
 package User.PointSystem;
 
 import Trade.Adaptor.BorderGUIBuilder;
-import Trade.Adaptor.BorderGUINoTextArea;
 import Trade.Adaptor.BorderGUI;
 import Trade.Adaptor.TradeGUIHelper;
 import javax.swing.*;

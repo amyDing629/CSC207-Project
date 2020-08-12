@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.HashMap;
 
-public class BorderGUI implements TradeGUIPlan, BorderLayoutGUI, InputAndPresent {
+public class BorderGUI implements GUIPlan, BorderLayoutGUI, InputAndPresent {
     private JTextArea curr;
     private JTextArea list;
     private JTextArea msg;

@@ -51,17 +51,6 @@ public class UserManager {
     }
 
 
-
-
-    public boolean deleteItem(String item) {
-        if (dataAccess.hasObject(item)) {
-            dataAccess.removeObject(item);
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     public ClientUser popUser(UUID id){
         if (dataAccess.hasObject(id)) {
             ClientUser result =  (ClientUser) dataAccess.getObject(id);
@@ -122,8 +111,8 @@ public class UserManager {
     }
 
     /**
-     *                 return the list of most frequent three traders that the user trades with
-     *                 if the user trades with less than three traders, return all the traders the user trades with
+     * return the list of most frequent three traders that the user trades with
+     * if the user trades with less than three traders, return all the traders the user trades with
      */
     public List<String> getFrequentUser(UUID userID) {
         TradeManager tm = new TradeManager();
@@ -158,10 +147,6 @@ public class UserManager {
         }
         return g;
     }
-    //no use
-    public List<UUID> getTradeHistory(UUID a){
-        return getUser(a).getTradeHistory();
-    }
 
     //FINISHED
     public boolean getIsAdmin(String a){return getUser(a).getIsAdmin();}
@@ -182,10 +167,7 @@ public class UserManager {
     public int getIncompleteTransactionLimit(String a) {
         return getUser(a).getIncompleteTransactionLimit();
     }
-    //no use
-    public boolean getIsBorrow(ClientUser a) {
-        return a.getIsBorrow();
-    }
+
     //finished
     public int getDiff(String a) {
         return getUser(a).getDiff();
@@ -214,16 +196,8 @@ public class UserManager {
         return getUser(userID).getIsFrozen();
     }
 
-    //no use
-    public List<String> getNotification(ClientUser a){return a.getNotification();}
-
     //finished
     public void set(ClientUser a, String password){a.setPassword(password);}
-
-    //finished
-    public void setEnd(ClientUser a, LocalDateTime end){
-        a.setEnd(end);
-    }
 
     public ArrayList<ArrayList<String>> getActions(ClientUser a) {
         return a.getActions();
