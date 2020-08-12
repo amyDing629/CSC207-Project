@@ -29,7 +29,7 @@ public class TradeHistoryController {
 
     public String getTradeHistory(){
         String result = "";
-        List<Trade> tHis = tm.getTradeHistoryTop(currUser);
+        List<Trade> tHis = tm.getComplete(currUser);
         for (int i = 0; i < tHis.size(); i++) {
            result = result + (i + 1) + ". " + tHis.get(i).toString()+"\n";
         }
