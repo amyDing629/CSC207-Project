@@ -3,8 +3,6 @@ package User.GUI;
 import Inventory.Adaptor.MarketBuilder;
 import Main.DataAccessFull;
 import Trade.Adaptor.BorderGUIBuilder;
-import Trade.Adaptor.TradeGUIEngineer;
-import Trade.Adaptor.TradeGUIPlan;
 import User.Adapter.ClientUserController;
 import User.Adapter.ClientUserPresenter;
 import User.Adapter.LoginSystemPresenter;
@@ -65,18 +63,17 @@ public class LoginGUI{
         exitButton.setPreferredSize(new Dimension(300, 30));
         panel.add(exitButton);
         UserManager um=new UserManager();
-
         logInButton.addActionListener(e -> {
             String name = nameInput.getText();
             String password = new String(passwordInput.getPassword());
             boolean response = lsp.login(name, password);
             System.out.println(response);
             //boolean response = lsp.getUserModel().verifyUser(name, password);
-            if (!response)
+            if (!response) {
                 JOptionPane.showMessageDialog(null,
                         "Invalid Login! Please check the username and/or password!");
+            }
             else {
-                frame.setVisible(false);
 
                 ClientUserController controller = new ClientUserController();
                 UUID uuid = controller.getIDbyName(name);
@@ -85,6 +82,7 @@ public class LoginGUI{
 
                 ClientUserGUI a = new ClientUserGUI(frame, name);
                 a.run();
+                frame.setVisible(false);
             }
         });
 
@@ -114,14 +112,6 @@ public class LoginGUI{
         });
 
 
-        exploreButton.addActionListener(e -> {
-            frame.setVisible(false);
-            BorderGUIBuilder builder = new MarketBuilder(frame);
-            TradeGUIEngineer engineer = new TradeGUIEngineer(builder);
-            engineer.constructGUI();
-            TradeGUIPlan tg = engineer.getGUI();
-            tg.run();
-        });
 
         exitButton.addActionListener(e -> {
             frame.setVisible(false);
