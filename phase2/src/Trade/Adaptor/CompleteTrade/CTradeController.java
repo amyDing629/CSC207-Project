@@ -115,10 +115,12 @@ public class CTradeController implements Observer {
             bor.getWishBorrow().remove(tr.getItemList().get(0));
             lend.getWishLend().remove(tr.getItemList().get(0));
             bor.setBorrowCounter(bor.getBorrowCounter() + 1);
-            bor.setLendCounter(bor.getLendCounter() + 1);
+            lend.setLendCounter(bor.getLendCounter() + 1);
             um.addUser(bor);
             um.addUser(lend);
             tm.addTrade(tr);
+            System.out.println("bor-borCounter" + um.getUser(tr.getUsers().get(0)).getBorrowCounter());
+            System.out.println("lend-lendCounter" + um.getUser(tr.getUsers().get(1)).getLendCounter());
         } else {
             ClientUser u1 = um.popUser(tr.getUsers().get(0));
             ClientUser u2 = um.popUser(tr.getUsers().get(1));
