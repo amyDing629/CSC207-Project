@@ -54,7 +54,6 @@ public class FreeUserGUI {
             pFrame.setVisible(true);
         });
         submitButton.addActionListener(e -> {
-            frame.setVisible(false);
             if(ac.checkUser(userInput.getText())) {
                 JOptionPane.showMessageDialog(null, "There is no such user exist");
             }
