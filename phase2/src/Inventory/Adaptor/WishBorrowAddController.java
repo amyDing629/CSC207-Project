@@ -31,7 +31,7 @@ public class WishBorrowAddController implements iItemController {
 
     String it;
 
-    InventoryPresenter ip;
+    iItemPresenter ip;
 
     JFrame fr;
 
@@ -132,7 +132,7 @@ public class WishBorrowAddController implements iItemController {
 
 
     public void updateList(){
-        ip.updateListM(printList());
+        ip.updateList(printList());
     }
 
     void addToWishBorrow(){
@@ -142,7 +142,7 @@ public class WishBorrowAddController implements iItemController {
             ip.isInWishBorrow();
         } else {
             moveToWishList();
-            ip.updateListM(printList());
+            ip.updateList(printList());
             ip.addToWishBorrow(true);
         }
     }

@@ -29,7 +29,7 @@ public class AgreeReqController implements iItemController {
 
     String it;
 
-    InventoryPresenter ip;
+    iItemPresenter ip;
 
     JFrame fr;
 
@@ -99,7 +99,7 @@ public class AgreeReqController implements iItemController {
     }
 
     public void updateList(){
-        ip.updateListM(printList());
+        ip.updateList(printList());
 
     }
 

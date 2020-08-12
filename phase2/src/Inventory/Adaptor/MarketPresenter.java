@@ -2,34 +2,34 @@ package Inventory.Adaptor;
 
 import Trade.Adaptor.BorderGUIWithThreeTextArea;
 
-public class MarketPresenter {
+public class MarketPresenter implements iMarketPresenter {
     BorderGUIWithThreeTextArea bta;
 
     public MarketPresenter(BorderGUIWithThreeTextArea bta){
         this.bta = bta;
     }
 
-    void resetInputArea(){
+    public void resetInputArea(){
         bta.setInput("input","item name");
     }
 
-    void updateListM(String availableList){
+    public void updateListM(String availableList){
         bta.setListText(availableList);
     }
 
-    void closeFrame(){
+    public void closeFrame(){
         bta.getFrame().setVisible(false);
     }
 
-    void resetCurr(){
+    public void resetCurr(){
         bta.setCurrText("not item selected");
     }
 
-    void wrongInput(){
+    public void wrongInput(){
         bta.setMsgText("wrong input");
     }
 
-    void updateCurr(String itemInfo){
+    public void updateCurr(String itemInfo){
 
         bta.setCurrText(itemInfo);
     }

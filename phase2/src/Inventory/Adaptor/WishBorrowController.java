@@ -31,7 +31,7 @@ public class WishBorrowController implements iItemController {
 
     String it;
 
-    InventoryPresenter ip;
+    iItemPresenter ip;
 
     JFrame fr;
 
@@ -65,7 +65,7 @@ public class WishBorrowController implements iItemController {
             ip.delSuccess(it);
             ip.resetCurr();
             it = null;
-            ip.updateListB(currUser);
+            updateBut();
         }
     }
 
@@ -74,7 +74,7 @@ public class WishBorrowController implements iItemController {
     }
 
     public void updateList(){
-        ip.updateListM(printList());
+        ip.updateList(printList());
     }
 
     public String printList(){
@@ -92,7 +92,7 @@ public class WishBorrowController implements iItemController {
 
     void addBut(){
         it = null;
-        ip.updateListB(currUser);
+        updateBut();
         ip.closeFrame();
         BorderGUIBuilder builder = new WishBorrowAddBuilder(um.UUIDToName(currUser), bta.getFrame());
         TradeGUIEngineer engineer = new TradeGUIEngineer(builder);

@@ -11,7 +11,7 @@ public class MarketController implements iItemController {
     BorderGUIWithThreeTextArea bta;
     JFrame fr;
     Item it;
-    MarketPresenter ip;
+    iMarketPresenter ip;
     public MarketController(BorderGUIWithThreeTextArea bta, JFrame fr){
         this.iv = new Inventory();
         this.bta = bta;

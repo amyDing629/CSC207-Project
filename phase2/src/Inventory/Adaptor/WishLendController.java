@@ -28,7 +28,7 @@ public class WishLendController implements iItemController {
 
     String it;
 
-    InventoryPresenter ip;
+    iItemPresenter ip;
 
     JFrame fr;
 
@@ -72,7 +72,7 @@ public class WishLendController implements iItemController {
             ip.delSuccess(it);
             ip.resetCurr();
             it = null;
-            ip.updateListL(currUser);
+            updateBut();
         }
     }
 
@@ -94,7 +94,7 @@ public class WishLendController implements iItemController {
         }
     }
 
-    public void updateList(){ ip.updateListM(printList()); }
+    public void updateList(){ ip.updateList(printList()); }
 
     void addBut(){
         String itemName = bta.getInput("name");
