@@ -1,11 +1,11 @@
 package Inventory.Adaptor;
 
-import Trade.Adaptor.BorderGUIWithThreeTextArea;
+import Trade.Adaptor.BorderGUI;
 
 public class MarketPresenter implements iMarketPresenter {
-    BorderGUIWithThreeTextArea bta;
+    BorderGUI bta;
 
-    public MarketPresenter(BorderGUIWithThreeTextArea bta){
+    public MarketPresenter(BorderGUI bta){
         this.bta = bta;
     }
 

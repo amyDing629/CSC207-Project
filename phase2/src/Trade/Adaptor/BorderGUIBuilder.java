@@ -7,5 +7,5 @@ public interface BorderGUIBuilder {
     void buildPanelW();
     void buildPanelS();
     void buildPanelC();
-    BorderGUINoTextArea getTradeGUI();
+    BorderGUI getTradeGUI();
 }

@@ -1,7 +1,7 @@
 package Trade.Adaptor.CompleteTrade;
 
 import Trade.Adaptor.BorderGUIBuilder;
-import Trade.Adaptor.BorderGUIWithThreeTextArea;
+import Trade.Adaptor.BorderGUI;
 import Trade.Adaptor.TradeGUIHelper;
 
 import javax.swing.*;
@@ -11,10 +11,10 @@ import java.util.ArrayList;
 public class CompleteTradeGUIBuilder implements BorderGUIBuilder {
     CTradeController ctc;
     JFrame tf;
-    BorderGUIWithThreeTextArea tg;
+    BorderGUI tg;
 
     public CompleteTradeGUIBuilder(String currUser, JFrame tf) {
-        tg = new BorderGUIWithThreeTextArea();
+        tg = new BorderGUI();
         ctc = new CTradeController(currUser, tg);
         this.tf = tf;
     }
@@ -99,7 +99,7 @@ public class CompleteTradeGUIBuilder implements BorderGUIBuilder {
 
     }
 
-    public BorderGUIWithThreeTextArea getTradeGUI(){
+    public BorderGUI getTradeGUI(){
         return tg;
     }
 }

@@ -14,13 +14,13 @@ public class SelectController {
     UserManager um;
     Inventory iv;
     String currItem;
-    BorderGUIWithThreeTextArea bta;
+    BorderGUI bta;
     TradeManager tm;
     SelectPresenter sp;
     List<String> wishList;
     JFrame fr;
 
-    public SelectController(String currUser, BorderGUIWithThreeTextArea bta, JFrame fr){
+    public SelectController(String currUser, BorderGUI bta, JFrame fr){
         this.um = new UserManager();
         this.iv = new Inventory();
         this.bta = bta;

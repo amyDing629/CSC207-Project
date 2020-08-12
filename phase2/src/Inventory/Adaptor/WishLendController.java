@@ -2,7 +2,7 @@ package Inventory.Adaptor;
 
 import Inventory.Entity.Item;
 import Inventory.UseCase.Inventory;
-import Trade.Adaptor.BorderGUIWithThreeTextArea;
+import Trade.Adaptor.BorderGUI;
 import User.Entity.ClientUser;
 import User.UseCase.ApprovalManager;
 import User.UseCase.UserManager;
@@ -24,7 +24,7 @@ public class WishLendController implements iItemController {
 
     ApprovalManager iam;
 
-    BorderGUIWithThreeTextArea bta;
+    BorderGUI bta;
 
     String it;
 
@@ -36,7 +36,7 @@ public class WishLendController implements iItemController {
      * [constructor]
      * @param currUser current user
      */
-    public WishLendController(String currUser, BorderGUIWithThreeTextArea bta, JFrame fr){
+    public WishLendController(String currUser, BorderGUI bta, JFrame fr){
         iv = new Inventory();
         um = new UserManager();
         iam = new ApprovalManager();

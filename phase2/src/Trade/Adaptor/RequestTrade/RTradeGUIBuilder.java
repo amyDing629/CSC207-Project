@@ -2,8 +2,7 @@ package Trade.Adaptor.RequestTrade;
 
 import Trade.Adaptor.BorderGUIBuilder;
 import Trade.Adaptor.BorderGUINoTextArea;
-import Trade.Adaptor.BorderGUIWithThreeTextArea;
-import Trade.Adaptor.RequestTrade.RTradeController;
+import Trade.Adaptor.BorderGUI;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,7 +13,7 @@ public class RTradeGUIBuilder implements BorderGUIBuilder {
 
 
     private final RTradeController trc;
-    private final BorderGUIWithThreeTextArea tg;
+    private final BorderGUI tg;
     private final JFrame fr;
 
     /**
@@ -26,7 +25,7 @@ public class RTradeGUIBuilder implements BorderGUIBuilder {
     public RTradeGUIBuilder(UUID currUser, String item, JFrame fr) {
 
 
-        tg = new BorderGUIWithThreeTextArea();
+        tg = new BorderGUI();
         trc = new RTradeController(currUser, tg, item);
         trc.getTarUser(item);
         this.fr = fr;
@@ -126,7 +125,7 @@ public class RTradeGUIBuilder implements BorderGUIBuilder {
     }
 
     @Override
-    public BorderGUINoTextArea getTradeGUI() {
+    public BorderGUI getTradeGUI() {
         return tg;
     }
 }

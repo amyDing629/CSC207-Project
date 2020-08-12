@@ -1,20 +1,18 @@
 package Inventory.Adaptor;
 
 import Trade.Adaptor.BorderGUIBuilder;
-import Trade.Adaptor.BorderGUINoTextArea;
-import Trade.Adaptor.BorderGUIWithThreeTextArea;
+
+import Trade.Adaptor.BorderGUI;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class AgreeReqGUIBuilder implements BorderGUIBuilder {
     iItemController ic;
-    BorderGUIWithThreeTextArea tg;
+    BorderGUI tg;
 
-    public AgreeReqGUIBuilder(String currUser, JFrame fr){
-        tg = new BorderGUIWithThreeTextArea();
-        ic = new AgreeReqController(currUser, tg, fr);
+    public AgreeReqGUIBuilder(JFrame fr){
+        tg = new BorderGUI();
+        ic = new AgreeReqController(tg, fr);
     }
 
 
@@ -85,7 +83,7 @@ public class AgreeReqGUIBuilder implements BorderGUIBuilder {
     }
 
     @Override
-    public BorderGUINoTextArea getTradeGUI() {
+    public BorderGUI getTradeGUI() {
         return tg;
     }
 

@@ -1,18 +1,18 @@
 package Inventory.Adaptor;
 
 import Inventory.UseCase.Inventory;
-import Trade.Adaptor.BorderGUIWithThreeTextArea;
+import Trade.Adaptor.BorderGUI;
 import User.UseCase.UserManager;
 import Inventory.Entity.Item;
 import javax.swing.*;
 
 public class MarketController implements iItemController {
     Inventory iv;
-    BorderGUIWithThreeTextArea bta;
+    BorderGUI bta;
     JFrame fr;
-    Item it;
+    String it;
     iMarketPresenter ip;
-    public MarketController(BorderGUIWithThreeTextArea bta, JFrame fr){
+    public MarketController(BorderGUI bta, JFrame fr){
         this.iv = new Inventory();
         this.bta = bta;
         ip = new MarketPresenter(bta);
@@ -52,8 +52,8 @@ public class MarketController implements iItemController {
         if (!iv.getAvailableList().contains(input)){
             ip.wrongInput();
         }else{
-            it = iv.getItem(input);
-            ip.updateCurr(getItemInfo(it));
+            it = input;
+            ip.updateCurr(getItemInfo(iv.getItem(it)));
         }
     }
 

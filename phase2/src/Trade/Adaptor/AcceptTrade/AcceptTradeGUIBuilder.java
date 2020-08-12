@@ -1,19 +1,18 @@
 package Trade.Adaptor.AcceptTrade;
 
-import Trade.Adaptor.AcceptTrade.AcceptTradeController;
 import Trade.Adaptor.BorderGUIBuilder;
-import Trade.Adaptor.BorderGUIWithThreeTextArea;
+import Trade.Adaptor.BorderGUI;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class AcceptTradeGUIBuilder implements BorderGUIBuilder {
-    BorderGUIWithThreeTextArea tg;
+    BorderGUI tg;
     AcceptTradeController atc;
     JFrame tf;
 
     public AcceptTradeGUIBuilder(String user, JFrame tf){
-        tg = new BorderGUIWithThreeTextArea();
+        tg = new BorderGUI();
         atc = new AcceptTradeController(user, tg);
         this.tf = tf;
     }
@@ -105,7 +104,7 @@ public class AcceptTradeGUIBuilder implements BorderGUIBuilder {
 
     }
 
-    public BorderGUIWithThreeTextArea getTradeGUI(){
+    public BorderGUI getTradeGUI(){
         return tg;
     }
 }

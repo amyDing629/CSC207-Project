@@ -9,7 +9,7 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
-import Trade.Adaptor.BorderGUIWithThreeTextArea;
+import Trade.Adaptor.BorderGUI;
 import User.UseCase.UserManager;
 
 /**
@@ -30,7 +30,7 @@ public class AwardActivities {
     /**
      * Constructs the AwardActivities for user
      */
-    public AwardActivities(String currUser, JFrame fr, BorderGUIWithThreeTextArea tg){
+    public AwardActivities(String currUser, JFrame fr, BorderGUI tg){
         this.currUser = currUser;
         this.fr = fr;
         pp = new PointPresenter(tg);

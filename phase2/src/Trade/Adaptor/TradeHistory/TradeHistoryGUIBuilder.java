@@ -2,18 +2,17 @@ package Trade.Adaptor.TradeHistory;
 
 import Trade.Adaptor.BorderGUIBuilder;
 import Trade.Adaptor.BorderGUINoTextArea;
-import Trade.Adaptor.BorderGUIWithThreeTextArea;
-import Trade.Adaptor.TradeHistory.TradeHistoryController;
+import Trade.Adaptor.BorderGUI;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class TradeHistoryGUIBuilder implements BorderGUIBuilder {
     TradeHistoryController thc;
-    BorderGUIWithThreeTextArea bgUI;
+    BorderGUI bgUI;
 
     public TradeHistoryGUIBuilder(String currUser, JFrame tf){
-        bgUI = new BorderGUIWithThreeTextArea();
+        bgUI = new BorderGUI();
         this.thc = new TradeHistoryController(currUser, bgUI, tf);
     }
 
@@ -87,7 +86,7 @@ public class TradeHistoryGUIBuilder implements BorderGUIBuilder {
     }
 
     @Override
-    public BorderGUINoTextArea getTradeGUI() {
+    public BorderGUI getTradeGUI() {
         return bgUI;
     }
 }

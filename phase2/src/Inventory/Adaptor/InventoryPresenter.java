@@ -1,10 +1,7 @@
 package Inventory.Adaptor;
 
-import Trade.Adaptor.BorderGUIWithThreeTextArea;
+import Trade.Adaptor.BorderGUI;
 import Trade.Adaptor.InputAndPresent;
-import User.UseCase.UserManager;
-
-import java.util.UUID;
 
 /**
  * present information of the inventory system to user.
@@ -15,7 +12,7 @@ public class InventoryPresenter implements iItemPresenter {
     /**
      * [constructor]
      */
-    InventoryPresenter(BorderGUIWithThreeTextArea bta){
+    InventoryPresenter(BorderGUI bta){
         this.bta = bta;
     }
 

@@ -2,8 +2,7 @@ package Trade.Adaptor.RequestTrade;
 
 import Trade.Adaptor.BorderGUIBuilder;
 import Trade.Adaptor.BorderGUINoTextArea;
-import Trade.Adaptor.BorderGUIWithThreeTextArea;
-import Trade.Adaptor.RequestTrade.SelectController;
+import Trade.Adaptor.BorderGUI;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,10 +10,10 @@ import java.awt.*;
 public class SelectItemToTradeBuilder implements BorderGUIBuilder {
 
     SelectController sc;
-    BorderGUIWithThreeTextArea bta;
+    BorderGUI bta;
 
     public SelectItemToTradeBuilder(String currUser, JFrame tFrame){
-        bta = new BorderGUIWithThreeTextArea();
+        bta = new BorderGUI();
         sc = new SelectController(currUser, bta, tFrame);
 
     }
@@ -96,7 +95,7 @@ public class SelectItemToTradeBuilder implements BorderGUIBuilder {
     }
 
     @Override
-    public BorderGUINoTextArea getTradeGUI() {
+    public BorderGUI getTradeGUI() {
         return bta;
     }
 }

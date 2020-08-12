@@ -1,15 +1,15 @@
 package Trade.Adaptor.TradeHistory;
 
-import Trade.Adaptor.BorderGUIWithThreeTextArea;
+import Trade.Adaptor.BorderGUI;
 import Trade.Entity.Trade;
 
 import java.util.List;
 
 public class TradeHistoryPresenter {
 
-    BorderGUIWithThreeTextArea tgp;
+    BorderGUI tgp;
 
-    public TradeHistoryPresenter(BorderGUIWithThreeTextArea tgp) {
+    public TradeHistoryPresenter(BorderGUI tgp) {
         this.tgp = tgp;
     }
 

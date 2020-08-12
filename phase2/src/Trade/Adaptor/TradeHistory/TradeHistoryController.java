@@ -1,6 +1,6 @@
 package Trade.Adaptor.TradeHistory;
 
-import Trade.Adaptor.BorderGUIWithThreeTextArea;
+import Trade.Adaptor.BorderGUI;
 import Trade.Entity.Trade;
 import User.UseCase.UserManager;
 import Trade.UseCase.TradeManager;
@@ -17,7 +17,7 @@ public class TradeHistoryController {
     List<String> userList;
     JFrame fr;
 
-    public TradeHistoryController(String currUser, BorderGUIWithThreeTextArea tgp, JFrame fr){
+    public TradeHistoryController(String currUser, BorderGUI tgp, JFrame fr){
         this.tm = new TradeManager();
         this.um = new UserManager();
         this.fr = fr;

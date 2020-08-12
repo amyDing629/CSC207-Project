@@ -10,13 +10,11 @@ import javax.swing.*;
 public class InventoryGUI {
     private final String currUser;
     private final JFrame ivf;
-    private final UserManager um;
 
 
     public InventoryGUI(String currUser, JFrame frame){
         this.currUser = currUser;
         this.ivf = frame;
-        um = new UserManager();
 
     };
 
@@ -38,7 +36,7 @@ public class InventoryGUI {
         menu.add(mk);
         menu.add(wb);
         menu.add(wl);
-        if (um.getUser(currUser).getIsAdmin()){
+        if (new UserManager().getUser(currUser).getIsAdmin()){
             menu.add(ar);
         }
         menu.add(back);
@@ -76,7 +74,7 @@ public class InventoryGUI {
 
         ar.addActionListener(e -> {
             frame.setVisible(false);
-            BorderGUIBuilder builder = new AgreeReqGUIBuilder(currUser, frame);
+            BorderGUIBuilder builder = new AgreeReqGUIBuilder(frame);
             TradeGUIEngineer engineer = new TradeGUIEngineer(builder);
             engineer.constructGUI();
             TradeGUIPlan tg = engineer.getGUI();

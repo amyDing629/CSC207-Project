@@ -1,16 +1,16 @@
 package Inventory.Adaptor;
 
-import Trade.Adaptor.BorderGUIWithThreeTextArea;
+import Trade.Adaptor.BorderGUI;
 
 import javax.swing.*;
 
 interface MarketInputPanelStrategy {
-    void solve(BorderGUIWithThreeTextArea tg, MarketController ic);
+    void solve(BorderGUI tg, MarketController ic);
 }
 
 class VisitorStrategy implements MarketInputPanelStrategy {
 
-    public void solve(BorderGUIWithThreeTextArea tg, MarketController ic) {
+    public void solve(BorderGUI tg, MarketController ic) {
         JPanel panelS = new JPanel();
         JTextArea ta = new JTextArea("Type item name here", 1, 10);
         JButton submit = new JButton("Submit");
@@ -29,7 +29,7 @@ class VisitorStrategy implements MarketInputPanelStrategy {
 
 class RegularStrategy implements MarketInputPanelStrategy {
 
-    public void solve(BorderGUIWithThreeTextArea tg, MarketController ic) {
+    public void solve(BorderGUI tg, MarketController ic) {
         JPanel panelS = new JPanel();
         JTextArea ta = new JTextArea("Type item name here", 1, 10);
         JButton submit = new JButton("Submit");

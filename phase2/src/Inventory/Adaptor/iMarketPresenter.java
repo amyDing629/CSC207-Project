@@ -1,7 +1,5 @@
 package Inventory.Adaptor;
 
-import Trade.Adaptor.BorderGUIWithThreeTextArea;
-
 public interface iMarketPresenter {
 
     void resetInputArea();

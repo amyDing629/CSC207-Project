@@ -2,7 +2,7 @@ package Trade.Adaptor.RequestTrade;
 
 import Inventory.UseCase.Inventory;
 import Inventory.Entity.Item;
-import Trade.Adaptor.BorderGUIWithThreeTextArea;
+import Trade.Adaptor.BorderGUI;
 import Trade.Entity.Trade;
 import User.Entity.ClientUser;
 import User.UseCase.UserManager;
@@ -27,7 +27,7 @@ public class RTradeController {
     private final UserManager um;
     private final Inventory iv;
     RTradePresenter tp;
-    BorderGUIWithThreeTextArea bta;
+    BorderGUI bta;
     String it;
 
     /**
@@ -35,7 +35,7 @@ public class RTradeController {
      * @param currUser the user that is using the system
      */
     RTradeController(UUID currUser,
-                     BorderGUIWithThreeTextArea bta, String item){
+                     BorderGUI bta, String item){
         this.currUser = currUser;
         this.tm = new TradeManager();
         this.um = new UserManager();

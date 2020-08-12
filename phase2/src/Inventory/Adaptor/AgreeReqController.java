@@ -2,53 +2,42 @@ package Inventory.Adaptor;
 
 import Inventory.Entity.Item;
 import Inventory.UseCase.Inventory;
-import Trade.Adaptor.BorderGUIWithThreeTextArea;
+import Trade.Adaptor.BorderGUI;
 import User.Entity.ClientUser;
 import User.Entity.ItemApprovals;
 import User.UseCase.ApprovalManager;
 import User.UseCase.UserManager;
 
 import javax.swing.*;
-import java.util.UUID;
 
 public class AgreeReqController implements iItemController {
     /**
      * the inventory of the system.
      */
     private final Inventory iv;
-    /**
-     * the user that is using the system.
-     */
-    private final UUID currUser;
 
-    UserManager um;
+    private final UserManager um;
 
-    ApprovalManager iam;
+    private final ApprovalManager iam;
 
-    BorderGUIWithThreeTextArea bta;
+    private final BorderGUI bta;
 
-    String it;
+    private String it;
 
-    iItemPresenter ip;
+    private final iItemPresenter ip;
 
-    JFrame fr;
+    private final JFrame fr;
 
     /**
      * [constructor]
-     * @param currUser current user
      */
-    public AgreeReqController (String currUser, BorderGUIWithThreeTextArea bta, JFrame fr){
+    public AgreeReqController (BorderGUI bta, JFrame fr){
         iv = new Inventory();
         um = new UserManager();
         iam = new ApprovalManager();
         this.bta = bta;
         ip = new InventoryPresenter(bta);
         this.fr = fr;
-        this.currUser = um.nameToUUID(currUser);
-    }
-
-    void removeItemFromIam(Item it){
-        iam.removeItemApproval(iv.getName(it));
     }
 
     public String printList() {
@@ -69,10 +58,6 @@ public class AgreeReqController implements iItemController {
 
     public boolean iamCheckInput(String name){
         return iam.hasItemApprovals(name);
-    }
-
-    public void addItem(String name, String des){
-        iam.addApprovals(um.getUser(currUser),name,des);
     }
 
     public void updateCurr(){

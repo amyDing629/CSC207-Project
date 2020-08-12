@@ -1,14 +1,14 @@
 package User.PointSystem;
 
-import Trade.Adaptor.BorderGUIWithThreeTextArea;
+import Trade.Adaptor.BorderGUI;
 import Trade.Entity.Trade;
 
 import java.util.List;
 
 public class PointPresenter {
-    BorderGUIWithThreeTextArea tg;
+    BorderGUI tg;
 
-    public PointPresenter(BorderGUIWithThreeTextArea tg){
+    public PointPresenter(BorderGUI tg){
         this.tg = tg;
     }
 

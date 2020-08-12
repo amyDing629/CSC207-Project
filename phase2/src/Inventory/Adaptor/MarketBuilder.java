@@ -1,8 +1,7 @@
 package Inventory.Adaptor;
 
 import Trade.Adaptor.BorderGUIBuilder;
-import Trade.Adaptor.BorderGUINoTextArea;
-import Trade.Adaptor.BorderGUIWithThreeTextArea;
+import Trade.Adaptor.BorderGUI;
 
 import javax.swing.*;
 
@@ -10,10 +9,10 @@ import javax.swing.*;
 public class MarketBuilder implements BorderGUIBuilder {
 
     iItemController ic;
-    BorderGUIWithThreeTextArea tg;
+    BorderGUI tg;
 
     public MarketBuilder(JFrame fr) {
-        tg = new BorderGUIWithThreeTextArea();
+        tg = new BorderGUI();
         ic = new MarketController(tg, fr);
     }
 
@@ -96,7 +95,7 @@ public class MarketBuilder implements BorderGUIBuilder {
     }
 
     @Override
-    public BorderGUINoTextArea getTradeGUI() {
+    public BorderGUI getTradeGUI() {
         return tg;
     }
 }

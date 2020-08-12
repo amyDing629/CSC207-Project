@@ -1,6 +1,6 @@
 package Trade.Adaptor.CompleteTrade;
 
-import Trade.Adaptor.BorderGUIWithThreeTextArea;
+import Trade.Adaptor.BorderGUI;
 import MeetingSystem.Adapter.MPresenter;
 import MeetingSystem.Adapter.MainViewPresenter;
 import MeetingSystem.Entity.Meeting;
@@ -24,9 +24,9 @@ public class CTradeController implements Observer {
     UUID currTrade;
     Boolean isFirst;
     CTradePresenter tp;
-    BorderGUIWithThreeTextArea tg;
+    BorderGUI tg;
 
-    public CTradeController(String currUser, BorderGUIWithThreeTextArea tg) {
+    public CTradeController(String currUser, BorderGUI tg) {
 
         tm = new TradeManager();
         um = new UserManager();

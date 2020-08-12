@@ -1,14 +1,14 @@
 package Trade.Adaptor.RequestTrade;
 
-import Trade.Adaptor.BorderGUIWithThreeTextArea;
+import Trade.Adaptor.BorderGUI;
 
 import java.util.List;
 
 public class SelectPresenter {
 
-    BorderGUIWithThreeTextArea bta;
+    BorderGUI bta;
 
-    public SelectPresenter(BorderGUIWithThreeTextArea bta){
+    public SelectPresenter(BorderGUI bta){
         this.bta = bta;
     }
 

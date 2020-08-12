@@ -2,7 +2,7 @@ package User.PointSystem;
 
 import Trade.Adaptor.BorderGUIBuilder;
 import Trade.Adaptor.BorderGUINoTextArea;
-import Trade.Adaptor.BorderGUIWithThreeTextArea;
+import Trade.Adaptor.BorderGUI;
 import Trade.Adaptor.TradeGUIHelper;
 import javax.swing.*;
 import java.awt.*;
@@ -12,11 +12,11 @@ public class PointGUIBuilder implements BorderGUIBuilder {
 
     String currUser;
     AwardActivities aa;
-    BorderGUIWithThreeTextArea tg;
+    BorderGUI tg;
 
     public PointGUIBuilder(String currUser, JFrame tf){
         this.currUser = currUser;
-        tg = new BorderGUIWithThreeTextArea();
+        tg = new BorderGUI();
         aa = new AwardActivities(currUser, tf, tg);
     }
 
@@ -110,7 +110,7 @@ public class PointGUIBuilder implements BorderGUIBuilder {
     }
 
     @Override
-    public BorderGUINoTextArea getTradeGUI() {
+    public BorderGUI getTradeGUI() {
         return tg;
     }
 }

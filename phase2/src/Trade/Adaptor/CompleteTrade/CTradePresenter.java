@@ -1,14 +1,14 @@
 package Trade.Adaptor.CompleteTrade;
 
-import Trade.Adaptor.BorderGUIWithThreeTextArea;
+import Trade.Adaptor.BorderGUI;
 import Trade.Entity.Trade;
 
 import java.util.List;
 
 public class CTradePresenter {
-    BorderGUIWithThreeTextArea tg;
+    BorderGUI tg;
 
-    public CTradePresenter(BorderGUIWithThreeTextArea tg) {
+    public CTradePresenter(BorderGUI tg) {
         this.tg = tg;
     }
 

@@ -1,17 +1,16 @@
 package Inventory.Adaptor;
 
 import Trade.Adaptor.BorderGUIBuilder;
-import Trade.Adaptor.BorderGUINoTextArea;
-import Trade.Adaptor.BorderGUIWithThreeTextArea;
+import Trade.Adaptor.BorderGUI;
 
 import javax.swing.*;
 
 public class WishBorrowAddBuilder implements BorderGUIBuilder {
     iItemController ic;
-    BorderGUIWithThreeTextArea tg;
+    BorderGUI tg;
 
     public WishBorrowAddBuilder(String currUser, JFrame fr) {
-        tg = new BorderGUIWithThreeTextArea();
+        tg = new BorderGUI();
         ic = new WishBorrowAddController(currUser, tg, fr);
     }
 
@@ -86,7 +85,7 @@ public class WishBorrowAddBuilder implements BorderGUIBuilder {
     }
 
     @Override
-    public BorderGUINoTextArea getTradeGUI() {
+    public BorderGUI getTradeGUI() {
         return tg;
     }
 }

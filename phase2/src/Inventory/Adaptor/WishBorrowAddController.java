@@ -2,12 +2,8 @@ package Inventory.Adaptor;
 
 import Inventory.Entity.Item;
 import Inventory.UseCase.Inventory;
-import Trade.Adaptor.BorderGUIBuilder;
-import Trade.Adaptor.BorderGUIWithThreeTextArea;
-import Trade.Adaptor.TradeGUIEngineer;
-import Trade.Adaptor.TradeGUIPlan;
+import Trade.Adaptor.BorderGUI;
 import User.Entity.ClientUser;
-import User.UseCase.ApprovalManager;
 import User.UseCase.UserManager;
 
 import javax.swing.*;
@@ -25,9 +21,7 @@ public class WishBorrowAddController implements iItemController {
 
     UserManager um;
 
-    ApprovalManager iam;
-
-    BorderGUIWithThreeTextArea bta;
+    BorderGUI bta;
 
     String it;
 
@@ -39,10 +33,9 @@ public class WishBorrowAddController implements iItemController {
      * [constructor]
      * @param currUser current user
      */
-    public WishBorrowAddController(String currUser, BorderGUIWithThreeTextArea bta, JFrame fr){
+    public WishBorrowAddController(String currUser, BorderGUI bta, JFrame fr){
         iv = new Inventory();
         um = new UserManager();
-        iam = new ApprovalManager();
         this.bta = bta;
         ip = new InventoryPresenter(bta);
         this.fr = fr;

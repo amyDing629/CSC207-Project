@@ -1,6 +1,6 @@
 package Trade.Adaptor.AcceptTrade;
 
-import Trade.Adaptor.BorderGUIWithThreeTextArea;
+import Trade.Adaptor.BorderGUI;
 import User.UseCase.UserManager;
 import Trade.Entity.Trade;
 import javax.swing.*;
@@ -18,7 +18,7 @@ public class AcceptTradeController {
     Trade currTrade;
     AcceptTradePresenter tp;
 
-    public AcceptTradeController(String userName, BorderGUIWithThreeTextArea tg){
+    public AcceptTradeController(String userName, BorderGUI tg){
         this.tm = new TradeManager();
         this.um = new UserManager();
         tp = new AcceptTradePresenter(tg);
