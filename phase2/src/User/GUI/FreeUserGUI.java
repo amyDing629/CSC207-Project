@@ -55,10 +55,13 @@ public class FreeUserGUI {
         });
         submitButton.addActionListener(e -> {
             frame.setVisible(false);
-            ac.setFreeze(userInput.getText(), true);
-            JOptionPane.showMessageDialog(null, "Successfully froze the User");
-            UserFreezeSystem d = new UserFreezeSystem(uc,frame);
-            d.run(b);
+            if(ac.checkUser(userInput.getText())) {
+                ac.setFreeze(userInput.getText(), true);
+                JOptionPane.showMessageDialog(null, "Success");
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "There is no such user exist");
+            }
         });
     }
 }

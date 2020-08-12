@@ -68,6 +68,7 @@ public class ClientUserController {
      *             find the user by the user name
      */
     public boolean checkUser(String name) {
+        System.out.println(um.getUser(name)==null);
         return um.getUser(name) == null;
     }
 
