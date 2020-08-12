@@ -3,8 +3,6 @@ package User.GUI;
 import Inventory.Adaptor.MarketBuilder;
 import Main.DataAccessFull;
 import Trade.Adaptor.BorderGUIBuilder;
-import Trade.Adaptor.BorderGUIEngineer;
-import Trade.Adaptor.GUIPlan;
 import User.Adapter.ClientUserController;
 import User.Adapter.ClientUserPresenter;
 import User.Adapter.LoginSystemPresenter;
@@ -28,11 +26,11 @@ public class LoginGUI{
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JPanel panel = new JPanel();
         frame.add(panel);
-        placeComponents(panel);
+        placeComponents(frame, panel);
         frame.setVisible(true);
     }
 
-    private void placeComponents(JPanel panel){
+    private void placeComponents(JFrame frame, JPanel panel){
         JLabel userLabel = new JLabel("User:");
         userLabel.setBounds(10,20,80,25);
         panel.add(userLabel);
@@ -65,18 +63,17 @@ public class LoginGUI{
         exitButton.setPreferredSize(new Dimension(300, 30));
         panel.add(exitButton);
         UserManager um=new UserManager();
-
         logInButton.addActionListener(e -> {
             String name = nameInput.getText();
             String password = new String(passwordInput.getPassword());
             boolean response = lsp.login(name, password);
             System.out.println(response);
             //boolean response = lsp.getUserModel().verifyUser(name, password);
-            if (!response)
+            if (!response) {
                 JOptionPane.showMessageDialog(null,
                         "Invalid Login! Please check the username and/or password!");
+            }
             else {
-                frame.setVisible(false);
 
                 ClientUserController controller = new ClientUserController();
                 UUID uuid = controller.getIDbyName(name);
@@ -85,33 +82,36 @@ public class LoginGUI{
 
                 ClientUserGUI a = new ClientUserGUI(frame, name);
                 a.run();
+                frame.setVisible(false);
             }
         });
 
         registerButton.addActionListener(e -> {
             String name = nameInput.getText();
             String password = new String(passwordInput.getPassword());
-            if(lsp.register(name, password)){
-                JOptionPane.showMessageDialog(null, "Success");
+            if(!name.equals("")&&!password.equals("")){
+                boolean check=lsp.register(name,password);
+                if(check){
+                    JOptionPane.showMessageDialog(null, "Success");
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "Username already exist");
+                }
             }
             else{
                 JOptionPane.showMessageDialog(null,
-                        "This username has already been registered! Please register with a new one!");
+                        "There is problem with either the username exit or the empty password");
             }
 
             // TODO: delete
             //lsp.getUserModel().createClientUser(name, password, false);
+            for(ClientUser i:um.getUserList()){
+                System.out.println(i.getUsername());
+                System.out.println(i.getPassword());
+            }
         });
 
 
-        exploreButton.addActionListener(e -> {
-            frame.setVisible(false);
-            BorderGUIBuilder builder = new MarketBuilder(frame);
-            BorderGUIEngineer engineer = new BorderGUIEngineer(builder);
-            engineer.constructGUI();
-            GUIPlan tg = engineer.getGUI();
-            tg.run();
-        });
 
         exitButton.addActionListener(e -> {
             frame.setVisible(false);

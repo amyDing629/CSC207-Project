@@ -44,7 +44,8 @@ public class LoginSystemPresenter implements IUserPresenter {
     }
 
     public boolean register(String name, String password) {
-            return um.createClientUser(name,password,false);
+
+        return um.createClientUser(name,password,false);
     }
 
     public boolean login(String name, String password) {

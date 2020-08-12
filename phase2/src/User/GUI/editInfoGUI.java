@@ -74,11 +74,6 @@ public class editInfoGUI {
             frame.setVisible(false);
             PFrame.setVisible(true);
         });
-//        AddItemSystem.addActionListener(e -> {
-//            frame.setVisible(false);
-//            //AddItemSystemGUI d = new AddItemSystemGUI(uc,frame);
-//            //d.run(b);
-//        });
         limitSystem.addActionListener(e -> {
             frame.setVisible(false);
             UserLimitGUI d = new UserLimitGUI(uc,frame);

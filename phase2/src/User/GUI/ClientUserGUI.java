@@ -52,7 +52,7 @@ public class ClientUserGUI implements View {
         boolean isFrozen = um.getIsFrozen(userId);
 
 
-
+        System.out.println("CUGUI indicator");
         JLabel freezeStatus = new JLabel("Freeze Status: " + isFrozen);
         freezeStatus.setPreferredSize(new Dimension(300, 30));
         panel.add(freezeStatus);
