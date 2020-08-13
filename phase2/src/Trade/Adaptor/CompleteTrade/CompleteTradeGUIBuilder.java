@@ -50,14 +50,14 @@ public class CompleteTradeGUIBuilder implements BorderGUIBuilder {
         JPanel panelW =  new JPanel();
         JLabel tradeList = new JLabel("Available Trades");
         JTextArea tradeArea = new JTextArea();
-        tg.initializeList(tradeArea);
-        ctc.updateBut();
         JScrollPane jsp= new JScrollPane(tradeArea);
         panelW.setLayout(new BoxLayout(panelW, BoxLayout.Y_AXIS));
         panelW.add(tradeList);
         panelW.add(jsp);
         panelW.setPreferredSize(new Dimension(380,370));
         tg.setWest(panelW);
+        tg.initializeList(tradeArea);
+        ctc.updateList();
     }
 
     @Override

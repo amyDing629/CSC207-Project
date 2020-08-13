@@ -144,6 +144,7 @@ public class CTradeController implements Observer {
 
     public void updateBut(){
         tp.updateFrame(tm.getIncomplete(currUser));
+        tp.noTradeCurr();
     }
 
     void submitBut(String tradeNum){
@@ -155,6 +156,14 @@ public class CTradeController implements Observer {
             tp.presentTradeInfo(tm.getTrade(currTrade));
             tp.updateSuccess();
         }
+    }
+
+    public void updateList(){
+        tp.updateFrame(tm.getIncomplete(currUser));
+    }
+
+    public void resetCurr(){
+        tp.noTradeCurr();
     }
 
     void backBut(JFrame frame){

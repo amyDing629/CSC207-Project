@@ -53,9 +53,9 @@ public class OnewayTrade extends Trade implements Serializable {
      * extends the to string method of the trade
      */
     public String toString(){
-        return "trade id: " + getId() + "\ntrade type: " + getType()  + "\nduration: "+ getDuration()+ "\n" +
-                "status: " + getStatus().toString() + "\nitems: "
-                + getItemList() + "\ncreate time: " + getCreateTime().format(formatter)+"\n";
+        return "Trade type: " + getType()  + "\nDuration: "+ getDuration()+ "\n" +
+                "Status: " + getStatus().toString() + "\nItems: "
+                + getItemList() + "\nCreate time: " + getCreateTime().format(formatter)+"\n";
     }
 
     /**
