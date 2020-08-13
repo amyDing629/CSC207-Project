@@ -5,18 +5,19 @@ Link: https://drive.google.com/file/d/1fVDdqURkgX-YA32CMqR3ovyetCB0bVu2/view?usp
 
 ## Videos' Content
 
-### `V1_RegisterLogin.mp4`
+### `V1_RegisterLogin.mp4`✅
 - Login: Admin & Client User
 - Register: Client User *2
 - Change Password
 - Creates new Admin user：Admin
     
-### `V2_WishList_AddLendableItems.mp4`
+### `V2_WishList_AddLendableItems.mp4`✅
 - Add items to wish-to-lend list
 - Admin agrees/decline requests (agreed items will appear in the market)
     
-### `V3_WishList_AddWishList.mp4`
-- 
+### `V3_WishList_AddWishList.mp4`✅
+- Add item from the Market to Wishlist
+- Delete item in the Wishlist
     
 ### `V4_TradeItems_TwoWay_Temporary.mp4`
 - Initialise a TwoWay-Temporary Trade (ClientUser A): <MeetingStatus: `INCOMPLETE`>
