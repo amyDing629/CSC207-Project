@@ -34,29 +34,90 @@ Link: https://drive.google.com/file/d/1fVDdqURkgX-YA32CMqR3ovyetCB0bVu2/view?usp
     - (Automatically generates; the same time, but exactly 1 month after; the same place)
     - `Confirm` proposal after meeting occurs: <MeetingStatus: `CONFIRMED`>
      
+     
 ### `V5_xxx.mp4`
-- 
+- a
     
 ### `V6_xxx.mp4`
-- 
+- a
     
 ### `V7_xxx.mp4`
-- 
+- a
     
 ### `V8_xxx.mp4`
-- 
+- a
     
 ### `V9_xxx.mp4`
-- 
+- a
     
 ### `V10_xxx.mp4`
-- 
+- a
      
 ### `V11_xxx.mp4`
-- 
+- a
     
 ### `V12_xxx.mp4`
-- 
+- a
     
 ### `V13_xxx.mp4`
-- 
+- a
+
+====================================
+
+## Video Script
+---
+
+### Users
+
+| username | password | notes |
+|:---------|:---------|:------|
+|admin |123 |(already exists in system, login only)|
+|admin2 |123|(create by admin)|
+|qqq |123 |(new: register new user, change password to “123abcABC” )|
+|www |123 |(new: register new user)|
+
+### Inventory 
+| item | description |
+|:---------|:---------|
+|iPad|1st generation|
+|iPhone|latest released|
+|toy car|red and shiny|
+|tea cup|vintage|
+|horror film|home-made|
+|---|---|
+|daydream|fresh and healthy|
+|trash|aka. garbage|
+|love|my pure emotion and feeling|
+
+
+## == TESTS ==
+
+## Register and login, create admin, change password
+
+
+## Request adding items to inventory, Agree/Decline requests
+add above items to inventory,
+-  the items from the upper section  — agree request
+-  the items from the lower section  — decline request
+
+
+## Mandatory #3 - Market
+before login -> explore (view an item)
+after login -> inventory/market  (view an item)
+
+
+## Point System
+每complete一个trade (trade status == complete)，系统自动给这个user加一分；每5分，可以兑换一次bonus trade
+TBA
+
+## Mandatory #1 -  Roll Back
+TBA
+
+## Mandatory #2 - Suggest items to lend
+TBA
+
+## Mandatory #4 - Admin adjust all threshold
+TBA
+
+## Mandatory #5 - Admin adjust all threshold
+TBA
