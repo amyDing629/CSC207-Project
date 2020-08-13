@@ -18,17 +18,11 @@ public class PointPresenter {
     }
 
     public void updateFrame(List<Trade> tradeList){
-        StringBuilder results = new StringBuilder();
-        for (Trade t: tradeList) {
-            String trade = "Trade{" +
-                    "tradeId=" + t.getId() +
-                    ", user1=" + t.getUsers().get(0) +
-                    ", user2=" + t.getUsers().get(1) +
-                    ", create at=" + t.getCreateTime() +
-                    "} " + "\n";
-            results.append(trade);
+        String result = "";
+        for (int i = 0; i < tradeList.size(); i++) {
+            result = result + (i + 1) + ". " + tradeList.get(i).toString()+"\n";
         }
-        tg.setListText(results.toString());
+        tg.setListText(result);
     }
 
     public void resetInputArea(){
