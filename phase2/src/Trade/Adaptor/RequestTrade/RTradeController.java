@@ -240,7 +240,7 @@ public class RTradeController {
         if (!um.getWishLend(currUser).contains(item)){
             tp.wrongInput();
         }else if (checkInput(item)){
-            if (duration.equals("temp")){
+            if (duration.equals("per")){
                 createTrade("4", it, item);
                 tp.createSuccess("(two way-permanent)");
             }else{
