@@ -22,7 +22,7 @@ public class WishBorrowAddBuilder implements BorderGUIBuilder {
     @Override
     public void buildPanelN() {
         JPanel panelN = new JPanel();
-        JLabel msg = new JLabel("message:", SwingConstants.LEFT);
+        JLabel msg = new JLabel("message: ", SwingConstants.LEFT);
         JTextArea msgArea = new JTextArea();
         panelN.add(msg);
         panelN.add(msgArea);
