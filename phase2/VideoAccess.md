@@ -1,7 +1,7 @@
 # Videos
 
 ## Google Drive Video Link
-Link: https://drive.google.com/file/d/1fVDdqURkgX-YA32CMqR3ovyetCB0bVu2/view?usp=sharing
+Link: https://drive.google.com/drive/folders/1unT-WmSSiGtjKi7qOSXFZHjPwjTrSJvI?usp=sharing
 
 ## Videos' Content
 
