@@ -109,7 +109,7 @@ public class CTradeController implements Observer {
 
     void makeTrade() {
         Trade tr = tm.popTrade(currTrade);
-        if (tr.getType().equals("oneway")) {
+        if (tr.getType().equals("one way")) {
             ClientUser bor = um.popUser(tr.getUsers().get(0));
             ClientUser lend = um.popUser(tr.getUsers().get(1));
             bor.getWishBorrow().remove(tr.getItemList().get(0));

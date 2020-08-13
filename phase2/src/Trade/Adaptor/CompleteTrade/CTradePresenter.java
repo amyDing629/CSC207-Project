@@ -2,7 +2,9 @@ package Trade.Adaptor.CompleteTrade;
 
 import Trade.Adaptor.BorderGUI;
 import Trade.Entity.Trade;
+import User.UseCase.UserManager;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CTradePresenter {
@@ -20,10 +22,13 @@ public class CTradePresenter {
     public void updateFrame(List<Trade> tradeList){
         String result = "";
         for (int i = 0; i < tradeList.size(); i++) {
-            result = result + i + ". " + tradeList.get(i).toString() + "\n";
+            ArrayList<String> users = new ArrayList<>();
+            users.add(new UserManager().UUIDToName(tradeList.get(i).getUsers().get(0)));
+            users.add(new UserManager().UUIDToName(tradeList.get(i).getUsers().get(1)));
+            result = result + i + ". " + "\n" + "traders: "+ users + "\n" + tradeList.get(i).toString();
         }
         if (result.equals("")){
-            tg.setListText("no available trade");
+            tg.setMsgText("no available trade");
         }else{
             tg.setListText(result);
         }

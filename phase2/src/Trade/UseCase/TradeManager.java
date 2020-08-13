@@ -119,7 +119,7 @@ public class TradeManager{
         UserManager um = new UserManager();
         Trade currTrade = getTrade(id);
 
-        if (currTrade.getType().equals("oneway")) {
+        if (currTrade.getType().equals("one way")) {
             ClientUser bor = um.getUser(currTrade.getUsers().get(0));
             ClientUser lend = um.getUser(currTrade.getUsers().get(1));
 

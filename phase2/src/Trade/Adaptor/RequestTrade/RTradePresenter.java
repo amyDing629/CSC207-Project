@@ -100,7 +100,7 @@ public class RTradePresenter {
 
     void presentTradeInfo(ClientUser currUser, Item item, List<String> secondList, ArrayList<String> suggestList){
         bta.setCurrText("Current User: " + currUser.getUsername() + "\n" + "Item to request the trade: " + item.getName()
-                + "\n" + secondList
+                + "\n" + "items in your lending list: "+ secondList
                 + "\n" + "Suggest item to lend if make a two way trade: " + suggestList);
     }
 
