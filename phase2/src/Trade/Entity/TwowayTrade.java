@@ -47,9 +47,9 @@ public class TwowayTrade extends Trade implements Serializable {
      * @return trade information in a string format
      */
     public String toString(){
-        return  "trade type: " + getType()  + "\nduration: "+ getDuration()+ "\n" +
-        "status: " + getStatus().toString() + "\nitems: "
-                + getItemList() + "\ncreate time: " + getCreateTime().format(formatter)+"\n";
+        return  "Trade type: " + getType()  + "\nDuration: "+ getDuration()+ "\n" +
+        "Status: " + getStatus().toString() + "\nItems: "
+                + getItemList() + "\nCreate time: " + getCreateTime().format(formatter)+"\n";
     }
 
     /**

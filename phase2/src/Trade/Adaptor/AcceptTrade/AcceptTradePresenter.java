@@ -1,6 +1,8 @@
 package Trade.Adaptor.AcceptTrade;
 
 
+import MeetingSystem.UseCase.MeetingActionManager;
+import MeetingSystem.UseCase.MeetingManager;
 import Trade.Adaptor.BorderGUI;
 import Trade.Entity.Trade;
 import User.Entity.ClientUser;
@@ -66,7 +68,15 @@ public class AcceptTradePresenter {
             ArrayList<String> users = new ArrayList<>();
             users.add(new UserManager().UUIDToName(tradeList.get(i).getUsers().get(0)));
             users.add(new UserManager().UUIDToName(tradeList.get(i).getUsers().get(1)));
-            result = result + i + ". " + "\n" + "traders: "+ users + "\n" + tradeList.get(i).toString();
+            result = result + i + ". " + "\n" + "Traders: "+ users + "\n" + tradeList.get(i).toString();
+            if (tradeList.get(i).getMeeting() != null){
+                result = result + "First meeting: "
+                        + new MeetingActionManager().getMeetingWithId(tradeList.get(i).getMeeting()).toString() + "\n";
+            }
+            if (tradeList.get(i).getSecondMeeting() != null){
+                result = result + "Second meeting: "
+                        + new MeetingActionManager().getMeetingWithId(tradeList.get(i).getSecondMeeting()).toString() + "\n";
+            }
         }
         if (result.equals("")){
             tg.setMsgText("no available trade");

@@ -11,6 +11,10 @@ public class mainRun {
         uc.checkFileEmpty(new File("phase2/src/user.ser"));
         uaf.readFile();
 
+        LoginGUI amy = new LoginGUI();
+        amy.run();
+        LoginGUI tom = new LoginGUI();
+        tom.run();
         LoginGUI admin = new LoginGUI();
         admin.run();
 
