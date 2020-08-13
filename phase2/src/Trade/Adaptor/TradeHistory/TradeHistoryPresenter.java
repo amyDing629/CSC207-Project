@@ -37,7 +37,7 @@ public class TradeHistoryPresenter {
             }
         }
         if (result.equals("")){
-            tgp.setMsgText("no available trade");
+            tgp.setListText("no available trade");
         }else{
             tgp.setListText(result);
         }

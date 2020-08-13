@@ -37,7 +37,7 @@ public class CTradePresenter {
             }
         }
         if (result.equals("")){
-            tg.setMsgText("no available trade");
+            tg.setListText("no available trade");
         }else{
             tg.setListText(result);
         }

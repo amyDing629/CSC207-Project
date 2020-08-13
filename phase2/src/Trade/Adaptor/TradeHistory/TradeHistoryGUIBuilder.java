@@ -23,8 +23,6 @@ public class TradeHistoryGUIBuilder implements BorderGUIBuilder {
 
     @Override
     public void buildPanelN() {
-
-
     }
 
     @Override
@@ -55,6 +53,7 @@ public class TradeHistoryGUIBuilder implements BorderGUIBuilder {
         trade.setText(thc.getTradeHistory());
         JScrollPane jsp= new JScrollPane(trade);
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.setPreferredSize(new Dimension(350, 380 ));
         panel.add(tradeList);
         panel.add(jsp);
         bgUI.initializeList(trade);
