@@ -19,7 +19,7 @@ Link: https://drive.google.com/drive/folders/1unT-WmSSiGtjKi7qOSXFZHjPwjTrSJvI?u
 - Add item from the Market to Wishlist
 - Delete item in the Wishlist
     
-### `V4_TradeItems_TwoWay_Temporary.mp4`
+### `V4_TradeItems_TwoWay_Temporary.mp4`✅
 - Initialise a TwoWay-Temporary Trade (ClientUser A): <MeetingStatus: `INCOMPLETE`>
 - Add second item to trade (ClientUser B)
 - Agree trading request (ClientUser B)
@@ -35,8 +35,8 @@ Link: https://drive.google.com/drive/folders/1unT-WmSSiGtjKi7qOSXFZHjPwjTrSJvI?u
     - `Confirm` proposal after meeting occurs: <MeetingStatus: `CONFIRMED`>
      
      
-### `V5_xxx.mp4`
-- a
+### `V5_Mandatory3_VisitorExplore.mp4`✅
+- Explore Market (where all not-in-trade item be) as a visitor (no login required)
     
 ### `V6_xxx.mp4`
 - a

@@ -1,8 +1,9 @@
 package User.GUI;
-
 import Inventory.Adaptor.MarketBuilder;
 import Main.DataAccessFull;
 import Trade.Adaptor.BorderGUIBuilder;
+import Trade.Adaptor.BorderGUIEngineer;
+import Trade.Adaptor.GUIPlan;
 import User.Adapter.ClientUserController;
 import User.Adapter.ClientUserPresenter;
 import User.Adapter.LoginSystemPresenter;
@@ -16,8 +17,9 @@ import java.util.UUID;
 public class LoginGUI{
 
     JFrame frame;
-    LoginSystemPresenter lsp;
+
     // presenter
+    LoginSystemPresenter lsp;
 
     public void run() {
         lsp = new LoginSystemPresenter(frame);
@@ -62,7 +64,9 @@ public class LoginGUI{
         JButton exitButton = new JButton("Quit");
         exitButton.setPreferredSize(new Dimension(300, 30));
         panel.add(exitButton);
-        UserManager um=new UserManager();
+        UserManager um = new UserManager();
+
+
         logInButton.addActionListener(e -> {
             String name = nameInput.getText();
             String password = new String(passwordInput.getPassword());
@@ -108,15 +112,17 @@ public class LoginGUI{
                         "There is problem with either the username exit or the empty password");
             }
 
-            // TODO: delete
-            //lsp.getUserModel().createClientUser(name, password, false);
-            for(ClientUser i:um.getUserList()){
-                System.out.println(i.getUsername());
-                System.out.println(i.getPassword());
-            }
         });
 
 
+        exploreButton.addActionListener(e -> {
+            frame.setVisible(false);
+            BorderGUIBuilder builder = new MarketBuilder(frame);
+            BorderGUIEngineer engineer = new BorderGUIEngineer(builder);
+            engineer.constructGUI();
+            GUIPlan tg = engineer.getGUI();
+            tg.run();
+        });
 
         exitButton.addActionListener(e -> {
             frame.setVisible(false);
