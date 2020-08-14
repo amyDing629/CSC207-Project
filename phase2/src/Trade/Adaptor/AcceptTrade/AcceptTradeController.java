@@ -1,27 +1,30 @@
 package Trade.Adaptor.AcceptTrade;
 
 import Trade.Adaptor.BorderGUI;
-import User.UseCase.UserManager;
+import Trade.Adaptor.iTradeController;
 import Trade.Entity.Trade;
+import Trade.TradeStatus;
+import Trade.UseCase.TradeManager;
+import User.UseCase.UserManager;
 import javax.swing.*;
 import java.util.List;
 import java.util.UUID;
 import java.util.regex.Pattern;
-import Trade.UseCase.TradeManager;
-import Trade.TradeStatus;
 
-public class AcceptTradeController {
+public class AcceptTradeController implements iTradeController {
     UUID currUser;
     TradeManager tm;
     UserManager um;
     List<Trade> tradeList;
-    Trade currTrade;
+    UUID currTrade;
     AcceptTradePresenter tp;
+    JFrame frame;
 
-    public AcceptTradeController(String userName, BorderGUI tg){
+    public AcceptTradeController(String userName, BorderGUI tg, JFrame fr){
         this.tm = new TradeManager();
         this.um = new UserManager();
         tp = new AcceptTradePresenter(tg);
+        frame = fr;
         currUser = um.nameToUUID(userName);
     }
 
@@ -36,9 +39,9 @@ public class AcceptTradeController {
         }else return !(Integer.parseInt(num) < 0 | Integer.parseInt(num) >= tradeList.size());
     }
 
-    Trade getCurrTrade(String num){
+    public UUID getCurrTrade(String num){
         int tradeNum = Integer.parseInt(num.trim());
-        currTrade = tradeList.get(tradeNum);
+        currTrade = tradeList.get(tradeNum).getId();
         return currTrade;
 
     }
@@ -49,13 +52,13 @@ public class AcceptTradeController {
     }
 
     void agreeTrade(){
-        Trade trade = tm.popTrade(currTrade.getId());
+        Trade trade = tm.popTrade(currTrade);
         trade.setStatus(TradeStatus.incomplete);
         tm.addTrade(trade);
     }
 
     void refuseTrade(){
-        Trade trade = tm.popTrade(currTrade.getId());
+        Trade trade = tm.popTrade(currTrade);
         trade.setStatus(TradeStatus.cancelled);
         tm.addTrade(trade);
     }
@@ -76,28 +79,42 @@ public class AcceptTradeController {
         }
     }
 
-    void submitBut(String tradeNum){
+    public void submitBut(String tradeNum){
         if (!checkInput(tradeNum)){
             tp.wrongInput();
         }else{
             currTrade = getCurrTrade(tradeNum);
-            tp.presentTradeInfo(currTrade);
+            tp.presentTradeInfo(tm.getTrade(currTrade));
             tp.updateSuccess();
         }
     }
 
-    void backBut(JFrame frame){
+    public void backBut(){
         frame.setVisible(true);
         tp.closeFrame();
     }
 
     public void updateBut(){
         tp.updateFrame(getUnconfirmed());
+        tp.noTradeCurr();
+    }
 
+    public void updateList(){
+        tp.updateFrame(getUnconfirmed());
     }
 
     public void noTradeSelected(){
         tp.noTradeCurr();
+    }
+
+    @Override
+    public void performAction1() {
+        agreeBut(true);
+    }
+
+    @Override
+    public void performAction2() {
+        agreeBut(false);
     }
 
 

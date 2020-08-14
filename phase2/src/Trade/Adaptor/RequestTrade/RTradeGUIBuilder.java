@@ -11,9 +11,8 @@ import java.util.UUID;
 public class RTradeGUIBuilder implements BorderGUIBuilder {
 
 
-    private final RTradeController trc;
+    private final iRequestTradeController trc;
     private final BorderGUI tg;
-    private final JFrame fr;
 
     /**
      * [constructor]
@@ -25,9 +24,8 @@ public class RTradeGUIBuilder implements BorderGUIBuilder {
 
 
         tg = new BorderGUI();
-        trc = new RTradeController(currUser, tg, item);
+        trc = new RTradeController(currUser, tg, item, fr);
         trc.getTarUser(item);
-        this.fr = fr;
     }
 
     @Override
@@ -77,35 +75,11 @@ public class RTradeGUIBuilder implements BorderGUIBuilder {
         panelS.add(twowayPer);
         panelS.add(back);
         tg.setSouth(panelS);
-        onewayTemp.addActionListener(e -> {
-            try {
-                trc.onewayBut("temp");
-            } catch (FileNotFoundException fileNotFoundException) {
-                fileNotFoundException.printStackTrace();
-            }
-        });
-        onewayPer.addActionListener(e -> {
-            try {
-                trc.onewayBut("per");
-            } catch (FileNotFoundException fileNotFoundException) {
-                fileNotFoundException.printStackTrace();
-            }
-        });
-        twowayTemp.addActionListener(e -> {
-            try {
-                trc.twowayBut("temp");
-            } catch (FileNotFoundException fileNotFoundException) {
-                fileNotFoundException.printStackTrace();
-            }
-        });
-        twowayPer.addActionListener(e -> {
-            try {
-                trc.twowayBut("per");
-            } catch (FileNotFoundException fileNotFoundException) {
-                fileNotFoundException.printStackTrace();
-            }
-        });
-        back.addActionListener(e -> trc.backBut(fr));
+        onewayTemp.addActionListener(e -> {trc.onewayBut("temp");});
+        onewayPer.addActionListener(e -> {trc.onewayBut("per");});
+        twowayTemp.addActionListener(e -> {trc.twowayBut("temp"); });
+        twowayPer.addActionListener(e -> { trc.twowayBut("per"); });
+        back.addActionListener(e -> trc.backBut());
 
 
 

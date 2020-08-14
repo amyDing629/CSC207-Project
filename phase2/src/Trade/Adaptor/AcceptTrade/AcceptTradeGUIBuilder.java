@@ -2,18 +2,19 @@ package Trade.Adaptor.AcceptTrade;
 
 import Trade.Adaptor.BorderGUIBuilder;
 import Trade.Adaptor.BorderGUI;
+import Trade.Adaptor.iTradeController;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class AcceptTradeGUIBuilder implements BorderGUIBuilder {
     BorderGUI tg;
-    AcceptTradeController atc;
+    iTradeController atc;
     JFrame tf;
 
     public AcceptTradeGUIBuilder(String user, JFrame tf){
         tg = new BorderGUI();
-        atc = new AcceptTradeController(user, tg);
+        atc = new AcceptTradeController(user, tg, tf);
         this.tf = tf;
     }
 
@@ -44,8 +45,8 @@ public class AcceptTradeGUIBuilder implements BorderGUIBuilder {
         panelE.add(agree);
         panelE.add(refuse);
         tg.setEast(panelE);
-        agree.addActionListener(e -> atc.agreeBut(true));
-        refuse.addActionListener(e -> atc.agreeBut(false));
+        agree.addActionListener(e -> atc.performAction1());
+        refuse.addActionListener(e -> atc.performAction2());
     }
 
     @Override
@@ -54,7 +55,7 @@ public class AcceptTradeGUIBuilder implements BorderGUIBuilder {
         JLabel tradeList = new JLabel("Available Trades");
         JTextArea tradeArea = new JTextArea();
         tg.initializeList(tradeArea);
-        atc.updateBut();
+        atc.updateList();
         JScrollPane jsp= new JScrollPane(tradeArea);
         panelW.setLayout(new BoxLayout(panelW, BoxLayout.Y_AXIS));
         panelW.add(tradeList);
@@ -84,7 +85,7 @@ public class AcceptTradeGUIBuilder implements BorderGUIBuilder {
             System.out.println(tradeNum);
             atc.submitBut(tradeNum);
         });
-        back.addActionListener(e -> atc.backBut(tf));
+        back.addActionListener(e -> atc.backBut());
         update.addActionListener(e -> atc.updateBut());
     }
 

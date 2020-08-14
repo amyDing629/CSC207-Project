@@ -3,6 +3,7 @@ package Trade.Adaptor.RequestTrade;
 import Inventory.UseCase.Inventory;
 import Inventory.Entity.Item;
 import Trade.Adaptor.BorderGUI;
+import Trade.Adaptor.iTradeController;
 import Trade.Entity.Trade;
 import User.Entity.ClientUser;
 import User.UseCase.UserManager;
@@ -19,7 +20,7 @@ import java.util.UUID;
  * [controller]
  * the action of trade depend on the input of user
  */
-public class RTradeController {
+public class RTradeController implements iRequestTradeController{
     private final UUID currUser;
     private UUID tarUser;
     private TradeManager tm;
@@ -29,13 +30,14 @@ public class RTradeController {
     RTradePresenter tp;
     BorderGUI bta;
     String it;
+    JFrame fr;
 
     /**
      * [constructor]
      * @param currUser the user that is using the system
      */
     RTradeController(UUID currUser,
-                     BorderGUI bta, String item){
+                     BorderGUI bta, String item, JFrame fr){
         this.currUser = currUser;
         this.tm = new TradeManager();
         this.um = new UserManager();
@@ -43,17 +45,14 @@ public class RTradeController {
         tp = new RTradePresenter(bta);
         this.bta = bta;
         it = item;
-
+        this.fr = fr;
     }
-
-
-
 
     /**
      * get owner of the item
      * @param item current item selected by currUser
      */
-    void getTarUser(String item){
+    public void getTarUser(String item){
         tarUser = iv.getItem(item).getOwnerUUID();
     }
 
@@ -62,7 +61,7 @@ public class RTradeController {
      * check the frozen status of two users.
      * @throws IOException one of the users's account is frozen
      */
-    boolean checkInput(String item){
+    private boolean checkInput(String item){
         if (getIsInTrade(item)){
             tp.inTradeError();
             return false;
@@ -93,8 +92,7 @@ public class RTradeController {
      * @return whether or not the trade is a oneway trade
      * @throws IOException the trade is not created
      */
-    boolean createTrade(String line, String item){
-        ClientUser user = um.getUser(currUser);
+    private boolean createTrade(String line, String item){
         LocalDateTime time = LocalDateTime.now();
         iv.setIsInTrade(item,true);
         switch (line) {
@@ -125,7 +123,7 @@ public class RTradeController {
      * @param item2 the second item
      * @throws IOException if the trade is not created
      */
-    void createTrade(String line, String item1, String item2){
+    private void createTrade(String line, String item1, String item2){
         iv.setIsInTrade(item1,true);
         iv.setIsInTrade(item2,true);
         LocalDateTime time = LocalDateTime.now();
@@ -146,7 +144,7 @@ public class RTradeController {
         }
     }
 
-    void updateTradeHistory() {
+    private void updateTradeHistory() {
         // System.out.println("userList:"+userManager.getUser UserManager userManager = new UserManager(gw);
         ClientUser curr = um.popUser(currUser);
         ClientUser tar = um.popUser(tarUser);
@@ -162,33 +160,9 @@ public class RTradeController {
 //    String checkTradeMeeting() {
 //        return tm.checkTradeMeeting(currTrade);
 //    }
-    /**
-     * confirm trade(agree with the trade)
-     */
-    void confirmTrade() throws FileNotFoundException {
-        tm.confirmTrade(currTrade);
-    }
 
-    /**
-     * set the status of trade to complete and make trade
-     */
-    void completeTrade() throws FileNotFoundException {
-        tm.completeTrade(currTrade);
-    }
 
-    /**
-     * set the status of trade to cancelled
-     */
-    void cancelTrade() throws FileNotFoundException {
-        tm.cancelTrade(currTrade);
-    }
-
-    Item getItem(String line){
-        return iv.getItem(line);
-
-    }
-
-    ArrayList<String> getSuggestedItemName(){
+    private ArrayList<String> getSuggestedItemName(){
         ArrayList<String> result = new ArrayList<>();
         for (String i: um.getWishLend(currUser)){
             if (um.getWishBorrow(tarUser).contains(i)){
@@ -198,27 +172,18 @@ public class RTradeController {
         return result;
     }
 
-    String printUnConfirmed(){
-        String result = "";
-        List<Trade> iU = tm.getUnconfirmed(currUser);
-        for (int i = 0; i < iU.size(); i++) {
-            result = result + i + ". " + iU.get(i).toString() + "\n";
-        }
-        return result;
-    }
-
-    boolean getIsInTrade(String it){
+    private boolean getIsInTrade(String it){
         return iv.getIsInTrade(it);
 
     }
 
-    void presentTradeInfo(){
+    public void presentTradeInfo(){
         ClientUser user = um.getUser(currUser);
         Item item = iv.getItem(it);
         tp.presentTradeInfo(user, item, um.getWishLend(currUser), getSuggestedItemName() );
     }
 
-    void onewayBut(String duration) throws FileNotFoundException {
+    public void onewayBut(String duration){
         if (it == null){
             tp.wrongInput();
         }else if (checkInput(it)){
@@ -233,7 +198,7 @@ public class RTradeController {
         }
     }
 
-    void twowayBut(String duration) throws FileNotFoundException {
+    public void twowayBut(String duration){
 
         String item = bta.getInput("input");
         tp.updateInputArea();
@@ -250,8 +215,8 @@ public class RTradeController {
         }
     }
 
-    void backBut(JFrame frame){
-        frame.setVisible(true);
+    public void backBut(){
+        fr.setVisible(true);
         tp.closeFrame();
     }
 

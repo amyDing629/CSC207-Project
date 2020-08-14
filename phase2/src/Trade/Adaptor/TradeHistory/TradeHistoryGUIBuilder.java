@@ -2,12 +2,13 @@ package Trade.Adaptor.TradeHistory;
 
 import Trade.Adaptor.BorderGUIBuilder;
 import Trade.Adaptor.BorderGUI;
+import Trade.Adaptor.iTradeController;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class TradeHistoryGUIBuilder implements BorderGUIBuilder {
-    TradeHistoryController thc;
+    iTradeController thc;
     BorderGUI bgUI;
 
     public TradeHistoryGUIBuilder(String currUser, JFrame tf){
@@ -38,8 +39,7 @@ public class TradeHistoryGUIBuilder implements BorderGUIBuilder {
         back.addActionListener(e -> thc.backBut());
 
         update.addActionListener(e -> {
-            thc.updateTrade();
-            thc.updateUser();
+            thc.updateBut();
         });
 
     }
@@ -50,7 +50,6 @@ public class TradeHistoryGUIBuilder implements BorderGUIBuilder {
         JPanel panel = new JPanel();
         JLabel tradeList = new JLabel("Complete Trade");
         JTextArea trade = new JTextArea();
-        trade.setText(thc.getTradeHistory());
         JScrollPane jsp= new JScrollPane(trade);
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.setPreferredSize(new Dimension(350, 380 ));
@@ -58,6 +57,7 @@ public class TradeHistoryGUIBuilder implements BorderGUIBuilder {
         panel.add(jsp);
         bgUI.initializeList(trade);
         bgUI.setWest(panel);
+        thc.updateList();
 
     }
 
@@ -78,7 +78,7 @@ public class TradeHistoryGUIBuilder implements BorderGUIBuilder {
         panelR.setPreferredSize(new Dimension(300,400));
         bgUI.initializeCurr(user);
         bgUI.setCenter(panelR);
-        thc.updateUser();
+        thc.updateBut();
 
 
     }

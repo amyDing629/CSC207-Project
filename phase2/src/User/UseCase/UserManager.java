@@ -162,24 +162,33 @@ public class UserManager {
     }
     //finished
     public int getWeekTransactionLimit(String a) {
+        dataAccess.deSerialize();
+        dataAccess.updateSer();
         return getUser(a).getWeekTransactionLimit();
     }
     //finished
     public int getIncompleteTransactionLimit(String a) {
+        dataAccess.deSerialize();
+        dataAccess.updateSer();
         return getUser(a).getIncompleteTransactionLimit();
     }
 
     //finished
     public int getDiff(String a) {
+        dataAccess.deSerialize();
+        dataAccess.updateSer();
         return getUser(a).getDiff();
     }
     //finished
     public String getPassword(ClientUser a) {
+        dataAccess.deSerialize();
+        dataAccess.updateSer();
         return a.getPassword();
     }
 
     //finished
-    public String getUsername(UUID a){return getUser(a).getUsername();}
+    public String getUsername(UUID a){
+        return getUser(a).getUsername();}
 
     //finished
     public UUID getId(ClientUser a) {
@@ -205,6 +214,7 @@ public class UserManager {
     }
 
     public void removeBWishes(String hi,ClientUser b){
+
         b.removeBWishes(hi);
     }
 
