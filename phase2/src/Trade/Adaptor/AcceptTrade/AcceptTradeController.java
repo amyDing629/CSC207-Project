@@ -46,19 +46,19 @@ public class AcceptTradeController implements iTradeController {
         return pattern.matcher(str).matches();
     }
 
-    void agreeTrade(){
+    private void agreeTrade(){
         Trade trade = tm.popTrade(currTrade);
         trade.setStatus(TradeStatus.incomplete);
         tm.addTrade(trade);
     }
 
-    void refuseTrade(){
+    private void refuseTrade(){
         Trade trade = tm.popTrade(currTrade);
         trade.setStatus(TradeStatus.cancelled);
         tm.addTrade(trade);
     }
 
-    void agreeBut(Boolean agree){
+    private void agreeBut(Boolean agree){
         if (currTrade == null){
             tp.notTradeSelected();
         } else{

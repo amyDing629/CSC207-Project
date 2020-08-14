@@ -14,8 +14,6 @@ public class TradeHistoryController implements iTradeController {
     TradeManager tm;
     UserManager um;
     iTradeHistoryPresenter tp;
-    List<Trade> tradeList;
-    List<String> userList;
     JFrame fr;
 
     public TradeHistoryController(String currUser, BorderGUI tgp, JFrame fr){
@@ -28,18 +26,6 @@ public class TradeHistoryController implements iTradeController {
     }
 
 
-    public String getTradeHistory(){
-        String result = "";
-        List<Trade> tHis = tm.getComplete(currUser);
-        for (int i = 0; i < tHis.size(); i++) {
-           result = result + (i + 1) + ". " + tHis.get(i).toString()+"\n";
-        }
-        if (result.equals("")){
-            return "no trade";
-        }
-        return result;
-    }
-
     @Override
     public UUID getCurrTrade(String num) {
         return null;
@@ -51,23 +37,14 @@ public class TradeHistoryController implements iTradeController {
         tp.closeFrame();
     }
 
-    List<Trade> getComplete() {
-        tradeList = tm.getComplete(currUser);
-        return tradeList;
+
+
+    private void updateTrade(){
+        tp.updateTrade(tm.getComplete(currUser));
     }
 
-    List<String> getFreUser() {
-        userList = um.getFrequentUser(currUser);
-        return userList;
-    }
-
-
-    public void updateTrade(){
-        tp.updateTrade(getComplete());
-    }
-
-    public void updateUser(){
-        tp.updateFreUser(getFreUser());
+    private void updateUser(){
+        tp.updateFreUser(um.getFrequentUser(currUser));
 
     }
 

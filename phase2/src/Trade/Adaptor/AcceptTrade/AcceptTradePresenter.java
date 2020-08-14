@@ -28,7 +28,7 @@ public class AcceptTradePresenter implements iTradePresenter {
         agreeTrade(tl, agree);
     }
 
-    public void agreeTrade(List<Trade> tl, boolean agree){
+    private void agreeTrade(List<Trade> tl, boolean agree){
         String result = "";
         for (int i = 0; i < tl.size(); i++) {
             result = result + i + ". " + tl.get(i).toString() + "\n";
