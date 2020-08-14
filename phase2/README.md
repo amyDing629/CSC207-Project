@@ -3,7 +3,10 @@
 This is a program that allows users to trade different items with each other.
 
   - Language: Java
-  - Intellij
+  - IntelliJ
+  
+  - SDK: java version 1.8
+  - Project Language level: 8 - Lambdas, type annotations, etc
  
 # Prerequisites
 
