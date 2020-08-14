@@ -87,16 +87,17 @@ public class MainView {
         } else { // second meeting view
 
             confirmButton.setVisible(true);
+            setUpButton.setVisible(false);
+            editButton.setVisible(false);
+            agreeButton.setVisible(false);
 
             if (model.isLastUserCurrUser()) {
-                setUpButton.setVisible(false);
-                editButton.setVisible(false);
-                agreeButton.setVisible(false);
                 confirmButton.setVisible(false);
                 welcomeTextArea.setText("Please wait the other user to confirm!");
             }
 
             if (meetingStatus.equals(MeetingStatus.COMPLETED)) {
+                confirmButton.setVisible(false);
                 welcomeTextArea.setText("Meeting Confirmed by both users!");
             }
         }
