@@ -95,12 +95,45 @@
      To decouple each part, interfaces are added among the layer boundaries.
      
 ## Builder Design Pattern
+https://www.geeksforgeeks.org/builder-design-pattern/
+
+The link above is a basic overview of how I used builder design pattern to build GUI for inventory and trade system.
  1. Classes Involved
-    -   `.java`
- 2. Why you implement this DP
+    - Interfaces:
      
+     `GUIPlan.java`, `InputAndPresent`, `BorderGUIBuilder`, `BorderLayoutGUI`
+    - Other classes: 
+    
+    `BorderGUIEngineer`, `BorderGUI`, and all Builders.
+ 2. Why you implement this DP
+    - Separate the construction of GUI into different parts so that the code is more organized and easy to read.
+    - Separate the construction and representation of GUI
+    - Easier for extension. -> Open and Close principle
  3. How you implement this DP
- 
+    - GUIPlan has basic functions of a GUI, including set visible to true and setFrame.
+    - InputAndPresent are for presenters to "output" the information to users.
+    - BorderLayoutGUi decides the layout used for creating the GUI. (If you want to build GUI with another layout,
+    you can just create another interface and implement it instead of this one).
+    - BorderGUIBuilders defines all of the steps(abstract) that must be taken in order to correctly create a GUI with BorderLayout.
+    - Specific Builders: contains specific and different construction method to constructe different GUIs.
+    - BorderGUIEngineer controls the algorithm that generates the final product object. 
+    
+
+## MVC (Model-View-Controller) Design Pattern
+
+ 1. Classes Involved
+    - Adapters in Trade and Inventory System
+ 2. Why you implement this DP
+    - Separate controllers and presenters so that multiple views are available without changing controllers.
+    - Adapt to Single Responsibility Principle. Controllers are responsible for reacting to the Model with users' action, 
+    such as clicking a button. While presenters are responsible for getting information from the Model and present to users.
+ 3. How you implement this DP
+    - Builders connect controllers with view. Whenever users click a button, controller methods will be called and make 
+    modifications to the backend system(Model). After an action is performed by the controller, the controller will call 
+    presenter's method to show users the information(Message) from the backend system(Model). 
+    - Also, controller and presenter interfaces are implemented for better decoupling.
+    
+    
 ## Factory Design Pattern
  1. Classes Involved
     -   `.java`
@@ -114,3 +147,5 @@
  2. Why you implement this DP
      
  3. How you implement this DP
+ 
+## Visitor Design Pattern

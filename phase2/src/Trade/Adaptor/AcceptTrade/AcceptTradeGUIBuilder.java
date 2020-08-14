@@ -53,13 +53,13 @@ public class AcceptTradeGUIBuilder implements BorderGUIBuilder {
         JLabel tradeList = new JLabel("Available Trades");
         JTextArea tradeArea = new JTextArea();
         tg.initializeList(tradeArea);
-        atc.updateList();
         JScrollPane jsp= new JScrollPane(tradeArea);
         panelW.setLayout(new BoxLayout(panelW, BoxLayout.Y_AXIS));
         panelW.add(tradeList);
         panelW.add(jsp);
         panelW.setPreferredSize(new Dimension(380,370));
         tg.setWest(panelW);
+        atc.updateList();
     }
 
     @Override
