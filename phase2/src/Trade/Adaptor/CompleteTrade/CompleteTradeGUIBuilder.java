@@ -3,19 +3,20 @@ package Trade.Adaptor.CompleteTrade;
 import Trade.Adaptor.BorderGUIBuilder;
 import Trade.Adaptor.BorderGUI;
 import Trade.Adaptor.TradeGUIHelper;
+import Trade.Adaptor.iTradeController;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
 public class CompleteTradeGUIBuilder implements BorderGUIBuilder {
-    CTradeController ctc;
+    iTradeController ctc;
     JFrame tf;
     BorderGUI tg;
 
     public CompleteTradeGUIBuilder(String currUser, JFrame tf) {
         tg = new BorderGUI();
-        ctc = new CTradeController(currUser, tg);
+        ctc = new CTradeController(currUser, tg, tf);
         this.tf = tf;
     }
 
@@ -39,7 +40,7 @@ public class CompleteTradeGUIBuilder implements BorderGUIBuilder {
         panelE.setLayout(new BoxLayout(panelE, BoxLayout.Y_AXIS));
         panelE.add(action);
         action.addActionListener(e -> {
-            ctc.action();
+            ctc.performAction1();
         });
         tg.setEast(panelE);
 
@@ -81,7 +82,7 @@ public class CompleteTradeGUIBuilder implements BorderGUIBuilder {
             String tradeNum = tg.getInput("input");
             ctc.submitBut(tradeNum);
         });
-        back.addActionListener(e -> ctc.backBut(tf));
+        back.addActionListener(e -> ctc.backBut());
         update.addActionListener(e -> ctc.updateBut());
     }
 

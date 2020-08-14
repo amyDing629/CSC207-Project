@@ -6,6 +6,7 @@ import MeetingSystem.Adapter.MainViewPresenter;
 import MeetingSystem.Entity.Meeting;
 import MeetingSystem.MeetingStatus;
 import MeetingSystem.UseCase.MeetingActionManager;
+import Trade.Adaptor.iTradeController;
 import Trade.Entity.Trade;
 import Trade.TradeStatus;
 import User.Entity.ClientUser;
@@ -17,7 +18,7 @@ import java.util.Observer;
 import java.util.UUID;
 import java.util.regex.Pattern;
 
-public class CTradeController implements Observer {
+public class CTradeController implements Observer, iTradeController {
     UUID currUser;
     TradeManager tm;
     UserManager um;
@@ -25,12 +26,14 @@ public class CTradeController implements Observer {
     Boolean isFirst;
     CTradePresenter tp;
     BorderGUI tg;
+    JFrame fr;
 
-    public CTradeController(String currUser, BorderGUI tg) {
+    public CTradeController(String currUser, BorderGUI tg, JFrame fr) {
 
         tm = new TradeManager();
         um = new UserManager();
         tp = new CTradePresenter(tg);
+        this.fr = fr;
         this.currUser = um.nameToUUID(currUser);
         this.tg = tg;
     }
@@ -47,7 +50,7 @@ public class CTradeController implements Observer {
         return pattern.matcher(str).matches();
     }
 
-    UUID getCurrTrade(String num) {
+    public UUID getCurrTrade(String num) {
         int tradeNum = Integer.parseInt(num.trim());
         currTrade = tm.getIncomplete(currUser).get(tradeNum).getId();
         return currTrade;
@@ -147,7 +150,7 @@ public class CTradeController implements Observer {
         tp.noTradeCurr();
     }
 
-    void submitBut(String tradeNum){
+    public void submitBut(String tradeNum){
         tp.resetInputArea();
         if (!checkInput(tradeNum)){
             tp.wrongInput();
@@ -166,13 +169,23 @@ public class CTradeController implements Observer {
         tp.noTradeCurr();
     }
 
-    void backBut(JFrame frame){
-        frame.setVisible(true);
+    public void backBut(){
+        fr.setVisible(true);
         tp.closeFrame();
     }
 
     public void noTradeSelected(){
         tp.noTradeCurr();
+    }
+
+    @Override
+    public void performAction1() {
+        action();
+    }
+
+    @Override
+    public void performAction2() {
+
     }
 
     public void checkCurrTrade(Trade trade){

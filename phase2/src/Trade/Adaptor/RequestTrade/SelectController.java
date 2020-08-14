@@ -1,5 +1,6 @@
 package Trade.Adaptor.RequestTrade;
 
+import Inventory.Adaptor.iItemController;
 import Inventory.UseCase.Inventory;
 import Inventory.Entity.Item;
 import Trade.Adaptor.*;
@@ -9,7 +10,7 @@ import javax.swing.*;
 import java.util.List;
 import java.util.UUID;
 
-public class SelectController {
+public class SelectController implements iItemController {
     UUID currUser;
     UserManager um;
     Inventory iv;
@@ -30,7 +31,12 @@ public class SelectController {
         this.currUser = um.nameToUUID(currUser);
     }
 
-    public String getWishList(){
+    @Override
+    public void updateCurr() {
+        sp.notItemSelected();
+    }
+
+    public String printList(){
         String result = "";
         for (String it: um.getWishBorrow(currUser)){
             result = result + it + "\n";
@@ -42,18 +48,18 @@ public class SelectController {
         return um.getWishBorrow(currUser).contains(str);
     }
 
-    Item getItem(String str){
-        return iv.getItem(str);
-    }
 
 
-    String getItemInfo(String str){
-        currItem = str;
-        Item it = iv.getItem(str);
+    public String getItemInfo(Item it){
         return "Item Info:\nitem name: " + iv.getName(it) + "\n" +
                 "item description: " + iv.getDescription(it)
                 + "\n" + "item owner: " + um.UUIDToName(it.getOwnerUUID()) ;
 
+    }
+
+    @Override
+    public boolean isInList(String name) {
+        return false;
     }
 
     void enterRTradeGUI(){
@@ -77,24 +83,46 @@ public class SelectController {
         return wishList;
     }
 
-    void updateList(){
+    public void updateList(){
         sp.updateFrame(getWishBorrow());
     }
 
+    @Override
+    public void updateBut() {
+        updateList();
+        updateCurr();
 
-    void submitBut(){
+    }
+
+    @Override
+    public void performActionOne() {
+        enterRTradeGUI();
+    }
+
+    @Override
+    public void performActionTwo() {
+
+    }
+
+    @Override
+    public void performActionThree() {
+
+    }
+
+
+    public void submitBut(){
         String name = bta.getInput("input");
         sp.resetInputArea();
         if (!checkInput(name)){
             sp.wrongInput();
         }else{
             currItem = name;
-            sp.selectItemInfo(getItemInfo(name));
+            sp.selectItemInfo(getItemInfo(iv.getItem(name)));
             sp.updateSuccess();
         }
     }
 
-    void backBut(){
+    public void backBut(){
         fr.setVisible(true);
         sp.closeFrame();
     }

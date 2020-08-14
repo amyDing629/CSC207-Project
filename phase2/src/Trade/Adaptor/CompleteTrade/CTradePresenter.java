@@ -64,7 +64,7 @@ public class CTradePresenter {
     }
 
     public void notTradeSelected(){
-        tg.setMsgText("no trade is selected");
+        tg.setMsgText("no trade selected");
     }
 
 

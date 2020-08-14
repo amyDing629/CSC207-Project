@@ -1,5 +1,6 @@
 package Trade.Adaptor.RequestTrade;
 
+import Inventory.Adaptor.iItemController;
 import Trade.Adaptor.BorderGUIBuilder;
 import Trade.Adaptor.BorderGUI;
 
@@ -8,7 +9,7 @@ import java.awt.*;
 
 public class SelectItemToTradeBuilder implements BorderGUIBuilder {
 
-    SelectController sc;
+    iItemController sc;
     BorderGUI bta;
 
     public SelectItemToTradeBuilder(String currUser, JFrame tFrame){
@@ -40,7 +41,7 @@ public class SelectItemToTradeBuilder implements BorderGUIBuilder {
         JButton request = new JButton("Request Trade");
         panelE.add(request);
         bta.setEast(panelE);
-        request.addActionListener(e -> sc.enterRTradeGUI());
+        request.addActionListener(e -> sc.performActionOne());
 
 
     }
