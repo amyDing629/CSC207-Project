@@ -79,16 +79,18 @@ public class AwardActivities {
      * @param selected the trade user selected to be bonus
      */
     public void getBonus(UUID userId, Trade selected){
-        ClientUser user = this.um.popUser(userId);
+        ClientUser user = this.um.getUser(userId);
         if (selected == null){
             pp.notTradeSelected();
         }else if (pm.getUserPoints(user) < pm.getExStandard()){
            pp.pointNotEnough();
         }
         else{
-            user.addBonusTrade(selected.getId());
+            ClientUser u1 = this.um.popUser(userId);
+            u1.addBonusTrade(selected.getId());
+            this.um.addUser(u1);
             this.pm.setUserPoints(user.getId());
-            this.um.addUser(user);
+            pp.changeSuccess();
         }
 
     }
@@ -114,13 +116,16 @@ public class AwardActivities {
         pp.updatePoint(um.getUser(currUser).getBonusPoints());
         noTradeSelected();
         pp.resetCurr();
-
     }
 
     public void updatePoint(){
         ClientUser user = um.getUser(currUser);
         pm.setUserPoints(user.getId());
         pp.updatePoint(pm.getUserPoints(user));
+    }
+
+    public void updateStandard(){
+        pp.updateStandard(pm.getExStandard());
     }
 
     public void noTradeSelected(){
@@ -130,7 +135,7 @@ public class AwardActivities {
     public void ebBut(){
         getBonus(um.getUser(currUser).getId(), currTrade);
         updateBut();
-        pp.changeSuccess();
+        //pp.changeSuccess();
     }
 
     public void updateList(){

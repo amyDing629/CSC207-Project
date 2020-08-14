@@ -40,10 +40,20 @@ public class PointManager {
     /**
      * Set (update) the bonus points for particular user and update the pointList.
      */
-    public void setUserPoints(UUID user) {
-        int newPoint = this.tm.getComplete(user).size() - um.getSelectedBonusTrades(user).size() * this.exStandard;
-        um.getUser(user).setBonusPoints(newPoint);
-        this.pointList.put(um.getUser(user).getId(), newPoint);
+    public void setUserPoints(UUID userId) {
+        int newPoint = this.tm.getComplete(userId).size() - um.getSelectedBonusTrades(userId).size() * this.exStandard;
+        ClientUser user = um.getUser(userId);
+        if (user == null) {
+            System.out.println("User is null");
+        }else{
+            ClientUser user1 = um.popUser(userId);
+            user1.setBonusPoints(newPoint);
+            this.pointList.put(user1.getId(), newPoint);
+            um.addUser(user1);
+        }
+        //um.addUser(user);
+        //um.getUser(user).setBonusPoints(newPoint);
+        //this.pointList.put(um.getUser(user).getId(), newPoint);
     }
 
     /**
@@ -81,38 +91,6 @@ public class PointManager {
      */
     public void setExStandard(int newStandard) {
         this.exStandard = newStandard;
-    }
-
-
-
-    /** TODO: May be deleted
-     * Update the number of trades that each user create since date dateTime.
-     * @param dateTime Count the number of trades (not cancelled) after this dateTime.
-     */
-    public void CountPointsSince(LocalDateTime dateTime) {
-        for (UUID userId: this.pointList.keySet()) {
-            List<Trade> trades = this.tm.getAllTrade(userId);
-            int count = 0;
-            for (Trade t: trades) {
-                if (t.getCreateTime().isAfter(dateTime) && !t.getStatus().equals(TradeStatus.cancelled)) {
-                    count++;
-                }
-            }this.pointList.replace(userId, count);
-        }
-    }
-
-    /**
-     * Get the ID of users who trade most frequently
-     */
-    public Map<UUID, Integer> getMostFreq() {
-        Map<UUID, Integer> result = new HashMap<>();
-        List<Integer> valueList = new ArrayList<>(this.pointList.values());
-        Integer max = Collections.max(valueList);
-        for (Map.Entry e: this.pointList.entrySet()){
-            if (e.getValue().equals(max)) {
-                result.put((UUID) e.getKey(), max);
-            }
-        }return result;
     }
 
 
