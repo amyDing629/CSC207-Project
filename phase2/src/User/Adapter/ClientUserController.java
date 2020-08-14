@@ -105,6 +105,11 @@ public class ClientUserController {
         }
     }
 
+
+
+    public String UUIDToName(UUID userID){
+        return um.UUIDToName(userID);
+    }
     public String getPassword(String username){
         return um.getPassword(um.getUser(username));
     }
@@ -116,4 +121,24 @@ public class ClientUserController {
     public ArrayList<ArrayList<String>> getActions(String username) {
         return um.getActions(um.getUser(username));
     }
+
+    public int readDiff(String username) {
+        return um.readDiff(username);
+    }
+
+    public int getDiff(String a) {
+        return um.getDiff(a);
+    }
+
+    public int getWeekTransactionLimit(String a) {
+        return um.getWeekTransactionLimit(a);
+    }
+
+    public int getIncompleteTransactionLimit(String a) {
+        return um.getIncompleteTransactionLimit(a);
+    }
+
+    public int getTradeNumber(String username) {return um.getTradeNumber(username);}
+
+    public int getIncompleteTransaction(UUID userId) {return um.getIncompleteTransaction(userId);}
 }

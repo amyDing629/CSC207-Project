@@ -1,5 +1,7 @@
 package User.Entity;
 
+import Trade.Entity.Trade;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -295,13 +297,6 @@ public class ClientUser implements Serializable {
      */
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    /**
-     * return the status that whether the user can borrow or not
-     */
-    public boolean getIsBorrow() {
-        return isBorrow;
     }
 
     /**

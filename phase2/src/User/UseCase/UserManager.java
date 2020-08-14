@@ -1,10 +1,12 @@
 package User.UseCase;
 
 import Trade.Entity.Trade;
+import Trade.GateWay.TradeDataAccess;
 import Trade.UseCase.TradeManager;
 import User.Entity.ClientUser;
 import User.Gateway.DataAccess;
 import User.Gateway.UserDataAccess;
+import Trade.TradeStatus;
 
 import java.time.LocalDateTime;
 import java.util.*;
@@ -16,6 +18,7 @@ import java.util.*;
 public class UserManager {
 
 
+    DataAccess tradeAccess = new TradeDataAccess();
     DataAccess dataAccess = new UserDataAccess();
 
     /**
@@ -228,6 +231,39 @@ public class UserManager {
 
     public List<UUID> getSelectedBonusTrades(UUID userID){
         return getUser(userID).getSelectedBonusTrades();
+    }
+
+    public int getTradeNumber(String username) {
+        ClientUser user = (ClientUser) dataAccess.getObject(username);
+
+        if(user.getTradeHistory().size() == 0){return 0;}
+        Trade s = getTrade(user.getTradeHistory().get(user.getTradeHistory().size() - 1));
+        LocalDateTime x  = s.getCreateTime();
+        LocalDateTime y = x.minusDays(7);
+        int number = 1;
+        for (UUID i : user.getTradeHistory()){
+            if(getTrade(i).getCreateTime().isAfter(y) && getTrade(i).getCreateTime().isBefore(x)){
+                number ++;
+            }
+        }
+        return number;
+    }
+
+    public Trade getTrade(UUID id) {
+        return (Trade) tradeAccess.getObject(id);
+    }
+
+    public int getIncompleteTransaction(UUID userId) {
+        ClientUser user = (ClientUser) dataAccess.getObject(userId);
+
+        int number = 0;
+        for (UUID i : user.getTradeHistory()) {
+
+            if (getTrade(i).getStatus().equals(TradeStatus.incomplete)) {
+                number++;
+            }
+        }
+        return number;
     }
 
 }
