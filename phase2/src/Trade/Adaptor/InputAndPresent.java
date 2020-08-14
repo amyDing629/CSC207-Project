@@ -5,7 +5,6 @@ import java.awt.*;
 import java.util.HashMap;
 
 public interface InputAndPresent {
-    HashMap<String, TextArea> inputs = new HashMap<String, TextArea>();
 
     String getInput(String key);
     void setInput(String key, String contents);

@@ -15,6 +15,7 @@ public class ExStandardGUI {
     public ExStandardGUI(ClientUserController uc ,JFrame pFrame) {
         this.uc=uc;
         this.pFrame=pFrame;
+        this.ac = new AdminController();
     }
 
     public void run(String name) {
