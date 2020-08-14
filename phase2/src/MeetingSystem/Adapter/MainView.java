@@ -164,6 +164,8 @@ public class MainView {
         });
         helpButton.addActionListener(e -> {
             // TODO: go to help view
+            HelpViewPresenter helpViewPresenter = new HelpViewPresenter();
+            helpViewPresenter.run();
         });
     }
 
