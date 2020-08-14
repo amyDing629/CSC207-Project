@@ -7,7 +7,7 @@ import Trade.Adaptor.InputAndPresent;
  * present information of the inventory system to user.
  */
 public class InventoryPresenter implements iItemPresenter {
-    InputAndPresent bta;
+    private final InputAndPresent bta;
 
     /**
      * [constructor]

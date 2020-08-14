@@ -4,7 +4,7 @@ import Trade.Adaptor.BorderGUI;
 import Trade.Adaptor.InputAndPresent;
 
 public class MarketPresenter implements iMarketPresenter {
-    InputAndPresent bta;
+    private final InputAndPresent bta;
 
     public MarketPresenter(BorderGUI bta){
         this.bta = bta;

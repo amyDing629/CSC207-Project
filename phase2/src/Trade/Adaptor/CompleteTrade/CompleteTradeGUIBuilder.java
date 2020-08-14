@@ -11,13 +11,11 @@ import java.util.ArrayList;
 
 public class CompleteTradeGUIBuilder implements BorderGUIBuilder {
     iTradeController ctc;
-    JFrame tf;
     BorderGUI tg;
 
     public CompleteTradeGUIBuilder(String currUser, JFrame tf) {
         tg = new BorderGUI();
         ctc = new CTradeController(currUser, tg, tf);
-        this.tf = tf;
     }
 
     @Override

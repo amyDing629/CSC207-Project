@@ -10,12 +10,10 @@ import java.awt.*;
 public class AcceptTradeGUIBuilder implements BorderGUIBuilder {
     BorderGUI tg;
     iTradeController atc;
-    JFrame tf;
 
     public AcceptTradeGUIBuilder(String user, JFrame tf){
         tg = new BorderGUI();
         atc = new AcceptTradeController(user, tg, tf);
-        this.tf = tf;
     }
 
     @Override

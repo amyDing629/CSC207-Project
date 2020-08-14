@@ -1,13 +1,14 @@
 package Trade.Adaptor.RequestTrade;
 
 import Trade.Adaptor.BorderGUI;
+import Trade.Adaptor.InputAndPresent;
 import Trade.Adaptor.iTradePresenter;
 
 import java.util.List;
 
 public class SelectPresenter implements iSelectPresenter {
 
-    BorderGUI bta;
+    private final InputAndPresent bta;
 
     public SelectPresenter(BorderGUI bta){
         this.bta = bta;

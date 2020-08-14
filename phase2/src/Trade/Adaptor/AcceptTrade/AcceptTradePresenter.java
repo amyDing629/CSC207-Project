@@ -4,6 +4,7 @@ package Trade.Adaptor.AcceptTrade;
 import MeetingSystem.UseCase.MeetingActionManager;
 import MeetingSystem.UseCase.MeetingManager;
 import Trade.Adaptor.BorderGUI;
+import Trade.Adaptor.InputAndPresent;
 import Trade.Adaptor.iTradePresenter;
 import Trade.Entity.Trade;
 import User.Entity.ClientUser;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AcceptTradePresenter implements iTradePresenter {
-    BorderGUI tg;
+    private final InputAndPresent tg;
 
     public AcceptTradePresenter(BorderGUI tg) {
         this.tg = tg;
