@@ -1,5 +1,6 @@
 package User.GUI;
 
+import User.Adapter.ApprovalController;
 import User.Adapter.ClientUserController;
 import User.UseCase.ApprovalManager;
 
@@ -7,8 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class RequestUnfreezeTicketGUI {
-
-    ApprovalManager iam = new ApprovalManager();
+    ApprovalController ac;
     ClientUserController uc;
     JFrame pFrame;
     JFrame frame;
@@ -58,7 +58,7 @@ public class RequestUnfreezeTicketGUI {
         });
         submitButton.addActionListener(e -> {
             frame.setVisible(false);
-            iam.addApprovals(uc.getUser(name),textLabel.getText());
+            ac.addApprovals(name,textLabel.getText());
             JOptionPane.showMessageDialog(null,"Request successfully");
             JOptionPane.showMessageDialog(null,"Please wait for the admin to approve");
             UserFreezeSystem d = new UserFreezeSystem(uc,frame);
