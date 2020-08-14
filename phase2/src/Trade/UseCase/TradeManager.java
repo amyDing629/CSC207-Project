@@ -158,8 +158,12 @@ public class TradeManager{
         ClientUser user = (ClientUser) userAccess.getObject(userID);
 
         ArrayList<Trade> b = new ArrayList<>();
-        for (UUID i : user.getTradeHistory()) {
-            b.add(getTrade(i));
+        if (user == null) {
+            System.out.println("user is null");
+        }else{
+            for (UUID i : user.getTradeHistory()) {
+                b.add(getTrade(i));
+            }
         }
         return b;
     }
