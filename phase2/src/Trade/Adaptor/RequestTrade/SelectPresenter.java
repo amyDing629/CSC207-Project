@@ -1,10 +1,11 @@
 package Trade.Adaptor.RequestTrade;
 
 import Trade.Adaptor.BorderGUI;
+import Trade.Adaptor.iTradePresenter;
 
 import java.util.List;
 
-public class SelectPresenter {
+public class SelectPresenter implements iSelectPresenter {
 
     BorderGUI bta;
 

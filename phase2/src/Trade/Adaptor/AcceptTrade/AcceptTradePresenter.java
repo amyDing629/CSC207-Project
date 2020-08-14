@@ -4,14 +4,14 @@ package Trade.Adaptor.AcceptTrade;
 import MeetingSystem.UseCase.MeetingActionManager;
 import MeetingSystem.UseCase.MeetingManager;
 import Trade.Adaptor.BorderGUI;
+import Trade.Adaptor.iTradePresenter;
 import Trade.Entity.Trade;
 import User.Entity.ClientUser;
 import User.UseCase.UserManager;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class AcceptTradePresenter {
+public class AcceptTradePresenter implements iTradePresenter {
     BorderGUI tg;
 
     public AcceptTradePresenter(BorderGUI tg) {
@@ -23,7 +23,12 @@ public class AcceptTradePresenter {
 
     }
 
-    public void agreeTrade(List<Trade> tl, boolean agree){
+    @Override
+    public void ActionSuccess(List<Trade> tl, boolean agree) {
+        agreeTrade(tl, agree);
+    }
+
+    private void agreeTrade(List<Trade> tl, boolean agree){
         String result = "";
         for (int i = 0; i < tl.size(); i++) {
             result = result + i + ". " + tl.get(i).toString() + "\n";

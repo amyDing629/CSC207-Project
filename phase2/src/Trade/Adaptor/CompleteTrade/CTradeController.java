@@ -7,6 +7,7 @@ import MeetingSystem.Entity.Meeting;
 import MeetingSystem.MeetingStatus;
 import MeetingSystem.UseCase.MeetingActionManager;
 import Trade.Adaptor.iTradeController;
+import Trade.Adaptor.iTradePresenter;
 import Trade.Entity.Trade;
 import Trade.TradeStatus;
 import User.Entity.ClientUser;
@@ -24,7 +25,7 @@ public class CTradeController implements Observer, iTradeController {
     UserManager um;
     UUID currTrade;
     Boolean isFirst;
-    CTradePresenter tp;
+    iTradePresenter tp;
     BorderGUI tg;
     JFrame fr;
 
@@ -57,7 +58,7 @@ public class CTradeController implements Observer, iTradeController {
     }
 
 
-    public boolean enterFirst() {
+    private boolean enterFirst() {
         Trade tr = tm.getTrade(currTrade);
         isFirst = (tr.getSecondMeeting() == null);
         return isFirst;
@@ -103,14 +104,14 @@ public class CTradeController implements Observer, iTradeController {
 
     }
 
-    void completeTrade() {
+    private void completeTrade() {
         Trade trade = tm.popTrade(currTrade);
         trade.setStatus(TradeStatus.complete);
         tm.addTrade(trade);
         makeTrade();
     }
 
-    void makeTrade() {
+    private void makeTrade() {
         Trade tr = tm.popTrade(currTrade);
         if (tr.getType().equals("one way")) {
             ClientUser bor = um.popUser(tr.getUsers().get(0));
@@ -141,7 +142,7 @@ public class CTradeController implements Observer, iTradeController {
         }
     }
 
-    void closeFrame(){
+    private void closeFrame(){
         tp.closeFrame();
     }
 

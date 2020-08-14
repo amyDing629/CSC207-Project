@@ -17,7 +17,7 @@ public class SelectController implements iItemController {
     String currItem;
     BorderGUI bta;
     TradeManager tm;
-    SelectPresenter sp;
+    iSelectPresenter sp;
     List<String> wishList;
     JFrame fr;
 

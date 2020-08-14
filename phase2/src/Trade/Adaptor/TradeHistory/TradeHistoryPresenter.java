@@ -8,7 +8,7 @@ import User.UseCase.UserManager;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TradeHistoryPresenter {
+public class TradeHistoryPresenter implements iTradeHistoryPresenter {
 
     BorderGUI tgp;
 

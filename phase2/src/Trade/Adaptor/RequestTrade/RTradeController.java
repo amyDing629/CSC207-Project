@@ -27,7 +27,7 @@ public class RTradeController implements iRequestTradeController{
     private UUID currTrade;
     private final UserManager um;
     private final Inventory iv;
-    RTradePresenter tp;
+    iRTradePresenter tp;
     BorderGUI bta;
     String it;
     JFrame fr;

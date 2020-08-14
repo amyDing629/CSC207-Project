@@ -2,13 +2,14 @@ package Trade.Adaptor.CompleteTrade;
 
 import MeetingSystem.UseCase.MeetingActionManager;
 import Trade.Adaptor.BorderGUI;
+import Trade.Adaptor.iTradePresenter;
 import Trade.Entity.Trade;
 import User.UseCase.UserManager;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CTradePresenter {
+public class CTradePresenter implements iTradePresenter {
     BorderGUI tg;
 
     public CTradePresenter(BorderGUI tg) {
@@ -65,6 +66,9 @@ public class CTradePresenter {
 
     public void notTradeSelected(){
         tg.setMsgText("no trade selected");
+    }
+
+    public void ActionSuccess(List<Trade> tl, boolean agree) {
     }
 
 
