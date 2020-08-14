@@ -13,7 +13,7 @@ public class TradeHistoryController implements iTradeController {
     UUID currUser;
     TradeManager tm;
     UserManager um;
-    TradeHistoryPresenter tp;
+    iTradeHistoryPresenter tp;
     List<Trade> tradeList;
     List<String> userList;
     JFrame fr;

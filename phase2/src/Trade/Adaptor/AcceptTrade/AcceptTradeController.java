@@ -2,23 +2,22 @@ package Trade.Adaptor.AcceptTrade;
 
 import Trade.Adaptor.BorderGUI;
 import Trade.Adaptor.iTradeController;
+import Trade.Adaptor.iTradePresenter;
 import Trade.Entity.Trade;
 import Trade.TradeStatus;
 import Trade.UseCase.TradeManager;
 import User.UseCase.UserManager;
 import javax.swing.*;
-import java.util.List;
 import java.util.UUID;
 import java.util.regex.Pattern;
 
 public class AcceptTradeController implements iTradeController {
-    UUID currUser;
-    TradeManager tm;
-    UserManager um;
-    List<Trade> tradeList;
-    UUID currTrade;
-    AcceptTradePresenter tp;
-    JFrame frame;
+    private final UUID currUser;
+    private final TradeManager tm;
+    private UserManager um;
+    private UUID currTrade;
+    private final iTradePresenter tp;
+    private final JFrame frame;
 
     public AcceptTradeController(String userName, BorderGUI tg, JFrame fr){
         this.tm = new TradeManager();
@@ -28,20 +27,16 @@ public class AcceptTradeController implements iTradeController {
         currUser = um.nameToUUID(userName);
     }
 
-    List<Trade> getUnconfirmed(){
-        tradeList = tm.getUnconfirmed(currUser);
-        return tradeList;
-    }
 
     boolean checkInput(String num){
         if (!isNum(num)){
             return false;
-        }else return !(Integer.parseInt(num) < 0 | Integer.parseInt(num) >= tradeList.size());
+        }else return !(Integer.parseInt(num) < 0 | Integer.parseInt(num) >= tm.getUnconfirmed(currUser).size());
     }
 
     public UUID getCurrTrade(String num){
         int tradeNum = Integer.parseInt(num.trim());
-        currTrade = tradeList.get(tradeNum).getId();
+        currTrade = tm.getUnconfirmed(currUser).get(tradeNum).getId();
         return currTrade;
 
     }
@@ -69,10 +64,10 @@ public class AcceptTradeController implements iTradeController {
         } else{
             if (agree){
                 agreeTrade();
-                tp.agreeTrade(tm.getUnconfirmed(currUser), true);
+                tp.ActionSuccess(tm.getUnconfirmed(currUser), true);
             }else{
                 refuseTrade();
-                tp.agreeTrade(tm.getUnconfirmed(currUser), false);
+                tp.ActionSuccess(tm.getUnconfirmed(currUser), false);
             }
             currTrade = null;
 
@@ -95,12 +90,12 @@ public class AcceptTradeController implements iTradeController {
     }
 
     public void updateBut(){
-        tp.updateFrame(getUnconfirmed());
+        tp.updateFrame(tm.getUnconfirmed(currUser));
         tp.noTradeCurr();
     }
 
     public void updateList(){
-        tp.updateFrame(getUnconfirmed());
+        tp.updateFrame(tm.getUnconfirmed(currUser));
     }
 
     public void noTradeSelected(){
