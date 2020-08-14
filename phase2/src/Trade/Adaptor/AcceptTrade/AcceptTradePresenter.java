@@ -47,7 +47,7 @@ public class AcceptTradePresenter {
     }
 
     public void resetInputArea(){
-        tg.setInput("input", "trade number");
+        tg.setInput("input", "Trade Number");
     }
 
     public void presentTradeInfo(Trade trade){
