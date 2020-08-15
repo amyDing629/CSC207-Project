@@ -34,6 +34,7 @@ public class ClientUserGUI implements View {
         controller = new ClientUserController();
     }
 
+
     /**
      * create new frame
      */
