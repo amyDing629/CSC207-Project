@@ -11,10 +11,9 @@ import java.util.*;
 
 // Supervising controller
 public class SetupViewPresenter extends Observable implements IPresenter {
-    UUID currLogInUser;
-    UUID meetingID;
-    MeetingStatus meetingStatus;
-    List<UUID> users;
+    private final UUID currLogInUser;
+    private UUID meetingID;
+    private final List<UUID> users;
 
     // Use case
     MeetingManager meetingManager = new MeetingActionManager();
@@ -25,6 +24,13 @@ public class SetupViewPresenter extends Observable implements IPresenter {
     InputTimePlaceView view;
 
 
+    /**
+     * Construct SetupViewPresenter with given info
+     * @param meetingID the id of the meeting
+     * @param currLogInUser the id of the user
+     * @param users the list of userIds
+     * @param observer the observer to be notified
+     */
     public SetupViewPresenter(UUID meetingID, UUID currLogInUser, List<UUID> users, Observer observer) {
         this.meetingID = meetingID;
         this.currLogInUser = currLogInUser;
@@ -37,7 +43,7 @@ public class SetupViewPresenter extends Observable implements IPresenter {
         view = new SetupView();
 
         // get meeting status
-        meetingStatus = meetingModel.getMeetingStatus(meetingID);
+        MeetingStatus meetingStatus = meetingModel.getMeetingStatus(meetingID);
 
         // set observers
         addObserver(observer);

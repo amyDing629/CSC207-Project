@@ -7,7 +7,10 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.UUID;
 
-public interface MPresenter extends Observer {
+/**
+ * Blueprint for MainViewPresenter
+ */
+public interface MPresenter {
     void back();
 
     Model getModel();
@@ -24,7 +27,7 @@ public interface MPresenter extends Observer {
 
     void update(Observable o, Object arg);
 
-    void addObserver(Observer observer);
+    void setObserver(Observer observer);
 
     Observer getObserver();
 }

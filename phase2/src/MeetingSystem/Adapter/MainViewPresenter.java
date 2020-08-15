@@ -15,11 +15,10 @@ import java.util.UUID;
 // presenter
 public class MainViewPresenter extends Observable implements MPresenter {
 
-    UUID currLogInUser;
-    UUID meetingID;
-    MeetingStatus meetingStatus;
-    List<UUID> users;
-    boolean isFirst;
+    private final UUID currLogInUser;
+    private UUID meetingID;
+    private final List<UUID> users;
+    private final boolean isFirst;
 
     // Use case
     Model meetingModel;
@@ -32,6 +31,14 @@ public class MainViewPresenter extends Observable implements MPresenter {
     Observer observer;
 
 
+    /**
+     * Construct MainViewPresenter with given info
+     * @param meetingID the id of the meeting
+     * @param currLogInUser the id of the user
+     * @param users the list of userIDs
+     * @param isFirst if the meeting is of the first meeting of the trade
+     * @param frame the frame in Trade connecting meeting system
+     */
     public MainViewPresenter(UUID meetingID, UUID currLogInUser, List<UUID> users, boolean isFirst,
                              JFrame frame) {
         this.meetingID = meetingID;
@@ -47,26 +54,41 @@ public class MainViewPresenter extends Observable implements MPresenter {
         this.frame = frame;
 
         // get meeting status
-        meetingStatus = meetingModel.getMeetingStatus(meetingID);
+        MeetingStatus meetingStatus = meetingModel.getMeetingStatus(meetingID);
 
     }
 
+    /**
+     * Back to the Trade System View
+     */
     @Override
     public void back() {
         // back to Trade System View
         frame.setVisible(true);
     }
 
+    /**
+     * Returns the model
+     * @return the model
+     */
     @Override
     public Model getModel() {
         return meetingModel;
     }
 
+    /**
+     * Returns the meeting id
+     * @return the meeting id
+     */
     @Override
     public UUID getMeetingID() {
         return meetingID;
     }
 
+    /**
+     * Set the (first) meeting id in the presenter
+     * @param meetingID the meeting id of the meeting
+     */
     @Override
     public void setMeetingID(UUID meetingID) {
         this.meetingID = meetingID;
@@ -75,14 +97,20 @@ public class MainViewPresenter extends Observable implements MPresenter {
         // notify trade controller - meetingID
         setChanged();
         notifyObservers(meetingID);
-
     }
 
+    /**
+     * Returns current login user's id
+     * @return current login user's id
+     */
     @Override
     public UUID getCurrLogInUser() {
         return currLogInUser;
     }
 
+    /**
+     * Runs the view
+     */
     @Override
     public void run() {
         mainView.setPresenter(this);
@@ -90,6 +118,10 @@ public class MainViewPresenter extends Observable implements MPresenter {
         mainView.open();
     }
 
+    /**
+     * Returns the list of users' id
+     * @return the list of users' id
+     */
     @Override
     public List<UUID> getUsers() {
         return users;
@@ -103,12 +135,19 @@ public class MainViewPresenter extends Observable implements MPresenter {
         }
     }
 
+    /**
+     * Sets the Observer to this presenter
+     * @param observer the object implements Observer
+     */
     @Override
-    public void addObserver(Observer observer) {
+    public void setObserver(Observer observer) {
         this.observer = observer;
     }
 
-
+    /**
+     * Return the Observer
+     * @return the Observer
+     */
     @Override
     public Observer getObserver() {
         return observer;

@@ -12,7 +12,9 @@ public class HelpViewPresenter implements IPresenter{
     // View
     InfoView view;
 
-
+    /**
+     * Construct HelpViewPresenter
+     */
     public HelpViewPresenter() {
         // set View
         view = new HelpView();

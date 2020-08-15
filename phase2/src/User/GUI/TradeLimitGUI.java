@@ -20,8 +20,8 @@ public class TradeLimitGUI {
      * @param uc client user controller
      */
     public TradeLimitGUI(IUserController uc ,JFrame pFrame) {
-        this.uc=uc;
-        this.pFrame=pFrame;
+        this.uc = uc;
+        this.pFrame = pFrame;
     }
     /**
      * @param name  name of user
@@ -54,7 +54,6 @@ public class TradeLimitGUI {
         JLabel textLabel = new JLabel("Please enter the user's username and the limit below");
         textLabel.setPreferredSize(new Dimension(300, 30));
         panel.add(textLabel);
-
 
         JTextField userInput = new JTextField(30);
         userInput.setPreferredSize(new Dimension(300, 30));
