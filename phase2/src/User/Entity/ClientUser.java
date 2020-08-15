@@ -73,6 +73,8 @@ public class ClientUser implements Serializable {
      * the bonus points that the client user has.
      */
     private int bonusPoints;
+
+
     private final ArrayList<ArrayList<String>> actions;
 
     /**
@@ -108,18 +110,14 @@ public class ClientUser implements Serializable {
         this.end = end;
     }
 
+    public LocalDateTime getEnd() {
+        return end;
+    }
 
-    /**
-     * return whether is left or not
-     */
     public boolean getIsLeft() {
         return isLeft;
     }
 
-    /**
-     * @param left the isLeft status
-     * set isLeft status
-     */
     public void setLeft(boolean left) {
         isLeft =  left;
     }
@@ -183,6 +181,10 @@ public class ClientUser implements Serializable {
     public boolean getIsFrozen(){
         return isFrozen;
     }
+    /**
+     * return all the notifications the user has
+     */
+    public List<String> getNotification(){return notification;}
 
     /**
      * @param incompleteTransaction the maximum number of incomplete transactions user can have
@@ -338,5 +340,5 @@ public class ClientUser implements Serializable {
      * Set exchange standard
      */
     public void setExStandard(int newStandard){this.exStandard = newStandard;}
-    
+
 }

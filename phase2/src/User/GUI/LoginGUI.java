@@ -78,10 +78,10 @@ public class LoginGUI{
         logInButton.addActionListener(e -> {
             String name = nameInput.getText();
             String password = new String(passwordInput.getPassword());
-            for(ClientUser i:um.getUserList()){
-                System.out.println(i.getUsername());
-                System.out.println(i.getPassword());
-            }
+//            for(ClientUser i:um.getUserList()){
+//                System.out.println(i.getUsername());
+//                System.out.println(i.getPassword());
+//            }
             boolean response = lsp.login(name, password);
             if (!response) {
                 JOptionPane.showMessageDialog(null,
@@ -97,10 +97,10 @@ public class LoginGUI{
                 a.run();
                 frame.setVisible(false);
 
-                for(ClientUser i:um.getUserList()){
-                    System.out.println(i.getUsername());
-                    System.out.println(i.getPassword());
-                }
+//                for(ClientUser i:um.getUserList()){
+//                    System.out.println(i.getUsername());
+//                    System.out.println(i.getPassword());
+//                }
             }
         });
 

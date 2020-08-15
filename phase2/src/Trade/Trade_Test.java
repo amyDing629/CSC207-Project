@@ -5,6 +5,7 @@ import Inventory.Entity.Item;
 import Trade.Adaptor.TradeGUI_Main;
 import Trade.UseCase.TradeManager;
 import User.Entity.ClientUser;
+import User.GUI.LoginGUI;
 import User.UseCase.UserManager;
 
 import javax.swing.*;
@@ -24,6 +25,7 @@ public class Trade_Test {
         boolean result2 = file.createNewFile();
         ClientUser daniel = new ClientUser("daniel", "123", false);
         ClientUser amy = new ClientUser("amy", "123", false);
+        ClientUser admin = new ClientUser("admin", "123", true);
         Item apple = new Item("apple", amy.getId());
         Item pear = new Item("pear", daniel.getId());
         amy.addWishBorrow("pear");
@@ -34,6 +36,7 @@ public class Trade_Test {
         UserManager um = new UserManager();
         iv.addItem(apple);
         iv.addItem(pear);
+        um.addUser(admin);
         um.addUser(daniel);
         um.addUser(amy);
         JFrame f = new JFrame();
@@ -42,6 +45,8 @@ public class Trade_Test {
         trmD.run();
         TradeGUI_Main trmA = new TradeGUI_Main("amy", f);
         trmA.run();
+        LoginGUI user = new LoginGUI();
+        user.run();
 
 
 
