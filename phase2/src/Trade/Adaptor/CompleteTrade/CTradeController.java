@@ -190,13 +190,13 @@ public class CTradeController implements Observer, iTradeController {
 
     }
 
-    public void checkCurrTrade(Trade trade){
+    private  void checkCurrTrade(Trade trade){
         if (trade == null){
             tp.notTradeSelected();
         }
     }
 
-    public void action(){
+    private void action(){
         if (currTrade == null){
             tp.notTradeSelected();
         }else{
