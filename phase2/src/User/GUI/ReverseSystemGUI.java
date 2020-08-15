@@ -3,6 +3,8 @@ package User.GUI;
 
 import User.Adapter.ClientUserController;
 import User.Entity.ClientUser;
+import User.UseCase.ApprovalManager;
+import User.UseCase.RemoveActions;
 
 import javax.swing.*;
 import java.awt.*;
@@ -67,41 +69,45 @@ public class ReverseSystemGUI {
         exit.setPreferredSize(new Dimension(300, 30));
         panel.add(exit);
 
+        JTextArea textArea2=new JTextArea(5,20);
+        JScrollPane scrollPane2 = new JScrollPane(textArea2);
+        textArea2.setEditable(false);
+        panel.add(scrollPane2, c);
+
+
+        JButton submitButton2 = new JButton("Reverse action");
+        submitButton2.setPreferredSize(new Dimension(300, 30));
+        panel.add(submitButton2);
+
+        submitButton2.setEnabled(false);
         exit.addActionListener(e -> {
             frame.setVisible(false);
             pFrame.setVisible(true);
         });
         submitButton.addActionListener(e -> {
-            if(uc.getUser(userInput.getText())!=null){
-                createNext(frame,panel,uc.getUser(userInput.getText()),textArea,exit);
+            ClientUser user=uc.getUser(userInput.getText());
+            if(user!=null){
+                submitButton2.setEnabled(true);
+                System.out.println(user.getActions());
+                StringBuilder k= new StringBuilder();
+                for(int i=0;i<user.getActions().size();i++){
+                    k.append(user.getActions().get(i).get(0)).append("\n");
+                }
+                textArea2.setText(k.toString());
+            }
+        });
+
+        submitButton2.addActionListener(e -> {
+            ApprovalManager am=new ApprovalManager();
+            RemoveActions ra=new RemoveActions(uc.getUser(userInput.getText()),uc,am);
+            if(uc.checkActionExist(userInput.getText(),uc.getUser(userInput.getText()).getActions().get(0))) {
+                ra.deleteAction(uc.getUser(userInput.getText()).getActions().get(0));
+            }
+            else{
+                JOptionPane.showMessageDialog(null,"Reverse failed,someone edited the user's action");
+                uc.removeAction(userInput.getText(),uc.getActions(userInput.getText()).get(0).get(0),uc.getActions(userInput.getText()).get(0).get(1));
             }
         });
     }
 
-    public  void createNext(JFrame frame, JPanel panel,ClientUser a,JTextArea textArea,JButton exit){
-        JTextArea textArea1 = new JTextArea(5, 20);
-        textArea1.setEditable(false);
-        JScrollPane scrollPane1 = new JScrollPane(textArea1);
-        GridBagConstraints c1 = new GridBagConstraints();
-        c1.gridwidth = GridBagConstraints.REMAINDER;
-        c1.fill = GridBagConstraints.HORIZONTAL;
-
-        c1.fill = GridBagConstraints.BOTH;
-        c1.weightx = 1.0;
-        c1.weighty = 1.0;
-        panel.add(scrollPane1, c1);
-        panel.remove(exit);
-        if(!textArea.getText().equals("Currently there is no users")){
-            StringBuilder lol= new StringBuilder("Actions: ");
-            ArrayList<ArrayList<String>> z=uc.getActions(a.getUsername());
-            for (ArrayList<String> strings : z) {
-                lol.append(strings.get(1)).append("\n");
-            }
-            textArea1.setText(lol.toString());
-        }else{
-            textArea1.setEnabled(false);
-        }
-        panel.add(textArea1);
-        panel.add(exit);
-    }
 }

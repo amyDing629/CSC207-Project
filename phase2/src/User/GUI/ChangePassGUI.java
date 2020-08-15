@@ -5,6 +5,7 @@ import User.Entity.ClientUser;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class ChangePassGUI {
 
@@ -58,6 +59,7 @@ public class ChangePassGUI {
             pFrame.setVisible(true);
         });
         submitButton.addActionListener(e -> {
+            uc.addAction(getUserName(),"password",uc.getPassword(getUserName()));
             uc.setPassword(getUserName(), passInput.getText());
             JOptionPane.showMessageDialog(null, "Successfully changed the password!");
         });

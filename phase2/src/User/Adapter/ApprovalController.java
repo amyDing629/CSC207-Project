@@ -17,5 +17,8 @@ public class ApprovalController {
         am.removeUserApproval(ua);
     }
 
-    public void addApprovals(String name, String des){am.addApprovals(um.getUser(name),des);}
+    public void addApprovals(String name, String des){
+        System.out.println(um.getUser(name).getUsername());
+        am.addApprovals(um.getUser(name),des);
+    }
 }

@@ -115,6 +115,7 @@ public class ClientUserController {
     }
 
     public void setPassword(String name, String password){
+
         um.setPassword(name, password);
     }
     public List<ClientUser> getUserList() {return um.getUserList();}
@@ -141,4 +142,23 @@ public class ClientUserController {
     public int getTradeNumber(String username) {return um.getTradeNumber(username);}
 
     public int getIncompleteTransaction(UUID userId) {return um.getIncompleteTransaction(userId);}
+
+    public void addAction(String username,String type,String pValue){
+        um.addAction(username,type,pValue);
+    }
+
+    public void removeAction(String username,String type,String pValue){
+        um.removeAcition(username,type,pValue);
+    }
+
+    public void deleteBItem(String username,String it){
+        um.deleteBItem(username,it);
+    }
+    public void deleteLItem(String username,String it){
+        um.deleteLItem(username,it);
+    }
+
+    public boolean checkActionExist(String username,ArrayList<String> input){
+        return um.getActions(um.getUser(username)).contains(input);
+    }
 }

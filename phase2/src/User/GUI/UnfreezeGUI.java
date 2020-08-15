@@ -69,8 +69,6 @@ public class UnfreezeGUI {
                 avc.removeUserApproval(userInput.getText());
                 ac.setFreeze(userInput.getText(),false);
                 JOptionPane.showMessageDialog(null,"Unfreeze successfully");
-                UserFreezeSystem d = new UserFreezeSystem(uc,frame);
-                d.run(b);
             }
             else{
                 JOptionPane.showMessageDialog(null, "Invalid User");

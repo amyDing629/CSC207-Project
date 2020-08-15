@@ -321,5 +321,20 @@ public class ClientUser implements Serializable {
     public ArrayList<ArrayList<String>> getActions() {
         return this.actions;
     }
-    
+
+    public void addAction(String type,String pValue){
+        ArrayList<String> addA=new ArrayList<>();
+        addA.add(type);
+        addA.add(pValue);
+        actions.add(addA);
+    }
+
+    public void removeAction(String type,String pValue){
+
+        for(int i=0;i<actions.size();i++){
+            if(actions.get(i).get(0).equals(type)&&actions.get(i).get(1).equals(pValue)){
+                actions.remove(i);
+            }
+        }
+    }
 }

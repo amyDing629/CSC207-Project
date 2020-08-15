@@ -74,7 +74,9 @@ public class ApprovalUserDataAccess implements DataAccess {
 
     @Override
     public void removeObject(String o) {
-        UserApprovalsList.remove(getObject(o));
+        deSerialize();
+        UserApprovalsList.removeIf(i -> i.getFstString().equals(o));
+        updateSer();
     }
 
     @Override
