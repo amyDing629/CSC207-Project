@@ -41,7 +41,6 @@ public class TradeLimitGUI {
         textLabel.setPreferredSize(new Dimension(300, 30));
         panel.add(textLabel);
 
-
         JTextField userInput = new JTextField(30);
         userInput.setPreferredSize(new Dimension(300, 30));
         panel.add(userInput);

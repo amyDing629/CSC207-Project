@@ -13,9 +13,8 @@ import java.util.Observer;
 import java.util.UUID;
 
 public class EditViewPresenter extends Observable implements IPresenter {
-    UUID currLogInUser;
-    UUID meetingID;
-    MeetingStatus meetingStatus;
+    private final UUID currLogInUser;
+    private final UUID meetingID;
 
     // Use case
     MeetingManager meetingManager = new MeetingActionManager();
@@ -26,6 +25,12 @@ public class EditViewPresenter extends Observable implements IPresenter {
     InputTimePlaceView view;
 
 
+    /**
+     * Construct EditViewPresenter with given info
+     * @param meetingID the id of the meeting
+     * @param currLogInUser the id of the user
+     * @param observer the observer to be notified
+     */
     public EditViewPresenter(UUID meetingID, UUID currLogInUser, Observer observer) {
         this.meetingID = meetingID;
         this.currLogInUser = currLogInUser;
@@ -37,7 +42,7 @@ public class EditViewPresenter extends Observable implements IPresenter {
         view = new EditView();
 
         // get meeting status
-        meetingStatus = meetingModel.getMeetingStatus(meetingID);
+        MeetingStatus meetingStatus = meetingModel.getMeetingStatus(meetingID);
 
         // set observers
         addObserver(observer);

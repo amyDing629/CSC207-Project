@@ -14,9 +14,8 @@ import java.util.UUID;
 
 public class AgreeViewPresenter implements IPresenter {
 
-    UUID currLogInUser;
-    UUID meetingID;
-    MeetingStatus meetingStatus;
+    private final UUID currLogInUser;
+    private final UUID meetingID;
 
     // Use case
     MeetingManager meetingManager = new MeetingActionManager();
@@ -26,6 +25,11 @@ public class AgreeViewPresenter implements IPresenter {
     OKCancelView view;
 
 
+    /**
+     * Construct AgreeViewPresenter with meetingID and currLoginUserID
+     * @param meetingID the meeting id of the meeting
+     * @param currLogInUser the id of the current login user
+     */
     public AgreeViewPresenter(UUID meetingID, UUID currLogInUser) {
 
         this.meetingID = meetingID;
@@ -38,7 +42,7 @@ public class AgreeViewPresenter implements IPresenter {
         view = new AgreeView();
 
         // get meeting status
-        meetingStatus = meetingModel.getMeetingStatus(meetingID);
+        MeetingStatus meetingStatus = meetingModel.getMeetingStatus(meetingID);
 
     }
 
