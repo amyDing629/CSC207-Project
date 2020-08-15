@@ -1,30 +1,22 @@
 package User.GUI;
 
 import User.Adapter.ApprovalController;
-import User.Adapter.IUserController;
+import User.Adapter.ClientUserController;
+import User.UseCase.ApprovalManager;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class RequestUnfreezeTicketGUI {
     ApprovalController ac;
-    IUserController uc;
+    ClientUserController uc;
     JFrame pFrame;
     JFrame frame;
-    /**
-     * [Constructor]
-     * @param pFrame frame
-     * @param uc client user controller
-     */
-    public RequestUnfreezeTicketGUI(IUserController uc ,JFrame pFrame) {
+
+    public RequestUnfreezeTicketGUI(ClientUserController uc ,JFrame pFrame) {
         this.uc=uc;
         this.pFrame=pFrame;
-        ac = new ApprovalController();
     }
-    /**
-     * @param name  name of user
-     * create new frame
-     */
     public void run(String name){
         frame = new JFrame("Freeze User");
         frame.setSize(500, 700);
@@ -41,11 +33,6 @@ public class RequestUnfreezeTicketGUI {
         frame.setVisible(true);
     }
 
-    /**
-     * @param frame new frame
-     * @param panel the new panel
-     * set new frame
-     */
     private void placeComponents(JFrame frame, JPanel panel, String name){
 
         JLabel textLabel = new JLabel("Please enter the reasons to unfreeze below");
