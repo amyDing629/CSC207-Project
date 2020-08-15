@@ -10,13 +10,24 @@ This is a program that allows users to trade different items with each other.
  
 # Prerequisites
 
-  - Ensure all the database file(.ser format) are empty before running
-  - Do not quit the whole program or stop the execution of program when running tests, follow the menu to exit instead.
+  - Ensure all the database file (.ser format) are empty before running
+  - Do **NOT** quit the whole program or stop the execution of program when running tests, 
+  **follow the menu to exit instead**.
 
 # Tests
-The main menu UI will appear at the bottom (in terminal)
-To test all the available functionality, you need to:
-  - register at least one ordinary user account into the system
+Run `phase2/src/Main/mainRun`. To simplify the testing, we provide **three** login windows 
+so that 3 users can log in and communicate through the application at the same time.
+
+For better testing all the available functionality, you need to:
+  - log in an Admin account (already exists in the system)
+    > username: `admin`, password: `123`
+                                                               
+  - register two regular-user account into the system. 
+    e.g.
+    > username: `qqq`, password: `123`
+
+    and
+    > username: `www`, password: `123`
   - (ps: The first admin will be automatically created with name "admin" and password "123")
   - (ps: Admin users are able to perform ordinary functionalities and other admin functionalities)
   - add items into at least two users' lend wish list.
@@ -187,7 +198,9 @@ Meeting status can be:
   - cancelled: only when one meeting attendee edits in record over 3 times
   - incomplete: the default meeting status, should being this status before both users agrees or the meeting cancels
   - agreed: both users agree the meeting proposal
-  - completed: both users confirm the meeting actually occurred
+  - completed: both users confirm the meeting actually occurred.
+  
+  
   
 
 
