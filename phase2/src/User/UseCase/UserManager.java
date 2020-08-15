@@ -266,6 +266,11 @@ public class UserManager {
         return number;
     }
 
+    public int getExStandard() {
+        System.out.println(getUserList() + String.valueOf(getUserList().get(0).getExStandard()));
+        return this.getUserList().get(0).getExStandard();
+    }
+
     public void setEnd(String username, LocalDateTime end){
         dataAccess.deSerialize();
         dataAccess.updateSer();
