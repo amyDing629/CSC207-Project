@@ -246,6 +246,11 @@ public class UserManager {
                 number ++;
             }
         }
+        for (UUID j: user.getSelectedBonusTrades()) {
+            if(getTrade(j).getCreateTime().isAfter(y) && getTrade(j).getCreateTime().isBefore(x)){
+                number --;
+            }
+        }
         return number;
     }
 
@@ -258,16 +263,19 @@ public class UserManager {
 
         int number = 0;
         for (UUID i : user.getTradeHistory()) {
-
             if (getTrade(i).getStatus().equals(TradeStatus.incomplete)) {
                 number++;
+            }
+        }
+        for (UUID j: user.getSelectedBonusTrades()) {
+            if(getTrade(j).getStatus().equals(TradeStatus.incomplete)){
+                number --;
             }
         }
         return number;
     }
 
     public int getExStandard() {
-        System.out.println(getUserList() + String.valueOf(getUserList().get(0).getExStandard()));
         return this.getUserList().get(0).getExStandard();
     }
 
