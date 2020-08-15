@@ -84,7 +84,7 @@ public class TradeDataAccess implements DataAccess {
         serialize();
     }
 
-    public void serialize() {
+    private void serialize() {
         try {
             FileOutputStream fileOut =
                     new FileOutputStream(serFilePath);

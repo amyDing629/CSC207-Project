@@ -122,7 +122,7 @@ public class UserDataAccess implements DataAccess {
     /**
      * Serializes the userList to the user.ser file
      */
-    public void serialize() {
+    private void serialize() {
         try {
             FileOutputStream fileOut =
                     new FileOutputStream(serFilePath);
