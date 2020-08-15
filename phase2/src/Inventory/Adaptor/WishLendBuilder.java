@@ -7,21 +7,35 @@ import Trade.Adaptor.BorderGUI;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * build wish lend GUI
+ */
 public class WishLendBuilder implements BorderGUIBuilder {
 
     iItemController ic;
     BorderGUI tg;
 
+    /**
+     * [Constructor]
+     * @param currUser: current user name
+     * @param fr: last frame
+     */
     public WishLendBuilder(String currUser, JFrame fr){
         tg = new BorderGUI();
         ic = new WishLendController(currUser, tg, fr);
     }
 
+    /**
+     * build frame
+     */
     @Override
     public void buildFrame() {
         tg.setFrame(600, 400, "Edit WishLend Session");
     }
 
+    /**
+     * build north panel
+     */
     @Override
     public void buildPanelN() {
         JPanel panelN = new JPanel();
@@ -33,6 +47,9 @@ public class WishLendBuilder implements BorderGUIBuilder {
         tg.setNorth(panelN);
     }
 
+    /**
+     * build east panel
+     */
     public void buildPanelE() {
         JPanel panelE = new JPanel();
         JLabel itemName = new JLabel("item name");
@@ -61,6 +78,9 @@ public class WishLendBuilder implements BorderGUIBuilder {
         editDes.addActionListener(e -> ic.performActionThree());
     }
 
+    /**
+     * build west panel
+     */
     public void buildPanelW(){
         JPanel panelW = new JPanel();
         JLabel wishList = new JLabel("Wish Lend List");
@@ -74,6 +94,9 @@ public class WishLendBuilder implements BorderGUIBuilder {
         ic.updateList();
     }
 
+    /**
+     * build south panel
+     */
     @Override
     public void buildPanelS() {
         JPanel panelS = new JPanel();
@@ -92,10 +115,11 @@ public class WishLendBuilder implements BorderGUIBuilder {
         submit.addActionListener(e -> ic.submitBut());
         back.addActionListener(e -> ic.backBut());
         update.addActionListener(e -> ic.updateBut());
-
-
     }
 
+    /**
+     * build central panel
+     */
     @Override
     public void buildPanelC() {
         JPanel panelC = new JPanel();
@@ -111,6 +135,10 @@ public class WishLendBuilder implements BorderGUIBuilder {
 
     }
 
+    /**
+     * get BorderGUI
+     * @return BorderGUI
+     */
     @Override
     public BorderGUI getTradeGUI() {
         return tg;

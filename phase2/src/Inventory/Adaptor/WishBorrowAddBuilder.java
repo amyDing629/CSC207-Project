@@ -5,20 +5,34 @@ import Trade.Adaptor.BorderGUI;
 
 import javax.swing.*;
 
+/**
+ * construct WishBorrowAdd GUI
+ */
 public class WishBorrowAddBuilder implements BorderGUIBuilder {
     iItemController ic;
     BorderGUI tg;
 
+    /**
+     * [constructor]
+     * @param currUser current user's name
+     * @param fr last frame
+     */
     public WishBorrowAddBuilder(String currUser, JFrame fr) {
         tg = new BorderGUI();
         ic = new WishBorrowAddController(currUser, tg, fr);
     }
 
+    /**
+     * build frame
+     */
     @Override
     public void buildFrame() {
         tg.setFrame(600, 200, "Add to Borrow Session");
     }
 
+    /**
+     * build north panel
+     */
     @Override
     public void buildPanelN() {
         JPanel panelN = new JPanel();
@@ -28,13 +42,18 @@ public class WishBorrowAddBuilder implements BorderGUIBuilder {
         panelN.add(msgArea);
         tg.setNorth(panelN);
         tg.initializeMsg(msgArea);
-
     }
 
+    /**
+     * build east panel
+     */
     @Override
     public void buildPanelE() {
     }
 
+    /**
+     * build west panel
+     */
     @Override
     public void buildPanelW() {
         JPanel panelW = new JPanel();
@@ -50,6 +69,9 @@ public class WishBorrowAddBuilder implements BorderGUIBuilder {
         ic.updateList();
     }
 
+    /**
+     * build south panel
+     */
     @Override
     public void buildPanelS() {
         JPanel panelS = new JPanel();
@@ -70,6 +92,9 @@ public class WishBorrowAddBuilder implements BorderGUIBuilder {
 
     }
 
+    /**
+     * build central panel
+     */
     @Override
     public void buildPanelC() {
         JPanel panelC = new JPanel();
@@ -84,6 +109,10 @@ public class WishBorrowAddBuilder implements BorderGUIBuilder {
         ic.updateCurr();
     }
 
+    /**
+     * get BorderGUI
+     * @return BorderGUI
+     */
     @Override
     public BorderGUI getTradeGUI() {
         return tg;

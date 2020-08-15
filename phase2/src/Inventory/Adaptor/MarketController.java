@@ -30,6 +30,10 @@ public class MarketController implements iItemController {
     }
 
 
+    /**
+     * print available items
+     * @return string that contains info about available items
+     */
     public String printList(){
         StringBuilder result = new StringBuilder();
         for (String it: iv.getAvailableList()){
@@ -43,6 +47,11 @@ public class MarketController implements iItemController {
     }
 
 
+    /**
+     * print item info from item
+     * @param it item
+     * @return item info
+     */
     public String getItemInfo(Item it) {
         UserManager um = new UserManager();
         if (iv.getName(it) == null) {
@@ -54,6 +63,9 @@ public class MarketController implements iItemController {
         }
     }
 
+    /**
+     * change currItem with inputs
+     */
     public void submitBut(){
         String input = bta.getInput("input");
         ip.resetInputArea();
@@ -67,28 +79,43 @@ public class MarketController implements iItemController {
         }
     }
 
+    /**
+     * update available list
+     */
     public void updateList(){
         ip.updateListM(printList());
     }
 
+    /**
+     * update button
+     */
     @Override
     public void updateBut() {
         updateList();
         updateCurr();
     }
 
-
+    /**
+     * back to last frame
+     */
     public void backBut(){
         fr.setVisible(true);
         ip.closeFrame();
     }
 
-
+    /**
+     * test whether the item is in the available list
+     * @param name: item name
+     * @return boolean
+     */
     @Override
     public boolean isInList(String name){
         return false;
     }
 
+    /**
+     * reset curr area
+     */
     public void updateCurr(){
         ip.resetCurr();
     }

@@ -10,31 +10,37 @@ import User.UseCase.UserManager;
 import javax.swing.*;
 import java.util.UUID;
 
+/**
+ * [controller]
+ * controller for wish lend session
+ */
 public class WishLendController implements iItemController {
     /**
      * the inventory of the system.
      */
-    private Inventory iv;
+    private final Inventory iv;
     /**
      * the user that is using the system.
      */
-    private UUID currUser;
+    private final UUID currUser;
 
-    UserManager um;
+    private final UserManager um;
 
-    ApprovalManager iam;
+    private final ApprovalManager iam;
 
-    BorderGUI bta;
+    private final BorderGUI bta;
 
-    String it;
+    private String it;
 
-    iItemPresenter ip;
+    private final iItemPresenter ip;
 
-    JFrame fr;
+    private final JFrame fr;
 
     /**
      * [constructor]
-     * @param currUser current user
+     * @param currUser current user name
+     * @param bta view
+     * @param fr past frame
      */
     public WishLendController(String currUser, BorderGUI bta, JFrame fr){
         iv = new Inventory();
@@ -47,8 +53,10 @@ public class WishLendController implements iItemController {
     }
 
 
-
-
+    /**
+     * delete item from wish lend list
+     * @param it item name
+     */
     public void deleteItem(String it){
         if (iv.deleteItem(it)){
             ClientUser user = um.popUser(currUser);
@@ -57,12 +65,20 @@ public class WishLendController implements iItemController {
         }
     }
 
+    /**
+     * set item description
+     * @param des description
+     * @param itemName item name
+     */
     private void setDescription(String des, String itemName){
         Item item = iv.popItem(itemName);
         item.setDescription(des);
         iv.addItem(item);
     }
 
+    /**
+     * delete item from lending list
+     */
     void delBut(){
         if (it == null){
             ip.noItemSelected();
@@ -76,10 +92,17 @@ public class WishLendController implements iItemController {
         }
     }
 
+    /**
+     * reset curr area
+     */
     public void updateCurr(){
         ip.resetCurr();
     }
 
+    /**
+     * turn wish lend list info to string
+     * @return wish lend info
+     */
     @Override
     public String printList() {
         String result = "";
@@ -94,8 +117,14 @@ public class WishLendController implements iItemController {
         }
     }
 
+    /**
+     * update list area
+     */
     public void updateList(){ ip.updateList(printList()); }
 
+    /**
+     * add button
+     */
     void addBut(){
         String itemName = bta.getInput("name");
         String description = bta.getInput("des");
@@ -112,31 +141,51 @@ public class WishLendController implements iItemController {
 
     }
 
+    /**
+     *  addthe item to approval list
+     * @param name
+     * @param des
+     */
     public void addToList(String name, String des){
         iam.addApprovals(um.getUser(currUser),name,des);
     }
 
+    /**
+     * update button
+     */
     public void updateBut(){
         updateList();
         updateCurr();
     }
 
+    /**
+     * action one: add
+     */
     @Override
     public void performActionOne() {
         addBut();
 
     }
 
+    /**
+     * action two: delete
+     */
     @Override
     public void performActionTwo() {
         delBut();
     }
 
+    /**
+     * action three: edit description
+     */
     @Override
     public void performActionThree() {
         editDes();
     }
 
+    /**
+     * submit button
+     */
     public void submitBut(){
         String input = bta.getInput("input");
         ip.resetInputArea();
@@ -148,6 +197,9 @@ public class WishLendController implements iItemController {
         }
     }
 
+    /**
+     * back button
+     */
     public void backBut(){
         fr.setVisible(true);
         ip.closeFrame();
@@ -164,6 +216,9 @@ public class WishLendController implements iItemController {
         return false;
     }
 
+    /**
+     * edit description
+     */
     void editDes(){
         if (it == null){
             ip.noItemSelected();
