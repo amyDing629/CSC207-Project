@@ -51,9 +51,11 @@ WishLend List shows: [iPad, iPhone, toy car]
 Suggested List shows: [iPad, iPhone]
 
     
-### `V7_xxx.mp4`
-- a
-    
+### `V7_Mandatory5.mp4`✅ (Siwei Tang)
+Two Users- Admin4
+- set the end date(date must after datetime now)
+- submit, then back and then log out
+- log in again, the freeze status and left status would change to true
 ### `V8_xxx.mp4`
 - a
     
@@ -117,7 +119,8 @@ after login -> inventory/market  (view an item)
 
 
 ## Point System
-每complete一个trade (trade status == complete)，系统自动给这个user加一分；每5分，可以兑换一次bonus trade
+Every complete trade (trade status == complete)，the system will automatically give the user add one point；every 5
+points，user can exchange for bonus trade
 TBA
 
 ## Mandatory #1 -  Roll Back
@@ -129,5 +132,6 @@ TBA
 ## Mandatory #4 - Admin adjust all threshold
 TBA
 
-## Mandatory #5 - Admin adjust all threshold
-TBA
+## Mandatory #5 - User set Left Status
+User set the end time, it means that if the time now is before that end
+time, the left status and freeze status to be true. 
