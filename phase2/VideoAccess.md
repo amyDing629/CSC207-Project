@@ -5,21 +5,21 @@ Link: https://drive.google.com/drive/folders/1unT-WmSSiGtjKi7qOSXFZHjPwjTrSJvI?u
 
 ## Videos' Content
 
-### `V1_RegisterLogin.mp4`✅
+### `V1_RegisterLogin.mp4`✅ (Rella)
 - Login: Admin & Client User
 - Register: Client User *2
 - Change Password
 - Creates new Admin user：Admin
     
-### `V2_WishList_AddLendableItems.mp4`✅
+### `V2_WishList_AddLendableItems.mp4`✅ (Rella)
 - Add items to wish-to-lend list
 - Admin agrees/decline requests (agreed items will appear in the market)
     
-### `V3_WishList_AddWishList.mp4`✅
+### `V3_WishList_AddWishList.mp4`✅ (Rella)
 - Add item from the Market to Wishlist
 - Delete item in the Wishlist
     
-### `V4_TradeItems_TwoWay_Temporary.mp4`✅
+### `V4_TradeItems_TwoWay_Temporary.mp4`✅ (Rella)
 - Initialise a TwoWay-Temporary Trade (ClientUser A): <MeetingStatus: `INCOMPLETE`>
 - Add second item to trade (ClientUser B)
 - Agree trading request (ClientUser B)
@@ -35,10 +35,10 @@ Link: https://drive.google.com/drive/folders/1unT-WmSSiGtjKi7qOSXFZHjPwjTrSJvI?u
     - `Confirm` proposal after meeting occurs: <MeetingStatus: `CONFIRMED`>
      
      
-### `V5_Mandatory3_VisitorExplore.mp4`✅
+### `V5_Mandatory3_VisitorExplore.mp4`✅ (Rella)
 - Explore Market (where all not-in-trade item be) as a visitor (no login required)
     
-### `V6_xxx.mp4`
+### `V6_Mandatory2_ItemSuggestion.mp4`✅ (Amy)
 - a
     
 ### `V7_xxx.mp4`
