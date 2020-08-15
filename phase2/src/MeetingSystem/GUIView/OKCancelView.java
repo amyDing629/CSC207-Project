@@ -7,7 +7,10 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-public abstract class OKCancelView extends JDialog {
+/**
+ * The OKCancelView
+ */
+public abstract class OKCancelView extends JDialog implements InfoView {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
@@ -16,6 +19,9 @@ public abstract class OKCancelView extends JDialog {
     // presenter
     private IPresenter presenter;
 
+    /**
+     * Constructs the OKCancelView
+     */
     public OKCancelView() {
         createUIComponents();
 
@@ -54,18 +60,28 @@ public abstract class OKCancelView extends JDialog {
         setTextArea(questionTextArea);
     }
 
-    abstract void setTextArea(JTextArea questionTextArea);
-
     abstract void setOnOK();
 
-    public IPresenter getPresenter() {
+    abstract void setTextArea(JTextArea questionTextArea);
+
+    IPresenter getPresenter() {
         return presenter;
     }
 
+    /**
+     * Sets the presenter to the view
+     *
+     * @param presenter the presenter
+     */
+    @Override
     public void setPresenter(IPresenter presenter) {
         this.presenter = presenter;
     }
 
+    /**
+     * Opens the view
+     */
+    @Override
     public void open() {
         this.pack();
         this.setVisible(true);

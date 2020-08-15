@@ -4,6 +4,9 @@ import MeetingSystem.Adapter.TimePlaceInputController;
 
 import javax.swing.*;
 
+/**
+ * The setup view
+ */
 public class SetupView extends InputTimePlaceView {
 
     // controller: validate time and address input
@@ -50,6 +53,9 @@ public class SetupView extends InputTimePlaceView {
         }
     }
 
+    /**
+     * Opens and updates the view from the model
+     */
     @Override
     public void open() {
         this.pack();

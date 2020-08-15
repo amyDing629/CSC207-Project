@@ -8,6 +8,9 @@ import MeetingSystem.UseCase.Model;
 import javax.swing.*;
 import java.util.UUID;
 
+/**
+ * The edit view
+ */
 public class EditView extends InputTimePlaceView {
 
     // controller: validate time and address input
@@ -86,6 +89,9 @@ public class EditView extends InputTimePlaceView {
         getPlaceTextField().setText(meeting.getPlace());
     }
 
+    /**
+     * Opens and updates the view from the model
+     */
     @Override
     public void open() {
         updateViewFromModel();
