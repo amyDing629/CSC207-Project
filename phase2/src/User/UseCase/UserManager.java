@@ -376,12 +376,5 @@ public class UserManager {
         return getUser(userID).getIsLeft();
     }
 
-    /**
-     * return the exchange standard of the user
-     */
-    public int getExStandard() {
-        return this.getUserList().get(0).getExStandard();
-    }
-
 }
 
