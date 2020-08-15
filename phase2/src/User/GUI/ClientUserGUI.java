@@ -5,21 +5,16 @@ import Trade.Adaptor.BorderGUIBuilder;
 import Trade.Adaptor.BorderGUIEngineer;
 import Trade.Adaptor.GUIPlan;
 import Trade.Adaptor.TradeGUI_Main;
-import Trade.Adaptor.TradeHistory.TradeHistoryController;
-import Trade.UseCase.TradeManager;
 import User.Adapter.ClientUserController;
 import User.Adapter.IUserController;
 import User.Adapter.IUserPresenter;
 import User.PointSystem.PointGUIBuilder;
-import User.UseCase.UserManager;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.UUID;
 
 public class ClientUserGUI implements View {
-//    UserManager um = new UserManager();
-//    TradeManager tm = new TradeManager();
 
     JFrame pFrame; // previous frame
     JFrame frame;// this frame
