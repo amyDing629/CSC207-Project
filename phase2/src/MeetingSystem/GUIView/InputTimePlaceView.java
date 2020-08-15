@@ -8,15 +8,16 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-public abstract class InputTimePlaceView extends JDialog {
+public abstract class InputTimePlaceView extends JDialog implements InfoView {
+
     private JPanel contentPane;
-    private JButton buttonOK;
-    private JButton buttonClear;
     private JTextArea instructionTextArea;
     private JTextArea noteTextArea;
     private JButton buttonBack;
-    private JTextField placeTextField;
+    private JButton buttonOK;
+    private JButton buttonClear;
     private JFormattedTextField timeFormattedTextField;
+    private JTextField placeTextField;
 
     // presenter
     private IPresenter presenter;
@@ -76,15 +77,15 @@ public abstract class InputTimePlaceView extends JDialog {
         placeTextField.setToolTipText("Must contain letters; \n Optional: digits, period, space");
     }
 
-    IPresenter getPresenter() {
-        return presenter;
-    }
+    public abstract void open();
 
     public void setPresenter(IPresenter presenter) {
         this.presenter = presenter;
     }
 
-    public abstract void open();
+    IPresenter getPresenter() {
+        return presenter;
+    }
 
     JFormattedTextField getTimeFormattedTextField() {
         return timeFormattedTextField;

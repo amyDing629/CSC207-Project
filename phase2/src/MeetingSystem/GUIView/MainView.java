@@ -7,32 +7,39 @@ import MeetingSystem.UseCase.Model;
 import javax.swing.*;
 import java.util.UUID;
 
+/**
+ * The Main Menu view for the meeting system
+ */
 public class MainView implements MView {
     private JFrame frame;
     private JPanel panel1;
-    private JButton backButton;
-    private JButton confirmButton;
+    private JTextArea welcomeTextArea;
     private JTextArea meetingInfoTextArea;
-    private JButton helpButton;
-    private JButton agreeButton;
+    private JButton backButton;
     private JButton setUpButton;
     private JButton editButton;
-    private JTextArea welcomeTextArea;
+    private JButton agreeButton;
+    private JButton confirmButton;
+    private JButton helpButton;
+
 
     private boolean isFirst; // is first meeting
 
     // Presenter
     private MPresenter presenter;
 
+    /**
+     * Constructs MainView
+     */
     public MainView() {
         initComponents();
     }
 
-    private void backActionPerformed(java.awt.event.ActionEvent evt) {
-        getPresenter().back();
-        frame.setVisible(false);
-    }
-
+    /**
+     * Updates the view regarding to the model
+     *
+     * @param isFirst if the meeting is the first meeting (for temporary trade)
+     */
     @Override
     public void updateViewFromModel(boolean isFirst) {
         this.isFirst = isFirst;
@@ -107,15 +114,28 @@ public class MainView implements MView {
 
     }
 
+    /**
+     * Opens the view
+     */
     @Override
     public void open() {
         frame.setVisible(true);
     }
 
-    MPresenter getPresenter() {
+    /**
+     * Gets the presenter of this view
+     *
+     * @return the presenter
+     */
+    protected MPresenter getPresenter() {
         return presenter;
     }
 
+    /**
+     * Sets the presenter to the view
+     *
+     * @param presenter the presenter
+     */
     @Override
     public void setPresenter(MPresenter presenter) {
         this.presenter = presenter;
@@ -171,6 +191,11 @@ public class MainView implements MView {
             HelpViewPresenter helpViewPresenter = new HelpViewPresenter();
             helpViewPresenter.run();
         });
+    }
+
+    private void backActionPerformed(java.awt.event.ActionEvent evt) {
+        getPresenter().back();
+        frame.setVisible(false);
     }
 
 

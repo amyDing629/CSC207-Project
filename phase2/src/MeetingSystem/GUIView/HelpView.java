@@ -3,7 +3,12 @@ package MeetingSystem.GUIView;
 import MeetingSystem.Adapter.IPresenter;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+/**
+ * The Help (or About) View
+ */
 public class HelpView extends JDialog implements InfoView {
 
     private JPanel contentPane;
@@ -14,14 +19,15 @@ public class HelpView extends JDialog implements InfoView {
     // presenter
     IPresenter presenter;
 
+    /**
+     * Constructs HelpView
+     */
     public HelpView() {
         createUIComponents();
         setContentPane(contentPane);
         setModal(true);
 
-        backButton.addActionListener(e -> {
-            this.dispose();
-        });
+        backButton.addActionListener(e -> HelpView.this.dispose());
     }
 
     private void createUIComponents() {
@@ -51,11 +57,19 @@ public class HelpView extends JDialog implements InfoView {
                 "       - COMPLETED:    when both users confirmed the meeting occurred\n";
     }
 
+    /**
+     * Sets the presenter to the view
+     *
+     * @param presenter the presenter
+     */
     @Override
     public void setPresenter(IPresenter presenter) {
         this.presenter = presenter;
     }
 
+    /**
+     * Opens the view
+     */
     @Override
     public void open() {
         this.pack();

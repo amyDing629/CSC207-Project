@@ -2,6 +2,9 @@ package MeetingSystem.GUIView;
 
 import javax.swing.*;
 
+/**
+ * The Agree View
+ */
 public class AgreeView extends OKCancelView {
     @Override
     void setTextArea(JTextArea questionTextArea) {

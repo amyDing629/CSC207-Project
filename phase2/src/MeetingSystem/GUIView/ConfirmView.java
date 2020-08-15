@@ -2,6 +2,9 @@ package MeetingSystem.GUIView;
 
 import javax.swing.*;
 
+/**
+ * The confirm view
+ */
 public class ConfirmView extends OKCancelView {
     @Override
     void setTextArea(JTextArea questionTextArea) {
