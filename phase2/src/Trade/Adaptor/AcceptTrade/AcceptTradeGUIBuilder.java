@@ -7,20 +7,34 @@ import Trade.Adaptor.iTradeController;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * build accept trade GUI
+ */
 public class AcceptTradeGUIBuilder implements BorderGUIBuilder {
     BorderGUI tg;
     iTradeController atc;
 
+    /**
+     * [constructor]
+     * @param user current user name
+     * @param tf last frame
+     */
     public AcceptTradeGUIBuilder(String user, JFrame tf){
         tg = new BorderGUI();
         atc = new AcceptTradeController(user, tg, tf);
     }
 
+    /**
+     * build gui frame
+     */
     @Override
     public void buildFrame(){
         tg.setFrame(800, 400, "Accept Trade Session");
     }
 
+    /**
+     * build north panel
+     */
     @Override
     public void buildPanelN() {
         JPanel panelN = new JPanel();
@@ -31,9 +45,11 @@ public class AcceptTradeGUIBuilder implements BorderGUIBuilder {
         panelN.add(msgArea);
         tg.initializeMsg(msgArea);
         tg.setNorth(panelN);
-
     }
 
+    /**
+     * build east panel
+     */
     @Override
     public void buildPanelE() {
         JPanel panelE = new JPanel();
@@ -47,6 +63,9 @@ public class AcceptTradeGUIBuilder implements BorderGUIBuilder {
         refuse.addActionListener(e -> atc.performAction2());
     }
 
+    /**
+     * build west panel
+     */
     @Override
     public void buildPanelW() {
         JPanel panelW =  new JPanel();
@@ -62,6 +81,9 @@ public class AcceptTradeGUIBuilder implements BorderGUIBuilder {
         atc.updateList();
     }
 
+    /**
+     * build south panel
+     */
     @Override
     public void buildPanelS() {
         JPanel panelS =  new JPanel();
@@ -87,6 +109,9 @@ public class AcceptTradeGUIBuilder implements BorderGUIBuilder {
         update.addActionListener(e -> atc.updateBut());
     }
 
+    /**
+     * build central panel
+     */
     @Override
     public void buildPanelC() {
         JPanel panelC =  new JPanel();
@@ -100,9 +125,12 @@ public class AcceptTradeGUIBuilder implements BorderGUIBuilder {
         tg.setCenter(panelC);
         tg.initializeCurr(currArea);
         atc.noTradeSelected();
-
     }
 
+    /**
+     * get accept trade GUI
+     * @return BorderGUI
+     */
     public BorderGUI getTradeGUI(){
         return tg;
     }

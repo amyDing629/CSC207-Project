@@ -2,10 +2,8 @@ package User.PointSystem;
 
 import Trade.Adaptor.BorderGUIBuilder;
 import Trade.Adaptor.BorderGUI;
-import Trade.Adaptor.TradeGUIHelper;
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 
 public class PointGUIBuilder implements BorderGUIBuilder {
 
@@ -35,9 +33,14 @@ public class PointGUIBuilder implements BorderGUIBuilder {
      */
     @Override
     public void buildPanelN() {
-        ArrayList<Object> rst = new TradeGUIHelper().createMessagePanel();
-        tg.initializeMsg((JTextArea)rst.get(1));
-        tg.setNorth((JPanel)rst.get(0));
+        JPanel panelN = new JPanel();
+        JLabel msg = new JLabel("Message:", SwingConstants.LEFT);
+        JTextArea msgArea = new JTextArea();
+        msgArea.setEditable(false);
+        panelN.add(msg);
+        panelN.add(msgArea);
+        tg.initializeMsg(msgArea);
+        tg.setNorth(panelN);
     }
 
     /**

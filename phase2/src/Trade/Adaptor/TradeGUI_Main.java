@@ -8,6 +8,10 @@ import Trade.Adaptor.TradeHistory.TradeHistoryGUIBuilder;
 
 import javax.swing.*;
 
+/**
+ * [view]
+ * Trade main GUI. Connect to separate trade systems.
+ */
 public class TradeGUI_Main {
     String currUser;
     JFrame cf;
@@ -21,6 +25,9 @@ public class TradeGUI_Main {
         this.cf = cf;
     }
 
+    /**
+     * build and show the view
+     */
     public void run(){
         JFrame frame = new JFrame("Select Trade Session");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

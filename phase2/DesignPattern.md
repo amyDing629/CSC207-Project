@@ -114,8 +114,8 @@ The link above is a basic overview of how I used builder design pattern to build
     - InputAndPresent are for presenters to "output" the information to users.
     - BorderLayoutGUi decides the layout used for creating the GUI. (If you want to build GUI with another layout,
     you can just create another interface and implement it instead of this one).
-    - BorderGUIBuilders defines all of the steps(abstract) that must be taken in order to correctly create a GUI with BorderLayout.
-    - Specific Builders: contains specific and different construction method to constructe different GUIs.
+    - BorderGUIBuilders defines all the steps(abstract) that must be taken in order to correctly create a GUI with BorderLayout.
+    - Specific Builders: contains specific and different construction method to construct different GUIs.
     - BorderGUIEngineer controls the algorithm that generates the final product object. 
     
 

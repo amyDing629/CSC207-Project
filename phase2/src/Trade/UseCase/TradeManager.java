@@ -8,7 +8,6 @@ import Trade.Entity.TwowayTrade;
 import User.Entity.ClientUser;
 import User.Gateway.DataAccess;
 import User.Gateway.UserDataAccess;
-import User.UseCase.UserManager;
 import Trade.GateWay.TradeDataAccess;
 import Trade.TradeStatus;
 import java.time.LocalDateTime;
@@ -76,80 +75,14 @@ public class TradeManager{
     }
 
 
+    /**
+     * get trade with trade id
+     * @param id trade id
+     * @return
+     */
     public Trade getTrade(UUID id) {
         return (Trade) dataAccess.getObject(id);
     }
-
-
-    /**
-     * confirm trade(agree with the trade)
-     *
-     * @param id the id current trade
-     */
-    public void confirmTrade(UUID id){
-        Trade trade = getTrade(id);
-        trade.setStatus(TradeStatus.incomplete);
-        dataAccess.updateSer();
-    }
-
-    /**
-     * set the status of trade to complete and make trade
-     *
-     * @param id the id current trade
-     */
-    public void completeTrade(UUID id) {
-        Trade trade = getTrade(id);
-        trade.setStatus(TradeStatus.complete);
-        dataAccess.updateSer();
-    }
-
-    /**
-     * set the status of trade to cancelled
-     *
-     * @param id the id current trade
-     */
-    public void cancelTrade(UUID id){
-        Trade trade = getTrade(id);
-        trade.setStatus(TradeStatus.cancelled);
-        dataAccess.updateSer();
-    }
-    //move to userManager
-
-    void makeTrade(UUID id) {
-        UserManager um = new UserManager();
-        Trade currTrade = getTrade(id);
-
-        if (currTrade.getType().equals("one way")) {
-            ClientUser bor = um.getUser(currTrade.getUsers().get(0));
-            ClientUser lend = um.getUser(currTrade.getUsers().get(1));
-
-            System.out.println(bor);
-            System.out.println(bor.getWishBorrow());
-            System.out.println(currTrade.getItemList());
-            System.out.println(currTrade.getItemList().get(0));
-
-            bor.getWishBorrow().remove(currTrade.getItemList().get(0));
-            lend.getWishLend().remove(currTrade.getItemList().get(0));
-            bor.setBorrowCounter(bor.getBorrowCounter()+1);
-            bor.setLendCounter(bor.getLendCounter()+1);
-
-        }else{
-            ClientUser u1 = um.getUser(currTrade.getUsers().get(0));
-            ClientUser u2 = um.getUser(currTrade.getUsers().get(1));
-
-            u1.getWishBorrow().remove(currTrade.getItemList().get(1));
-            u1.getWishLend().remove(currTrade.getItemList().get(0));
-            u2.getWishBorrow().remove(currTrade.getItemList().get(0));
-            u2.getWishLend().remove(currTrade.getItemList().get(1));
-
-            u1.setBorrowCounter(u1.getBorrowCounter()+1);
-            u1.setLendCounter(u1.getLendCounter()+1);
-            u2.setBorrowCounter(u2.getBorrowCounter()+1);
-            u2.setLendCounter(u2.getLendCounter()+1);
-        }
-
-    }
-
 
     /**
      * return the list of all trades that the user has
@@ -170,7 +103,7 @@ public class TradeManager{
 
     /**
      * return the list of all unconfirmed trades that the user has
-     * @return
+     * @return a list of unconfirmed trade
      */
     public List<Trade> getUnconfirmed(UUID userID) {
         ClientUser user = (ClientUser) userAccess.getObject(userID);
@@ -285,22 +218,20 @@ public class TradeManager{
         return result;
     }
 
-    public void setStatus(Trade trade, TradeStatus status){
-        trade.setStatus(status);
-    }
-
-    public TradeStatus getTradeStatus(Trade trade){
-        return trade.getStatus();
-    }
-
-    public void setCreator(UUID tradeID, UUID creatorID){
-        getTrade(tradeID).setCreator(creatorID);
-    }
-
+    /**
+     * get trade id
+     * @param trade Trade
+     * @return trade id
+     */
     public UUID getId(Trade trade){
         return trade.getId();
     }
 
+    /**
+     * pop trade out from file with tradeId
+     * @param tradeId trade id
+     * @return trade
+     */
     public Trade popTrade(UUID tradeId){
         if (dataAccess.hasObject(tradeId)) {
             Trade result =  (Trade) dataAccess.getObject(tradeId);
@@ -312,37 +243,6 @@ public class TradeManager{
     }
 
 
-//    /**
-//     * check the status of the current trade
-//     * @param currTrade the current trade
-//     * @return the status
-//     */
-//    String checkTradeMeeting(Trade currTrade) {
-//        if (currTrade.getStatus().equals(TradeStatus.unconfirmed)) {
-//            return "confirm trade";
-//        }else if (currTrade.getStatus().equals(TradeStatus.cancelled)) {
-//            return "cancelled";
-//        }else if (currTrade.getStatus().equals(TradeStatus.complete)) {
-//            return "complete";
-//
-//        }else if (currTrade.getMeeting() == null ||
-//                currTrade.getMeeting().getStatus().equals(MeetingStatus.INCOMPLETE) ||
-//                currTrade.getMeeting().getStatus().equals(MeetingStatus.AGREED)){
-//            return "first meeting";
-//        }else if (currTrade.getMeeting().getStatus().equals(MeetingStatus.CANCELLED)){
-//            currTrade.setStatus(TradeStatus.cancelled);
-//            return "cancelled";
-//        }else if (currTrade.getDuration()==Trade.temp){
-//            if (currTrade.getSecondMeeting().getStatus().equals(MeetingStatus.INCOMPLETE)){
-//                return "second meeting";
-//            }else{
-//                currTrade.setStatus(TradeStatus.complete);
-//                return "complete";
-//            }
-//        }else{
-//            return "complete";
-//        }
-//    }
 }
 
 

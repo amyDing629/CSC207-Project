@@ -16,9 +16,9 @@ public class RTradeGUIBuilder implements BorderGUIBuilder {
 
     /**
      * [constructor]
-     *
      * @param currUser current user
-     * @param item     item selected by the current user
+     * @param item item selected by the current user
+     * @param fr  last frame
      */
     public RTradeGUIBuilder(UUID currUser, String item, JFrame fr) {
 
@@ -28,11 +28,17 @@ public class RTradeGUIBuilder implements BorderGUIBuilder {
         trc.getTarUser(item);
     }
 
+    /**
+     * build frame
+     */
     @Override
     public void buildFrame() {
         tg.setFrame(800, 200, "Request Trade Session");
     }
 
+    /**
+     * build north panel
+     */
     @Override
     public void buildPanelN() {
         JPanel msg = new JPanel();
@@ -44,6 +50,9 @@ public class RTradeGUIBuilder implements BorderGUIBuilder {
         tg.initializeMsg(jtz);
     }
 
+    /**
+     * build east panel
+     */
     @Override
     public void buildPanelE() {
         JPanel panelRight = new JPanel();
@@ -57,10 +66,16 @@ public class RTradeGUIBuilder implements BorderGUIBuilder {
         tg.addInput("input", ta);
     }
 
+    /**
+     * build west panel
+     */
     @Override
     public void buildPanelW() {
     }
 
+    /**
+     * build south panel
+     */
     @Override
     public void buildPanelS() {
         JPanel panelS =  new JPanel();
@@ -81,11 +96,11 @@ public class RTradeGUIBuilder implements BorderGUIBuilder {
         twowayPer.addActionListener(e -> { trc.twowayBut("per"); });
         back.addActionListener(e -> trc.backBut());
 
-
-
-
     }
 
+    /**
+     * build central panel
+     */
     @Override
     public void buildPanelC() {
         JTextArea tradeInfo = new JTextArea();
@@ -97,6 +112,10 @@ public class RTradeGUIBuilder implements BorderGUIBuilder {
         trc.presentTradeInfo();
     }
 
+    /**
+     * get trade GUI
+     * @return trade GUI
+     */
     @Override
     public BorderGUI getTradeGUI() {
         return tg;

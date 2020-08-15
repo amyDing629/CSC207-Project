@@ -10,23 +10,43 @@ import User.UseCase.UserManager;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * present info about accept trade session to users
+ */
 public class AcceptTradePresenter implements iTradePresenter {
     private final iPresent tg;
 
+    /**
+     * [constrctor]
+     * @param tg: accept trade GUI
+     */
     public AcceptTradePresenter(BorderGUI tg) {
         this.tg = tg;
     }
 
+    /**
+     * notify users if no trade is selected
+     */
     public void notTradeSelected(){
         tg.setMsgText("no trade is selected");
 
     }
 
+    /**
+     * nofity users if action succeeds
+     * @param tl a list of unconfirmed trade
+     * @param agree whether the user wants to agree or refuse trade
+     */
     @Override
     public void ActionSuccess(List<Trade> tl, boolean agree) {
         agreeTrade(tl, agree);
     }
 
+    /**
+     * nofity users if action succeeds
+     * @param tl a list of unconfirmed trade
+     * @param agree whether the user wants to agree or refuse trade
+     */
     private void agreeTrade(List<Trade> tl, boolean agree){
         String result = "";
         for (int i = 0; i < tl.size(); i++) {
@@ -46,26 +66,46 @@ public class AcceptTradePresenter implements iTradePresenter {
         tg.setCurrText("no trade selected");
     }
 
+    /**
+     * notify users if the input is wrong
+     */
     public void wrongInput(){
         tg.setMsgText("wrong input");
     }
 
+    /**
+     * reset input area
+     */
     public void resetInputArea(){
         tg.setInput("input", "Trade Number");
     }
 
+    /**
+     * present input trade's information
+     * @param trade trade
+     */
     public void presentTradeInfo(Trade trade){
         tg.setCurrText(trade.toString());
     }
 
+    /**
+     * notify users if current trade's info has been updated
+     */
     public void updateSuccess(){
         tg.setMsgText("Trade info has been updated successfully");
     }
 
+    /**
+     * close current frame
+     */
     public void closeFrame(){
         tg.getFrame().setVisible(false);
     }
 
+    /**
+     * update presented trade list
+     * @param tradeList unconfirmed trade list
+     */
     public void updateFrame(List<Trade> tradeList){
         String result = "";
         for (int i = 0; i < tradeList.size(); i++) {
@@ -89,6 +129,9 @@ public class AcceptTradePresenter implements iTradePresenter {
         }
     }
 
+    /**
+     * notify users if no trade is selected
+     */
     public void noTradeCurr(){
         tg.setCurrText("no trade selected");
     }

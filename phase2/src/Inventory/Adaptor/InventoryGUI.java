@@ -9,7 +9,7 @@ import javax.swing.*;
 
 /**
  * [Presenter]
- * inventoryGUI main. Connect to other GUIs.
+ * inventoryGUI main. Connect to other Inventory GUIs.
  */
 public class InventoryGUI {
     private final String currUser;
