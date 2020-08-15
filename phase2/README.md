@@ -34,7 +34,23 @@ For better testing all the available functionality, you need to:
   - add items into at least two users' lend wish list.
 
 
+# Usage
+Please see `VideoAccess.md`.
 
+
+
+# Authors and Contribution 
+*(names listed in no particular order)
+
+**Yuhan Zheng (Ensouled)** - AdminUser & GUI, Mandatory Extension 1
+
+**Yiyun Ding (Amy)** - Trade & GUI, Inventory & GUI, Mandatory Extension 2
+
+**Changyan Xu (Rella)** - Meeting System & GUI, Mandatory Extension 3
+
+**Yuxin Yang (Amber)** - Point System, Mandatory Extension 4
+
+**Siwei Tang** - User, Mandatory Extension 5
 
 
 
