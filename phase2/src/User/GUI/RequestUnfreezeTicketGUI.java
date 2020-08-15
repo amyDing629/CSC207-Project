@@ -17,6 +17,7 @@ public class RequestUnfreezeTicketGUI {
     public RequestUnfreezeTicketGUI(IUserController uc ,JFrame pFrame) {
         this.uc=uc;
         this.pFrame=pFrame;
+        ac = new ApprovalController();
     }
     public void run(String name){
         frame = new JFrame("Freeze User");
