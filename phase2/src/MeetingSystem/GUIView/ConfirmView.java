@@ -1,4 +1,4 @@
-package MeetingSystem.Adapter;
+package MeetingSystem.GUIView;
 
 import javax.swing.*;
 

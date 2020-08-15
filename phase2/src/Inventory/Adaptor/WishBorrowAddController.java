@@ -9,6 +9,10 @@ import User.UseCase.UserManager;
 import javax.swing.*;
 import java.util.UUID;
 
+/**
+ * [Controller]
+ * controller for adding items to wish borrow list session
+ */
 public class WishBorrowAddController implements iItemController {
     /**
      * the inventory of the system.
@@ -30,8 +34,10 @@ public class WishBorrowAddController implements iItemController {
     JFrame fr;
 
     /**
-     * [constructor]
-     * @param currUser current user
+     *
+     * @param currUser current User name
+     * @param bta view
+     * @param fr last frame
      */
     public WishBorrowAddController(String currUser, BorderGUI bta, JFrame fr){
         iv = new Inventory();
@@ -42,12 +48,20 @@ public class WishBorrowAddController implements iItemController {
         this.currUser = um.nameToUUID(currUser);
     }
 
+    /**
+     * move current item into wish borrow list
+     */
     void moveToWishList(){
         ClientUser user = um.popUser(currUser);
         user.getWishBorrow().add(it);
         um.addUser(user);
     }
 
+    /**
+     * check whether the item is in wish borrow list
+     * @param name item name
+     * @return boolean
+     */
     public boolean isInList(String name){
         for (String it: um.getWishBorrow(currUser)){
             if (it.equals(name)){
@@ -57,16 +71,27 @@ public class WishBorrowAddController implements iItemController {
         return false;
     }
 
+    /**
+     * reset curr area
+     */
     public void updateCurr(){
         ip.resetCurr();
     }
 
 
+    /**
+     * back to last frame
+     */
     public void backBut(){
         fr.setVisible(true);
         ip.closeFrame();
     }
 
+    /**
+     * print item info
+     * @param it item name
+     * @return item info
+     */
     public String getItemInfo(Item it) {
         return "Item Info:\nitem name: " + iv.getName(it) + "\n" +
                 "item description: " + iv.getDescription(it)

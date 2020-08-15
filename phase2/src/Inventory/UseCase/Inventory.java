@@ -77,6 +77,12 @@ public class Inventory {
     }
 
 
+    /**
+     * create item with item name and owner UUID
+     * @param name item name
+     * @param owner the owner id of the item
+     * @return item
+     */
     public Item createItem(String name, UUID owner){
         return new Item(name, owner);
     }
@@ -85,6 +91,11 @@ public class Inventory {
         item.setDescription(des);
     }
 
+    /**
+     * return whether the item is in the trade
+     * @param it item name
+     * @return boolean
+     */
     public boolean getIsInTrade(String it){
         return getItem(it).getIsInTrade();
 

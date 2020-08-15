@@ -1,6 +1,8 @@
 package MeetingSystem.Adapter;
 
 import MeetingSystem.Entity.Meeting;
+import MeetingSystem.GUIView.AgreeView;
+import MeetingSystem.GUIView.OKCancelView;
 import MeetingSystem.MeetingStatus;
 import MeetingSystem.UseCase.MeetingActionManager;
 import MeetingSystem.UseCase.MeetingManager;

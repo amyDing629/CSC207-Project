@@ -209,8 +209,16 @@ public class UserManager {
         return getUser(userID).getIsFrozen();
     }
 
+    //finished
+    public void set(ClientUser a, String password){a.setPassword(password);}
+
     public ArrayList<ArrayList<String>> getActions(ClientUser a) {
         return a.getActions();
+    }
+
+    public void removeBWishes(String hi,ClientUser b){
+
+        b.removeBWishes(hi);
     }
 
     public String UUIDToName(UUID userID){
@@ -241,17 +249,6 @@ public class UserManager {
         return number;
     }
 
-    public void deleteBItem(String username,String it){
-        ClientUser user = popUser(getUser(username).getId());
-        user.getWishBorrow().remove(it);
-        addUser(user);
-    }
-    public void deleteLItem(String username,String it){
-        ClientUser user = popUser(getUser(username).getId());
-        user.getWishLend().remove(it);
-        addUser(user);
-    }
-
     public Trade getTrade(UUID id) {
         return (Trade) tradeAccess.getObject(id);
     }
@@ -269,16 +266,5 @@ public class UserManager {
         return number;
     }
 
-    public void addAction(String username,String type,String preValue){
-        ClientUser a = popUser(nameToUUID(username));
-        a.addAction(type,preValue);
-        addUser(a);
-    }
-
-    public void removeAcition(String username,String type,String preValue){
-        ClientUser a = popUser(nameToUUID(username));
-        a.removeAction(type,preValue);
-        addUser(a);
-    }
 }
 

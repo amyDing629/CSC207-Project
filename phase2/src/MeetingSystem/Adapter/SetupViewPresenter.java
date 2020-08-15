@@ -1,5 +1,7 @@
 package MeetingSystem.Adapter;
 
+import MeetingSystem.GUIView.InputTimePlaceView;
+import MeetingSystem.GUIView.SetupView;
 import MeetingSystem.MeetingStatus;
 import MeetingSystem.UseCase.*;
 
@@ -39,7 +41,6 @@ public class SetupViewPresenter extends Observable implements IPresenter {
 
         // set observers
         addObserver(observer);
-        System.out.println("SetupPresenter - add observer: " + observer.toString());
     }
 
     @Override

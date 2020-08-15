@@ -6,6 +6,9 @@ import User.UseCase.UserManager;
 import javax.swing.*;
 import java.util.UUID;
 
+/**
+ * [Presenter]
+ */
 public class ClientUserPresenter implements IUserPresenter {
 
     // View
@@ -17,18 +20,25 @@ public class ClientUserPresenter implements IUserPresenter {
 
     // Other
     UUID currUser;
-
+    /**
+     * [Constructor]
+     */
     public ClientUserPresenter(UUID currUser, JFrame view) {
         this.currUser = currUser;
         this.view = view;
     }
 
-
+    /**
+     * return user manager
+     */
     @Override
     public UserManager getUserModel() {
         return userManager;
     }
 
+    /**
+     * return trade manager
+     */
     @Override
     public TradeManager getTradeModel() {
         return tradeManager;
@@ -39,11 +49,17 @@ public class ClientUserPresenter implements IUserPresenter {
 
     }
 
+    /**
+     * return id of the user
+     */
     @Override
     public UUID getCurrUser() {
         return currUser;
     }
 
+    /**
+     * run the frame
+     */
     @Override
     public void run() {
         view.setVisible(true);

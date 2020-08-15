@@ -1,23 +1,31 @@
 package User.GUI;
 
-import User.Adapter.AdminController;
-import User.Adapter.ApprovalController;
-import User.Adapter.ClientUserController;
+import User.Adapter.*;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class UnfreezeGUI {
     ApprovalController avc;
-    ClientUserController uc;
-    AdminController ac;
+    IUserController uc;
+    IAdminController ac;
     JFrame pFrame;
     JFrame frame;
-    public UnfreezeGUI(ClientUserController uc ,JFrame pFrame) {
+    /**
+     * [Constructor]
+     * @param pFrame frame
+     * @param uc client user controller
+     */
+    public UnfreezeGUI(IUserController uc , JFrame pFrame) {
         this.uc=uc;
         this.avc= new ApprovalController();
         this.ac = new AdminController();
         this.pFrame=pFrame;
     }
+    /**
+     * @param name  name of user
+     * create new frame
+     */
     public void run(String name){
         frame = new JFrame("UnFreeze User");
         frame.setSize(500, 700);
@@ -33,6 +41,12 @@ public class UnfreezeGUI {
         frame.setVisible(true);
     }
 
+    /**
+     * @param frame new frame
+     * @param panel the new panel
+     * @param b name of user
+     * set new frame
+     */
     private void placeComponents(JFrame frame, JPanel panel, String b){
 
         JTextArea textArea = new JTextArea(5, 20);

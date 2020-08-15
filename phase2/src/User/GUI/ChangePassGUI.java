@@ -1,7 +1,6 @@
 package User.GUI;
 
-import User.Adapter.ClientUserController;
-import User.Entity.ClientUser;
+import User.Adapter.IUserController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,15 +8,25 @@ import java.util.ArrayList;
 
 public class ChangePassGUI {
 
-    ClientUserController uc;
+    IUserController uc;
     JFrame pFrame;
     JFrame frame;
     String userName;
 
-    public ChangePassGUI(ClientUserController uc , JFrame pFrame) {
+    /**
+     * [Constructor]
+     * @param pFrame frame
+     * @param uc client user controller
+     */
+    public ChangePassGUI(IUserController uc , JFrame pFrame) {
         this.uc = uc;
         this.pFrame=pFrame;
     }
+
+    /**
+     * @param name  name of user
+     * create new frame
+     */
     public void run(String name){
         this.userName = name;
 
@@ -35,6 +44,11 @@ public class ChangePassGUI {
         frame.setVisible(true);
     }
 
+    /**
+     * @param frame new frame
+     * @param panel the new panel
+     * set new frame
+     */
     private void placeComponents(JFrame frame, JPanel panel){
         JLabel curPass = new JLabel("Current password:"+ uc.getPassword(getUserName()));
         curPass.setPreferredSize(new Dimension(300, 30));

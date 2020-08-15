@@ -2,6 +2,7 @@ package Inventory.Adaptor;
 
 import Inventory.Entity.Item;
 
+
 public interface iItemController {
 
     void updateCurr();

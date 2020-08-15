@@ -37,15 +37,22 @@ public class PointGUIBuilder implements BorderGUIBuilder {
         JLabel p = new JLabel("Points");
         JTextArea points = new JTextArea();
         points.setEditable(false);
+        JLabel ex = new JLabel("Exchange Standard");
+        JTextArea exStandard = new JTextArea();
+        exStandard.setEditable(false);
         points.setPreferredSize(new Dimension(50, 50));
         JButton eb = new JButton("Get Bonus");
         panelE.setLayout(new BoxLayout(panelE, BoxLayout.Y_AXIS));
         panelE.add(p);
         panelE.add(points);
+        panelE.add(ex);
+        panelE.add(exStandard);
         panelE.add(eb);
         eb.addActionListener(e -> aa.ebBut());
         tg.addInput("Points", points);
+        tg.addInput("Exchange Standard", exStandard);
         aa.updatePoint();
+        aa.updateStandard();
         tg.setEast(panelE);
 
     }

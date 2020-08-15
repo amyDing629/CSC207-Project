@@ -16,7 +16,6 @@ public class RequestUnfreezeTicketGUI {
     public RequestUnfreezeTicketGUI(ClientUserController uc ,JFrame pFrame) {
         this.uc=uc;
         this.pFrame=pFrame;
-        this.ac=new ApprovalController();
     }
     public void run(String name){
         frame = new JFrame("Freeze User");
@@ -59,9 +58,7 @@ public class RequestUnfreezeTicketGUI {
         });
         submitButton.addActionListener(e -> {
             frame.setVisible(false);
-            System.out.println(userInput.getText());
-            ac.addApprovals(name,userInput.getText());
-            uc.addAction(name,"Freeze ticket","");
+            ac.addApprovals(name,textLabel.getText());
             JOptionPane.showMessageDialog(null,"Request successfully");
             JOptionPane.showMessageDialog(null,"Please wait for the admin to approve");
             UserFreezeSystem d = new UserFreezeSystem(uc,frame);

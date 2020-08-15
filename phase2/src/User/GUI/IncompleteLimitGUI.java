@@ -1,21 +1,31 @@
 package User.GUI;
 
 import User.Adapter.AdminController;
-import User.Adapter.ClientUserController;
+import User.Adapter.IAdminController;
+import User.Adapter.IUserController;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class IncompleteLimitGUI {
-    ClientUserController uc;
-    AdminController ac;
+    IUserController uc;
+    IAdminController ac;
     JFrame pFrame;
     JFrame frame;
-    public IncompleteLimitGUI(ClientUserController uc ,JFrame pFrame) {
+    /**
+     * [Constructor]
+     * @param pFrame frame
+     * @param uc client user controller
+     */
+    public IncompleteLimitGUI(IUserController uc ,JFrame pFrame) {
         this.uc=uc;
         this.ac = new AdminController();
         this.pFrame=pFrame;
     }
+    /**
+     * @param name  name of user
+     * create new frame
+     */
     public void run(String name){
         frame = new JFrame("Trade Limit");
         frame.setSize(500, 700);
@@ -32,7 +42,11 @@ public class IncompleteLimitGUI {
         placeComponents(frame, panel, name);
         frame.setVisible(true);
     }
-
+    /**
+     * @param frame new frame
+     * @param panel the new panel
+     * set new frame
+     */
     private void placeComponents(JFrame frame, JPanel panel, String b){
 
         JLabel textLabel = new JLabel("Please enter the user's username and the limit below");

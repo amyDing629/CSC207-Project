@@ -10,10 +10,12 @@ import User.UseCase.UserManager;
 
 import javax.swing.*;
 
+/**
+ * [Controller]
+ * controllers that are responsible for agree requests
+ */
 public class AgreeReqController implements iItemController {
-    /**
-     * the inventory of the system.
-     */
+
     private final Inventory iv;
 
     private final UserManager um;
@@ -40,6 +42,9 @@ public class AgreeReqController implements iItemController {
         this.fr = fr;
     }
 
+    /**
+     * @return the string of list
+     */
     public String printList() {
         String result = iam.AllItemApprovals();
         if (result.equals("")) {
@@ -49,6 +54,11 @@ public class AgreeReqController implements iItemController {
 
     }
 
+    /**
+     * get item from request list using item name
+     * @param itemName: item name
+     * @return item
+     */
     private Item getItemByRequestList(String itemName){
         ItemApprovals k=iam.getItemApproval(itemName);
         Item item = iv.createItem(itemName,um.nameToUUID(k.getCurUserName()));
@@ -56,38 +66,65 @@ public class AgreeReqController implements iItemController {
         return item;
     }
 
+    /**
+     * check input
+     * @param name the item name
+     * @return whether item approvals has the item
+     */
     private boolean iamCheckInput(String name){
         return iam.hasItemApprovals(name);
     }
 
+    /**
+     * reset curr area
+     */
     public void updateCurr(){
         ip.resetCurr();
     }
 
+    /**
+     * update list
+     */
     public void updateBut(){
         updateList();
+        updateCurr();
     }
 
+    /**
+     * perform agree action
+     */
     @Override
     public void performActionOne() {
         agreeBut();
     }
 
+    /**
+     * perform disagree action
+     */
     @Override
     public void performActionTwo() {
         disagreeBut();
     }
 
+    /**
+     * no use
+     */
     @Override
     public void performActionThree() {
 
     }
 
+    /**
+     * update trade list
+     */
     public void updateList(){
         ip.updateList(printList());
 
     }
 
+    /**
+     * set currTrade, present trade info
+     */
     public void submitBut(){
         String input = bta.getInput("input");
         ip.resetInputArea();
@@ -100,17 +137,29 @@ public class AgreeReqController implements iItemController {
         }
     }
 
+    /**
+     * return to last frame
+     */
     public void backBut(){
         fr.setVisible(true);
         ip.closeFrame();
     }
 
+    /**
+     * present item info with the item
+     * @param it item name
+     * @return item info
+     */
     public String getItemInfo(Item it) {
         return "Item Info:\nitem name: " + iv.getName(it) + "\n" +
                 "item description: " + iv.getDescription(it)
                 + "\n" + "item owner: " + um.UUIDToName(it.getOwnerUUID());
     }
 
+    /**
+     * add the item to lending list(agree request
+     * @param it: item
+     */
     private void addToList(Item it) {
         if (!isInList(it.getName())){
             iv.add(it);
@@ -124,6 +173,11 @@ public class AgreeReqController implements iItemController {
         }
     }
 
+    /**
+     * whether the item is in user's lending list
+     * @param name item name
+     * @return boolean
+     */
     public boolean isInList(String name){
         for (Item it: iv.getLendingList()){
             if (it.getName().equals(name)){
@@ -134,6 +188,9 @@ public class AgreeReqController implements iItemController {
     }
 
 
+    /**
+     * agree with user's request
+     */
     void agreeBut(){
         if (it == null){
             ip.noItemSelected();
@@ -147,6 +204,9 @@ public class AgreeReqController implements iItemController {
         }
     }
 
+    /**
+     * disagree with user's request, delete the item from the itemApproval
+     */
     void disagreeBut(){
         if (it == null) {
             ip.noItemSelected();

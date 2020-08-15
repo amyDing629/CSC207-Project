@@ -5,21 +5,35 @@ import Trade.Adaptor.BorderGUI;
 
 import javax.swing.*;
 
+/**
+ * build wish borrow GUI
+ */
 public class WishBorrowBuilder implements BorderGUIBuilder {
     iItemController ic;
     BorderGUI tg;
 
+    /**
+     * [constructor]
+     * @param currUser current user name
+     * @param fr last frame
+     */
     public WishBorrowBuilder(String currUser, JFrame fr){
         tg = new BorderGUI();
         ic = new WishBorrowController(currUser, tg, fr);
     }
 
+    /**
+     * build frame
+     */
     @Override
     public void buildFrame() {
         tg.setFrame(600, 200, "Edit WishBorrow Session");
 
     }
 
+    /**
+     * build north panel
+     */
     @Override
     public void buildPanelN() {
         JPanel panelN = new JPanel();
@@ -29,11 +43,11 @@ public class WishBorrowBuilder implements BorderGUIBuilder {
         panelN.add(msgArea);
         tg.initializeMsg(msgArea);
         tg.setNorth(panelN);
-
-
-
     }
 
+    /**
+     * build east panel
+     */
     public void buildPanelE(){
         JPanel panelE = new JPanel();
         JButton add = new JButton("Add");
@@ -47,6 +61,9 @@ public class WishBorrowBuilder implements BorderGUIBuilder {
         add.addActionListener(e -> ic.performActionOne());
     }
 
+    /**
+     * build west panel
+     */
     @Override
     public void buildPanelW() {
         JPanel panelW = new JPanel();
@@ -61,6 +78,9 @@ public class WishBorrowBuilder implements BorderGUIBuilder {
         ic.updateList();
     }
 
+    /**
+     * build south panel
+     */
     @Override
     public void buildPanelS() {
         JPanel panelS = new JPanel();
@@ -81,6 +101,9 @@ public class WishBorrowBuilder implements BorderGUIBuilder {
         update.addActionListener(e -> ic.updateBut());
     }
 
+    /**
+     * build central panel
+     */
     @Override
     public void buildPanelC() {
         JPanel panelC = new JPanel();
@@ -96,6 +119,10 @@ public class WishBorrowBuilder implements BorderGUIBuilder {
 
     }
 
+    /**
+     * get BorderGUI
+     * @return BorderGUI
+     */
     @Override
     public BorderGUI getTradeGUI() {
         return tg;

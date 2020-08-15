@@ -6,7 +6,6 @@ import java.util.Map;
 import java.util.UUID;
 
 public interface IDataAccess {
-    String meetingDataFile = "src/MeetingSystem/MeetingData.csv";
 
     void updateFile(Meeting meeting); // write into the csv, read from the csv
 
@@ -17,7 +16,5 @@ public interface IDataAccess {
     void readFromCSVFile();
 
     void writeAllMeetingsToCSV();
-
-    Map<UUID, Meeting> getMap();
 
 }

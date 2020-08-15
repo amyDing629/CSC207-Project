@@ -5,21 +5,21 @@ Link: https://drive.google.com/drive/folders/1unT-WmSSiGtjKi7qOSXFZHjPwjTrSJvI?u
 
 ## Videos' Content
 
-### `V1_RegisterLogin.mp4`✅
+### `V1_RegisterLogin.mp4`✅ (Rella)
 - Login: Admin & Client User
 - Register: Client User *2
 - Change Password
 - Creates new Admin user：Admin
     
-### `V2_WishList_AddLendableItems.mp4`✅
+### `V2_WishList_AddLendableItems.mp4`✅ (Rella)
 - Add items to wish-to-lend list
 - Admin agrees/decline requests (agreed items will appear in the market)
     
-### `V3_WishList_AddWishList.mp4`✅
+### `V3_WishList_AddWishList.mp4`✅ (Rella)
 - Add item from the Market to Wishlist
 - Delete item in the Wishlist
     
-### `V4_TradeItems_TwoWay_Temporary.mp4`✅
+### `V4_TradeItems_TwoWay_Temporary.mp4`✅ (Rella)
 - Initialise a TwoWay-Temporary Trade (ClientUser A): <MeetingStatus: `INCOMPLETE`>
 - Add second item to trade (ClientUser B)
 - Agree trading request (ClientUser B)
@@ -35,15 +35,27 @@ Link: https://drive.google.com/drive/folders/1unT-WmSSiGtjKi7qOSXFZHjPwjTrSJvI?u
     - `Confirm` proposal after meeting occurs: <MeetingStatus: `CONFIRMED`>
      
      
-### `V5_Mandatory3_VisitorExplore.mp4`✅
+### `V5_Mandatory3_VisitorExplore.mp4`✅ (Rella)
 - Explore Market (where all not-in-trade item be) as a visitor (no login required)
     
-### `V6_xxx.mp4`
-- a
+### `V6_Mandatory2_ItemSuggestion.mp4`✅ (Amy)
+Two users--Amy and Tom
+- Amy's WishLend:  [iPad, iPhone, toy car ]
+- Amy's WishBorrow: [horror film]
+- Tom's WishLend: [horror film]
+- Tom's WishBorrow: [iPad, iPhone]
+
+Amy requests a trade for the item "horror film" with Tom.
+
+WishLend List shows: [iPad, iPhone, toy car]
+Suggested List shows: [iPad, iPhone]
+
     
-### `V7_xxx.mp4`
-- a
-    
+### `V7_Mandatory5.mp4`✅ (Siwei Tang)
+Two Users- Admin4
+- set the end date(date must after datetime now)
+- submit, then back and then log out
+- log in again, the freeze status and left status would change to true
 ### `V8_xxx.mp4`
 - a
     
@@ -107,7 +119,8 @@ after login -> inventory/market  (view an item)
 
 
 ## Point System
-每complete一个trade (trade status == complete)，系统自动给这个user加一分；每5分，可以兑换一次bonus trade
+Every complete trade (trade status == complete)，the system will automatically give the user add one point；every 5
+points，user can exchange for bonus trade
 TBA
 
 ## Mandatory #1 -  Roll Back
@@ -119,5 +132,6 @@ TBA
 ## Mandatory #4 - Admin adjust all threshold
 TBA
 
-## Mandatory #5 - Admin adjust all threshold
-TBA
+## Mandatory #5 - User set Left Status
+User set the end time, it means that if the time now is before that end
+time, the left status and freeze status to be true. 

@@ -1,5 +1,7 @@
 package MeetingSystem.Adapter;
 
+import MeetingSystem.GUIView.MView;
+import MeetingSystem.GUIView.MainView;
 import MeetingSystem.MeetingStatus;
 import MeetingSystem.UseCase.MeetingModel;
 import MeetingSystem.UseCase.Model;
@@ -23,7 +25,7 @@ public class MainViewPresenter extends Observable implements MPresenter {
     Model meetingModel;
 
     // View
-    MainView mainView; // meeting main view
+    MView mainView; // meeting main view
     JFrame frame; // trade view
 
     // Observer

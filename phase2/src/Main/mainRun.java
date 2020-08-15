@@ -11,14 +11,14 @@ public class mainRun {
         uc.checkFileEmpty(new File("phase2/src/user.ser"));
         uaf.readFile();
 
+        // start with three login window (for easy test)
+        LoginGUI user1 = new LoginGUI();
+        user1.run();
+
+        LoginGUI user2 = new LoginGUI();
+        user2.run();
+
         LoginGUI admin = new LoginGUI();
         admin.run();
-
-        LoginGUI login1 = new LoginGUI();
-        login1.run();
-
-        LoginGUI login2 = new LoginGUI();
-        login2.run();
-
     }
 }

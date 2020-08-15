@@ -1,4 +1,6 @@
-package MeetingSystem.Adapter;
+package MeetingSystem.GUIView;
+
+import MeetingSystem.Adapter.TimePlaceInputController;
 
 import javax.swing.*;
 
@@ -9,9 +11,6 @@ public class SetupView extends InputTimePlaceView {
 
     @Override
     void setOnOK(JFormattedTextField timeFormattedTextField, JTextField placeTextField) {
-        System.out.println(timeFormattedTextField.getText());
-        System.out.println(placeTextField.getText());
-
 
         String timeFieldText = timeFormattedTextField.getText();
         String placeFieldText = placeTextField.getText();

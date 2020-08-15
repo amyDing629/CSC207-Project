@@ -5,22 +5,35 @@ import Trade.Adaptor.BorderGUI;
 
 import javax.swing.*;
 
-
+/**
+ * build market frame
+ */
 public class MarketBuilder implements BorderGUIBuilder {
 
     iItemController ic;
     BorderGUI tg;
 
+    /**
+     * [Constructor]
+     * initialize iItemController
+     * @param fr: last frame
+     */
     public MarketBuilder(JFrame fr) {
         tg = new BorderGUI();
         ic = new MarketController(tg, fr);
     }
 
+    /**
+     * build frame
+     */
     @Override
     public void buildFrame() {
         tg.setFrame(600, 200, "Market Session");
     }
 
+    /**
+     * build north panel
+     */
     @Override
     public void buildPanelN() {
         JPanel panelN = new JPanel();
@@ -30,15 +43,19 @@ public class MarketBuilder implements BorderGUIBuilder {
         panelN.add(msgArea);
         tg.setNorth(panelN);
         tg.initializeMsg(msgArea);
-
     }
 
+    /**
+     * build east panel
+     */
     @Override
     public void buildPanelE() {
-
-
     }
 
+
+    /**
+     * build west panel
+     */
     @Override
     public void buildPanelW() {
         JPanel panelW = new JPanel();
@@ -52,11 +69,11 @@ public class MarketBuilder implements BorderGUIBuilder {
         tg.setWest(panelW);
         tg.initializeList(itemList);
         ic.updateList();
-
-
-
     }
 
+    /**
+     * build south panel
+     */
     @Override
     public void buildPanelS() {
         JPanel panelS = new JPanel();
@@ -76,6 +93,9 @@ public class MarketBuilder implements BorderGUIBuilder {
 
     }
 
+    /**
+     * build central panel
+     */
     @Override
     public void buildPanelC() {
         JPanel panelC = new JPanel();
@@ -94,6 +114,10 @@ public class MarketBuilder implements BorderGUIBuilder {
 
     }
 
+    /**
+     * get frame
+     * @return Market BorderGUI
+     */
     @Override
     public BorderGUI getTradeGUI() {
         return tg;

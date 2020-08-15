@@ -5,33 +5,38 @@ import Trade.Adaptor.BorderGUIBuilder;
 import Trade.Adaptor.BorderGUIEngineer;
 import Trade.Adaptor.GUIPlan;
 import Trade.Adaptor.TradeGUI_Main;
-import Trade.Adaptor.TradeHistory.TradeHistoryController;
-import Trade.UseCase.TradeManager;
 import User.Adapter.ClientUserController;
+import User.Adapter.IUserController;
 import User.Adapter.IUserPresenter;
 import User.PointSystem.PointGUIBuilder;
-import User.UseCase.UserManager;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.UUID;
 
 public class ClientUserGUI implements View {
-//    UserManager um = new UserManager();
-//    TradeManager tm = new TradeManager();
 
     JFrame pFrame; // previous frame
     JFrame frame;// this frame
     String currUser;
 
     IUserPresenter presenter;
-    ClientUserController controller = new ClientUserController();
+    IUserController controller;
 
+    /**
+     * [Constructor]
+     * @param pFrame frame
+     * @param currUser name of user
+     */
     public ClientUserGUI(JFrame pFrame, String currUser) {
         this.pFrame = pFrame;
         this.currUser = currUser;
+        controller = new ClientUserController();
     }
 
+    /**
+     * create new frame
+     */
     public void run() {
         frame = new JFrame("Login Success");
         frame.setSize(500, 700);
@@ -47,16 +52,27 @@ public class ClientUserGUI implements View {
         frame.setVisible(true);
     }
 
+    /**
+     * @param frame new frame
+     * @param panel the new panel
+     * @param b name of user
+     * set new frame
+     */
     private void placeComponents(JFrame frame, JPanel panel, String b) {
 
         UUID userId = controller.nameToUUID(b);
         boolean isFrozen = controller.getIsFrozen(userId);
+        boolean isLeft = controller.getIsLeft(userId);
 
 
         System.out.println("CUGUI indicator");
         JLabel freezeStatus = new JLabel("Freeze Status: " + isFrozen);
         freezeStatus.setPreferredSize(new Dimension(300, 30));
         panel.add(freezeStatus);
+
+        JLabel leftStatus = new JLabel("Left Status: " + isLeft);
+        leftStatus.setPreferredSize(new Dimension(300, 30));
+        panel.add(leftStatus);
 
         JLabel tradeLimit = new JLabel("Trade limit: " + controller.getTradeNumber(controller.UUIDToName(userId)) + "/" +
                 controller.getWeekTransactionLimit(controller.UUIDToName(userId)));
@@ -133,6 +149,9 @@ public class ClientUserGUI implements View {
         return null;
     }
 
+    /**
+     * set presenter
+     */
     @Override
     public void setPresenter(IUserPresenter presenter) {
         this.presenter = presenter;

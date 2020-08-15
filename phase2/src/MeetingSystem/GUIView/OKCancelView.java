@@ -1,4 +1,6 @@
-package MeetingSystem.Adapter;
+package MeetingSystem.GUIView;
+
+import MeetingSystem.Adapter.IPresenter;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;

@@ -6,6 +6,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.UUID;
 
+/**
+ * MeetingActionManager's interface
+ */
 public interface MeetingManager {
     boolean isMeetingIdExist(UUID meetingID);
 

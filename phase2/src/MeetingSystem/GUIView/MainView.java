@@ -1,12 +1,13 @@
-package MeetingSystem.Adapter;
+package MeetingSystem.GUIView;
 
+import MeetingSystem.Adapter.*;
 import MeetingSystem.MeetingStatus;
 import MeetingSystem.UseCase.Model;
 
 import javax.swing.*;
 import java.util.UUID;
 
-public class MainView {
+public class MainView implements MView {
     private JFrame frame;
     private JPanel panel1;
     private JButton backButton;
@@ -32,6 +33,7 @@ public class MainView {
         frame.setVisible(false);
     }
 
+    @Override
     public void updateViewFromModel(boolean isFirst) {
         this.isFirst = isFirst;
         Model model = getPresenter().getModel();
@@ -42,7 +44,7 @@ public class MainView {
         welcomeTextArea.setText(model.getCurrUser());
         meetingInfoTextArea.setText(model.getMeetingInfo(meetingID));
 
-        // TODO: strategy pattern
+
         if (isFirst) { // first meeting view
 
             // update Button view
@@ -105,14 +107,16 @@ public class MainView {
 
     }
 
+    @Override
     public void open() {
         frame.setVisible(true);
     }
 
-    public MPresenter getPresenter() {
+    MPresenter getPresenter() {
         return presenter;
     }
 
+    @Override
     public void setPresenter(MPresenter presenter) {
         this.presenter = presenter;
     }
@@ -163,7 +167,9 @@ public class MainView {
             updateViewFromModel(isFirst);
         });
         helpButton.addActionListener(e -> {
-            // TODO: go to help view
+            // go to help view
+            HelpViewPresenter helpViewPresenter = new HelpViewPresenter();
+            helpViewPresenter.run();
         });
     }
 

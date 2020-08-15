@@ -59,6 +59,8 @@ public class PointPresenter {
         tg.setInput("Points", String.valueOf(points));
     }
 
+    public void updateStandard(int exStandard) {tg.setInput("Exchange Standard", String.valueOf(exStandard));}
+
     void resetCurr(){
         tg.setCurrText("No trade selected");
     }

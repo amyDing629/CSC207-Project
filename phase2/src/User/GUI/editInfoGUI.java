@@ -1,6 +1,6 @@
 package User.GUI;
 
-import User.Adapter.ClientUserController;
+import User.Adapter.IUserController;
 import User.Entity.ClientUser;
 import User.UseCase.UserManager;
 
@@ -8,13 +8,24 @@ import javax.swing.*;
 import java.awt.*;
 
 public class editInfoGUI {
-    ClientUserController uc;
+    IUserController uc;
     JFrame frame;
     JFrame PFrame;
-    public editInfoGUI(ClientUserController uc , JFrame pFrame) {
+
+    /**
+     * [Constructor]
+     * @param pFrame frame
+     * @param uc client user controller
+     */
+    public editInfoGUI(IUserController uc , JFrame pFrame) {
         this.uc = uc;
         this.PFrame=pFrame;
     }
+
+    /**
+     * @param name  name of user
+     * create new frame
+     */
     public void run(String name){
         frame = new JFrame("Edit User Information");
         frame.setSize(500, 700);
@@ -31,7 +42,12 @@ public class editInfoGUI {
         frame.setVisible(true);
     }
 
-
+    /**
+     * @param frame new frame
+     * @param panel the new panel
+     * @param b name of user
+     * set new frame
+     */
     private void placeComponents(JFrame frame, JPanel panel, String b){
 
         JLabel isAdmin = new JLabel("Admin: "+ uc.getIsAdmin(b));
@@ -58,10 +74,13 @@ public class editInfoGUI {
         CreateAdminGUI.setPreferredSize(new Dimension(300, 30));
         panel.add(CreateAdminGUI);
 
-
         JButton ReverseSystem = new JButton("Reverse System");
         ReverseSystem.setPreferredSize(new Dimension(300, 30));
         panel.add(ReverseSystem);
+
+        JButton isLeft = new JButton("set Left");
+        isLeft.setPreferredSize(new Dimension(300, 30));
+        panel.add(isLeft);
 
         JButton exit = new JButton("Back");
         exit.setPreferredSize(new Dimension(300, 30));
@@ -106,6 +125,12 @@ public class editInfoGUI {
         ReverseSystem.addActionListener(e -> {
             frame.setVisible(false);
             ReverseSystemGUI d = new ReverseSystemGUI(uc,frame);
+            d.run(b);
+        });
+
+        isLeft.addActionListener(e -> {
+            frame.setVisible(false);
+            leftGUI d = new leftGUI(uc,frame);
             d.run(b);
         });
 

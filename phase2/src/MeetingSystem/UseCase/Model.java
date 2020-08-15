@@ -6,7 +6,7 @@ import MeetingSystem.MeetingStatus;
 import java.util.UUID;
 
 /**
- *
+ * The display model of meeting
  */
 public interface Model {
     String getMeetingInfo(UUID meetingID);
@@ -20,8 +20,6 @@ public interface Model {
     MeetingStatus getMeetingStatus(UUID meetingID);
 
     boolean otherUserAgreed(UUID meetingID);
-
-    boolean otherUserConfirmed(UUID meetingID);
 
     boolean isLastUserCurrUser();
 

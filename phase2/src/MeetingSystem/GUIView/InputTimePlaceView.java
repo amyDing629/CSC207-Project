@@ -1,4 +1,6 @@
-package MeetingSystem.Adapter;
+package MeetingSystem.GUIView;
+
+import MeetingSystem.Adapter.IPresenter;
 
 import javax.swing.*;
 import javax.swing.text.MaskFormatter;
@@ -78,11 +80,11 @@ public abstract class InputTimePlaceView extends JDialog {
         return presenter;
     }
 
-    void setPresenter(IPresenter presenter) {
+    public void setPresenter(IPresenter presenter) {
         this.presenter = presenter;
     }
 
-    abstract void open();
+    public abstract void open();
 
     JFormattedTextField getTimeFormattedTextField() {
         return timeFormattedTextField;

@@ -3,22 +3,34 @@ package User.Adapter;
 import User.UseCase.ApprovalManager;
 import User.UseCase.UserManager;
 
-
+/**
+ * [Controller]
+ * controllers that control approval manager
+ */
 public class ApprovalController {
     ApprovalManager am = new ApprovalManager();
     UserManager um = new UserManager();
 
+    /**
+     * return the string of all approval users
+     */
     public String AllUserApprovals(){
         return am.AllUserApprovals();
     }
 
+    /**
+     * @param ua string that represents the approval user
+     * remove users
+     */
     public void removeUserApproval(String ua){
 
         am.removeUserApproval(ua);
     }
 
-    public void addApprovals(String name, String des){
-        System.out.println(um.getUser(name).getUsername());
-        am.addApprovals(um.getUser(name),des);
-    }
+    /**
+     * @param name the name of user
+     * @param des description
+     * add approvals with description
+     */
+    public void addApprovals(String name, String des){am.addApprovals(um.getUser(name),des);}
 }

@@ -12,14 +12,14 @@ import User.UseCase.UserManager;
 import javax.swing.*;
 import java.util.UUID;
 
+/**
+ * [Controller]
+ * controller for wish borrow session
+ */
 public class WishBorrowController implements iItemController {
-    /**
-     * the inventory of the system.
-     */
+
     private final Inventory iv;
-    /**
-     * the user that is using the system.
-     */
+
     private final UUID currUser;
 
     UserManager um;
@@ -33,8 +33,10 @@ public class WishBorrowController implements iItemController {
     JFrame fr;
 
     /**
-     * [constructor]
-     * @param currUser current user
+     *
+     * @param currUser current user name
+     * @param bta borderGUI
+     * @param fr last frame
      */
     public WishBorrowController(String currUser, BorderGUI bta, JFrame fr){
         iv = new Inventory();
@@ -46,12 +48,19 @@ public class WishBorrowController implements iItemController {
     }
 
 
+    /**
+     * delete item from wish borrow list
+     * @param it the item name that wanted to be deleted
+     */
     public void deleteItem(String it){
         ClientUser user = um.popUser(currUser);
         user.getWishBorrow().remove(it);
         um.addUser(user);
     }
 
+    /**
+     * delete button
+     */
     public void delBut() {
         if (it == null){
             ip.noItemSelected();
@@ -65,14 +74,24 @@ public class WishBorrowController implements iItemController {
         }
     }
 
+    /**
+     * reset curr area
+     */
     public void updateCurr(){
         ip.resetCurr();
     }
 
+    /**
+     * update item list
+     */
     public void updateList(){
         ip.updateList(printList());
     }
 
+    /**
+     * change list to string
+     * @return string
+     */
     public String printList(){
         StringBuilder result = new StringBuilder();
         for (String it: um.getUser(currUser).getWishBorrow()){
@@ -85,6 +104,9 @@ public class WishBorrowController implements iItemController {
     }
 
 
+    /**
+     * action of add button
+     */
     void addBut(){
         it = null;
         updateBut();
@@ -96,6 +118,9 @@ public class WishBorrowController implements iItemController {
         tg.run();
     }
 
+    /**
+     * action for submit button
+     */
     public void submitBut(){
         String input = bta.getInput("input");
         ip.resetInputArea();
@@ -107,34 +132,56 @@ public class WishBorrowController implements iItemController {
         }
     }
 
+    /**
+     * return to last frame
+     */
     public void backBut(){
         fr.setVisible(true);
         ip.closeFrame();
     }
 
+    /**
+     * get item info
+     * @param it: Item
+     * @return item info
+     */
     public String getItemInfo(Item it) {
         return "Item Info:\nitem name: " + iv.getName(it) + "\n" +
                 "item description: " + iv.getDescription(it)
                 + "\n" + "item owner: " + um.UUIDToName(it.getOwnerUUID());
     }
 
+    /**
+     * check whether the item is in the wish borrow list
+     * @param name item name
+     * @return boolean
+     */
     @Override
     public boolean isInList(String name) {
         return false;
     }
 
-
+    /**
+     * action for update button
+     * reset list info and curr
+     */
     public void updateBut(){
         updateList();
         updateCurr();
     }
 
+    /**
+     * add the item
+     */
     @Override
     public void performActionOne() {
         addBut();
 
     }
 
+    /**
+     * delete the item
+     */
     @Override
     public void performActionTwo() {
         delBut();
