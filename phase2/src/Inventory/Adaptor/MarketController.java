@@ -6,12 +6,22 @@ import User.UseCase.UserManager;
 import Inventory.Entity.Item;
 import javax.swing.*;
 
+/**
+ * [Controller]
+ * Controller for market system
+ */
 public class MarketController implements iItemController {
     Inventory iv;
     BorderGUI bta;
     JFrame fr;
     String it;
     iMarketPresenter ip;
+
+    /**
+     *
+     * @param bta BorderGUI
+     * @param fr
+     */
     public MarketController(BorderGUI bta, JFrame fr){
         this.iv = new Inventory();
         this.bta = bta;

@@ -68,7 +68,7 @@ public class ClientUserController implements IUserController{
         return um.getUser(name) != null;
     }
 
-    public void createClientUser(String name, String password) throws FileNotFoundException {
+    public void createClientUser(String name, String password){
         um.createClientUser(name, password, false);
     }
 

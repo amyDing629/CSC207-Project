@@ -6,6 +6,9 @@ import Trade.Adaptor.BorderGUI;
 
 import javax.swing.*;
 
+/**
+ * build agreeReqGUI frame
+ */
 public class AgreeReqGUIBuilder implements BorderGUIBuilder {
     private iItemController ic;
     private BorderGUI tg;
@@ -15,12 +18,17 @@ public class AgreeReqGUIBuilder implements BorderGUIBuilder {
         ic = new AgreeReqController(tg, fr);
     }
 
-
+    /**
+     * build empty frame
+     */
     public void buildFrame() {
         tg.setFrame(600, 200, "Agree Requests Session");
 
     }
 
+    /**
+     * build north message panel
+     */
     @Override
     public void buildPanelN() {
         JPanel panelN = new JPanel();
@@ -33,6 +41,9 @@ public class AgreeReqGUIBuilder implements BorderGUIBuilder {
 
     }
 
+    /**
+     * build west panel
+     */
     public void buildPanelW(){
         JPanel panelW = new JPanel();
         JLabel requestList = new JLabel("Request List");
@@ -46,6 +57,9 @@ public class AgreeReqGUIBuilder implements BorderGUIBuilder {
         tg.setListText(ic.printList());
     }
 
+    /**
+     * build south panel
+     */
     @Override
     public void buildPanelS() {
         JPanel panelS = new JPanel();
@@ -68,6 +82,9 @@ public class AgreeReqGUIBuilder implements BorderGUIBuilder {
 
     }
 
+    /**
+     * build central panel
+     */
     @Override
     public void buildPanelC() {
         JPanel panelC = new JPanel();
@@ -82,11 +99,18 @@ public class AgreeReqGUIBuilder implements BorderGUIBuilder {
         ic.updateCurr();
     }
 
+    /**
+     * get "view"
+     * @return BorderGUI, the frame
+     */
     @Override
     public BorderGUI getTradeGUI() {
         return tg;
     }
 
+    /**
+     * build east panel
+     */
     public void buildPanelE(){
         JPanel panelE = new JPanel();
         JButton agree = new JButton("agree");

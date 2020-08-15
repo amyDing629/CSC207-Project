@@ -19,6 +19,7 @@ public class InvDataAccess implements DataAccess {
 
     /**
      * [constructor]
+     * Create temporary item list. Check whether required file existed. If existed, deserialze the file, if not, create new file.
      */
     // https://stackoverflow.com/questions/1205995/what-is-the-list-of-valid-suppresswarnings-warning-names-in-java
     @SuppressWarnings("all")
@@ -38,6 +39,9 @@ public class InvDataAccess implements DataAccess {
         }
     }
 
+    /**
+     * serialize the file
+     */
     public void serialize(){
         try {
             FileOutputStream fileOut =
@@ -53,12 +57,21 @@ public class InvDataAccess implements DataAccess {
         }
     }
 
+    /**
+     * get the list from file
+     * @return item list
+     */
     @Override
     public List<Object> getList() {
         deSerialize();
         return new ArrayList<>(lendingList);
     }
 
+    /**
+     *
+     * @param name the name of the object
+     * @return Item
+     */
     @Override
     public Object getObject(String name) {
         deSerialize();
@@ -69,11 +82,18 @@ public class InvDataAccess implements DataAccess {
         return null;
     }
 
+    /**
+     * no use
+     */
     @Override
     public Object getObject(UUID uuid) {
         return null;
     }
 
+    /**
+     * add item to file
+     * @param o: item
+     */
     @Override
     public void addObject(Object o) {
         deSerialize();
@@ -81,6 +101,9 @@ public class InvDataAccess implements DataAccess {
         updateSer();
     }
 
+    /**
+     * update list info to file
+     */
     @Override @SuppressWarnings("ALL")
     public void updateSer(){
         File file = new File(serFilePath);
@@ -104,6 +127,9 @@ public class InvDataAccess implements DataAccess {
 
     // source: https://stackoverflow.com/questions/31540556/casting-object-to-list-results-in-unchecked-cast-warning
     @SuppressWarnings("unchecked")
+    /**
+     * update file info to list
+     */
     public void deSerialize() {
         try {
             File file = new File(serFilePath);
@@ -122,12 +148,21 @@ public class InvDataAccess implements DataAccess {
         }
     }
 
+    /**
+     * no use
+     * @param userList na
+     */
     @Override
     public void setList(List<Object> userList) {
 
     }
 
 
+    /**
+     * whether the item is in the item list
+     * @param o: item
+     * @return boolean
+     */
     @Override
     public boolean hasObject(Object o) {
         deSerialize();

@@ -39,7 +39,17 @@ Link: https://drive.google.com/drive/folders/1unT-WmSSiGtjKi7qOSXFZHjPwjTrSJvI?u
 - Explore Market (where all not-in-trade item be) as a visitor (no login required)
     
 ### `V6_Mandatory2_ItemSuggestion.mp4`✅ (Amy)
-- a
+Two users--Amy and Tom
+- Amy's WishLend:  [iPad, iPhone, toy car ]
+- Amy's WishBorrow: [horror film]
+- Tom's WishLend: [horror film]
+- Tom's WishBorrow: [iPad, iPhone]
+
+Amy requests a trade for the item "horror film" with Tom.
+
+WishLend List shows: [iPad, iPhone, toy car]
+Suggested List shows: [iPad, iPhone]
+
     
 ### `V7_xxx.mp4`
 - a

@@ -7,17 +7,28 @@ import User.UseCase.UserManager;
 
 import javax.swing.*;
 
+/**
+ * [Presenter]
+ * inventoryGUI main. Connect to other GUIs.
+ */
 public class InventoryGUI {
     private final String currUser;
     private final JFrame ivf;
 
-
+    /**
+     * [Constructor]
+     * @param currUser Current User name
+     * @param frame Last frame
+     */
     public InventoryGUI(String currUser, JFrame frame){
         this.currUser = currUser;
         this.ivf = frame;
 
     };
 
+    /**
+     * present the frame
+     */
     public void run(){
         JFrame frame = new JFrame("Inventory Session");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
