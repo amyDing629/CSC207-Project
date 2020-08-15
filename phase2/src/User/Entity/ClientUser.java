@@ -74,6 +74,10 @@ public class ClientUser implements Serializable {
      */
     private int bonusPoints;
     private final ArrayList<ArrayList<String>> actions;
+
+    /**
+     * The points needed to exchange one bonus trade which will not count towards being frozen
+     */
     private int exStandard = 5;
 
     /**
