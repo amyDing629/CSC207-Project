@@ -1,46 +1,31 @@
 package MeetingSystem.Adapter;
 
-import com.sun.javafx.binding.StringFormatter;
-
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class HelpView {
-    private JFrame frame;
-    private JButton backButton;
-    private JTextArea textArea1;
-    private JPanel backPanel;
+public class HelpView extends JDialog{
+
     private JPanel contentPane;
+    private JPanel backPanel;
+    private JTextPane textPane1;
+    private JButton backButton;
 
     // presenter
     IPresenter presenter;
 
     public HelpView() {
-        initComponents();
+        createUIComponents();
+        setContentPane(contentPane);
+        setModal(true);
+
         backButton.addActionListener(e -> {
-            frame.dispose();
+            this.dispose();
         });
     }
 
-    private void initComponents() {
-        frame = new JFrame("Help");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(800, 600);
-
-        backPanel.add(backButton);
-        contentPane.add(textArea1);
-
-        frame.getContentPane().add(backPanel);
-        frame.getContentPane().add(contentPane);
-        frame.setVisible(true);
-    }
-
     private void createUIComponents() {
-        textArea1 = new JTextArea();
-        textArea1.setEditable(false);
-        textArea1.setText(getInstruction());
+        textPane1 = new JTextPane();
+        textPane1.setEditable(false);
+        textPane1.setText(getInstruction());
     }
 
     private String getInstruction() {
@@ -49,7 +34,7 @@ public class HelpView {
                 "       - Time: (yyyy-MM-dd hh:mm) only future time allowed; must be valid time input\n" +
                 "       - Place: valid string input\n" +
                 "2. Edit input: \n" +
-                "       - as in 1" +
+                "       - as in 1 \n" +
                 "       - content to submit must be edited\n" +
                 "3. Once the meeting sets up, the two traders can only make actions (i.e. edit, agree, confirm) " +
                 "in turns. \n" +
@@ -69,7 +54,7 @@ public class HelpView {
     }
 
     public void open() {
-        frame.pack();
-        frame.setVisible(true);
+        this.pack();
+        this.setVisible(true);
     }
 }
