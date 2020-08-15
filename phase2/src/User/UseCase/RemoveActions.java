@@ -1,6 +1,7 @@
 package User.UseCase;
 
 
+import User.Adapter.ClientUserController;
 import User.Entity.ClientUser;
 import User.UseCase.ApprovalManager;
 import User.UseCase.UserManager;
@@ -9,47 +10,57 @@ import java.util.ArrayList;
 
 public class RemoveActions {
     ClientUser user;
-    UserManager um;
+    ClientUserController uc;
     ApprovalManager iam;
 
-    public RemoveActions(ClientUser user, UserManager um, ApprovalManager iam) {
+    public RemoveActions(ClientUser user, ClientUserController uc, ApprovalManager iam) {
         this.user = user;
-        this.um = um;
+        this.uc = uc;
         this.iam = iam;
     }
 
-
     public void deleteAction(ArrayList<String> action) {
-        String check = action.get(1);
+        String check = action.get(0);
         switch (check) {
             case "password":
-                deletePassWord(action.get(0));
+                deletePassWord(action.get(1));
                 break;
             case "Freeze ticket":
                 deleteFreezeTicket();
                 break;
             case "Item ticket":
-                deleteItemTicket(action.get(0));
+                deleteItemTicket(action.get(1));
                 break;
             case "add to borrow":
-                deleteWishBorrow(action.get(0));
+                deleteWishBorrow(action.get(1));
+                break;
+             case "add to wish":
+                deleteWishLend(action.get(1));
                 break;
         }
     }
 
     private void deletePassWord(String passAction){
-        um.set(user,passAction);
+        uc.setPassword(user.getUsername(),passAction);
+        uc.removeAction(user.getUsername(),"password",passAction);
     }
 
     private void deleteWishBorrow(String borrowWish){
-        um.removeBWishes(borrowWish,user);
+        uc.deleteBItem(user.getUsername(),borrowWish);
+        uc.removeAction(user.getUsername(),"add to borrow","");
     }
 
+    private void deleteWishLend(String lendWish){
+        uc.deleteLItem(user.getUsername(),lendWish);
+        uc.removeAction(user.getUsername(),"add to wish","");
+    }
     private void deleteFreezeTicket(){
         iam.removeUserApproval(user.getUsername());
+        uc.removeAction(user.getUsername(),"Freeze ticket","");
     }
 
     private void deleteItemTicket(String itemName){
         iam.removeItemApproval(itemName);
+        uc.removeAction(user.getUsername(),"Item ticket","");
     }
 }
