@@ -1,15 +1,22 @@
 # CSC207 Project
 
 This is a program that allows users to trade different items with each other.
-
-  - Language: Java
-  - IntelliJ
-  
-  - SDK: java version 1.8
-  - Project Language level: 8 - Lambdas, type annotations, etc
+ 
+# Table of contents
+ | File | Content |
+ |------|:---------------|
+ |`FeatureList.md`|the features we have done for phase 2|
+ |`VideoAccess.md`|the link for sample usage videos, and basic txt elaborations on test functions|
+ |`DesignPattern.md`|the design patterns we have applied with detailed explanations|
+ |`src/Main/mainRun.java`|main test file; to start testing the functionalities from here :)|
  
 # Prerequisites
-
+  - Language: Java
+  - IntelliJ
+--- 
+  - SDK: java version 1.8
+  - Project Language level: 8 - Lambdas, type annotations, etc
+---
   - Ensure all the database file (.ser format) are empty before running
   - Do **NOT** quit the whole program or stop the execution of program when running tests, 
   **follow the menu to exit instead**.
@@ -37,18 +44,14 @@ For better testing all the available functionality, you need to:
 # Authors and Contribution 
 *(names listed in no particular order)
 
-**Yuhan Zheng (Ensouled)** - AdminUser & GUI, Mandatory Extension 1
+| Name | Divide of work |
+|------|:---------------|
+|**Yuhan Zheng (Ensouled)**|AdminUser & GUI, Mandatory Extension 1|
+|**Yiyun Ding (Amy)**|Trade & GUI, Inventory & GUI, Mandatory Extension 2|
+|**Changyan Xu (Rella)**|Meeting System & GUI, Mandatory Extension 3|
+|**Yuxin Yang (Amber)**|Point System, Mandatory Extension 4|
+|**Siwei Tang**|User, Mandatory Extension 5|
 
-**Yiyun Ding (Amy)** - Trade & GUI, Inventory & GUI, Mandatory Extension 2
-
-**Changyan Xu (Rella)** - Meeting System & GUI, Mandatory Extension 3
-
-**Yuxin Yang (Amber)** - Point System, Mandatory Extension 4
-
-**Siwei Tang** - User, Mandatory Extension 5
-
-
-# Table of contents
 
 # Illustrations
 

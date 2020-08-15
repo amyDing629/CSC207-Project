@@ -4,7 +4,7 @@ Since we only have 5 members in total, we did the mandatory extensions, one elec
 
 ## Mandatory Extension (5 extensions)
 
-### 1. Reverse System
+### 1. Reverse System - Undo
 
 
 ### 2. Automatic Item Suggests
@@ -23,7 +23,7 @@ communicate with other users (neither regular users nor admin users), cannot mak
 ### 4. ClientUser Limit System
 
 
-### 5. Another status for accounts??
+### 5. Addition status for accounts
 The user can set the left status to be true by set up the end date, 
 the end date means that the user would be regarded as left during the period, so it
 is the same as the account is frozen, but the left status is just during the period. 
