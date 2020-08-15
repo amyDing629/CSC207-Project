@@ -2,10 +2,7 @@ package Inventory.Adaptor;
 
 import Inventory.Entity.Item;
 import Inventory.UseCase.Inventory;
-import Trade.Adaptor.BorderGUIBuilder;
-import Trade.Adaptor.BorderGUI;
-import Trade.Adaptor.BorderGUIEngineer;
-import Trade.Adaptor.GUIPlan;
+import Trade.Adaptor.*;
 import User.Entity.ClientUser;
 import User.UseCase.UserManager;
 
@@ -24,7 +21,7 @@ public class WishBorrowController implements iItemController {
 
     UserManager um;
 
-    BorderGUI bta;
+    iInput bta;
 
     String it;
 

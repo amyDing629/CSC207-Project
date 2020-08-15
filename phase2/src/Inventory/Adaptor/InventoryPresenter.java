@@ -2,12 +2,13 @@ package Inventory.Adaptor;
 
 import Trade.Adaptor.BorderGUI;
 import Trade.Adaptor.InputAndPresent;
+import Trade.Adaptor.iPresent;
 
 /**
  * present information of the inventory system to user.
  */
 public class InventoryPresenter implements iItemPresenter {
-    private final InputAndPresent bta;
+    private final iPresent bta;
 
     /**
      * [constructor]

@@ -6,6 +6,7 @@ import MeetingSystem.Adapter.MainViewPresenter;
 import MeetingSystem.Entity.Meeting;
 import MeetingSystem.MeetingStatus;
 import MeetingSystem.UseCase.MeetingActionManager;
+import Trade.Adaptor.iInput;
 import Trade.Adaptor.iTradeController;
 import Trade.Adaptor.iTradePresenter;
 import Trade.Entity.Trade;
@@ -26,7 +27,7 @@ public class CTradeController implements Observer, iTradeController {
     UUID currTrade;
     Boolean isFirst;
     iTradePresenter tp;
-    BorderGUI tg;
+    iInput tg;
     JFrame fr;
 
     public CTradeController(String currUser, BorderGUI tg, JFrame fr) {

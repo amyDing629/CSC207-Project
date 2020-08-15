@@ -2,6 +2,7 @@ package Trade.Adaptor.RequestTrade;
 
 import Inventory.Entity.Item;
 import Trade.Adaptor.InputAndPresent;
+import Trade.Adaptor.iPresent;
 import User.Entity.ClientUser;
 
 import java.util.ArrayList;
@@ -12,10 +13,10 @@ import java.util.List;
  * present the information of trade
  */
 public class RTradePresenter implements iRTradePresenter {
-    private final InputAndPresent bta;
+    private final iPresent bta;
 
 
-    RTradePresenter(InputAndPresent bta){
+    RTradePresenter(iPresent bta){
         this.bta = bta;
     }
 

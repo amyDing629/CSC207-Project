@@ -2,13 +2,14 @@ package Inventory.Adaptor;
 
 import Trade.Adaptor.BorderGUI;
 import Trade.Adaptor.InputAndPresent;
+import Trade.Adaptor.iPresent;
 
 /**
  * [presenter]
  * Presenter for market system
  */
 public class MarketPresenter implements iMarketPresenter {
-    private final InputAndPresent bta;
+    private final iPresent bta;
 
     /**
      * [constructor]

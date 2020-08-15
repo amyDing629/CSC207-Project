@@ -2,7 +2,7 @@ package Trade.Adaptor.TradeHistory;
 
 import MeetingSystem.UseCase.MeetingActionManager;
 import Trade.Adaptor.BorderGUI;
-import Trade.Adaptor.InputAndPresent;
+import Trade.Adaptor.iPresent;
 import Trade.Entity.Trade;
 import User.UseCase.UserManager;
 
@@ -11,7 +11,7 @@ import java.util.List;
 
 public class TradeHistoryPresenter implements iTradeHistoryPresenter {
 
-    private final InputAndPresent tgp;
+    private final iPresent tgp;
 
     public TradeHistoryPresenter(BorderGUI tgp) {
         this.tgp = tgp;

@@ -3,6 +3,7 @@ package Inventory.Adaptor;
 import Inventory.Entity.Item;
 import Inventory.UseCase.Inventory;
 import Trade.Adaptor.BorderGUI;
+import Trade.Adaptor.iInput;
 import User.Entity.ClientUser;
 import User.Entity.ItemApprovals;
 import User.UseCase.ApprovalManager;
@@ -22,7 +23,7 @@ public class AgreeReqController implements iItemController {
 
     private final ApprovalManager iam;
 
-    private final BorderGUI bta;
+    private final iInput bta;
 
     private String it;
 
