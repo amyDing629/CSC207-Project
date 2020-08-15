@@ -2,7 +2,7 @@ package Trade.Adaptor.CompleteTrade;
 
 import MeetingSystem.UseCase.MeetingActionManager;
 import Trade.Adaptor.BorderGUI;
-import Trade.Adaptor.InputAndPresent;
+import Trade.Adaptor.iPresent;
 import Trade.Adaptor.iTradePresenter;
 import Trade.Entity.Trade;
 import User.UseCase.UserManager;
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CTradePresenter implements iTradePresenter {
-    private final InputAndPresent tg;
+    private final iPresent tg;
 
     public CTradePresenter(BorderGUI tg) {
         this.tg = tg;

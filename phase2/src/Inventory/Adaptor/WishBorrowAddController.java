@@ -3,6 +3,7 @@ package Inventory.Adaptor;
 import Inventory.Entity.Item;
 import Inventory.UseCase.Inventory;
 import Trade.Adaptor.BorderGUI;
+import Trade.Adaptor.iInput;
 import User.Entity.ClientUser;
 import User.UseCase.UserManager;
 
@@ -25,7 +26,7 @@ public class WishBorrowAddController implements iItemController {
 
     UserManager um;
 
-    BorderGUI bta;
+    iInput bta;
 
     String it;
 

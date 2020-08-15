@@ -2,6 +2,7 @@ package Inventory.Adaptor;
 
 import Inventory.UseCase.Inventory;
 import Trade.Adaptor.BorderGUI;
+import Trade.Adaptor.iInput;
 import User.UseCase.UserManager;
 import Inventory.Entity.Item;
 import javax.swing.*;
@@ -12,7 +13,7 @@ import javax.swing.*;
  */
 public class MarketController implements iItemController {
     Inventory iv;
-    BorderGUI bta;
+    iInput bta;
     JFrame fr;
     String it;
     iMarketPresenter ip;

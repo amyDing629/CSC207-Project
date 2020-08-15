@@ -1,6 +1,5 @@
 package User.Adapter;
 
-import Inventory.Adaptor.MarketBuilder;
 import Trade.UseCase.TradeManager;
 import User.UseCase.UserManager;
 

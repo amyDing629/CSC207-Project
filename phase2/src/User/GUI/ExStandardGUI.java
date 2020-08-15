@@ -1,7 +1,6 @@
 package User.GUI;
 
 import User.Adapter.AdminController;
-import User.Adapter.ClientUserController;
 import User.Adapter.IAdminController;
 import User.Adapter.IUserController;
 

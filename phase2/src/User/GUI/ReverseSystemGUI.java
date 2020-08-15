@@ -1,7 +1,6 @@
 package User.GUI;
 
 
-import User.Adapter.ClientUserController;
 import User.Adapter.IUserController;
 import User.Entity.ClientUser;
 import User.UseCase.ApprovalManager;

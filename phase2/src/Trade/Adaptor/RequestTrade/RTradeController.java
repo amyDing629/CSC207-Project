@@ -3,6 +3,7 @@ package Trade.Adaptor.RequestTrade;
 import Inventory.UseCase.Inventory;
 import Inventory.Entity.Item;
 import Trade.Adaptor.BorderGUI;
+import Trade.Adaptor.iInput;
 import Trade.Adaptor.iTradeController;
 import Trade.Entity.Trade;
 import User.Entity.ClientUser;
@@ -28,7 +29,7 @@ public class RTradeController implements iRequestTradeController{
     private final UserManager um;
     private final Inventory iv;
     iRTradePresenter tp;
-    BorderGUI bta;
+    iInput bta;
     String it;
     JFrame fr;
 

@@ -7,8 +7,6 @@ import Trade.Adaptor.GUIPlan;
 import User.Adapter.ClientUserController;
 import User.Adapter.ClientUserPresenter;
 import User.Adapter.LoginSystemPresenter;
-import User.Entity.ClientUser;
-import User.UseCase.UserManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -72,16 +70,11 @@ public class LoginGUI{
         JButton exitButton = new JButton("Quit");
         exitButton.setPreferredSize(new Dimension(300, 30));
         panel.add(exitButton);
-        UserManager um = new UserManager();
 
 
         logInButton.addActionListener(e -> {
             String name = nameInput.getText();
             String password = new String(passwordInput.getPassword());
-//            for(ClientUser i:um.getUserList()){
-//                System.out.println(i.getUsername());
-//                System.out.println(i.getPassword());
-//            }
             boolean response = lsp.login(name, password);
             if (!response) {
                 JOptionPane.showMessageDialog(null,
@@ -96,11 +89,6 @@ public class LoginGUI{
                 ClientUserGUI a = new ClientUserGUI(frame, name);
                 a.run();
                 frame.setVisible(false);
-
-//                for(ClientUser i:um.getUserList()){
-//                    System.out.println(i.getUsername());
-//                    System.out.println(i.getPassword());
-//                }
             }
         });
 
