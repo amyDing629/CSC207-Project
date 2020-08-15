@@ -20,8 +20,8 @@ public class TradeLimitGUI {
      * @param uc client user controller
      */
     public TradeLimitGUI(IUserController uc ,JFrame pFrame) {
-        this.uc=uc;
-        this.pFrame=pFrame;
+        this.uc = uc;
+        this.pFrame = pFrame;
     }
     /**
      * @param name  name of user
