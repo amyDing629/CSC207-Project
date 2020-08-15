@@ -10,5 +10,6 @@ public interface View {
 
     void run();
 
-    void updateUIComponent(); //TODO
+    void updateUIComponent();
+
 }

@@ -1,6 +1,5 @@
 package Trade.Adaptor;
 
-import javax.swing.*;
 
 public interface GUIPlan {
 
