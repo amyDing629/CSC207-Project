@@ -1,7 +1,6 @@
 package User.PointSystem;
 
 import Trade.Adaptor.BorderGUI;
-import Trade.Adaptor.InputAndPresent;
 import Trade.Adaptor.iPresent;
 import Trade.Entity.Trade;
 

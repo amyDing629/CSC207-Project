@@ -1,7 +1,6 @@
 package Inventory.Adaptor;
 
 import Trade.Adaptor.BorderGUI;
-import Trade.Adaptor.InputAndPresent;
 import Trade.Adaptor.iPresent;
 
 /**

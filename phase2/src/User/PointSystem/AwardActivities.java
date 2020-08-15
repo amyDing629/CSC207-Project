@@ -39,7 +39,7 @@ public class AwardActivities implements iPointController {
     }
 
     /**
-     *
+     * Get current Trade
      */
     public Trade getCurrTrade(String num){
         int tradeNum = Integer.parseInt(num.trim());
@@ -48,7 +48,8 @@ public class AwardActivities implements iPointController {
     }
 
     /**
-     *
+     * Check if the input satisfy certain condition
+     * @param num the input
      */
     public boolean checkInput(String num){
         if (!isNum(num)){
@@ -110,7 +111,7 @@ public class AwardActivities implements iPointController {
     }
 
     /**
-     *
+     * Set up the submission button
      */
     public void submitBut(String tradeNum){
         pp.resetInputArea();
@@ -124,7 +125,7 @@ public class AwardActivities implements iPointController {
     }
 
     /**
-     *
+     * Set up the return/back button
      */
     public void backBut(){
         fr.setVisible(true);
@@ -132,7 +133,7 @@ public class AwardActivities implements iPointController {
     }
 
     /**
-     *
+     * Set up the update button
      */
     public void updateBut(){
         updateList();
@@ -143,7 +144,7 @@ public class AwardActivities implements iPointController {
     }
 
     /**
-     *
+     * Update the bonus points
      */
     public void updatePoint(){
         ClientUser user = um.getUser(currUser);
@@ -152,21 +153,21 @@ public class AwardActivities implements iPointController {
     }
 
     /**
-     *
+     * Update the exchange standard for bonus trades
      */
     public void updateStandard(){
         pp.updateStandard(um.getExStandard());
     }
 
     /**
-     *
+     * Indicate that there is no trade being selected
      */
     public void noTradeSelected(){
         pp.noTradeCurr();
     }
 
     /**
-     *
+     * Set up the button for getting bonus trades
      */
     public void ebBut(){
         getBonus(um.getUser(currUser).getId(), currTrade);
@@ -174,7 +175,7 @@ public class AwardActivities implements iPointController {
     }
 
     /**
-     *
+     * Update the list of available trades
      */
     public void updateList(){
         pp.updateFrame(getTradesForExchange(um.getUser(currUser)));
