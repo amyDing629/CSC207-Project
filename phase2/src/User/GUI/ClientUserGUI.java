@@ -31,6 +31,7 @@ public class ClientUserGUI implements View {
     public ClientUserGUI(JFrame pFrame, String currUser) {
         this.pFrame = pFrame;
         this.currUser = currUser;
+        controller = new ClientUserController();
     }
 
     public void run() {

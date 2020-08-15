@@ -17,6 +17,7 @@ public class DiffLimitGUI {
     public DiffLimitGUI(IUserController uc ,JFrame pFrame) {
         this.uc=uc;
         this.pFrame=pFrame;
+        ac = new AdminController();
     }
     public void run(String name){
         frame = new JFrame("Trade Limit");
