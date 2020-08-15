@@ -8,6 +8,7 @@ import User.UseCase.UserManager;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -137,4 +138,11 @@ public class ClientUserController implements IUserController{
     public int getTradeNumber(String username) {return um.getTradeNumber(username);}
 
     public int getIncompleteTransaction(UUID userId) {return um.getIncompleteTransaction(userId);}
+
+    public void setEnd(String username, LocalDateTime end){um.setEnd(username, end);}
+
+
+    public boolean getIsLeft(UUID userID){
+        return um.getIsLeft(userID);
+    }
 }

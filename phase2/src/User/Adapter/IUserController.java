@@ -2,6 +2,7 @@ package User.Adapter;
 
 import User.Entity.ClientUser;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -39,4 +40,8 @@ public interface IUserController {
     List<ClientUser> getUserList();
 
     ArrayList<ArrayList<String>> getActions(String username);
+
+    void setEnd(String username, LocalDateTime end);
+
+    boolean getIsLeft(UUID userID);
 }

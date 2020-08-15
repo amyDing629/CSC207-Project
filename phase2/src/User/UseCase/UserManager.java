@@ -266,9 +266,22 @@ public class UserManager {
         return number;
     }
 
-    public int getExStandard() {
-        System.out.println(getUserList() + String.valueOf(getUserList().get(0).getExStandard()));
-        return this.getUserList().get(0).getExStandard();
+    public void setEnd(String username, LocalDateTime end){
+        dataAccess.deSerialize();
+        dataAccess.updateSer();
+//        dataAccess.deSerialize();
+        ClientUser user = popUser(nameToUUID(username));
+        user.setEnd(end);
+        if(LocalDateTime.now().isBefore(end)){
+            user.setLeft(true);
+            user.setFrozen(true);
+        }
+        addUser(user);
+//        dataAccess.updateSer();
+    }
+
+    public boolean getIsLeft(UUID userID){
+        return getUser(userID).getIsLeft();
     }
 
 }

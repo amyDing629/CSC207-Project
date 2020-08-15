@@ -48,12 +48,17 @@ public class ClientUserGUI implements View {
 
         UUID userId = controller.nameToUUID(b);
         boolean isFrozen = controller.getIsFrozen(userId);
+        boolean isLeft = controller.getIsLeft(userId);
 
 
         System.out.println("CUGUI indicator");
         JLabel freezeStatus = new JLabel("Freeze Status: " + isFrozen);
         freezeStatus.setPreferredSize(new Dimension(300, 30));
         panel.add(freezeStatus);
+
+        JLabel leftStatus = new JLabel("Left Status: " + isLeft);
+        leftStatus.setPreferredSize(new Dimension(300, 30));
+        panel.add(leftStatus);
 
         JLabel tradeLimit = new JLabel("Trade limit: " + controller.getTradeNumber(controller.UUIDToName(userId)) + "/" +
                 controller.getWeekTransactionLimit(controller.UUIDToName(userId)));
