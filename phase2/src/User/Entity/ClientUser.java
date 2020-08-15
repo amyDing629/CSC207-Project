@@ -321,5 +321,7 @@ public class ClientUser implements Serializable {
     public ArrayList<ArrayList<String>> getActions() {
         return this.actions;
     }
-    
+
+    public void setExStandard(int exStandard) {
+    }
 }

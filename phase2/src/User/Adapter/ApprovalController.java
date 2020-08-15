@@ -23,7 +23,6 @@ public class ApprovalController {
      * remove users
      */
     public void removeUserApproval(String ua){
-
         am.removeUserApproval(ua);
     }
 

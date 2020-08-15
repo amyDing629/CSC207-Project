@@ -9,41 +9,24 @@ import User.UseCase.ApprovalManager;
 import User.UseCase.UserManager;
 
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class ClientUserController {
+/**
+ * [Controller]
+ * controllers that control ClientUser
+ */
+public class ClientUserController implements IUserController{
     UserManager um = new UserManager();
-    ApprovalManager iam = new ApprovalManager();
-    TradeManager tm = new TradeManager();
-
-
+    /**
+     * @param username the name of user
+     * return whether the user is admin or not
+     */
     public boolean getIsAdmin(String username) {
         return um.getUser(username).getIsAdmin();
     }
-
-    public boolean checkItemExist(String item, Inventory iv) {
-        for (Item n : iv.getLendingList()) {
-            if (iv.getName(n).equals(item)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-//    public ItemApprovalManager getIam() {
-//        return iam;
-//    }
-//
-//    public UserManager getUm() {
-//        return um;
-//    }
-//
-//    public String getUsername(ClientUser user){
-//        return user.getUsername();
-//    }
 
     /**
      * @param name     the name of the user that the manager check
@@ -65,26 +48,37 @@ public class ClientUserController {
 
     /**
      * @param name the name of the user that the manager wants to get
-     *             find the user by the user name
+     * find the user by the user name
      */
     public boolean checkUser(String name) {
         System.out.println(um.getUser(name)==null);
         return um.getUser(name) == null;
     }
 
-    public void createClientUser(String name, String password) throws FileNotFoundException {
+    public void createClientUser(String name, String password){
         um.createClientUser(name, password, false);
     }
 
+    /**
+     * @param userID the id of the user that the manager wants to get
+     * return whether the user is frozen or not
+     */
     public boolean getIsFrozen(UUID userID){
         return um.getIsFrozen(userID);
     }
 
+    /**
+     * @param name the name of the user that the manager wants to get
+     * return id of user
+     */
     public UUID nameToUUID(String name){
         return um.nameToUUID(name);
     }
 
-
+    /**
+     * @param name the name of the user that the manager wants to get
+     * return id of user
+     */
     public UUID getIDbyName(String name) {
         return um.getUser(name).getId();
     }
@@ -97,6 +91,10 @@ public class ClientUserController {
         return um.getUser(username);
     }
 
+    /**
+     * @param file File save data
+     * create initial admin user admin, it can add another admin users
+     */
     public void checkFileEmpty(File file){
         if (file.length() == 0) {
             ClientUser b = new ClientUser("admin", "123", true);
@@ -106,39 +104,98 @@ public class ClientUserController {
     }
 
 
-
+    /**
+     * @param userID the id of the user that the manager wants to get
+     * return name of user
+     */
     public String UUIDToName(UUID userID){
         return um.UUIDToName(userID);
     }
+
+    /**
+     * @param username name of user
+     * return the password of the user
+     */
     public String getPassword(String username){
         return um.getPassword(um.getUser(username));
     }
 
+    /**
+     * @param name name of user
+     * @param password the input string
+     * set the input string as the password
+     */
     public void setPassword(String name, String password){
         um.setPassword(name, password);
     }
+
+    /**
+     * return the whole user list
+     */
     public List<ClientUser> getUserList() {return um.getUserList();}
+
+    /**
+     * @param username name of user
+     * return list of list of actions
+     */
     public ArrayList<ArrayList<String>> getActions(String username) {
         return um.getActions(um.getUser(username));
     }
 
-    public int readDiff(String username) {
-        return um.readDiff(username);
-    }
+    /**
+     * @param username name of user
+     * return the difference between lend amount and borrow amount
+     */
+    public int readDiff(String username) { return um.readDiff(username); }
 
+    /**
+     * @param a name of user
+     * get the difference between lend amount and borrow amount
+     */
     public int getDiff(String a) {
         return um.getDiff(a);
     }
 
+    /**
+     * @param a name of user
+     * return the week transaction limit of user
+     */
     public int getWeekTransactionLimit(String a) {
         return um.getWeekTransactionLimit(a);
     }
 
+    /**
+     * @param a name of user
+     * return the Incomplete Transaction Limit of user
+     */
     public int getIncompleteTransactionLimit(String a) {
         return um.getIncompleteTransactionLimit(a);
     }
 
+    /**
+     * @param username name of user
+     * return the total trade number of user
+     */
     public int getTradeNumber(String username) {return um.getTradeNumber(username);}
 
+    /**
+     * @param userId id of user
+     * return the incomplete transaction  number of user
+     */
     public int getIncompleteTransaction(UUID userId) {return um.getIncompleteTransaction(userId);}
+
+    /**
+     * @param username name of user
+     * @param  end the end date
+     * set teh edn date
+     */
+    public void setEnd(String username, LocalDateTime end){um.setEnd(username, end);}
+
+    /**
+     * @param userID id of user
+     * return whether the user is left or not
+     */
+    public boolean getIsLeft(UUID userID){
+        return um.getIsLeft(userID);
+    }
 }
