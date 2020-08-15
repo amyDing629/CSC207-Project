@@ -252,16 +252,14 @@ public class TradeManager{
     /**
      * return the number of transactions of the user has in seven days from the most recent trade
      */
-    public int getTradeNumber(String username) {
+    public int getTradeNumber(UUID username) {
         ClientUser user = (ClientUser) userAccess.getObject(username);
-
         if(user.getTradeHistory().size() == 0){return 0;}
-        Trade s = getTrade(user.getTradeHistory().get(user.getTradeHistory().size() - 1));
-        LocalDateTime x  = s.getCreateTime();
+        LocalDateTime x  = LocalDateTime.now();
         LocalDateTime y = x.minusDays(7);
-        int number = 1;
+        int number = 0;
         for (UUID i : user.getTradeHistory()){
-            if(getTrade(i).getCreateTime().isAfter(y) && getTrade(i).getCreateTime().isBefore(x)){
+            if((!getTrade(i).getStatus().equals(TradeStatus.unconfirmed)) && getTrade(i).getCreateTime().isAfter(y) && getTrade(i).getCreateTime().isBefore(x)){
                 number ++;
             }
         }
