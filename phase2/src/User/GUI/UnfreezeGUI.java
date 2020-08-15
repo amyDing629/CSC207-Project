@@ -82,6 +82,7 @@ public class UnfreezeGUI {
             if(uc.getUser(userInput.getText())!=null){
                 avc.removeUserApproval(userInput.getText());
                 ac.setFreeze(userInput.getText(),false);
+                uc.removeAction(userInput.getText(),"Freeze ticket","");
                 JOptionPane.showMessageDialog(null,"Unfreeze successfully");
             }
             else{

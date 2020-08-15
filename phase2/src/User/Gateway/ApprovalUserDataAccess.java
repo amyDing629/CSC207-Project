@@ -84,9 +84,8 @@ public class ApprovalUserDataAccess implements DataAccess {
      */
     @Override
     public boolean hasObject(Object o) {
-        UserApprovals check=(UserApprovals) o;
         for (UserApprovals s : UserApprovalsList) {
-            if (s.getCurUserName().equals(check.getCurUserName()) && s.getFstString().equals(check.getFstString())) {
+            if (s.getCurUserName().equals(o)) {
                 return true;
             }
         }
@@ -100,7 +99,7 @@ public class ApprovalUserDataAccess implements DataAccess {
     @Override
     public void removeObject(String o) {
         deSerialize();
-        UserApprovalsList.removeIf(i -> i.getFstString().equals(o));
+        UserApprovalsList.removeIf(i -> i.getCurUserName().equals(o));
         updateSer();
     }
 

@@ -32,4 +32,9 @@ public class ApprovalController {
      * add approvals with description
      */
     public void addApprovals(String name, String des){am.addApprovals(um.getUser(name),des);}
+
+
+    public boolean hasUserApproval(String username){
+        return am.hasUserApproval(username);
+    }
 }

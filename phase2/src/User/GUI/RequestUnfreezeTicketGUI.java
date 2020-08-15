@@ -70,13 +70,15 @@ public class RequestUnfreezeTicketGUI {
             pFrame.setVisible(true);
         });
         submitButton.addActionListener(e -> {
-            frame.setVisible(false);
-
-            ac.addApprovals(name,userInput.getText());
-            uc.addAction(name,"Freeze ticket","");
-
-            JOptionPane.showMessageDialog(null,"Request successfully");
-            JOptionPane.showMessageDialog(null,"Please wait for the admin to approve");
+            if(!ac.hasUserApproval(name)) {
+                ac.addApprovals(name, userInput.getText());
+                uc.addAction(name, "Freeze ticket", "");
+                JOptionPane.showMessageDialog(null,"Request successfully");
+                JOptionPane.showMessageDialog(null,"Please wait for the admin to approve");
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Requsted, cannot request again");
+            }
         });
     }
 }

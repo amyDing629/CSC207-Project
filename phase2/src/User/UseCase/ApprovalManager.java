@@ -107,4 +107,7 @@ public class ApprovalManager {
         return itemDataAccess.hasObject(itemName);
     }
 
+    public boolean hasUserApproval(String username){
+        return userDataAccess.hasObject(username);
+    }
 }
