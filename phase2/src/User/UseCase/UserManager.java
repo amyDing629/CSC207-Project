@@ -266,5 +266,12 @@ public class UserManager {
         return number;
     }
 
+    /**
+     * return the exchange standard of the user
+     */
+    public int getExStandard() {
+        return this.getUserList().get(0).getExStandard();
+    }
+
 }
 
