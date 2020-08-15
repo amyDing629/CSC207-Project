@@ -73,6 +73,8 @@ public class ClientUser implements Serializable {
      * the bonus points that the client user has.
      */
     private int bonusPoints;
+
+
     private final ArrayList<ArrayList<String>> actions;
 
     /**

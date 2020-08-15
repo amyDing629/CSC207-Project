@@ -74,8 +74,6 @@ public class RequestUnfreezeTicketGUI {
             ac.addApprovals(name,userInput.getText());
             JOptionPane.showMessageDialog(null,"Request successfully");
             JOptionPane.showMessageDialog(null,"Please wait for the admin to approve");
-            UserFreezeSystem d = new UserFreezeSystem(uc,frame);
-            d.run(name);
         });
     }
 }
