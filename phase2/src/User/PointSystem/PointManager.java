@@ -25,7 +25,7 @@ public class PointManager {
     /**
      * The points needed to exchange one bonus trade which will not count towards being frozen
      */
-    private int exStandard;
+    //private int exStandard;
 
     /**
      * Constructs the Point Manager to manage points for client users.
@@ -34,26 +34,19 @@ public class PointManager {
         this.um = new UserManager();
         this.tm = new TradeManager();
         this.pointList = new HashMap<>();
-        this.exStandard = 5;
+        //this.exStandard = 5;
     }
 
     /**
      * Set (update) the bonus points for particular user and update the pointList.
      */
     public void setUserPoints(UUID userId) {
-        int newPoint = this.tm.getComplete(userId).size() - um.getSelectedBonusTrades(userId).size() * this.exStandard;
         ClientUser user = um.getUser(userId);
-        if (user == null) {
-            System.out.println("User is null");
-        }else{
-            ClientUser user1 = um.popUser(userId);
-            user1.setBonusPoints(newPoint);
-            this.pointList.put(user1.getId(), newPoint);
-            um.addUser(user1);
-        }
-        //um.addUser(user);
-        //um.getUser(user).setBonusPoints(newPoint);
-        //this.pointList.put(um.getUser(user).getId(), newPoint);
+        int newPoint = this.tm.getComplete(userId).size() - um.getSelectedBonusTrades(userId).size() * user.getExStandard();
+        ClientUser user1 = um.popUser(userId);
+        user1.setBonusPoints(newPoint);
+        this.pointList.put(user1.getId(), newPoint);
+        um.addUser(user1);
     }
 
     /**
@@ -83,15 +76,15 @@ public class PointManager {
     /**
      * Return the set value of points needed to exchange one bonus trade
      */
-    public int getExStandard(){return this.exStandard;}
+    //public int getExStandard(){return this.exStandard;}
 
     /**
      * Set the exchange standard to a new value
      * @param newStandard the new exchange standard
      */
-    public void setExStandard(int newStandard) {
-        this.exStandard = newStandard;
-    }
+    //public void setExStandard(int newStandard) {
+        //this.exStandard = newStandard;
+    //}
 
 
 }

@@ -76,6 +76,7 @@ public class ClientUser implements Serializable {
      */
     private int bonusPoints;
     private final ArrayList<ArrayList<String>> actions;
+    private int exStandard = 5;
 
     /**
      * @param username the username of the user account
@@ -321,5 +322,9 @@ public class ClientUser implements Serializable {
     public ArrayList<ArrayList<String>> getActions() {
         return this.actions;
     }
+
+    public int getExStandard(){return this.exStandard;}
+
+    public void setExStandard(int newStandard){this.exStandard = newStandard;}
     
 }

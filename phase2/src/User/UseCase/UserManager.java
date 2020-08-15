@@ -266,5 +266,9 @@ public class UserManager {
         return number;
     }
 
+    public int getExStandard() {
+        return this.getUserList().get(0).getExStandard();
+    }
+
 }
 

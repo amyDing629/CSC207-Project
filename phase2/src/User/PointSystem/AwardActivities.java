@@ -82,7 +82,7 @@ public class AwardActivities {
         ClientUser user = this.um.getUser(userId);
         if (selected == null){
             pp.notTradeSelected();
-        }else if (pm.getUserPoints(user) < pm.getExStandard()){
+        }else if (pm.getUserPoints(user) < user.getExStandard()){
            pp.pointNotEnough();
         }
         else{
@@ -125,7 +125,7 @@ public class AwardActivities {
     }
 
     public void updateStandard(){
-        pp.updateStandard(pm.getExStandard());
+        pp.updateStandard(um.getExStandard());
     }
 
     public void noTradeSelected(){

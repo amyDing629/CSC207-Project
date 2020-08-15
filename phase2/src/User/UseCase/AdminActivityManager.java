@@ -193,7 +193,7 @@ public class AdminActivityManager {
     }
     public void setExchangeStandard(int exStandard) {
         userAccess.deSerialize();
-        pm.setExStandard(exStandard);
+        //pm.setExStandard(exStandard);
         userAccess.updateSer();
     }
 

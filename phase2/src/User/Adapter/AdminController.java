@@ -4,6 +4,7 @@ import User.Entity.ClientUser;
 import User.UseCase.AdminActivityManager;
 
 import java.io.FileNotFoundException;
+import java.util.List;
 
 public class AdminController extends ClientUserController implements IUserController, IAdminController{
     private final AdminActivityManager am;
@@ -60,7 +61,12 @@ public class AdminController extends ClientUserController implements IUserContro
     }
 
     public void setExchangeStandard(int exStandard) {
-        am.setExchangeStandard(exStandard);
+        List<ClientUser> userList = um.getUserList();
+        for (ClientUser user: userList) {
+            ClientUser u = um.popUser(user.getId());
+            u.setExStandard(exStandard);
+            um.addUser(user);
+        }
     }
 
 
