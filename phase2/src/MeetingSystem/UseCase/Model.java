@@ -6,7 +6,7 @@ import MeetingSystem.MeetingStatus;
 import java.util.UUID;
 
 /**
- *
+ * The display model of meeting
  */
 public interface Model {
     String getMeetingInfo(UUID meetingID);

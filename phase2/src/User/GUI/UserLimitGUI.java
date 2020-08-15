@@ -1,6 +1,5 @@
 package User.GUI;
 
-import User.Adapter.ClientUserController;
 import User.Adapter.IUserController;
 
 import javax.swing.*;
@@ -10,10 +9,19 @@ public class UserLimitGUI {
     IUserController uc;
     JFrame pFrame;
     JFrame frame;
+    /**
+     * [Constructor]
+     * @param pFrame frame
+     * @param uc client user controller
+     */
     public UserLimitGUI(IUserController uc ,JFrame pFrame) {
         this.uc=uc;
         this.pFrame=pFrame;
     }
+    /**
+     * @param name  name of user
+     * create new frame
+     */
     public void run(String name){
         frame = new JFrame("User Limit System");
         frame.setSize(500, 700);
@@ -29,7 +37,12 @@ public class UserLimitGUI {
         placeComponents(frame, panel, name);
         frame.setVisible(true);
     }
-
+    /**
+     * @param frame new frame
+     * @param panel the new panel
+     * @param b name of user
+     * set new frame
+     */
     private void placeComponents(JFrame frame, JPanel panel, String b){
 
         JButton editButton = new JButton("Weekly Transaction Limit");

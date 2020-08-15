@@ -1,7 +1,6 @@
 package User.GUI;
 
 
-import User.Adapter.ClientUserController;
 import User.Adapter.IUserController;
 import User.Entity.ClientUser;
 
@@ -13,10 +12,19 @@ public class ReverseSystemGUI {
     IUserController uc;
     JFrame pFrame;
     JFrame frame;
+    /**
+     * [Constructor]
+     * @param pFrame frame
+     * @param uc client user controller
+     */
     public ReverseSystemGUI(IUserController uc ,JFrame pFrame) {
         this.uc=uc;
         this.pFrame=pFrame;
     }
+    /**
+     * @param name  name of user
+     * create new frame
+     */
     public void run(String name){
         frame = new JFrame("Reverse System");
         frame.setSize(500, 700);
@@ -33,6 +41,12 @@ public class ReverseSystemGUI {
         frame.setVisible(true);
     }
 
+    /**
+     * @param frame new frame
+     * @param panel the new panel
+     * @param b name of user
+     * set new frame
+     */
     private void placeComponents(JFrame frame, JPanel panel, String b){
 
         JTextArea textArea = new JTextArea(5, 20);
@@ -78,7 +92,12 @@ public class ReverseSystemGUI {
             }
         });
     }
-
+    /**
+     * @param panel the new panel
+     * @param textArea text area
+     * @param exit the exit button
+     * set new frame
+     */
     public  void createNext(JFrame frame, JPanel panel,ClientUser a,JTextArea textArea,JButton exit){
         JTextArea textArea1 = new JTextArea(5, 20);
         textArea1.setEditable(false);
