@@ -18,7 +18,6 @@ import java.util.UUID;
 public class AdminActivityManager {
     UserManager um = new UserManager();
     TradeManager tm = new TradeManager();
-    PointManager pm = new PointManager();
     DataAccess userAccess = new UserDataAccess();
 
 

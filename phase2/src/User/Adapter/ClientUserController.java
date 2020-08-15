@@ -2,6 +2,7 @@ package User.Adapter;
 
 import User.Entity.ClientUser;
 import User.Gateway.UserDataAccess;
+import User.UseCase.AdminActivityManager;
 import User.UseCase.UserManager;
 
 import java.io.File;
@@ -61,6 +62,7 @@ public class ClientUserController implements IUserController{
      * return whether the user is frozen or not
      */
     public boolean getIsFrozen(UUID userID){
+        checkFrozen(um.UUIDToName(userID));
         return um.getIsFrozen(userID);
     }
 
@@ -220,5 +222,20 @@ public class ClientUserController implements IUserController{
 
     public boolean checkActionExist(String username,ArrayList<String> input){
         return um.getActions(um.getUser(username)).contains(input);
+    }
+
+    public void checkFrozen(String username) {
+        if(um.readDiff(username)>um.getDiff(username)){
+            System.out.println("You have been freeze due to exceed difference between borrow and lend");
+            ClientUser u = um.popUser(um.nameToUUID(username));
+            u.setFrozen(true);
+            um.addUser(u);
+        }
+        else if(new AdminActivityManager().incompleteTransaction(um.nameToUUID(username))){
+            System.out.println("You have been freeze due to maximum incomplete transaction");
+        }
+        else if(new AdminActivityManager().tradeLimit(um.nameToUUID(username))){
+            System.out.println("You have been freeze due to maximum trade limit");
+        }
     }
 }
