@@ -1,11 +1,8 @@
 package User.PointSystem;
 
-import Trade.Entity.Trade;
 import Trade.UseCase.TradeManager;
-import Trade.TradeStatus;
 import User.Entity.ClientUser;
 import User.UseCase.UserManager;
-import java.time.LocalDateTime;
 import java.util.*;
 
 /**
@@ -23,18 +20,12 @@ public class PointManager {
     private final Map<UUID, Integer> pointList;
 
     /**
-     * The points needed to exchange one bonus trade which will not count towards being frozen
-     */
-    //private int exStandard;
-
-    /**
      * Constructs the Point Manager to manage points for client users.
      */
     public PointManager(){
         this.um = new UserManager();
         this.tm = new TradeManager();
         this.pointList = new HashMap<>();
-        //this.exStandard = 5;
     }
 
     /**
@@ -50,41 +41,12 @@ public class PointManager {
     }
 
     /**
-     * Return the list of user id and corresponding points.
-     * @return pointList
-     */
-//    public Map<UUID, Integer> getPointList() {return this.pointList;}
-
-
-//    /**
-//     * Set the list of user id and the bonus points the use has. (setter for pointList)
-//     */
-//    public void setAllPoints() {
-//        for (ClientUser user: this.um.getUserList()) {
-//            this.setUserPoints(user.getId());
-//        }
-//    }
-
-    /**
      * Return the number of bonus points for user
      * @param user the specific user
      */
     public int getUserPoints(ClientUser user) {
         return this.pointList.get(user.getId());
     }
-
-    /**
-     * Return the set value of points needed to exchange one bonus trade
-     */
-    //public int getExStandard(){return this.exStandard;}
-
-    /**
-     * Set the exchange standard to a new value
-     * @param newStandard the new exchange standard
-     */
-    //public void setExStandard(int newStandard) {
-        //this.exStandard = newStandard;
-    //}
 
 
 }
