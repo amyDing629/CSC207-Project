@@ -267,6 +267,7 @@ public class UserManager {
     }
 
     public int getExStandard() {
+        System.out.println(getUserList() + String.valueOf(getUserList().get(0).getExStandard()));
         return this.getUserList().get(0).getExStandard();
     }
 

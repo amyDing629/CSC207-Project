@@ -37,7 +37,9 @@ public class AdminController extends ClientUserController implements IUserContro
     }
 
     public void setDiff(String username,int diff) {
-        am.setDiff(username, diff);
+        ClientUser user = um.popUser(um.nameToUUID(username));
+        user.setDiff(diff);
+        um.addUser(user);
     }
 
     public void createAdmin(String name, String password) {
@@ -65,7 +67,9 @@ public class AdminController extends ClientUserController implements IUserContro
         for (ClientUser user: userList) {
             ClientUser u = um.popUser(user.getId());
             u.setExStandard(exStandard);
-            um.addUser(user);
+            System.out.println("acb ex" + u.getUsername() + ": " + u.getExStandard());
+            um.addUser(u);
+            System.out.println("ac ex" + user.getUsername() + ": " + um.getUser(user.getId()).getExStandard());
         }
     }
 

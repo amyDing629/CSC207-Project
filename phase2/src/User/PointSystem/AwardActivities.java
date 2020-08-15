@@ -116,6 +116,7 @@ public class AwardActivities {
         pp.updatePoint(um.getUser(currUser).getBonusPoints());
         noTradeSelected();
         pp.resetCurr();
+        updateStandard();
     }
 
     public void updatePoint(){

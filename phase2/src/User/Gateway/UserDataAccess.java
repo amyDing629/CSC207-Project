@@ -87,11 +87,6 @@ public class UserDataAccess implements DataAccess {
         }
         serialize();
 
-        for (ClientUser a: userList){
-            if (a.getUsername().equals("amy")){
-                System.out.println("wish borrow" + a.getWishBorrow());
-            }
-        }
     }
 
     @Override
