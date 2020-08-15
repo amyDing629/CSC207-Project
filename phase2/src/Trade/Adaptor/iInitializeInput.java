@@ -2,7 +2,7 @@ package Trade.Adaptor;
 
 import javax.swing.*;
 
-public interface iBuilder {
+public interface iInitializeInput {
     void addInput(String key, JTextArea input);
     void initializeList(JTextArea ta);
     void initializeCurr(JTextArea ta);
