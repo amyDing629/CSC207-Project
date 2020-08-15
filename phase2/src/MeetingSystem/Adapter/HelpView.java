@@ -2,7 +2,7 @@ package MeetingSystem.Adapter;
 
 import javax.swing.*;
 
-public class HelpView extends JDialog{
+public class HelpView extends JDialog implements InfoView{
 
     private JPanel contentPane;
     private JPanel backPanel;
@@ -49,10 +49,12 @@ public class HelpView extends JDialog{
                 "       - COMPLETED:    when both users confirmed the meeting occurred\n";
     }
 
+    @Override
     public void setPresenter(IPresenter presenter) {
         this.presenter = presenter;
     }
 
+    @Override
     public void open() {
         this.pack();
         this.setVisible(true);

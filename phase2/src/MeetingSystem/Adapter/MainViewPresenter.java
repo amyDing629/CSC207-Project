@@ -23,7 +23,7 @@ public class MainViewPresenter extends Observable implements MPresenter {
     Model meetingModel;
 
     // View
-    MainView mainView; // meeting main view
+    MView mainView; // meeting main view
     JFrame frame; // trade view
 
     // Observer

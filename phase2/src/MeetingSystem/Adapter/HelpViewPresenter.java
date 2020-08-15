@@ -8,7 +8,7 @@ import java.util.UUID;
 public class HelpViewPresenter implements IPresenter{
 
     // View
-    HelpView view;
+    InfoView view;
 
 
     public HelpViewPresenter() {
