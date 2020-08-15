@@ -2,6 +2,7 @@ package User.GUI;
 
 
 import User.Adapter.ClientUserController;
+import User.Adapter.IUserController;
 import User.Entity.ClientUser;
 
 import javax.swing.*;
@@ -9,10 +10,10 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class ReverseSystemGUI {
-    ClientUserController uc;
+    IUserController uc;
     JFrame pFrame;
     JFrame frame;
-    public ReverseSystemGUI(ClientUserController uc ,JFrame pFrame) {
+    public ReverseSystemGUI(IUserController uc ,JFrame pFrame) {
         this.uc=uc;
         this.pFrame=pFrame;
     }

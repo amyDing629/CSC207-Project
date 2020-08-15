@@ -2,22 +2,22 @@ package User.GUI;
 
 import User.Adapter.AdminController;
 import User.Adapter.ClientUserController;
+import User.Adapter.IAdminController;
+import User.Adapter.IUserController;
 import User.Entity.ClientUser;
 import User.UseCase.UserManager;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.FileNotFoundException;
-
 public class CreateAdminGUI {
-    ClientUserController uc;
-    AdminController ac;
+    IUserController uc;
+    IAdminController ac;
     JFrame pFrame;
     JFrame frame;
-    public CreateAdminGUI(ClientUserController uc , JFrame pFrame) {
+    public CreateAdminGUI(IUserController uc , JFrame pFrame) {
         this.uc=uc;
-        ac= new AdminController();
         this.pFrame=pFrame;
+        this.ac = new AdminController();
     }
     public void run(String name){
         frame = new JFrame("Create Admin Session");

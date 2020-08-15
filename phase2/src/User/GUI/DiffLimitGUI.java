@@ -3,18 +3,19 @@ package User.GUI;
 
 import User.Adapter.AdminController;
 import User.Adapter.ClientUserController;
+import User.Adapter.IAdminController;
+import User.Adapter.IUserController;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class DiffLimitGUI {
-    ClientUserController uc;
-    AdminController ac;
+    IUserController uc;
+    IAdminController ac;
     JFrame pFrame;
     JFrame frame;
-    public DiffLimitGUI(ClientUserController uc ,JFrame pFrame) {
+    public DiffLimitGUI(IUserController uc ,JFrame pFrame) {
         this.uc=uc;
-        ac = new AdminController();
         this.pFrame=pFrame;
     }
     public void run(String name){

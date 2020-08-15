@@ -14,10 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class ClientUserController {
+public class ClientUserController implements IUserController{
     UserManager um = new UserManager();
-    ApprovalManager iam = new ApprovalManager();
-    TradeManager tm = new TradeManager();
 
 
     public boolean getIsAdmin(String username) {

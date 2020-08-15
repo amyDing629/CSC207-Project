@@ -8,6 +8,7 @@ import Trade.Adaptor.TradeGUI_Main;
 import Trade.Adaptor.TradeHistory.TradeHistoryController;
 import Trade.UseCase.TradeManager;
 import User.Adapter.ClientUserController;
+import User.Adapter.IUserController;
 import User.Adapter.IUserPresenter;
 import User.PointSystem.PointGUIBuilder;
 import User.UseCase.UserManager;
@@ -25,7 +26,7 @@ public class ClientUserGUI implements View {
     String currUser;
 
     IUserPresenter presenter;
-    ClientUserController controller = new ClientUserController();
+    IUserController controller;
 
     public ClientUserGUI(JFrame pFrame, String currUser) {
         this.pFrame = pFrame;

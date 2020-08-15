@@ -5,7 +5,7 @@ import User.UseCase.AdminActivityManager;
 
 import java.io.FileNotFoundException;
 
-public class AdminController extends ClientUserController {
+public class AdminController extends ClientUserController implements IUserController, IAdminController{
     private final AdminActivityManager am;
 
 

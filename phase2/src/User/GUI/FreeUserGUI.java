@@ -2,15 +2,18 @@ package User.GUI;
 
 import User.Adapter.AdminController;
 import User.Adapter.ClientUserController;
+import User.Adapter.IAdminController;
+import User.Adapter.IUserController;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class FreeUserGUI {
-    ClientUserController uc;
-    AdminController ac;
+    IUserController uc;
+    IAdminController ac;
     JFrame pFrame;
     JFrame frame;
-    public FreeUserGUI(ClientUserController uc ,JFrame pFrame) {
+    public FreeUserGUI(IUserController uc ,JFrame pFrame) {
         this.uc=uc;
         this.pFrame=pFrame;
         ac = new AdminController();

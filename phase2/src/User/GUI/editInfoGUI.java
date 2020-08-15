@@ -1,6 +1,6 @@
 package User.GUI;
 
-import User.Adapter.ClientUserController;
+import User.Adapter.IUserController;
 import User.Entity.ClientUser;
 import User.UseCase.UserManager;
 
@@ -8,10 +8,10 @@ import javax.swing.*;
 import java.awt.*;
 
 public class editInfoGUI {
-    ClientUserController uc;
+    IUserController uc;
     JFrame frame;
     JFrame PFrame;
-    public editInfoGUI(ClientUserController uc , JFrame pFrame) {
+    public editInfoGUI(IUserController uc , JFrame pFrame) {
         this.uc = uc;
         this.PFrame=pFrame;
     }

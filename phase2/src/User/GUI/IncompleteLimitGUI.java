@@ -2,16 +2,18 @@ package User.GUI;
 
 import User.Adapter.AdminController;
 import User.Adapter.ClientUserController;
+import User.Adapter.IAdminController;
+import User.Adapter.IUserController;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class IncompleteLimitGUI {
-    ClientUserController uc;
-    AdminController ac;
+    IUserController uc;
+    IAdminController ac;
     JFrame pFrame;
     JFrame frame;
-    public IncompleteLimitGUI(ClientUserController uc ,JFrame pFrame) {
+    public IncompleteLimitGUI(IUserController uc ,JFrame pFrame) {
         this.uc=uc;
         this.ac = new AdminController();
         this.pFrame=pFrame;
