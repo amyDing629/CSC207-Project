@@ -57,10 +57,42 @@ Two Users- Admin4
 - submit, then back and then log out
 - log in again, the freeze status and left status would change to true
 
-### `V8_xxx.mp4`✅ (Amy)
+### `V8_FreezeSystem.mp4`✅ (Amy)
+
+- Froze because of trade limit in a week:
+ 
+  - Trade limit = 1, after agreeing two requested trade by tom, 
+amy's freeze status becomes true.
+
+- Froze because of incomplete trade limit:
+ 
+  - Trade limit = 1, after agreeing two requested trade by tom, 
+amy's freeze status becomes true.
+
+- Froze because of difference between borrow and lend:
+
+  - Diff limit = 1, after borrow two items from amy, 
+tom's freeze status becomes true.
+
+- Froze because admin user freeze users:
+
+  - Admin set amy's status to true, and amy's status becomes true.
 
 
-    
+- If user's account is frozen due to out of limit, only unfreeze user is useless:
+
+  - Amy's account is frozen due to incomplete limit out of bounds. After admin unfreeze
+  amy's account, the account is still frozen.
+
+  - Method 1: Reduce the limit by waiting for 1 week to pass, or complete trades, 
+  and then admin unfreeze users. 
+    - Amy completes a trade so that the trade number is in the limit, then admin unfreeze Amy,
+    amy's freeze status becomes false.
+  
+  - Method 2: Admin increase user's limit, and unfreeze users.
+    - admin change amy's incomplete trade limit to 2, and then unfreeze amy. amy's freeze status
+    becomes true.
+   
 ### `V9_xxx.mp4`
 - a
     
