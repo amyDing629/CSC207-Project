@@ -45,7 +45,7 @@ For better testing all the available functionality, you need to:
 *(names listed in no particular order)
 
 | Name | Divide of work |
-|------|:---------------|
+|:------:|:---------------|
 |**Yuhan Zheng (Ensouled)**|AdminUser & GUI, Mandatory Extension 1|
 |**Yiyun Ding (Amy)**|Trade & GUI, Inventory & GUI, Mandatory Extension 2|
 |**Changyan Xu (Rella)**|Meeting System & GUI, Mandatory Extension 3|
@@ -55,7 +55,52 @@ For better testing all the available functionality, you need to:
 
 # Illustrations
 
+
+
+
 # Scope of functionalities 
+
+## Terms in the Program
+### Limits
+| Limits | Default Value | Meaning |
+|:------|:---------------:|:---------------|
+|Trade Limit            |5|???? |
+|Incomplete Trade Limit |2|???? |
+|Diff between borrow and lend |2|???? |
+|Points exchange for Bonus Trade|???|???? |
+|Meeting Edit Limit     |3|If either one of two users does NOT agree meeting proposal before their **4th** time edition (i.e. edits its 4th time), meeting will be cancelled|
+
+### Inventory:
+| List Type | Meaning |
+|------:|:---------------|
+|WishList-Borrow|displays all wish-to-borrow items (from other users), i.e. a wishlist|
+|WishList-Lend|displays all wish-to-lend items (to other users), which passed Admin's inspect|
+
+### Trade Type:
+| Type | Meaning |
+|------:|:---------------|
+|one way (temporary)|one item in trade, two meetings involved|
+|one way (permanent)|one item in trade, one meeting involved|
+|two way (temporary)|two items in trade, two meetings involved|
+|two way (permanent)|two items in trade, one meeting involved|
+
+### Trade Statuses:
+| Status | Meaning |
+|------:|:---------------|
+|`unconfirmed`| the trade is requested by user through an item, but not yet confirmed by the other user|
+|`cancelled`|   if first meeting is cancelled or user choose not to confirm the trade|
+|`incomplete`|  user choose to confirm the trade, but the trade hasn't been completed|
+|`completed`|   the meeting is complete for permanent trade and the second meeting is complete for temporary trade|
+
+### Meeting Statuses:
+| Status | Meaning |
+|------:|:---------------|
+|`DNE`|          when meeting is not yet set up|
+|`INCOMPLETE`|   when meeting can be edited and/or agreed|
+|`CANCELLED`|    when one user edits over threshold (more than 3 times)|
+|`AGREED`|       when both users agreed the meeting proposal|
+|`COMPLETED`|    when both users confirmed the meeting occurred|
+
 
 # Examples of use
 Please see `VideoAccess.md`.
