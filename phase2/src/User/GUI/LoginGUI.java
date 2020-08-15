@@ -21,6 +21,9 @@ public class LoginGUI{
     // presenter
     LoginSystemPresenter lsp;
 
+    /**
+     * create new frame
+     */
     public void run() {
         lsp = new LoginSystemPresenter(frame);
         frame = new JFrame("Login/Register");
@@ -32,6 +35,11 @@ public class LoginGUI{
         frame.setVisible(true);
     }
 
+    /**
+     * @param frame new frame
+     * @param panel the new panel
+     * set new frame
+     */
     private void placeComponents(JFrame frame, JPanel panel){
         JLabel userLabel = new JLabel("User:");
         userLabel.setBounds(10,20,80,25);

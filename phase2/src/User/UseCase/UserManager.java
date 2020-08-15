@@ -53,7 +53,10 @@ public class UserManager {
         return (ClientUser) dataAccess.getObject(userId);
     }
 
-
+    /**
+     * @param id the ID of the user that the manager wants to get
+     *              pop the user form list
+     */
     public ClientUser popUser(UUID id){
         if (dataAccess.hasObject(id)) {
             ClientUser result =  (ClientUser) dataAccess.getObject(id);
@@ -108,7 +111,10 @@ public class UserManager {
         }
     }
 
-
+    /**
+     * @param username name of user
+     * return the difference between lend amount and borrow amount
+     */
     public int readDiff(String username) {
         ClientUser user = getUser(username);
         return user.getLendCounter() - user.getBorrowCounter();
@@ -151,88 +157,144 @@ public class UserManager {
         }
         return g;
     }
-
-    //FINISHED
-    public boolean getIsAdmin(String a){return getUser(a).getIsAdmin();}
-
-    //FINISHED
+    /**
+     * @param a id of user
+     * return lend wish list
+     */
     public List<String> getWishLend(UUID a) {
         return getUser(a).getWishLend();
     }
-    //FINISHED
+    /**
+     * @param a id of user
+     * return borrow wish list
+     */
     public List<String> getWishBorrow(UUID a) {
         return getUser(a).getWishBorrow();
     }
-    //finished
+    /**
+     * @param a name of user
+     * return the week transaction limit of user
+     */
     public int getWeekTransactionLimit(String a) {
         dataAccess.deSerialize();
         dataAccess.updateSer();
         return getUser(a).getWeekTransactionLimit();
     }
-    //finished
+    /**
+     * @param a name of user
+     * return the Incomplete Transaction Limit of user
+     */
     public int getIncompleteTransactionLimit(String a) {
         dataAccess.deSerialize();
         dataAccess.updateSer();
         return getUser(a).getIncompleteTransactionLimit();
     }
 
-    //finished
+    /**
+     * @param a name of user
+     * get the difference between lend amount and borrow amount
+     */
     public int getDiff(String a) {
         dataAccess.deSerialize();
         dataAccess.updateSer();
         return getUser(a).getDiff();
     }
-    //finished
+    /**
+     * @param a user
+     * return the password of the user
+     */
     public String getPassword(ClientUser a) {
         dataAccess.deSerialize();
         dataAccess.updateSer();
         return a.getPassword();
     }
 
-    //finished
+    /**
+     * @param a the id of the user that the manager wants to get
+     * return user name
+     */
     public String getUsername(UUID a){
         return getUser(a).getUsername();}
 
-    //finished
+    /**
+     * @param a user
+     * return the id of the user
+     */
     public UUID getId(ClientUser a) {
         return a.getId();
     }
-
+    /**
+     * @param name name of user
+     * @param password the input string
+     * set the input string as the password
+     */
     public void setPassword(String name, String password) {
         ClientUser a = popUser(nameToUUID(name));
         a.setPassword(password);
         addUser(a);
     }
 
-    //finished
+    /**
+     * @param userID the id of the user that the manager wants to get
+     * return whether the user is frozen or not
+     */
     public boolean getIsFrozen(UUID userID){
         return getUser(userID).getIsFrozen();
     }
 
-    //finished
+    /**
+     * @param a user
+     * @param password the input string
+     * set the input string as the password
+     */
     public void set(ClientUser a, String password){a.setPassword(password);}
 
+    /**
+     * @param a user
+     * return list of list of actions
+     */
     public ArrayList<ArrayList<String>> getActions(ClientUser a) {
         return a.getActions();
     }
 
+    /**
+     * @param hi wish borrow that wants to remove
+     * @param b user
+     * remove lend borrow from list
+     */
     public void removeBWishes(String hi,ClientUser b){
 
         b.removeBWishes(hi);
     }
 
+    /**
+     * @param userID the id of the user that the manager wants to get
+     * return name of user
+     */
     public String UUIDToName(UUID userID){
         return getUser(userID).getUsername();
     }
 
+    /**
+     * @param name the name of the user that the manager wants to get
+     * return id of user
+     */
     public UUID nameToUUID(String name){
         return getUser(name).getId();
     }
 
+    /**
+     * @param userID the id of the user that the manager wants to get
+     * return list of bonus trade the user wants to select
+     */
     public List<UUID> getSelectedBonusTrades(UUID userID){
         return getUser(userID).getSelectedBonusTrades();
     }
 
+    /**
+     * @param username the name of the user that the manager wants to get
+     * return total trade number in seven days of user
+     */
     public int getTradeNumber(String username) {
         ClientUser user = (ClientUser) dataAccess.getObject(username);
 
@@ -254,10 +316,18 @@ public class UserManager {
         return number;
     }
 
+    /**
+     * @param id the id of the trade of the  user that the manager wants to get
+     * return that trade
+     */
     public Trade getTrade(UUID id) {
         return (Trade) tradeAccess.getObject(id);
     }
 
+    /**
+     * @param userId the id of the trade of the  user that the manager wants to get
+     * return the number of incomplete trade that the user has
+     */
     public int getIncompleteTransaction(UUID userId) {
         ClientUser user = (ClientUser) dataAccess.getObject(userId);
 
@@ -274,11 +344,18 @@ public class UserManager {
         }
         return number;
     }
-
+    /**
+     * return the exchange standard of the user
+     */
     public int getExStandard() {
         return this.getUserList().get(0).getExStandard();
     }
 
+    /**
+     * @param username name of user
+     * @param end end time of left
+     * return the exchange standard of the user
+     */
     public void setEnd(String username, LocalDateTime end){
         dataAccess.deSerialize();
         dataAccess.updateSer();
@@ -293,6 +370,10 @@ public class UserManager {
 //        dataAccess.updateSer();
     }
 
+    /**
+     * @param userID id of user
+     * return whether the user is left or not
+     */
     public boolean getIsLeft(UUID userID){
         return getUser(userID).getIsLeft();
     }

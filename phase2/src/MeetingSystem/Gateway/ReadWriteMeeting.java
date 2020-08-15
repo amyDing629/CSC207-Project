@@ -40,9 +40,22 @@ public class ReadWriteMeeting implements IDataAccess {
 
     }
 
+    @Override
+    public boolean hasMeeting(UUID meetingID) {
+        readFromCSVFile();
+        return meetingMap.containsKey(meetingID);
+    }
+
+    @Override
+    public Meeting searchMeeting(UUID meetingID) {
+        readFromCSVFile();
+        return meetingMap.get(meetingID);
+    }
+
     /**
      * Populates the records map from the MeetingData.csv file at path meetingDataFile.
      */
+    @Override
     public void readFromCSVFile() {
         meetingMap.clear();
         try {
@@ -131,6 +144,7 @@ public class ReadWriteMeeting implements IDataAccess {
                 idToEditTime, idToAgreedStatus, idToConfirmedStatus);
     }
 
+    @Override
     public void writeAllMeetingsToCSV() {
         try {
             // create a writer
@@ -159,6 +173,7 @@ public class ReadWriteMeeting implements IDataAccess {
     }
 
 
+    @Override
     public void updateFile(Meeting meeting) {
         // read: Map <- CSV
         readFromCSVFile();
@@ -255,24 +270,6 @@ public class ReadWriteMeeting implements IDataAccess {
         record.add(8, confirmedStatusFullStr);
 
         return record;
-    }
-
-    @Override
-    public boolean hasMeeting(UUID meetingID) {
-        readFromCSVFile();
-        return meetingMap.containsKey(meetingID);
-    }
-
-    @Override
-    public Meeting searchMeeting(UUID meetingID) {
-        readFromCSVFile();
-        return meetingMap.get(meetingID);
-    }
-
-    @Override
-    public Map<UUID, Meeting> getMap() {
-        readFromCSVFile();
-        return meetingMap;
     }
 
 }
