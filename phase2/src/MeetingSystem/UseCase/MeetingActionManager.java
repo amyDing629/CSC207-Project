@@ -20,7 +20,7 @@ import java.util.UUID;
 
 public class MeetingActionManager implements MeetingManager {
 
-    IDataAccess MeetingDataAccess = new ReadWriteMeeting();
+    IDataAccess meetingDataAccess = new ReadWriteMeeting();
 
     /**
      * Checks if the meeting with this meetingID exists in database
@@ -30,7 +30,7 @@ public class MeetingActionManager implements MeetingManager {
      */
     @Override
     public boolean isMeetingIdExist(UUID meetingID) {
-        return MeetingDataAccess.hasMeeting(meetingID);
+        return meetingDataAccess.hasMeeting(meetingID);
     }
 
     /**
@@ -41,7 +41,7 @@ public class MeetingActionManager implements MeetingManager {
      */
     @Override
     public Meeting getMeetingWithId(UUID meetingID) {
-        return MeetingDataAccess.searchMeeting(meetingID);
+        return meetingDataAccess.searchMeeting(meetingID);
     }
 
     /**
@@ -57,7 +57,7 @@ public class MeetingActionManager implements MeetingManager {
         Meeting meeting = new GenerateMeeting().createMeeting(dateTime, place, userIds);
         meeting.setLastEditUser(currLogInUser);
 
-        MeetingDataAccess.updateFile(meeting);
+        meetingDataAccess.updateFile(meeting);
 
         return meeting.getID();
     }
@@ -95,9 +95,9 @@ public class MeetingActionManager implements MeetingManager {
     public void editMeeting(Meeting meeting, UUID currLogInUser, LocalDateTime dateTime, String place) {
 
         UUID meetingID = meeting.getID();
-        assert MeetingDataAccess.hasMeeting(meetingID);
+        assert meetingDataAccess.hasMeeting(meetingID);
 
-        Meeting m = MeetingDataAccess.searchMeeting(meetingID);
+        Meeting m = meetingDataAccess.searchMeeting(meetingID);
         m.getEditor(currLogInUser).updateTimeOfEdition(); // update time of edition
         m.setLastEditUser(currLogInUser); // update last edit user
         if (!m.getEditor(currLogInUser).editsOverThreshold()) {
@@ -105,7 +105,7 @@ public class MeetingActionManager implements MeetingManager {
         } else {
             updateStatus(m); // cancels
         }
-        MeetingDataAccess.writeAllMeetingsToCSV(); // write meetingMap to csv
+        meetingDataAccess.writeAllMeetingsToCSV(); // write meetingMap to csv
 
     }
 
@@ -118,8 +118,8 @@ public class MeetingActionManager implements MeetingManager {
     @Override
     public void agreeMeeting(Meeting meeting, UUID currLogInUser) {
         UUID meetingID = meeting.getID();
-        assert MeetingDataAccess.hasMeeting(meetingID);
-        Meeting m = MeetingDataAccess.searchMeeting(meetingID);
+        assert meetingDataAccess.hasMeeting(meetingID);
+        Meeting m = meetingDataAccess.searchMeeting(meetingID);
 
         HashMap<UUID, Boolean> status = m.getAgreedStatusFull();
 
@@ -132,7 +132,7 @@ public class MeetingActionManager implements MeetingManager {
             //update meeting Status
             updateStatus(m);
 
-            MeetingDataAccess.writeAllMeetingsToCSV();
+            meetingDataAccess.writeAllMeetingsToCSV();
         }
 
     }
@@ -146,8 +146,8 @@ public class MeetingActionManager implements MeetingManager {
     @Override
     public void confirmMeeting(Meeting meeting, UUID currLogInUser) {
         UUID meetingID = meeting.getID();
-        assert MeetingDataAccess.hasMeeting(meetingID);
-        Meeting m = MeetingDataAccess.searchMeeting(meetingID);
+        assert meetingDataAccess.hasMeeting(meetingID);
+        Meeting m = meetingDataAccess.searchMeeting(meetingID);
 
         HashMap<UUID, Boolean> status = m.getConfirmedStatusFull();
 
@@ -160,7 +160,7 @@ public class MeetingActionManager implements MeetingManager {
             //update meeting Status
             updateStatus(m);
 
-            MeetingDataAccess.writeAllMeetingsToCSV();
+            meetingDataAccess.writeAllMeetingsToCSV();
         }
 
     }
@@ -185,21 +185,6 @@ public class MeetingActionManager implements MeetingManager {
         }
         return false;
     }
-
-//    /**
-//     * Cancels the meeting, and set the meeting status to "cancelled".
-//     *
-//     * @param meeting the meeting to be cancelled
-//     * @return true if the status of meeting is finally be set to "cancelled".
-//     */
-//    public boolean cancelMeeting(Meeting meeting) {
-//        UUID meetingID = meeting.getID();
-//        assert MeetingDataAccess.hasMeeting(meetingID);
-//        Meeting m = MeetingDataAccess.searchMeeting(meetingID);
-//        m.setStatus(MeetingStatus.CANCELLED);
-//        MeetingDataAccess.writeAllMeetingsToCSV();
-//        return m.getStatus().equals(MeetingStatus.CANCELLED);
-//    }
 
 }
 
