@@ -11,8 +11,8 @@ import java.util.*;
  *
  */
 public class PointManager {
-    public UserManager um;
-    public TradeManager tm;
+    private final UserManager um;
+    private final TradeManager tm;
 
     /**
      * A list of all users with the bonus points they earn

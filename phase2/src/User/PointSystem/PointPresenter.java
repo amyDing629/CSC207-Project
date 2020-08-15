@@ -1,12 +1,13 @@
 package User.PointSystem;
 
 import Trade.Adaptor.BorderGUI;
+import Trade.Adaptor.InputAndPresent;
 import Trade.Entity.Trade;
 
 import java.util.List;
 
-public class PointPresenter {
-    BorderGUI tg;
+public class PointPresenter implements iPointPresenter {
+    InputAndPresent tg;
 
     /**
      * [Constructor]

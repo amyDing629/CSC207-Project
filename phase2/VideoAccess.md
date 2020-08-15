@@ -52,10 +52,12 @@ Suggested List shows: [iPad, iPhone]
 
     
 ### `V7_Mandatory5.mp4`✅ (Siwei Tang)
+
 Two Users- Admin4
 - set the end date(date must after datetime now)
 - submit, then back and then log out
 - log in again, the freeze status and left status would change to true
+
 ### `V8_xxx.mp4`
 - a
     

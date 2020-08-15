@@ -1,11 +1,7 @@
 package User.Adapter;
 
-import Inventory.UseCase.Inventory;
-import Inventory.Entity.Item;
-import Trade.UseCase.TradeManager;
 import User.Entity.ClientUser;
 import User.Gateway.UserDataAccess;
-import User.UseCase.ApprovalManager;
 import User.UseCase.UserManager;
 
 import java.io.File;

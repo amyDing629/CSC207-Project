@@ -9,15 +9,13 @@ import java.util.ArrayList;
 
 public class PointGUIBuilder implements BorderGUIBuilder {
 
-    String currUser;
-    AwardActivities aa;
+    iPointController aa;
     BorderGUI tg;
 
     /**
      *
      */
     public PointGUIBuilder(String currUser, JFrame tf){
-        this.currUser = currUser;
         tg = new BorderGUI();
         aa = new AwardActivities(currUser, tf, tg);
     }

@@ -16,16 +16,16 @@ import User.UseCase.UserManager;
  * [Controller]
  * Responsible for awarding the users with bonus trades.
  */
-public class AwardActivities {
+public class AwardActivities implements iPointController {
 
-    TradeManager tm = new TradeManager();
-    PointManager pm = new PointManager();
-    Trade currTrade;
-    List<Trade> tradeList;
-    JFrame fr;
-    PointPresenter pp;
-    String currUser;
-    UserManager um;
+    private final TradeManager tm = new TradeManager();
+    private final PointManager pm = new PointManager();
+    private Trade currTrade;
+    private List<Trade> tradeList;
+    private final JFrame fr;
+    private final iPointPresenter pp;
+    private final String currUser;
+    private final UserManager um;
 
     /**
      * Constructs the AwardActivities for user
@@ -41,7 +41,7 @@ public class AwardActivities {
     /**
      *
      */
-    Trade getCurrTrade(String num){
+    public Trade getCurrTrade(String num){
         int tradeNum = Integer.parseInt(num.trim());
         currTrade = tradeList.get(tradeNum);
         return currTrade;
@@ -50,7 +50,7 @@ public class AwardActivities {
     /**
      *
      */
-    boolean checkInput(String num){
+    public boolean checkInput(String num){
         if (!isNum(num)){
             return true;
         }else return Integer.parseInt(num) < 0 | Integer.parseInt(num) >= tradeList.size();
@@ -92,7 +92,7 @@ public class AwardActivities {
      * @param userId the ID of current user who is making actions
      * @param selected the trade user selected to be bonus
      */
-    public void getBonus(UUID userId, Trade selected){
+    private void getBonus(UUID userId, Trade selected){
         ClientUser user = this.um.getUser(userId);
         if (selected == null){
             pp.notTradeSelected();
@@ -112,7 +112,7 @@ public class AwardActivities {
     /**
      *
      */
-    void submitBut(String tradeNum){
+    public void submitBut(String tradeNum){
         pp.resetInputArea();
         if (checkInput(tradeNum)){
             pp.wrongInput();
@@ -126,7 +126,7 @@ public class AwardActivities {
     /**
      *
      */
-    void backBut(){
+    public void backBut(){
         fr.setVisible(true);
         pp.closeFrame();
     }
