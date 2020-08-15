@@ -1,15 +1,16 @@
 package User.GUI;
 
 import User.Adapter.ClientUserController;
+import User.Adapter.IUserController;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class UserFreezeSystem {
-    ClientUserController uc;
+    IUserController uc;
     JFrame pFrame;
     JFrame frame;
-    public UserFreezeSystem(ClientUserController uc ,JFrame pFrame) {
+    public UserFreezeSystem(IUserController uc ,JFrame pFrame) {
         this.uc=uc;
         this.pFrame=pFrame;
     }

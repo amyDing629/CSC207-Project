@@ -1,18 +1,17 @@
 package User.GUI;
 
-import User.Adapter.AdminController;
-import User.Adapter.ApprovalController;
-import User.Adapter.ClientUserController;
+import User.Adapter.*;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class UnfreezeGUI {
     ApprovalController avc;
-    ClientUserController uc;
-    AdminController ac;
+    IUserController uc;
+    IAdminController ac;
     JFrame pFrame;
     JFrame frame;
-    public UnfreezeGUI(ClientUserController uc ,JFrame pFrame) {
+    public UnfreezeGUI(IUserController uc , JFrame pFrame) {
         this.uc=uc;
         this.avc= new ApprovalController();
         this.ac = new AdminController();

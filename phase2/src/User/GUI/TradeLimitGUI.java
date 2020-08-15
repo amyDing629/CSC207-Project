@@ -2,17 +2,20 @@ package User.GUI;
 
 import User.Adapter.AdminController;
 import User.Adapter.ClientUserController;
+import User.Adapter.IAdminController;
+import User.Adapter.IUserController;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class TradeLimitGUI {
 
-    ClientUserController uc;
-    AdminController ac = new AdminController();
+    IUserController uc;
+    IAdminController ac = new AdminController();
     JFrame pFrame;
     JFrame frame;
 
-    public TradeLimitGUI(ClientUserController uc ,JFrame pFrame) {
+    public TradeLimitGUI(IUserController uc ,JFrame pFrame) {
         this.uc=uc;
         this.pFrame=pFrame;
     }

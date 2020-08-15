@@ -2,17 +2,20 @@ package User.GUI;
 
 import User.Adapter.AdminController;
 import User.Adapter.ClientUserController;
+import User.Adapter.IAdminController;
+import User.Adapter.IUserController;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class ExStandardGUI {
 
-    ClientUserController uc;
-    AdminController ac;
+    IUserController uc;
+    IAdminController ac;
     JFrame pFrame;
     JFrame frame;
 
-    public ExStandardGUI(ClientUserController uc ,JFrame pFrame) {
+    public ExStandardGUI(IUserController uc ,JFrame pFrame) {
         this.uc=uc;
         this.pFrame=pFrame;
         this.ac = new AdminController();
