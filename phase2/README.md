@@ -19,21 +19,46 @@ Run `phase2/src/Main/mainRun`. To simplify the testing, we provide **three** log
 so that 3 users can log in and communicate through the application at the same time.
 
 For better testing all the available functionality, you need to:
-  - log in an Admin account (already exists in the system)
+  - **log in** an Admin account (automatically created, already exists in the system)
     > username: `admin`, password: `123`
                                                                
-  - register two regular-user account into the system. 
+  - **register** two regular-user account into the system. 
     e.g.
     > username: `qqq`, password: `123`
 
     and
     > username: `www`, password: `123`
-  - (ps: The first admin will be automatically created with name "admin" and password "123")
-  - (ps: Admin users are able to perform ordinary functionalities and other admin functionalities)
+  - P.S. 
+    - ClientUser: ClientUser can only perform ordinary (ClientUser) functionalities
+    - AdminUser: AdminUsers are able to perform ordinary (ClientUser) functionalities and admin functionalities
   - add items into at least two users' lend wish list.
 
 
-(user should input the serial number (0,1,2,etc.) only to select a menu option)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# ======================================
 [main menu]
 quit(0): stop 'main' execution
 
@@ -124,12 +149,17 @@ Trade status can be:
   -  completed: the meeting is complete for permanent trade and the second meeting is complete for temporary trade
 
 Meeting System:
-For each trade (or transaction), only if the trading proposal is proposed by one user and is accepted by the other user, both users can then get into the Meeting System, where it is allowed for one of the two users (the meeting attendees) to set up meeting proposal. As long as the meeting has been officially scheduled, the meeting attendees can then edit
+For each trade (or transaction), only if the trading proposal is proposed by one user and is accepted by the other user, 
+both users can then get into the Meeting System, where it is allowed for one of the two users (the meeting attendees) to set up meeting proposal. 
+As long as the meeting has been officially scheduled, the meeting attendees can then edit
 meeting info (including date and time) up to three times, agree meeting proposal before offline transaction take place.
-Meeting System has three service sessions: <Set Up Session>, <Edit and Agree Session> and <Confirm Session>.
+
+Meeting System has three service sessions: 
+- `Setup`
+- `Edit` and `Agree`
+- `Confirm`
 These sessions would be provided to the users in sequence, according to the current status of the Meeting object (which is stored in the trade system).
 For each session, the attendee users can choose to quit the session or complete the session in accordance to the instructions on the UI.
-Alternatively, the meeting system can be run and tested individually through ```MeetingSystemDemo.java```.
   - first meeting system will run all the sessions
   - second meeting system will only run confirm session
 
