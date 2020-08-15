@@ -85,20 +85,7 @@ public class ReverseSystemGUI {
             pFrame.setVisible(true);
         });
         submitButton.addActionListener(e -> {
-            ClientUser user=uc.getUser(userInput.getText());
-            if(user!=null){
-                System.out.println(user.getActions());
-                StringBuilder k= new StringBuilder();
-                for(int i=0;i<user.getActions().size();i++){
-                    k.append(user.getActions().get(i).get(0)).append("\n");
-                }
-                if(!(k.toString().equals(""))){
-                    textArea2.setText(k.toString());
-                    submitButton2.setEnabled(true);
-                }else{
-                    textArea2.setText("Currently there is no actions");
-                }
-            }
+            updateTextArea(textArea2,userInput,submitButton2);
         });
 
         submitButton2.addActionListener(e -> {
@@ -106,6 +93,7 @@ public class ReverseSystemGUI {
             RemoveActions ra=new RemoveActions(uc.getUser(userInput.getText()),uc,am);
             if(uc.checkActionExist(userInput.getText(),uc.getUser(userInput.getText()).getActions().get(0))) {
                 ra.deleteAction(uc.getUser(userInput.getText()).getActions().get(0));
+                updateTextArea(textArea2,userInput,submitButton2);
             }
             else{
                 JOptionPane.showMessageDialog(null,"Reverse failed,someone edited the user's action");
@@ -114,4 +102,20 @@ public class ReverseSystemGUI {
         });
     }
 
+    public void updateTextArea(JTextArea textArea,JTextField userInput,JButton submitButton){
+        ClientUser user=uc.getUser(userInput.getText());
+        if(user!=null){
+            System.out.println(user.getActions());
+            StringBuilder k= new StringBuilder();
+            for(int i=0;i<user.getActions().size();i++){
+                k.append(user.getActions().get(i).get(0)).append("\n");
+            }
+            if(!(k.toString().equals(""))){
+                textArea.setText(k.toString());
+                submitButton.setEnabled(true);
+            }else{
+                textArea.setText("Currently there is no actions");
+            }
+        }
+    }
 }

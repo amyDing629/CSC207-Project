@@ -49,7 +49,7 @@ public class ChangePassGUI {
      * set new frame
      */
     private void placeComponents(JFrame frame, JPanel panel){
-        JLabel curPass = new JLabel("Current password:"+ uc.getPassword(getUserName()));
+        JLabel curPass = new JLabel("Current password:"+getUserPass());
         curPass.setPreferredSize(new Dimension(300, 30));
         panel.add(curPass);
         JLabel nameLabel = new JLabel("Change your password");
@@ -74,11 +74,15 @@ public class ChangePassGUI {
         submitButton.addActionListener(e -> {
             uc.addAction(getUserName(),"password",uc.getPassword(getUserName()));
             uc.setPassword(getUserName(), passInput.getText());
+            curPass.setText("Current password:"+getUserPass());
             JOptionPane.showMessageDialog(null, "Successfully changed the password!");
         });
     }
 
     String getUserName() {
         return userName;
+    }
+    String getUserPass(){
+        return uc.getPassword(userName);
     }
 }
