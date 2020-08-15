@@ -1,7 +1,6 @@
 package Trade.Adaptor.RequestTrade;
 
 import Inventory.Entity.Item;
-import Trade.Adaptor.InputAndPresent;
 import Trade.Adaptor.iPresent;
 import User.Entity.ClientUser;
 

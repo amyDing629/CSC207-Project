@@ -1,9 +1,7 @@
 package Trade.Adaptor.RequestTrade;
 
 import Trade.Adaptor.BorderGUI;
-import Trade.Adaptor.InputAndPresent;
 import Trade.Adaptor.iPresent;
-import Trade.Adaptor.iTradePresenter;
 
 import java.util.List;
 
