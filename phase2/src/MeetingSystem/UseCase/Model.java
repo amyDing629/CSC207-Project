@@ -21,8 +21,6 @@ public interface Model {
 
     boolean otherUserAgreed(UUID meetingID);
 
-    boolean otherUserConfirmed(UUID meetingID);
-
     boolean isLastUserCurrUser();
 
     String getCurrUser();

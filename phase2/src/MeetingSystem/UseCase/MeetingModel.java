@@ -26,7 +26,6 @@ public class MeetingModel implements Model {
     @Override
     public String getCurrUser() {
         return "Welcome to Meeting System! \n" + "User: " + userManager.getUser(currLogInUser).getUsername();
-//        return "Welcome to Meeting System! \n" + "User: " + currLogInUser.toString();
     }
 
     @Override
@@ -94,12 +93,6 @@ public class MeetingModel implements Model {
     public boolean otherUserAgreed(UUID meetingID) {
         UUID otherUser = getMeeting(meetingID).getLastEditUser();
         return getMeeting(meetingID).getAgreedStatusFull().get(otherUser);
-    }
-
-    @Override
-    public boolean otherUserConfirmed(UUID meetingID) {
-        UUID otherUser = getMeeting(meetingID).getLastEditUser();
-        return getMeeting(meetingID).getConfirmedStatusFull().get(otherUser);
     }
 
     @Override

@@ -41,7 +41,6 @@ public class SetupViewPresenter extends Observable implements IPresenter {
 
         // set observers
         addObserver(observer);
-        System.out.println("SetupPresenter - add observer: " + observer.toString());
     }
 
     @Override

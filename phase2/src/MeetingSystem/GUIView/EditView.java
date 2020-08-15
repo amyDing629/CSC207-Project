@@ -15,9 +15,6 @@ public class EditView extends InputTimePlaceView {
 
     @Override
     void setOnOK(JFormattedTextField timeFormattedTextField, JTextField placeTextField) {
-        System.out.println(timeFormattedTextField.getText());
-        System.out.println(placeTextField.getText());
-
 
         String timeFieldText = timeFormattedTextField.getText();
         String placeFieldText = placeTextField.getText();
