@@ -13,6 +13,9 @@ public class PointGUIBuilder implements BorderGUIBuilder {
     AwardActivities aa;
     BorderGUI tg;
 
+    /**
+     *
+     */
     public PointGUIBuilder(String currUser, JFrame tf){
         this.currUser = currUser;
         tg = new BorderGUI();
@@ -20,11 +23,17 @@ public class PointGUIBuilder implements BorderGUIBuilder {
     }
 
     @Override
+    /**
+     *
+     */
     public void buildFrame() {
         tg.setFrame(800, 400, "Redeem Point Session");
     }
 
     @Override
+    /**
+     *
+     */
     public void buildPanelN() {
         ArrayList<Object> rst = new TradeGUIHelper().createMessagePanel();
         tg.initializeMsg((JTextArea)rst.get(1));
@@ -32,6 +41,9 @@ public class PointGUIBuilder implements BorderGUIBuilder {
     }
 
     @Override
+    /**
+     *
+     */
     public void buildPanelE() {
         JPanel panelE = new JPanel();
         JLabel p = new JLabel("Points");
@@ -58,6 +70,9 @@ public class PointGUIBuilder implements BorderGUIBuilder {
     }
 
     @Override
+    /**
+     *
+     */
     public void buildPanelW() {
         JPanel panelW =  new JPanel();
         JLabel tradeList = new JLabel("Available Trades");
@@ -74,6 +89,9 @@ public class PointGUIBuilder implements BorderGUIBuilder {
     }
 
     @Override
+    /**
+     *
+     */
     public void buildPanelS() {
         JPanel panelS =  new JPanel();
         JLabel input = new JLabel("Input Trade Number");
@@ -101,6 +119,9 @@ public class PointGUIBuilder implements BorderGUIBuilder {
 
 
     @Override
+    /**
+     *
+     */
     public void buildPanelC() {
         JPanel panelC =  new JPanel();
         JLabel currTradeL = new JLabel("Trade Selected");
@@ -116,6 +137,9 @@ public class PointGUIBuilder implements BorderGUIBuilder {
     }
 
     @Override
+    /**
+     *
+     */
     public BorderGUI getTradeGUI() {
         return tg;
     }

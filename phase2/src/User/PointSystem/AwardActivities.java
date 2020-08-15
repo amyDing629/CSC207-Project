@@ -38,13 +38,18 @@ public class AwardActivities {
 
     }
 
+    /**
+     *
+     */
     Trade getCurrTrade(String num){
         int tradeNum = Integer.parseInt(num.trim());
         currTrade = tradeList.get(tradeNum);
         return currTrade;
-
     }
 
+    /**
+     *
+     */
     boolean checkInput(String num){
         if (!isNum(num)){
             return true;
@@ -58,18 +63,27 @@ public class AwardActivities {
 
     /**
      * Provide a list of trades for user to select as bonus trades to avoid counting towards being frozen.
-     * The trades in list are incomplete trades within the most recent 7 days.
+     * The trades in list are incomplete trades OR trades within the most recent 7 days.
      * Once the trade is selected as bonus, a fixed amount of bonus points will be deducted.
      * @param user the current user who makes actions
      */
     public List<Trade> getTradesForExchange(ClientUser user){
-        List<Trade> result = new ArrayList<Trade>();
-        tradeList = tm.getWeekTradeList(user.getUsername()); // get all trades within the most recent seven days
+        List<Trade> result = new ArrayList<>();
+        tradeList = tm.getAllTrade(user.getId());
+        List<UUID> weekList = new ArrayList<>();
+        for (Trade i: tm.getWeekTradeList(user.getUsername())) {
+            weekList.add(i.getId());
+        }
         for (Trade t: tradeList) {
-            if (t.getStatus().equals(TradeStatus.incomplete) && !user.getSelectedBonusTrades().contains(t.getId())) {
-                result.add(t); // get incomplete trade from the recent trades
+            if (weekList.contains(t.getId())) {
+                result.add(t);
+            }else if (t.getStatus().equals(TradeStatus.incomplete)) {
+                result.add(t);
+            }if (user.getSelectedBonusTrades().contains(t.getId())) {
+                result.remove(t);
             }
-        }return result;
+        }
+        return result;
     }
 
     /**
@@ -95,6 +109,9 @@ public class AwardActivities {
 
     }
 
+    /**
+     *
+     */
     void submitBut(String tradeNum){
         pp.resetInputArea();
         if (checkInput(tradeNum)){
@@ -106,39 +123,59 @@ public class AwardActivities {
         }
     }
 
+    /**
+     *
+     */
     void backBut(){
         fr.setVisible(true);
         pp.closeFrame();
     }
 
+    /**
+     *
+     */
     public void updateBut(){
-        pp.updateFrame(getTradesForExchange(um.getUser(currUser)));
+        updateList();
         pp.updatePoint(um.getUser(currUser).getBonusPoints());
         noTradeSelected();
-        pp.resetCurr();
+        //pp.resetCurr();
         updateStandard();
     }
 
+    /**
+     *
+     */
     public void updatePoint(){
         ClientUser user = um.getUser(currUser);
         pm.setUserPoints(user.getId());
         pp.updatePoint(pm.getUserPoints(user));
     }
 
+    /**
+     *
+     */
     public void updateStandard(){
         pp.updateStandard(um.getExStandard());
     }
 
+    /**
+     *
+     */
     public void noTradeSelected(){
         pp.noTradeCurr();
     }
 
+    /**
+     *
+     */
     public void ebBut(){
         getBonus(um.getUser(currUser).getId(), currTrade);
         updateBut();
-        //pp.changeSuccess();
     }
 
+    /**
+     *
+     */
     public void updateList(){
         pp.updateFrame(getTradesForExchange(um.getUser(currUser)));
     }

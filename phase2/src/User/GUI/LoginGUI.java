@@ -21,6 +21,9 @@ public class LoginGUI{
     // presenter
     LoginSystemPresenter lsp;
 
+    /**
+     * create new frame
+     */
     public void run() {
         lsp = new LoginSystemPresenter(frame);
         frame = new JFrame("Login/Register");
@@ -32,6 +35,11 @@ public class LoginGUI{
         frame.setVisible(true);
     }
 
+    /**
+     * @param frame new frame
+     * @param panel the new panel
+     * set new frame
+     */
     private void placeComponents(JFrame frame, JPanel panel){
         JLabel userLabel = new JLabel("User:");
         userLabel.setBounds(10,20,80,25);
@@ -70,10 +78,10 @@ public class LoginGUI{
         logInButton.addActionListener(e -> {
             String name = nameInput.getText();
             String password = new String(passwordInput.getPassword());
-            for(ClientUser i:um.getUserList()){
-                System.out.println(i.getUsername());
-                System.out.println(i.getPassword());
-            }
+//            for(ClientUser i:um.getUserList()){
+//                System.out.println(i.getUsername());
+//                System.out.println(i.getPassword());
+//            }
             boolean response = lsp.login(name, password);
             if (!response) {
                 JOptionPane.showMessageDialog(null,
@@ -89,10 +97,10 @@ public class LoginGUI{
                 a.run();
                 frame.setVisible(false);
 
-                for(ClientUser i:um.getUserList()){
-                    System.out.println(i.getUsername());
-                    System.out.println(i.getPassword());
-                }
+//                for(ClientUser i:um.getUserList()){
+//                    System.out.println(i.getUsername());
+//                    System.out.println(i.getPassword());
+//                }
             }
         });
 

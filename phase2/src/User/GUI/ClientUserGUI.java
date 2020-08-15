@@ -23,12 +23,21 @@ public class ClientUserGUI implements View {
     IUserPresenter presenter;
     IUserController controller;
 
+    /**
+     * [Constructor]
+     * @param pFrame frame
+     * @param currUser name of user
+     */
     public ClientUserGUI(JFrame pFrame, String currUser) {
         this.pFrame = pFrame;
         this.currUser = currUser;
         controller = new ClientUserController();
     }
 
+
+    /**
+     * create new frame
+     */
     public void run() {
         frame = new JFrame("Login Success");
         frame.setSize(500, 700);
@@ -44,6 +53,12 @@ public class ClientUserGUI implements View {
         frame.setVisible(true);
     }
 
+    /**
+     * @param frame new frame
+     * @param panel the new panel
+     * @param b name of user
+     * set new frame
+     */
     private void placeComponents(JFrame frame, JPanel panel, String b) {
 
         UUID userId = controller.nameToUUID(b);
@@ -135,6 +150,9 @@ public class ClientUserGUI implements View {
         return null;
     }
 
+    /**
+     * set presenter
+     */
     @Override
     public void setPresenter(IUserPresenter presenter) {
         this.presenter = presenter;

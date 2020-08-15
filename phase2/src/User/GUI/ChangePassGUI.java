@@ -1,11 +1,10 @@
 package User.GUI;
 
-import User.Adapter.ClientUserController;
 import User.Adapter.IUserController;
-import User.Entity.ClientUser;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class ChangePassGUI {
 
@@ -14,10 +13,20 @@ public class ChangePassGUI {
     JFrame frame;
     String userName;
 
+    /**
+     * [Constructor]
+     * @param pFrame frame
+     * @param uc client user controller
+     */
     public ChangePassGUI(IUserController uc , JFrame pFrame) {
         this.uc = uc;
         this.pFrame=pFrame;
     }
+
+    /**
+     * @param name  name of user
+     * create new frame
+     */
     public void run(String name){
         this.userName = name;
 
@@ -35,6 +44,11 @@ public class ChangePassGUI {
         frame.setVisible(true);
     }
 
+    /**
+     * @param frame new frame
+     * @param panel the new panel
+     * set new frame
+     */
     private void placeComponents(JFrame frame, JPanel panel){
         JLabel curPass = new JLabel("Current password:"+ uc.getPassword(getUserName()));
         curPass.setPreferredSize(new Dimension(300, 30));
@@ -59,6 +73,7 @@ public class ChangePassGUI {
             pFrame.setVisible(true);
         });
         submitButton.addActionListener(e -> {
+            uc.addAction(getUserName(),"password",uc.getPassword(getUserName()));
             uc.setPassword(getUserName(), passInput.getText());
             JOptionPane.showMessageDialog(null, "Successfully changed the password!");
         });

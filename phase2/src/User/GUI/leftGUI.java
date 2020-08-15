@@ -12,11 +12,20 @@ public class leftGUI {
     JFrame frame;
     JFrame pFrame;
     String username;
+    /**
+     * [Constructor]
+     * @param pFrame frame
+     * @param uc client user controller
+     */
     public leftGUI(IUserController uc, JFrame pFrame){
         this.uc = uc;
         this.pFrame = pFrame;
     }
 
+    /**
+     * @param name  name of user
+     * create new frame
+     */
     void run(String name){
         this.username = name;
 
@@ -34,6 +43,11 @@ public class leftGUI {
         frame.setVisible(true);
     }
 
+    /**
+     * @param frame new frame
+     * @param panel the new panel
+     * set new frame
+     */
     private void placeComponents(JFrame frame, JPanel panel){
         JLabel yearLabel = new JLabel("Set Year");
         yearLabel.setPreferredSize(new Dimension(300, 30));

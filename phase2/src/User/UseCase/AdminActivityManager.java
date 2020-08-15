@@ -147,12 +147,19 @@ public class AdminActivityManager {
      * set the account of user a frozen if a has exceeded the incomplete transaction limit
      */
     public boolean incompleteTransaction(UUID username){
-        ClientUser a = (ClientUser) userAccess.getObject(username);
-        if(!a.getIsFrozen()){
-            a.setFrozen(tm.getIncompleteTransaction(username) > a.getIncompleteTransactionLimit());
-            return true;
+        int tl = tm.getIncompleteTransaction(username);
+        ClientUser a = um.popUser(username);
+        boolean setFrozen;
+        if(!a.getIsFrozen()) {
+            setFrozen = (tl > a.getIncompleteTransactionLimit());
+            if (setFrozen) {
+                a.setFrozen(true);
+            }
+        }else{
+            setFrozen = false;
         }
-        return false;
+        um.addUser(a);
+        return setFrozen;
     }
 
 //    public boolean checkLeft(String username){
@@ -169,14 +176,22 @@ public class AdminActivityManager {
      * @param username the user name that the administrative user wants to check the transaction limit
      * set the user.ClientUser a account frozen a has exceeded the week transaction limit
      */
-    public boolean tradeLimit(String username){
-        ClientUser a = (ClientUser) userAccess.getObject(username);
-        if(!a.getIsFrozen()){
-            a.setFrozen(tm.getTradeNumber(username) > a.getWeekTransactionLimit());
-            return true;
+    public boolean tradeLimit(UUID username){
+        int tl = tm.getTradeNumber(username);
+        ClientUser a = um.popUser(username);
+        boolean setFrozen;
+        if(!a.getIsFrozen()) {
+            setFrozen = (tl > a.getWeekTransactionLimit());
+            if (setFrozen) {
+                a.setFrozen(true);
+            }
+        }else{
+            setFrozen = false;
         }
-        return false;
+        um.addUser(a);
+        return setFrozen;
     }
+
     public void setDiff(String username, int diff) {
         um.getUser(username).setDiff(diff);
     }

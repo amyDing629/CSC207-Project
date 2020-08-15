@@ -1,13 +1,14 @@
 package User.Gateway;
 
-import User.Entity.ItemApprovals;
 import User.Entity.UserApprovals;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
+/**
+ * [GateWay]
+ */
 public class ApprovalUserDataAccess implements DataAccess {
     private final String serFilePath = "phase2/src/UserApprovals.ser";
     private List<UserApprovals> UserApprovalsList;
@@ -32,12 +33,20 @@ public class ApprovalUserDataAccess implements DataAccess {
             e.printStackTrace();
         }
     }
+
+    /**
+     * return list of users
+     */
     @Override
     public ArrayList<Object> getList() {
         deSerialize();
         return new ArrayList<>(UserApprovalsList);
     }
 
+    /**
+     * @param name name of user
+     * find user by name
+     */
     @Override
     public UserApprovals getObject(String name) {
         deSerialize();
@@ -49,11 +58,19 @@ public class ApprovalUserDataAccess implements DataAccess {
         return null;
     }
 
+    /**
+     * @param uuid  id of user
+     * find user by id
+     */
     @Override
     public Object getObject(UUID uuid) {
         return null;
     }
 
+    /**
+     * @param o user
+     * add user into list
+     */
     @Override
     public void addObject(Object o) {
         deSerialize();
@@ -61,6 +78,10 @@ public class ApprovalUserDataAccess implements DataAccess {
         updateSer();
     }
 
+    /**
+     * @param o user
+     * return if user in list
+     */
     @Override
     public boolean hasObject(Object o) {
         UserApprovals check=(UserApprovals) o;
@@ -72,9 +93,15 @@ public class ApprovalUserDataAccess implements DataAccess {
         return false;
     }
 
+    /**
+     * @param o name of user
+     * remove user from the list
+     */
     @Override
     public void removeObject(String o) {
-        UserApprovalsList.remove(getObject(o));
+        deSerialize();
+        UserApprovalsList.removeIf(i -> i.getFstString().equals(o));
+        updateSer();
     }
 
     @Override
@@ -82,6 +109,9 @@ public class ApprovalUserDataAccess implements DataAccess {
 
     }
 
+    /**
+     * update the database file
+     */
     @Override @SuppressWarnings("ALL")
     public void updateSer() {
         File file = new File(serFilePath);
@@ -127,6 +157,9 @@ public class ApprovalUserDataAccess implements DataAccess {
         }
     }
 
+    /**
+     * set list of users
+     */
     @Override
     public void setList(List<Object> UserApprovalsList) {
         this.UserApprovalsList.clear();

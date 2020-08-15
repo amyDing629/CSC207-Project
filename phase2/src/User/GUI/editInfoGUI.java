@@ -11,10 +11,21 @@ public class editInfoGUI {
     IUserController uc;
     JFrame frame;
     JFrame PFrame;
+
+    /**
+     * [Constructor]
+     * @param pFrame frame
+     * @param uc client user controller
+     */
     public editInfoGUI(IUserController uc , JFrame pFrame) {
         this.uc = uc;
         this.PFrame=pFrame;
     }
+
+    /**
+     * @param name  name of user
+     * create new frame
+     */
     public void run(String name){
         frame = new JFrame("Edit User Information");
         frame.setSize(500, 700);
@@ -31,7 +42,12 @@ public class editInfoGUI {
         frame.setVisible(true);
     }
 
-
+    /**
+     * @param frame new frame
+     * @param panel the new panel
+     * @param b name of user
+     * set new frame
+     */
     private void placeComponents(JFrame frame, JPanel panel, String b){
 
         JLabel isAdmin = new JLabel("Admin: "+ uc.getIsAdmin(b));

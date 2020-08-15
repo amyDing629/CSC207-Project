@@ -1,7 +1,5 @@
 package User.Entity;
 
-import Trade.Entity.Trade;
-
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -75,7 +73,13 @@ public class ClientUser implements Serializable {
      * the bonus points that the client user has.
      */
     private int bonusPoints;
+
+
     private final ArrayList<ArrayList<String>> actions;
+
+    /**
+     * The points needed to exchange one bonus trade which will not count towards being frozen
+     */
     private int exStandard = 5;
 
     /**
@@ -319,12 +323,22 @@ public class ClientUser implements Serializable {
      */
     public void setBonusPoints(int newPoints) {this.bonusPoints = newPoints;}
 
+    /**
+     * return actions
+     */
     public ArrayList<ArrayList<String>> getActions() {
         return this.actions;
     }
 
+    /**
+     * return exchange standard
+     */
     public int getExStandard(){return this.exStandard;}
 
+    /**
+     * @param newStandard the new exchange standard
+     * Set exchange standard
+     */
     public void setExStandard(int newStandard){this.exStandard = newStandard;}
-    
+
 }

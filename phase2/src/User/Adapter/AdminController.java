@@ -22,17 +22,17 @@ public class AdminController extends ClientUserController implements IUserContro
 
 
     public void checkFrozen(String username) {
-        if(um.readDiff(username)>=um.getDiff(username)){
+        if(um.readDiff(username)>um.getDiff(username)){
             System.out.println("You have been freeze due to exceed difference between borrow and lend");
-            am.setFreeze(username,true);
+            ClientUser u = um.popUser(um.nameToUUID(username));
+            u.setFrozen(true);
+            um.addUser(u);
         }
         else if(am.incompleteTransaction(um.nameToUUID(username))){
             System.out.println("You have been freeze due to maximum incomplete transaction");
-            am.setFreeze(username,true);
         }
-        else if(am.tradeLimit(username)){
+        else if(am.tradeLimit(um.nameToUUID(username))){
             System.out.println("You have been freeze due to maximum trade limit");
-            am.setFreeze(username,true);
         }
     }
 
