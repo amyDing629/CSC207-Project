@@ -1,5 +1,4 @@
 package Main;
-import Main.DataAccessFull;
 import User.Adapter.ClientUserController;
 import User.GUI.LoginGUI;
 import java.io.File;
@@ -12,8 +11,14 @@ public class mainRun {
         uc.checkFileEmpty(new File("phase2/src/user.ser"));
         uaf.readFile();
 
-        LoginGUI lo = new LoginGUI();
-        lo.run();
+        // start with three login window (for easy test)
+        LoginGUI user1 = new LoginGUI();
+        user1.run();
 
+        LoginGUI user2 = new LoginGUI();
+        user2.run();
+
+        LoginGUI admin = new LoginGUI();
+        admin.run();
     }
 }

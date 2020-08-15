@@ -1,5 +1,7 @@
 package MeetingSystem.Adapter;
 
+import MeetingSystem.GUIView.MView;
+import MeetingSystem.GUIView.MainView;
 import MeetingSystem.MeetingStatus;
 import MeetingSystem.UseCase.MeetingModel;
 import MeetingSystem.UseCase.Model;

@@ -1,8 +1,10 @@
-package MeetingSystem.Adapter;
+package MeetingSystem.GUIView;
+
+import MeetingSystem.Adapter.IPresenter;
 
 import javax.swing.*;
 
-public class HelpView extends JDialog implements InfoView{
+public class HelpView extends JDialog implements InfoView {
 
     private JPanel contentPane;
     private JPanel backPanel;

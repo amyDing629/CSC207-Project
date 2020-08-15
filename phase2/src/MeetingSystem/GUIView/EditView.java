@@ -1,5 +1,6 @@
-package MeetingSystem.Adapter;
+package MeetingSystem.GUIView;
 
+import MeetingSystem.Adapter.TimePlaceInputController;
 import MeetingSystem.Entity.Meeting;
 import MeetingSystem.UseCase.DateTime;
 import MeetingSystem.UseCase.Model;

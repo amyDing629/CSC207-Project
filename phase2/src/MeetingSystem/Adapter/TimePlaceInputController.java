@@ -14,11 +14,11 @@ public class TimePlaceInputController {
     LocalDateTime dateTime_input;
 
 
-    boolean assessInput(String inputDateTime, String inputAddress) {
+    public boolean assessInput(String inputDateTime, String inputAddress) {
         return assessDateTimeInput(inputDateTime) && assessPlaceInput(inputAddress);
     }
 
-    boolean assessDateTimeInput(String inputDateTime) {
+    public boolean assessDateTimeInput(String inputDateTime) {
         if (dt.isValidFormat(inputDateTime)) {
             if (dt.isFutureTime(inputDateTime)) {
                 // answer acceptable
@@ -29,7 +29,7 @@ public class TimePlaceInputController {
         return false;
     }
 
-    boolean assessPlaceInput(String inputAddress) {
+    public boolean assessPlaceInput(String inputAddress) {
         Pattern pattern = Pattern.compile("^\\w+([ .\\w]*)$");
         String trimmedInput = inputAddress.trim();
         return pattern.matcher(trimmedInput).matches();

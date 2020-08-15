@@ -32,6 +32,8 @@ public class MeetingModel implements Model {
     @Override
     public String getMeetingInfo(UUID meetingID) {
         Meeting m = getMeeting(meetingID);
+        DateTime dt = new DateTime();
+
         if (m == null) {
             return "Meeting ID: " + null + "\n"
                     + "Meeting status: " + MeetingStatus.DNE + "\n"
@@ -42,7 +44,7 @@ public class MeetingModel implements Model {
             return "Meeting ID: " + m.getID() + "\n"
                     + "Meeting status: " + m.getStatus() + "\n"
                     + "Your edited time: " + m.getEditor(currLogInUser).getTimeOfEdition() + "\n"
-                    + "DateTime: " + m.getDateTime() + "\n"
+                    + "DateTime: " + dt.convertLDTtoString(m.getDateTime()) + "\n"
                     + "Place: " + m.getPlace() + "\n";
         }
 

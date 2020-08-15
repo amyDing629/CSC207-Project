@@ -1,12 +1,13 @@
-package MeetingSystem.Adapter;
+package MeetingSystem.GUIView;
 
+import MeetingSystem.Adapter.*;
 import MeetingSystem.MeetingStatus;
 import MeetingSystem.UseCase.Model;
 
 import javax.swing.*;
 import java.util.UUID;
 
-public class MainView implements MView{
+public class MainView implements MView {
     private JFrame frame;
     private JPanel panel1;
     private JButton backButton;
@@ -43,7 +44,7 @@ public class MainView implements MView{
         welcomeTextArea.setText(model.getCurrUser());
         meetingInfoTextArea.setText(model.getMeetingInfo(meetingID));
 
-        // TODO: strategy pattern
+
         if (isFirst) { // first meeting view
 
             // update Button view

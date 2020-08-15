@@ -1,5 +1,7 @@
 package MeetingSystem.Adapter;
 
+import MeetingSystem.GUIView.HelpView;
+import MeetingSystem.GUIView.InfoView;
 import MeetingSystem.UseCase.*;
 
 import java.util.List;
