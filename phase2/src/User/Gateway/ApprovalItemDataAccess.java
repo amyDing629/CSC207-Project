@@ -7,7 +7,9 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
+/**
+ * [GateWay]
+ */
 public class ApprovalItemDataAccess implements DataAccess {
     private final String serFilePath = "phase2/src/ItemApprovals.ser";
     private List<ItemApprovals> ItemApprovalsList;
@@ -31,12 +33,20 @@ public class ApprovalItemDataAccess implements DataAccess {
             e.printStackTrace();
         }
     }
+
+    /**
+     * return list of items
+     */
     @Override
     public ArrayList<Object> getList() {
         deSerialize();
         return new ArrayList<>(ItemApprovalsList);
     }
 
+    /**
+     * @param name name of item
+     * find user by name
+     */
     @Override
     public ItemApprovals getObject(String name) {
         deSerialize();
@@ -48,11 +58,19 @@ public class ApprovalItemDataAccess implements DataAccess {
         return null;
     }
 
+    /**
+     * @param uuid  id of user
+     * find item by id
+     */
     @Override
     public Object getObject(UUID uuid) {
         return null;
     }
 
+    /**
+     * @param o item
+     * add item into list
+     */
     @Override
     public void addObject(Object o) {
         deSerialize();
@@ -60,6 +78,10 @@ public class ApprovalItemDataAccess implements DataAccess {
         updateSer();
     }
 
+    /**
+     * @param o item
+     * return if item in list
+     */
     @Override
     public boolean hasObject(Object o) {
         for (ItemApprovals itemApprovals : ItemApprovalsList) {
@@ -70,6 +92,10 @@ public class ApprovalItemDataAccess implements DataAccess {
         return false;
     }
 
+    /**
+     * @param o name of item
+     * remove item from the list
+     */
     @Override
     public void removeObject(String o) {
         deSerialize();
@@ -82,7 +108,9 @@ public class ApprovalItemDataAccess implements DataAccess {
 
     }
 
-
+    /**
+     * update the database file
+     */
     @Override @SuppressWarnings("ALL")
     public void updateSer() {
         File file = new File(serFilePath);
@@ -128,6 +156,9 @@ public class ApprovalItemDataAccess implements DataAccess {
         }
     }
 
+    /**
+     * set list of items
+     */
     @Override
     public void setList(List<Object> ItemApprovalsList) {
         this.ItemApprovalsList.clear();

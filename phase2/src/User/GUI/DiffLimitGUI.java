@@ -2,7 +2,6 @@ package User.GUI;
 
 
 import User.Adapter.AdminController;
-import User.Adapter.ClientUserController;
 import User.Adapter.IAdminController;
 import User.Adapter.IUserController;
 
@@ -14,11 +13,22 @@ public class DiffLimitGUI {
     IAdminController ac;
     JFrame pFrame;
     JFrame frame;
+
+    /**
+     * [Constructor]
+     * @param pFrame frame
+     * @param uc client user controller
+     */
     public DiffLimitGUI(IUserController uc ,JFrame pFrame) {
         this.uc=uc;
         this.pFrame=pFrame;
         ac = new AdminController();
     }
+
+    /**
+     * @param name  name of user
+     * create new frame
+     */
     public void run(String name){
         frame = new JFrame("Trade Limit");
         frame.setSize(500, 700);
@@ -35,6 +45,12 @@ public class DiffLimitGUI {
         frame.setVisible(true);
     }
 
+    /**
+     * @param frame new frame
+     * @param panel the new panel
+     * @param b name of user
+     * set new frame
+     */
     private void placeComponents(JFrame frame, JPanel panel, String b){
 
         JLabel textLabel = new JLabel("Please enter the user's username and the limit below");

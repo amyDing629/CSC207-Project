@@ -1,9 +1,5 @@
 package User.Gateway;
 
-
-import User.Entity.ClientUser;
-
-import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.UUID;
 
@@ -29,16 +25,4 @@ public interface DataAccess {
 
     void setList(List<Object> list);
 
-
-//    boolean hasObject(String name);
-
-//    ClientUser getUser(String name);
-//
-//    ClientUser getUser(UUID uuid);
-//
-//    boolean hasUser(String name);
-//
-//    void addUser(ClientUser clientUser);
-//
-//    void add(Object object);
 }
