@@ -7,22 +7,37 @@ import Trade.Adaptor.BorderGUI;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * build select item to trade GUI
+ */
 public class SelectItemToTradeBuilder implements BorderGUIBuilder {
 
     iItemController sc;
     BorderGUI bta;
 
+    /**
+     * [constructor]
+     * @param currUser current user name
+     * @param tFrame last frame
+     */
     public SelectItemToTradeBuilder(String currUser, JFrame tFrame){
         bta = new BorderGUI();
         sc = new SelectController(currUser, bta, tFrame);
 
     }
+
+    /**
+     * build frame
+     */
     @Override
     public void buildFrame() {
         bta.setFrame(600, 200, "Select Item to Trade Session");
 
     }
 
+    /**
+     * build north panel
+     */
     @Override
     public void buildPanelN() {
         JPanel panelN = new JPanel();
@@ -35,6 +50,9 @@ public class SelectItemToTradeBuilder implements BorderGUIBuilder {
 
     }
 
+    /**
+     * build east panel
+     */
     @Override
     public void buildPanelE() {
         JPanel panelE = new JPanel();
@@ -42,10 +60,11 @@ public class SelectItemToTradeBuilder implements BorderGUIBuilder {
         panelE.add(request);
         bta.setEast(panelE);
         request.addActionListener(e -> sc.performActionOne());
-
-
     }
 
+    /**
+     * build west panel
+     */
     @Override
     public void buildPanelW() {
         JPanel panelW =  new JPanel();
@@ -59,10 +78,11 @@ public class SelectItemToTradeBuilder implements BorderGUIBuilder {
         bta.setWest(panelW);
         bta.initializeList(wishArea);
         sc.updateList();
-
-
     }
 
+    /**
+     * build south panel
+     */
     @Override
     public void buildPanelS() {
         JPanel panelS = new JPanel();
@@ -81,6 +101,9 @@ public class SelectItemToTradeBuilder implements BorderGUIBuilder {
         back.addActionListener(e -> sc.backBut());
     }
 
+    /**
+     * build central panel
+     */
     @Override
     public void buildPanelC() {
         JPanel panelC = new JPanel();
@@ -94,6 +117,10 @@ public class SelectItemToTradeBuilder implements BorderGUIBuilder {
         bta.setCenter(panelC);
     }
 
+    /**
+     * get setItem gui
+     * @return borderGUI
+     */
     @Override
     public BorderGUI getTradeGUI() {
         return bta;

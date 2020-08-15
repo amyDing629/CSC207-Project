@@ -2,35 +2,54 @@ package Trade.Adaptor.CompleteTrade;
 
 import Trade.Adaptor.BorderGUIBuilder;
 import Trade.Adaptor.BorderGUI;
-import Trade.Adaptor.TradeGUIHelper;
 import Trade.Adaptor.iTradeController;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 
+/**
+ * build complete trade GUI
+ */
 public class CompleteTradeGUIBuilder implements BorderGUIBuilder {
     iTradeController ctc;
     BorderGUI tg;
 
+    /**
+     * [constructor]
+     * @param currUser current user name
+     * @param tf last frame
+     */
     public CompleteTradeGUIBuilder(String currUser, JFrame tf) {
         tg = new BorderGUI();
         ctc = new CTradeController(currUser, tg, tf);
     }
 
+    /**
+     * build frame
+     */
     @Override
     public void buildFrame(){
         tg.setFrame(800, 400, "Complete Trade Session");
     }
 
+    /**
+     * build north panel
+     */
     @Override
     public void buildPanelN() {
-        ArrayList<Object> rst = new TradeGUIHelper().createMessagePanel();
-        tg.initializeMsg((JTextArea)rst.get(1));
-        tg.setNorth((JPanel)rst.get(0));
+        JPanel panelN = new JPanel();
+        JLabel msg = new JLabel("message:", SwingConstants.LEFT);
+        JTextArea msgArea = new JTextArea();
+        panelN.add(msg);
+        panelN.add(msgArea);
+        tg.initializeMsg(msgArea);
+        tg.setNorth(panelN);
 
     }
 
+    /**
+     * build east panel
+     */
     @Override
     public void buildPanelE() {
         JPanel panelE = new JPanel();
@@ -44,6 +63,9 @@ public class CompleteTradeGUIBuilder implements BorderGUIBuilder {
 
     }
 
+    /**
+     * build west panel
+     */
     @Override
     public void buildPanelW() {
         JPanel panelW =  new JPanel();
@@ -59,6 +81,9 @@ public class CompleteTradeGUIBuilder implements BorderGUIBuilder {
         ctc.updateList();
     }
 
+    /**
+     * build south panel
+     */
     @Override
     public void buildPanelS() {
         JPanel panelS =  new JPanel();
@@ -84,6 +109,9 @@ public class CompleteTradeGUIBuilder implements BorderGUIBuilder {
         update.addActionListener(e -> ctc.updateBut());
     }
 
+    /**
+     * build central panel
+     */
     @Override
     public void buildPanelC() {
         JPanel panelC =  new JPanel();
@@ -98,6 +126,10 @@ public class CompleteTradeGUIBuilder implements BorderGUIBuilder {
 
     }
 
+    /**
+     * get complete trade GUI
+     * @return complete trade GUI
+     */
     public BorderGUI getTradeGUI(){
         return tg;
     }

@@ -2,10 +2,8 @@ package User.PointSystem;
 
 import Trade.Adaptor.BorderGUIBuilder;
 import Trade.Adaptor.BorderGUI;
-import Trade.Adaptor.TradeGUIHelper;
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 
 public class PointGUIBuilder implements BorderGUIBuilder {
 
@@ -13,35 +11,42 @@ public class PointGUIBuilder implements BorderGUIBuilder {
     BorderGUI tg;
 
     /**
-     *
+     * Constructs the PointGUIBuilder
+     * @param currUser the current acting user
+     * @param tf frame
      */
     public PointGUIBuilder(String currUser, JFrame tf){
         tg = new BorderGUI();
         aa = new AwardActivities(currUser, tf, tg);
     }
 
-    @Override
     /**
-     *
+     * Set up the panel for redeeming bonus points
      */
+    @Override
     public void buildFrame() {
         tg.setFrame(800, 400, "Redeem Point Session");
     }
 
-    @Override
     /**
-     *
+     * Set up the panel
      */
+    @Override
     public void buildPanelN() {
-        ArrayList<Object> rst = new TradeGUIHelper().createMessagePanel();
-        tg.initializeMsg((JTextArea)rst.get(1));
-        tg.setNorth((JPanel)rst.get(0));
+        JPanel panelN = new JPanel();
+        JLabel msg = new JLabel("Message:", SwingConstants.LEFT);
+        JTextArea msgArea = new JTextArea();
+        msgArea.setEditable(false);
+        panelN.add(msg);
+        panelN.add(msgArea);
+        tg.initializeMsg(msgArea);
+        tg.setNorth(panelN);
     }
 
-    @Override
     /**
-     *
+     * Set up the panel for presenting points on the right hand side
      */
+    @Override
     public void buildPanelE() {
         JPanel panelE = new JPanel();
         JLabel p = new JLabel("Points");
@@ -67,10 +72,10 @@ public class PointGUIBuilder implements BorderGUIBuilder {
 
     }
 
-    @Override
     /**
-     *
+     * Set up the panel for presenting available trades
      */
+    @Override
     public void buildPanelW() {
         JPanel panelW =  new JPanel();
         JLabel tradeList = new JLabel("Available Trades");
@@ -86,10 +91,10 @@ public class PointGUIBuilder implements BorderGUIBuilder {
         aa.updateList();
     }
 
-    @Override
     /**
-     *
+     * Set up the panel for inputs at the bottom
      */
+    @Override
     public void buildPanelS() {
         JPanel panelS =  new JPanel();
         JLabel input = new JLabel("Input Trade Number");
@@ -116,10 +121,10 @@ public class PointGUIBuilder implements BorderGUIBuilder {
     }
 
 
-    @Override
     /**
-     *
+     * Set up the panel for presenting selected trades
      */
+    @Override
     public void buildPanelC() {
         JPanel panelC =  new JPanel();
         JLabel currTradeL = new JLabel("Trade Selected");
@@ -134,10 +139,10 @@ public class PointGUIBuilder implements BorderGUIBuilder {
 
     }
 
-    @Override
     /**
-     *
+     * Get the TradeGUI
      */
+    @Override
     public BorderGUI getTradeGUI() {
         return tg;
     }

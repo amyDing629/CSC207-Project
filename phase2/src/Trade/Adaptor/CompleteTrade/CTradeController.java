@@ -20,6 +20,10 @@ import java.util.Observer;
 import java.util.UUID;
 import java.util.regex.Pattern;
 
+/**
+ * [controller]
+ * controller for complete trade session
+ */
 public class CTradeController implements Observer, iTradeController {
     UUID currUser;
     TradeManager tm;
@@ -30,6 +34,12 @@ public class CTradeController implements Observer, iTradeController {
     iInput tg;
     JFrame fr;
 
+    /**
+     * [constructor]
+     * @param currUser current user name
+     * @param tg view
+     * @param fr last frame
+     */
     public CTradeController(String currUser, BorderGUI tg, JFrame fr) {
 
         tm = new TradeManager();
@@ -41,17 +51,32 @@ public class CTradeController implements Observer, iTradeController {
     }
 
 
-    boolean checkInput(String num) {
+    /**
+     * check whether input is correct
+     * @param num input string
+     * @return boolean
+     */
+    private boolean checkInput(String num) {
         if (!isNum(num)) {
             return false;
         } else return !(Integer.parseInt(num) < 0 | Integer.parseInt(num) >= tm.getIncomplete(currUser).size());
     }
 
+    /**
+     * check whether input is an integer
+     * @param str input string
+     * @return boolean
+     */
     private boolean isNum(String str) {
         Pattern pattern = Pattern.compile("^[0-9]*$");
         return pattern.matcher(str).matches();
     }
 
+    /**
+     * get trade UUID with input string
+     * @param num input string
+     * @return trade UUID
+     */
     public UUID getCurrTrade(String num) {
         int tradeNum = Integer.parseInt(num.trim());
         currTrade = tm.getIncomplete(currUser).get(tradeNum).getId();
@@ -59,6 +84,10 @@ public class CTradeController implements Observer, iTradeController {
     }
 
 
+    /**
+     * decide whether to enter first meeting session
+     * @return boolean
+     */
     private boolean enterFirst() {
         Trade tr = tm.getTrade(currTrade);
         isFirst = (tr.getSecondMeeting() == null);
@@ -66,6 +95,11 @@ public class CTradeController implements Observer, iTradeController {
     }
 
 
+    /**
+     * update trade status based on meeting system's notification
+     * @param o presenters in meeting system
+     * @param arg meeting id
+     */
     @Override
     public void update(Observable o, Object arg) {
         Trade tr = tm.getTrade(currTrade);
@@ -190,13 +224,13 @@ public class CTradeController implements Observer, iTradeController {
 
     }
 
-    public void checkCurrTrade(Trade trade){
+    private  void checkCurrTrade(Trade trade){
         if (trade == null){
             tp.notTradeSelected();
         }
     }
 
-    public void action(){
+    private void action(){
         if (currTrade == null){
             tp.notTradeSelected();
         }else{

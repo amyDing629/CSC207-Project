@@ -67,6 +67,9 @@ public class ApprovalManager {
         for (ItemApprovals i : itemApprovals) {
             result.append(i.toString());
         }
+        if(result.toString().equals("")){
+            return "Currently there is no item approvals";
+        }
         return result.toString();
     }
 
@@ -78,6 +81,9 @@ public class ApprovalManager {
         ArrayList<UserApprovals> userApprovals=getUserApprovals();
         for (UserApprovals i : userApprovals) {
             result.append(i.toString());
+        }
+        if(result.toString().equals("")){
+            return "Currently there is no user unfreeze ticket";
         }
         return result.toString();
     }

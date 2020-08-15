@@ -19,7 +19,7 @@ import java.util.UUID;
 
 /**
  * [controller]
- * the action of trade depend on the input of user
+ * controller for request trade session
  */
 public class RTradeController implements iRequestTradeController{
     private final UUID currUser;
@@ -35,7 +35,10 @@ public class RTradeController implements iRequestTradeController{
 
     /**
      * [constructor]
-     * @param currUser the user that is using the system
+     * @param currUser the user id that is using the system
+     * @param bta view
+     * @param item the item name for requesting the trade
+     * @param fr last frame
      */
     RTradeController(UUID currUser,
                      BorderGUI bta, String item, JFrame fr){
@@ -50,7 +53,7 @@ public class RTradeController implements iRequestTradeController{
     }
 
     /**
-     * get owner of the item
+     * get owner name of the item
      * @param item current item selected by currUser
      */
     public void getTarUser(String item){
@@ -59,8 +62,7 @@ public class RTradeController implements iRequestTradeController{
 
 
     /**
-     * check the frozen status of two users.
-     * @throws IOException one of the users's account is frozen
+     * check whether the input is available
      */
     private boolean checkInput(String item){
         if (getIsInTrade(item)){
@@ -91,7 +93,6 @@ public class RTradeController implements iRequestTradeController{
      * @param line the user's input
      * @param item the item of the trade
      * @return whether or not the trade is a oneway trade
-     * @throws IOException the trade is not created
      */
     private boolean createTrade(String line, String item){
         LocalDateTime time = LocalDateTime.now();
@@ -122,7 +123,6 @@ public class RTradeController implements iRequestTradeController{
      * @param line the input of users
      * @param item1 the first item
      * @param item2 the second item
-     * @throws IOException if the trade is not created
      */
     private void createTrade(String line, String item1, String item2){
         iv.setIsInTrade(item1,true);
@@ -178,12 +178,19 @@ public class RTradeController implements iRequestTradeController{
 
     }
 
+    /**
+     * present current trade's information
+     */
     public void presentTradeInfo(){
         ClientUser user = um.getUser(currUser);
         Item item = iv.getItem(it);
         tp.presentTradeInfo(user, item, um.getWishLend(currUser), getSuggestedItemName() );
     }
 
+    /**
+     * the action of oneway button
+     * @param duration temporary of permanent
+     */
     public void onewayBut(String duration){
         if (it == null){
             tp.wrongInput();
@@ -199,6 +206,10 @@ public class RTradeController implements iRequestTradeController{
         }
     }
 
+    /**
+     * the action of twoway button
+     * @param duration temporary of permanent
+     */
     public void twowayBut(String duration){
 
         String item = bta.getInput("input");
@@ -216,6 +227,9 @@ public class RTradeController implements iRequestTradeController{
         }
     }
 
+    /**
+     * back to last frame
+     */
     public void backBut(){
         fr.setVisible(true);
         tp.closeFrame();
