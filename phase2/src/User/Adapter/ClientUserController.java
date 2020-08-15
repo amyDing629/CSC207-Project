@@ -24,6 +24,7 @@ public class ClientUserController implements IUserController{
      * @param username the name of user
      * return whether the user is admin or not
      */
+
     public boolean getIsAdmin(String username) {
         return um.getUser(username).getIsAdmin();
     }
