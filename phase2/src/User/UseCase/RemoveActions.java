@@ -2,6 +2,7 @@ package User.UseCase;
 
 
 import User.Adapter.ClientUserController;
+import User.Adapter.IUserController;
 import User.Entity.ClientUser;
 import User.UseCase.ApprovalManager;
 import User.UseCase.UserManager;
@@ -10,10 +11,10 @@ import java.util.ArrayList;
 
 public class RemoveActions {
     ClientUser user;
-    ClientUserController uc;
+    IUserController uc;
     ApprovalManager iam;
 
-    public RemoveActions(ClientUser user, ClientUserController uc, ApprovalManager iam) {
+    public RemoveActions(ClientUser user, IUserController uc, ApprovalManager iam) {
         this.user = user;
         this.uc = uc;
         this.iam = iam;

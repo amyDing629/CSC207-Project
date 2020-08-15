@@ -44,4 +44,14 @@ public interface IUserController {
     void setEnd(String username, LocalDateTime end);
 
     boolean getIsLeft(UUID userID);
+
+    void addAction(String userName, String password, String password1);
+
+    void removeAction(String username, String item_ticket, String s);
+
+    void deleteLItem(String username, String lendWish);
+
+    void deleteBItem(String username, String borrowWish);
+
+    boolean checkActionExist(String text, ArrayList<String> strings);
 }

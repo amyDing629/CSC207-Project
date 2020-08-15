@@ -341,4 +341,18 @@ public class ClientUser implements Serializable {
      */
     public void setExStandard(int newStandard){this.exStandard = newStandard;}
 
+
+    public void addActions(String type,String pValues){
+        ArrayList<String> action=new ArrayList<>();
+        action.add(type);
+        action.add(pValues);
+        actions.add(0,action);
+    }
+
+    public void removeAction(String type,String pValues){
+        ArrayList<String> action=new ArrayList<>();
+        action.add(type);
+        action.add(pValues);
+        actions.remove(action);
+    }
 }

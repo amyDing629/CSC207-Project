@@ -71,7 +71,10 @@ public class RequestUnfreezeTicketGUI {
         });
         submitButton.addActionListener(e -> {
             frame.setVisible(false);
+
             ac.addApprovals(name,userInput.getText());
+            uc.addAction(name,"Freeze ticket","");
+
             JOptionPane.showMessageDialog(null,"Request successfully");
             JOptionPane.showMessageDialog(null,"Please wait for the admin to approve");
         });

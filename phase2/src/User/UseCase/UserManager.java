@@ -376,5 +376,29 @@ public class UserManager {
         return getUser(userID).getIsLeft();
     }
 
+
+    public void addAction(String username,String type,String preValue){
+        ClientUser a = popUser(nameToUUID(username));
+        a.addActions(type,preValue);
+        addUser(a);
+    }
+
+    public void removeAction(String username,String type,String preValue){
+        ClientUser a = popUser(nameToUUID(username));
+        a.removeAction(type,preValue);
+        addUser(a);
+    }
+
+    public void deleteLItem(String username, String lendWish) {
+        ClientUser user = popUser(getUser(username).getId());
+        user.getWishLend().remove(lendWish);
+        addUser(user);
+    }
+
+    public void deleteBItem(String username, String borrowWish) {
+        ClientUser user = popUser(getUser(username).getId());
+        user.getWishBorrow().remove(borrowWish);
+        addUser(user);
+    }
 }
 

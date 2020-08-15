@@ -199,4 +199,30 @@ public class ClientUserController implements IUserController{
     public boolean getIsLeft(UUID userID){
         return um.getIsLeft(userID);
     }
+
+    @Override
+    public void addAction(String userName, String type, String pValue) {
+
+        um.addAction(userName,type,pValue);
+    }
+
+    @Override
+    public void removeAction(String userName, String type, String pValue) {
+        um.removeAction(userName,type,pValue);
+    }
+
+
+    @Override
+    public void deleteLItem(String username, String lendWish) {
+        um.deleteLItem(username,lendWish);
+    }
+
+    @Override
+    public void deleteBItem(String username, String borrowWish) {
+        um.deleteBItem(username,borrowWish);
+    }
+
+    public boolean checkActionExist(String username,ArrayList<String> input){
+        return um.getActions(um.getUser(username)).contains(input);
+    }
 }
