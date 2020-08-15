@@ -147,5 +147,3 @@ The link above is a basic overview of how I used builder design pattern to build
  2. Why you implement this DP
      
  3. How you implement this DP
- 
-## Visitor Design Pattern

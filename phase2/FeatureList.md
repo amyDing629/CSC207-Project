@@ -1,6 +1,6 @@
 # Feature List for Phase 2
 
-Since we only have 5 members in total, we did the mandatory extensions, one elective extension and the GUI.
+Since we only have 5 members in total, we did the mandatory extensions, one elective extension and the GUI (counted as two).
 
 ## Mandatory Extension (5 extensions)
 
@@ -14,17 +14,25 @@ then the item will be added to the "suggest list".
 On the left side of the frame, the system will print out the users' "wish to lend list" and "suggest list".
 
 ### 3. Explore System 
+Visitor users can explore the program without register and login. By simply click on `Explore` button on the Login 
+user interface, visitor can explore the market where all available-to-trade items are exhibiting. Visitor users cannot
+communicate with other users (neither regular users nor admin users), cannot make trade (or joining in trade community),
+ and do not have an explicit account.
 
 ### 4. ClientUser Limit System
 
 ### 5. Another status for accounts??
-
+The user can set the left status to be true by set up the end date, 
+the end date means that the user would be regarded as left during the period, so it
+is the same as the account is frozen, but the left status is just during the period. 
 ## Chosen Extension (3 extensions)
 
 ### 4 - Points System
 For each complete trade, the user will get one bonus point. The user can redeem points to get bonus trades. 
 The bonus trade is an extra chance for users to trade without it counting towards being frozen.
-Each bonus trade is worth 5 points. The admin can change the "exchange standard" (the number of points needed for one bonus trade) in ClientUser Limit System.
+Each bonus trade is worth 5 points. The admin can change the "exchange standard" (the number of points needed for 
+one bonus trade) in ClientUser Limit System.
 
 ### 8 - GUI
 Watch videos to see how to use the GUI system.
+See more in `VideoAccess.md`.
