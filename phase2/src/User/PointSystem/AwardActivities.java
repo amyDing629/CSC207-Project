@@ -6,7 +6,6 @@ import Trade.TradeStatus;
 import User.Entity.ClientUser;
 
 import javax.swing.*;
-import java.time.LocalDateTime;
 import java.util.*;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -39,13 +38,18 @@ public class AwardActivities {
 
     }
 
+    /**
+     *
+     */
     Trade getCurrTrade(String num){
         int tradeNum = Integer.parseInt(num.trim());
         currTrade = tradeList.get(tradeNum);
         return currTrade;
-
     }
 
+    /**
+     *
+     */
     boolean checkInput(String num){
         if (!isNum(num)){
             return true;
@@ -59,7 +63,7 @@ public class AwardActivities {
 
     /**
      * Provide a list of trades for user to select as bonus trades to avoid counting towards being frozen.
-     * The trades in list are incomplete trades or trades within the most recent 7 days.
+     * The trades in list are incomplete trades OR trades within the most recent 7 days.
      * Once the trade is selected as bonus, a fixed amount of bonus points will be deducted.
      * @param user the current user who makes actions
      */
@@ -105,6 +109,9 @@ public class AwardActivities {
 
     }
 
+    /**
+     *
+     */
     void submitBut(String tradeNum){
         pp.resetInputArea();
         if (checkInput(tradeNum)){
@@ -116,39 +123,59 @@ public class AwardActivities {
         }
     }
 
+    /**
+     *
+     */
     void backBut(){
         fr.setVisible(true);
         pp.closeFrame();
     }
 
+    /**
+     *
+     */
     public void updateBut(){
         updateList();
         pp.updatePoint(um.getUser(currUser).getBonusPoints());
         noTradeSelected();
-        pp.resetCurr();
+        //pp.resetCurr();
         updateStandard();
     }
 
+    /**
+     *
+     */
     public void updatePoint(){
         ClientUser user = um.getUser(currUser);
         pm.setUserPoints(user.getId());
         pp.updatePoint(pm.getUserPoints(user));
     }
 
+    /**
+     *
+     */
     public void updateStandard(){
         pp.updateStandard(um.getExStandard());
     }
 
+    /**
+     *
+     */
     public void noTradeSelected(){
         pp.noTradeCurr();
     }
 
+    /**
+     *
+     */
     public void ebBut(){
         getBonus(um.getUser(currUser).getId(), currTrade);
         updateBut();
-        //pp.changeSuccess();
     }
 
+    /**
+     *
+     */
     public void updateList(){
         pp.updateFrame(getTradesForExchange(um.getUser(currUser)));
     }
