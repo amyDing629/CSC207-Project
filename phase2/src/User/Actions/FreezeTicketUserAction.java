@@ -10,23 +10,31 @@ public class FreezeTicketUserAction implements UserAction {
         this.user=user;
     }
 
-
+    /**
+     * return object indicator of the action
+     */
     @Override
     public String getIndicator() {
         return getType()+user.getUsername()+getItem();
     }
-
+    /**
+     * return object type of the action
+     */
     @Override
     public String getType() {
         return "Freeze Ticket";
     }
-
+    /**
+     * return action user's name
+     */
     @Override
     public String getUsername() {
         return user.getUsername();
     }
 
-
+    /**
+     * return the string or item that needed by the action to perform
+     */
     @Override
     public String getItem() {
         return "";

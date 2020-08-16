@@ -8,6 +8,7 @@ import User.UseCase.UserManager;
 import java.util.ArrayList;
 
 public class ActionController {
+
     ApprovalManager iam= new ApprovalManager();
     UserManager um=new UserManager();
     public void addAction(String username, UserAction action) {
@@ -84,6 +85,11 @@ public class ActionController {
         check(ua);
         removeAction(username,ua);
     }
+    /**
+     * @param username name of user
+     * @param ua user's action
+     * remove the action from user by its username
+     */
     public void removeAction(String username,UserAction ua){
         um.removeAction(username,ua);
     }
