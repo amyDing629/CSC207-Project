@@ -218,4 +218,12 @@ public class ClientUserController implements IUserController{
             System.out.println("You have been freeze due to maximum trade limit");
         }
     }
+
+    public void setLeft(String a,boolean s){um.setLeft(a, s);}
+
+    @Override
+    public void setFreeze(String a, boolean s) {
+        um.setFreeze(a, s);
+    }
+    
 }
