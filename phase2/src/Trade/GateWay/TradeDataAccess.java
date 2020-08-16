@@ -147,7 +147,6 @@ public class TradeDataAccess implements DataAccess {
                 tradeList = (List<Trade>) in.readObject();
                 in.close();
                 fileIn.close();
-                //System.out.println("deSerialize: "+lendingList);
             }
 
         } catch (IOException | ClassNotFoundException i) {

@@ -148,7 +148,6 @@ public class ApprovalItemDataAccess implements DataAccess {
                 ItemApprovalsList = (List<ItemApprovals>) in.readObject();
                 in.close();
                 fileIn.close();
-                //System.out.println("deSerialize: "+lendingList);
             }
 
         } catch (IOException | ClassNotFoundException i) {

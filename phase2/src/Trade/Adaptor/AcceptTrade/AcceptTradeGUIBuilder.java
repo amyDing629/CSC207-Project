@@ -102,7 +102,6 @@ public class AcceptTradeGUIBuilder implements BorderGUIBuilder {
         tg.setInput("Input", "Trade Number");
         submit.addActionListener(e -> {
             String tradeNum = tg.getInput("Input");
-            System.out.println(tradeNum);
             atc.submitBut(tradeNum);
         });
         back.addActionListener(e -> atc.backBut());

@@ -58,8 +58,6 @@ public class WishBorrowAddController implements iItemController {
         ClientUser user = um.popUser(currUser);
         user.getWishBorrow().add(it);
         um.addUser(user);
-        System.out.println(user.getUsername());
-        System.out.println(it);
         um.addAction(user.getUsername(),new AddWishBorrowUserAction(user,it));
 
     }
