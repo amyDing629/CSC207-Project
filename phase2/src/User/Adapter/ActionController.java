@@ -2,7 +2,6 @@ package User.Adapter;
 
 import User.Actions.PasswordUserAction;
 import User.Actions.UserAction;
-import User.UseCase.ActionManager;
 import User.UseCase.ApprovalManager;
 import User.UseCase.UserManager;
 
