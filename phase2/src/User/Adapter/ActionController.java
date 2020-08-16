@@ -2,18 +2,16 @@ package User.Adapter;
 
 import User.Actions.PasswordUserAction;
 import User.Actions.UserAction;
-import User.UseCase.ActionManager;
 import User.UseCase.ApprovalManager;
 import User.UseCase.UserManager;
 
 import java.util.ArrayList;
 
 public class ActionController {
-    ActionManager am=new ActionManager();
     ApprovalManager iam= new ApprovalManager();
     UserManager um=new UserManager();
     public void addAction(String username, UserAction action) {
-        am.addAction(username,action);
+        um.addAction(username,action);
     }
 
     /**
@@ -21,7 +19,7 @@ public class ActionController {
      * return list of list of UserActions
      */
     public ArrayList<UserAction> getActions(String username) {
-        return am.getActions(username);
+        return um.getActions(um.getUser(username));
     }
 
 

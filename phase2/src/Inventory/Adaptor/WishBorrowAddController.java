@@ -7,7 +7,6 @@ import Trade.Adaptor.iInput;
 import User.Actions.AddWishBorrowUserAction;
 import User.Actions.AddWishLendUserAction;
 import User.Entity.ClientUser;
-import User.UseCase.ActionManager;
 import User.UseCase.UserManager;
 
 import javax.swing.*;
@@ -29,7 +28,6 @@ public class WishBorrowAddController implements iItemController {
 
     UserManager um;
 
-    ActionManager am;
     iInput bta;
 
     String it;
@@ -47,7 +45,6 @@ public class WishBorrowAddController implements iItemController {
     public WishBorrowAddController(String currUser, BorderGUI bta, JFrame fr){
         iv = new Inventory();
         um = new UserManager();
-        am=new ActionManager();
         this.bta = bta;
         ip = new InventoryPresenter(bta);
         this.fr = fr;
@@ -63,7 +60,7 @@ public class WishBorrowAddController implements iItemController {
         um.addUser(user);
         System.out.println(user.getUsername());
         System.out.println(it);
-        am.addAction(user.getUsername(),new AddWishBorrowUserAction(user,it));
+        um.addAction(user.getUsername(),new AddWishBorrowUserAction(user,it));
 
     }
 
