@@ -13,22 +13,31 @@ public class PasswordUserAction implements UserAction {
         this.user=user;
         this.prePass=prePass;
     }
-
+    /**
+     * return object indicator of the action
+     */
     @Override
     public String getIndicator() {
         return "PasswordUserAction"+getUsername()+prePass;
     }
-
+    /**
+     * return object type of the action
+     */
     @Override
     public String getType() {
         return "pass";
     }
-
+    /**
+     * return action user's name
+     */
     @Override
     public String getUsername() {
         return user.getUsername();
     }
 
+    /**
+     * return the string or item that needed by the action to perform
+     */
     @Override
     public String getItem() {
         return prePass;
