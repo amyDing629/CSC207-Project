@@ -51,4 +51,5 @@ public interface IUserController {
     void deleteBItem(String username, String borrowWish);
 
     boolean checkActionExist(String text, ArrayList<String> strings);
+
 }
