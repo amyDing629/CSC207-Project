@@ -163,7 +163,12 @@ The link above is a basic overview of how I used builder design pattern to build
         - `iTradePresenter.java` are implemented by all other presenters except `RTradePresenter.java`. 
       - decouple: 
         - builders and controllers
-        - controllers and presenters  
+        - controllers and presenters 
+        
+    - Reverse System
+      - interface: `UserAction.java`
+      - classes: `AddWishBorrowUserAction` `AddWishLendUserAction`  `FreezeTicketUserActon`  `PasswordUserAction`
+           
         
  2. Why you implement this DP?
     - Decouple Classes, encapsulate specific implementation of methods.
