@@ -79,7 +79,7 @@ public class UserFreezeSystem {
         });
         editButton.addActionListener(e -> {
             frame.setVisible(false);
-            RequestUnfreezeTicketGUI d=new RequestUnfreezeTicketGUI(frame);
+            RequestUnfreezeTicketGUI d= new RequestUnfreezeTicketGUI(frame);
             d.run(b);
         });
         tradeButton.addActionListener(e -> {

@@ -2,6 +2,7 @@ package User.GUI;
 
 
 import User.Adapter.ActionController;
+import User.Adapter.ClientUserController;
 import User.Adapter.IUserController;
 import User.Entity.ClientUser;
 import User.UseCase.ApprovalManager;
@@ -15,8 +16,8 @@ public class ReverseSystemGUI {
     ActionController aac;
     JFrame pFrame;
     JFrame frame;
-    public ReverseSystemGUI(IUserController uc , JFrame pFrame) {
-        this.uc=uc;
+    public ReverseSystemGUI(JFrame pFrame) {
+        this.uc=new ClientUserController();
         this.pFrame=pFrame;
         aac=new ActionController();
     }

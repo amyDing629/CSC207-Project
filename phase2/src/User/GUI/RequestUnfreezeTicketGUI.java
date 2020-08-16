@@ -4,6 +4,7 @@ import User.Actions.FreezeTicketUserAction;
 import User.Actions.UserAction;
 import User.Adapter.ActionController;
 import User.Adapter.ApprovalController;
+import User.Adapter.ClientUserController;
 import User.Adapter.IUserController;
 
 import javax.swing.*;
@@ -18,10 +19,9 @@ public class RequestUnfreezeTicketGUI {
     /**
      * [Constructor]
      * @param pFrame frame
-     * @param uc client user controller
      */
-    public RequestUnfreezeTicketGUI(IUserController uc ,JFrame pFrame) {
-        this.uc=uc;
+    public RequestUnfreezeTicketGUI(JFrame pFrame) {
+        this.uc = new ClientUserController();
         this.pFrame=pFrame;
         ac = new ApprovalController();
         acc=new ActionController();

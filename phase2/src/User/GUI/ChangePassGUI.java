@@ -2,6 +2,7 @@ package User.GUI;
 
 import User.Actions.PasswordUserAction;
 import User.Adapter.ActionController;
+import User.Adapter.ClientUserController;
 import User.Adapter.IUserController;
 import User.UseCase.ActionManager;
 
@@ -19,10 +20,9 @@ public class ChangePassGUI {
     /**
      * [Constructor]
      * @param pFrame frame
-     * @param uc client user controller
      */
-    public ChangePassGUI(IUserController uc , JFrame pFrame) {
-        this.uc = uc;
+    public ChangePassGUI(JFrame pFrame) {
+        this.uc = new ClientUserController();
         this.pFrame=pFrame;
         ac=new ActionController();
     }
