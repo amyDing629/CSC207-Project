@@ -97,7 +97,7 @@ tom's freeze status becomes true.
 Demonstration of Point System
 - Complete a trade to get one bonus point. 
     - The system will automatically add one bonus point to user for each complete trade
-- Redeem points for a bonus trade without counting into limits
+- Redeem points for a bonus trade which does not count into limits
     
 ### `V10_Mandatory1_Reverse-Password&UnfreezeTicket.mp4`❤️ (Ensouled)
 - a
