@@ -106,6 +106,9 @@ The thresholds that can be changed:
 ### 3 - Creating new admins
 - The admins can create other admin accounts in the system.
 
+### 4 - Agree/decline item adding request from ClientUsers
+- The admins can agree/decline item adding request from ClientUsers (in Inventory)
+
 ## Terms in the Program
 
 ### User Account Statuses
