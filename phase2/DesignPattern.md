@@ -101,7 +101,7 @@ The link above is a basic overview of how I used builder design pattern to build
  1. Classes Involved
     - Interfaces:
      
-     `GUIPlan.java`, `InputAndPresent`, `BorderGUIBuilder`, `BorderLayoutGUI`
+     `GUIPlan.java`, `iPresent`, `iInput`, `BorderGUIBuilder`, `BorderLayoutGUI`, `initializeInput`
     - Other classes: 
     
     `BorderGUIEngineer`, `BorderGUI`, and all Builders.
@@ -111,7 +111,8 @@ The link above is a basic overview of how I used builder design pattern to build
     - Easier for extension. -> Open and Close principle
  3. How you implement this DP
     - GUIPlan has basic functions of a GUI, including set visible to true and setFrame.
-    - InputAndPresent are for presenters to "output" the information to users.
+    - iPresent is for presenters to "output" the information to users.
+    - iInput is for controllers to get user's input
     - BorderLayoutGUi decides the layout used for creating the GUI. (If you want to build GUI with another layout,
     you can just create another interface and implement it instead of this one).
     - BorderGUIBuilders defines all the steps(abstract) that must be taken in order to correctly create a GUI with BorderLayout.
@@ -122,7 +123,7 @@ The link above is a basic overview of how I used builder design pattern to build
 ## MVC (Model-View-Controller) Design Pattern
 
  1. Classes Involved
-    - Adapters in Trade and Inventory System
+    - Adapters in Trade, Inventory and Point System
  2. Why you implement this DP
     - Separate controllers and presenters so that multiple views are available without changing controllers.
     - Adapt to Single Responsibility Principle. Controllers are responsible for reacting to the Model with users' action, 
@@ -133,7 +134,63 @@ The link above is a basic overview of how I used builder design pattern to build
     presenter's method to show users the information(Message) from the backend system(Model). 
     - Also, controller and presenter interfaces are implemented for better decoupling.
     
-    
+
+## Strategy Design Pattern
+ 1. Classes Involved
+    - data
+      - interface: `DataAccess.java`
+      - classes: `UserDataAccess.java` `TradeDataAccess.java` `InvDataAccess.java`
+      `ApprovalItemDataAccess` `ApprovalUserDataAccess`
+      - decouple: use case classes and data access classes, such as userManager and userDataAccess
+    - Inventory
+      - interface: `iItemController.java` `iItemPresenter.java` `iMarketPresenter.java` `MarketInputPanelStrategy.java`
+      - classes: 
+        - `iItemController.java` is implemented by all controllers in inventory except market
+        - `iItemPresener.java` is implemented by all presenters in inventory
+        - `iMarketPresenter.java` is implemented by `marketPresenter.java`
+        -  `MarketInputPanelStrategy.java` is implemented by `RegularStrategy.java` and `VisitorStrategy.java`.
+      - decouple: 
+        - builders and controllers
+        - controllers and presenters 
+    - Builders
+      - interface: `BorderGUIBuilder.java` `BorderLayoutGUI.java` `GUIPlan` `iInitializeInput` `iInput` `iPresent`
+      - classes: 
+        - `BorderGUIBuilder.java` is implemented by all builders
+        - other interfaces are all implemented by `BorderGUI.java`
+      - decouple:
+        - `BorderGUI.java` & all controllers and presenters
+        - `BorderGUIEngineer` & all builders
+    - Trade
+      - interface: `iRequestTradeController.java` `iTradeController.java` `iTradePresenter.java` `iRTradePresenter.java`
+      - classes:
+        - `iRequestTradeController.java` `iTradeController.java`  are implemented by `RTradeController.java` and other 
+        - `iRTradePresenter.java` `iTradePresenter.java` are implemented by `RTradePresenter.java` and other presenters
+      - decouple: 
+        - builders and controllers
+        - controllers and presenters  
+    - Meeting System
+    - Point System
+      - interface: `iPointController.java` `iPointPresenter.java`
+      - classes:
+        - `iPointController.java` is implemented by `AwardActivities.java`
+        - `iPointPresenter.java` is implemented by `PointPresenter.java`
+      - decouple
+        - builders and controllers
+        - controllers and presenters
+    - User
+      - interface: `IAdminController.java` `IUserController` `IUserPresenter` 
+      - class: 
+        - `IAdminController.java` is implemented by `adminController.java`
+        - `IUserController.java` is implemented by `ClientUserController.java`
+        - `IUserPresenter.java` is implemented by `clientUserPresenter.java`
+      - decouple
+        - GUIs and controllers
+        - controllers and presenters 
+  
+       
+          
+        
+             
 ## Factory Design Pattern
  1. Classes Involved
     -   `.java`
