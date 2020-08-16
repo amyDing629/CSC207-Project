@@ -30,13 +30,18 @@ communicate with other users (neither regular users nor admin users), cannot mak
 
 ### 4. ClientUser Limit System
 Only the admin user can log in and change the default limit value for client users.
-After login, click the edit info button, the admin user can choose which limit to reset, 
-for example, week transaction limit and incomplete transaction limit.
+After logging in, click the edit info button, the admin user can choose which limit to reset.
+
+The thresholds that can be changed:
+- Weekly transaction limit 
+- Incomplete transaction limit
+- Difference between borrow and lend
+- Exchange standard for bonus points
 
 ### 5. Addition status for accounts
-The user can set the left status to be true by set up the end date, 
-the end date means that the user would be regarded as left during the period, so it
-is the same as the account is frozen, but the left status is just during the period. 
+The user can set the "left status" to be true by set up the end date. 
+This means that the user would be regarded as "left away" starting from the present time till the end date. 
+The account in "left status" is the same as the frozen account, but it only sustains the period set by user. 
 
 ## Chosen Extension (3 extensions)
 
