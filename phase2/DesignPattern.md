@@ -143,54 +143,34 @@ The link above is a basic overview of how I used builder design pattern to build
       `ApprovalItemDataAccess` `ApprovalUserDataAccess`
       - decouple: use case classes and data access classes, such as userManager and userDataAccess
     - Inventory
-      - interface: `iItemController.java` `iItemPresenter.java` `iMarketPresenter.java` 
+      - interface: `iItemController.java` `iItemPresenter.java` 
       - classes: 
         - `iItemController.java` is implemented by all controllers in inventory except market
         - `iItemPresener.java` is implemented by all presenters in inventory
-        - `iMarketPresenter.java` is implemented by `marketPresenter.java`
       - decouple: 
         - builders and controllers
         - controllers and presenters 
     - Builders
-      - interface: `BorderGUIBuilder.java` `BorderLayoutGUI.java` `GUIPlan` `iInitializeInput` `iInput` `iPresent`
+      - interface: `BorderGUIBuilder.java`
       - classes: 
         - `BorderGUIBuilder.java` is implemented by all builders
-        - other interfaces are all implemented by `BorderGUI.java`
       - decouple:
-        - `BorderGUI.java` & all controllers and presenters
         - `BorderGUIEngineer` & all builders
     - Trade
-      - interface: `iRequestTradeController.java` `iTradeController.java` `iTradePresenter.java` `iRTradePresenter.java`
+      - interface: `iTradeController.java` `iTradePresenter.java` 
       - classes:
-        - `iRequestTradeController.java` `iTradeController.java`  are implemented by `RTradeController.java` and other 
-        - `iRTradePresenter.java` `iTradePresenter.java` are implemented by `RTradePresenter.java` and other presenters
+        - `iTradeController.java`  are implemented by all trade controllers except `RTradeController`. 
+        - `iTradePresenter.java` are implemented by all other presenters except `RTradePresenter.java`. 
       - decouple: 
         - builders and controllers
         - controllers and presenters  
-    - Meeting System
-    - Point System
-      - interface: `iPointController.java` `iPointPresenter.java`
-      - classes:
-        - `iPointController.java` is implemented by `AwardActivities.java`
-        - `iPointPresenter.java` is implemented by `PointPresenter.java`
-      - decouple
-        - builders and controllers
-        - controllers and presenters
-    - User
-      - interface: `IAdminController.java` `IUserController` `IUserPresenter` 
-      - class: 
-        - `IAdminController.java` is implemented by `adminController.java`
-        - `IUserController.java` is implemented by `ClientUserController.java`
-        - `IUserPresenter.java` is implemented by `clientUserPresenter.java`
-      - decouple
-        - GUIs and controllers
-        - controllers and presenters 
         
  2. Why you implement this DP?
     - Decouple Classes, encapsulate specific implementation of methods.
     - No impact when the number of derived classes changes, 
     and no impact when the implementation of a derived class changes.
     - Better for open-close principle
+    
  3. How you implement this DP   
     - Store interfaces rather than specific classes
     - Bury the alternative implementation details in derived classes.
@@ -225,6 +205,11 @@ The link above is a basic overview of how I used builder design pattern to build
                 - `SetupViewPresenter.java`
                 - `EditViewPresenter.java`
                 - `ConfirmViewPresenter.java`
+                
+    - 3️⃣ BorderGUIEngineer: (Constructor Injection)
+        - `BorderGUIEngineer.java`
+         `BorderGUIBuilder.java`
+                
  2. Why you implement this DP
     - we use DI to create loose-coupled dependency
      
