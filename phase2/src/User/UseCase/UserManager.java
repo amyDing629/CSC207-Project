@@ -3,11 +3,13 @@ package User.UseCase;
 import Trade.Entity.Trade;
 import Trade.GateWay.TradeDataAccess;
 import Trade.UseCase.TradeManager;
+import User.Actions.UserAction;
 import User.Entity.ClientUser;
 import User.Gateway.DataAccess;
 import User.Gateway.UserDataAccess;
 import Trade.TradeStatus;
 
+import javax.swing.*;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -251,7 +253,7 @@ public class UserManager {
      * @param a user
      * return list of list of actions
      */
-    public ArrayList<ArrayList<String>> getActions(ClientUser a) {
+    public ArrayList<UserAction> getActions(ClientUser a) {
         return a.getActions();
     }
 
@@ -377,15 +379,22 @@ public class UserManager {
     }
 
 
-    public void addAction(String username,String type,String preValue){
+    public void addAction(String username,UserAction action){
         ClientUser a = popUser(nameToUUID(username));
-        a.addActions(type,preValue);
+        a.addActions(action);
         addUser(a);
     }
 
-    public void removeAction(String username,String type,String preValue){
+    public void removeAction(String username,UserAction ua){
         ClientUser a = popUser(nameToUUID(username));
-        a.removeAction(type,preValue);
+        ArrayList<UserAction> actions=getActions(a);
+        UserAction b = null;
+        for (UserAction action : actions) {
+            if (action.getIndicator().equals(ua.getIndicator())) {
+                b=action;
+            }
+        }
+        a.removeAction(b);
         addUser(a);
     }
 

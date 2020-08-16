@@ -3,6 +3,8 @@ package Inventory.Adaptor;
 import Inventory.Entity.Item;
 import Inventory.UseCase.Inventory;
 import Trade.Adaptor.*;
+import User.Actions.AddWishBorrowUserAction;
+import User.Adapter.ActionController;
 import User.Entity.ClientUser;
 import User.UseCase.UserManager;
 
@@ -16,9 +18,9 @@ import java.util.UUID;
 public class WishBorrowController implements iItemController {
 
     private final Inventory iv;
-
     private final UUID currUser;
 
+    ActionController ac=new ActionController();
     UserManager um;
 
     iInput bta;
@@ -53,6 +55,7 @@ public class WishBorrowController implements iItemController {
         ClientUser user = um.popUser(currUser);
         user.getWishBorrow().remove(it);
         um.addUser(user);
+        ac.removeAction(um.getUsername(currUser),new AddWishBorrowUserAction(um.getUser(currUser),it));
     }
 
     /**

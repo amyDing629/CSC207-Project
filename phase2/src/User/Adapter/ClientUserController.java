@@ -1,10 +1,12 @@
 package User.Adapter;
 
+import User.Actions.UserAction;
 import User.Entity.ClientUser;
 import User.Gateway.UserDataAccess;
 import User.UseCase.AdminActivityManager;
 import User.UseCase.UserManager;
-
+import User.Actions.*;
+import javax.swing.*;
 import java.io.File;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -135,14 +137,6 @@ public class ClientUserController implements IUserController{
 
     /**
      * @param username name of user
-     * return list of list of actions
-     */
-    public ArrayList<ArrayList<String>> getActions(String username) {
-        return um.getActions(um.getUser(username));
-    }
-
-    /**
-     * @param username name of user
      * return the difference between lend amount and borrow amount
      */
     public int readDiff(String username) { return um.readDiff(username); }
@@ -196,17 +190,6 @@ public class ClientUserController implements IUserController{
      */
     public boolean getIsLeft(UUID userID){
         return um.getIsLeft(userID);
-    }
-
-    @Override
-    public void addAction(String userName, String type, String pValue) {
-
-        um.addAction(userName,type,pValue);
-    }
-
-    @Override
-    public void removeAction(String userName, String type, String pValue) {
-        um.removeAction(userName,type,pValue);
     }
 
 

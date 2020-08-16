@@ -84,6 +84,13 @@ For admins only:
 ### 3 - Creating new admins
 
 ## Terms in the Program
+
+### User Account Statuses
+| Type | Meaning |
+|------:|:---------------|
+|`freeze status`|???|
+|`left status`|???|
+
 ### Limits
 | Limits | Default Value | Meaning |
 |:------|:---------------:|:---------------|

@@ -143,54 +143,39 @@ The link above is a basic overview of how I used builder design pattern to build
       `ApprovalItemDataAccess` `ApprovalUserDataAccess`
       - decouple: use case classes and data access classes, such as userManager and userDataAccess
     - Inventory
-      - interface: `iItemController.java` `iItemPresenter.java` `iMarketPresenter.java` 
+      - interface: `iItemController.java` `iItemPresenter.java` 
       - classes: 
         - `iItemController.java` is implemented by all controllers in inventory except market
         - `iItemPresener.java` is implemented by all presenters in inventory
-        - `iMarketPresenter.java` is implemented by `marketPresenter.java`
       - decouple: 
         - builders and controllers
         - controllers and presenters 
     - Builders
-      - interface: `BorderGUIBuilder.java` `BorderLayoutGUI.java` `GUIPlan` `iInitializeInput` `iInput` `iPresent`
+      - interface: `BorderGUIBuilder.java`
       - classes: 
         - `BorderGUIBuilder.java` is implemented by all builders
-        - other interfaces are all implemented by `BorderGUI.java`
       - decouple:
-        - `BorderGUI.java` & all controllers and presenters
         - `BorderGUIEngineer` & all builders
     - Trade
-      - interface: `iRequestTradeController.java` `iTradeController.java` `iTradePresenter.java` `iRTradePresenter.java`
+      - interface: `iTradeController.java` `iTradePresenter.java` 
       - classes:
-        - `iRequestTradeController.java` `iTradeController.java`  are implemented by `RTradeController.java` and other 
-        - `iRTradePresenter.java` `iTradePresenter.java` are implemented by `RTradePresenter.java` and other presenters
+        - `iTradeController.java`  are implemented by all trade controllers except `RTradeController`. 
+        - `iTradePresenter.java` are implemented by all other presenters except `RTradePresenter.java`. 
       - decouple: 
         - builders and controllers
-        - controllers and presenters  
-    - Meeting System
-    - Point System
-      - interface: `iPointController.java` `iPointPresenter.java`
-      - classes:
-        - `iPointController.java` is implemented by `AwardActivities.java`
-        - `iPointPresenter.java` is implemented by `PointPresenter.java`
-      - decouple
-        - builders and controllers
-        - controllers and presenters
-    - User
-      - interface: `IAdminController.java` `IUserController` `IUserPresenter` 
-      - class: 
-        - `IAdminController.java` is implemented by `adminController.java`
-        - `IUserController.java` is implemented by `ClientUserController.java`
-        - `IUserPresenter.java` is implemented by `clientUserPresenter.java`
-      - decouple
-        - GUIs and controllers
         - controllers and presenters 
+        
+    - Reverse System
+      - interface: `UserAction.java`
+      - classes: `AddWishBorrowUserAction` `AddWishLendUserAction`  `FreezeTicketUserActon`  `PasswordUserAction`
+           
         
  2. Why you implement this DP?
     - Decouple Classes, encapsulate specific implementation of methods.
     - No impact when the number of derived classes changes, 
     and no impact when the implementation of a derived class changes.
     - Better for open-close principle
+    
  3. How you implement this DP   
     - Store interfaces rather than specific classes
     - Bury the alternative implementation details in derived classes.
@@ -203,9 +188,70 @@ The link above is a basic overview of how I used builder design pattern to build
      
  3. How you implement this DP
  
-## Dependency Injection Design Pattern
+## Dependency Injection (DI) Design Pattern
  1. Classes Involved
-    - `.java`
+    - 1️⃣ Meeting DataAccess: (Property/Setter Injection)
+        - `MeetingActionManager.java` (Use Case Class)
+        - `IDataAccess.java` (interface)
+        - `ReadWriteMeeting.java` (Gateway Class)
+    - 2️⃣ Meeting Presenter & View interaction: (Method Injection & Constructor Injection)
+        - views: `phase2/src/Trade/MeetingSystem/Adapter`
+            - `MainView.java`
+            - `InputTimePlaceView.java` (abstract)
+                - `SetupView.java`
+                - `EditView.java`
+            - `OKCancelView.java` (abstract)
+                - `AgreeView.java`
+                - `ConfirmView.java`
+        - presenters: `phase2/src/Trade/MeetingSystem/Adapter`
+            - `MPresenter.java` (interface)
+                - `MainViewPresenter.java`
+            - `IPresenter.java` (interface)
+                - `SetupViewPresenter.java`
+                - `EditViewPresenter.java`
+                - `ConfirmViewPresenter.java`
+                
+    - 3️⃣ BorderGUIEngineer: (Constructor Injection)
+        - `BorderGUIEngineer.java`
+         `BorderGUIBuilder.java`
+                
  2. Why you implement this DP
+    - we use DI to create loose-coupled dependency
      
  3. How you implement this DP
+    - interfaces is implemented by concrete class(es)
+    - for 1️⃣: 
+        - use case read/write data through the interface, rather than explicit using `ReadWriteMeeting` methods
+        ```
+      IDataAccess meetingDataAccess = new ReadWriteMeeting(); // in MeetingActionManager.java
+        ```
+    - for 2️⃣:
+        - presenter for each view is injected by the presenter
+        - the view for each presenter is also injected (constructor injection), the view is invoked by calling `xxxPresenter.run()`
+      ```
+      @Override
+          public void run() {
+              view.setPresenter(this);
+              view.open();
+          }
+      ```
+ 
+ ## Facade Design Pattern
+  1. Classes Involved
+     - `ClientUser.java`
+     - `UserManager.java` 
+     - `AdminActivityManager.java`
+     - `PointManager.java`
+  2. Why you implement this DP
+      Since the client user has multiple complicated functionalities. 
+      It is responsible to multiple actors. In order to make the design clear, I would like to use the 
+      facade pattern to delegate the responsibility.
+  3. How you implement this DP
+      So for different managers, they are responsible to implement 
+      different responsibility.
+      - UserManager is responsible for the client user part, client user
+      means that the user which the attribute isAdmin is true. 
+      - AdminActivity Manager is responsible for the admin user, which isAdmin is true.
+      - PointManager is responsible for the point system which is for all users. 
+    
+    

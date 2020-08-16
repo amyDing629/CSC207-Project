@@ -100,7 +100,10 @@ Demonstration of Point System
 - Redeem points for a bonus trade which does not count into limits
     
 ### `V10_Mandatory1_Reverse-Password&UnfreezeTicket.mp4`❤️ (Ensouled)
-- a
+- Amy change password from 123 to 1234. Admin reverses the system, and the password
+change back to 123
+- Amy requests to unfreeze account, the requests appear in admin's unfreeze system. 
+Admin reverses action, amy's requests disappeared in admin's unfreeze system.
      
 ### `V11_Mandatory4_AdjustThresholds.mp4`✅ (Yuxin Yang)
 Demonstration of ClientUser Limit System
