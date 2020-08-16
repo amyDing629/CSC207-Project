@@ -48,7 +48,6 @@ public class ClientUserController implements IUserController{
      * find the user by the user name
      */
     public boolean checkUser(String name) {
-        System.out.println(um.getUser(name)==null);
         return um.getUser(name) == null;
     }
 
@@ -206,16 +205,13 @@ public class ClientUserController implements IUserController{
 
     public void checkFrozen(String username) {
         if(um.readDiff(username)>um.getDiff(username)){
-            System.out.println("You have been freeze due to exceed difference between borrow and lend");
             ClientUser u = um.popUser(um.nameToUUID(username));
             u.setFrozen(true);
             um.addUser(u);
         }
         else if(new AdminActivityManager().incompleteTransaction(um.nameToUUID(username))){
-            System.out.println("You have been freeze due to maximum incomplete transaction");
         }
         else if(new AdminActivityManager().tradeLimit(um.nameToUUID(username))){
-            System.out.println("You have been freeze due to maximum trade limit");
         }
     }
 

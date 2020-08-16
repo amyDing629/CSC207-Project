@@ -54,7 +54,7 @@ public class ActionController {
         iam.removeItemApproval(itemName);
     }
     public void reverse(String username){
-        System.out.println(um.getUser(username).getActions());
+
         UserAction ua= getActions(username).get(0);
         check(ua);
         removeAction(username,ua);
