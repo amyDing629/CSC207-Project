@@ -34,8 +34,8 @@ After login, click the edit info button, the admin user can choose which limit t
 for example, week transaction limit and incomplete transaction limit.
 
 ### 5. Addition status for accounts
-The user can set the left status to be true by set up the end date, 
-the end date means that the user would be regarded as left during the period, so it
+The user can set the `left status` to be true by set up the end date, 
+the `end date` means that the user would be regarded as left during the period, so it
 is the same as the account is frozen, but the left status is just during the period. 
 
 ## Chosen Extension (3 extensions)
