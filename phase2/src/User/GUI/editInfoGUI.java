@@ -130,7 +130,7 @@ public class editInfoGUI {
 
         isLeft.addActionListener(e -> {
             frame.setVisible(false);
-            leftGUI d = new leftGUI(frame);
+            leftGUI d = new leftGUI(uc, frame);
             d.run(b);
         });
 

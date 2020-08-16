@@ -214,4 +214,12 @@ public class ClientUserController implements IUserController{
         else if(new AdminActivityManager().tradeLimit(um.nameToUUID(username))){
         }
     }
+
+    public void setLeft(String a,boolean s){um.setLeft(a, s);}
+
+    @Override
+    public void setFreeze(String a, boolean s) {
+        um.setFreeze(a, s);
+    }
+    
 }

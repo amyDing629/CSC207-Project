@@ -17,7 +17,7 @@ This is a program that allows users to trade different items with each other.
   - SDK: java version 1.8
   - Project Language level: 8 - Lambdas, type annotations, etc
 ---
-  - Ensure all the database file (.ser format) are empty or not existed before running the first time
+  - Ensure all the database files (.ser format) are empty or do not exist before running
   - Do **NOT** quit the whole program or stop the execution of program when running tests, 
   **follow the menu to exit instead**.
 
@@ -53,25 +53,58 @@ For better testing all the available functionality, you need to:
 |**Siwei Tang**|ClientUser, Mandatory Extension 5|
 
 
+# Illustrations
+
+
+
 
 # Scope of functionalities 
 
-For both regular users and admins:
-1. Editing basic information
-2. Inventory
-3. Trade System
-4. Meeting System (within Trade)
-5. Point System
-    - Users will get bonus points for each complete trade.
-    - Users can redeem points for bonus trades which do not count into any trade limits.
+## For both regular users and admins:
+### 1 - Editing basic information
+- Change password
 
-6. Setting account status
-    - Users can set their accounts to be "left away" status for set periods.
+### 2 - Inventory
+- Users can view all available items in Market.
+- Users can add items to WishList-Lend.
+- Users can add items to WishList-Borrow (with item suggestion).
+### 3 - Trade System
+- Users can request trades with other users.
+- User can agree/decline the trade requests from other users.
+- Users can complete trades (by entering Meeting System).
+- Users can view their history of complete trades.
 
-For admins only:
-1. ClientUser Freeze System
-2. ClientUser Limit System
-3. Creating new admins
+### 4 - Meeting System (within Trade)
+- Users can set up the time and place for meeting.
+- Users can agree/edit the time and place for meeting in turns.
+- Users can confirm the meeting after it has happened.
+
+### 5 - Point System
+- Users will get bonus points for each complete trade.
+- Users can redeem points for bonus trades which do not count into any trade limits.
+
+### 6 - Setting account status
+- Users can set their accounts to be "left away" status for set periods.
+
+### 7 - Request Unfreeze
+- Users can make unfreeze request to admins
+
+## For admins only:
+### 1 - Freeze/Unfreeze ClientUser
+- The admins can set selected ClientUser to freeze status manually.
+- The admins can unfreeze the accounts of selected ClientUsers
+
+### 2 - ClientUser Limit System
+The admins can change the default limit value for client users.
+
+The thresholds that can be changed:
+- Weekly transaction limit 
+- Incomplete transaction limit
+- Difference between borrow and lend
+- Exchange standard for bonus points
+
+### 3 - Creating new admins
+- The admins can create other admin accounts in the system.
 
 ## Terms in the Program
 

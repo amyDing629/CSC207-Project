@@ -1,7 +1,8 @@
 package User.GUI;
 
 import User.Adapter.AdminController;
-import User.Adapter.IAdminController;
+import User.Adapter.ClientUserController;
+import User.Adapter.IUserController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,7 +10,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class leftGUI {
-    IAdminController uc;
+    IUserController uc;
     JFrame frame;
     JFrame pFrame;
     String username;
@@ -17,8 +18,8 @@ public class leftGUI {
      * [Constructor]
      * @param pFrame frame
      */
-    public leftGUI(JFrame pFrame){
-        this.uc = new AdminController();
+    public leftGUI(IUserController uc, JFrame pFrame){
+        this.uc = uc;
         this.pFrame = pFrame;
     }
 
@@ -123,11 +124,13 @@ public class leftGUI {
             pFrame.setVisible(true);
         });
         submitButton.addActionListener(e -> {
+//        System.out.println(uc.getUser(getUserName()).getIsFrozen());
         uc.setEnd(getUserName(), dateTime);
-        if(LocalDateTime.now().isAfter(dateTime)){
-            uc.setFreeze(getUserName(), false);
-            uc.setLeft(getUserName(), false);
-        }
+//        if(LocalDateTime.now().isAfter(dateTime)){
+//            uc.setFreeze(getUserName(), false);
+//            uc.setLeft(getUserName(), false);
+//        }
+        System.out.println(uc.getUser(getUserName()).getIsFrozen());
             JOptionPane.showMessageDialog(null, "Successfully set Left!");
         });
     }

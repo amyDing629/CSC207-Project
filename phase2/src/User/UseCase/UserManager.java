@@ -251,7 +251,7 @@ public class UserManager {
 
     /**
      * @param a user
-     * return list of list of actions
+     * return list of  actions
      */
     public ArrayList<UserAction> getActions(ClientUser a) {
         return a.getActions();
@@ -370,6 +370,18 @@ public class UserManager {
 //        dataAccess.updateSer();
     }
 
+    public void  setLeft(String username, boolean a){
+        ClientUser ca = (ClientUser)dataAccess.getObject(username);
+        if(ca != null){ca.setLeft(a);}
+        dataAccess.updateSer();
+    }
+
+    public void setFreeze(String a,boolean s){
+        ClientUser ca = (ClientUser)dataAccess.getObject(a);
+        if(ca != null){ca.setFrozen(s);}
+        dataAccess.updateSer();
+    }
+
     /**
      * @param userID id of user
      * return whether the user is left or not
@@ -378,12 +390,22 @@ public class UserManager {
         return getUser(userID).getIsLeft();
     }
 
-
+    /**
+     * @param username name of user
+     * @param action the action that need to add
+     * add the action into user's actions
+     */
     public void addAction(String username,UserAction action){
         ClientUser a = popUser(nameToUUID(username));
         a.addActions(action);
         addUser(a);
     }
+
+    /**
+     * @param username name of user
+     * @param ua the instance of UserAction
+     * remove the action from user's list.
+     */
 
     public void removeAction(String username,UserAction ua){
         ClientUser a = popUser(nameToUUID(username));
@@ -398,12 +420,22 @@ public class UserManager {
         addUser(a);
     }
 
+    /**
+     * @param username name of user
+     * @param lendWish name of the item
+     * remove wish from user
+     */
+
     public void deleteLItem(String username, String lendWish) {
         ClientUser user = popUser(getUser(username).getId());
         user.getWishLend().remove(lendWish);
         addUser(user);
     }
-
+    /**
+     * @param username name of user
+     * @param borrowWish the name of item
+     * remove the borrowWish from user's list.
+     */
     public void deleteBItem(String username, String borrowWish) {
         ClientUser user = popUser(getUser(username).getId());
         user.getWishBorrow().remove(borrowWish);
