@@ -103,10 +103,8 @@ public class CTradeController implements Observer, iTradeController {
     @Override
     public void update(Observable o, Object arg) {
         Trade tr = tm.getTrade(currTrade);
-        System.out.println("has updated!" + arg);
         UUID mtID = (UUID) arg;
         Meeting mt = new MeetingActionManager().getMeetingWithId(mtID);
-        System.out.println("firstMeetingID: " + mt.getID());
         if (isFirst) {
             if (mt.getStatus().equals(MeetingStatus.INCOMPLETE)) {
                 Trade trade = tm.popTrade(currTrade);
@@ -158,8 +156,6 @@ public class CTradeController implements Observer, iTradeController {
             um.addUser(bor);
             um.addUser(lend);
             tm.addTrade(tr);
-            System.out.println("bor-borCounter" + um.getUser(tr.getUsers().get(0)).getBorrowCounter());
-            System.out.println("lend-lendCounter" + um.getUser(tr.getUsers().get(1)).getLendCounter());
         } else {
             ClientUser u1 = um.popUser(tr.getUsers().get(0));
             ClientUser u2 = um.popUser(tr.getUsers().get(1));
