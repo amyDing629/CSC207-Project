@@ -2,7 +2,6 @@ package User.GUI;
 
 import User.Actions.FreezeTicketUserAction;
 import User.Adapter.*;
-import User.UseCase.ActionManager;
 
 import javax.swing.*;
 import java.awt.*;

@@ -17,7 +17,7 @@ This is a program that allows users to trade different items with each other.
   - SDK: java version 1.8
   - Project Language level: 8 - Lambdas, type annotations, etc
 ---
-  - Ensure all the database file (.ser format) are empty before running
+  - Ensure all the database file (.ser format) are empty or not existed before running the first time
   - Do **NOT** quit the whole program or stop the execution of program when running tests, 
   **follow the menu to exit instead**.
 
