@@ -85,9 +85,7 @@ public class AdminController extends ClientUserController implements IUserContro
         for (ClientUser user: userList) {
             ClientUser u = um.popUser(user.getId());
             u.setExStandard(exStandard);
-            System.out.println("acb ex" + u.getUsername() + ": " + u.getExStandard());
             um.addUser(u);
-            System.out.println("ac ex" + user.getUsername() + ": " + um.getUser(user.getId()).getExStandard());
         }
     }
 

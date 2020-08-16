@@ -79,7 +79,7 @@ public class ActionController {
      * reverse the latest action of user by its username.
      */
     public void reverse(String username){
-        System.out.println(um.getUser(username).getActions());
+
         UserAction ua= getActions(username).get(0);
         check(ua);
         removeAction(username,ua);

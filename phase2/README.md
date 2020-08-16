@@ -53,11 +53,6 @@ For better testing all the available functionality, you need to:
 |**Siwei Tang**|ClientUser, Mandatory Extension 5|
 
 
-# Illustrations
-
-
-
-
 # Scope of functionalities 
 
 ## For both regular users and admins:
@@ -111,8 +106,8 @@ The thresholds that can be changed:
 ### User Account Statuses
 | Type | Meaning |
 |------:|:---------------|
-|`freeze status`|???|
-|`left status`|???|
+|`freeze status`|borrow over threshold may cause the account to be freezed|
+|`left status`|The user can set the "left status" to be true by set up the end date. This means that the user would be regarded as "left away" starting from the present time till the end date. The account in "left status" is the same as the frozen account, but it only sustains the period set by user. |
 
 ### Limits
 | Limits | Default Value | Meaning |
@@ -156,29 +151,17 @@ The thresholds that can be changed:
 
 
 
-
-
-
 # Examples of use
 Please see `VideoAccess.md`.
 
 
+# Authors and Contribution 
+*(names listed in no particular order)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# ======================================
+| Name | Divide of work |
+|:------:|:---------------|
+|**Yuhan Zheng (Ensouled)**|AdminUser & GUI, Mandatory Extension 1|
+|**Yiyun Ding (Amy)**|Trade & GUI, Inventory & GUI, Mandatory Extension 2|
+|**Changyan Xu (Rella)**|Meeting System & GUI, Mandatory Extension 3|
+|**Yuxin Yang (Amber)**|Point System, Mandatory Extension 4|
+|**Siwei Tang**|ClientUser, Mandatory Extension 5|

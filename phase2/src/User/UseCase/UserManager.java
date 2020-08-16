@@ -370,6 +370,18 @@ public class UserManager {
 //        dataAccess.updateSer();
     }
 
+    public void  setLeft(String username, boolean a){
+        ClientUser ca = (ClientUser)dataAccess.getObject(username);
+        if(ca != null){ca.setLeft(a);}
+        dataAccess.updateSer();
+    }
+
+    public void setFreeze(String a,boolean s){
+        ClientUser ca = (ClientUser)dataAccess.getObject(a);
+        if(ca != null){ca.setFrozen(s);}
+        dataAccess.updateSer();
+    }
+
     /**
      * @param userID id of user
      * return whether the user is left or not
