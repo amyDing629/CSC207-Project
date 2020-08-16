@@ -93,7 +93,7 @@ tom's freeze status becomes true.
     - admin change amy's incomplete trade limit to 2, and then unfreeze amy. amy's freeze status
     becomes true.
    
-### `V9_xxx.mp4`
+### `V9_ElectiveExtension_PointSystem.mp4` (Amber)
 - a
     
 ### `V10_xxx.mp4`

@@ -102,6 +102,10 @@ For better testing all the available functionality, you need to:
 |`COMPLETED`|    when both users confirmed the meeting occurred|
 
 
+
+
+
+
 # Examples of use
 Please see `VideoAccess.md`.
 
