@@ -14,4 +14,7 @@ public interface IAdminController extends IUserController {
     void setIncompleteTransaction(String username,int incompleteTransaction);
 
     void setWeekTransactionLimit(String username, int weekTransaction);
+
+    void setLeft(String a,boolean s);
+
 }

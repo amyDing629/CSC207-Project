@@ -1,12 +1,9 @@
 package User.Adapter;
 
-import User.Actions.UserAction;
 import User.Entity.ClientUser;
 import User.Gateway.UserDataAccess;
 import User.UseCase.AdminActivityManager;
 import User.UseCase.UserManager;
-import User.Actions.*;
-import javax.swing.*;
 import java.io.File;
 import java.time.LocalDateTime;
 import java.util.ArrayList;

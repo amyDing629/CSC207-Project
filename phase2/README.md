@@ -60,7 +60,28 @@ For better testing all the available functionality, you need to:
 
 # Scope of functionalities 
 
-## 
+For both regular users and admins:
+### 1 - Editing basic information
+
+### 2 - Inventory
+
+### 3 - Trade System
+
+### 4 - Meeting System (within Trade)
+
+### 5 - Point System
+- Users will get bonus points for each complete trade.
+- Users can redeem points for bonus trades which do not count into any trade limits.
+
+### 6 - Setting account status
+- Users can set their accounts to be "left away" status for set periods.
+
+For admins only:
+### 1 - ClientUser Freeze System
+
+### 2 - ClientUser Limit System
+
+### 3 - Creating new admins
 
 ## Terms in the Program
 
