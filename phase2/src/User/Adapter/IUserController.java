@@ -41,6 +41,10 @@ public interface IUserController {
 
     List<ClientUser> getUserList();
 
+    void setLeft(String a,boolean s);
+
+    void setFreeze(String a,boolean s);
+
 
     void setEnd(String username, LocalDateTime end);
 

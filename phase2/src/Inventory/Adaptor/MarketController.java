@@ -70,8 +70,6 @@ public class MarketController implements iItemController {
     public void submitBut(){
         String input = bta.getInput("input");
         ip.resetInputArea();
-        System.out.println("market controller" + iv.getAvailableList() + iv.getItem(input));
-        System.out.println(iv.getAvailableList().contains(input));
         if (!iv.getAvailableList().contains(input)){
             ip.wrongInput();
         }else{
