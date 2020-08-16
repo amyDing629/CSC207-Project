@@ -20,7 +20,6 @@ public class ClientUserGUI{
     JFrame frame;// this frame
     String currUser;
 
-    IUserPresenter presenter;
     IUserController controller;
 
     /**
@@ -114,7 +113,7 @@ public class ClientUserGUI{
 
         editButton.addActionListener(e -> {
             frame.setVisible(false);
-            editInfoGUI d = new editInfoGUI(controller, frame);
+            editInfoGUI d = new editInfoGUI(frame);
             d.run(b);
         });
 

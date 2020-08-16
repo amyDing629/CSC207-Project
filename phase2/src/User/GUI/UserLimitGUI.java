@@ -1,5 +1,6 @@
 package User.GUI;
 
+import User.Adapter.ClientUserController;
 import User.Adapter.IUserController;
 
 import javax.swing.*;
@@ -12,10 +13,9 @@ public class UserLimitGUI {
     /**
      * [Constructor]
      * @param pFrame frame
-     * @param uc client user controller
      */
-    public UserLimitGUI(IUserController uc ,JFrame pFrame) {
-        this.uc=uc;
+    public UserLimitGUI(JFrame pFrame) {
+        this.uc=new ClientUserController();
         this.pFrame=pFrame;
     }
     /**
@@ -71,22 +71,22 @@ public class UserLimitGUI {
         });
         editButton.addActionListener(e -> {
             frame.setVisible(false);
-           TradeLimitGUI d=new TradeLimitGUI(uc,frame);
+           TradeLimitGUI d=new TradeLimitGUI(frame);
             d.run(b);
         });
         tradeButton.addActionListener(e -> {
             frame.setVisible(false);
-            IncompleteLimitGUI d=new IncompleteLimitGUI(uc,frame);
+            IncompleteLimitGUI d=new IncompleteLimitGUI(frame);
             d.run(b);
         });
         inventoryButton.addActionListener(e -> {
             frame.setVisible(false);
-            DiffLimitGUI d=new DiffLimitGUI (uc,frame);
+            DiffLimitGUI d=new DiffLimitGUI (frame);
             d.run(b);
         });
         pointButton.addActionListener(e ->{
             frame.setVisible(false);
-            ExStandardGUI d=new ExStandardGUI(uc,frame);
+            ExStandardGUI d=new ExStandardGUI(frame);
             d.run(b);
         });
     }

@@ -1,6 +1,6 @@
 package User.Adapter;
 
-public interface IAdminController {
+public interface IAdminController extends IUserController {
     void createAdmin(String name, String password);
 
     void setDiff(String username,int diff);

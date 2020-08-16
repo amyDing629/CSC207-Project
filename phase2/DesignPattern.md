@@ -195,10 +195,7 @@ The link above is a basic overview of how I used builder design pattern to build
     - Store interfaces rather than specific classes
     - Bury the alternative implementation details in derived classes.
 
-       
-          
-        
-             
+            
 ## Factory Design Pattern
  1. Classes Involved
     -   `.java`
@@ -208,7 +205,7 @@ The link above is a basic overview of how I used builder design pattern to build
  
 ## Dependency Injection Design Pattern
  1. Classes Involved
-    -   `.java`
+    - `.java`
  2. Why you implement this DP
      
  3. How you implement this DP

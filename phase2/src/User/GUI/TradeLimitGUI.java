@@ -9,18 +9,16 @@ import java.awt.*;
 
 public class TradeLimitGUI {
 
-    IUserController uc;
-    IAdminController ac = new AdminController();
+    IAdminController ac;
     JFrame pFrame;
     JFrame frame;
 
     /**
      * [Constructor]
      * @param pFrame frame
-     * @param uc client user controller
      */
-    public TradeLimitGUI(IUserController uc ,JFrame pFrame) {
-        this.uc = uc;
+    public TradeLimitGUI(JFrame pFrame) {
+        ac = new AdminController();
         this.pFrame = pFrame;
     }
     /**
@@ -78,7 +76,7 @@ public class TradeLimitGUI {
             frame.setVisible(false);
             ac.setWeekTransactionLimit(userInput.getText(),Integer.parseInt(userInput1.getText()));
             JOptionPane.showMessageDialog(null, "Successfully set the limit!");
-            UserFreezeSystem d = new UserFreezeSystem(uc,frame);
+            UserFreezeSystem d = new UserFreezeSystem(frame);
             d.run(b);
         });
     }

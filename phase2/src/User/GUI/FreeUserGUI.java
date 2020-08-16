@@ -8,17 +8,14 @@ import javax.swing.*;
 import java.awt.*;
 
 public class FreeUserGUI {
-    IUserController uc;
     IAdminController ac;
     JFrame pFrame;
     JFrame frame;
     /**
      * [Constructor]
      * @param pFrame frame
-     * @param uc client user controller
      */
-    public FreeUserGUI(IUserController uc ,JFrame pFrame) {
-        this.uc=uc;
+    public FreeUserGUI(JFrame pFrame) {
         this.pFrame=pFrame;
         ac = new AdminController();
     }
