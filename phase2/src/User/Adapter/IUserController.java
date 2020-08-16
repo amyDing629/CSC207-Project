@@ -1,7 +1,9 @@
 package User.Adapter;
 
+import User.Actions.UserAction;
 import User.Entity.ClientUser;
 
+import javax.swing.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,15 +41,10 @@ public interface IUserController {
 
     List<ClientUser> getUserList();
 
-    ArrayList<ArrayList<String>> getActions(String username);
 
     void setEnd(String username, LocalDateTime end);
 
     boolean getIsLeft(UUID userID);
-
-    void addAction(String userName, String password, String password1);
-
-    void removeAction(String username, String item_ticket, String s);
 
     void deleteLItem(String username, String lendWish);
 

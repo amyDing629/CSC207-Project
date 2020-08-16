@@ -1,5 +1,8 @@
 package User.Entity;
 
+import User.Actions.UserAction;
+
+import javax.swing.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -75,7 +78,7 @@ public class ClientUser implements Serializable {
     private int bonusPoints;
 
 
-    private final ArrayList<ArrayList<String>> actions;
+    private final ArrayList<UserAction> actions;
 
     /**
      * The points needed to exchange one bonus trade which will not count towards being frozen
@@ -326,7 +329,7 @@ public class ClientUser implements Serializable {
     /**
      * return actions
      */
-    public ArrayList<ArrayList<String>> getActions() {
+    public ArrayList<UserAction> getActions() {
         return this.actions;
     }
 
@@ -342,17 +345,13 @@ public class ClientUser implements Serializable {
     public void setExStandard(int newStandard){this.exStandard = newStandard;}
 
 
-    public void addActions(String type,String pValues){
-        ArrayList<String> action=new ArrayList<>();
-        action.add(type);
-        action.add(pValues);
+    public void addActions(UserAction action){
         actions.add(0,action);
     }
 
-    public void removeAction(String type,Object pValues){
-        ArrayList<Object> action=new ArrayList<>();
-        action.add(type);
-        action.add(pValues);
+    public void removeAction(UserAction action){
         actions.remove(action);
     }
+
+
 }

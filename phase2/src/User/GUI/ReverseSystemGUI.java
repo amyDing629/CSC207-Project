@@ -1,11 +1,10 @@
 package User.GUI;
 
 
-import User.Adapter.ClientUserController;
+import User.Adapter.ActionController;
 import User.Adapter.IUserController;
 import User.Entity.ClientUser;
 import User.UseCase.ApprovalManager;
-import User.UseCase.RemoveActions;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,11 +12,13 @@ import java.util.ArrayList;
 
 public class ReverseSystemGUI {
     IUserController uc;
+    ActionController aac;
     JFrame pFrame;
     JFrame frame;
-    public ReverseSystemGUI(JFrame pFrame) {
-        this.uc=new ClientUserController();
+    public ReverseSystemGUI(IUserController uc , JFrame pFrame) {
+        this.uc=uc;
         this.pFrame=pFrame;
+        aac=new ActionController();
     }
     public void run(String name){
         frame = new JFrame("Reverse System");
@@ -90,26 +91,17 @@ public class ReverseSystemGUI {
         });
 
         submitButton2.addActionListener(e -> {
-            ApprovalManager am=new ApprovalManager();
-            RemoveActions ra=new RemoveActions(uc.getUser(userInput.getText()),uc,am);
-            if(uc.checkActionExist(userInput.getText(),uc.getUser(userInput.getText()).getActions().get(0))) {
-                ra.deleteAction(uc.getUser(userInput.getText()).getActions().get(0));
-                updateTextArea(textArea2,userInput,submitButton2);
-            }
-            else{
-                JOptionPane.showMessageDialog(null,"Reverse failed,someone edited the user's action");
-                uc.removeAction(userInput.getText(),uc.getActions(userInput.getText()).get(0).get(0),uc.getActions(userInput.getText()).get(0).get(1));
-            }
+            aac.reverse(userInput.getText());
+            updateTextArea(textArea2,userInput,submitButton2);
         });
     }
 
     public void updateTextArea(JTextArea textArea,JTextField userInput,JButton submitButton){
         ClientUser user=uc.getUser(userInput.getText());
         if(user!=null){
-            System.out.println(user.getActions());
             StringBuilder k= new StringBuilder();
             for(int i=0;i<user.getActions().size();i++){
-                k.append(user.getActions().get(i).get(0)).append("\n");
+                k.append(user.getActions().get(i).toString()).append("\n");
             }
             if(!(k.toString().equals(""))){
                 textArea.setText(k.toString());

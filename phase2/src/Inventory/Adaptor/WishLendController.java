@@ -4,7 +4,12 @@ import Inventory.Entity.Item;
 import Inventory.UseCase.Inventory;
 import Trade.Adaptor.BorderGUI;
 import Trade.Adaptor.iInput;
+import User.Actions.AddWishBorrowUserAction;
+import User.Actions.AddWishLendUserAction;
+import User.Adapter.ActionController;
+import User.Adapter.ClientUserController;
 import User.Entity.ClientUser;
+import User.UseCase.ActionManager;
 import User.UseCase.ApprovalManager;
 import User.UseCase.UserManager;
 
@@ -29,6 +34,7 @@ public class WishLendController implements iItemController {
 
     private final ApprovalManager iam;
 
+    private final ActionController am;
     private final iInput bta;
 
     private String it;
@@ -47,6 +53,7 @@ public class WishLendController implements iItemController {
         iv = new Inventory();
         um = new UserManager();
         iam = new ApprovalManager();
+        am=new ActionController();
         this.bta = bta;
         ip = new InventoryPresenter(bta);
         this.fr = fr;
@@ -149,6 +156,8 @@ public class WishLendController implements iItemController {
      */
     public void addToList(String name, String des){
         iam.addApprovals(um.getUser(currUser),name,des);
+        am.addAction(um.getUsername(currUser),new AddWishLendUserAction(um.getUser(currUser),name));
+        iam.AllItemApprovals();
     }
 
     /**
