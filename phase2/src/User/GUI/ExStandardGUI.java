@@ -9,7 +9,6 @@ import java.awt.*;
 
 public class ExStandardGUI {
 
-    IUserController uc;
     IAdminController ac;
     JFrame pFrame;
     JFrame frame;
@@ -17,10 +16,8 @@ public class ExStandardGUI {
     /**
      * [Constructor]
      * @param pFrame frame
-     * @param uc client user controller
      */
-    public ExStandardGUI(IUserController uc ,JFrame pFrame) {
-        this.uc=uc;
+    public ExStandardGUI(JFrame pFrame) {
         this.pFrame=pFrame;
         this.ac = new AdminController();
     }
@@ -75,7 +72,7 @@ public class ExStandardGUI {
             frame.setVisible(false);
             ac.setExchangeStandard(Integer.parseInt(userInput.getText()));
             JOptionPane.showMessageDialog(null, "standard change succeed");
-            UserFreezeSystem d = new UserFreezeSystem(uc,frame);
+            UserFreezeSystem d = new UserFreezeSystem(frame);
             d.run(b);
         });
     }

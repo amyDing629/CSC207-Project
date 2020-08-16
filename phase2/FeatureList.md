@@ -5,8 +5,16 @@ Since we only have 5 members in total, we did the mandatory extensions, one elec
 ## Mandatory Extension (5 extensions)
 
 ### 1. Reverse System - Undo
-
-
+- Reverse change password action
+- Reverse send unfreeze requests action (If the requests have been agreed by admin user, then 
+the action is not available to undo)
+- Reverse inventory-related actions
+  - undo adding item to wish lend list requests. (If the requests have been processed by admin user, then
+  the action is not available to undo)
+  - undo deleting item from wish lend list. -> add the item back
+  - undo adding item to wish borrow list requests. -> delete the added item
+  - undo deleting item from wish borrow list. -> add the item back
+  
 ### 2. Automatic Item Suggests
 In Request Trade Session, users need to input a second item to request a two-way trade. 
 Users need to choose the second item from his "wish to lend" list. 
@@ -21,7 +29,9 @@ communicate with other users (neither regular users nor admin users), cannot mak
  and do not have an explicit account.
 
 ### 4. ClientUser Limit System
-
+Only the admin user can log in and change the default limit value for client users.
+After login, click the edit info button, the admin user can choose which limit to reset, 
+for example, week transaction limit and incomplete transaction limit.
 
 ### 5. Addition status for accounts
 The user can set the left status to be true by set up the end date, 

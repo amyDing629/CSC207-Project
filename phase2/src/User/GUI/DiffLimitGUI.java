@@ -9,7 +9,6 @@ import javax.swing.*;
 import java.awt.*;
 
 public class DiffLimitGUI {
-    IUserController uc;
     IAdminController ac;
     JFrame pFrame;
     JFrame frame;
@@ -17,10 +16,8 @@ public class DiffLimitGUI {
     /**
      * [Constructor]
      * @param pFrame frame
-     * @param uc client user controller
      */
-    public DiffLimitGUI(IUserController uc ,JFrame pFrame) {
-        this.uc=uc;
+    public DiffLimitGUI(JFrame pFrame) {
         this.pFrame=pFrame;
         ac = new AdminController();
     }
@@ -81,7 +78,7 @@ public class DiffLimitGUI {
             frame.setVisible(false);
             ac.setDiff(userInput.getText(),Integer.parseInt(userInput1.getText()));
             JOptionPane.showMessageDialog(null, "Successfully changed limit");
-            UserFreezeSystem d = new UserFreezeSystem(uc,frame);
+            UserFreezeSystem d = new UserFreezeSystem(frame);
             d.run(b);
         });
     }

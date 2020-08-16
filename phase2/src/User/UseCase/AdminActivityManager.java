@@ -51,10 +51,6 @@ public class AdminActivityManager {
         if(userAccess.getObject("admin")!= null) {
             um.addUser(new ClientUser(username, password, true));
         }
-        for(ClientUser i:um.getUserList()){
-            System.out.println(i.getUsername());
-            System.out.println(i.getPassword());
-        }
     }
 
 
