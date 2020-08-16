@@ -71,6 +71,11 @@ public class AdminController extends ClientUserController implements IUserContro
         um.addUser(user);
     }
 
+    @Override
+    public void setLeft(String a, boolean s) {
+        am.setLeft(a, s);
+    }
+
     /**
      * @param exStandard the exchange standard of user
      * set the exchange standard of user
