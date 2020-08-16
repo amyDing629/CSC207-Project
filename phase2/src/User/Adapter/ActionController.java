@@ -23,7 +23,10 @@ public class ActionController {
     }
 
 
-
+    /**
+     * @param ua name of user
+     * check the type of UserAction and reverse the action
+     */
     public void check(UserAction ua){
         switch (ua.getType()) {
             case "pass":
@@ -40,19 +43,41 @@ public class ActionController {
                 break;
         }
     }
+    /**
+     * @param username name of user
+     * @param password passowrd of user
+     * reverse the action of changing password
+     */
     private void passWordReverse(String username,String password){
         um.setPassword(username,password);
     }
+    /**
+     * @param username name of user
+     * reverse the action of freeze ticket
+     */
     private void deleteFreezeTicket(String username){
         iam.removeUserApproval(username);
     }
-
+    /**
+     * @param username name of user
+     * @param borrowWish name of the item
+     * reverse the action of adding WishBorrow
+     */
     private void deleteWishBorrow(String username,String borrowWish){
         um.deleteBItem(username,borrowWish);
     }
+    /**
+     * @param itemName name of item
+     * reverse the action of adding ticket
+     */
     private void deleteItemTicket(String itemName){
         iam.removeItemApproval(itemName);
     }
+
+    /**
+     * @param username name of user
+     * reverse the latest action of user by its username.
+     */
     public void reverse(String username){
         System.out.println(um.getUser(username).getActions());
         UserAction ua= getActions(username).get(0);

@@ -31,4 +31,9 @@ public class FreezeTicketUserAction implements UserAction {
     public String getItem() {
         return "";
     }
+
+    @Override
+    public String toString() {
+        return "Requested to unfreeze";
+    }
 }

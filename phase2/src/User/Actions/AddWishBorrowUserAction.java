@@ -32,4 +32,9 @@ public class AddWishBorrowUserAction implements UserAction {
     public String getItem() {
         return borrowWish;
     }
+
+    @Override
+    public String toString() {
+        return "Requested: "+borrowWish;
+    }
 }
