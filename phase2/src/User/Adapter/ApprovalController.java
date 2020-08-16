@@ -28,13 +28,21 @@ public class ApprovalController {
 
     /**
      * @param name the name of user
-     * @param des description
-     * add approvals with description
+     * @param des  description
+     *             add approvals with description
      */
-    public void addApprovals(String name, String des){am.addApprovals(um.getUser(name),des);}
+    public void addApprovals(String name, String des) {
+        am.addApprovals(um.getUser(name), des);
+    }
 
 
-    public boolean hasUserApproval(String username){
+    /**
+     * Check if user with username has approval
+     *
+     * @param username the username of the user
+     * @return if user with username has approval
+     */
+    public boolean hasUserApproval(String username) {
         return am.hasUserApproval(username);
     }
 }

@@ -107,13 +107,19 @@ public class ApprovalManager {
 
     /**
      * @param itemName name of item
-     * return if list has item or not
+     *                 return if list has item or not
      */
-    public boolean hasItemApprovals(String itemName){
+    public boolean hasItemApprovals(String itemName) {
         return itemDataAccess.hasObject(itemName);
     }
 
-    public boolean hasUserApproval(String username){
+    /**
+     * Check if user with username has approval
+     *
+     * @param username the username of the user
+     * @return if user with username has approval
+     */
+    public boolean hasUserApproval(String username) {
         return userDataAccess.hasObject(username);
     }
 }
