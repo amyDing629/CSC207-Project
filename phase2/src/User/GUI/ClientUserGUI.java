@@ -14,7 +14,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.UUID;
 
-public class ClientUserGUI implements View {
+public class ClientUserGUI{
 
     JFrame pFrame; // previous frame
     JFrame frame;// this frame
@@ -145,21 +145,4 @@ public class ClientUserGUI implements View {
         });
     }
 
-    @Override
-    public IUserPresenter getPresenter() {
-        return null;
-    }
-
-    /**
-     * set presenter
-     */
-    @Override
-    public void setPresenter(IUserPresenter presenter) {
-        this.presenter = presenter;
-    }
-
-    @Override
-    public void updateUIComponent() {
-
-    }
 }

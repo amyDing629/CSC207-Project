@@ -143,12 +143,11 @@ The link above is a basic overview of how I used builder design pattern to build
       `ApprovalItemDataAccess` `ApprovalUserDataAccess`
       - decouple: use case classes and data access classes, such as userManager and userDataAccess
     - Inventory
-      - interface: `iItemController.java` `iItemPresenter.java` `iMarketPresenter.java` `MarketInputPanelStrategy.java`
+      - interface: `iItemController.java` `iItemPresenter.java` `iMarketPresenter.java` 
       - classes: 
         - `iItemController.java` is implemented by all controllers in inventory except market
         - `iItemPresener.java` is implemented by all presenters in inventory
         - `iMarketPresenter.java` is implemented by `marketPresenter.java`
-        -  `MarketInputPanelStrategy.java` is implemented by `RegularStrategy.java` and `VisitorStrategy.java`.
       - decouple: 
         - builders and controllers
         - controllers and presenters 
