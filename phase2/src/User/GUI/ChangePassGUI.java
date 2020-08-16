@@ -4,7 +4,6 @@ import User.Actions.PasswordUserAction;
 import User.Adapter.ActionController;
 import User.Adapter.ClientUserController;
 import User.Adapter.IUserController;
-import User.UseCase.ActionManager;
 
 import javax.swing.*;
 import java.awt.*;

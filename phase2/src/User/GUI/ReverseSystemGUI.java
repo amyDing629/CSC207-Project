@@ -58,7 +58,6 @@ public class ReverseSystemGUI {
         for (ClientUser user : name) {
             hi.append(user.getUsername()).append("\n");
         }
-        System.out.println(hi.toString());
         textArea.setText(hi.toString());
         JTextField userInput = new JTextField(30);
         userInput.setPreferredSize(new Dimension(300, 30));
