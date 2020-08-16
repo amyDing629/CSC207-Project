@@ -1,5 +1,8 @@
 package User.GUI;
 
+import User.Actions.FreezeTicketUserAction;
+import User.Actions.UserAction;
+import User.Adapter.ActionController;
 import User.Adapter.ApprovalController;
 import User.Adapter.IUserController;
 
@@ -9,6 +12,7 @@ import java.awt.*;
 public class RequestUnfreezeTicketGUI {
     ApprovalController ac;
     IUserController uc;
+    ActionController acc;
     JFrame pFrame;
     JFrame frame;
     /**
@@ -20,6 +24,7 @@ public class RequestUnfreezeTicketGUI {
         this.uc=uc;
         this.pFrame=pFrame;
         ac = new ApprovalController();
+        acc=new ActionController();
     }
     /**
      * @param name  name of user
@@ -72,7 +77,7 @@ public class RequestUnfreezeTicketGUI {
         submitButton.addActionListener(e -> {
             if(!ac.hasUserApproval(name)) {
                 ac.addApprovals(name, userInput.getText());
-                uc.addAction(name, "Freeze ticket", "");
+                acc.addAction(name, new FreezeTicketUserAction(uc.getUser(name)));
                 JOptionPane.showMessageDialog(null,"Request successfully");
                 JOptionPane.showMessageDialog(null,"Please wait for the admin to approve");
             }

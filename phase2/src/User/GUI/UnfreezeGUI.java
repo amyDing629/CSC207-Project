@@ -1,12 +1,15 @@
 package User.GUI;
 
+import User.Actions.FreezeTicketUserAction;
 import User.Adapter.*;
+import User.UseCase.ActionManager;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class UnfreezeGUI {
     ApprovalController avc;
+    ActionController am;
     IUserController uc;
     IAdminController ac;
     JFrame pFrame;
@@ -18,6 +21,7 @@ public class UnfreezeGUI {
      */
     public UnfreezeGUI(IUserController uc , JFrame pFrame) {
         this.uc=uc;
+        am=new ActionController();
         this.avc= new ApprovalController();
         this.ac = new AdminController();
         this.pFrame=pFrame;
@@ -81,8 +85,8 @@ public class UnfreezeGUI {
         submitButton.addActionListener(e -> {
             if(uc.getUser(userInput.getText())!=null){
                 avc.removeUserApproval(userInput.getText());
+                am.removeAction(userInput.getText(),new FreezeTicketUserAction(uc.getUser(userInput.getText())));
                 ac.setFreeze(userInput.getText(),false);
-                uc.removeAction(userInput.getText(),"Freeze ticket","");
                 textArea.setText(avc.AllUserApprovals());
                 JOptionPane.showMessageDialog(null,"Unfreeze successfully");
             }

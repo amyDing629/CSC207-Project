@@ -1,6 +1,9 @@
 package User.GUI;
 
+import User.Actions.PasswordUserAction;
+import User.Adapter.ActionController;
 import User.Adapter.IUserController;
+import User.UseCase.ActionManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,6 +11,7 @@ import java.awt.*;
 public class ChangePassGUI {
 
     IUserController uc;
+    ActionController ac;
     JFrame pFrame;
     JFrame frame;
     String userName;
@@ -20,6 +24,7 @@ public class ChangePassGUI {
     public ChangePassGUI(IUserController uc , JFrame pFrame) {
         this.uc = uc;
         this.pFrame=pFrame;
+        ac=new ActionController();
     }
 
     /**
@@ -72,8 +77,9 @@ public class ChangePassGUI {
             pFrame.setVisible(true);
         });
         submitButton.addActionListener(e -> {
-            uc.addAction(getUserName(),"password",uc.getPassword(getUserName()));
+            String prePass=getUserPass();
             uc.setPassword(getUserName(), passInput.getText());
+            ac.addAction(userName,new PasswordUserAction(uc.getUser(userName),prePass));
             curPass.setText("Current password:"+getUserPass());
             JOptionPane.showMessageDialog(null, "Successfully changed the password!");
         });

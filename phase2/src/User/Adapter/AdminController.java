@@ -73,17 +73,6 @@ public class AdminController extends ClientUserController implements IUserContro
         }
     }
 
-
-    @Override
-    public void addAction(String userName, String password, String password1) {
-
-    }
-
-    @Override
-    public void removeAction(String username, String item_ticket, String s) {
-
-    }
-
     @Override
     public void deleteLItem(String username, String lendWish) {
 
