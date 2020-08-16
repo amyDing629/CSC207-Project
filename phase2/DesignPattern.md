@@ -204,3 +204,23 @@ The link above is a basic overview of how I used builder design pattern to build
  2. Why you implement this DP
      
  3. How you implement this DP
+ 
+ ## Facade Design Pattern
+  1. Classes Involved
+     - `ClientUser.java`
+     - `UserManager.java` 
+     - `AdminActivityManager.java`
+     - `PointManager.java`
+  2. Why you implement this DP
+      Since the client user has multiple complicated functionalities. 
+      It is responsible to multiple actors. In order to make the design clear, I would like to use the 
+      facade pattern to delegate the responsibility.
+  3. How you implement this DP
+      So for different managers , they are responsible to implement 
+      different responsibility.
+      - UserManager is responsible for the client user part, client user
+      means that the user which the attribute isAdmin is true. 
+      - AdminActivity Manager is responsible for the admin user, which isAdmin is true.
+      - PointManager is responsible for the point system which is for all users. 
+    
+    
