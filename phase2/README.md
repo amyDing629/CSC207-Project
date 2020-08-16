@@ -50,7 +50,7 @@ For better testing all the available functionality, you need to:
 |**Yiyun Ding (Amy)**|Trade & GUI, Inventory & GUI, Mandatory Extension 2|
 |**Changyan Xu (Rella)**|Meeting System & GUI, Mandatory Extension 3|
 |**Yuxin Yang (Amber)**|Point System, Mandatory Extension 4|
-|**Siwei Tang**|User, Mandatory Extension 5|
+|**Siwei Tang**|ClientUser, Mandatory Extension 5|
 
 
 # Illustrations
@@ -64,10 +64,10 @@ For better testing all the available functionality, you need to:
 ### Limits
 | Limits | Default Value | Meaning |
 |:------|:---------------:|:---------------|
-|Trade Limit            |5|???? |
-|Incomplete Trade Limit |2|???? |
-|Diff between borrow and lend |2|???? |
-|Points exchange for Bonus Trade|???|???? |
+|Trade Limit            |5|The limit of trade in a week |
+|Incomplete Trade Limit |2|The limit of existed incomplete trade|
+|Diff between borrow and lend |2|The number of borrowed items minus the number of lent items |
+|Points exchange for Bonus Trade|5|The number of points to exchange one bonus trade |
 |Meeting Edit Limit     |3|If either one of two users does NOT agree meeting proposal before their **4th** time edition (i.e. edits its 4th time), meeting will be cancelled|
 
 ### Inventory:
