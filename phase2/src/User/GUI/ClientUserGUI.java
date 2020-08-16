@@ -65,7 +65,6 @@ public class ClientUserGUI{
         boolean isLeft = controller.getIsLeft(userId);
 
 
-        System.out.println("CUGUI indicator");
         JLabel freezeStatus = new JLabel("Freeze Status: " + isFrozen);
         freezeStatus.setPreferredSize(new Dimension(300, 30));
         panel.add(freezeStatus);
