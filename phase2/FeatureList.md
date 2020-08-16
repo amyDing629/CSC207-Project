@@ -38,7 +38,7 @@ The thresholds that can be changed:
 - Difference between borrow and lend
 - Exchange standard for bonus points
 
-### 5. Additional status for accounts
+### 5. Additional Status for Accounts
 The user can set the "left status" to be true by set up the end date. 
 This means that the user would be regarded as "left away" starting from the present time till the end date. 
 The account in "left status" is the same as the frozen account, but it only sustains the period set by user. 
