@@ -21,7 +21,9 @@ communicate with other users (neither regular users nor admin users), cannot mak
  and do not have an explicit account.
 
 ### 4. ClientUser Limit System
-
+Only the admin user can log in and change the default limit value for client users.
+After login, click the edit info button, the admin user can choose which limit to reset, 
+for example, week transaction limit and incomplete transaction limit.
 
 ### 5. Addition status for accounts
 The user can set the left status to be true by set up the end date, 
