@@ -63,6 +63,13 @@ For better testing all the available functionality, you need to:
 ## 
 
 ## Terms in the Program
+
+### User Account Statuses
+| Type | Meaning |
+|------:|:---------------|
+|`freeze status`|???|
+|`left status`|???|
+
 ### Limits
 | Limits | Default Value | Meaning |
 |:------|:---------------:|:---------------|

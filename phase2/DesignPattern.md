@@ -242,7 +242,7 @@ The link above is a basic overview of how I used builder design pattern to build
       It is responsible to multiple actors. In order to make the design clear, I would like to use the 
       facade pattern to delegate the responsibility.
   3. How you implement this DP
-      So for different managers , they are responsible to implement 
+      So for different managers, they are responsible to implement 
       different responsibility.
       - UserManager is responsible for the client user part, client user
       means that the user which the attribute isAdmin is true. 
