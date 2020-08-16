@@ -5,8 +5,16 @@ Since we only have 5 members in total, we did the mandatory extensions, one elec
 ## Mandatory Extension (5 extensions)
 
 ### 1. Reverse System - Undo
-
-
+- Reverse change password action
+- Reverse send unfreeze requests action (If the requests have been agreed by admin user, then 
+the action is not available to undo)
+- Reverse inventory-related actions
+  - undo adding item to wish lend list requests. (If the requests have been processed by admin user, then
+  the action is not available to undo)
+  - undo deleting item from wish lend list. -> add the item back
+  - undo adding item to wish borrow list requests. -> delete the added item
+  - undo deleting item from wish borrow list. -> add the item back
+  
 ### 2. Automatic Item Suggests
 In Request Trade Session, users need to input a second item to request a two-way trade. 
 Users need to choose the second item from his "wish to lend" list. 
