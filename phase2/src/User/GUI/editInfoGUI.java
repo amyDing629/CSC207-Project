@@ -1,5 +1,6 @@
 package User.GUI;
 
+import User.Adapter.ClientUserController;
 import User.Adapter.IUserController;
 import User.Entity.ClientUser;
 import User.UseCase.UserManager;
@@ -15,10 +16,9 @@ public class editInfoGUI {
     /**
      * [Constructor]
      * @param pFrame frame
-     * @param uc client user controller
      */
-    public editInfoGUI(IUserController uc , JFrame pFrame) {
-        this.uc = uc;
+    public editInfoGUI(JFrame pFrame) {
+        this.uc = new ClientUserController();
         this.PFrame=pFrame;
     }
 
@@ -103,34 +103,34 @@ public class editInfoGUI {
         });
         limitSystem.addActionListener(e -> {
             frame.setVisible(false);
-            UserLimitGUI d = new UserLimitGUI(uc,frame);
+            UserLimitGUI d = new UserLimitGUI(frame);
             d.run(b);
         });
         CreateAdminGUI.addActionListener(e -> {
             frame.setVisible(false);
-         CreateAdminGUI d = new CreateAdminGUI(uc,frame);
+         CreateAdminGUI d = new CreateAdminGUI(frame);
             d.run(b);
         });
        changePass.addActionListener(e -> {
             frame.setVisible(false);
-            ChangePassGUI d = new ChangePassGUI(uc,frame);
+            ChangePassGUI d = new ChangePassGUI(frame);
             d.run(b);
         });
         freezeSystem.addActionListener(e -> {
             frame.setVisible(false);
-            UserFreezeSystem d = new UserFreezeSystem(uc,frame);
+            UserFreezeSystem d = new UserFreezeSystem(frame);
             d.run(b);
         });
 
         ReverseSystem.addActionListener(e -> {
             frame.setVisible(false);
-            ReverseSystemGUI d = new ReverseSystemGUI(uc,frame);
+            ReverseSystemGUI d = new ReverseSystemGUI(frame);
             d.run(b);
         });
 
         isLeft.addActionListener(e -> {
             frame.setVisible(false);
-            leftGUI d = new leftGUI(uc,frame);
+            leftGUI d = new leftGUI(frame);
             d.run(b);
         });
 

@@ -93,14 +93,21 @@ tom's freeze status becomes true.
     - admin change amy's incomplete trade limit to 2, and then unfreeze amy. amy's freeze status
     becomes true.
    
-### `V9_ElectiveExtension_PointSystem.mp4`❤️ (Amber)
-- a
+### `V9_ElectiveExtension_PointSystem.mp4`✅ (Yuxin Yang)
+Demonstration of Point System
+- Complete a trade to get one bonus point. 
+    - The system will automatically add one bonus point to user for each complete trade
+- Redeem points for a bonus trade which does not count into limits
     
 ### `V10_Mandatory1_Reverse-Password&UnfreezeTicket.mp4`❤️ (Ensouled)
 - a
      
-### `V11_Mandatory4_xxx.mp4`❤️ (Amber)
-- a
+### `V11_Mandatory4_AdjustThresholds.mp4`✅ (Yuxin Yang)
+Demonstration of ClientUser Limit System
+- Adjust weekly trade limit for selected user
+- Adjust incomplete trade limit for selected user
+- Adjust difference between borrow and lend for selected user
+- Adjust bonus point exchange standard for all users
     
 ### `V12_xxx.mp4`
 - a

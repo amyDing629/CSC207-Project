@@ -8,17 +8,14 @@ import javax.swing.*;
 import java.awt.*;
 
 public class IncompleteLimitGUI {
-    IUserController uc;
     IAdminController ac;
     JFrame pFrame;
     JFrame frame;
     /**
      * [Constructor]
      * @param pFrame frame
-     * @param uc client user controller
      */
-    public IncompleteLimitGUI(IUserController uc ,JFrame pFrame) {
-        this.uc=uc;
+    public IncompleteLimitGUI(JFrame pFrame) {
         this.ac = new AdminController();
         this.pFrame=pFrame;
     }
@@ -77,7 +74,7 @@ public class IncompleteLimitGUI {
             frame.setVisible(false);
             ac.setIncompleteTransaction(userInput.getText(),Integer.parseInt(userInput1.getText()));
             JOptionPane.showMessageDialog(null, "success changed limit");
-            UserFreezeSystem d = new UserFreezeSystem(uc,frame);
+            UserFreezeSystem d = new UserFreezeSystem(frame);
             d.run(b);
         });
     }
