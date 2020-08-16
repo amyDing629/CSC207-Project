@@ -18,7 +18,7 @@ the action is not available to undo)
 ### 2. Automatic Item Suggests
 In Request Trade Session, users need to input a second item to request a two-way trade. 
 Users need to choose the second item from his "wish to lend" list. 
-If an item is both in current user's "wish to borrow list" and in target user's "wish to borrow list", 
+If an item is **both in current user's "wish to borrow list" and in target user's "wish to borrow list"**, 
 then the item will be added to the "suggest list".
 On the left side of the frame, the system will print out the users' "wish to lend list" and "suggest list".
 
