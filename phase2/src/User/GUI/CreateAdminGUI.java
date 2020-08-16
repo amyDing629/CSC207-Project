@@ -1,6 +1,7 @@
 package User.GUI;
 
 import User.Adapter.AdminController;
+import User.Adapter.ClientUserController;
 import User.Adapter.IAdminController;
 import User.Adapter.IUserController;
 import User.Entity.ClientUser;
@@ -9,17 +10,14 @@ import User.UseCase.UserManager;
 import javax.swing.*;
 import java.awt.*;
 public class CreateAdminGUI {
-    IUserController uc;
     IAdminController ac;
     JFrame pFrame;
     JFrame frame;
     /**
      * [Constructor]
      * @param pFrame frame
-     * @param uc client user controller
      */
-    public CreateAdminGUI(IUserController uc , JFrame pFrame) {
-        this.uc=uc;
+    public CreateAdminGUI(JFrame pFrame) { ;
         this.pFrame=pFrame;
         this.ac = new AdminController();
     }
@@ -84,13 +82,13 @@ public class CreateAdminGUI {
 
         });
         submitButton.addActionListener(e -> {
-            if(userInput1.getText().equals("")|| uc.checkUser(userInput.getText()) || userInput.getText().equals("")) {
+            if(userInput1.getText().equals("")|| ac.checkUser(userInput.getText()) || userInput.getText().equals("")) {
 
                 String error="";
                 if(userInput1.getText().equals("")||userInput.getText().equals("")){
                     error+="Password or Name can't not be empty";
                 }
-                if(uc.checkUser(userInput.getText())){
+                if(ac.checkUser(userInput.getText())){
                     error+="; username already exist";
                 }
                 JOptionPane.showMessageDialog(null, error);

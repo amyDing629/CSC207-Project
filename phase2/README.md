@@ -8,7 +8,7 @@ This is a program that allows users to trade different items with each other.
  |`FeatureList.md`|the features we have done for phase 2|
  |`VideoAccess.md`|the link for sample usage videos, and basic txt elaborations on test functions|
  |`DesignPattern.md`|the design patterns we have applied with detailed explanations|
- |`src/Main/mainRun.java`|main test file; to start testing the functionalities from here :)|
+ |`src/Main/mainRun.java`|main test file; start testing the functionalities from here :)|
  
 # Prerequisites
   - Language: Java
@@ -60,6 +60,8 @@ For better testing all the available functionality, you need to:
 
 # Scope of functionalities 
 
+## 
+
 ## Terms in the Program
 ### Limits
 | Limits | Default Value | Meaning |
@@ -67,16 +69,16 @@ For better testing all the available functionality, you need to:
 |Trade Limit            |5|The limit of trade in a week |
 |Incomplete Trade Limit |2|The limit of existed incomplete trade|
 |Diff between borrow and lend |2|The number of borrowed items minus the number of lent items |
-|Points exchange for Bonus Trade|5|The number of points to exchange one bonus trade |
-|Meeting Edit Limit     |3|If either one of two users does NOT agree meeting proposal before their **4th** time edition (i.e. edits its 4th time), meeting will be cancelled|
+|Points exchange for Bonus Trade|5|The number of points needed to exchange for one bonus trade |
+|Meeting Edit Limit     |3|If either one of two users does NOT agree meeting proposal before their **4th** time edition (i.e. edits its 4th time), the meeting will be cancelled|
 
-### Inventory:
+### Lists in Inventory:
 | List Type | Meaning |
 |------:|:---------------|
 |WishList-Borrow|displays all wish-to-borrow items (from other users), i.e. a wishlist|
 |WishList-Lend|displays all wish-to-lend items (to other users), which passed Admin's inspect|
 
-### Trade Type:
+### Trade Types:
 | Type | Meaning |
 |------:|:---------------|
 |one way (temporary)|one item in trade, two meetings involved|

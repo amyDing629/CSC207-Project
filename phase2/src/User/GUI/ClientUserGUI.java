@@ -14,13 +14,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.UUID;
 
-public class ClientUserGUI implements View {
+public class ClientUserGUI{
 
     JFrame pFrame; // previous frame
     JFrame frame;// this frame
     String currUser;
 
-    IUserPresenter presenter;
     IUserController controller;
 
     /**
@@ -114,7 +113,7 @@ public class ClientUserGUI implements View {
 
         editButton.addActionListener(e -> {
             frame.setVisible(false);
-            editInfoGUI d = new editInfoGUI(controller, frame);
+            editInfoGUI d = new editInfoGUI(frame);
             d.run(b);
         });
 
@@ -145,21 +144,4 @@ public class ClientUserGUI implements View {
         });
     }
 
-    @Override
-    public IUserPresenter getPresenter() {
-        return null;
-    }
-
-    /**
-     * set presenter
-     */
-    @Override
-    public void setPresenter(IUserPresenter presenter) {
-        this.presenter = presenter;
-    }
-
-    @Override
-    public void updateUIComponent() {
-
-    }
 }

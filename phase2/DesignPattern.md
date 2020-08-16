@@ -143,12 +143,11 @@ The link above is a basic overview of how I used builder design pattern to build
       `ApprovalItemDataAccess` `ApprovalUserDataAccess`
       - decouple: use case classes and data access classes, such as userManager and userDataAccess
     - Inventory
-      - interface: `iItemController.java` `iItemPresenter.java` `iMarketPresenter.java` `MarketInputPanelStrategy.java`
+      - interface: `iItemController.java` `iItemPresenter.java` `iMarketPresenter.java` 
       - classes: 
         - `iItemController.java` is implemented by all controllers in inventory except market
         - `iItemPresener.java` is implemented by all presenters in inventory
         - `iMarketPresenter.java` is implemented by `marketPresenter.java`
-        -  `MarketInputPanelStrategy.java` is implemented by `RegularStrategy.java` and `VisitorStrategy.java`.
       - decouple: 
         - builders and controllers
         - controllers and presenters 
@@ -186,11 +185,17 @@ The link above is a basic overview of how I used builder design pattern to build
       - decouple
         - GUIs and controllers
         - controllers and presenters 
-  
-       
-          
         
-             
+ 2. Why you implement this DP?
+    - Decouple Classes, encapsulate specific implementation of methods.
+    - No impact when the number of derived classes changes, 
+    and no impact when the implementation of a derived class changes.
+    - Better for open-close principle
+ 3. How you implement this DP   
+    - Store interfaces rather than specific classes
+    - Bury the alternative implementation details in derived classes.
+
+            
 ## Factory Design Pattern
  1. Classes Involved
     -   `.java`
@@ -200,7 +205,7 @@ The link above is a basic overview of how I used builder design pattern to build
  
 ## Dependency Injection Design Pattern
  1. Classes Involved
-    -   `.java`
+    - `.java`
  2. Why you implement this DP
      
  3. How you implement this DP

@@ -1,5 +1,6 @@
 package User.GUI;
 
+import User.Adapter.ClientUserController;
 import User.Adapter.IUserController;
 
 import javax.swing.*;
@@ -12,10 +13,9 @@ public class UserFreezeSystem {
     /**
      * [Constructor]
      * @param pFrame frame
-     * @param uc client user controller
      */
-    public UserFreezeSystem(IUserController uc ,JFrame pFrame) {
-        this.uc=uc;
+    public UserFreezeSystem(JFrame pFrame) {
+        this.uc= new ClientUserController();
         this.pFrame=pFrame;
     }
     /**
@@ -79,17 +79,17 @@ public class UserFreezeSystem {
         });
         editButton.addActionListener(e -> {
             frame.setVisible(false);
-            RequestUnfreezeTicketGUI d=new RequestUnfreezeTicketGUI(uc,frame);
+            RequestUnfreezeTicketGUI d=new RequestUnfreezeTicketGUI(frame);
             d.run(b);
         });
         tradeButton.addActionListener(e -> {
             frame.setVisible(false);
-            FreeUserGUI d=new FreeUserGUI(uc,frame);
+            FreeUserGUI d=new FreeUserGUI(frame);
             d.run(b);
         });
         inventoryButton.addActionListener(e -> {
             frame.setVisible(false);
-            UnfreezeGUI d=new UnfreezeGUI(uc,frame);
+            UnfreezeGUI d=new UnfreezeGUI(frame);
             d.run(b);
         });
     }
