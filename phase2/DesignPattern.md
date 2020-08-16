@@ -185,7 +185,16 @@ The link above is a basic overview of how I used builder design pattern to build
       - decouple
         - GUIs and controllers
         - controllers and presenters 
-  
+        
+ 2. Why you implement this DP?
+    - Decouple Classes, encapsulate specific implementation of methods.
+    - No impact when the number of derived classes changes, 
+    and no impact when the implementation of a derived class changes.
+    - Better for open-close principle
+ 3. How you implement this DP   
+    - Store interfaces rather than specific classes
+    - Bury the alternative implementation details in derived classes.
+
        
           
         
